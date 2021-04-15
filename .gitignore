@@ -76,6 +76,11 @@ typings/
 # SB-related
 storybook-static
 
+
+# Generated files
+.docusaurus
+.cache-loader
+
 # Misc
 .wp-env.override.json
 .env
