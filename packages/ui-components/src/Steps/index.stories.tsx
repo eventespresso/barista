@@ -12,13 +12,13 @@ const firstStepIcon = () => <Repeat noMargin size='big' />;
 
 export const Default = () => (
 	<Steps compact current={0} showStepNumber>
-		<Step description='define how recurring dates are generated' icon={firstStepIcon} title='Pattern Editor' />
-		<Step description='primary information for generated dates' icon={Calendar} title='Date Details' />
-		<Step description='create or add tickets for generated dates' icon={Ticket} title='Tickets' />
+		<Step description={'define how recurring dates are generated'} icon={firstStepIcon} title={'Pattern Editor'} />
+		<Step description={'primary information for generated dates'} icon={Calendar} title={'Date Details'} />
+		<Step description={'create or add tickets for generated dates'} icon={Ticket} title={'Tickets'} />
 		<Step
-			description='confirm final dates list and add or remove exceptions'
+			description={'confirm final dates list and add or remove exceptions'}
 			icon={CalendarOutlined}
-			title='Generated Dates'
+			title={'Generated Dates'}
 		/>
 	</Steps>
 );
