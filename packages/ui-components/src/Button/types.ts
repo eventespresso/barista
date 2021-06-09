@@ -19,6 +19,7 @@ export interface ButtonProps extends Omit<ButtonAdapterProps, 'size'>, Size {
 	buttonType?: ButtonType | 'accent' | 'default' | 'minimal' | 'primary' | 'secondary';
 	className?: string;
 	noMargin?: boolean;
+	noPadding?: boolean;
 	noHorizontalMargin?: boolean;
 	noVerticalMargin?: boolean;
 	onClick?: React.MouseEventHandler;

@@ -47,13 +47,14 @@ const withLabel = <P extends AnyObject>(
 				<WrappedComponent
 					{...(props as P)}
 					aria-label={null} // avoid duplicate aria-label
-					id={id}
 					aria-labelledby={labelIDGenerator(id)}
+					id={id}
+					noPadding={noPadding}
 					ref={forwardedRef}
 				/>
 			</div>
 		) : (
-			<WrappedComponent {...(props as P)} id={id} ref={forwardedRef} />
+			<WrappedComponent {...(props as P)} id={id} noPadding={noPadding} ref={forwardedRef} />
 		);
 	};
 
