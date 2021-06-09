@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { __ } from '@eventespresso/i18n';
 import { TypeName } from '@eventespresso/services';
@@ -16,8 +16,10 @@ import { legendConfig } from './config';
 import { RenderCardView } from './cardView';
 import { RenderTableView } from './tableView';
 import { ActiveDatesFilters } from './filterBar';
+import { hideAllExcept } from '../../utils';
 
 const DatesList: React.FC = () => {
+	useEffect(() => hideAllExcept([]), []);
 	const filterState = useDatesListFilterState();
 
 	const renderList = useCallback(

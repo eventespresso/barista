@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { __ } from '@eventespresso/i18n';
 import { withFeature } from '@eventespresso/services';
 import { Heading } from '@eventespresso/ui-components';
@@ -6,6 +8,7 @@ import { getEdtrDomData } from '@eventespresso/edtr-services';
 
 import { APPLIES_TO_OPTIONS, MAPS_TO_OPTIONS } from './constants';
 import { ErrorMessage } from './ErrorMessage';
+import { hideAllExcept } from '../utils';
 
 const header = (
 	<Heading as='h3' className='ee-edtr-section-heading'>
@@ -14,6 +17,7 @@ const header = (
 );
 
 export const RegistrationForm: React.FC = () => {
+	useEffect(() => hideAllExcept([]), []);
 	const { elements, sections, topLevelSectionId } = getEdtrDomData('formBuilder');
 
 	return (
