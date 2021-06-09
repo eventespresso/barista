@@ -6,6 +6,8 @@ import { Heading } from '@eventespresso/ui-components';
 import { useEvent, useEventMutator } from '@eventespresso/edtr-services';
 import { withFeature } from '@eventespresso/services';
 
+import { moveAfterElement, moveBeforeElement, hideAllExcept } from './utils';
+
 type AdvancedTextEditorProps = React.ComponentProps<typeof AdvancedTextEditor>;
 
 const EventDescription: React.FC = () => {
@@ -23,8 +25,13 @@ const EventDescription: React.FC = () => {
 	);
 
 	useEffect(() => {
-		// remove tiny mce editor
-		document.getElementById('postdivrich')?.remove();
+		const eventDescription = document.querySelector('.ee-event-description');
+		moveBeforeElement(eventDescription, 'submitdiv');
+		moveBeforeElement(eventDescription, 'titlediv');
+		moveAfterElement(eventDescription, 'postimagediv');
+		moveAfterElement(eventDescription, 'postexcerpt');
+		const divsToKeep = ['titlediv', 'postexcerpt', 'postimagediv'];
+		hideAllExcept(divsToKeep);
 	}, []);
 
 	return (

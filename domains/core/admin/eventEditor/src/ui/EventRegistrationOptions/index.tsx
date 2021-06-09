@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { __ } from '@eventespresso/i18n';
 import { Grid, GridCard } from '@eventespresso/ui-components';
 import { noop } from '@eventespresso/utils';
@@ -12,6 +14,7 @@ import EventPhoneNumber from './EventPhoneNumber';
 import MaxRegistrations from './MaxRegistrations';
 import TicketSelector from './TicketSelector';
 import withData from './withData';
+import { moveAfterElement, hideAllExcept } from '../utils';
 
 import type { EventRegistrationOptionsProps } from './types';
 
@@ -36,6 +39,15 @@ export const EventRegistrationOptions: React.FC<Partial<EventRegistrationOptions
 	phoneNumber,
 	status,
 }) => {
+	useEffect(() => {
+		const regOptions = document.querySelector('.ee-event-registration-options');
+		moveAfterElement(regOptions, 'page_templates');
+		moveAfterElement(regOptions, 'tagsdiv-post_tag');
+		moveAfterElement(regOptions, 'espresso_event_categoriesdiv');
+		const divsToKeep = ['espresso_event_categoriesdiv', 'page_templates', 'tagsdiv-post_tag'];
+		hideAllExcept(divsToKeep);
+	}, []);
+
 	return (
 		<Grid className='ee-edtr-section ee-edtr-cards' maxColumns={2} size='bigger'>
 			<GridCard className='ee-event-details' header={__('Event Details')}>
