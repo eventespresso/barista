@@ -6,8 +6,8 @@ const Clipboard = (props: IconProps): JSX.Element => {
 		<svg
 			stroke='currentColor'
 			fill='currentColor'
-			strokeWidth='.5px'
-			viewBox='0 0 14 16'
+			strokeWidth='.25px'
+			viewBox='0 0 16 16'
 			height='1.25em'
 			width='1.25em'
 			xmlns='http://www.w3.org/2000/svg'
