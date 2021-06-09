@@ -4,7 +4,7 @@ import { __ } from '@eventespresso/i18n';
 import { IconButton } from '@eventespresso/ui-components';
 import {
 	Building,
-	CheckList,
+	Clipboard,
 	CalendarOutlined,
 	ControlOutlined,
 	Discussion,
@@ -86,7 +86,7 @@ export const EdtrMenuBar = ({ activeModule, setActiveModule }) => {
 				borderless
 				noPadding
 				transparentBg
-				icon={CheckList}
+				icon={Clipboard}
 				onClick={viewRegForm}
 				tooltip={__('Registration Form: form builder for gathering information from registrants')}
 			/>
