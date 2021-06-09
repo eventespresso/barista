@@ -8,14 +8,13 @@
 	}
 
 	.ee-textarea.ee-html-editor {
-		border: none;
+		border: var(--ee-border-width-thick) solid rgba(192, 192, 192, 0.5);
 		font-size: var(--ee-font-size-big);
 		min-height: 15rem;
 		padding: var(--ee-padding-smaller);
 		resize: none;
 
 		&:hover {
-			border: none;
 			color: var(--ee-default-text-color);
 		}
 	}
