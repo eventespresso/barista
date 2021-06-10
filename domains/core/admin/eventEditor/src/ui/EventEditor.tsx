@@ -58,15 +58,15 @@ const EventEditor: React.FC = () => {
 		case 'plugins':
 			module = <PluginArea />;
 			break;
-		case 'other':
-			module = containers;
-			break;
 	}
 
 	return (
 		<div className='ee-event-editor'>
 			<EdtrMenuBar activeModule={activeModule} setActiveModule={setActiveModule} />
-			<div className='ee-event-editor__modules'>{module}</div>
+			<div className='ee-event-editor__modules'>
+				{module}
+				{containers}
+			</div>
 		</div>
 	);
 };
