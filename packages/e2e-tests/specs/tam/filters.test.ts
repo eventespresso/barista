@@ -18,7 +18,7 @@ beforeAll(async () => {
 	/**
 	 * Ensure that the default date is for the next month
 	 * It is to take care of the default date added on the first day
-	 * of a month with 31 days which falls in the same month
+	 * of a month with 31 days which falls in the same month (after 30 days)
 	 * @see https://github.com/eventespresso/barista/pull/945#issuecomment-872468475
 	 */
 	await editor.editDate(null, { startDate: PLUS_ONE_MONTH });
