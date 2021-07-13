@@ -1,11 +1,17 @@
 import { __ } from '@eventespresso/i18n';
-import { NumberInputWithLabel, SwitchWithLabel, TextInputWithLabel, withLabel } from '@eventespresso/ui-components';
+import {
+	NumberInputWithLabel,
+	SelectWithLabel,
+	SwitchWithLabel,
+	TextInputWithLabel,
+	withLabel,
+} from '@eventespresso/ui-components';
 import { DatePicker, TimePicker } from '@eventespresso/dates';
 
 import { useUpdateElement } from '../useUpdateElement';
 
 import type { FormElementProps } from '../../types';
-import { isDateField, isNumericField, isTextField, isFieldOfType } from '../../utils';
+import { isDateField, isNumericField, isTextField, isFieldOfType, isTelField } from '../../utils';
 
 const DatePickerWithLabel = withLabel(DatePicker);
 const TimePickerWithLabel = withLabel(TimePicker);
@@ -14,6 +20,29 @@ const monthFieldProps = {
 	showMonthYearPicker: true,
 	dateFormat: 'MM/yyyy',
 };
+
+const formatOptions = [
+	{
+		value: 'de_DE',
+		label: __('Germany'),
+	},
+	{
+		value: 'fr_FR',
+		label: __('France'),
+	},
+	{
+		value: 'en_UK',
+		label: __('United Kingdom'),
+	},
+	{
+		value: 'en_US',
+		label: __('United States'),
+	},
+	{
+		value: 'custom',
+		label: __('Custom'),
+	},
+];
 
 export const Validation: React.FC<FormElementProps> = ({ element }) => {
 	const onChangeValue = useUpdateElement(element);
@@ -37,11 +66,23 @@ export const Validation: React.FC<FormElementProps> = ({ element }) => {
 						onChangeValue={onChangeValue('attributes.autocomplete')}
 						isChecked={element.attributes?.autocomplete}
 					/>
-					<TextInputWithLabel
-						label={__('pattern')}
-						onChangeValue={onChangeValue('attributes.pattern')}
-						value={element.attributes?.pattern}
-					/>
+					{isTelField(element) && (
+						<SelectWithLabel
+							id={`${element.id}-format`}
+							label={__('format')}
+							options={formatOptions}
+							value={element.attributes?.format}
+							onChangeValue={onChangeValue('attributes.format')}
+							size='small'
+						/>
+					)}
+					{(!isTelField(element) || element.attributes?.format === 'custom') && (
+						<TextInputWithLabel
+							label={__('pattern')}
+							onChangeValue={onChangeValue('attributes.pattern')}
+							value={element.attributes?.pattern}
+						/>
+					)}
 				</>
 			)}
 			{isNumericField(element) && (

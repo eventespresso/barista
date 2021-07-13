@@ -64,7 +64,7 @@ export const FormElementInput = memo<FormElementProps>(({ element }) => {
 			case 'TEL':
 			case 'TEXT':
 			case 'URL':
-				inputProps.type = element.type;
+				inputProps.type = element.type.toLowerCase();
 				break;
 			case 'EMAIL_CONFIRMATION':
 				inputProps.type = 'email';

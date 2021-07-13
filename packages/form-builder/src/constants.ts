@@ -37,6 +37,7 @@ export const TEXT_FIELDS: Array<ElementType> = [
 	'EMAIL',
 	'EMAIL_CONFIRMATION',
 	'PASSWORD',
+	'PASSWORD_CONFIRMATION',
 	'TEL',
 	'TEXT',
 	'URL',

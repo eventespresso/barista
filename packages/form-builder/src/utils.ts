@@ -12,3 +12,4 @@ export const isDateField = isFieldOfType(DATE_FIELDS);
 export const isFieldWithOptions = isFieldOfType(FIELDS_WITH_OPTIONS);
 export const isNumericField = isFieldOfType(NUMERIC_FIELDS);
 export const isTextField = isFieldOfType(TEXT_FIELDS);
+export const isTelField = isFieldOfType(['TEL']);
