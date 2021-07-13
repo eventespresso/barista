@@ -3,16 +3,25 @@ import { saveVideo } from 'playwright-video';
 import { PLUS_ONE_MONTH } from '@eventespresso/constants';
 
 import { clickButton, clickLabel } from '@e2eUtils/common';
-import { createNewEvent } from '@e2eUtils/admin/event-editor';
+import { createNewEvent, DateEditor } from '@e2eUtils/admin/event-editor';
 
 import { addDatesAndTickets } from './utils';
 
 const tamSelector = '.ee-ticket-assignments-manager';
+const editor = new DateEditor();
 
 beforeAll(async () => {
 	await saveVideo(page, 'artifacts/tam-filters.mp4');
 
 	await createNewEvent({ title: 'TAM Filters Test' });
+
+	/**
+	 * Ensure that the default date is for the next month
+	 * It is to take care of the default date added on the first day
+	 * of a month with 31 days which falls in the same month
+	 * @see https://github.com/eventespresso/barista/pull/945#issuecomment-872468475
+	 */
+	await editor.editDate(null, { startDate: PLUS_ONE_MONTH });
 
 	await addDatesAndTickets();
 
