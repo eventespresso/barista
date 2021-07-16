@@ -3,8 +3,8 @@ import { useCallback, useMemo } from 'react';
 import { __ } from '@eventespresso/i18n';
 import { ADMIN_ROUTES, EMPTY_OBJECT } from '@eventespresso/constants';
 import { SimpleTextEditorModal } from '@eventespresso/ee-components';
-import { useConfig } from '@eventespresso/services';
-import { getAdminUrl, useDatetimeMutator, useEventId, hooks } from '@eventespresso/edtr-services';
+import { useConfig, getAdminUrl } from '@eventespresso/services';
+import { useDatetimeMutator, useEventId, hooks } from '@eventespresso/edtr-services';
 
 import DateDetailsPanel from './DateDetailsPanel';
 import { EditableName } from '../editable';

@@ -1,7 +1,6 @@
 import { ADMIN_ROUTES } from '@eventespresso/constants';
-import { getAdminUrl } from '@eventespresso/edtr-services';
 import { Link } from '@eventespresso/ui-components';
-import { useConfig } from '@eventespresso/services';
+import { useConfig, getAdminUrl } from '@eventespresso/services';
 
 const DefaultPricesLink: React.FC = ({ children }) => {
 	const {

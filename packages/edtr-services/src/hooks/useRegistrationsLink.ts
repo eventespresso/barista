@@ -2,9 +2,8 @@ import { useMemo } from 'react';
 import { addQueryArgs } from '@wordpress/url';
 
 import { ADMIN_ROUTES } from '@eventespresso/constants';
-import { useConfig } from '@eventespresso/services';
+import { useConfig, getAdminUrl } from '@eventespresso/services';
 
-import { getAdminUrl } from '../utils';
 import { useEventId } from '../apollo/queries';
 
 export type RegistrationsLinkArgs = {

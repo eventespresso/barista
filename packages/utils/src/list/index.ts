@@ -1,5 +1,6 @@
 import { groupBy, pluck, prop as propVal } from 'ramda';
 
+import { __ } from '@eventespresso/i18n';
 import type { OptionsType } from '@eventespresso/adapters';
 import { AnyObject } from '../types';
 
@@ -8,7 +9,10 @@ import { AnyObject } from '../types';
  * @param list The entity list
  * @param emptyOption empty option to display at the top
  */
-export const entityListToSelectOptions = (list: Array<any>, emptyOption?: OptionsType[0]): OptionsType => {
+export const entityListToSelectOptions = (
+	list: Array<any>,
+	emptyOption: OptionsType[0] = { label: __('Select…'), value: '' }
+): OptionsType => {
 	const options = emptyOption ? [emptyOption] : [];
 
 	return [...options, ...list.map(({ id: value, name: label }) => ({ label, value }))];

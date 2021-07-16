@@ -4,8 +4,8 @@ import { __ } from '@eventespresso/i18n';
 
 import { ADMIN_ROUTES, EMPTY_OBJECT } from '@eventespresso/constants';
 import { SimpleTextEditorModal } from '@eventespresso/ee-components';
-import { useConfig } from '@eventespresso/services';
-import { getAdminUrl, useTicketMutator, useEventId, hooks } from '@eventespresso/edtr-services';
+import { useConfig, getAdminUrl } from '@eventespresso/services';
+import { useTicketMutator, useEventId, hooks } from '@eventespresso/edtr-services';
 
 import { EditableName, EditablePrice } from '../editable';
 import TicketDetailsPanel from './TicketDetailsPanel';
