@@ -6,6 +6,8 @@ import { DatesList } from './datetimes/datesList';
 import EventRegistrationOptions from './EventRegistrationOptions';
 import { TicketsList } from './tickets/ticketsList';
 import EventDescription from './EventDescription';
+import { VenueDetails } from './venue';
+
 import { RegistrationForm } from './registrationForm';
 import Init from './Init';
 // fire up the service and UI element registry
@@ -23,6 +25,7 @@ const EventEditor: React.FC = () => {
 			<EventRegistrationOptions />
 			<DatesList />
 			<TicketsList />
+			<VenueDetails />
 			<RegistrationForm />
 			<PluginArea />
 			{containers}
