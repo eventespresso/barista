@@ -38,4 +38,6 @@ export * from './priceTypes';
 
 export * from './users';
 
+export * from './venues';
+
 export * from './types';

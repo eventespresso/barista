@@ -22,4 +22,6 @@ export * from './registrations';
 
 export * from './tickets';
 
+export * from './venues';
+
 export * from './types';

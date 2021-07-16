@@ -157,3 +157,19 @@ export type PriceTypeEdge = EntityEdge<PriceType, 'EspressoRootQueryPriceTypesCo
 export interface PriceTypesList {
 	espressoPriceTypes: PriceTypeEdge;
 }
+
+export interface Venue extends Entity {
+	address: string;
+	address2: string;
+	city: string;
+	countryName: string;
+	name: string;
+	stateName: string;
+	zip: string;
+}
+
+export type VenueEdge = EntityEdge<Venue, 'EspressoRootQueryPricesConnection'>;
+
+export interface VenuesList {
+	espressoVenues: VenueEdge;
+}
