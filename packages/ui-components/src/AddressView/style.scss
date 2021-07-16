@@ -1,0 +1,14 @@
+.ee-address-view {
+	display: flex;
+	flex-direction: column;
+	&__item {
+		display: flex;
+		&--label,
+		&--value {
+			flex: 1;
+		}
+		&--label {
+			font-weight: bold;
+		}
+	}
+}
