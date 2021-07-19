@@ -33,6 +33,7 @@ export const EVENT_DEFAULTS: Event = {
 	shortDescription: '',
 	status: '',
 	timezoneString: '',
+	venue: '',
 	visibleOn: '',
 };
 

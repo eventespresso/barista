@@ -37,6 +37,7 @@ export const nodes: Event[] = [
 		shortDescription: 'short',
 		status: 'publish',
 		timezoneString: '',
+		venue: '',
 		visibleOn: 'October 21, 2020 1:03 pm',
 		__typename: 'EspressoEvent',
 	},
