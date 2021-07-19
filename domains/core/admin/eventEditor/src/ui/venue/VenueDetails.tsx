@@ -1,10 +1,10 @@
 import { useCallback, useMemo, useState } from 'react';
 
 import { __ } from '@eventespresso/i18n';
-import { useVenues } from '@eventespresso/edtr-services';
+import { useVenues, useEventMutator, useEvent } from '@eventespresso/edtr-services';
 import { entityListToSelectOptions } from '@eventespresso/utils';
 import { findEntityByGuid } from '@eventespresso/predicates';
-import { AddressView, Container, Heading, SelectWithLabel, SelectProps, Link } from '@eventespresso/ui-components';
+import { AddressView, Container, Heading, SelectWithLabel, Link } from '@eventespresso/ui-components';
 
 import { useVenueLink } from './useVenueLink';
 
@@ -19,12 +19,25 @@ const header = (
 );
 
 export const VenueDetails: React.FC = () => {
-	const [selectedVenueId, setSelectedVenueId] = useState('');
+	const event = useEvent();
 
-	const onChangeValue = useCallback<SelectProps['onChangeValue']>((newValue) => {
-		setSelectedVenueId(newValue as string);
-		// TODO wire up mutations
+	const [selectedVenueId, setSelectedVenueId] = useState(event?.venue || '');
+
+	const { updateEntity: updateEvent } = useEventMutator(event?.id);
+
+	const onChangeInstantValue = useCallback((newValue: string) => {
+		setSelectedVenueId(newValue);
 	}, []);
+
+	const onChangeValue = useCallback(
+		(newVenue: string) => {
+			// lets avoid unnecessary mutation
+			if (event?.venue !== newVenue) {
+				updateEvent({ venue: newVenue });
+			}
+		},
+		[event?.venue, updateEvent]
+	);
 
 	const venues = useVenues();
 
@@ -42,6 +55,7 @@ export const VenueDetails: React.FC = () => {
 				flow='inline'
 				label={__('Select from Venue Manager List')}
 				onChangeValue={onChangeValue}
+				onChangeInstantValue={onChangeInstantValue}
 				options={options}
 				size='small'
 				value={selectedVenueId}
