@@ -9,7 +9,7 @@ import type { SelectProps } from './types';
 
 import './style.scss';
 
-export const Select = forwardRef<HTMLSelectElement, SelectProps>(
+export const Select = forwardRef<HTMLSelectElement, SelectProps & React.ComponentProps<typeof InlineSelect>>(
 	({ fitContainer, flow, id, noBorderColor, size, ...props }, ref) => {
 		const className = classNames(
 			'ee-select',

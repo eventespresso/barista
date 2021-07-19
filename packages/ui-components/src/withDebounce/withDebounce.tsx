@@ -21,7 +21,7 @@ const withDebounce = <P extends AnyObject, R extends any>(
 	type Ref = React.Ref<R>;
 	type RefProps = { forwardedRef: Ref } & WithDebounceProps & InternalDebounceProps;
 
-	const WithDebounce: React.FC<P & RefProps> = ({ forwardedRef, debounceDelay, ...props }) => {
+	const WithDebounce: React.FC<P & RefProps> = ({ forwardedRef, debounceDelay, onChangeInstantValue, ...props }) => {
 		const onChangeValue = props[changeHandler as string];
 		// to use debounce, debounceDelay and onChangeValue should be passed
 		const shouldDebounce = debounceDelay && typeof onChangeValue !== 'undefined';
@@ -38,9 +38,10 @@ const withDebounce = <P extends AnyObject, R extends any>(
 				if (typeof internalValue !== 'undefined') {
 					setInternalValue(newValue);
 				}
+				onChangeInstantValue?.(newValue);
 				callback(newValue, event);
 			},
-			[callback, internalValue]
+			[callback, internalValue, onChangeInstantValue]
 		);
 
 		const previousValue = usePrevious(fieldValue);
