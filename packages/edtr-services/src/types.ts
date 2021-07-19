@@ -2,7 +2,7 @@ import type { OptionsType } from '@eventespresso/adapters';
 import type { User } from '@eventespresso/data';
 import type { GeneralSettings, RelationalData } from '@eventespresso/services';
 import type { FormSectionRaw, FormElementRaw } from '@eventespresso/form-builder';
-import type { DatetimeEdge, TicketEdge, PriceEdge, PriceTypeEdge, Event, EventManager } from './apollo';
+import type { DatetimeEdge, TicketEdge, PriceEdge, PriceTypeEdge, Event, EventManager, VenueEdge } from './apollo';
 
 export type TicketMeta = {
 	visibilityOptions: OptionsType;
@@ -15,15 +15,16 @@ export type EdtrFormBuilderData = {
 };
 
 export interface EventEditorData {
+	datetimes?: DatetimeEdge;
 	event?: Event;
 	eventManagers?: Array<EventManager>;
-	datetimes?: DatetimeEdge;
 	formBuilder?: EdtrFormBuilderData;
-	tickets?: TicketEdge;
-	ticketMeta?: TicketMeta;
-	prices?: PriceEdge;
 	priceTypes?: PriceTypeEdge;
+	prices?: PriceEdge;
 	relations?: RelationalData;
+	ticketMeta?: TicketMeta;
+	tickets?: TicketEdge;
+	venues?: VenueEdge;
 }
 
 export interface EditorData {

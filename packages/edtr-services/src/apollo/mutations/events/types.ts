@@ -18,6 +18,7 @@ type PickedProps =
 	| 'shortDescription'
 	| 'status'
 	| 'timezoneString'
+	| 'venue'
 	| 'visibleOn';
 
 export interface EventBaseInput extends Partial<Pick<Event, PickedProps>> {}

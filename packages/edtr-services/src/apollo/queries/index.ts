@@ -1,4 +1,4 @@
-import type { DatetimeEdge, TicketEdge, PriceEdge, PriceTypeEdge } from '../types';
+import type { DatetimeEdge, TicketEdge, PriceEdge, PriceTypeEdge, VenueEdge } from '../types';
 import { EntityEdge } from '@eventespresso/data';
 
 export const DEFAULT_ENTITY_LIST_DATA: EntityEdge = {
@@ -24,6 +24,11 @@ export const DEFAULT_PRICE_LIST_DATA: PriceEdge = {
 export const DEFAULT_PRICE_TYPE_LIST_DATA: PriceTypeEdge = {
 	nodes: [],
 	__typename: 'EspressoRootQueryPriceTypesConnection',
+};
+
+export const DEFAULT_VENUE_LIST_DATA: VenueEdge = {
+	nodes: [],
+	__typename: 'RootQueryToEspressoVenueConnection',
 };
 
 export * from './datetimes';

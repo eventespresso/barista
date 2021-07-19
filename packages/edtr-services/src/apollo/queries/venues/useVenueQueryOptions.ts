@@ -14,7 +14,6 @@ export const useVenueQueryOptions = (queryArgs?: VenuesQueryArgs['where']): Venu
 			variables: {
 				where: queryArgs,
 			},
-			fetchPolicy: 'cache-first',
 		};
 	}, [queryArgs]);
 };

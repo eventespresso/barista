@@ -14,17 +14,25 @@ import {
 } from '@eventespresso/data';
 
 import useCacheRehydrationData from './useCacheRehydrationData';
-import { useUpdateDatetimeList, useUpdatePriceList, useUpdatePriceTypeList, useUpdateTicketList } from '../../hooks';
+import {
+	useUpdateDatetimeList,
+	useUpdatePriceList,
+	useUpdatePriceTypeList,
+	useUpdateTicketList,
+	useUpdateVenueList,
+} from '../../hooks';
 import {
 	DEFAULT_DATETIME_LIST_DATA,
 	DEFAULT_TICKET_LIST_DATA,
 	DEFAULT_PRICE_LIST_DATA,
 	DEFAULT_PRICE_TYPE_LIST_DATA,
+	DEFAULT_VENUE_LIST_DATA,
 	useDatetimeQueryOptions,
 	useEventQueryOptions,
 	usePriceQueryOptions,
 	usePriceTypeQueryOptions,
 	useTicketQueryOptions,
+	useVenueQueryOptions,
 } from '../queries';
 
 const useCacheRehydration = (): boolean => {
@@ -39,6 +47,7 @@ const useCacheRehydration = (): boolean => {
 		tickets: espressoTickets = DEFAULT_TICKET_LIST_DATA,
 		prices: espressoPrices = DEFAULT_PRICE_LIST_DATA,
 		priceTypes: espressoPriceTypes = DEFAULT_PRICE_TYPE_LIST_DATA,
+		venues: espressoVenues = DEFAULT_VENUE_LIST_DATA,
 		relations,
 	} = eventEditor;
 
@@ -53,6 +62,9 @@ const useCacheRehydration = (): boolean => {
 
 	const priceQueryOptions = usePriceQueryOptions();
 	const updatePriceList = useUpdatePriceList();
+
+	const venueQueryOptions = useVenueQueryOptions();
+	const updateVenueList = useUpdateVenueList();
 
 	const currentUserQueryOptions = useCurrentUserQueryOptions();
 	const updateCurrentUser = useUpdateCurrentUserCache();
@@ -123,6 +135,14 @@ const useCacheRehydration = (): boolean => {
 		});
 		setIsLoaded(TypeName.prices, true);
 		isDev && toaster.success({ message: __('prices initialized') });
+
+		/* Rehydrate venues */
+		updateVenueList({
+			...venueQueryOptions,
+			data: {
+				espressoVenues,
+			},
+		});
 
 		/* Rehydrate current user */
 		updateCurrentUser({

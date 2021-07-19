@@ -32,6 +32,7 @@ export const EVENT_ATTRIBUTES: any = gql`
 		shortDescription
 		status
 		timezoneString
+		venue
 		visibleOn
 	}
 `;

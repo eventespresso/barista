@@ -33,6 +33,7 @@ export interface Event extends Entity {
 	shortDescription: string;
 	status: string;
 	timezoneString: string;
+	venue: string;
 	visibleOn: string;
 }
 
@@ -168,7 +169,7 @@ export interface Venue extends Entity {
 	zip: string;
 }
 
-export type VenueEdge = EntityEdge<Venue, 'EspressoRootQueryPricesConnection'>;
+export type VenueEdge = EntityEdge<Venue, 'RootQueryToEspressoVenueConnection'>;
 
 export interface VenuesList {
 	espressoVenues: VenueEdge;
