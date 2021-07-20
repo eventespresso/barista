@@ -1,1 +1,2 @@
-export { default as useEvents } from './useEvents';
+export * from './useEvent';
+export * from './useEvents';

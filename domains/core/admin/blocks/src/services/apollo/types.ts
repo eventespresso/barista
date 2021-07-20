@@ -24,7 +24,13 @@ export type AttendeeEdge<Connection = 'EspressoRootQueryAttendeesConnection'> = 
 export type AttendeesList = AttendeeList<AttendeeEdge>;
 
 export interface Event extends Entity {
+	description: string;
 	name: string;
+	shortDescription: string;
+}
+
+export interface EventData {
+	espressoEvent: Event;
 }
 
 export type EventEdge<Connection = 'RootQueryToEspressoEventConnection'> = EntityEdge<Event, Connection>;
