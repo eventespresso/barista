@@ -14,6 +14,7 @@ const cacheConfig: InMemoryCacheConfig = {
 		Query: {
 			fields: {
 				datetime: getReadFunction('EspressoDatetime'),
+				espressoEvent: getReadFunction('EspressoEvent'),
 				ticket: getReadFunction('EspressoTicket'),
 				price: getReadFunction('EspressoPrice'),
 				priceType: getReadFunction('EspressoPriceType'),
