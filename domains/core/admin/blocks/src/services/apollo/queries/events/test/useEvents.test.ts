@@ -3,7 +3,7 @@ import { renderHook } from '@testing-library/react-hooks';
 import { ApolloMockedProvider } from '@eventespresso/edtr-services/src/context/test';
 import { actWait } from '@eventespresso/utils/src/test';
 import useEventsQueryOptions from '../useEventsQueryOptions';
-import useEvents from '../useEvents';
+import { useEvents } from '../useEvents';
 import { errorMocks, successMocks, nodes } from './data';
 
 describe('useEvents', () => {
