@@ -11,6 +11,7 @@ export const VENUE_ATTRIBUTES: any = gql`
 		dbId
 		name
 		stateName
+		thumbnail
 		zip
 	}
 `;

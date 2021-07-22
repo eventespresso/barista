@@ -166,6 +166,7 @@ export interface Venue extends Entity {
 	countryName: string;
 	name: string;
 	stateName: string;
+	thumbnail: string;
 	zip: string;
 }
 
