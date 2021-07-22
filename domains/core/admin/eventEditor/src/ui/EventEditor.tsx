@@ -23,9 +23,9 @@ const EventEditor: React.FC = () => {
 		<>
 			<EventDescription />
 			<EventRegistrationOptions />
+			<VenueDetails />
 			<DatesList />
 			<TicketsList />
-			<VenueDetails />
 			<RegistrationForm />
 			<PluginArea />
 			{containers}
