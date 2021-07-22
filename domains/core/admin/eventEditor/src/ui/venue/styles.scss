@@ -1,0 +1,132 @@
+@import '~@eventespresso/styles/src/mixins/breakpoints';
+
+.ee-event-venue {
+	color: var(--ee-default-text-color);
+	font-size: var(--ee-font-size-default);
+	justify-content: space-between;
+	line-height: var(--ee-line-height-modifier);
+
+	.ee-container {
+		width: 100%;
+
+		&__section {
+			display: flex;
+			flex-direction: column;
+			@include min767px {
+				flex-direction: row;
+			}
+		}
+	}
+
+	&__card {
+		align-items: center;
+		background: var(--ee-background-color);
+		border-radius: var(--ee-border-radius-big);
+		box-shadow: var(--ee-box-shadow-tiny-diffuse);
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		padding: var(--ee-padding-smaller);
+		max-width: 100%;
+		min-width: 320px;
+
+		@include min767px {
+			flex-direction: row;
+			max-width: 728px;
+		}
+	}
+
+	&__details {
+		align-items: flex-start;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		padding: var(--ee-padding-small) 0;
+		width: 100%;
+
+		@include min767px {
+			max-height: 640px;
+			min-width: 320px;
+			padding: 0 var(--ee-padding-small);
+		}
+	}
+
+	h4.ee-heading.ee-event-venue__venue-name {
+		line-height: var(--ee-font-size-bigger);
+		margin: 0 0 var(--ee-margin-tiny);
+		text-align: start;
+	}
+
+	&__address {
+		font-size: var(--ee-font-size-small);
+		line-height: var(--ee-font-size-big);
+		min-width: 320px;
+		margin: 0 0 var(--ee-margin-tiny);
+
+		.ee-address-view__item--value {
+			margin-inline-start: var(--ee-margin-tiny);
+		}
+	}
+
+	&__edit-link,
+	&__add-new-link {
+		font-size: var(--ee-font-size-small);
+	}
+
+	&__thumbnail {
+		border-radius: var(--ee-border-radius-default);
+		max-width: 100%;
+		max-height: 320px;
+		min-height: 180px;
+		min-width: 180px;
+		overflow: hidden;
+		width: 100%;
+
+		@include min767px {
+			max-width: 320px;
+		}
+
+		img {
+			border-radius: var(--ee-border-radius-default);
+			max-width: 100%;
+			max-height: 320px;
+			min-height: 180px;
+			min-width: 180px;
+			width: 100%;
+
+			@include min767px {
+				max-width: 320px;
+				object-fit: cover;
+			}
+		}
+	}
+
+	&__editing {
+		margin: var(--ee-margin-small) 0 0;
+		max-width: 100%;
+		min-width: 320px;
+		width: 100%;
+
+		@include min767px {
+			margin: 0;
+			margin-inline-start: var(--ee-margin-small);
+			width: min-content;
+		}
+
+		.ee-input__wrapper,
+		.ee-select-wrapper {
+			width: 100%;
+		}
+	}
+
+	&__edit-link,
+	&__add-new-link {
+		font-size: var(--ee-font-size-small);
+	}
+
+	&__add-new-link.ee-btn-base.ee-icon-button {
+		margin-inline-start: var(--ee-margin-tiny);
+	}
+}

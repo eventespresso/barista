@@ -8,8 +8,10 @@ import { AddressView, Container, Heading, SelectWithLabel, Link } from '@eventes
 
 import { useVenueLink } from './useVenueLink';
 
+import './styles.scss';
+
 const classes = {
-	container: 'ee-edtr-section',
+	container: 'ee-edtr-section ee-event-venue',
 };
 
 const header = (
@@ -44,31 +46,47 @@ export const VenueDetails: React.FC = () => {
 	const options = useMemo(() => entityListToSelectOptions(venues), [venues]);
 
 	const selectedVenue = useMemo(() => findEntityByGuid(venues)(selectedVenueId), [selectedVenueId, venues]);
+	const thumbnail = useMemo(() => {
+		return { __html: selectedVenue?.thumbnail };
+	}, [selectedVenue]);
 
 	const createVenueLink = useVenueLink('create_new');
 	const editVenueLink = useVenueLink('edit', selectedVenue?.dbId);
 
 	return (
-		<Container id='ee-event-venue-details' classes={classes} header={header}>
-			<SelectWithLabel
-				id='ee-event-venue'
-				flow='inline'
-				label={__('Select from Venue Manager List')}
-				onChangeValue={onChangeValue}
-				onChangeInstantValue={onChangeInstantValue}
-				options={options}
-				size='small'
-				value={selectedVenueId}
-			/>
-			<div>
-				{selectedVenue && (
-					<>
-						<AddressView {...selectedVenue} />
-						<Link href={editVenueLink}>{__('Edit this Venue')}</Link>
-						<p>{__('or')}</p>
-					</>
-				)}
-				<Link href={createVenueLink}>{__('Add new Venue')}</Link>
+		<Container classes={classes} header={header}>
+			{selectedVenue && (
+				<div className='ee-event-venue__card'>
+					<div className='ee-event-venue__thumbnail' dangerouslySetInnerHTML={thumbnail} />
+					<div className='ee-event-venue__details'>
+						<Heading as='h4' className='ee-event-venue__venue-name'>
+							{selectedVenue?.name}
+						</Heading>
+						<AddressView className='ee-event-venue__address' {...selectedVenue} />
+						<div>
+							<Link className='ee-event-venue__edit-link' href={editVenueLink}>
+								{__('Edit this Venue')}
+							</Link>
+						</div>
+					</div>
+				</div>
+			)}
+			<div className='ee-event-venue__editing'>
+				<SelectWithLabel
+					className='ee-event-venue__selector'
+					flow='inline'
+					label={__('Select a different Venue')}
+					onChangeValue={onChangeValue}
+					onChangeInstantValue={onChangeInstantValue}
+					options={options}
+					size='small'
+					value={selectedVenueId}
+				/>
+				<div>
+					<Link className='ee-event-venue__add-new-link' href={createVenueLink}>
+						{__('Add new Venue')}
+					</Link>
+				</div>
 			</div>
 		</Container>
 	);
