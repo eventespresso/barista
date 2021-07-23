@@ -20,8 +20,6 @@
 	},
 	"devDependencies": {
 		"@types/react-select": "^4.0.17",
-		"@types/wordpress__block-editor": "6.0.3",
-		"@types/wordpress__blocks": "9.0.2",
 		"@types/wordpress__components": "^14.0.3",
 		"@types/wordpress__i18n": "^3.11.0"
 	},
