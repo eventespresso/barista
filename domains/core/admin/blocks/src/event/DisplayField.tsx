@@ -44,5 +44,12 @@ export const DisplayField: React.FC<any> = (props) => {
 		return <Placeholder>{__('An unknown error occurred while fetching event details.')}</Placeholder>;
 	}
 
-	return <>{data?.espressoEvent?.[attributes.field]}</>;
+	return (
+		<div
+			style={attributes.style}
+			// field can be HTML (e.g. Event description)
+			// eslint-disable-next-line react-perf/jsx-no-new-object-as-prop
+			dangerouslySetInnerHTML={{ __html: data?.espressoEvent?.[attributes.field] || '' }}
+		/>
+	);
 };

@@ -18,6 +18,10 @@ registerBlockType('eventespresso/event-field', {
 			type: 'string',
 			default: '',
 		},
+		style: {
+			type: 'object',
+			default: {},
+		},
 	},
 	edit: Edit,
 	save() {
