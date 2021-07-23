@@ -41,7 +41,7 @@ export const DisplayField: React.FC<any> = (props) => {
 	}
 
 	if (error) {
-		return <Placeholder>{__('There was some error fetching event details.')}</Placeholder>;
+		return <Placeholder>{__('An unknown error occurred while fetching event details.')}</Placeholder>;
 	}
 
 	return <>{data?.espressoEvent?.[attributes.field]}</>;
