@@ -6,12 +6,20 @@ export const VENUE_ATTRIBUTES: any = gql`
 		address
 		address2
 		cacheId
+		capacity
 		city
+		countryISO
 		countryName
 		dbId
+		description
+		googleMapLink
 		name
+		phone
+		shortDescription
+		stateAbbrev
 		stateName
 		thumbnail
+		url
 		zip
 	}
 `;

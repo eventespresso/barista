@@ -162,9 +162,13 @@ export interface PriceTypesList {
 
 export interface Venue extends Entity, Address {
 	capacity: number;
+	description: string;
+	googleMapLink: string;
 	name: string;
 	phone: string;
+	shortDescription: string;
 	thumbnail: string;
+	url: string;
 }
 
 export type VenueEdge = EntityEdge<Venue, 'RootQueryToEspressoVenueConnection'>;
