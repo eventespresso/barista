@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 import { __ } from '@eventespresso/i18n';
 
 import { Select as SelectControl } from '../../adapters';
+import { EventFieldEditProps } from '../types';
 
 const options = [
 	{
@@ -23,7 +24,7 @@ const options = [
 	},
 ];
 
-export const SelectField: React.FC<any> = ({ attributes, setAttributes }) => {
+export const SelectField: React.FC<EventFieldEditProps> = ({ attributes, setAttributes }) => {
 	const { field } = attributes;
 
 	const onChange = useCallback((field): void => setAttributes({ field }), [setAttributes]);

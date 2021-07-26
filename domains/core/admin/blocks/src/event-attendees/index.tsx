@@ -17,5 +17,4 @@ registerBlockType<EventAttendeesAttributes>('eventespresso/event-attendees', {
 	save() {
 		return null;
 	},
-	// TODO migrate attributes to use GUID
 });

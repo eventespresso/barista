@@ -2,8 +2,9 @@ import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@eventespresso/i18n';
 
 import Edit from './edit';
+import { EventFieldAttributes } from './types';
 
-registerBlockType('eventespresso/event-field', {
+registerBlockType<EventFieldAttributes>('eventespresso/event-field', {
 	title: __('Event Field'),
 	description: __('Displays the selected field of an event'),
 	icon: 'editor-paragraph',
@@ -27,5 +28,4 @@ registerBlockType('eventespresso/event-field', {
 	save() {
 		return null;
 	},
-	// TODO migrate attributes to use GUID
 });

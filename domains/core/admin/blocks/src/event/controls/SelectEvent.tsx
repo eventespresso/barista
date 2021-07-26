@@ -5,8 +5,9 @@ import { __ } from '@eventespresso/i18n';
 import { useEvents } from '@blocksServices/apollo';
 import { buildEntitySelectOptions } from '@blocksServices/utils';
 import { Select as SelectControl } from '../../adapters';
+import { EventFieldEditProps } from '../types';
 
-export const SelectEvent: React.FC<any> = ({ attributes, setAttributes }) => {
+export const SelectEvent: React.FC<EventFieldEditProps> = ({ attributes, setAttributes }) => {
 	const { event } = attributes;
 
 	const { data, loading, error } = useEvents();
