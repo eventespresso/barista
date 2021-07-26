@@ -19,7 +19,6 @@
 	}
 
 	&__card {
-		align-items: center;
 		background: var(--ee-background-color);
 		border-radius: var(--ee-border-radius-big);
 		box-shadow: var(--ee-box-shadow-tiny-diffuse);
@@ -37,7 +36,7 @@
 		}
 	}
 
-	&__details {
+	&__properties {
 		align-items: flex-start;
 		box-sizing: border-box;
 		display: flex;
@@ -54,19 +53,51 @@
 	}
 
 	h4.ee-heading.ee-event-venue__venue-name {
+		color: var(--ee-default-text-color-low-contrast);
+		font-size: var(--ee-font-size-big);
 		line-height: var(--ee-font-size-bigger);
-		margin: 0 0 var(--ee-margin-smaller);
+		margin: 0;
+		margin-block-end: var(--ee-margin-smaller);
 		text-align: start;
 	}
 
-	&__address {
-		font-size: var(--ee-font-size-small);
-		line-height: var(--ee-font-size-big);
-		min-width: 320px;
-		margin: 0 0 var(--ee-margin-smaller);
+	&__desc {
+		margin: 0;
+		margin-block-end: var(--ee-margin-default);
+	}
 
-		.ee-address-view__item--value {
-			margin-inline-start: var(--ee-margin-tiny);
+	&__details {
+		align-items: flex-start;
+		display: flex;
+		flex-flow: column nowrap;
+		font-size: var(--ee-font-size-small);
+		margin: 0;
+		margin-block-end: var(--ee-margin-tiny);
+		width: 100%;
+	}
+
+	&__detail {
+		display: flex;
+		flex-flow: row nowrap;
+		margin: 0;
+		margin-block-end: var(--ee-margin-smaller);
+		width: 100%;
+
+		&-label {
+			display: inline-block;
+			flex-shrink: 0;
+			margin: 0;
+			margin-inline-end: var(--ee-margin-tiny);
+			width: 2rem;
+
+			svg.ee-svg.ee-svg {
+				margin: 0;
+			}
+		}
+
+		&-value {
+			display: inline-block;
+			line-height: var(--ee-font-size-default);
 		}
 	}
 
@@ -78,6 +109,7 @@
 	&__thumbnail {
 		border-radius: var(--ee-border-radius-default);
 		max-width: 100%;
+		margin-inline-end: var(--ee-margin-tiny);
 		max-height: 320px;
 		min-height: 180px;
 		min-width: 180px;
@@ -90,6 +122,7 @@
 
 		img {
 			border-radius: var(--ee-border-radius-default);
+			height: 100%;
 			max-width: 100%;
 			max-height: 320px;
 			min-height: 180px;
@@ -128,5 +161,11 @@
 
 	&__add-new-link.ee-btn-base.ee-icon-button {
 		margin-inline-start: var(--ee-margin-tiny);
+	}
+
+	svg.ee-svg.ee-svg {
+		color: var(--ee-default-text-color-super-low-contrast) ! important;
+		height: 1.5rem;
+		width: 1.5rem;
 	}
 }
