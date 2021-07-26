@@ -1,4 +1,5 @@
 import type {
+	Address,
 	Entity,
 	EntityId,
 	EntityEdge,
@@ -159,15 +160,11 @@ export interface PriceTypesList {
 	espressoPriceTypes: PriceTypeEdge;
 }
 
-export interface Venue extends Entity {
-	address: string;
-	address2: string;
-	city: string;
-	countryName: string;
+export interface Venue extends Entity, Address {
+	capacity: number;
 	name: string;
-	stateName: string;
+	phone: string;
 	thumbnail: string;
-	zip: string;
 }
 
 export type VenueEdge = EntityEdge<Venue, 'RootQueryToEspressoVenueConnection'>;
