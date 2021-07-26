@@ -1,5 +1,5 @@
 export * from './ActiveFilters';
-export * from './AddressView';
+export * from './Address';
 export * from './AlertDialog';
 export * from './Banner';
 export * from './BiggieCalendarDate';
