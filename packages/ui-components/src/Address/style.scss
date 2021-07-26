@@ -1,11 +1,10 @@
 .ee-address {
 	display: flex;
 	flex-direction: column;
-	margin-bottom: var(--ee-margin-tiny);
 
 	&__header {
 		font-weight: bold;
-		margin-bottom: var(--ee-margin-tiny);
+		margin-block-end: var(--ee-margin-tiny);
 	}
 
 	&__line {
@@ -13,8 +12,13 @@
 	}
 
 	&--inline {
-		&__line {
-			flex-flow: row wrap;
+		flex-direction: row;
+		.ee-address__line {
+			svg.ee-svg.ee-svg--mapMarker {
+				margin: 0;
+				margin-block-start: var(--ee-margin-micro);
+				margin-inline-end: var(--ee-margin-tiny);
+			}
 		}
 	}
 

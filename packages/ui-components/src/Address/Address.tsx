@@ -1,5 +1,6 @@
-import { __ } from '@eventespresso/i18n';
 import classNames from 'classnames';
+import { __ } from '@eventespresso/i18n';
+import { MapMarker } from '@eventespresso/icons';
 
 import { addressFormatter } from './addressFormatter';
 
@@ -16,6 +17,7 @@ export type AddressProps = {
 	inlineFormat?: string;
 	name?: string;
 	separator?: string;
+	showIcon?: boolean;
 	showLabels?: boolean;
 	showHeader?: boolean;
 	stateName?: string;
@@ -32,6 +34,7 @@ export const Address: React.FC<AddressProps> = ({
 	countryISO,
 	countryName,
 	separator,
+	showIcon,
 	showLabels,
 	showHeader,
 	stateName,
@@ -53,12 +56,16 @@ export const Address: React.FC<AddressProps> = ({
 		return (
 			<div className={addressClass}>
 				{showHeader && <h5 className='ee-address__header'>{__('Address:')}</h5>}
-				<div className='ee-address__line'>{fullAddress}</div>
+				<div className='ee-address__line'>
+					{showIcon && <MapMarker />}
+					{fullAddress}
+				</div>
 			</div>
 		);
 	}
 	return (
 		<div className={addressClass}>
+			{showIcon && <MapMarker />}
 			{showHeader && <h5 className='ee-address__header'>{__('Address:')}</h5>}
 			{(address || address2) && (
 				<div className='ee-address__line'>
