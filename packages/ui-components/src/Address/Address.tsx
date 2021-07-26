@@ -46,6 +46,7 @@ export const Address: React.FC<AddressProps> = ({
 			city,
 			stateName,
 			countryName,
+			countryISO,
 			zip,
 			separator
 		);
