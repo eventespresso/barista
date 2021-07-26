@@ -1,10 +1,11 @@
 import { useCallback, useMemo, useState } from 'react';
 
 import { __ } from '@eventespresso/i18n';
+import { Image } from '@eventespresso/adapters';
 import { useVenues, useEventMutator, useEvent } from '@eventespresso/edtr-services';
 import { entityListToSelectOptions } from '@eventespresso/utils';
 import { findEntityByGuid } from '@eventespresso/predicates';
-import { AddressView, Container, Heading, SelectWithLabel, Link } from '@eventespresso/ui-components';
+import { Address, Container, Heading, SelectWithLabel, Link } from '@eventespresso/ui-components';
 
 import { useVenueLink } from './useVenueLink';
 
@@ -42,13 +43,10 @@ export const VenueDetails: React.FC = () => {
 	);
 
 	const venues = useVenues();
-
+	console.log('%c venues', 'color: cyan;', venues);
 	const options = useMemo(() => entityListToSelectOptions(venues), [venues]);
-
 	const selectedVenue = useMemo(() => findEntityByGuid(venues)(selectedVenueId), [selectedVenueId, venues]);
-	const thumbnail = useMemo(() => {
-		return { __html: selectedVenue?.thumbnail };
-	}, [selectedVenue]);
+	console.log('%c selectedVenue', 'color: Yellow;', selectedVenue);
 
 	const createVenueLink = useVenueLink('create_new');
 	const editVenueLink = useVenueLink('edit', selectedVenue?.dbId);
@@ -57,12 +55,14 @@ export const VenueDetails: React.FC = () => {
 		<Container classes={classes} header={header}>
 			{selectedVenue && (
 				<div className='ee-event-venue__card'>
-					<div className='ee-event-venue__thumbnail' dangerouslySetInnerHTML={thumbnail} />
+					<div className='ee-event-venue__thumbnail'>
+						<Image src={selectedVenue?.thumbnail} alt={selectedVenue?.name} />
+					</div>
 					<div className='ee-event-venue__details'>
 						<Heading as='h4' className='ee-event-venue__venue-name'>
 							{selectedVenue?.name}
 						</Heading>
-						<AddressView className='ee-event-venue__address' {...selectedVenue} />
+						<Address className='ee-event-venue__address' inline {...selectedVenue} />
 						<div>
 							<Link className='ee-event-venue__edit-link' href={editVenueLink}>
 								{__('Edit this Venue')}

@@ -42,7 +42,7 @@
 		box-sizing: border-box;
 		display: flex;
 		flex-direction: column;
-		justify-content: space-between;
+		height: 100%;
 		padding: var(--ee-padding-small) 0;
 		width: 100%;
 
@@ -55,7 +55,7 @@
 
 	h4.ee-heading.ee-event-venue__venue-name {
 		line-height: var(--ee-font-size-bigger);
-		margin: 0 0 var(--ee-margin-tiny);
+		margin: 0 0 var(--ee-margin-smaller);
 		text-align: start;
 	}
 
@@ -63,7 +63,7 @@
 		font-size: var(--ee-font-size-small);
 		line-height: var(--ee-font-size-big);
 		min-width: 320px;
-		margin: 0 0 var(--ee-margin-tiny);
+		margin: 0 0 var(--ee-margin-smaller);
 
 		.ee-address-view__item--value {
 			margin-inline-start: var(--ee-margin-tiny);
