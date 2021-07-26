@@ -26,6 +26,10 @@ export interface Address {
 	address2?: string;
 	city?: string;
 	country?: string;
+	countryISO?: string;
+	countryName?: string;
 	state?: string;
+	stateAbbrev?: string;
+	stateName?: string;
 	zip?: string;
 }
