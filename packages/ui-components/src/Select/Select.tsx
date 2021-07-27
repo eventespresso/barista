@@ -5,11 +5,12 @@ import { Select as SelectAdapter } from '@eventespresso/adapters';
 import { ArrowDownAlt } from '@eventespresso/icons';
 import { withLabel } from '../withLabel';
 import InlineSelect from './InlineSelect';
-import type { SelectProps } from './types';
+
+import type { SelectProps, InlineSelectProps } from './types';
 
 import './style.scss';
 
-export const Select = forwardRef<HTMLSelectElement, SelectProps & React.ComponentProps<typeof InlineSelect>>(
+export const Select = forwardRef<HTMLSelectElement, SelectProps & InlineSelectProps>(
 	({ fitContainer, flow, id, noBorderColor, size, ...props }, ref) => {
 		const className = classNames(
 			'ee-select',

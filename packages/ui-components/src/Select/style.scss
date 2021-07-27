@@ -5,6 +5,7 @@
 	align-items: center;
 	display: flex;
 	justify-content: space-between;
+	max-width: 100%;
 
 	@at-root .ee-input__wrapper & {
 		width: 100%;
