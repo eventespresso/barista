@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { __, sprintf } from '@eventespresso/i18n';
 import { Image } from '@eventespresso/adapters';
@@ -24,29 +24,11 @@ const header = (
 
 export const VenueDetails: React.FC = () => {
 	const event = useEvent();
-
-	const [selectedVenueId, setSelectedVenueId] = useState(event?.venue || '');
-
-	const { updateEntity: updateEvent } = useEventMutator(event?.id);
-
-	const onChangeInstantValue = useCallback((newValue: string) => {
-		setSelectedVenueId(newValue);
-	}, []);
-
-	const onChangeValue = useCallback(
-		(newVenue: string) => {
-			// lets avoid unnecessary mutation
-			if (event?.venue !== newVenue) {
-				updateEvent({ venue: newVenue });
-			}
-		},
-		[event?.venue, updateEvent]
-	);
+	const { updateEntity } = useEventMutator(event?.id);
 
 	const venues = useVenues();
 	const options = useMemo(() => entityListToSelectOptions(venues), [venues]);
-	const selectedVenue = useMemo(() => findEntityByGuid(venues)(selectedVenueId), [selectedVenueId, venues]);
-	console.log('%c selectedVenue', 'color: Yellow;', selectedVenue);
+	const selectedVenue = useMemo(() => findEntityByGuid(venues)(event?.venue), [event?.venue, venues]);
 
 	const createVenueLink = useVenueLink('create_new');
 	const editVenueLink = useVenueLink('edit', selectedVenue?.dbId);
@@ -56,8 +38,8 @@ export const VenueDetails: React.FC = () => {
 		capacity === -1
 			? __('unlimited space')
 			: sprintf(
-					/* translators: %s venue capacity */
-					__('Space for up to %s people'),
+					/* translators: %d venue capacity */
+					__('Space for up to %d people'),
 					`${selectedVenue?.capacity}`
 			  );
 
@@ -110,12 +92,11 @@ export const VenueDetails: React.FC = () => {
 			<VenueSelector
 				className='ee-event-venue'
 				createVenueLink={createVenueLink}
-				inline
+				entityToUpdate={event}
 				label={__('Select a different Venue')}
-				onChangeInstantValue={onChangeInstantValue}
-				onChangeValue={onChangeValue}
 				options={options}
-				value={selectedVenueId}
+				updateEntity={updateEntity}
+				venue={selectedVenue}
 			/>
 		</Container>
 	);

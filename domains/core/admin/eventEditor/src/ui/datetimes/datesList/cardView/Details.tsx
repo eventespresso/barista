@@ -41,19 +41,6 @@ const Details: React.FC<DateItemProps> = ({ entity: datetime }) => {
 	const venues = useVenues();
 	const options = useMemo(() => entityListToSelectOptions(venues), [venues]);
 	const selectedVenue = useMemo(() => findEntityByGuid(venues)(datetime.venue), [datetime, venues]);
-	console.log('%c selectedVenue', 'color: DodgerBlue;', selectedVenue);
-
-	const onChangeVenue = useCallback(
-		(venue: string) => {
-			console.log('%c venue', 'color: Yellow;', venue);
-			// lets avoid unnecessary mutation
-			if (datetime.venue !== venue) {
-				console.log('%c venue', 'color: LimeGreen;', venue);
-				updateEntity({ venue });
-			}
-		},
-		[datetime?.venue, updateEntity]
-	);
 
 	return (
 		<>
@@ -70,12 +57,13 @@ const Details: React.FC<DateItemProps> = ({ entity: datetime }) => {
 
 			<VenueSelector
 				className='ee-event-venue'
+				entityToUpdate={datetime}
 				inline
 				noBorderColor
-				onChangeValue={onChangeVenue}
 				options={options}
 				showIcon
-				value={selectedVenue?.id}
+				venue={selectedVenue}
+				updateEntity={updateEntity}
 			/>
 
 			{detailsItems}
