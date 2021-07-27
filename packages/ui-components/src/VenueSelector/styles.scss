@@ -11,6 +11,10 @@
 		flex-direction: row;
 	}
 
+	&--align-center {
+		text-align: center;
+	}
+
 	.ee-input__wrapper,
 	.ee-select-wrapper {
 		width: 100%;
@@ -24,10 +28,28 @@
 	&__add-new-link.ee-btn-base.ee-icon-button {
 		margin-inline-start: var(--ee-margin-tiny);
 	}
+	&__preview {
+		.ee-heading {
+			color: var(--ee-default-text-color-low-contrast) ! important;
+			display: flex;
+			font-weight: 700;
+			line-height: var(--ee-font-size-big);
+			margin: 0 !important;
 
-	svg.ee-svg.ee-svg {
-		color: var(--ee-default-text-color) ! important;
-		height: 1.5rem;
-		width: 1.5rem;
+			span {
+				margin-block-start: var(--ee-margin-micro);
+			}
+
+			&--align-center {
+				text-align: center;
+			}
+
+			svg.ee-svg.ee-svg {
+				color: var(--ee-default-text-color-low-contrast) ! important;
+				height: 1.5rem;
+				margin-inline-end: var(--ee-margin-tiny);
+				width: 1.5rem;
+			}
+		}
 	}
 }
