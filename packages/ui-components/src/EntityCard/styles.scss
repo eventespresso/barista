@@ -43,7 +43,7 @@
 		}
 
 		&__details {
-			align-content: space-between;
+			align-content: center;
 			align-items: center;
 			box-sizing: border-box;
 			display: flex;
@@ -51,7 +51,7 @@
 			font-family: var(--ee-admin-font-family);
 			height: 100%;
 			line-height: calc(var(--ee-line-height-modifier) * 0.875);
-			justify-content: flex-start;
+			justify-content: space-between;
 			text-align: center;
 			width: 100%;
 

@@ -8,7 +8,8 @@
 	font-size: var(--ee-font-size-big);
 	justify-content: center;
 	line-height: var(--ee-font-size-big);
-	margin: auto 0 0;
+	margin: 0;
+	margin-block-start: var(--ee-margin-tiny);
 	min-width: calc(var(--ee-font-size-tiny) * 21);
 	text-align: center;
 	vertical-align: bottom;
