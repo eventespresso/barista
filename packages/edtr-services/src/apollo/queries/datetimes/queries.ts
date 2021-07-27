@@ -21,6 +21,7 @@ export const DATETIME_ATTRIBUTES: any = gql`
 		sold
 		status
 		startDate
+		venue
 	}
 `;
 

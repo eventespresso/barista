@@ -70,6 +70,7 @@ export interface Datetime extends Entity, Trashable {
 	sold: number;
 	startDate: string;
 	status: DateStatus;
+	venue: string;
 }
 
 export interface DatetimeItem {

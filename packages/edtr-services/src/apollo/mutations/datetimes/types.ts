@@ -17,6 +17,7 @@ export interface DatetimeBaseInput {
 	sold?: number;
 	startDate?: string | Date;
 	tickets?: Array<EntityId>;
+	venue?: string;
 }
 
 export type CreateDatetimeInput = DatetimeBaseInput;
