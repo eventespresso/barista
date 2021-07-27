@@ -6,7 +6,6 @@ import { SimpleTextEditorModal } from '@eventespresso/ee-components';
 import { useConfig, getAdminUrl } from '@eventespresso/services';
 import { useDatetimeMutator, useEventId, useVenues, hooks } from '@eventespresso/edtr-services';
 import { entityListToSelectOptions } from '@eventespresso/utils';
-import { findEntityByGuid } from '@eventespresso/predicates';
 import { VenueSelector } from '@eventespresso/ui-components';
 
 import DateDetailsPanel from './DateDetailsPanel';
@@ -40,7 +39,8 @@ const Details: React.FC<DateItemProps> = ({ entity: datetime }) => {
 
 	const venues = useVenues();
 	const options = useMemo(() => entityListToSelectOptions(venues), [venues]);
-	const selectedVenue = useMemo(() => findEntityByGuid(venues)(datetime.venue), [datetime, venues]);
+
+	const onChangeValue = useCallback((venue) => updateEntity({ venue }), [updateEntity]);
 
 	return (
 		<>
@@ -57,13 +57,11 @@ const Details: React.FC<DateItemProps> = ({ entity: datetime }) => {
 
 			<VenueSelector
 				className='ee-event-venue'
-				entityToUpdate={datetime}
-				inline
 				noBorderColor
 				options={options}
 				showIcon
-				venue={selectedVenue}
-				updateEntity={updateEntity}
+				onChangeValue={onChangeValue}
+				value={datetime.venue}
 			/>
 
 			{detailsItems}

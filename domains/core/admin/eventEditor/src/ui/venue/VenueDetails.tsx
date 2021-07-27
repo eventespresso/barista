@@ -1,9 +1,9 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { __, sprintf } from '@eventespresso/i18n';
 import { Image } from '@eventespresso/adapters';
 import { useEvent, useEventMutator, useVenues } from '@eventespresso/edtr-services';
-import { entityListToSelectOptions } from '@eventespresso/utils';
+import { entityListToSelectOptions, isInfinite } from '@eventespresso/utils';
 import { findEntityByGuid } from '@eventespresso/predicates';
 import { Address, Container, Heading, Link, VenueSelector } from '@eventespresso/ui-components';
 import { MapMarker, Phone, VenueSeat } from '@eventespresso/icons';
@@ -25,23 +25,27 @@ const header = (
 export const VenueDetails: React.FC = () => {
 	const event = useEvent();
 	const { updateEntity } = useEventMutator(event?.id);
+	const [selectedVenueId, setSelectedVenueId] = useState(event?.venue || '');
 
 	const venues = useVenues();
 	const options = useMemo(() => entityListToSelectOptions(venues), [venues]);
-	const selectedVenue = useMemo(() => findEntityByGuid(venues)(event?.venue), [event?.venue, venues]);
+	const selectedVenue = useMemo(() => findEntityByGuid(venues)(selectedVenueId), [selectedVenueId, venues]);
 
 	const createVenueLink = useVenueLink('create_new');
 	const editVenueLink = useVenueLink('edit', selectedVenue?.dbId);
 
 	const capacity = selectedVenue?.capacity;
-	const venueCapacity =
-		capacity === -1
-			? __('unlimited space')
-			: sprintf(
-					/* translators: %d venue capacity */
-					__('Space for up to %d people'),
-					`${selectedVenue?.capacity}`
-			  );
+	const venueCapacity = isInfinite(capacity)
+		? __('unlimited space')
+		: sprintf(
+				/* translators: %d venue capacity */
+				__('Space for up to %d people'),
+				selectedVenue?.capacity
+		  );
+
+	const onChangeInstantValue = useCallback((newValue) => setSelectedVenueId(newValue), []);
+
+	const onChangeValue = useCallback((venue) => updateEntity({ venue }), [updateEntity]);
 
 	return (
 		<Container classes={classes} header={header}>
@@ -92,11 +96,11 @@ export const VenueDetails: React.FC = () => {
 			<VenueSelector
 				className='ee-event-venue'
 				createVenueLink={createVenueLink}
-				entityToUpdate={event}
 				label={__('Select a different Venue')}
 				options={options}
-				updateEntity={updateEntity}
-				venue={selectedVenue}
+				onChangeValue={onChangeValue}
+				onChangeInstantValue={onChangeInstantValue}
+				value={event?.venue}
 			/>
 		</Container>
 	);

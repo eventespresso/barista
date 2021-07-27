@@ -2,47 +2,48 @@ import { useCallback, useState } from 'react';
 import classNames from 'classnames';
 
 import { __ } from '@eventespresso/i18n';
-import type { Event, Datetime, Venue } from '@eventespresso/edtr-services';
+import { Building } from '@eventespresso/icons';
+import { usePrevious } from '@eventespresso/hooks';
 
 import { Link } from '../Button';
 import { SelectWithLabel } from '../Select';
-import { Building } from '@eventespresso/icons';
 
 import './styles.scss';
 
 interface VenueSelectorProps extends React.ComponentProps<typeof SelectWithLabel> {
 	createVenueLink?: string;
-	entityToUpdate: Event | Datetime;
 	inline?: boolean;
 	showIcon?: boolean;
-	updateEntity: ({ venue: string }) => Promise<boolean>;
-	venue?: Venue;
 }
 
 export const VenueSelector: React.FC<VenueSelectorProps> = ({
 	createVenueLink,
-	entityToUpdate,
-	inline,
+	inline = true,
 	showIcon,
-	updateEntity,
-	venue,
+	value,
 	...props
 }) => {
 	// tracking selected venue ID internally so that things like keyboard selection don't trigger updates immediately
-	const [selectedVenueId, setSelectedVenueId] = useState(venue.id || '');
+	const [selectedVenueId, setSelectedVenueId] = useState(value || '');
 
-	const onChangeInstantValue = useCallback((newValue: string) => {
-		setSelectedVenueId(newValue);
-	}, []);
+	const previousValue = usePrevious(value);
+
+	const onChangeInstantValue = useCallback(
+		(newValue: string) => {
+			setSelectedVenueId(newValue);
+			props.onChangeInstantValue?.(newValue);
+		},
+		[props]
+	);
 
 	const onChangeValue = useCallback(
-		(venue: string) => {
+		(newValue: string) => {
 			// lets avoid unnecessary mutation
-			if (entityToUpdate.venue !== venue) {
-				updateEntity({ venue });
+			if (previousValue !== newValue) {
+				props.onChangeValue?.(newValue);
 			}
 		},
-		[entityToUpdate?.venue, updateEntity]
+		[previousValue, props]
 	);
 
 	const className = classNames('ee-venue-selector__input', props.className);
