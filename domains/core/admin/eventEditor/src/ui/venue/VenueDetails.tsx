@@ -2,11 +2,11 @@ import { useCallback, useMemo, useState } from 'react';
 
 import { __, sprintf } from '@eventespresso/i18n';
 import { Image } from '@eventespresso/adapters';
-import { useVenues, useEventMutator, useEvent } from '@eventespresso/edtr-services';
+import { useEvent, useEventMutator, useVenues } from '@eventespresso/edtr-services';
 import { entityListToSelectOptions } from '@eventespresso/utils';
 import { findEntityByGuid } from '@eventespresso/predicates';
-import { Address, Container, Heading, SelectWithLabel, Link } from '@eventespresso/ui-components';
-import { MapMarker, Phone, Seat } from '@eventespresso/icons';
+import { Address, Container, Heading, Link, VenueSelector } from '@eventespresso/ui-components';
+import { MapMarker, Phone, VenueSeat } from '@eventespresso/icons';
 
 import { useVenueLink } from './useVenueLink';
 
@@ -86,7 +86,7 @@ export const VenueDetails: React.FC = () => {
 							</div>
 							<div className='ee-event-venue__detail'>
 								<span className='ee-event-venue__detail-label'>
-									<Seat />
+									<VenueSeat />
 								</span>
 								<span className='ee-event-venue__detail-value'>{venueCapacity}</span>
 							</div>
@@ -107,23 +107,15 @@ export const VenueDetails: React.FC = () => {
 					</div>
 				</div>
 			)}
-			<div className='ee-event-venue__editing'>
-				<SelectWithLabel
-					className='ee-event-venue__selector'
-					flow='inline'
-					label={__('Select a different Venue')}
-					onChangeValue={onChangeValue}
-					onChangeInstantValue={onChangeInstantValue}
-					options={options}
-					size='small'
-					value={selectedVenueId}
-				/>
-				<div>
-					<Link className='ee-event-venue__add-new-link' href={createVenueLink}>
-						{__('Add new Venue')}
-					</Link>
-				</div>
-			</div>
+			<VenueSelector
+				className='ee-event-venue'
+				createVenueLink={createVenueLink}
+				label={__('Select a different Venue')}
+				onChangeValue={onChangeValue}
+				onChangeInstantValue={onChangeInstantValue}
+				options={options}
+				value={selectedVenueId}
+			/>
 		</Container>
 	);
 };

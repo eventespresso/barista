@@ -4,7 +4,10 @@ import { __ } from '@eventespresso/i18n';
 import { ADMIN_ROUTES, EMPTY_OBJECT } from '@eventespresso/constants';
 import { SimpleTextEditorModal } from '@eventespresso/ee-components';
 import { useConfig, getAdminUrl } from '@eventespresso/services';
-import { useDatetimeMutator, useEventId, hooks } from '@eventespresso/edtr-services';
+import { useDatetimeMutator, useEventId, useVenues, hooks } from '@eventespresso/edtr-services';
+import { entityListToSelectOptions } from '@eventespresso/utils';
+import { findEntityByGuid } from '@eventespresso/predicates';
+import { VenueSelector } from '@eventespresso/ui-components';
 
 import DateDetailsPanel from './DateDetailsPanel';
 import { EditableName } from '../editable';
@@ -35,6 +38,23 @@ const Details: React.FC<DateItemProps> = ({ entity: datetime }) => {
 		return hooks.applyFilters('eventEditor.datetimes.inlineDescriptionProps', EMPTY_OBJECT, datetime);
 	}, [datetime]);
 
+	const venues = useVenues();
+	const options = useMemo(() => entityListToSelectOptions(venues), [venues]);
+	const selectedVenue = useMemo(() => findEntityByGuid(venues)(datetime.venue), [datetime, venues]);
+	console.log('%c selectedVenue', 'color: DodgerBlue;', selectedVenue);
+
+	const onChangeVenue = useCallback(
+		(venue: string) => {
+			console.log('%c venue', 'color: Yellow;', venue);
+			// lets avoid unnecessary mutation
+			if (datetime.venue !== venue) {
+				console.log('%c venue', 'color: LimeGreen;', venue);
+				updateEntity({ venue });
+			}
+		},
+		[datetime?.venue, updateEntity]
+	);
+
 	return (
 		<>
 			<EditableName className='entity-card-details__name' entity={datetime} />
@@ -46,6 +66,16 @@ const Details: React.FC<DateItemProps> = ({ entity: datetime }) => {
 				title={__('Edit description')}
 				tooltip={__('edit description…')}
 				{...additionalProps}
+			/>
+
+			<VenueSelector
+				className='ee-event-venue'
+				inline
+				noBorderColor
+				onChangeValue={onChangeVenue}
+				options={options}
+				showIcon
+				value={selectedVenue.id}
 			/>
 
 			{detailsItems}
