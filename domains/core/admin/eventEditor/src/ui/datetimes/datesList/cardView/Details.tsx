@@ -7,6 +7,7 @@ import { useConfig, getAdminUrl } from '@eventespresso/services';
 import { useDatetimeMutator, useEventId, useVenues, hooks } from '@eventespresso/edtr-services';
 import { entityListToSelectOptions } from '@eventespresso/utils';
 import { VenueSelector } from '@eventespresso/ui-components';
+import { findEntityByGuid } from '@eventespresso/predicates';
 
 import DateDetailsPanel from './DateDetailsPanel';
 import { EditableName } from '../editable';
@@ -39,6 +40,7 @@ const Details: React.FC<DateItemProps> = ({ entity: datetime }) => {
 
 	const venues = useVenues();
 	const options = useMemo(() => entityListToSelectOptions(venues), [venues]);
+	const selectedVenue = useMemo(() => findEntityByGuid(venues)(datetime?.venue), [datetime?.venue, venues]);
 
 	const onChangeValue = useCallback((venue) => updateEntity({ venue }), [updateEntity]);
 
@@ -56,12 +58,14 @@ const Details: React.FC<DateItemProps> = ({ entity: datetime }) => {
 			/>
 
 			<VenueSelector
+				align='center'
 				className='ee-event-venue'
+				inline
 				noBorderColor
 				options={options}
-				showIcon
 				onChangeValue={onChangeValue}
-				value={datetime.venue}
+				value={datetime?.venue}
+				venueName={selectedVenue?.name}
 			/>
 
 			{detailsItems}

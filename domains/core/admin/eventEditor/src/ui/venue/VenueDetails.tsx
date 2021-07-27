@@ -101,6 +101,7 @@ export const VenueDetails: React.FC = () => {
 				onChangeValue={onChangeValue}
 				onChangeInstantValue={onChangeInstantValue}
 				value={event?.venue}
+				venueName={selectedVenue?.name}
 			/>
 		</Container>
 	);
