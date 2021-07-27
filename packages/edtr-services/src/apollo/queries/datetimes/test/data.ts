@@ -27,6 +27,7 @@ export const nodes: Datetime[] = [
 		reserved: 0,
 		sold: 6,
 		startDate: formatISO(new Date(1987, 1, 11)),
+		venue: '',
 		__typename: 'EspressoDatetime',
 	},
 	{
@@ -49,6 +50,7 @@ export const nodes: Datetime[] = [
 		reserved: 0,
 		sold: 10,
 		startDate: formatISO(new Date(1986, 1, 11)),
+		venue: '',
 		__typename: 'EspressoDatetime',
 	},
 	{
@@ -71,6 +73,7 @@ export const nodes: Datetime[] = [
 		reserved: 0,
 		sold: 42,
 		startDate: formatISO(new Date(1985, 1, 11)),
+		venue: '',
 		__typename: 'EspressoDatetime',
 	},
 ];

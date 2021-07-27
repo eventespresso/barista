@@ -21,6 +21,7 @@ const dates: Datetime[] = [
 		order: 0,
 		reserved: 0,
 		startDate: 'end',
+		venue: '',
 	},
 	{
 		id: 'RGF0ZXRpbWU6ODM=',
@@ -42,6 +43,7 @@ const dates: Datetime[] = [
 		order: 0,
 		reserved: 0,
 		startDate: 'end',
+		venue: '',
 	},
 	{
 		id: 'RGF0ZXRpbWU6ODM=',
@@ -63,6 +65,7 @@ const dates: Datetime[] = [
 		order: 0,
 		reserved: 0,
 		startDate: 'end',
+		venue: '',
 	},
 	{
 		id: 'RGF0ZXRpbWU6ODM=',
@@ -84,6 +87,7 @@ const dates: Datetime[] = [
 		order: 0,
 		reserved: 0,
 		startDate: 'end',
+		venue: '',
 	},
 	{
 		id: 'RGF0ZXRpbWU6ODM=',
@@ -105,6 +109,7 @@ const dates: Datetime[] = [
 		order: 0,
 		reserved: 0,
 		startDate: 'end',
+		venue: '',
 	},
 	{
 		id: 'RGF0ZXRpbWU6ODM=',
@@ -126,6 +131,7 @@ const dates: Datetime[] = [
 		order: 0,
 		reserved: 0,
 		startDate: 'end',
+		venue: '',
 	},
 	{
 		id: 'RGF0ZXRpbWU6ODM=',
@@ -147,6 +153,7 @@ const dates: Datetime[] = [
 		order: 0,
 		reserved: 0,
 		startDate: 'end',
+		venue: '',
 	},
 ];
 

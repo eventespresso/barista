@@ -26,6 +26,7 @@ export const DATETIME_DEFAULTS: Datetime = {
 	sold: 0,
 	startDate: PLUS_ONE_MONTH.toISOString(),
 	status: null,
+	venue: '',
 };
 
 type OptimisticResCb = (mutationType: MutationType, input: MutationInput) => any;
