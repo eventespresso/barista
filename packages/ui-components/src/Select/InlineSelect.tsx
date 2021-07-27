@@ -6,9 +6,9 @@ import { withDebounce } from '../withDebounce';
 
 import './style.scss';
 
-import type { InlineSelectProps } from './types';
+import type { SelectProps } from './types';
 
-const InlineSelect = forwardRef<HTMLSelectElement, InlineSelectProps>((props, ref) => {
+const InlineSelect = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
 	const className = classNames('ee-select--inline', props.className);
 	const rootClassName = classNames('ee-select-wrapper--inline', props?.rootProps?.className);
 	const rootProps = useMemo(

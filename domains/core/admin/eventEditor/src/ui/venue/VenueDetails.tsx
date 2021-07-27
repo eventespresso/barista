@@ -110,9 +110,10 @@ export const VenueDetails: React.FC = () => {
 			<VenueSelector
 				className='ee-event-venue'
 				createVenueLink={createVenueLink}
+				inline
 				label={__('Select a different Venue')}
-				onChangeValue={onChangeValue}
 				onChangeInstantValue={onChangeInstantValue}
+				onChangeValue={onChangeValue}
 				options={options}
 				value={selectedVenueId}
 			/>

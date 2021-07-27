@@ -75,7 +75,7 @@ const Details: React.FC<DateItemProps> = ({ entity: datetime }) => {
 				onChangeValue={onChangeVenue}
 				options={options}
 				showIcon
-				value={selectedVenue.id}
+				value={selectedVenue?.id}
 			/>
 
 			{detailsItems}

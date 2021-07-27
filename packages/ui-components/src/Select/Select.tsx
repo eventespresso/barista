@@ -6,11 +6,11 @@ import { ArrowDownAlt } from '@eventespresso/icons';
 import { withLabel } from '../withLabel';
 import InlineSelect from './InlineSelect';
 
-import type { SelectProps, InlineSelectProps } from './types';
+import type { SelectProps } from './types';
 
 import './style.scss';
 
-export const Select = forwardRef<HTMLSelectElement, SelectProps & InlineSelectProps>(
+export const Select = forwardRef<HTMLSelectElement, SelectProps & React.ComponentProps<typeof InlineSelect>>(
 	({ fitContainer, flow, id, noBorderColor, size, ...props }, ref) => {
 		const className = classNames(
 			'ee-select',

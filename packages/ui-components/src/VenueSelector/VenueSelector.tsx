@@ -5,11 +5,9 @@ import { Link } from '../Button';
 import { SelectWithLabel } from '../Select';
 import { Building } from '@eventespresso/icons';
 
-import type { InlineSelectProps } from '../Select';
-
 import './styles.scss';
 
-interface VenueSelectorProps extends InlineSelectProps {
+interface VenueSelectorProps extends React.ComponentProps<typeof SelectWithLabel> {
 	createVenueLink?: string;
 	inline?: boolean;
 	showIcon?: boolean;
