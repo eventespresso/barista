@@ -23,7 +23,7 @@
 		"dev:watch": "node scripts/watch.js",
 		"gen-workspaces": "node scripts/gen-workspaces.js",
 		"generate:css": "node packages/styles/bin/css-builder/css-builder",
-		"generate:icons": "npx @svgr/cli --config-file packages/icons/.svgrrc.js -d packages/icons/src/icons packages/icons/src/svg",
+		"generate:icons": "yarn svgr --config-file packages/icons/.svgrrc.js -d packages/icons/src/icons packages/icons/src/svg",
 		"lint": "node eslint/validate.js && yarn workspaces run lint",
 		"lint:ci": "FORCE_COLOR=true yarn lint",
 		"postinstall": "yarn gen-workspaces && husky install",
