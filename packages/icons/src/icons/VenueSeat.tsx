@@ -1,14 +1,17 @@
 import withClassName from '../withClassName';
 import { IconProps } from '../types';
 
-const Seat = (props: IconProps): JSX.Element => {
+const VenueSeat = (props: IconProps): JSX.Element => {
 	return (
 		<svg
 			aria-hidden='true'
-			className='ee-svg--seat'
+			className='ee-svg--venue-seat'
+			fill='currentColor'
 			focusable='false'
 			height='1.5em'
 			role='img'
+			stroke='currentColor'
+			strokeWidth='0'
 			viewBox='0 1 24 24'
 			width='1.5em'
 			xmlns='http://www.w3.org/2000/svg'
@@ -19,4 +22,4 @@ const Seat = (props: IconProps): JSX.Element => {
 	);
 };
 
-export default withClassName(Seat, 'seat');
+export default withClassName(VenueSeat, 'seat');
