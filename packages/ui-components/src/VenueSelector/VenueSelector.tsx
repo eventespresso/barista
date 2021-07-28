@@ -55,9 +55,11 @@ export const VenueSelector: React.FC<VenueSelectorProps> = ({
 		(newValue: string) => {
 			// lets avoid unnecessary mutation
 			if (previousValue !== newValue) {
+				setSelectedVenueId(newValue);
 				props.onChangeValue?.(newValue);
-				setIsEditing(false);
+				props.onChangeInstantValue?.(newValue);
 			}
+			setIsEditing(false);
 		},
 		[previousValue, props]
 	);
