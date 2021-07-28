@@ -143,6 +143,16 @@
 			max-width: 320px;
 		}
 
+		&--no-image {
+			align-items: center;
+			background: var(--ee-color-grey-15);
+			color: var(--ee-color-grey-12);
+			display: flex;
+			font-size: var(--ee-font-size-huge);
+			font-weight: 800;
+			justify-content: center;
+		}
+
 		img {
 			border-radius: var(--ee-border-radius-default);
 			height: 100%;
@@ -166,7 +176,6 @@
 
 		@include min767px {
 			margin: 0;
-			margin-inline-start: var(--ee-margin-small);
 			width: min-content;
 		}
 	}
@@ -176,4 +185,8 @@
 		height: 1.5rem;
 		width: 1.5rem;
 	}
+}
+
+.ee-event-venue__card + .ee-venue-selector {
+	margin-inline-start: var(--ee-margin-small);
 }
