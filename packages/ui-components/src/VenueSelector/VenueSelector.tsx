@@ -1,47 +1,55 @@
-import { useCallback, useRef, useState } from 'react';
-import { useOutsideClick } from '@chakra-ui/react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import classNames from 'classnames';
 
 import { __ } from '@eventespresso/i18n';
 import { Building } from '@eventespresso/icons';
-import { usePrevious } from '@eventespresso/hooks';
+import { useOnClickOutside, usePrevious } from '@eventespresso/hooks';
+import { entityListToSelectOptions } from '@eventespresso/utils';
 
 import { Link } from '../Button';
 import { Heading } from '../Heading';
 import { SelectWithLabel } from '../Select';
+import { TabbableText } from '../TabbableText';
 
 import './styles.scss';
+
+interface Option {
+	label: string;
+	value: string;
+}
 
 interface VenueSelectorProps extends React.ComponentProps<typeof SelectWithLabel> {
 	align?: 'center';
 	createVenueLink?: string;
+	emptyOption?: Option;
 	inline?: boolean;
+	value?: string;
 	venueName?: string;
+	venues: Array<{
+		id: string;
+		name: string;
+	}>;
 }
+
+const defaultEmptyOption = { label: __('~ no venue ~'), value: '0' };
 
 export const VenueSelector: React.FC<VenueSelectorProps> = ({
 	align,
 	createVenueLink,
+	emptyOption = defaultEmptyOption,
 	inline,
 	value,
 	venueName,
+	venues,
 	...props
 }) => {
 	const ref = useRef();
-	const previousValue = usePrevious(value, value);
-	// tracking selected venue ID internally so that things like keyboard selection don't trigger updates immediately
-	const [selectedVenueId, setSelectedVenueId] = useState(value as React.ReactText);
-
 	const [isEditing, setIsEditing] = useState(false);
-	useOutsideClick({
-		ref: ref,
-		handler: () => {
-			if (previousValue !== selectedVenueId) {
-				props.onChangeValue?.(selectedVenueId);
-			}
-			setIsEditing(false);
-		},
-	});
+	const previousValue = usePrevious<string>(value, value);
+
+	// tracking selected venue ID internally so that things like keyboard selection don't trigger updates immediately
+	const [selectedVenueId, setSelectedVenueId] = useState<string>(value);
+	const options = useMemo(() => entityListToSelectOptions(venues, emptyOption), [emptyOption, venues]);
 
 	const onChangeInstantValue = useCallback(
 		(newValue: string) => {
@@ -55,14 +63,22 @@ export const VenueSelector: React.FC<VenueSelectorProps> = ({
 		(newValue: string) => {
 			// lets avoid unnecessary mutation
 			if (previousValue !== newValue) {
-				setSelectedVenueId(newValue);
+				onChangeInstantValue(newValue);
 				props.onChangeValue?.(newValue);
-				props.onChangeInstantValue?.(newValue);
 			}
 			setIsEditing(false);
 		},
-		[previousValue, props]
+		[onChangeInstantValue, previousValue, props]
 	);
+
+	useOnClickOutside({
+		ref: ref,
+		handler: () => {
+			if (isEditing) {
+				onChangeValue(selectedVenueId);
+			}
+		},
+	});
 
 	const onClick = useCallback(() => setIsEditing(true), [setIsEditing]);
 
@@ -76,10 +92,12 @@ export const VenueSelector: React.FC<VenueSelectorProps> = ({
 	if (inline && !isEditing) {
 		return (
 			<div className={previewClass}>
-				<Heading as='h6' onClick={onClick}>
-					<Building />
-					<span>{venueName}</span>
-				</Heading>
+				<TabbableText onClick={onClick} tooltip={__('select a venue for this datetime')}>
+					<Heading as='h6'>
+						<Building />
+						{selectedVenueId && <span>{venueName}</span>}
+					</Heading>
+				</TabbableText>
 			</div>
 		);
 	}
@@ -100,8 +118,9 @@ export const VenueSelector: React.FC<VenueSelectorProps> = ({
 				className={className}
 				onChangeValue={onChangeValue}
 				onChangeInstantValue={onChangeInstantValue}
+				options={options}
 				ref={ref}
-				value={selectedVenueId}
+				value={selectedVenueId ?? ''}
 			/>
 			{addNewVenue}
 		</div>
