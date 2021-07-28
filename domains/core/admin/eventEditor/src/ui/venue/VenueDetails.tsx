@@ -46,13 +46,14 @@ export const VenueDetails: React.FC = () => {
 	const onChangeInstantValue = useCallback((newValue) => setSelectedVenueId(newValue), []);
 
 	const onChangeValue = useCallback((venue) => updateEntity({ venue }), [updateEntity]);
+	const thumbnail = selectedVenue?.thumbnail;
 
 	return (
 		<Container classes={classes} header={header}>
 			{selectedVenue && (
 				<div className='ee-event-venue__card'>
 					<div className='ee-event-venue__thumbnail'>
-						<Image src={selectedVenue?.thumbnail} alt={selectedVenue?.name} />
+						{thumbnail && <Image src={thumbnail} alt={selectedVenue?.name} />}
 					</div>
 					<div className='ee-event-venue__properties'>
 						<Heading as='h4' className='ee-event-venue__venue-name'>

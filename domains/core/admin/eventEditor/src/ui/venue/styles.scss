@@ -61,6 +61,29 @@
 		text-align: start;
 	}
 
+	/*
+		~ overlay parent venue name on photo after that is added ~
+		h4.ee-heading.ee-event-venue__venue-name {
+		// color: var(--ee-default-text-color-high-contrast);
+		color: white;
+		font-size: var(--ee-font-size-bigger);
+		line-height: var(--ee-font-size-bigger);
+		margin: 0;
+		margin-inline: var(--ee-margin-smaller);
+		position: absolute;
+		text-align: start;
+		text-shadow: rgba(0, 0, 0, .5) 0 0 1px,  rgba(0, 0, 0, .5) 0 0 1px,   rgba(0, 0, 0, .5) 0 0 1px,
+             rgba(0, 0, 0, .5) 0 0 1px,   rgba(0, 0, 0, .5) 0 0 1px,   rgba(0, 0, 0, .5) 0 0 1px,
+             rgba(0, 0, 0, .5) 0 0 1px,   rgba(0, 0, 0, .5) 0 0 1px,   rgba(0, 0, 0, .5) 0 0 1px,
+             rgba(0, 0, 0, .5) 1px 1px 1px,   rgba(0, 0, 0, .5) 1px 1px 1px,
+             rgba(0, 0, 0, .5) 1px -1px 1px,   rgba(0, 0, 0, .5) 1px -1px 1px,
+             rgba(0, 0, 0, .5) -1px 1px 1px,   rgba(0, 0, 0, .5) -1px 1px 1px,
+             rgba(0, 0, 0, .5) -1px -1px 1px,   rgba(0, 0, 0, .5) -1px -1px 1px;
+		top: var(--ee-margin-smaller);
+    	-webkit-font-smoothing: antialiased;
+	}
+	 */
+
 	&__desc {
 		margin: 0;
 		margin-block-end: var(--ee-margin-default);
@@ -113,6 +136,7 @@
 		min-height: 180px;
 		min-width: 180px;
 		overflow: hidden;
+		position: relative;
 		width: 100%;
 
 		@include min767px {
