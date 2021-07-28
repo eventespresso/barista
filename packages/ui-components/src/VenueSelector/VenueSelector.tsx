@@ -28,7 +28,7 @@ export const VenueSelector: React.FC<VenueSelectorProps> = ({
 	...props
 }) => {
 	const ref = useRef();
-	const previousValue = usePrevious(value);
+	const previousValue = usePrevious(value, value);
 	// tracking selected venue ID internally so that things like keyboard selection don't trigger updates immediately
 	const [selectedVenueId, setSelectedVenueId] = useState(value as React.ReactText);
 
