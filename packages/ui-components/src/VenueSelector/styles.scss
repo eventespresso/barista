@@ -29,6 +29,13 @@
 		margin-inline-start: var(--ee-margin-tiny);
 	}
 	&__preview {
+		width: 100%;
+
+		&--no-venue {
+			align-items: center;
+			display: flex;
+		}
+
 		.ee-heading {
 			color: var(--ee-default-text-color-low-contrast) ! important;
 			display: flex;
