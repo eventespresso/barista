@@ -23,6 +23,7 @@ interface VenueSelectorProps extends React.ComponentProps<typeof SelectWithLabel
 	createVenueLink?: string;
 	emptyOption?: Option;
 	inline?: boolean;
+	tooltip?: string;
 	value?: string;
 	venueName?: string;
 	venues: Array<{
@@ -38,6 +39,7 @@ export const VenueSelector: React.FC<VenueSelectorProps> = ({
 	createVenueLink,
 	emptyOption = defaultEmptyOption,
 	inline,
+	tooltip,
 	value,
 	venueName,
 	venues,
@@ -92,7 +94,7 @@ export const VenueSelector: React.FC<VenueSelectorProps> = ({
 	if (inline && !isEditing) {
 		return (
 			<div className={previewClass}>
-				<TabbableText onClick={onClick} tooltip={__('select a venue for this datetime')}>
+				<TabbableText onClick={onClick} tooltip={tooltip}>
 					<Heading as='h6'>
 						<Building />
 						{selectedVenueId && <span>{venueName}</span>}

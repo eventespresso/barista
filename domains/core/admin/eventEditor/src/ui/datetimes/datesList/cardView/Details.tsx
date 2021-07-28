@@ -61,6 +61,7 @@ const Details: React.FC<DateItemProps> = ({ entity: datetime }) => {
 				inline
 				noBorderColor
 				onChangeValue={onChangeValue}
+				tooltip={__('select datetime venue')}
 				value={datetime?.venue}
 				venueName={selectedVenue?.name}
 				venues={venues}
