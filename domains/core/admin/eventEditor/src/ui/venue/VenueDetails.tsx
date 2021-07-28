@@ -3,7 +3,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { __, sprintf } from '@eventespresso/i18n';
 import { Image } from '@eventespresso/adapters';
 import { useEvent, useEventMutator, useVenues } from '@eventespresso/edtr-services';
-import { entityListToSelectOptions, isInfinite } from '@eventespresso/utils';
+import { isInfinite } from '@eventespresso/utils';
 import { findEntityByGuid } from '@eventespresso/predicates';
 import { Address, Container, Heading, Link, VenueSelector } from '@eventespresso/ui-components';
 import { MapMarker, Phone, VenueSeat } from '@eventespresso/icons';
@@ -28,7 +28,6 @@ export const VenueDetails: React.FC = () => {
 	const [selectedVenueId, setSelectedVenueId] = useState(event?.venue || '');
 
 	const venues = useVenues();
-	const options = useMemo(() => entityListToSelectOptions(venues), [venues]);
 	const selectedVenue = useMemo(() => findEntityByGuid(venues)(selectedVenueId), [selectedVenueId, venues]);
 
 	const createVenueLink = useVenueLink('create_new');
@@ -52,9 +51,15 @@ export const VenueDetails: React.FC = () => {
 		<Container classes={classes} header={header}>
 			{selectedVenue && (
 				<div className='ee-event-venue__card'>
-					<div className='ee-event-venue__thumbnail'>
-						{thumbnail && <Image src={thumbnail} alt={selectedVenue?.name} />}
-					</div>
+					{thumbnail ? (
+						<div className='ee-event-venue__thumbnail'>
+							<Image src={thumbnail} alt={selectedVenue?.name} />
+						</div>
+					) : (
+						<div className='ee-event-venue__thumbnail ee-event-venue__thumbnail--no-image'>
+							{__('no image')}
+						</div>
+					)}
 					<div className='ee-event-venue__properties'>
 						<Heading as='h4' className='ee-event-venue__venue-name'>
 							{selectedVenue?.name}
@@ -97,12 +102,12 @@ export const VenueDetails: React.FC = () => {
 			<VenueSelector
 				className='ee-event-venue'
 				createVenueLink={createVenueLink}
-				label={__('Select a different Venue')}
-				options={options}
+				label={__('Select a Venue for the Event')}
 				onChangeValue={onChangeValue}
 				onChangeInstantValue={onChangeInstantValue}
 				value={event?.venue}
 				venueName={selectedVenue?.name}
+				venues={venues}
 			/>
 		</Container>
 	);
