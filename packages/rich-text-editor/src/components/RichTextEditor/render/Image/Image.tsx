@@ -11,6 +11,7 @@ import { useEditorState } from '../../../../hooks';
 import Toolbar from './Toolbar';
 
 export const Image: React.FC<ImageProps> = ({ align, alt, block, contentState, height, src, width }) => {
+	const wrapperRef = useRef<HTMLSpanElement>();
 	const [showToolbar, setShowToolbar] = useState(false);
 	const [editorState, setEditorState] = useEditorState();
 	const toolbar = useToolbarState({ loop: true });
@@ -27,9 +28,10 @@ export const Image: React.FC<ImageProps> = ({ align, alt, block, contentState, h
 		}
 	}, [showToolbar]);
 
-	const wrapperRef = useRef<HTMLSpanElement>();
-
-	useOnClickOutside(wrapperRef.current, onMouseOut);
+	useOnClickOutside({
+		ref: wrapperRef,
+		handler: onMouseOut,
+	});
 
 	const setAlignment = useCallback(
 		(alignment: Alignment) => {

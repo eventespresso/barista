@@ -22,15 +22,18 @@ export const ClickableIconWithTooltip: React.FC<ClickableIconWithTooltipProps> =
 	tooltipText,
 	...props
 }) => {
-	const { isOpen, onClose, onToggle } = useDisclosure();
 	const wrapperRef = useRef(null);
+	const { isOpen, onClose, onToggle } = useDisclosure();
 	const portalProps = useMemo(() => ({ appendToParent: false, containerRef: wrapperRef }), []);
 
 	const className = classNames('ee-clickable-tooltip', props.className);
 
 	const icon = <Icon className={className} size='small' />;
 
-	useOnClickOutside(wrapperRef.current, onClose);
+	useOnClickOutside({
+		ref: wrapperRef,
+		handler: onClose,
+	});
 
 	return (
 		<div className='ee-clickable-tooltip__wrapper' ref={wrapperRef} role='tooltip'>
