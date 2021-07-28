@@ -11,5 +11,7 @@
 	"mappings": {
 		"wp-content/plugins/event-espresso-core/assets": "./build"
 	},
-	"plugins": ["eventespresso/event-espresso-core#update-venue-ui"]
+	"plugins": [
+		"eventespresso/event-espresso-core#FET/reg-form-builder/main"
+	]
 }
