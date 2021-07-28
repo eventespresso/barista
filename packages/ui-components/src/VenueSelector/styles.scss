@@ -38,6 +38,7 @@
 
 			span {
 				margin-block-start: var(--ee-margin-micro);
+				margin-inline-start: var(--ee-margin-tiny);
 			}
 
 			&--align-center {
@@ -47,7 +48,7 @@
 			svg.ee-svg.ee-svg {
 				color: var(--ee-default-text-color-low-contrast) ! important;
 				height: 1.5rem;
-				margin-inline-end: var(--ee-margin-tiny);
+				margin: 0;
 				width: 1.5rem;
 			}
 		}
