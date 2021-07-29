@@ -33,7 +33,7 @@
 	&__inner {
 		font-size: calc(var(--ee-font-size-default) * 1.75);
 		font-weight: 500;
-		position: relative;
+		// position: relative;
 
 		.ee-entity-list__card-view & {
 			top: -2px;
@@ -44,6 +44,11 @@
 			font-weight: 300;
 			padding-bottom: 0;
 			padding-top: 0;
+		}
+
+		span {
+			position: relative;
+			top: -2px;
 		}
 	}
 

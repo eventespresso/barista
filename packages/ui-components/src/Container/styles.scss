@@ -40,6 +40,10 @@
 		flex-flow: row wrap;
 		padding: var(--ee-padding-micro);
 		width: 100%;
+
+		@include max480px {
+			padding: 0;
+		}
 	}
 
 	&__sidebar {
@@ -48,6 +52,10 @@
 		display: flex;
 		flex-flow: column nowrap;
 		padding: var(--ee-padding-micro);
+
+		@include max480px {
+			padding: 0;
+		}
 	}
 
 	&--align-start {

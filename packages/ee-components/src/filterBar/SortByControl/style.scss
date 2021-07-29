@@ -8,6 +8,10 @@
 	.ee-input-label__wrapper {
 		padding-bottom: 0;
 	}
+
+	.ee-btn-base.ee-btn {
+		margin-block-end: var(--ee-margin-micro);
+	}
 }
 
 .ee-filter-bar-modal__reorder-entitites {

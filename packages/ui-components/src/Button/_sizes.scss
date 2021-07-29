@@ -4,6 +4,13 @@
 	&.ee-btn {
 		box-sizing: border-box;
 
+		svg.ee-svg.ee-svg {
+			bottom: 1px;
+			height: calc(var(--ee-icon-button-size) / 2);
+			position: relative;
+			width: calc(var(--ee-icon-button-size) / 2);
+		}
+
 		&.ee-btn--micro {
 			box-shadow: var(--ee-button-box-shadow-soft);
 			font-size: var(--ee-font-size-micro);
@@ -12,14 +19,14 @@
 			line-height: var(--ee-icon-button-size-micro);
 			padding: 1px var(--ee-padding-tiny) 2px;
 
-			span {
+			span:not(.chakra-button__icon) {
 				font-size: var(--ee-font-size-micro);
 				letter-spacing: 1px;
 			}
 
-			svg {
-				height: 0.6rem;
-				width: 0.6rem;
+			svg.ee-svg.ee-svg {
+				height: 0.8rem;
+				width: 0.8rem;
 			}
 
 			.img-wrap span {
@@ -33,15 +40,15 @@
 			height: var(--ee-icon-button-size-tiny);
 			min-height: var(--ee-icon-button-size-smaller);
 			line-height: var(--ee-icon-button-size-tiny);
-			padding: 1px var(--ee-padding-smaller) var(--ee-padding-nano);
+			padding: var(--ee-padding-nano) var(--ee-padding-smaller);
 
-			span {
+			span:not(.chakra-button__icon) {
 				font-size: var(--ee-font-size-tiny);
 			}
 
-			svg {
-				height: 0.6rem;
-				width: 0.6rem;
+			svg.ee-svg.ee-svg {
+				height: 0.85rem;
+				width: 0.85rem;
 			}
 
 			.img-wrap span {
@@ -59,14 +66,14 @@
 			letter-spacing: 1px;
 			padding: calc(var(--ee-padding-nano) + 1px) var(--ee-padding-smaller) var(--ee-padding-micro);
 
-			svg {
+			svg.ee-svg.ee-svg {
 				margin-top: 2px;
 			}
 
 			> div {
 				margin-top: 2px;
 
-				svg {
+				svg.ee-svg.ee-svg {
 					margin-top: 0;
 				}
 			}
@@ -90,13 +97,13 @@
 			// line-height: var(--ee-font-size-tiny);
 			// min-height: var(--ee-font-size-small);
 
-			span {
+			span:not(.chakra-button__icon) {
 				font-size: var(--ee-font-size-small);
 			}
 
-			svg {
-				height: 0.9rem;
-				width: 0.9rem;
+			svg.ee-svg.ee-svg {
+				height: 1rem;
+				width: 1rem;
 			}
 		}
 
@@ -105,13 +112,13 @@
 			// line-height: var(--ee-font-size-micro);
 			// min-height: var(--ee-font-size-smaller);
 
-			span {
+			span:not(.chakra-button__icon) {
 				font-size: var(--ee-font-size-smaller);
 			}
 
-			svg {
-				height: 0.8rem;
-				width: 0.8rem;
+			svg.ee-svg.ee-svg {
+				height: 0.9rem;
+				width: 0.9rem;
 			}
 		}
 
@@ -124,12 +131,12 @@
 			line-height: var(--ee-icon-button-size-big);
 			padding: var(--ee-padding-smaller) var(--ee-padding-default);
 
-			span {
+			span:not(.chakra-button__icon) {
 				font-size: var(--ee-font-size-big);
 				font-weight: 800;
 			}
 
-			svg {
+			svg.ee-svg.ee-svg {
 				[dir='rtl'] & {
 					margin-right: 0;
 					margin-left: var(--ee-margin-tiny);
@@ -142,14 +149,14 @@
 		}
 
 		&.ee-btn--big {
-			svg {
+			svg.ee-svg.ee-svg {
 				height: 1.5rem;
 				width: 1.5rem;
 			}
 		}
 
 		&.ee-btn--bigger {
-			svg {
+			svg.ee-svg.ee-svg {
 				height: 1.75rem;
 				width: 1.75rem;
 			}
@@ -163,12 +170,12 @@
 			line-height: var(--ee-icon-button-size-bigger);
 			padding: var(--ee-padding-smaller) var(--ee-padding-default) var(--ee-padding-small);
 
-			span {
+			span:not(.chakra-button__icon) {
 				font-size: var(--ee-font-size-bigger);
 				font-weight: 800;
 			}
 
-			svg {
+			svg.ee-svg.ee-svg {
 				height: 1.75rem;
 				width: 1.75rem;
 			}

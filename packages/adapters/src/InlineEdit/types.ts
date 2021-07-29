@@ -16,6 +16,7 @@ export interface InlineEditProps
 	Preview?: React.ComponentType<InlineEditPreviewProps>;
 	previewClassName?: string;
 	textAreaClassName?: string;
+	tooltip?: string;
 }
 
 export interface InlineEditPreviewProps

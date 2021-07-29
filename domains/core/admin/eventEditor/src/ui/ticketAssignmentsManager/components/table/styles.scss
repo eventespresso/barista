@@ -106,6 +106,7 @@
 
 				&:hover {
 					background: var(--ee-text-on-dark-blue);
+					box-shadow: none;
 
 					.ee-rspnsv-table-body-td.date-cell {
 						background: var(--ee-color-grey-13);
@@ -121,6 +122,7 @@
 
 					&:hover {
 						background: var(--ee-text-on-dark-blue);
+						box-shadow: none;
 
 						.ee-rspnsv-table-body-td.date-cell {
 							background: var(--ee-color-grey-12);

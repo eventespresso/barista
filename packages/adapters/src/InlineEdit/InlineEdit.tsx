@@ -18,6 +18,7 @@ export const InlineEdit: React.FC<InlineEditProps> = ({
 	placeholder = '',
 	Preview,
 	previewClassName,
+	tooltip,
 	value,
 }) => {
 	const [currentValue, setCurrentValue] = useState(defaultValue || value);
@@ -71,6 +72,7 @@ export const InlineEdit: React.FC<InlineEditProps> = ({
 							isEditing={isEditing}
 							onRequestEdit={onEdit}
 							Preview={Preview}
+							tooltip={tooltip}
 							value={currentValue}
 						/>
 						<InlineEditInput

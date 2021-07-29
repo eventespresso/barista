@@ -5,9 +5,9 @@ const TableView = (props: IconProps): JSX.Element => {
 	return (
 		<svg
 			aria-hidden='true'
-			height='1.5em'
-			viewBox='0 0 20 20'
-			width='1.5em'
+			height='1.25em'
+			viewBox='0 -1 20 20'
+			width='1.25em'
 			xmlns='http://www.w3.org/2000/svg'
 			className='ee-svg--table-view'
 			{...props}

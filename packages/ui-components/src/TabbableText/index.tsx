@@ -18,7 +18,7 @@ export const TabbableText: React.FC<TabbableTextProps> = ({
 	onClick,
 	...props
 }) => {
-	const tooltip = props.tooltip || __('Click to edit…');
+	const tooltip = props.tooltip || __('click to edit…');
 	const text = props.text || children || tooltip;
 	const isDisabled = text === tooltip;
 	const role = props.isDisabled ? null : 'button';
@@ -42,7 +42,7 @@ export const TabbableText: React.FC<TabbableTextProps> = ({
 	);
 
 	return (
-		<Tooltip isDisabled={isDisabled} tooltip={tooltip}>
+		<Tooltip isDisabled={isDisabled} tooltip={tooltip} placement='top'>
 			<div
 				aria-describedby={ariaDescribedby}
 				aria-label={props.tooltip}

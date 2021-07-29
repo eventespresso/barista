@@ -1,10 +1,9 @@
-import { forwardRef, useMemo } from 'react';
+import { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
 import type { AnyObject } from '@eventespresso/utils';
 import { Tooltip } from '../';
-import type { TooltipProps } from '@eventespresso/adapters';
 import type { WithTooltipProps } from './types';
 import type { ForwardRefComponent } from '../types';
 
@@ -16,49 +15,46 @@ const withTooltip = <P extends AnyObject>(
 	// Define ref type
 	type Ref = React.Ref<typeof WrappedComponent>;
 	type RefProps = { forwardedRef: Ref };
+
 	const WithTooltip: React.ComponentType<P & WithTooltipProps & RefProps> = ({
 		forwardedRef,
 		showTooltipOnMobile = false,
 		tooltip,
-		tooltipProps: _tooltipProps,
+		tooltipProps,
 		...props
 	}) => {
 		const noTooltip = !tooltip || props.buttonText === tooltip;
-
-		let toolTipped: React.ReactNode;
-
-		const tooltipProps = useMemo<TooltipProps>(() => {
-			if (showTooltipOnMobile) {
-				return { ..._tooltipProps, className: 'ee-mobile-help-text__tooltip' };
-			}
-			return _tooltipProps;
-		}, [_tooltipProps, showTooltipOnMobile]);
 
 		if (noTooltip) {
 			return <WrappedComponent {...(props as P)} ref={forwardedRef} />;
 		}
 
-		if (showTooltipOnMobile) {
-			const className = classNames({
-				'ee-mobile-help-text': true,
-				'ee-mobile-help-text--short': tooltip.length < 25,
-				'ee-mobile-help-text--long': tooltip.length > 50,
-			});
-			toolTipped = (
-				<div className='ee-mobile-help-text__btn-wrap'>
-					<WrappedComponent aria-label={tooltip} {...(props as P)} ref={forwardedRef} tooltip={tooltip} />
-					<div className={className}>{tooltip}</div>
-				</div>
-			);
-		} else {
-			toolTipped = (
-				<WrappedComponent aria-label={tooltip} {...(props as P)} ref={forwardedRef} tooltip={tooltip} />
+		const wrappedComp = (
+			<WrappedComponent aria-label={tooltip} {...(props as P)} ref={forwardedRef} tooltip={tooltip} />
+		);
+
+		if (!showTooltipOnMobile) {
+			return (
+				<Tooltip {...tooltipProps} tooltip={tooltip}>
+					{wrappedComp}
+				</Tooltip>
 			);
 		}
 
+		const tooltipsClass = classNames('ee-mobile-help-text', tooltipProps?.className);
+
+		const helpTextClass = classNames(
+			'ee-mobile-help-text__tooltip',
+			tooltip.length < 25 && 'ee-mobile-help-text--short',
+			tooltip.length > 50 && 'ee-mobile-help-text--long'
+		);
+
 		return (
-			<Tooltip {...tooltipProps} tooltip={tooltip}>
-				{toolTipped}
+			<Tooltip className={tooltipsClass} {...tooltipProps} tooltip={tooltip}>
+				<div className='ee-mobile-help-text__btn-wrap'>
+					{wrappedComp}
+					<div className={helpTextClass}>{tooltip}</div>
+				</div>
 			</Tooltip>
 		);
 	};

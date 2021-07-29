@@ -10,13 +10,14 @@ export const CardViewFilterButton: React.FC<CardViewFilterButtonProps> = ({ id, 
 
 	return (
 		<Button
+			{...rest}
 			active={view === 'card'}
 			className='ee-filter-bar__btn'
 			icon={AppstoreFilled}
 			id={filterId}
 			onClick={view !== 'card' ? onClick : null}
 			labelClassName={'ee-filter-bar__btn-wrap'}
-			{...rest}
+			size='small'
 		>
 			{__('card view')}
 		</Button>

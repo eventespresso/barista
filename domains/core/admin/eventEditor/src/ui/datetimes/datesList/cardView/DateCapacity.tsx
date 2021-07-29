@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { __ } from '@eventespresso/i18n';
+import { __, sprintf } from '@eventespresso/i18n';
 
 import { parseInfinity } from '@eventespresso/utils';
 import { InlineEditInfinity, InlineEditProps } from '@eventespresso/ui-components';
@@ -30,11 +30,14 @@ const DateCapacity: React.FC<DateItemProps> = ({ entity: datetime }) => {
 		[datetime.capacity, datetime.id, updateEntity, ticketQuantityForCapacity, updateRelatedTickets]
 	);
 
+	/* translators:  click to edit capacity<linebreak>(registration limit)…*/
+	const tooltip = sprintf(__('click to edit capacity%s(registration limit)…'), '\n');
+
 	return (
 		<InlineEditInfinity
 			data-testid='ee-datetime-inline-cap'
 			onChange={onChange}
-			tooltip={__('edit capacity (registration limit)…')}
+			tooltip={tooltip}
 			value={`${datetime.capacity}`}
 		/>
 	);

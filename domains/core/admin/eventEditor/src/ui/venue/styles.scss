@@ -28,7 +28,11 @@
 		justify-content: space-between;
 		padding: var(--ee-padding-smaller);
 		max-width: 100%;
-		min-width: 320px;
+		width: 100%;
+
+		@include min360px {
+			min-width: 320px;
+		}
 
 		@include min767px {
 			flex-direction: row;
@@ -171,8 +175,11 @@
 
 	.ee-venue-selector {
 		max-width: 100%;
-		min-width: 320px;
 		width: 100%;
+
+		@include min360px {
+			min-width: 320px;
+		}
 
 		@include min767px {
 			margin: 0;
@@ -187,6 +194,8 @@
 	}
 }
 
-.ee-event-venue__card + .ee-venue-selector {
-	margin-inline-start: var(--ee-margin-small);
+@include min767px {
+	.ee-event-venue__card + .ee-venue-selector {
+		margin-inline-start: var(--ee-margin-small);
+	}
 }

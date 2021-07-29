@@ -49,9 +49,9 @@ const Details: React.FC<DateItemProps> = ({ entity: datetime }) => {
 			<SimpleTextEditorModal
 				className='entity-card-details__text'
 				onUpdate={onUpdate}
-				text={datetime.description}
+				text={datetime.description || __('add description…')}
 				title={__('Edit description')}
-				tooltip={__('edit description…')}
+				tooltip={__('click to edit description…')}
 				{...additionalProps}
 			/>
 

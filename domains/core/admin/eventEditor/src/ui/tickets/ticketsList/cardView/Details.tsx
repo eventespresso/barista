@@ -41,9 +41,9 @@ const Details: React.FC<Partial<TicketItemProps>> = ({ entity: ticket }) => {
 			<SimpleTextEditorModal
 				className='entity-card-details__text'
 				onUpdate={onUpdate}
-				text={ticket.description}
+				text={ticket.description || __('add description…')}
 				title={__('Edit description')}
-				tooltip={__('edit description…')}
+				tooltip={__('click to edit description…')}
 				{...additionalProps}
 			/>
 

@@ -20,10 +20,6 @@ const EditableName: React.FC<EditableNameProps> = ({
 }) => {
 	const { updateEntity } = useDatetimeMutator(datetime.id);
 
-	const tooltip = __('edit title…');
-
-	const dateName = datetime.name || tooltip;
-
 	const lineCount = view === 'card' && 2;
 
 	const onChangeName = useCallback(
@@ -42,8 +38,8 @@ const EditableName: React.FC<EditableNameProps> = ({
 			lineCount={lineCount}
 			onChange={onChangeName}
 			tag={view === 'table' ? 'div' : 'h4'}
-			tooltip={tooltip}
-			value={dateName}
+			tooltip={__('click to edit title…')}
+			value={datetime.name || __('add title…')}
 		/>
 	);
 };

@@ -5,10 +5,11 @@
 	border-width: var(--ee-border-width);
 	display: inline-flex;
 	justify-content: center;
-	outline: none !important;
-	padding: var(--ee-padding-micro) var(--ee-padding-tiny) var(--ee-padding-micro) var(--ee-padding-micro);
 	min-height: var(--ee-icon-button-size);
 	min-width: var(--ee-icon-button-size);
+	outline: none !important;
+	padding: var(--ee-padding-micro) var(--ee-padding-tiny) var(--ee-padding-micro) var(--ee-padding-micro);
+	position: relative;
 
 	p {
 		font-size: var(--ee-font-size-default);
@@ -18,20 +19,32 @@
 	&:not(&--is-disabled) {
 		cursor: pointer;
 
+		svg.ee-svg--edit {
+			border-color: none;
+			color: var(--ee-default-text-color-super-low-contrast);
+			margin-inline-end: calc(var(--ee-padding-smaller) * -1);
+			opacity: 0;
+			position: absolute;
+			transition: all 250ms ease-in-out ;
+		}
+
 		&:hover {
 			border-color: var(--ee-color-primary-low-contrast);
 			color: var(--ee-color-primary-high-contrast);
-
-			svg.ee-svg {
-				border-color: none;
-				color: var(--ee-default-text-color-super-low-contrast);
-			}
 		}
 
 		&:active,
 		&:focus {
 			border-width: var(--ee-border-width);
 			border-color: var(--ee-color-primary);
+		}
+
+		&:active,
+		&:focus,
+		&:hover {
+			svg.ee-svg--edit {
+				opacity: 1;
+			}
 		}
 	}
 }

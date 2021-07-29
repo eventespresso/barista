@@ -7,14 +7,15 @@
 		}
 	}
 
-	&__list {
-		border: 1px solid var(--ee-border-color);
-		box-shadow: var(--ee-box-shadow-small);
-		padding: var(--ee-padding-smaller) var(--ee-padding-smaller) var(--ee-padding-small);
-
-		&[role='menu'] {
-			z-index: 100;
-		}
+	&__list,
+	&__list[role='menu'] {
+		border: none;
+		box-shadow: var(--ee-box-shadow-default);
+		color: var(--ee-default-text-color);
+		min-width: 12rem;
+		outline: none;
+		padding: var(--ee-padding-smaller);
+		z-index: 100;
 	}
 
 	&__item {
@@ -23,7 +24,9 @@
 		.ee-dropdown-menu__list & {
 			font-size: var(--ee-font-size-default);
 			min-height: 2.5rem;
-			padding: var(--ee-padding-tiny);
+			padding: 0;
+			padding-block: var(--ee-padding-tiny);
+			padding-inline: var(--ee-padding-smaller);
 		}
 
 		&:last-child {
@@ -32,14 +35,16 @@
 
 		&:focus[role='menuitem'],
 		&:hover[role='menuitem'] {
-			background-color: var(--ee-color-grey-13);
+			background-color: var(--ee-color-grey-14);
 			box-shadow: none;
 			color: var(--ee-default-text-color-high-contrast);
 		}
 
 		svg,
-		svg.ee-svg {
-			margin: 0 var(--ee-margin-default) 0 0;
+		svg.ee-svg.ee-svg {
+			color: var(--ee-default-text-color);
+			margin: 0;
+			margin-inline-end: var(--ee-margin-smaller);
 		}
 	}
 }

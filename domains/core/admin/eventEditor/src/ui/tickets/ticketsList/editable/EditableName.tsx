@@ -31,10 +31,6 @@ const EditableName: React.FC<Partial<EditableNameProps>> = ({
 		[ticket.name, updateEntity]
 	);
 
-	const tooltip = __('edit title…');
-
-	const ticketName = ticket.name || tooltip;
-
 	return (
 		<InlineEditText
 			className={className}
@@ -42,8 +38,8 @@ const EditableName: React.FC<Partial<EditableNameProps>> = ({
 			lineCount={lineCount}
 			onChange={onChangeName}
 			tag={view === 'table' ? 'div' : 'h4'}
-			tooltip={tooltip}
-			value={ticketName}
+			tooltip={__('click to edit title…')}
+			value={ticket.name || __('add title…')}
 		/>
 	);
 };

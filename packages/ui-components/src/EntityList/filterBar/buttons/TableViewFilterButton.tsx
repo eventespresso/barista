@@ -9,13 +9,14 @@ export const TableViewFilterButton: React.FC<TableViewFilterButtonProps> = ({ id
 
 	return (
 		<Button
+			{...rest}
 			active={view === 'table'}
 			className='ee-filter-bar__btn'
 			icon={TableView}
 			id={filterId}
 			onClick={view !== 'table' ? onClick : null}
 			labelClassName={'ee-filter-bar__btn-wrap'}
-			{...rest}
+			size='small'
 		>
 			{__('table view')}
 		</Button>

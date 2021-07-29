@@ -5,7 +5,8 @@
 	border-radius: var(--ee-border-radius-small);
 	display: inline-flex;
 	flex-flow: row nowrap;
-	padding: var(--ee-padding-micro) var(--ee-padding-tiny);
+	padding: var(--ee-padding-nano) var(--ee-padding-tiny) var(--ee-padding-micro);
+	padding-inline-end: var(--ee-padding-smaller);
 	margin: var(--ee-margin-tiny) auto var(--ee-margin-small);
 
 	&--blue-green {
@@ -30,5 +31,11 @@
 				color: var(--ee-text-on-blue-green-super-low-contrast) !important;
 			}
 		}
+	}
+
+	svg.ee-svg.ee-svg {
+		margin: 0;
+		margin-block-start: var(--ee-margin-nano);
+		margin-inline-end: var(--ee-margin-micro);
 	}
 }

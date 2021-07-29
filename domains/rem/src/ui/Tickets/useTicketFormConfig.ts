@@ -16,7 +16,7 @@ import { normalizeTicketForRem } from '../../utils';
 
 type TicketFormConfig = EspressoFormProps<RemTicket>;
 
-const VISIBILITY_OPTIONS = getEEDomData('eventEditor').ticketMeta.visibilityOptions;
+const VISIBILITY_OPTIONS = getEEDomData('eventEditor')?.ticketMeta?.visibilityOptions;
 
 const useTicketFormConfig = (ticket?: RemTicket | Ticket, config?: Partial<TicketFormConfig>): TicketFormConfig => {
 	const { utcToSiteTime } = useTimeZoneTime();

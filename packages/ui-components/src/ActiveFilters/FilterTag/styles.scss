@@ -12,7 +12,7 @@
 	font-size: var(--ee-font-size-small);
 	height: var(--ee-icon-button-size-micro);
 	margin: 0 var(--ee-margin-smaller) var(--ee-margin-tiny) 0;
-	padding: var(--ee-padding-nano) var(--ee-padding-nano) var(--ee-padding-nano) var(--ee-padding-smaller);
+	padding: 0 var(--ee-padding-nano) var(--ee-padding-nano) var(--ee-padding-smaller);
 	position: relative;
 
 	[dir='rtl'] & {
@@ -23,12 +23,14 @@
 		align-items: center;
 		border: 1px solid transparent;
 		border-radius: 50%;
+		box-sizing: border-box;
 		cursor: pointer;
 		display: inline-flex;
 		font-size: var(--ee-font-size-default);
 		height: calc(var(--ee-icon-button-size-micro) - 6px);
 		justify-content: center;
-		margin-left: var(--ee-margin-micro);
+		margin-inline-start: var(--ee-margin-micro);
+		margin-block-start: var(--ee-padding-nano);
 		outline: none !important;
 		width: calc(var(--ee-icon-button-size-micro) - 6px);
 
