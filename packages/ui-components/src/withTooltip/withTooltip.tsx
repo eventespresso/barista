@@ -41,10 +41,10 @@ const withTooltip = <P extends AnyObject>(
 			);
 		}
 
-		const tooltipsClass = classNames('ee-mobile-help-text', tooltipProps?.className);
+		const tooltipsClass = classNames('ee-mobile-help-text__tooltip', tooltipProps?.className);
 
 		const helpTextClass = classNames(
-			'ee-mobile-help-text__tooltip',
+			'ee-mobile-help-text',
 			tooltip.length < 25 && 'ee-mobile-help-text--short',
 			tooltip.length > 50 && 'ee-mobile-help-text--long'
 		);
