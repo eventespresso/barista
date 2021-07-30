@@ -13,8 +13,8 @@ export const editEntityCard = async ({ capacity, entityType, name, quantity }: P
 	const entityList = parser.getRootSelector();
 
 	if (name) {
-		await page.click(`${entityList} .entity-card-details__name .ee-inline-edit__text`);
-		await page.type(`${entityList} .entity-card-details__name input`, name);
+		await page.click(`${entityList} .entity-card-details__name .ee-tabbable-text`);
+		await page.type(`${entityList} .entity-card-details__name .ee-inline-edit__input`, name);
 
 		const waitForListUpdate = await parser.createWaitForListUpdate();
 		await page.click(parser.getRootSelector()); // click outside of the inline input

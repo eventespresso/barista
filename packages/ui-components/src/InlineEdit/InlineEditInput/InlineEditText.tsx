@@ -14,6 +14,7 @@ export const InlineEditText: React.FC<InlineEditProps> = ({ className, lineCount
 			placeholder=''
 			{...props}
 			as={as}
+			editableInputClassName='ee-inline-edit__input'
 			inputClassName='ee-inline-edit__text'
 			inputType='text'
 			Preview={preview}
