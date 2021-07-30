@@ -27,8 +27,13 @@ const TicketCardSidebar: React.FC<Partial<TicketItemProps>> = ({ entity: ticket 
 
 	const labels = useMemo(() => {
 		return {
-			headerPast: ticket.isExpired && displayStartOrEndDate === 'end' ? __('sales ended') : __('sales began'),
-			headerFuture: __('sales start'),
+			headerFuture: displayStartOrEndDate === 'start' ? __('sales start') : __('sales end'),
+			headerPast:
+				displayStartOrEndDate === 'start'
+					? __('sales began')
+					: ticket.isExpired
+					? __('sales ended')
+					: __('sales end'), // if the ticket is not expired, then it's still on sale
 		};
 	}, [ticket.isExpired, displayStartOrEndDate]);
 
