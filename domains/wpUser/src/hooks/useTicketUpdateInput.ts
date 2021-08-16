@@ -11,7 +11,7 @@ const filterName: keyof Filters = 'eventEditor.ticket.mutationInput';
  */
 const useTicketUpdateInput = (): void => {
 	useEffect(() => {
-		hooks.addFilter(filterName, NAMESPACE, ({ capabilityRequired, customCapabilityRequired, ...input }) => {
+		hooks.addFilter(filterName, NAMESPACE, (input, { capabilityRequired, customCapabilityRequired } = {}) => {
 			switch (true) {
 				// if capabilityRequired is not being updated
 				case typeof capabilityRequired !== 'string':

@@ -1,5 +1,5 @@
 import { getHooks } from '@eventespresso/ioc';
-import type { MutationType, ApolloCache, Entity, EntityId } from '@eventespresso/data';
+import type { MutationType, ApolloCache, Entity } from '@eventespresso/data';
 import type { OptionsType } from '@eventespresso/adapters';
 import type { BulkEdit } from '@eventespresso/services';
 import type { ButtonProps } from '@eventespresso/ui-components';
@@ -24,7 +24,7 @@ export type Filters = {
 	'eventEditor.ticketForm.sections': [sections: TicketFormConfig['sections'], ticket: Ticket];
 	'eventEditor.dateForm.initalValues': [initialValues: DateFormShape, datetime: Datetime];
 	'eventEditor.dateForm.sections': [sections: DateFormConfig['sections'], datetime: Datetime];
-	'eventEditor.ticket.mutationInput': [input: Record<string, any>, entityId?: EntityId];
+	'eventEditor.ticket.mutationInput': [input: Record<string, any>, rawInput?: Record<string, any>];
 	'eventEditor.datetimes.bulkEdit.actions': [actions: OptionsType];
 	'eventEditor.addSingleDate.button': [button: JSX.Element, isOnlyButton: boolean];
 	'eventEditor.addSingleDate.buttonProps': [props: Partial<ButtonProps>, isOnlyButton: boolean];

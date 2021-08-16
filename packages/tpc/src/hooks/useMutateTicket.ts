@@ -42,7 +42,7 @@ const useMutateTicket = (): Callback => {
 			const mutationInput = hooks.applyFilters(
 				'eventEditor.ticket.mutationInput',
 				normalizedTicketFields,
-				ticket.id
+				ticket
 			);
 
 			let mutationResult: TicketMutationResult;
