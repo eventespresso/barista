@@ -17,7 +17,7 @@ export const editEntityCard = async ({ capacity, entityType, name, quantity }: P
 		await page.type(`${entityList} .entity-card-details__name .ee-inline-edit__input`, name);
 
 		const waitForListUpdate = await parser.createWaitForListUpdate();
-		await page.click(parser.getRootSelector()); // click outside of the inline input
+		await page.keyboard.press('Enter');
 		await waitForListUpdate();
 	}
 
@@ -26,7 +26,7 @@ export const editEntityCard = async ({ capacity, entityType, name, quantity }: P
 		await page.type(`${entityList} .ee-entity-details__value .ee-inline-edit__input`, capacity || quantity);
 
 		const waitForListUpdate = await parser.createWaitForListUpdate();
-		await page.click(parser.getRootSelector()); // click outside of the inline input
+		await page.keyboard.press('Enter');
 		await waitForListUpdate();
 	}
 };
