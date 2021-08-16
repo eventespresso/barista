@@ -1,6 +1,6 @@
 import type { EntityMetaMap } from '@eventespresso/services';
 
-export type TicketsMeta = EntityMetaMap;
+export type ticketMeta = EntityMetaMap;
 
 export type CapabilityOptions = {
 	[optgroup: string]: {
@@ -10,5 +10,5 @@ export type CapabilityOptions = {
 
 export interface WpUserData {
 	capabilityOptions?: CapabilityOptions;
-	ticketsMeta?: TicketsMeta;
+	ticketMeta?: ticketMeta;
 }
