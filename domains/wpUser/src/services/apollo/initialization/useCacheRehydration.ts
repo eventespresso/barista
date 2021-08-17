@@ -11,7 +11,7 @@ import useCacheRehydrationData from './useCacheRehydrationData';
 const useCacheRehydration = (): boolean => {
 	const [isRehydrated] = useIsRehydrated();
 
-	const { ticketsMeta } = useCacheRehydrationData();
+	const { ticketMeta } = useCacheRehydrationData();
 
 	const { mergeMetaMap } = useTicketsMeta();
 
@@ -24,11 +24,11 @@ const useCacheRehydration = (): boolean => {
 		}
 		// it's possible that other addons may add their meta,
 		// so we will merge it instead of resetting it
-		mergeMetaMap(ticketsMeta);
+		mergeMetaMap(ticketMeta);
 
 		// switch the flag
 		initialized.current = true;
-	}, [isRehydrated, mergeMetaMap, ticketsMeta]);
+	}, [isRehydrated, mergeMetaMap, ticketMeta]);
 
 	return initialized.current;
 };
