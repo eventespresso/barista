@@ -24,6 +24,7 @@ const AddSingleDate: React.FC<AddSingleDateProps> = ({ isOnlyButton }) => {
 			'eventEditor.addSingleDate.button',
 			<Button
 				buttonText={isOnlyButton ? __('Add New Date') : __('Add Single Date')}
+				buttonType='primary'
 				onClick={open}
 				icon={isOnlyButton && Calendar}
 				size={isOnlyButton ? 'big' : 'default'}
