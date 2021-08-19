@@ -4,7 +4,7 @@
 	focusable="false"
 	height="1.5em"
 	role="img"
-	viewBox="0 0 20 20"
+	viewBox="2 2 16 16"
 	width="1.5em"
 >
     <path d="M5 7v3l-2 1.5V5h11V3l4 3.01L14 9V7H5zm10 6v-3l2-1.5V15H6v2l-4-3.01L6 11v2h9z"/>
