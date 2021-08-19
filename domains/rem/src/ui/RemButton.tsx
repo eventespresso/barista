@@ -4,7 +4,7 @@ import { __ } from '@eventespresso/i18n';
 
 import { Button, NewEntityOption } from '@eventespresso/ui-components';
 import { useGlobalModal } from '@eventespresso/registry';
-import { Rem } from '@eventespresso/icons';
+import { Repeat } from '@eventespresso/icons';
 import { RemGlobalModals } from '../types';
 import { EdtrGlobalModals } from '@eventespresso/edtr-services';
 
@@ -21,7 +21,7 @@ const RemButton: React.FC = () => {
 		<NewEntityOption
 			className={'ee-new-entity-option__recurring-datetime'}
 			description={__('Add multiple dates in bulk that follow a recurring pattern')}
-			icon={Rem}
+			icon={Repeat}
 			title={__('Recurring Dates')}
 		>
 			<Button buttonType='primary' onClick={onClick}>
