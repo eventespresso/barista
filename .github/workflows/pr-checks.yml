@@ -16,6 +16,7 @@ jobs:
         steps:
             - uses: dorny/paths-filter@v2
               id: filter
+              base: master
               with:
                   base: ${{ github.ref }}
                   filters: |
