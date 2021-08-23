@@ -31,7 +31,7 @@ jobs:
         needs: what-is-hit
         steps:
             - name: Checkout and yarn
-              uses: eventespresso/actions/packages/checkout-and-yarn@checkout-and-yarn-action
+              uses: eventespresso/actions/packages/checkout-and-yarn@main
               with:
                   # To make sure all history is fetched for jest --changedSince to work as expected
                   fetch-depth: ${{ ( matrix.task != 'test' && 1 ) || 0 }} # 0 for test, 1 otherwise
@@ -79,7 +79,7 @@ jobs:
             fail-fast: false
         steps:
             - name: Checkout and yarn
-              uses: eventespresso/actions/packages/checkout-and-yarn@checkout-and-yarn-action
+              uses: eventespresso/actions/packages/checkout-and-yarn@main
 
             - name: Download build artifact
               # Download artifact only if running after build job
