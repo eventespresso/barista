@@ -30,28 +30,11 @@ jobs:
         name: ${{ matrix.task }}
         needs: what-is-hit
         steps:
-            - name: Checkout the commit
-              uses: actions/checkout@v2
+            - name: Checkout and yarn
+              uses: eventespresso/actions/packages/checkout-and-yarn@main
               with:
                   # To make sure all history is fetched for jest --changedSince to work as expected
                   fetch-depth: ${{ ( matrix.task != 'test' && 1 ) || 0 }} # 0 for test, 1 otherwise
-
-            - name: Set up Node
-              uses: actions/setup-node@v2
-              with:
-                  node-version: lts/*
-
-            - name: Cache dependencies
-              id: cache-deps
-              uses: actions/cache@v2
-              with:
-                  path: '**/node_modules'
-                  key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-
-            - name: Install dependencies
-              # install deps only if lockfile has changed
-              if: steps.cache-deps.outputs.cache-hit != 'true'
-              run: yarn install --frozen-lockfile
 
             - name: Set test CLI args
               if: ${{ matrix.task == 'test' }}
@@ -95,23 +78,8 @@ jobs:
             matrix: ${{ fromJSON(needs.list-e2e-specs.outputs.specs) }}
             fail-fast: false
         steps:
-            - uses: actions/checkout@v2
-
-            - name: Set up Node
-              uses: actions/setup-node@v2
-              with:
-                  node-version: lts/*
-
-            - name: Cache dependencies
-              id: cache-deps
-              uses: actions/cache@v2
-              with:
-                  path: '**/node_modules'
-                  key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-
-            - name: Install dependencies
-              if: steps.cache-deps.outputs.cache-hit != 'true'
-              run: yarn install --frozen-lockfile
+            - name: Checkout and yarn
+              uses: eventespresso/actions/packages/checkout-and-yarn@main
 
             - name: Download build artifact
               # Download artifact only if running after build job
