@@ -1,8 +1,6 @@
 name: Pull Request checks
 
-on:
-    push:
-        branches: [reusable-workflow]
+on: [pull_request]
 
 env:
     PLAYWRIGHT_BROWSERS_PATH: 0 # See https://playwright.dev/docs/ci/#caching-browsers
@@ -17,7 +15,7 @@ jobs:
             - uses: dorny/paths-filter@v2
               id: filter
               with:
-                  base: master
+                  base: ${{ github.ref }}
                   filters: |
                       js:
                         - 'domains/**'
