@@ -4,7 +4,7 @@ import type { Config } from '@jest/types';
 
 import { moduleNameMapper } from '../../jest.config';
 
-// E2E tests are run with packages/e2e-tests as Node CWD, so we need to adjust the paths.
+// E2E tests are run with packages/e2e-tests as Node CWD, so we need to adjust the paths...
 const e2eModuleNameMapper = map<any, any>(replace('<rootDir>', '<rootDir>/../..'), moduleNameMapper);
 
 dotenv.config();
