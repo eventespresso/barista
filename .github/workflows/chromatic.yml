@@ -14,28 +14,10 @@ jobs:
         name: Chromatic Deployment
         # Job steps
         steps:
-            - name: Checkout the commit
-              uses: actions/checkout@v2
+            - name: Checkout and yarn
+              uses: eventespresso/actions/packages/checkout-and-yarn@main
               with:
                   fetch-depth: 0 # 👈 Required to retrieve git history
-
-            - name: Set up Node
-              uses: actions/setup-node@v2
-              with:
-                  node-version: lts/*
-
-            - name: Cache dependencies
-              id: cache-deps
-              uses: actions/cache@v2
-              with:
-                  path: '**/node_modules'
-                  key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-
-            # Install all dependencies at root
-            - name: Install dependencies
-              # install deps only if lockfile has changed
-              if: steps.cache-deps.outputs.cache-hit != 'true'
-              run: yarn install --frozen-lockfile
 
               # 👇 Adds Chromatic as a step in the workflow
             - name: Deploy to Chromatic
