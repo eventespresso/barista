@@ -1,4 +1,4 @@
-const getHTMLElementClientRect = (element: HTMLElement): ClientRect => {
+const getHTMLElementClientRect = (element: HTMLElement): DOMRect => {
 	if (!element) {
 		return {
 			bottom: 0,
@@ -7,6 +7,9 @@ const getHTMLElementClientRect = (element: HTMLElement): ClientRect => {
 			right: 0,
 			top: 0,
 			width: 0,
+			x: 0,
+			y: 0,
+			toJSON: null,
 		};
 	}
 	return element.getBoundingClientRect();

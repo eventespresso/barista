@@ -31,8 +31,7 @@ describe('deleteRecurrence', () => {
 
 		await actWait();
 
-		expect(mutationData).toEqual(mockResult.data);
-		const pathToId = ['deleteEspressoRecurrence', 'espressoRecurrence', 'name'];
+		const pathToId = ['deleteEspressoRecurrence', 'espressoRecurrence', 'id'];
 
 		const idFromMutationData = R.path(pathToId, mutationData);
 		const idFromMockData = R.path(pathToId, mockResult.data);

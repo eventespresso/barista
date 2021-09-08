@@ -24,7 +24,6 @@ describe('useEvent', () => {
 		const { result } = renderHook(() => useEvent(), {
 			wrapper,
 		});
-		await actWait();
 
 		expect(result.current).toBeUndefined();
 	});

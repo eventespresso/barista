@@ -6,7 +6,7 @@ const { addEventListener, removeEventListener } = window;
 
 type voidFn = () => void;
 
-const useRect = (ref: React.RefObject<HTMLElement>): ClientRect => {
+const useRect = (ref: React.RefObject<HTMLElement>): DOMRect => {
 	const [rect, setRect] = useState(getHTMLElementClientRect(ref ? ref.current : null));
 
 	const handleResize = useCallback<voidFn>(() => {

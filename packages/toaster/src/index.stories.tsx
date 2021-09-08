@@ -30,6 +30,3 @@ Warning.args = { type: 'warning' };
 
 export const Error: ToasterStory = Template.bind({});
 Error.args = { type: 'error' };
-
-export const Dark: ToasterStory = Template.bind({});
-Dark.args = { type: 'dark' };
