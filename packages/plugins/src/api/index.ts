@@ -21,10 +21,6 @@ export function registerPlugin(name: string, settings: Settings): Plugin {
 		);
 	}
 
-	if (plugins[name]) {
-		console.error(`Plugin "${name}" is already registered.`);
-	}
-
 	const plugin = {
 		name,
 		...settings,
@@ -42,10 +38,6 @@ export function isPluginRegistered(name: string): boolean {
 
 export function updatePlugin(name: string, settings: Settings): Plugin {
 	const plugin = plugins[name];
-
-	if (!plugin) {
-		console.error(`Plugin "${name}" does not exist.`);
-	}
 
 	const render = () => settings.render(plugin.render);
 
