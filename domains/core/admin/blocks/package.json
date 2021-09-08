@@ -10,12 +10,12 @@
 		"url": "git+https://github.com/eventespresso/barista.git"
 	},
 	"dependencies": {
-		"@wordpress/block-library": "^4.0.0",
-		"@wordpress/blocks": "^10.0.0",
-		"@wordpress/components": "^14.2.0",
-		"@wordpress/compose": "^4.2.0",
-		"@wordpress/editor": "^10.2.0",
-		"@wordpress/url": "^3.2.0",
+		"@wordpress/block-library": "^5.0.1",
+		"@wordpress/blocks": "^11.0.1",
+		"@wordpress/components": "^16.0.0",
+		"@wordpress/compose": "^5.0.1",
+		"@wordpress/editor": "^11.0.1",
+		"@wordpress/url": "^3.2.1",
 		"react-select": "^4.3.1"
 	},
 	"devDependencies": {

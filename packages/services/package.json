@@ -15,7 +15,7 @@
 	},
 	"sideEffects": false,
 	"dependencies": {
-		"date-fns-tz": "^1.1.5",
+		"date-fns-tz": "^1.1.6",
 		"flagged": "^2.0.1"
 	},
 	"license": "GPL-3.0"
