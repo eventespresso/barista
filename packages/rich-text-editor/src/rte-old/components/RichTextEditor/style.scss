@@ -46,9 +46,11 @@
 	border-top: none;
 	cursor: text;
 	font-size: var(--ee-font-size-big);
+	height: auto;
+	line-height: var(--ee-font-size-huge);
 	margin: 0;
 	overflow-x: hidden;
-	height: auto;
+	padding: var(--ee-padding-smaller);
 
 	&__root {
 		border: none;
@@ -56,7 +58,7 @@
 
 		.ee-rich-text-editor {
 			line-height: var(--ee-font-size-huge);
-			padding: 0 var(--ee-padding-smaller);
+			padding: var(--ee-padding-smaller);
 		}
 
 		.rdw-option-wrapper {
