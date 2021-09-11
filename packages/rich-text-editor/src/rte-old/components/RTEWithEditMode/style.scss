@@ -9,10 +9,14 @@
 
 	.ee-textarea.ee-html-editor {
 		border: var(--ee-border-width-thick) solid rgba(192, 192, 192, 0.5);
+		box-sizing: border-box;
 		font-size: var(--ee-font-size-big);
-		min-height: 15rem;
-		padding: var(--ee-padding-smaller);
+		line-height: var(--ee-font-size-huge);
+  		min-height: clamp(10rem, 50vh, 50rem);
+		margin: var(--ee-margin-small);
+		padding: var(--ee-padding-default);
 		resize: none;
+  		width: calc(100% - var(--ee-margin-default));
 
 		&:hover {
 			color: var(--ee-default-text-color);

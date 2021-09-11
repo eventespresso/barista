@@ -94,10 +94,25 @@
 	.public-DraftEditor-content,
 	.public-DraftEditorPlaceholder-root {
 		margin: 0;
-		padding: 0 var(--ee-padding-smaller) var(--ee-padding-small);
+		padding: var(--ee-padding-small) var(--ee-padding-default) var(--ee-padding-small);
 	}
 
 	.public-DraftEditor-content {
 		min-height: calc(var(--ee-font-size-default) * 10);
+	}
+
+	&-root {
+		.ee-tabs  {
+			.ee-tabs__tab {
+				&-list {
+					// margin-inline-end: 1rem;
+				}
+				&-panel {
+					border-radius: var(--ee-border-radius-default);
+					border-top-right-radius: 0;
+					box-shadow: var(--ee-box-shadow-tiny-diffuse);
+				}
+			}
+		}
 	}
 }
