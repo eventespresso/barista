@@ -4,6 +4,7 @@ import { DocumentNode } from 'graphql';
 
 import type { SystemNotificationsToaster } from '@eventespresso/toaster';
 import { uuid } from '@eventespresso/utils';
+import { sprintf, __ } from '@eventespresso/i18n';
 
 import type { MutationType } from './types';
 
@@ -18,6 +19,22 @@ type MutationWithFeedback = <TData = any, TVariables = OperationVariables>(
 	args: MutationWithFeedbackArgs
 ) => MutationTuple<TData, TVariables>['0'];
 
+type ResultType = 'ERROR' | 'SUCCESS' | 'LOADING';
+
+export const MUTATION_STRINGS: { [key in `${ResultType}:${MutationType}`]: string } = {
+	/* eslint-disable @wordpress/i18n-translator-comments */
+	'ERROR:CREATE': __('error creating %s'),
+	'ERROR:DELETE': __('error deleting %s'),
+	'ERROR:UPDATE': __('error updating %s'),
+	'LOADING:CREATE': __('creating %s'),
+	'LOADING:DELETE': __('deleting %s'),
+	'LOADING:UPDATE': __('updating %s'),
+	'SUCCESS:CREATE': __('successfully created %s'),
+	'SUCCESS:DELETE': __('successfully deleted %s'),
+	'SUCCESS:UPDATE': __('successfully updated %s'),
+	/* eslint-enable @wordpress/i18n-translator-comments */
+};
+
 const useMutationWithFeedback: MutationWithFeedback = ({ typeName, mutation, mutationType, toaster }) => {
 	// generate a toaster key that sustains re-renders
 	const toasterKey = useRef(uuid());
@@ -28,11 +45,12 @@ const useMutationWithFeedback: MutationWithFeedback = ({ typeName, mutation, mut
 	 * Get the toaster message based upon typeName and mutationType
 	 */
 	const getToasterMessage = useCallback(
-		(suffix: 'ing' | 'ed' = 'ing') => {
-			// For example "CREATE" will become "creating" or "created"
-			const verb = mutationType.toLowerCase().replace(/e$/, suffix);
-			// e.g. "updating datetime"
-			return `${verb} ${typeName.toLowerCase()}`;
+		(resultType?: ResultType) => {
+			const key = `${resultType}:${mutationType}` as const;
+			// eslint-disable-next-line @wordpress/valid-sprintf
+			const message = sprintf(MUTATION_STRINGS[key], typeName);
+
+			return message;
 		},
 		[mutationType, typeName]
 	);
@@ -41,7 +59,7 @@ const useMutationWithFeedback: MutationWithFeedback = ({ typeName, mutation, mut
 	 * Displays a success toaster on complete
 	 */
 	const onCompleted = useCallback<VoidFunction>(() => {
-		const successMessage = `successfully ${getToasterMessage('ed')}`;
+		const successMessage = getToasterMessage('SUCCESS');
 		toaster.update({ key, message: successMessage, type: 'success' });
 	}, [getToasterMessage, key, toaster]);
 
@@ -49,7 +67,7 @@ const useMutationWithFeedback: MutationWithFeedback = ({ typeName, mutation, mut
 	 * Displays an error toaster on error
 	 */
 	const onError = useCallback(() => {
-		const errorMessage = `error ${getToasterMessage()}`;
+		const errorMessage = getToasterMessage('ERROR');
 		toaster.dismiss(key);
 		toaster.error({ message: errorMessage });
 	}, [getToasterMessage, key, toaster]);
@@ -58,7 +76,7 @@ const useMutationWithFeedback: MutationWithFeedback = ({ typeName, mutation, mut
 	 * Displays a loading indicator when the mutation starts
 	 */
 	const onMutationStart = useCallback<VoidFunction>(() => {
-		const message = getToasterMessage();
+		const message = getToasterMessage('LOADING');
 		toaster.loading({ autoClose: false, key, message });
 	}, [getToasterMessage, key, toaster]);
 
