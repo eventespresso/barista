@@ -1,13 +1,15 @@
 import { useCallback, useMemo } from 'react';
 
-import type { CreatePriceInput, UpdatePriceInput, DeletePriceInput } from './types';
 import { MutationType, MutationFunction, useMutationWithFeedback } from '@eventespresso/data';
+import { useSystemNotifications } from '@eventespresso/toaster';
+
+import { TypeName } from '../types';
 import { CREATE_PRICE, UPDATE_PRICE, DELETE_PRICE } from './';
 import useMutationHandler from './useMutationHandler';
 import useUpdateCallback from '../useUpdateCallback';
-import { TypeName } from '../types';
+import type { CreatePriceInput, UpdatePriceInput, DeletePriceInput } from './types';
 import type { CreatePriceResult, UpdatePriceResult, DeletePriceResult } from './types';
-import { useSystemNotifications } from '@eventespresso/toaster';
+import { SINGULAR_ENTITY_NAME } from '../../../constants';
 
 interface PriceMutator {
 	createEntity: MutationFunction<CreatePriceResult, CreatePriceInput>;
@@ -22,21 +24,21 @@ const usePriceMutator = (id = ''): PM => {
 	const toaster = useSystemNotifications();
 
 	const createPrice = useMutationWithFeedback({
-		typeName: TypeName.Price,
+		typeName: SINGULAR_ENTITY_NAME.PRICE,
 		mutationType: MutationType.Create,
 		mutation: CREATE_PRICE,
 		toaster,
 	});
 
 	const updatePrice = useMutationWithFeedback({
-		typeName: TypeName.Price,
+		typeName: SINGULAR_ENTITY_NAME.PRICE,
 		mutationType: MutationType.Update,
 		mutation: UPDATE_PRICE,
 		toaster,
 	});
 
 	const deletePrice = useMutationWithFeedback({
-		typeName: TypeName.Price,
+		typeName: SINGULAR_ENTITY_NAME.PRICE,
 		mutationType: MutationType.Delete,
 		mutation: DELETE_PRICE,
 		toaster,

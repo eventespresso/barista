@@ -8,7 +8,7 @@ import useOnUpdateDatetime from './useOnUpdateDatetime';
 import { useUpdateDatetimeList } from '../../../hooks';
 import { cacheNodesFromBulkInput } from '../utils';
 import type { DatetimeEdge, Datetime } from '../../types';
-import { TypeName } from '../';
+import { SINGULAR_ENTITY_NAME } from '../../../constants';
 
 interface BulkEditDatetimes {
 	updateEntities: (input: BulkUpdateDatetimeInput) => ReturnType<ReturnType<typeof useMutationWithFeedback>>;
@@ -22,7 +22,7 @@ const useBulkEditDatetimes = (): BulkEditDatetimes => {
 	const onUpdateDatetime = useOnUpdateDatetime();
 
 	const updateDatetimes = useMutationWithFeedback({
-		typeName: TypeName.Datetime,
+		typeName: SINGULAR_ENTITY_NAME.DATETIME,
 		mutationType: MutationType.Update,
 		mutation: BULK_UPDATE_DATETIMES,
 		toaster,

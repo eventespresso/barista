@@ -1,13 +1,15 @@
 import { useCallback, useMemo } from 'react';
 
-import type { CreateDatetimeInput, UpdateDatetimeInput, DeleteDatetimeInput } from './types';
 import { MutationType, MutationFunction, useMutationWithFeedback } from '@eventespresso/data';
+import { useSystemNotifications } from '@eventespresso/toaster';
+
+import type { CreateDatetimeInput, UpdateDatetimeInput, DeleteDatetimeInput } from './types';
 import { CREATE_DATETIME, UPDATE_DATETIME, DELETE_DATETIME } from './';
 import useMutationHandler from './useMutationHandler';
 import useUpdateCallback from '../useUpdateCallback';
 import { TypeName } from '../types';
 import type { CreateDatetimeResult, UpdateDatetimeResult, DeleteDatetimeResult } from './types';
-import { useSystemNotifications } from '@eventespresso/toaster';
+import { SINGULAR_ENTITY_NAME } from '../../../constants';
 
 interface DatetimeMutator {
 	createEntity: MutationFunction<CreateDatetimeResult, CreateDatetimeInput>;
@@ -22,21 +24,21 @@ const useDatetimeMutator = (id = ''): DM => {
 	const toaster = useSystemNotifications();
 
 	const createDatetime = useMutationWithFeedback({
-		typeName: TypeName.Datetime,
+		typeName: SINGULAR_ENTITY_NAME.DATETIME,
 		mutationType: MutationType.Create,
 		mutation: CREATE_DATETIME,
 		toaster,
 	});
 
 	const updateDatetime = useMutationWithFeedback({
-		typeName: TypeName.Datetime,
+		typeName: SINGULAR_ENTITY_NAME.DATETIME,
 		mutationType: MutationType.Update,
 		mutation: UPDATE_DATETIME,
 		toaster,
 	});
 
 	const deleteDatetime = useMutationWithFeedback({
-		typeName: TypeName.Datetime,
+		typeName: SINGULAR_ENTITY_NAME.DATETIME,
 		mutationType: MutationType.Delete,
 		mutation: DELETE_DATETIME,
 		toaster,

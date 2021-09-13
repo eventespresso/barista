@@ -3,12 +3,11 @@ import { useMutationWithFeedback, gql, MutationType } from '@eventespresso/data'
 import type { ExecutionResult } from 'graphql';
 
 import type { EntityId } from '@eventespresso/data';
-import { TypeName } from './';
 import { useSystemNotifications } from '@eventespresso/toaster';
 
 interface BulkDeleteEntitiesProps {
 	entityType: 'DATETIME' | 'TICKET' | 'PRICE';
-	typeName: TypeName;
+	typeName: string;
 }
 
 interface CallbackArgs {

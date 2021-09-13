@@ -1,13 +1,15 @@
 import { useCallback, useMemo } from 'react';
 
-import type { CreateTicketInput, UpdateTicketInput, DeleteTicketInput } from './types';
 import { MutationType, MutationFunction, useMutationWithFeedback } from '@eventespresso/data';
+import { useSystemNotifications } from '@eventespresso/toaster';
+
+import type { CreateTicketInput, UpdateTicketInput, DeleteTicketInput } from './types';
 import { CREATE_TICKET, UPDATE_TICKET, DELETE_TICKET } from './';
 import useMutationHandler from './useMutationHandler';
 import useUpdateCallback from '../useUpdateCallback';
 import { TypeName } from '../types';
 import type { CreateTicketResult, UpdateTicketResult, DeleteTicketResult } from './types';
-import { useSystemNotifications } from '@eventespresso/toaster';
+import { SINGULAR_ENTITY_NAME } from '../../../constants';
 
 interface TicketMutator {
 	createEntity: MutationFunction<CreateTicketResult, CreateTicketInput>;
@@ -22,21 +24,21 @@ const useTicketMutator = (id = ''): TM => {
 	const toaster = useSystemNotifications();
 
 	const createTicket = useMutationWithFeedback({
-		typeName: TypeName.Ticket,
+		typeName: SINGULAR_ENTITY_NAME.TICKET,
 		mutationType: MutationType.Create,
 		mutation: CREATE_TICKET,
 		toaster,
 	});
 
 	const updateTicket = useMutationWithFeedback({
-		typeName: TypeName.Ticket,
+		typeName: SINGULAR_ENTITY_NAME.TICKET,
 		mutationType: MutationType.Update,
 		mutation: UPDATE_TICKET,
 		toaster,
 	});
 
 	const deleteTicket = useMutationWithFeedback({
-		typeName: TypeName.Ticket,
+		typeName: SINGULAR_ENTITY_NAME.TICKET,
 		mutationType: MutationType.Delete,
 		mutation: DELETE_TICKET,
 		toaster,

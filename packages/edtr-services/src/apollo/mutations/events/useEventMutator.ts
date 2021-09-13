@@ -1,12 +1,13 @@
 import { useCallback, useMemo } from 'react';
 
-import type { UpdateEventInput } from './types';
 import { MutationType, MutationFunction, useMutationWithFeedback } from '@eventespresso/data';
+import { useSystemNotifications } from '@eventespresso/toaster';
+
+import type { UpdateEventInput } from './types';
 import { UPDATE_EVENT } from './';
 import useMutationHandler from './useMutationHandler';
-import { TypeName } from '../types';
 import type { UpdateEventResult } from './types';
-import { useSystemNotifications } from '@eventespresso/toaster';
+import { SINGULAR_ENTITY_NAME } from '../../../constants';
 
 interface EventMutator {
 	updateEntity: MutationFunction<UpdateEventResult, UpdateEventInput>;
@@ -18,7 +19,7 @@ const useEventMutator = (id = ''): EM => {
 	const toaster = useSystemNotifications();
 
 	const updateEvent = useMutationWithFeedback({
-		typeName: TypeName.Event,
+		typeName: SINGULAR_ENTITY_NAME.EVENT,
 		mutationType: MutationType.Update,
 		mutation: UPDATE_EVENT,
 		toaster,

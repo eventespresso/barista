@@ -8,6 +8,7 @@ import {
 	useMutationWithFeedback,
 } from '@eventespresso/data';
 import { useSystemNotifications } from '@eventespresso/toaster';
+import { __ } from '@eventespresso/i18n';
 
 import type {
 	CreateFormSectionInput,
@@ -41,21 +42,21 @@ export const useSectionMutator = (id = ''): SectionMutator => {
 	const toaster = useSystemNotifications();
 
 	const createSection = useMutationWithFeedback({
-		typeName: 'Section',
+		typeName: __('section'),
 		mutationType: MutationType.Create,
 		mutation: CREATE_FORM_SECTION,
 		toaster,
 	});
 
 	const updateSection = useMutationWithFeedback({
-		typeName: 'Section',
+		typeName: __('section'),
 		mutationType: MutationType.Update,
 		mutation: UPDATE_FORM_SECTION,
 		toaster,
 	});
 
 	const deleteSection = useMutationWithFeedback({
-		typeName: 'Section',
+		typeName: __('section'),
 		mutationType: MutationType.Delete,
 		mutation: DELETE_FORM_SECTION,
 		toaster,

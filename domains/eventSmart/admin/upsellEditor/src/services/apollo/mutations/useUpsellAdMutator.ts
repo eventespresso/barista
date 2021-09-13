@@ -2,6 +2,7 @@ import { useCallback, useMemo } from 'react';
 
 import { ExecutionResult, MutationType, useMutationWithFeedback } from '@eventespresso/data';
 import { useSystemNotifications } from '@eventespresso/toaster';
+import { __ } from '@eventespresso/i18n';
 
 import type { UpdateUpsellAdInput } from './types';
 import { UPDATE_UPSELL_AD } from './';
@@ -12,13 +13,11 @@ interface UpsellAdMutator {
 	updateEntity: (input: UpdateUpsellAdInput) => Promise<ExecutionResult<UpdateUpsellAdResult>>;
 }
 
-const typeName = 'Upsell Ad';
-
 const useUpsellAdMutator = (id = ''): UpsellAdMutator => {
 	const toaster = useSystemNotifications();
 
 	const updateUpsellAd = useMutationWithFeedback({
-		typeName,
+		typeName: __('upsell ad'),
 		mutationType: MutationType.Update,
 		mutation: UPDATE_UPSELL_AD,
 		toaster,

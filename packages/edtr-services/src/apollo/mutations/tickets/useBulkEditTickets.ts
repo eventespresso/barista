@@ -9,7 +9,7 @@ import type { TicketEdge, Ticket } from '../../types';
 import { useTicketQueryOptions, useTickets } from '../../queries';
 import { useUpdateTicketList } from '../../../hooks';
 import { BulkUpdateTicketInput, BULK_UPDATE_TICKETS } from './';
-import { TypeName } from '../';
+import { SINGULAR_ENTITY_NAME } from '../../../constants';
 import { cacheNodesFromBulkInput } from '../utils';
 import useOnUpdateTicket from './useOnUpdateTicket';
 
@@ -26,7 +26,7 @@ const useBulkEditTickets = (): BulkEditTickets => {
 	const onUpdateTicket = useOnUpdateTicket();
 
 	const updateTickets = useMutationWithFeedback({
-		typeName: TypeName.Ticket,
+		typeName: SINGULAR_ENTITY_NAME.TICKET,
 		mutationType: MutationType.Update,
 		mutation: BULK_UPDATE_TICKETS,
 		toaster,

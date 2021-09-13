@@ -1,13 +1,15 @@
 import { useCallback, useMemo } from 'react';
 
-import type { CreateRecurrenceInput, UpdateRecurrenceInput, DeleteRecurrenceInput } from './types';
 import { MutationType, MutationFunction, useMutationWithFeedback } from '@eventespresso/data';
-import { CREATE_RECURRENCE, UPDATE_RECURRENCE, DELETE_RECURRENCE } from './';
-import useMutationHandler from './useMutationHandler';
 import { useUpdateCallback, TypeName as EdtrTypeName } from '@eventespresso/edtr-services';
-import { TypeName } from '../types';
-import type { CreateRecurrenceResult, UpdateRecurrenceResult, DeleteRecurrenceResult } from './types';
 import { useSystemNotifications } from '@eventespresso/toaster';
+import { __ } from '@eventespresso/i18n';
+
+import { CREATE_RECURRENCE, UPDATE_RECURRENCE, DELETE_RECURRENCE } from './';
+import type { CreateRecurrenceInput, UpdateRecurrenceInput, DeleteRecurrenceInput } from './types';
+import type { CreateRecurrenceResult, UpdateRecurrenceResult, DeleteRecurrenceResult } from './types';
+import useMutationHandler from './useMutationHandler';
+import { TypeName } from '../types';
 
 interface RecurrenceMutator {
 	createEntity: MutationFunction<CreateRecurrenceResult, CreateRecurrenceInput>;
@@ -22,21 +24,21 @@ const useRecurrenceMutator = (id = ''): RM => {
 	const toaster = useSystemNotifications();
 
 	const createRecurrence = useMutationWithFeedback({
-		typeName: TypeName.Recurrence,
+		typeName: __('recurrence'),
 		mutationType: MutationType.Create,
 		mutation: CREATE_RECURRENCE,
 		toaster,
 	});
 
 	const updateRecurrence = useMutationWithFeedback({
-		typeName: TypeName.Recurrence,
+		typeName: __('recurrence'),
 		mutationType: MutationType.Update,
 		mutation: UPDATE_RECURRENCE,
 		toaster,
 	});
 
 	const deleteRecurrence = useMutationWithFeedback({
-		typeName: TypeName.Recurrence,
+		typeName: __('recurrence'),
 		mutationType: MutationType.Delete,
 		mutation: DELETE_RECURRENCE,
 		toaster,

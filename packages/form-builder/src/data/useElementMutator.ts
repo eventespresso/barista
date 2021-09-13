@@ -8,6 +8,7 @@ import {
 	useMutationWithFeedback,
 } from '@eventespresso/data';
 import { useSystemNotifications } from '@eventespresso/toaster';
+import { __ } from '@eventespresso/i18n';
 
 import type {
 	CreateFormElementInput,
@@ -41,21 +42,21 @@ export const useElementMutator = (id = ''): ElementMutator => {
 	const toaster = useSystemNotifications();
 
 	const createElement = useMutationWithFeedback({
-		typeName: 'Element',
+		typeName: __('element'),
 		mutationType: MutationType.Create,
 		mutation: CREATE_FORM_ELEMENT,
 		toaster,
 	});
 
 	const updateElement = useMutationWithFeedback({
-		typeName: 'Element',
+		typeName: __('element'),
 		mutationType: MutationType.Update,
 		mutation: UPDATE_FORM_ELEMENT,
 		toaster,
 	});
 
 	const deleteElement = useMutationWithFeedback({
-		typeName: 'Element',
+		typeName: __('element'),
 		mutationType: MutationType.Delete,
 		mutation: DELETE_FORM_ELEMENT,
 		toaster,
