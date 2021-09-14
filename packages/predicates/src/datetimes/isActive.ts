@@ -11,7 +11,7 @@ import { NOW as now } from '@eventespresso/constants';
  * @param date The datetime object
  * @param ignoreFlag Whether to ignore the boolean flag from the object and recalculate the value
  */
-const isActive = (date: Datetime, ignoreFlag?: boolean): boolean => {
+const isActive = (date: Datetime, ignoreFlag = false): boolean => {
 	return (
 		(!ignoreFlag && isBooleanTrue(date.isActive)) ||
 		(diff('seconds', parseISO(date.startDate), now) < 0 && diff('seconds', parseISO(date.endDate), now) > 0)
