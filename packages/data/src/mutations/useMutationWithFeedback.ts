@@ -61,6 +61,7 @@ const useMutationWithFeedback: MutationWithFeedback = ({ typeName, mutation, mut
 	 */
 	const onCompleted = useCallback<VoidFunction>(() => {
 		const successMessage = getToasterMessage('SUCCESS');
+		toaster.dismiss(key);
 		toaster.update({ key, message: successMessage, type: 'success' });
 	}, [getToasterMessage, key, toaster]);
 

@@ -45,10 +45,11 @@ const useSystemNotifications = (): SystemNotificationsToaster => {
 		});
 	}, []);
 
-	const update: UpdateToast = useCallback(({ key, message, type }) => {
-		const render = (): JSX.Element => <Toaster message={message} type={type} />;
-
-		toast.update(key, { autoClose: 5000, render, type });
+	const update = useCallback(({ key, message, type }): void => {
+		toast(<Toaster message={message} type={type} />, {
+			className,
+			position,
+		});
 	}, []);
 
 	const warning = useCallback(({ message }): void => {
