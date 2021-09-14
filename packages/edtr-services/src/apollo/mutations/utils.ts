@@ -1,4 +1,12 @@
-import { entitiesWithGuIdInArray, entitiesWithGuIdNotInArray } from '@eventespresso/predicates';
+import {
+	entitiesWithGuIdInArray,
+	entitiesWithGuIdNotInArray,
+	isActive,
+	isExpired,
+	isOnSale,
+	isPending,
+	isUpcoming,
+} from '@eventespresso/predicates';
 import type { AnyObject } from '@eventespresso/utils';
 import { shiftDate } from '@eventespresso/dates';
 import type { EntityId } from '@eventespresso/data';
@@ -96,4 +104,31 @@ export const cacheNodesFromBulkDelete = <E extends Datetime | Ticket | Price>(
 	});
 
 	return nodes;
+};
+
+/**
+ * Updates the boolean date related flags for the given datetime
+ * based upon the (possible updated) other fields
+ */
+export const updateDatetimeFlags = (date: Datetime): Datetime => {
+	return {
+		...date,
+		isActive: isActive(date, true),
+		isExpired: isExpired(date, true),
+		isUpcoming: isUpcoming(date, true),
+	};
+};
+
+/**
+ * Updates the boolean date related flags for the given ticket
+ * based upon the (possible updated) other fields
+ */
+export const updateTicketFlags = (ticket: Ticket): Ticket => {
+	return {
+		...ticket,
+		isExpired: isExpired(ticket, true),
+		isFree: !ticket.price,
+		isOnSale: isOnSale(ticket, true),
+		isPending: isPending(ticket, true),
+	};
 };
