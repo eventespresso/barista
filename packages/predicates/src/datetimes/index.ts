@@ -9,6 +9,7 @@ export { default as isInMonth } from './isInMonth';
 export { default as isInYear } from './isInYear';
 export { default as isDateSoldOut } from './isSoldOut';
 export { default as isUpcoming } from './isUpcoming';
+export { default as isSoldOut } from './isSoldOut';
 
 export { default as sortDates } from './sorters';
 

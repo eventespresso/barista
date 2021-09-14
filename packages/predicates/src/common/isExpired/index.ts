@@ -5,5 +5,12 @@ import { isBooleanTrue } from '@eventespresso/utils';
 import { diff } from '@eventespresso/dates';
 import { NOW as now } from '@eventespresso/constants';
 
-export const isExpired = (entity: Ticket | Datetime): boolean =>
-	isBooleanTrue(entity.isExpired) || diff('minutes', parseISO(entity.endDate), now) < 0;
+/**
+ * Whether an entity is expired, based on its end date
+ *
+ * @param entity The entity object
+ * @param ignoreFlag Whether to ignore the boolean flag from the object and recalculate the value
+ */
+export const isExpired = (entity: Ticket | Datetime, ignoreFlag?: boolean): boolean => {
+	return (!ignoreFlag && isBooleanTrue(entity.isExpired)) || diff('minutes', parseISO(entity.endDate), now) < 0;
+};
