@@ -6,7 +6,7 @@ import { useDatetimeQueryOptions, useDatetimes } from '../../queries';
 import { BulkUpdateDatetimeInput, BULK_UPDATE_DATETIMES } from './';
 import useOnUpdateDatetime from './useOnUpdateDatetime';
 import { useUpdateDatetimeList } from '../../../hooks';
-import { cacheNodesFromBulkInput } from '../utils';
+import { cacheNodesFromBulkInput, updateDatetimeFlags } from '../utils';
 import type { DatetimeEdge, Datetime } from '../../types';
 import { SINGULAR_ENTITY_NAME } from '../../../constants';
 
@@ -30,7 +30,7 @@ const useBulkEditDatetimes = (): BulkEditDatetimes => {
 
 	const updateEntityList = useCallback(
 		(input: BulkUpdateDatetimeInput) => () => {
-			const nodes = cacheNodesFromBulkInput(input, allDatetimes);
+			const nodes = cacheNodesFromBulkInput(input, allDatetimes).map(updateDatetimeFlags);
 
 			const espressoDatetimes: DatetimeEdge = {
 				nodes,

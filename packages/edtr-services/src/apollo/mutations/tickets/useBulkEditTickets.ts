@@ -10,7 +10,7 @@ import { useTicketQueryOptions, useTickets } from '../../queries';
 import { useUpdateTicketList } from '../../../hooks';
 import { BulkUpdateTicketInput, BULK_UPDATE_TICKETS } from './';
 import { SINGULAR_ENTITY_NAME } from '../../../constants';
-import { cacheNodesFromBulkInput } from '../utils';
+import { cacheNodesFromBulkInput, updateTicketFlags } from '../utils';
 import useOnUpdateTicket from './useOnUpdateTicket';
 
 interface BulkEditTickets {
@@ -34,7 +34,7 @@ const useBulkEditTickets = (): BulkEditTickets => {
 
 	const updateEntityList = useCallback(
 		(input: BulkUpdateTicketInput) => () => {
-			const nodes = cacheNodesFromBulkInput(input, allTickets);
+			const nodes = cacheNodesFromBulkInput(input, allTickets).map(updateTicketFlags);
 
 			const espressoTickets: TicketEdge = {
 				nodes,
