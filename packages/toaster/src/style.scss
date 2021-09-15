@@ -44,6 +44,10 @@
 		.Toastify__close-button {
 			color: var(--ee-default-text-color);
 		}
+
+		.Toastify__toast-icon {
+			width: fit-content;
+		}
 	}
 
 	.ee-toaster-notice {

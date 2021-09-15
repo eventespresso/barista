@@ -6,6 +6,7 @@ import { Toaster } from './Toaster';
 
 const position = toast.POSITION.BOTTOM_RIGHT as 'bottom-right';
 const className = 'ee-toaster-notice__toast';
+import toasterIcons from './toasterIcons';
 
 const useSystemNotifications = (): SystemNotificationsToaster => {
 	const dismiss: DissmissToast = useCallback((toastId) => toast.dismiss(toastId), []);
@@ -46,9 +47,12 @@ const useSystemNotifications = (): SystemNotificationsToaster => {
 	}, []);
 
 	const update: UpdateToast = useCallback(({ key, message, type }) => {
-		const render = (): JSX.Element => <Toaster message={message} type={type} />;
-
-		toast.update(key, { autoClose: 5000, render, type });
+		toast.update(key, {
+			autoClose: 4000,
+			render: message,
+			icon: toasterIcons[type],
+			type,
+		});
 	}, []);
 
 	const warning = useCallback(({ message }): void => {
