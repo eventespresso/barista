@@ -3,7 +3,6 @@ import { useMutationWithFeedback, gql, MutationType } from '@eventespresso/data'
 import type { ExecutionResult } from 'graphql';
 
 import type { EntityId } from '@eventespresso/data';
-import { useSystemNotifications } from '@eventespresso/toaster';
 
 interface BulkDeleteEntitiesProps {
 	entityType: 'DATETIME' | 'TICKET' | 'PRICE';
@@ -28,12 +27,10 @@ const BULK_DELETE_ENTITIES = gql`
 `;
 
 const useBulkDeleteEntities = ({ entityType, typeName }: BulkDeleteEntitiesProps): Callback => {
-	const toaster = useSystemNotifications();
 	const bulkDelete = useMutationWithFeedback({
 		typeName,
 		mutationType: MutationType.Delete,
 		mutation: BULK_DELETE_ENTITIES,
-		toaster,
 	});
 
 	return useCallback<Callback>(

@@ -1,7 +1,6 @@
 import { useCallback, useMemo } from 'react';
 
 import { MutationType, MutationFunction, useMutationWithFeedback } from '@eventespresso/data';
-import { useSystemNotifications } from '@eventespresso/toaster';
 
 import type { CreateDatetimeInput, UpdateDatetimeInput, DeleteDatetimeInput } from './types';
 import { CREATE_DATETIME, UPDATE_DATETIME, DELETE_DATETIME } from './';
@@ -20,28 +19,22 @@ interface DatetimeMutator {
 type DM = DatetimeMutator;
 
 const useDatetimeMutator = (id = ''): DM => {
-	// create a single toaster instance to share between all mutations
-	const toaster = useSystemNotifications();
-
 	const createDatetime = useMutationWithFeedback({
 		typeName: SINGULAR_ENTITY_NAME.DATETIME,
 		mutationType: MutationType.Create,
 		mutation: CREATE_DATETIME,
-		toaster,
 	});
 
 	const updateDatetime = useMutationWithFeedback({
 		typeName: SINGULAR_ENTITY_NAME.DATETIME,
 		mutationType: MutationType.Update,
 		mutation: UPDATE_DATETIME,
-		toaster,
 	});
 
 	const deleteDatetime = useMutationWithFeedback({
 		typeName: SINGULAR_ENTITY_NAME.DATETIME,
 		mutationType: MutationType.Delete,
 		mutation: DELETE_DATETIME,
-		toaster,
 	});
 
 	const mutationHandler = useMutationHandler();

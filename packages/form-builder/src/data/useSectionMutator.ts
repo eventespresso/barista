@@ -7,7 +7,6 @@ import {
 	OperationVariables,
 	useMutationWithFeedback,
 } from '@eventespresso/data';
-import { useSystemNotifications } from '@eventespresso/toaster';
 import { __ } from '@eventespresso/i18n';
 
 import type {
@@ -39,27 +38,22 @@ const createVariables = (mutationType: MutationType, input: MutationInput): Oper
 };
 
 export const useSectionMutator = (id = ''): SectionMutator => {
-	const toaster = useSystemNotifications();
-
 	const createSection = useMutationWithFeedback({
 		typeName: __('section'),
 		mutationType: MutationType.Create,
 		mutation: CREATE_FORM_SECTION,
-		toaster,
 	});
 
 	const updateSection = useMutationWithFeedback({
 		typeName: __('section'),
 		mutationType: MutationType.Update,
 		mutation: UPDATE_FORM_SECTION,
-		toaster,
 	});
 
 	const deleteSection = useMutationWithFeedback({
 		typeName: __('section'),
 		mutationType: MutationType.Delete,
 		mutation: DELETE_FORM_SECTION,
-		toaster,
 	});
 
 	const createEntity = useCallback<SectionMutator['createEntity']>(

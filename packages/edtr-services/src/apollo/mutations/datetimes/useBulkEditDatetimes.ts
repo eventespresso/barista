@@ -1,7 +1,6 @@
 import { useCallback, useMemo } from 'react';
 
 import { useMutationWithFeedback, MutationType } from '@eventespresso/data';
-import { useSystemNotifications } from '@eventespresso/toaster';
 import { useDatetimeQueryOptions, useDatetimes } from '../../queries';
 import { BulkUpdateDatetimeInput, BULK_UPDATE_DATETIMES } from './';
 import useOnUpdateDatetime from './useOnUpdateDatetime';
@@ -17,7 +16,6 @@ interface BulkEditDatetimes {
 const useBulkEditDatetimes = (): BulkEditDatetimes => {
 	const allDatetimes = useDatetimes();
 	const queryOptions = useDatetimeQueryOptions();
-	const toaster = useSystemNotifications();
 	const updateDatetimeList = useUpdateDatetimeList();
 	const onUpdateDatetime = useOnUpdateDatetime();
 
@@ -25,7 +23,6 @@ const useBulkEditDatetimes = (): BulkEditDatetimes => {
 		typeName: SINGULAR_ENTITY_NAME.DATETIME,
 		mutationType: MutationType.Update,
 		mutation: BULK_UPDATE_DATETIMES,
-		toaster,
 	});
 
 	const updateEntityList = useCallback(

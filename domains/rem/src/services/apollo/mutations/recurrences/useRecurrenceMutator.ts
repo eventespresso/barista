@@ -2,7 +2,6 @@ import { useCallback, useMemo } from 'react';
 
 import { MutationType, MutationFunction, useMutationWithFeedback } from '@eventespresso/data';
 import { useUpdateCallback, TypeName as EdtrTypeName } from '@eventespresso/edtr-services';
-import { useSystemNotifications } from '@eventespresso/toaster';
 import { __ } from '@eventespresso/i18n';
 
 import { CREATE_RECURRENCE, UPDATE_RECURRENCE, DELETE_RECURRENCE } from './';
@@ -20,28 +19,22 @@ interface RecurrenceMutator {
 type RM = RecurrenceMutator;
 
 const useRecurrenceMutator = (id = ''): RM => {
-	// create a single toaster instance to share between all mutations
-	const toaster = useSystemNotifications();
-
 	const createRecurrence = useMutationWithFeedback({
 		typeName: __('recurrence'),
 		mutationType: MutationType.Create,
 		mutation: CREATE_RECURRENCE,
-		toaster,
 	});
 
 	const updateRecurrence = useMutationWithFeedback({
 		typeName: __('recurrence'),
 		mutationType: MutationType.Update,
 		mutation: UPDATE_RECURRENCE,
-		toaster,
 	});
 
 	const deleteRecurrence = useMutationWithFeedback({
 		typeName: __('recurrence'),
 		mutationType: MutationType.Delete,
 		mutation: DELETE_RECURRENCE,
-		toaster,
 	});
 
 	const mutationHandler = useMutationHandler();

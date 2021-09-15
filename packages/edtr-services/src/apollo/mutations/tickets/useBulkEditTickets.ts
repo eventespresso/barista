@@ -2,7 +2,6 @@ import { useCallback, useMemo } from 'react';
 import { identity } from 'ramda';
 
 import { useMutationWithFeedback, MutationType } from '@eventespresso/data';
-import { useSystemNotifications } from '@eventespresso/toaster';
 import type { TicketPred } from '@eventespresso/predicates';
 
 import type { TicketEdge, Ticket } from '../../types';
@@ -21,7 +20,6 @@ const useBulkEditTickets = (): BulkEditTickets => {
 	// ensure that bulk edit preserves default tickets
 	const allTickets = useTickets(identity as TicketPred);
 	const queryOptions = useTicketQueryOptions();
-	const toaster = useSystemNotifications();
 	const updateTicketList = useUpdateTicketList();
 	const onUpdateTicket = useOnUpdateTicket();
 
@@ -29,7 +27,6 @@ const useBulkEditTickets = (): BulkEditTickets => {
 		typeName: SINGULAR_ENTITY_NAME.TICKET,
 		mutationType: MutationType.Update,
 		mutation: BULK_UPDATE_TICKETS,
-		toaster,
 	});
 
 	const updateEntityList = useCallback(

@@ -1,7 +1,6 @@
 import { useCallback, useMemo } from 'react';
 
 import { MutationType, MutationFunction, useMutationWithFeedback } from '@eventespresso/data';
-import { useSystemNotifications } from '@eventespresso/toaster';
 
 import { TypeName } from '../types';
 import { CREATE_PRICE, UPDATE_PRICE, DELETE_PRICE } from './';
@@ -20,28 +19,22 @@ interface PriceMutator {
 type PM = PriceMutator;
 
 const usePriceMutator = (id = ''): PM => {
-	// create a single toaster instance to share between all mutations
-	const toaster = useSystemNotifications();
-
 	const createPrice = useMutationWithFeedback({
 		typeName: SINGULAR_ENTITY_NAME.PRICE,
 		mutationType: MutationType.Create,
 		mutation: CREATE_PRICE,
-		toaster,
 	});
 
 	const updatePrice = useMutationWithFeedback({
 		typeName: SINGULAR_ENTITY_NAME.PRICE,
 		mutationType: MutationType.Update,
 		mutation: UPDATE_PRICE,
-		toaster,
 	});
 
 	const deletePrice = useMutationWithFeedback({
 		typeName: SINGULAR_ENTITY_NAME.PRICE,
 		mutationType: MutationType.Delete,
 		mutation: DELETE_PRICE,
-		toaster,
 	});
 
 	const mutationHandler = useMutationHandler();

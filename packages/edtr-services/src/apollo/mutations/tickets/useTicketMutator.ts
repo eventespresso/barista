@@ -1,7 +1,6 @@
 import { useCallback, useMemo } from 'react';
 
 import { MutationType, MutationFunction, useMutationWithFeedback } from '@eventespresso/data';
-import { useSystemNotifications } from '@eventespresso/toaster';
 
 import type { CreateTicketInput, UpdateTicketInput, DeleteTicketInput } from './types';
 import { CREATE_TICKET, UPDATE_TICKET, DELETE_TICKET } from './';
@@ -20,28 +19,22 @@ interface TicketMutator {
 type TM = TicketMutator;
 
 const useTicketMutator = (id = ''): TM => {
-	// create a single toaster instance to share between all mutations
-	const toaster = useSystemNotifications();
-
 	const createTicket = useMutationWithFeedback({
 		typeName: SINGULAR_ENTITY_NAME.TICKET,
 		mutationType: MutationType.Create,
 		mutation: CREATE_TICKET,
-		toaster,
 	});
 
 	const updateTicket = useMutationWithFeedback({
 		typeName: SINGULAR_ENTITY_NAME.TICKET,
 		mutationType: MutationType.Update,
 		mutation: UPDATE_TICKET,
-		toaster,
 	});
 
 	const deleteTicket = useMutationWithFeedback({
 		typeName: SINGULAR_ENTITY_NAME.TICKET,
 		mutationType: MutationType.Delete,
 		mutation: DELETE_TICKET,
-		toaster,
 	});
 
 	const mutationHandler = useMutationHandler();

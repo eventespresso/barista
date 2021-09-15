@@ -2,7 +2,7 @@ import { useCallback, useRef } from 'react';
 import { MutationTuple, OperationVariables, useMutation } from '@apollo/client';
 import { DocumentNode } from 'graphql';
 
-import type { SystemNotificationsToaster } from '@eventespresso/toaster';
+import { useSystemNotifications } from '@eventespresso/toaster';
 import { uuid } from '@eventespresso/utils';
 import { sprintf, __ } from '@eventespresso/i18n';
 
@@ -12,7 +12,6 @@ interface MutationWithFeedbackArgs {
 	typeName: string; // e.g. "Datetime", "Ticket", "PriceType"
 	mutation: DocumentNode;
 	mutationType: MutationType;
-	toaster: SystemNotificationsToaster;
 }
 
 type MutationWithFeedback = <TData = any, TVariables = OperationVariables>(
@@ -35,11 +34,13 @@ export const MUTATION_STRINGS: { [key in `${ResultType}:${MutationType}`]: strin
 	/* eslint-enable @wordpress/i18n-translator-comments */
 };
 
-const useMutationWithFeedback: MutationWithFeedback = ({ typeName, mutation, mutationType, toaster }) => {
+const useMutationWithFeedback: MutationWithFeedback = ({ typeName, mutation, mutationType }) => {
 	// generate a toaster key that sustains re-renders
 	const toasterKey = useRef(uuid());
 
 	const key = toasterKey.current;
+
+	const toaster = useSystemNotifications();
 
 	/**
 	 * Get the toaster message based upon typeName and mutationType
