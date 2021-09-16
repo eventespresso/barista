@@ -11,7 +11,7 @@ export const ErrorMessage: FormBuilderProps['topBanner'] = ({ elements, sections
 	let message = '';
 
 	const info = useMemo(() => {
-		// Lets filter not consider default or shared sections
+		// Lets not consider default or shared sections
 		// because it is possible that there is valid data in default or shared sections/elements
 		// but not added to the event
 		const formSectionIds = getGuids(Object.values(sections).filter(isNotSharedOrDefault));
