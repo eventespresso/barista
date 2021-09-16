@@ -7,7 +7,6 @@ import toasterIcons from './toasterIcons';
 const position = toast.POSITION.BOTTOM_RIGHT as 'bottom-right';
 const className = 'ee-toaster-notice__toast';
 
-
 const useSystemNotifications = (): SystemNotificationsToaster => {
 	const dismiss: DissmissToast = useCallback((toastId) => toast.dismiss(toastId), []);
 
@@ -37,7 +36,7 @@ const useSystemNotifications = (): SystemNotificationsToaster => {
 			className,
 			icon: toasterIcons['loading'],
 			position,
-			toastId
+			toastId,
 		});
 	}, []);
 
