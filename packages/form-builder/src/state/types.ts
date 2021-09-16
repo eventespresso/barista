@@ -52,7 +52,7 @@ export interface FormStateManager
 		Pick<FormStateProviderProps, 'appliesToOptions' | 'mapsToOptions'> {
 	addElement: (args: Pick<ArgsData, 'element'>) => void;
 	addSection: (args: Pick<ArgsData, 'section' | 'afterId'>) => void;
-	copyElement: (args: Pick<ArgsData, 'id' | 'afterId'>) => void;
+	copyElement: (args: Pick<ArgsData, 'id'>) => void;
 	copySection: (args: Pick<ArgsData, 'section' | 'id' | 'afterId'>) => void;
 	deleteElement: (args: Pick<ArgsData, 'id'>) => void;
 	deleteSection: (args: Pick<ArgsData, 'id'>) => void;

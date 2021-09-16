@@ -103,11 +103,10 @@ export const useFormStateManager: FormStateManagerHook = ({ onChange, appliesToO
 		});
 	}, []);
 
-	const copyElement = useCallback<FSM['copyElement']>(({ id, afterId }) => {
+	const copyElement = useCallback<FSM['copyElement']>(({ id }) => {
 		dispatch({
 			type: 'COPY_ELEMENT',
 			id,
-			afterId,
 		});
 	}, []);
 

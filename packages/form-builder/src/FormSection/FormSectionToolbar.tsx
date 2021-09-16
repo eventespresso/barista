@@ -16,7 +16,7 @@ export const FormSectionToolbar = memo<FormSectionToolbarProps>(({ formSection, 
 	const { id } = formSection;
 	const active = isElementOpen({ id });
 
-	const onCopy = useCallback(() => copySection({ id, section: {} }), [id, copySection]);
+	const onCopy = useCallback(() => copySection({ id, section: {}, afterId: '' }), [id, copySection]);
 	const onDelete = useCallback(() => deleteSection({ id }), [id, deleteSection]);
 	const onToggle = useCallback(() => toggleOpenElement({ openElement: id }), [id, toggleOpenElement]);
 
