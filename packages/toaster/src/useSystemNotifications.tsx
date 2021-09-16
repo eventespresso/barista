@@ -52,6 +52,8 @@ const useSystemNotifications = (): SystemNotificationsToaster => {
 	const update = useCallback(({ key, message, type }): void => {
 		toast.update(key, {
 			autoClose: 4000,
+			isLoading: false,
+			closeButton: true,
 			render: message,
 			icon: toasterIcons[type],
 			type,
