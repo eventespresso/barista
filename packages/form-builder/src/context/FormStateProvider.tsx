@@ -1,5 +1,7 @@
 import { createContext } from 'react';
 
+import type { OptionsType } from '@eventespresso/adapters';
+
 import { FormState, FormStateManager, useFormStateManager } from '../state';
 import { FormSectionRaw, FormElementRaw } from '../types';
 
@@ -8,8 +10,10 @@ const FormStateContext = createContext<FormStateManager>(null);
 const { Provider, Consumer: FormStateConsumer } = FormStateContext;
 
 export interface FormStateProviderProps {
-	initialSections?: Array<FormSectionRaw>;
+	appliesToOptions?: OptionsType;
 	initialElements?: Array<FormElementRaw>;
+	initialSections?: Array<FormSectionRaw>;
+	mapsToOptions?: OptionsType;
 	topLevelSectionId?: string;
 	onChange?: (data: FormState) => void;
 }

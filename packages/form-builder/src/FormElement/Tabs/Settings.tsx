@@ -1,5 +1,5 @@
 import { __ } from '@eventespresso/i18n';
-import { SwitchWithLabel, TextInputWithLabel, withLabel } from '@eventespresso/ui-components';
+import { SwitchWithLabel, TextInputWithLabel, withLabel, SelectWithLabel } from '@eventespresso/ui-components';
 import { SimpleTextEditor } from '@eventespresso/rich-text-editor';
 
 import type { FormElementProps } from '../../types';
@@ -8,17 +8,20 @@ import { isFieldWithOptions } from '../../utils';
 import { useUpdateElement } from '../useUpdateElement';
 import { InputType } from './InputType';
 import { isFieldOfType } from '../../utils';
+import { useFormState } from '../../state';
 
 const RTEWithLabel = withLabel(SimpleTextEditor);
 
 export const Settings: React.FC<FormElementProps> = ({ element }) => {
 	const onChangeValue = useUpdateElement(element);
 
+	const { mapsToOptions } = useFormState();
+
 	return (
 		<>
 			{
 				// HTML doesn't need a public label
-				isFieldOfType(['HTML'], element) && (
+				!isFieldOfType(['HTML'], element) && (
 					<TextInputWithLabel
 						label={__('public label')}
 						onChangeValue={onChangeValue('label.publicLabel')}
@@ -62,6 +65,14 @@ export const Settings: React.FC<FormElementProps> = ({ element }) => {
 					/>
 					<InputType element={element} />
 				</>
+			)}
+			{mapsToOptions && (
+				<SelectWithLabel
+					label={__('maps to')}
+					onChangeValue={onChangeValue('mapsTo')}
+					value={element.mapsTo}
+					options={mapsToOptions}
+				/>
 			)}
 		</>
 	);

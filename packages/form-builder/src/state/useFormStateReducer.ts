@@ -49,7 +49,7 @@ export const useFormStateReducer = (initializer: StateInitializer): FormStateRed
 				case 'COPY_SECTION': {
 					// Copied section will be composed of the existing section
 					const newSection = prepareNewSection({ ...state.sections[id], ...section });
-					predicates = [addSectionToState(newSection, id), copySectionElements(id, newSection.id)];
+					predicates = [addSectionToState(newSection, afterId || id), copySectionElements(id, newSection.id)];
 					break;
 				}
 
@@ -107,7 +107,7 @@ export const useFormStateReducer = (initializer: StateInitializer): FormStateRed
 				case 'COPY_ELEMENT': {
 					// Copied element will be composed of the existing element
 					const newElement = prepareNewElement(state.elements[id]);
-					predicates = [addElementToState(newElement, id)];
+					predicates = [addElementToState(newElement, afterId || id)];
 					break;
 				}
 

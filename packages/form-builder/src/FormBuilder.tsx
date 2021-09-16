@@ -14,8 +14,14 @@ import type { FormBuilderProps } from './types';
 
 import './styles.scss';
 
-const FormBuilder: React.FC<FormBuilderProps> = ({ bodyClassName, containerClassName, contentClassName, header }) => {
-	const { getSections } = useFormState();
+const FormBuilder: React.FC<FormBuilderProps> = ({
+	bodyClassName,
+	containerClassName,
+	contentClassName,
+	header,
+	topBanner: TopBanner,
+}) => {
+	const { getSections, getData } = useFormState();
 
 	// handle save form
 	useSaveForm();
@@ -36,6 +42,7 @@ const FormBuilder: React.FC<FormBuilderProps> = ({ bodyClassName, containerClass
 
 	return (
 		<Container classes={classes} header={header}>
+			{TopBanner && <TopBanner {...getData()} />}
 			<DragDropContext onDragEnd={handleDnD}>
 				<Droppable droppableId={SECTIONS_DROPPABLE_ID} type='section'>
 					{({ innerRef, droppableProps, placeholder }, { isDraggingOver }) => {

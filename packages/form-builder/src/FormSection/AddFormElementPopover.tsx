@@ -49,10 +49,10 @@ export const AddFormElementPopover: React.FC<SidebarProps> = ({ formSection }) =
 			// make sure that new status is not 'SHARED' and `belongsTo` is not set
 			// just to let the reducer to add `belongsTo` as the `topLevelSection`
 			section = { ...R.omit(['belongsTo'], section), status: 'ACTIVE' };
-			copySection({ id: selectedSection, section });
+			copySection({ id: selectedSection, section, afterId: formSection.id });
 		}
 		onClose();
-	}, [copySection, onClose, selectedSection, sharedSections]);
+	}, [copySection, formSection.id, onClose, selectedSection, sharedSections]);
 
 	const onChangeElement = useCallback<SelectProps['onChangeValue']>((value) => {
 		setSelectedElement(value as ElementType);

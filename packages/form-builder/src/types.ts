@@ -1,5 +1,7 @@
 import type { DraggableProvidedDragHandleProps, OptionsType } from '@eventespresso/adapters';
 
+import { FormState } from './state';
+
 export type ElementType =
 	| 'BUTTON'
 	| 'CHECKBOX_MULTI'
@@ -102,10 +104,9 @@ export interface FormElement extends LocalOnlyFields {
 }
 
 export type FormStatus = 'ACTIVE' | 'ARCHIVED' | 'DEFAULT' | 'SHARED' | 'TRASHED';
-export type FormSectionAppliesTo = 'ALL' | 'PRIMARY' | 'PURCHASER' | 'REGISTRANTS';
 
 export interface FormSection extends LocalOnlyFields, Required<FormStatusFlags> {
-	appliesTo?: FormSectionAppliesTo;
+	appliesTo?: string;
 	attributes?: FormAttributes;
 	belongsTo?: string;
 	id: string;
@@ -129,6 +130,7 @@ export interface FormBuilderProps {
 	contentClassName?: string;
 	header?: React.ReactNode;
 	sidebarClassName?: string;
+	topBanner?: React.ComponentType<FormState>;
 }
 
 interface CommonProps {
