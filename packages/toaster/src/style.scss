@@ -47,6 +47,11 @@
 
 		.Toastify__toast-icon {
 			width: fit-content;
+
+			.ee-loading-spinner {
+				animation: var(--ee-animation-spin);
+				@include reduce-motion('animation');
+			}
 		}
 	}
 
