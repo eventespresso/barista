@@ -2,14 +2,14 @@ import type { SelectProps as ChakraSelectProps } from '@chakra-ui/react';
 
 import type { CommonInputProps } from '../types';
 
-export interface OptionProps {
+export interface OptionProps<T extends React.ReactText = React.ReactText> {
 	label?: React.ReactNode;
 	options?: Array<Omit<OptionProps, 'options'>>; // for optgroup
-	value?: React.ReactText;
+	value?: T;
 	[key: string]: any;
 }
 
-export type OptionsType = Array<OptionProps>;
+export type OptionsType<T extends React.ReactText = React.ReactText> = Array<OptionProps<T>>;
 
 export interface SelectProps extends ChakraSelectProps, CommonInputProps<HTMLSelectElement> {
 	options?: OptionsType;
