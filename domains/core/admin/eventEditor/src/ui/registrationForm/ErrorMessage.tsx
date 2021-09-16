@@ -5,15 +5,15 @@ import { FormBuilderProps } from '@eventespresso/form-builder';
 import { Banner } from '@eventespresso/ui-components';
 import { sprintf, __ } from '@eventespresso/i18n';
 import { isNotSharedOrDefault, getGuids } from '@eventespresso/predicates';
-
-const hasAttendeeFirstName = R.any(R.allPass([R.propEq('type', 'TEXT'), R.propEq('mapsTo', 'Attendee.fname')]));
-const hasAttendeeEmailName = R.any(R.allPass([R.propEq('type', 'EMAIL'), R.propEq('mapsTo', 'Attendee.email')]));
+import { hasAnElementAsAttendeeEmail, hasAnElementAsAttendeeFName } from './utils';
 
 export const ErrorMessage: FormBuilderProps['topBanner'] = ({ elements, sections }) => {
 	let message = '';
 
 	const info = useMemo(() => {
 		// Lets filter not consider default or shared sections
+		// because it is possible that there is valid data in default or shared sections/elements
+		// but not added to the event
 		const formSectionIds = getGuids(Object.values(sections).filter(isNotSharedOrDefault));
 
 		const formElements = Object.values(elements).filter(
@@ -21,8 +21,8 @@ export const ErrorMessage: FormBuilderProps['topBanner'] = ({ elements, sections
 			R.propSatisfies(R.flip(R.includes)(formSectionIds), 'belongsTo')
 		);
 		return {
-			hasFirstName: hasAttendeeFirstName(formElements),
-			hasEmail: hasAttendeeEmailName(formElements),
+			hasFirstName: hasAnElementAsAttendeeFName(formElements),
+			hasEmail: hasAnElementAsAttendeeEmail(formElements),
 		};
 	}, [elements, sections]);
 
