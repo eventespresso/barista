@@ -10,7 +10,7 @@ import useInitEventTestCache from './useInitEventTestCache';
 const mockEvent = nodes[0];
 
 describe('useEvent', () => {
-	it('returns undefined when the given event does not exist', async () => {
+	it('checks for non existent event when the cache is empty', async () => {
 		/* Set query options and the wrapper */
 		const {
 			result: { current: request },
@@ -24,8 +24,9 @@ describe('useEvent', () => {
 		const { result } = renderHook(() => useEvent(), {
 			wrapper,
 		});
+		await actWait();
 
-		expect(result.current).toBeUndefined();
+		expect(result.current).toEqual({});
 	});
 
 	it('checks for response data', async () => {
