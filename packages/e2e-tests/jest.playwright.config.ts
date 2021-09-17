@@ -26,6 +26,12 @@ const config: Config.InitialOptions = {
 				headless: process.env.CI === 'true' ? true : process.env.HEADLESS === 'true',
 				// slowMo: +process.env.SLOW_MO,
 			},
+			contextOptions: {
+				viewport: {
+					width: 1920,
+					height: 1080,
+				},
+			},
 		},
 	},
 	testPathIgnorePatterns: ['/node_modules/'],
