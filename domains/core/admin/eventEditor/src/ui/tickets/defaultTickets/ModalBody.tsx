@@ -29,7 +29,19 @@ const ModalBody: React.FC = () => {
 		(entity) => {
 			const ticketPrices = getTicketPrices(entity.id);
 			const prices = prepTemplatePrices(ticketPrices);
-			addTicket({ ...entity, isNew: true, dbId: 0, prices });
+			addTicket({
+				...entity,
+				isNew: true,
+				dbId: 0,
+				prices,
+				/**
+				 * Ensure that ticket is not trashed,
+				 * as it's possible that a trashed ticket is used as a template
+				 *
+				 * @see https://github.com/eventespresso/barista/issues/1013
+				 */
+				isTrashed: false,
+			});
 		},
 		[addTicket, getTicketPrices, prepTemplatePrices]
 	);
