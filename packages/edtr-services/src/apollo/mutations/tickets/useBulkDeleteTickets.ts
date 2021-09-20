@@ -9,7 +9,8 @@ import type { Ticket, TicketsList } from '../../types';
 import { useTickets, useTicketQueryOptions, DEFAULT_TICKET_LIST_DATA as DEFAULT_LIST_DATA } from '../../queries';
 import { useUpdateTicketList } from '../../../hooks';
 import useBulkDeleteEntities from '../useBulkDeleteEntities';
-import { TypeName, cacheNodesFromBulkDelete } from '../';
+import { cacheNodesFromBulkDelete } from '../';
+import { SINGULAR_ENTITY_NAME } from '../../../constants';
 import useOnDeleteTicket from './useOnDeleteTicket';
 
 type Callback<R = void> = (args: {
@@ -26,7 +27,7 @@ const useBulkDeleteTickets = (): Callback<Promise<ExecutionResult | void>> => {
 	const onDeleteTicket = useOnDeleteTicket();
 	const { cache } = useApolloClient();
 
-	const bulkDelete = useBulkDeleteEntities({ entityType: 'TICKET', typeName: TypeName.Ticket });
+	const bulkDelete = useBulkDeleteEntities({ entityType: 'TICKET', typeName: SINGULAR_ENTITY_NAME.TICKET });
 
 	const updateEntityList = useCallback<Callback<VoidFunction>>(
 		({ entityIds, deletePermanently, relatedDatetimeIds }) =>

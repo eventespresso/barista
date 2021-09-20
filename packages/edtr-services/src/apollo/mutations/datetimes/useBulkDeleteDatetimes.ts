@@ -8,9 +8,10 @@ import type { Datetime, DatetimeEdge, DatetimesList } from '../../types';
 import { useDatetimes, useDatetimeQueryOptions, DEFAULT_DATETIME_LIST_DATA as DEFAULT_LIST_DATA } from '../../queries';
 import { useUpdateDatetimeList } from '../../../hooks';
 import useBulkDeleteEntities from '../useBulkDeleteEntities';
-import { TypeName, cacheNodesFromBulkDelete } from '../';
+import { cacheNodesFromBulkDelete } from '../';
 import useOnDeleteDatetime from './useOnDeleteDatetime';
 import useDeleteRelatedTickets from './useDeleteRelatedTickets';
+import { SINGULAR_ENTITY_NAME } from '../../../constants';
 
 type Callback<R = void> = (entityIds: Array<EntityId>, deletePermanently?: boolean) => R;
 
@@ -22,7 +23,7 @@ const useBulkDeleteDatetimes = (): Callback<Promise<ExecutionResult>> => {
 
 	const { cache } = useApolloClient();
 
-	const bulkDelete = useBulkDeleteEntities({ entityType: 'DATETIME', typeName: TypeName.Datetime });
+	const bulkDelete = useBulkDeleteEntities({ entityType: 'DATETIME', typeName: SINGULAR_ENTITY_NAME.DATETIME });
 
 	const deleteRelatedTickets = useDeleteRelatedTickets();
 
