@@ -2,7 +2,7 @@ import { saveVideo } from 'playwright-video';
 
 import { addNewDate, createNewEvent, DateEditor, EDTRGlider } from '@e2eUtils/admin/event-editor';
 import { EventRegistrar } from '@e2eUtils/public/reg-checkout';
-import { data } from '../../shared/data';
+import { data } from '../../../../../../shared/data';
 
 const namespace = 'eventDates.filters.status';
 

@@ -1,5 +1,5 @@
 import { addNewDate, createNewEvent, DateEditor } from '@e2eUtils/admin/event-editor';
-import { data } from '../../shared/data';
+import { data } from '../../../../../../shared/data';
 
 const namespace = 'eventEditor.dates.sortBy';
 

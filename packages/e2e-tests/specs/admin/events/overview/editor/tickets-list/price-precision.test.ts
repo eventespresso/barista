@@ -1,6 +1,6 @@
 import { createNewEvent, getTicketPrice, TicketEditor, TPCSafari } from '@e2eUtils/admin/event-editor';
 
-import { crazyTestCases } from './data';
+import { crazyTestCases } from '../admin/events/overview/editor/tickets-list/data';
 
 const namespace = 'event-tickets-price-craziness';
 

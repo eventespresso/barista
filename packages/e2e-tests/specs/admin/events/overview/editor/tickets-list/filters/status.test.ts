@@ -1,6 +1,6 @@
 import { addNewTicket, createNewEvent, TicketEditor, EDTRGlider } from '@e2eUtils/admin/event-editor';
 import { EventRegistrar } from '@e2eUtils/public/reg-checkout';
-import { data } from '../../shared/data';
+import { data } from '../../../../../../shared/data';
 
 const namespace = 'eventEditor.tickets.filters.status';
 

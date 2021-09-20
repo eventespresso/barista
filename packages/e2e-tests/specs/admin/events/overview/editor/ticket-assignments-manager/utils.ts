@@ -1,4 +1,4 @@
-import { data } from '../shared/data';
+import { data } from '../../../../../shared/data';
 import { addNewDate, addNewTicket } from '@e2eUtils/admin/event-editor';
 
 const datesListSelector = '#ee-entity-list-datetimes .ee-entity-list__card-view';

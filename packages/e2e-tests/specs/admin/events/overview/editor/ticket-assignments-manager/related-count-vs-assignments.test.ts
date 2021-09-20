@@ -2,7 +2,7 @@ import { saveVideo } from 'playwright-video';
 
 import { createNewEvent, EntityListParser, TAMRover, GetMapProps, ListView } from '@e2eUtils/admin/event-editor';
 import { clickLabel } from '@e2eUtils/common';
-import { EntityType } from '../../types';
+import { EntityType } from '../../../../../../types';
 
 import { addDatesAndTickets } from './utils';
 

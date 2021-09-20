@@ -4,7 +4,7 @@ import { add, getMonthName } from '@eventespresso/dates';
 
 import { createNewEvent, setListDisplayControl, TicketFields, TicketEditor } from '@e2eUtils/admin/event-editor';
 
-import { expectCardToContain } from '../../assertions';
+import { expectCardToContain } from '../../../../../../assertions';
 
 const namespace = 'event.tickets.edit';
 
