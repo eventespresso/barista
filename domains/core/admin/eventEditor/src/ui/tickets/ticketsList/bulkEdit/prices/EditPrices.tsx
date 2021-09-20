@@ -17,6 +17,7 @@ const EditPrices: React.FC<EditPricesBaseProps> = ({ onClose, isOpen }) => {
 			onClose={onClose}
 			closeOnOverlayClick={true}
 			title={__('Bulk edit ticket prices')}
+			showAlertOnClose={false}
 		>
 			{!editMode && <EditModeButtons setEditMode={setEditMode} />}
 			{editMode === 'together' && <EditTogether onClose={onClose} />}
