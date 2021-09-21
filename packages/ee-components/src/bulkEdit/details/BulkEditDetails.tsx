@@ -23,6 +23,7 @@ export const BulkEditDetails: React.FC<BulkEditDetailsProps> = ({ isOpen, onClos
 			isOpen={isOpen}
 			onClose={onClose}
 			closeOnOverlayClick={true}
+			showCancelButton={false}
 			title={title || __('Bulk edit details')}
 		>
 			<ErrorMessage message={message} />

@@ -41,7 +41,7 @@ const Container: React.FC = () => {
 	}, [close, resetData]);
 
 	return (
-		<Modal isOpen={isOpen} onClose={onClose} title={__('Bulk Add Tickets')}>
+		<Modal isOpen={isOpen} onClose={onClose} onCancel={null} title={__('Bulk Add Tickets')}>
 			<Tickets />
 			<Footer onSubmit={onSubmit} onClose={onClose} />
 		</Modal>
