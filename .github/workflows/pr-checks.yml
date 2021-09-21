@@ -117,3 +117,15 @@ jobs:
               with:
                   name: playwright-artifacts
                   path: artifacts
+
+            - name: Post error to Slack
+              if: ${{ failure() }}
+              uses: rtCamp/action-slack-notify@v2
+              env:
+                  SLACK_CHANNEL: ee-tests
+                  SLACK_COLOR: '#D80404'
+                  SLACK_ICON_EMOJI: ':coffee:'
+                  SLACK_TITLE: E2E tests failed
+                  SLACK_MESSAGE: 'E2E tests Failed :interrobang:'
+                  SLACK_USERNAME: barista
+                  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
