@@ -4,7 +4,7 @@ on:
         types: [created]
 jobs:
     rebase:
-        name: Rebase by ${{ github.event.comment.author_association }}
+        name: Rebase
         # Ensure it's run only by a member
         if: ${{ github.event.comment.author_association == 'MEMBER' && github.event.issue.pull_request && contains(github.event.comment.body, '/rebase') }}
         runs-on: ubuntu-latest
