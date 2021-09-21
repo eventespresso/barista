@@ -56,7 +56,7 @@ describe('REM', () => {
 
 		await clickButton('Next');
 
-		await page.selectOption('#existin-entity', {
+		await page.selectOption('#existing-entity', {
 			label: 'Free Ticket',
 		});
 
