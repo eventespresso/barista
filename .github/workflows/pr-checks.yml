@@ -126,6 +126,5 @@ jobs:
                   SLACK_COLOR: '#D80404'
                   SLACK_ICON_EMOJI: ':coffee:'
                   SLACK_TITLE: E2E tests failed
-                  SLACK_MESSAGE: 'E2E tests Failed :interrobang:'
                   SLACK_USERNAME: barista
                   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
