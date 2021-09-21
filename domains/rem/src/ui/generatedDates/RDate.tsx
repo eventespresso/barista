@@ -38,7 +38,7 @@ const RDate: React.FC = () => {
 		<Box display='flex' alignItems='center'>
 			<DatePicker onChange={onChange} value={date} disabled={limitReached} />
 			<Button
-				className={'ee-generated-date--add__event'}
+				className={'ee-generated-date__add-date-btn'}
 				icon={Insert}
 				onClick={onAddDate}
 				buttonText={__('Add Extra Event Date')}
