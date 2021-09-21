@@ -3,7 +3,7 @@ import { saveVideo } from 'playwright-video';
 import { createNewEvent, removeLastTicket } from '@e2eUtils/admin/event-editor';
 import { clickButton } from '@e2eUtils/common';
 
-import { isSubmitBtnDisabled } from '../../../../../../assertions';
+import { isSubmitBtnDisabled } from '../../assertions';
 
 beforeAll(async () => {
 	await saveVideo(page, 'artifacts/TAM.mp4');
