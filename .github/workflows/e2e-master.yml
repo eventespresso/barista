@@ -25,8 +25,6 @@ jobs:
         name: E2E Tests
         needs: [list-e2e-specs]
         runs-on: ubuntu-latest
-        # Run the job only if JS is affected
-        if: ${{ needs.what-is-hit.outputs.js == 'true' }}
         strategy:
             matrix: ${{ fromJSON(needs.list-e2e-specs.outputs.specs) }}
             fail-fast: false
