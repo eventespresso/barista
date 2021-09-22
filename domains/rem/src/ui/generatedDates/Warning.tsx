@@ -1,12 +1,9 @@
-import classNames from 'classnames';
-
 import { useFormState } from '../../data';
 
 import { ErrorMessage } from '@eventespresso/ui-components';
 import { getLimitsWarning, useIsCountCapped } from '../../utils';
 
 const Warning: React.FC = () => {
-	const wrapperClassName = classNames('rrule-generator-wrapper');
 	const isCountCapped = useIsCountCapped();
 
 	const { rRule } = useFormState();
@@ -17,7 +14,7 @@ const Warning: React.FC = () => {
 	const warning = getLimitsWarning(rRule);
 
 	return (
-		<div className={wrapperClassName}>
+		<div className='rrule-generator-wrapper'>
 			<ErrorMessage message={warning} />
 		</div>
 	);
