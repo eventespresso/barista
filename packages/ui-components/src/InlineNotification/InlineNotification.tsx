@@ -7,12 +7,12 @@ import type { InlineMessageProps } from './types';
 import './style.scss';
 
 export const InlineNotification: React.FC<InlineMessageProps> = ({ 
-	icon, 
-	id, 
-	message, 
-	type, 
-	variant, 
-	wrapperClassName 
+	icon,
+	id,
+	message,
+	type,
+	variant,
+	wrapperClassName,
 }) => {
 	const className = classNames(
 		'ee-inline-notification',
