@@ -12,9 +12,12 @@ export const InlineNotification: React.FC<InlineMessageProps> = ({ icon, id, mes
 		type && `ee-inline-notification--type-${type}`,
 		variant && `ee-inline-notification--variant-${variant}`
 	);
+	const wrapperClassName = classNames(
+		'ee-inline-notification__wrapper', 
+		type && `ee-inline-notification__wrapper-${type}`);
 
 	return (
-		<Collapsible show={Boolean(message?.length)}>
+		<Collapsible show={Boolean(message?.length)} className={wrapperClassName}>
 			<div aria-live='polite' className={className} id={id}>
 				{icon}
 				<p>{message}</p>
