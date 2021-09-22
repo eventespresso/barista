@@ -1,0 +1,72 @@
+name: E2E tests on master
+
+on:
+    push:
+        branches: [master]
+env:
+    PLAYWRIGHT_BROWSERS_PATH: 0 # See https://playwright.dev/docs/ci/#caching-browsers
+jobs:
+    list-e2e-specs:
+        runs-on: ubuntu-latest
+        outputs:
+            specs: ${{ steps.list.outputs.files }}
+        steps:
+            - uses: actions/checkout@v2
+            # This step outputs a JSON object of e2e test paths - {"path": []}, which is passed to the e2e matrix
+            - id: list
+              run: echo "::set-output name=files::{\"path\":$(ls -d packages/e2e-tests/specs/* | jq -R -s -c 'split("\n")[:-1]')}"
+    e2e:
+        env:
+            # If you want to run e2e in parallel to build:
+            # - Set this to false
+            # - Remove 'build' from needs:
+            # - Comment out if:
+            run_after_build: 'true'
+        name: E2E Tests
+        needs: [list-e2e-specs]
+        runs-on: ubuntu-latest
+        # Run the job only if JS is affected
+        if: ${{ needs.what-is-hit.outputs.js == 'true' }}
+        strategy:
+            matrix: ${{ fromJSON(needs.list-e2e-specs.outputs.specs) }}
+            fail-fast: false
+        steps:
+            - name: Checkout and yarn
+              uses: eventespresso/actions/packages/checkout-and-yarn@main
+
+            - name: Build barista assets
+              run: yarn && yarn build
+
+            # Since we map the barista build directory to core/assets, vendor scripts are not present
+            # we need to copy them manually
+            - name: Copy vendor assets
+              run: |
+                  mkdir -p build/vendor/
+                  cp node_modules/ramda/dist/* build/vendor/
+
+            - name: Install WordPress
+              run: yarn wp-env start
+
+            - name: Setup Playwright
+              uses: microsoft/playwright-github-action@v1
+
+            - name: Run E2E tests
+              run: yarn test:e2e ${{ matrix.path }}
+
+            - name: Archive debug artifacts (screenshots, HTML snapshots)
+              uses: actions/upload-artifact@v2
+              if: always()
+              with:
+                  name: playwright-artifacts
+                  path: artifacts
+
+            - name: Post error to Slack
+              if: ${{ failure() }}
+              uses: rtCamp/action-slack-notify@v2
+              env:
+                  SLACK_CHANNEL: ee-tests
+                  SLACK_COLOR: '#D80404'
+                  SLACK_ICON_EMOJI: ':coffee:'
+                  SLACK_TITLE: E2E tests failed
+                  SLACK_USERNAME: barista
+                  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
