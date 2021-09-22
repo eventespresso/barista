@@ -2,7 +2,7 @@ name: E2E tests on master
 
 on:
     push:
-        branches: [master, move-e2e-pr-check]
+        branches: [master]
 env:
     PLAYWRIGHT_BROWSERS_PATH: 0 # See https://playwright.dev/docs/ci/#caching-browsers
 jobs:
@@ -16,12 +16,6 @@ jobs:
             - id: list
               run: echo "::set-output name=files::{\"path\":$(ls -d packages/e2e-tests/specs/* | jq -R -s -c 'split("\n")[:-1]')}"
     e2e:
-        env:
-            # If you want to run e2e in parallel to build:
-            # - Set this to false
-            # - Remove 'build' from needs:
-            # - Comment out if:
-            run_after_build: 'true'
         name: E2E Tests
         needs: [list-e2e-specs]
         runs-on: ubuntu-latest
