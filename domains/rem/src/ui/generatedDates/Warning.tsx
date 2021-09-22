@@ -16,7 +16,7 @@ const Warning: React.FC = () => {
 	}
 	const warning = getLimitsWarning(rRule);
 
-	return <div className={wrapperClassName}><ErrorMessage message={warning} /></div>;
+	return (<div className={wrapperClassName}><ErrorMessage message={warning} /></div>);
 };
 
 export default Warning;
