@@ -13,11 +13,7 @@ const Warning: React.FC = () => {
 	}
 	const warning = getLimitsWarning(rRule);
 
-	return (
-		<div className='rem-max-event-dates-warning'>
-			<ErrorMessage message={warning} />
-		</div>
-	);
+	return <ErrorMessage wrapperClassName='rrule-generator-wrapper' message={warning} />;
 };
 
 export default Warning;

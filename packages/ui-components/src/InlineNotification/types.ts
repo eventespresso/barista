@@ -23,4 +23,5 @@ export interface InlineMessageProps {
 	 * The modifier for different styles
 	 */
 	variant?: 'subtle' | 'solid';
+	wrapperClassName?: string;
 }

@@ -11,6 +11,13 @@
 		margin: 0 auto;
 		max-width: 900px;
 
+		/* will only target the max dates warning notification */
+		.ee-inline-notification {
+			margin-block-start: var(--ee-margin-default);
+			margin-block-end: var(--ee-margin-tiny);
+			margin-inline-start: auto;
+		}
+
 		.rrule-generator {
 			flex: 0 1 75%;
 		}
