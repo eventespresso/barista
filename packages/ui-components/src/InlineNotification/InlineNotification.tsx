@@ -6,7 +6,7 @@ import type { InlineMessageProps } from './types';
 
 import './style.scss';
 
-export const InlineNotification: React.FC<InlineMessageProps> = ({ 
+export const InlineNotification: React.FC<InlineMessageProps> = ({
 	icon,
 	id,
 	message,
