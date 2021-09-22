@@ -13,8 +13,9 @@ export const InlineNotification: React.FC<InlineMessageProps> = ({ icon, id, mes
 		variant && `ee-inline-notification--variant-${variant}`
 	);
 	const wrapperClassName = classNames(
-		'ee-inline-notification__wrapper', 
-		type && `ee-inline-notification__wrapper-${type}`);
+		'ee-inline-notification__wrapper',
+		type && `ee-inline-notification__wrapper-${type}`
+	);
 
 	return (
 		<Collapsible show={Boolean(message?.length)} className={wrapperClassName}>
