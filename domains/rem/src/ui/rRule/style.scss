@@ -10,10 +10,6 @@
 		display: flex;
 		margin: 0 auto;
 		max-width: 900px;
-		margin-block-start: var(--ee-margin-smaller);
-    margin-block-end: var(--ee-margin-big);
-    margin-inline-start: auto;
-    justify-content: flex-end;
 
 		.rrule-generator {
 			flex: 0 1 75%;
