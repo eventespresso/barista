@@ -2,7 +2,7 @@ name: E2E tests on master
 
 on:
     push:
-        branches: [master]
+        branches: [master, move-e2e-pr-check]
 env:
     PLAYWRIGHT_BROWSERS_PATH: 0 # See https://playwright.dev/docs/ci/#caching-browsers
 jobs:
