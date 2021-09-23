@@ -51,8 +51,6 @@ export { default as useBulkEditDatetimes } from './useBulkEditDatetimes';
 
 export { default as useBulkDeleteDatetimes } from './useBulkDeleteDatetimes';
 
-export { default as useUpdateRelatedTickets } from './useUpdateRelatedTickets';
-
 export { default as useReorderDatetimes } from './useReorderDatetimes';
 
 export * from './types';
