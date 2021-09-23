@@ -2,8 +2,7 @@ import { useCallback } from 'react';
 
 import {
 	useDatetimeMutator,
-	useTicketQuantityForCapacity,
-	useUpdateRelatedTickets,
+	useUpdateTicketQtyByCapacity,
 	useDatetimeItem,
 	useDatetimes,
 } from '@eventespresso/edtr-services';
@@ -17,8 +16,7 @@ const useOnSubmit = (entityId: EntityId, onClose: VoidFunction): OnSubmit => {
 	const { createEntity, updateEntity } = useDatetimeMutator();
 	const datetime = useDatetimeItem({ id: entityId });
 
-	const updateRelatedTickets = useUpdateRelatedTickets();
-	const ticketQuantityForCapacity = useTicketQuantityForCapacity();
+	const { createBulkQtyUpdateInput, doQtyBulkUpdate } = useUpdateTicketQtyByCapacity();
 	const dates = useDatetimes();
 
 	const onSubmit = useCallback(
@@ -51,20 +49,11 @@ const useOnSubmit = (entityId: EntityId, onClose: VoidFunction): OnSubmit => {
 			}
 			// if true, we need to update the quantity of all the related tickets
 			if (capacityChanged && id) {
-				const inputGenerator = ticketQuantityForCapacity(fields?.capacity);
-				updateRelatedTickets(id, inputGenerator, fields?.tickets);
+				const input = createBulkQtyUpdateInput(fields, fields?.tickets);
+				await doQtyBulkUpdate(input);
 			}
 		},
-		[
-			createEntity,
-			dates,
-			datetime?.capacity,
-			entityId,
-			onClose,
-			ticketQuantityForCapacity,
-			updateEntity,
-			updateRelatedTickets,
-		]
+		[createBulkQtyUpdateInput, createEntity, dates, datetime, doQtyBulkUpdate, entityId, onClose, updateEntity]
 	);
 
 	return onSubmit;

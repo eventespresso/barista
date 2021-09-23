@@ -4,30 +4,29 @@ import { __, sprintf } from '@eventespresso/i18n';
 
 import { parseInfinity } from '@eventespresso/utils';
 import { InlineEditInfinity, InlineEditProps } from '@eventespresso/ui-components';
-import {
-	useDatetimeMutator,
-	useUpdateRelatedTickets,
-	useTicketQuantityForCapacity,
-} from '@eventespresso/edtr-services';
+import { useDatetimeMutator, useUpdateTicketQtyByCapacity } from '@eventespresso/edtr-services';
 import type { DateItemProps } from '../types';
 
 const DateCapacity: React.FC<DateItemProps> = ({ entity: datetime }) => {
 	const { updateEntity } = useDatetimeMutator(datetime.id);
 
-	const updateRelatedTickets = useUpdateRelatedTickets();
-	const ticketQuantityForCapacity = useTicketQuantityForCapacity();
+	const { createBulkQtyUpdateInput, doQtyBulkUpdate } = useUpdateTicketQtyByCapacity();
 
 	const onChange: InlineEditProps['onChange'] = useCallback(
-		(cap) => {
+		async (cap) => {
 			const capacity = parseInfinity(cap);
 			if (capacity !== datetime.capacity) {
-				updateEntity({ capacity });
+				console.log('datetime', datetime);
+				await updateEntity({ capacity });
 
-				const inputGenerator = ticketQuantityForCapacity(capacity);
-				updateRelatedTickets(datetime.id, inputGenerator);
+				// pass the new capacity to create input
+				const input = createBulkQtyUpdateInput({ ...datetime, capacity });
+				console.log('input', input);
+
+				await doQtyBulkUpdate(input);
 			}
 		},
-		[datetime.capacity, datetime.id, updateEntity, ticketQuantityForCapacity, updateRelatedTickets]
+		[datetime, updateEntity, createBulkQtyUpdateInput, doQtyBulkUpdate]
 	);
 
 	/* translators:  click to edit capacity<linebreak>(registration limit)…*/
