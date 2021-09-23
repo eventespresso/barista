@@ -34,7 +34,6 @@ export const useUpdateTicketQtyByCapacity = (): UpdateTicketQtyByCapacity => {
 			const ticketsToUpdate = ticketIdsToUpdate?.length
 				? entitiesWithGuIdInArray(tickets, ticketIdsToUpdate)
 				: getRelatedTickets({ entity: 'datetimes', entityId: datetime.id });
-			console.log('ticketsToUpdate', ticketsToUpdate);
 
 			const capacity = parseInfinity(datetime.capacity, Infinity);
 
@@ -43,8 +42,6 @@ export const useUpdateTicketQtyByCapacity = (): UpdateTicketQtyByCapacity => {
 			const uniqueInputs = ticketsToUpdate
 				.map<UpdateTicketInput>(({ id, quantity }) => {
 					const nonNegativeTicketQuantity = parseInfinity(quantity, Infinity);
-
-					console.log({ capacity, nonNegativeTicketQuantity });
 
 					// if capacity is infinite or it's more than ticket quantity
 					if (isInfinite(capacity) || capacity >= nonNegativeTicketQuantity) {
@@ -56,7 +53,6 @@ export const useUpdateTicketQtyByCapacity = (): UpdateTicketQtyByCapacity => {
 					return { id, quantity: newQuantity };
 				})
 				.filter(Boolean);
-			console.log('uniqueInputs', uniqueInputs);
 
 			return uniqueInputs;
 		},
