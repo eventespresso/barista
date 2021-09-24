@@ -2,7 +2,7 @@ name: E2E tests
 
 on:
     push:
-        branches: [master]
+        branches: [master, refactor-cap-qty-rules]
     # Allow to run E2E on demand
     workflow_dispatch:
         inputs:
