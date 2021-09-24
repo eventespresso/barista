@@ -3,13 +3,13 @@ import { useCallback } from 'react';
 import { useMutateTicket } from '@eventespresso/tpc';
 import { wait } from '@eventespresso/utils';
 
-import useCapQuantity from '@edtrUI/tickets/hooks/useCapQuantity';
+import { useCappedQuantity } from '@eventespresso/edtr-services';
 import { OnSubmit } from './types';
 
 const useOnSubmit = (onClose: VoidFunction): OnSubmit => {
 	const mutateTicket = useMutateTicket();
 
-	const getCappedQuantity = useCapQuantity();
+	const getCappedQuantity = useCappedQuantity();
 	const onSubmit = useCallback(
 		async (fields) => {
 			// wait the next event cycle to fire up isLoading for submit button
@@ -17,7 +17,7 @@ const useOnSubmit = (onClose: VoidFunction): OnSubmit => {
 			// close the modal
 			onClose();
 			//  get the capped quantity for ticket based on the related date(s)
-			const quantity = getCappedQuantity(fields.datetimes, fields.quantity);
+			const quantity = getCappedQuantity({ quantity: fields.quantity, relatedDateIds: fields.datetimes });
 
 			const input = {
 				...fields,
