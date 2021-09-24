@@ -12,7 +12,7 @@ const DateCapacity: React.FC<DateItemProps> = ({ entity: datetime }) => {
 
 	const { createBulkQtyUpdateInput, doQtyBulkUpdate } = useUpdateTicketQtyByCapacity();
 
-	const onChange: InlineEditProps['onChange'] = useCallback(
+	const onChange = useCallback<InlineEditProps['onChange']>(
 		async (cap) => {
 			const capacity = parseInfinity(cap);
 			if (capacity !== datetime.capacity) {

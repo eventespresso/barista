@@ -2,8 +2,12 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { parseISO } from 'date-fns';
 
 import { useProgress } from '@eventespresso/hooks';
-import { useLazyDatetime } from '@eventespresso/edtr-services';
+import { useLazyDatetime, useDatetimes, useCappedQuantity } from '@eventespresso/edtr-services';
 import type { EntityId } from '@eventespresso/data';
+import { minDateCapacity } from '@eventespresso/predicates';
+import { isInfinite, parseInfinity } from '@eventespresso/utils';
+import { useSystemNotifications } from '@eventespresso/toaster';
+import { __ } from '@eventespresso/i18n';
 
 import { getSharedTickets, getNonSharedTickets } from '../../utils';
 import useMutateTickets from '../../data/useMutateTickets';
@@ -28,13 +32,32 @@ const useSubmitForm = (tickets: FormState['tickets'], datetimeIds: Array<EntityI
 	const mutateTickets = useMutateTickets({ incrementProgress: incrementProgress('tickets') });
 	const getDatetime = useLazyDatetime();
 
+	const allDates = useDatetimes();
+	const toaster = useSystemNotifications();
+	const getCappedQuantity = useCappedQuantity();
+
 	useEffect(() => {
 		totalProgress && console.log('totalProgress', `${totalProgress}%`);
 	}, [totalProgress]);
 
 	return useCallback(async () => {
+		const minimumCapacity = minDateCapacity(allDates)(datetimeIds);
+
+		let showNotice = false;
+
 		// add datetime relation for all the shared tickets
-		const updatedSharedTickets = sharedTickets.map((ticket) => ({ ...ticket, datetimes: datetimeIds }));
+		const updatedSharedTickets = sharedTickets.map((ticket) => {
+			let quantity = parseInfinity(ticket.quantity);
+			// if the date capacity is no infinite, we may need to restrict the ticket quantity.
+			if (!isInfinite(minimumCapacity)) {
+				quantity = getCappedQuantity({ quantity, relatedDateIds: datetimeIds });
+				// if the quantity has been adjusted
+				if (!showNotice && quantity !== parseInfinity(ticket.quantity)) {
+					showNotice = true;
+				}
+			}
+			return { ...ticket, datetimes: datetimeIds, quantity };
+		});
 
 		// create shared tickets
 		await mutateTickets(updatedSharedTickets, true);
@@ -46,20 +69,46 @@ const useSubmitForm = (tickets: FormState['tickets'], datetimeIds: Array<EntityI
 				const startDate = parseISO(datetime?.startDate);
 				const endDate = parseISO(datetime?.endDate);
 
-				const updatedNonSharedTickets = nonSharedTickets.map((ticket) => ({
-					...ticket,
-					datetimes: [datetimeId],
-				}));
+				const updatedNonSharedTickets = nonSharedTickets.map((ticket) => {
+					let quantity = parseInfinity(ticket.quantity);
+					// if the date capacity is no infinite, we may need to restrict the ticket quantity.
+					if (!isInfinite(datetime.capacity)) {
+						quantity = getCappedQuantity({ quantity, relatedDateIds: [datetimeId] });
+						// if the quantity has been adjusted
+						if (!showNotice && quantity !== parseInfinity(ticket.quantity)) {
+							showNotice = true;
+						}
+					}
+					return { ...ticket, quantity, datetimes: [datetimeId] };
+				});
 
 				await mutateTickets(updatedNonSharedTickets, false, {
 					startDate,
 					endDate,
 				});
 
+				if (showNotice) {
+					toaster.info({
+						message: __(
+							'Ticket quantity has been adjusted because it cannot be more than the related event date capacity.'
+						),
+					});
+				}
+
 				updateProgress('datetimes');
 			})
 		);
-	}, [datetimeIds, getDatetime, mutateTickets, nonSharedTickets, sharedTickets, updateProgress]);
+	}, [
+		allDates,
+		datetimeIds,
+		getCappedQuantity,
+		getDatetime,
+		mutateTickets,
+		nonSharedTickets,
+		sharedTickets,
+		toaster,
+		updateProgress,
+	]);
 };
 
 export default useSubmitForm;
