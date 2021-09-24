@@ -9,3 +9,4 @@ export { default as useTicketItem } from './useTicketItem';
 export { default as useTicketPrices } from './useTicketPrices';
 export { default as useTicketQueryOptions } from './useTicketQueryOptions';
 export { default as useTickets } from './useTickets';
+export * from './useCappedQuantity';

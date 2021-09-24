@@ -1,4 +1,4 @@
-import { groupBy, pluck, prop as propVal } from 'ramda';
+import * as R from 'ramda';
 
 import { __ } from '@eventespresso/i18n';
 import type { OptionsType } from '@eventespresso/adapters';
@@ -36,7 +36,7 @@ export const objectToSelectOptions = (object: AnyObject, prependEmpty?: boolean)
  */
 export const getOptionValues = (allOptions: OptionsType): Array<string> => {
 	return allOptions
-		.map(({ options, value }) => (options ? pluck('value', options) : [value]))
+		.map(({ options, value }) => (options ? R.pluck('value', options) : [value]))
 		.flat()
 		.filter(Boolean);
 };
@@ -71,10 +71,43 @@ export const getOptionValues = (allOptions: OptionsType): Array<string> => {
  *
  * The primary purpose of this abstraction is to preserve types which R.groupBy messes up
  */
-
 export const groupByProp = <T extends Record<string, any>, K extends keyof T>(
 	prop: K,
 	objList: Array<T>
 ): Record<T[K], Array<T>> => {
-	return groupBy(propVal(prop as string), objList) as Record<T[K], Array<T>>;
+	return R.groupBy(R.prop(prop as string), objList) as Record<T[K], Array<T>>;
 };
+
+/**
+ * Given a prop name and the list, it creates an object
+ * with `id` as its key and the value of the prop in the object as the value
+ *
+ * For example this list
+ * [
+ * 	{ id: 'abc', capacity: 50 },
+ * 	{ id: 'def', capacity: 60 },
+ * 	{ id: 'ghi', capacity: 50 },
+ * 	{ id: 'klm', capacity: 70 },
+ * 	{ id: 'nop', capacity: 60 },
+ * 	{ id: 'qrs', capacity: 80 },
+ * 	{ id: 'tuv', capacity: 60 },
+ * ]
+ * becomes
+ * {
+ *     abc: 50,
+ * 	   def: 60,
+ *     ghi: 50,
+ *     klm: 70,
+ * 	   nop: 60,
+ *     qrs: 80,
+ * 	   tuv: 60,
+ * }
+ *
+ * The primary purpose of this abstraction is to preserve types which R.groupBy messes up
+ */
+export function idToPropMap<I extends Record<'id', string>, P extends keyof I = keyof I>(
+	prop: P,
+	list: Array<I>
+): AnyObject<I[P]> {
+	return list.reduce((acc, item) => R.assocPath([item.id], item[prop], acc), {});
+}

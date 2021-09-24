@@ -6,8 +6,8 @@ import type { AnyObject } from '@eventespresso/utils';
 import type { TAMPossibleRelation, TAMRelationEntity, TAMRelationalData, TAMRelationalEntity } from '../types';
 import type { Datetime, Ticket } from '@eventespresso/edtr-services';
 import type { OptionsType } from '@eventespresso/adapters';
-import { sortDates } from '@eventespresso/predicates';
-import { parseInfinity, isInfinite } from '@eventespresso/utils';
+import { sortDates, minDateCapacity } from '@eventespresso/predicates';
+import { parseInfinity, isInfinite, idToPropMap } from '@eventespresso/utils';
 import { getMonthName } from '@eventespresso/dates';
 
 export type EntitiesToUpdate = Array<[EntityId, TAMPossibleRelation]>;
@@ -53,16 +53,11 @@ export const ticketsWithNewQuantity = ({
 	existingData,
 	ticketsToUpdate,
 }: TicketsWithQuantityArgs): AnyObject<number> => {
-	// create a map of date ids to capacities
-	const dateIdToCapacityMap: AnyObject<number> = allDates.reduce(
-		(acc, date) => R.assocPath([date.id], date.capacity, acc),
-		{}
-	);
 	// create a map of ticket ids to quantities
-	const ticketIdToQuantityMap: AnyObject<number> = allTickets.reduce(
-		(acc, ticket) => R.assocPath([ticket.id], ticket.quantity, acc),
-		{}
-	);
+	const ticketIdToQuantityMap = idToPropMap('quantity', allTickets);
+
+	const getMinDateCapacity = minDateCapacity(allDates);
+
 	/**
 	 * This becomes an object with key as ticket id and value as new ticket quantity
 	 * {
@@ -82,15 +77,8 @@ export const ticketsWithNewQuantity = ({
 			(dateId) => !existingRelatedDateIds.includes(dateId)
 		);
 
-		// lets convert the array of ids to array of corresponding capacities
-		const newDateCapacities = newOnlyRelatedDateIds
-			// get capacity from the above map and parse it as infinity
-			.map((dateId) => parseInfinity(dateIdToCapacityMap?.[dateId], Infinity))
-			// we don't need to update ticket quantity if date capacity is infinite
-			.filter((capacity) => !isInfinite(capacity));
-
 		// we need to set the ticket quantity to the minimum of all the capacities
-		const minimumCapacity = Math.min(...newDateCapacities); // it will be Infinity for empty array
+		const minimumCapacity = getMinDateCapacity(newOnlyRelatedDateIds);
 
 		// Make sure that the non negative ticket quantity value is compared with
 		// a non negative datetime capacity value in Math.min()

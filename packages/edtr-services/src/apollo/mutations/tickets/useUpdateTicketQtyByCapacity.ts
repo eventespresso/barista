@@ -3,6 +3,8 @@ import { useCallback, useMemo } from 'react';
 import { parseInfinity, isInfinite } from '@eventespresso/utils';
 import { entitiesWithGuIdInArray, uniqTicketsByMinQty, ticketQuantityFromCapacity } from '@eventespresso/predicates';
 import { EntityId } from '@eventespresso/data';
+import { useSystemNotifications } from '@eventespresso/toaster';
+import { __ } from '@eventespresso/i18n';
 
 import { useTickets, useRelatedTickets } from '../../queries';
 import useBulkEditTickets from './useBulkEditTickets';
@@ -14,18 +16,22 @@ type UpdateTicketQtyByCapacity = {
 	/**
 	 * Given a datetime and/or `ticketIdsToUpdate`, it generates bulk edit input with updated ticket quantities
 	 */
-	createBulkQtyUpdateInput: (datetime: Datetime, ticketIdsToUpdate?: Array<EntityId>) => Array<UpdateTicketInput>;
+	createBulkQtyUpdateInput: (
+		datetime: Pick<Datetime, 'id' | 'capacity'>,
+		ticketIdsToUpdate?: Array<EntityId>
+	) => Array<UpdateTicketInput>;
 	/**
 	 * Given unique inputs of a bulk edit mutation, it performes the actual mutation
 	 * removing the duplicate entries in the input by retaining the tickets with minimum quantity
 	 */
-	doQtyBulkUpdate: (uniqInputs: Array<UpdateTicketInput>) => Promise<void>;
+	doQtyBulkUpdate: (uniqInputs: Array<UpdateTicketInput>, showNotice?: boolean) => Promise<void>;
 };
 
 export const useUpdateTicketQtyByCapacity = (): UpdateTicketQtyByCapacity => {
 	const tickets = useTickets();
 	const getRelatedTickets = useRelatedTickets();
 	const { updateEntities: bulkEditTickets } = useBulkEditTickets();
+	const toaster = useSystemNotifications();
 
 	const createBulkQtyUpdateInput = useCallback<UpdateTicketQtyByCapacity['createBulkQtyUpdateInput']>(
 		(datetime, ticketIdsToUpdate = []) => {
@@ -60,15 +66,23 @@ export const useUpdateTicketQtyByCapacity = (): UpdateTicketQtyByCapacity => {
 	);
 
 	const doQtyBulkUpdate = useCallback<UpdateTicketQtyByCapacity['doQtyBulkUpdate']>(
-		async (uniqInputs) => {
+		async (uniqInputs, showNotice = true) => {
 			if (uniqInputs.length) {
 				// remove duplicate entries, if any
 				const uniqueInputs = uniqTicketsByMinQty(uniqInputs);
 				// perform the bulk update
 				await bulkEditTickets({ uniqueInputs });
+
+				if (showNotice) {
+					toaster.info({
+						message: __(
+							'Ticket quantity has been adjusted because it cannot be more than the related event date capacity.'
+						),
+					});
+				}
 			}
 		},
-		[bulkEditTickets]
+		[bulkEditTickets, toaster]
 	);
 
 	return useMemo(() => ({ createBulkQtyUpdateInput, doQtyBulkUpdate }), [createBulkQtyUpdateInput, doQtyBulkUpdate]);
