@@ -38,8 +38,6 @@ const useSubmitForm = (onClose: VoidFunction): Callback => {
 					return [...input, ...newInput];
 				}, []);
 
-				console.log({ uniqInput });
-
 				await doQtyBulkUpdate(uniqInput);
 			}
 		},
