@@ -1,4 +1,4 @@
-name: E2E tests on master
+name: E2E tests
 
 on:
     push:
@@ -16,18 +16,21 @@ jobs:
     list-e2e-specs:
         runs-on: ubuntu-latest
         outputs:
-            specs: ${{ steps.list.outputs.files }}
+            specs: ${{ (github.event.inputs.path && steps.input.outputs.path) || steps.list.outputs.files }}
         steps:
             - uses: actions/checkout@v2
             # This step outputs a JSON object of e2e test paths - {"path": []}, which is passed to the e2e matrix
             - id: list
               run: echo "::set-output name=files::{\"path\":$(ls -d packages/e2e-tests/specs/* | jq -R -s -c 'split("\n")[:-1]')}"
+
+            - id: input
+              run: echo "::set-output name=path::{\"path\":[\"${{ github.event.inputs.path }}\"]}"
     e2e:
         name: E2E Tests
         needs: [list-e2e-specs]
         runs-on: ubuntu-latest
         strategy:
-            matrix: ${{ (github.event.inputs.path && [github.event.inputs.type]) || fromJSON(needs.list-e2e-specs.outputs.specs) }}
+            matrix: ${{ fromJSON(needs.list-e2e-specs.outputs.specs) }}
             fail-fast: false
         steps:
             - name: Checkout and yarn
