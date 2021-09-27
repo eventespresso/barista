@@ -45,10 +45,9 @@ const useSubmitForm = (tickets: FormState['tickets'], datetimeIds: Array<EntityI
 
 		let showNotice = false;
 
-		// add datetime relation for all the shared tickets
 		const updatedSharedTickets = sharedTickets.map((ticket) => {
 			let quantity = parseInfinity(ticket.quantity);
-			// if the date capacity is no infinite, we may need to restrict the ticket quantity.
+			// if the date capacity is not infinite, we may need to restrict the ticket quantity.
 			if (!isInfinite(minimumCapacity)) {
 				quantity = getCappedQuantity({ quantity, relatedDateIds: datetimeIds });
 				// if the quantity has been adjusted
@@ -56,6 +55,7 @@ const useSubmitForm = (tickets: FormState['tickets'], datetimeIds: Array<EntityI
 					showNotice = true;
 				}
 			}
+			// add datetimes and quantity to each ticket
 			return { ...ticket, datetimes: datetimeIds, quantity };
 		});
 
@@ -71,7 +71,7 @@ const useSubmitForm = (tickets: FormState['tickets'], datetimeIds: Array<EntityI
 
 				const updatedNonSharedTickets = nonSharedTickets.map((ticket) => {
 					let quantity = parseInfinity(ticket.quantity);
-					// if the date capacity is no infinite, we may need to restrict the ticket quantity.
+					// if the date capacity is not infinite, we may need to restrict the ticket quantity.
 					if (!isInfinite(datetime.capacity)) {
 						quantity = getCappedQuantity({ quantity, relatedDateIds: [datetimeId] });
 						// if the quantity has been adjusted
@@ -87,17 +87,17 @@ const useSubmitForm = (tickets: FormState['tickets'], datetimeIds: Array<EntityI
 					endDate,
 				});
 
-				if (showNotice) {
-					toaster.info({
-						message: __(
-							'Ticket quantity has been adjusted because it cannot be more than the related event date capacity.'
-						),
-					});
-				}
-
 				updateProgress('datetimes');
 			})
 		);
+
+		if (showNotice) {
+			toaster.info({
+				message: __(
+					'Ticket quantity has been adjusted because it cannot be more than the related event date capacity.'
+				),
+			});
+		}
 	}, [
 		allDates,
 		datetimeIds,

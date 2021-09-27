@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import * as R from 'ramda';
 
 import { EntityId } from '@eventespresso/data';
 import { useRelations } from '@eventespresso/services';
@@ -6,7 +7,12 @@ import { minDateCapacity, ticketQuantityFromCapacity } from '@eventespresso/pred
 
 import { useDatetimes } from '../datetimes';
 
-type GetCappedQuantity = (args: { quantity: number; relatedDateIds?: Array<EntityId>; ticketId?: EntityId }) => number;
+type GetCappedQuantity = (args: {
+	capacity?: number;
+	quantity: number;
+	relatedDateIds?: Array<EntityId>;
+	ticketId?: EntityId;
+}) => number;
 
 /**
  * Returns a callback to get the quantity cap for a ticket
@@ -19,7 +25,7 @@ export const useCappedQuantity = () => {
 
 	return useCallback<GetCappedQuantity>(
 		// at least one of `relatedDateIds` and `ticketId` must be passed
-		({ quantity, ticketId, relatedDateIds = [] }) => {
+		({ capacity, quantity, ticketId, relatedDateIds = [] }) => {
 			const dateIdsToUse = relatedDateIds?.length
 				? relatedDateIds
 				: getRelations({
@@ -27,7 +33,7 @@ export const useCappedQuantity = () => {
 						entityId: ticketId,
 						relation: 'datetimes',
 				  });
-			const minimumCapacity = minDateCapacity(allDates)(dateIdsToUse);
+			const minimumCapacity = !R.isNil(capacity) ? capacity : minDateCapacity(allDates)(dateIdsToUse);
 
 			return ticketQuantityFromCapacity(minimumCapacity)(quantity);
 		},

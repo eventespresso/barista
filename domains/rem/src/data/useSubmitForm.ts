@@ -1,10 +1,13 @@
 import { useCallback, useEffect, useMemo } from 'react';
 
 import { copyDatetimeFields, isDatetimeInputField, getHighestOrder } from '@eventespresso/predicates';
-import { useDatetimeMutator, useDatetimes } from '@eventespresso/edtr-services';
+import { useDatetimeMutator, useDatetimes, useCappedQuantity } from '@eventespresso/edtr-services';
 import { useSiteDateToUtcISO } from '@eventespresso/services';
 import { setTimeFromDate } from '@eventespresso/dates';
 import { useProgress } from '@eventespresso/hooks';
+import { isInfinite, parseInfinity } from '@eventespresso/utils';
+import { useSystemNotifications } from '@eventespresso/toaster';
+import { __ } from '@eventespresso/i18n';
 
 import { getSharedTickets, getNonSharedTickets, computeDatetimeEndDate } from '../utils';
 import type { GeneratedDate } from '../ui/generatedDates';
@@ -38,6 +41,8 @@ const useSubmitForm = (formState: FormState, generatedDates: Array<GeneratedDate
 
 	const mutateTickets = useMutateTickets({ incrementProgress: incrementProgress('tickets') });
 	const saveRecurrence = useSaveRecurrence();
+	const getCappedQuantity = useCappedQuantity();
+	const toaster = useSystemNotifications();
 
 	useEffect(() => {
 		totalProgress && console.log('totalProgress', `${totalProgress}%`);
@@ -46,11 +51,26 @@ const useSubmitForm = (formState: FormState, generatedDates: Array<GeneratedDate
 	return useCallback(async () => {
 		const recurrence = await saveRecurrence(formState);
 
-		// create shared tickets and collect their ids
-		const sharedTicketIds = await mutateTickets(sharedTickets, true);
-
 		// prepare common date mutation input
 		const normalizedDateInput = copyDatetimeFields(dateDetails, isDatetimeInputField);
+
+		let showNotice = false;
+
+		const updatedSharedTickets = sharedTickets.map((ticket) => {
+			let quantity = parseInfinity(ticket.quantity);
+			// if the date capacity is not infinite, we may need to restrict the ticket quantity.
+			if (!isInfinite(normalizedDateInput.capacity)) {
+				quantity = getCappedQuantity({ quantity, capacity: normalizedDateInput.capacity });
+				// if the quantity has been adjusted
+				if (!showNotice && quantity !== parseInfinity(ticket.quantity)) {
+					showNotice = true;
+				}
+			}
+			return { ...ticket, quantity };
+		});
+
+		// create shared tickets and collect their ids
+		const sharedTicketIds = await mutateTickets(updatedSharedTickets, true);
 
 		const { duration, unit, startTime } = dateDetails;
 
@@ -64,8 +84,21 @@ const useSubmitForm = (formState: FormState, generatedDates: Array<GeneratedDate
 				const start = setStartTime(date);
 				const end = computeDatetimeEndDate(start, unit, duration);
 
+				const updatedNonSharedTickets = nonSharedTickets.map((ticket) => {
+					let quantity = parseInfinity(ticket.quantity);
+					// if the date capacity is not infinite, we may need to restrict the ticket quantity.
+					if (!isInfinite(normalizedDateInput.capacity)) {
+						quantity = getCappedQuantity({ quantity, capacity: normalizedDateInput.capacity });
+						// if the quantity has been adjusted
+						if (!showNotice && quantity !== parseInfinity(ticket.quantity)) {
+							showNotice = true;
+						}
+					}
+					return { ...ticket, quantity };
+				});
+
 				// create tickets for the date and get the related ids
-				const relatedTicketIds = await mutateTickets(nonSharedTickets, false, {
+				const relatedTicketIds = await mutateTickets(updatedNonSharedTickets, false, {
 					startDate: start,
 					endDate: end,
 				});
@@ -82,10 +115,20 @@ const useSubmitForm = (formState: FormState, generatedDates: Array<GeneratedDate
 
 				const result = await createDatetime(input);
 				const datetimeId = result?.data?.createEspressoDatetime?.espressoDatetime?.id;
+
 				updateProgress('datetimes');
+
 				return datetimeId;
 			})
 		);
+
+		if (showNotice) {
+			toaster.info({
+				message: __(
+					'Ticket quantity has been adjusted because it cannot be more than the related event date capacity.'
+				),
+			});
+		}
 
 		onUpdateRecurrence({ recurrence, datetimeIds });
 	}, [
@@ -94,12 +137,14 @@ const useSubmitForm = (formState: FormState, generatedDates: Array<GeneratedDate
 		dates,
 		formState,
 		generatedDates,
+		getCappedQuantity,
 		mutateTickets,
 		nonSharedTickets,
 		onUpdateRecurrence,
 		saveRecurrence,
 		sharedTickets,
 		toUtcISO,
+		toaster,
 		updateProgress,
 	]);
 };
