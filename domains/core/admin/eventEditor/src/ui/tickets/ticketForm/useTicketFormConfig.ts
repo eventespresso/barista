@@ -3,7 +3,7 @@ import * as R from 'ramda';
 
 import { CalendarOutlined, ControlOutlined, ProfileOutlined } from '@eventespresso/icons';
 import { useUtcISOToSiteDate, useSiteDateToUtcISO, getEEDomData } from '@eventespresso/services';
-import { startAndEndDateFixer, useTicketItem, hooks } from '@eventespresso/edtr-services';
+import { startAndEndDateFixer, useTicketItem, hooks, useTicketPrices } from '@eventespresso/edtr-services';
 import { PLUS_ONE_MONTH } from '@eventespresso/constants';
 import { useMemoStringify } from '@eventespresso/hooks';
 import { setDefaultTime } from '@eventespresso/dates';
@@ -12,6 +12,7 @@ import { __ } from '@eventespresso/i18n';
 import type { EspressoFormProps } from '@eventespresso/form';
 import type { Ticket, TicketFormConfig } from '@eventespresso/edtr-services';
 import { EndDateFieldWrapper } from '@eventespresso/ee-components';
+import { preparePricesForTpc, usePriceToTpcModifier } from '@eventespresso/tpc';
 
 import { validate } from './formValidation';
 
@@ -63,19 +64,25 @@ export const useTicketFormConfig = (id: EntityId, config?: EspressoFormProps): T
 		},
 		[onSubmit, toUtcISO]
 	);
+	const getTicketPrices = useTicketPrices();
+	const priceToTpcModifier = usePriceToTpcModifier();
 
 	const initialValues = useMemo(() => {
+		const prices = preparePricesForTpc(getTicketPrices(ticket?.id), priceToTpcModifier);
+
 		return hooks.applyFilters(
 			'eventEditor.ticketForm.initalValues',
 			{
 				visibility: 'PUBLIC',
 				...R.pick<Omit<Partial<Ticket>, 'prices'>, keyof Ticket>(FIELD_NAMES, ticket || {}),
+				// set initial prices
+				prices,
 				startDate,
 				endDate,
 			},
 			ticket
 		);
-	}, [endDate, startDate, ticket]);
+	}, [endDate, getTicketPrices, priceToTpcModifier, startDate, ticket]);
 
 	const sections = useMemo(() => {
 		return hooks.applyFilters(

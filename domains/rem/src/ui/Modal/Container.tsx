@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 import { useGlobalModal } from '@eventespresso/registry';
 import { EdtrGlobalModals } from '@eventespresso/edtr-services';
 import { wait } from '@eventespresso/utils';
+import { DebugInfo } from '@eventespresso/ui-components';
 
 import Modal from './Modal';
 import { useFormState, useGenerateDates, useSubmitForm } from '../../data';
@@ -50,6 +51,7 @@ const Container: React.FC = () => {
 	return (
 		<Modal isOpen={isOpen} onClose={onClose} showAlertOnClose={isDirty} footerContent={footerContent}>
 			<ContentBody />
+			<DebugInfo data={getData()} />
 		</Modal>
 	);
 };

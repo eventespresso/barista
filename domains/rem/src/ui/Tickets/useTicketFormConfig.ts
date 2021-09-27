@@ -3,15 +3,15 @@ import { useMemo } from 'react';
 import { __ } from '@eventespresso/i18n';
 import { getEEDomData, useTimeZoneTime } from '@eventespresso/services';
 import { CalendarOutlined, ControlOutlined, ProfileOutlined } from '@eventespresso/icons';
-import { useMemoStringify } from '@eventespresso/hooks';
 import { Ticket } from '@eventespresso/edtr-services';
+
+import type { EspressoFormProps } from '@eventespresso/form';
 
 import { ticketSalesEndFields } from './ticketSalesEndFields';
 import { ticketSalesStartFields } from './ticketSalesStartFields';
 import { validate } from './formValidation';
 
-import type { EspressoFormProps } from '@eventespresso/form';
-import type { RemTicket } from '../../data';
+import { RemTicket, useFormState } from '../../data';
 import { normalizeTicketForRem } from '../../utils';
 
 type TicketFormConfig = EspressoFormProps<RemTicket>;
@@ -20,8 +20,16 @@ const VISIBILITY_OPTIONS = getEEDomData('eventEditor')?.ticketMeta?.visibilityOp
 
 const useTicketFormConfig = (ticket?: RemTicket | Ticket, config?: Partial<TicketFormConfig>): TicketFormConfig => {
 	const { utcToSiteTime } = useTimeZoneTime();
+	const { tickets } = useFormState();
 
-	const initialValues = useMemoStringify(normalizeTicketForRem(ticket, utcToSiteTime));
+	const initialValues = useMemo(() => {
+		const normalizedTicket = normalizeTicketForRem(ticket, utcToSiteTime);
+		return {
+			...normalizedTicket,
+			// set initial prices from REM state
+			prices: tickets?.[ticket?.id]?.prices,
+		};
+	}, [ticket, tickets, utcToSiteTime]);
 
 	return useMemo(
 		() => ({
