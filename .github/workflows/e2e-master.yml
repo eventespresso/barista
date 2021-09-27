@@ -7,7 +7,7 @@ on:
     workflow_dispatch:
         inputs:
             path:
-                description: 'Run E2E tests in path, e.g. `packages/e2e-tests/specs/admin`'
+                description: 'Run E2E tests in path, e.g. packages/e2e-tests/specs/admin'
                 required: false
                 default: ''
 env:
