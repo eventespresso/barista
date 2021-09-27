@@ -16,6 +16,7 @@ jobs:
     list-e2e-specs:
         runs-on: ubuntu-latest
         outputs:
+            # if input path is provided, it will be preferred over the directory structure.
             specs: ${{ (github.event.inputs.path && steps.input.outputs.path) || steps.list.outputs.files }}
         steps:
             - uses: actions/checkout@v2
