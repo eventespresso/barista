@@ -5,6 +5,11 @@ on:
         branches: [master]
     # Allow to run E2E on demand
     workflow_dispatch:
+        inputs:
+            path:
+                description: 'Run E2E tests in path, e.g. `packages/e2e-tests/specs/admin`'
+                required: false
+                default: ''
 env:
     PLAYWRIGHT_BROWSERS_PATH: 0 # See https://playwright.dev/docs/ci/#caching-browsers
 jobs:
@@ -22,7 +27,7 @@ jobs:
         needs: [list-e2e-specs]
         runs-on: ubuntu-latest
         strategy:
-            matrix: ${{ fromJSON(needs.list-e2e-specs.outputs.specs) }}
+            matrix: ${{ (github.event.inputs.path && [github.event.inputs.type]) || fromJSON(needs.list-e2e-specs.outputs.specs) }}
             fail-fast: false
         steps:
             - name: Checkout and yarn
