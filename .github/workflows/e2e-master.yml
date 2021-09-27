@@ -22,7 +22,7 @@ jobs:
             # This step outputs a JSON object of e2e test paths - {"path": []}, which is passed to the e2e matrix
             - id: list
               run: echo "::set-output name=files::{\"path\":$(ls -d packages/e2e-tests/specs/* | jq -R -s -c 'split("\n")[:-1]')}"
-
+            # this step computes the matrix from the path given in inputs
             - id: input
               run: echo "::set-output name=path::{\"path\":[\"${{ github.event.inputs.path }}\"]}"
     e2e:
