@@ -9,7 +9,7 @@ const Donations: React.FC<Props> = ({ allowDonations: isChecked, onDonationsChan
 	const label = isChecked ? __('Donations Enabled') : __('Donations Disabled');
 
 	return (
-		<GridItem id={id} label={label} className="ee-reg-option__event-donations">
+		<GridItem id={id} label={label} className='ee-reg-option__event-donations'>
 			<SwitchWithLabel
 				aria-describedby={id}
 				isChecked={isChecked}

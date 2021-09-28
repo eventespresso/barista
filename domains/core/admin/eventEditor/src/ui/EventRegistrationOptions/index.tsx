@@ -1,17 +1,7 @@
-import { __ } from '@eventespresso/i18n';
 import classNames from 'classnames';
-import { Grid, Heading, GridItem } from '@eventespresso/ui-components';
+import { Grid } from '@eventespresso/ui-components';
 import { noop } from '@eventespresso/utils';
 import { withFeature } from '@eventespresso/services';
-
-import ActiveStatus from './EventDetails/ActiveStatus';
-import AltRegPage from './RegistrationOptions/AltRegPage';
-import DefaultRegistrationStatus from './RegistrationOptions/DefaultRegistrationStatus';
-import Donations from './EventDetails/Donations';
-import EventManager from './EventDetails/EventManager';
-import EventPhoneNumber from './EventDetails/EventPhoneNumber';
-import MaxRegistrations from './RegistrationOptions/MaxRegistrations';
-import TicketSelector from './RegistrationOptions/TicketSelector';
 
 import RegistrationOptions from './RegistrationOptions';
 import EventDetails from './EventDetails';
@@ -27,7 +17,7 @@ const className = classNames(
 	'ee-grid--size-sm',
 	'ee-grid--size-md',
 	'ee-grid--size-lg',
-	'ee-reg-option',
+	'ee-reg-option'
 );
 
 export const EventRegistrationOptions: React.FC<Partial<EventRegistrationOptionsProps>> = ({
@@ -59,7 +49,7 @@ export const EventRegistrationOptions: React.FC<Partial<EventRegistrationOptions
 		onStatusChange,
 		phoneNumber,
 		status,
-	}
+	};
 
 	const registrationOptions = {
 		altRegPage,
@@ -70,14 +60,14 @@ export const EventRegistrationOptions: React.FC<Partial<EventRegistrationOptions
 		onDefaultRegStatusChange,
 		onTicketSelectorChange,
 		onMaxRegChange,
-	}
+	};
 
 	return (
 		<Grid className={className}>
 			<EventDetails {...eventDetails} />
 			<RegistrationOptions {...registrationOptions}	/>
 		</Grid>
-	)
+	);
 };
 
 export default withFeature('use_reg_options_meta_box')(withData(EventRegistrationOptions));

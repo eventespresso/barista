@@ -19,7 +19,7 @@ const RegistrationOptions: React.FC<Partial<EventRegistrationOptionsProps>> = ({
 	onTicketSelectorChange,
 	onMaxRegChange = noop,
 }) => (
-	<Grid className="ee-grid--one">
+	<Grid className='ee-grid--one'>
 		<Heading as='h3' className='ee-edtr-section-heading'>
 			{__('Registration Options')}
 		</Heading>

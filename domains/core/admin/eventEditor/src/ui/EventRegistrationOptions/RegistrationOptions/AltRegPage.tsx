@@ -9,7 +9,7 @@ const AltRegPage: React.FC<Props> = ({ altRegPage, onAltRegPageChange }) => {
 
 	return (
 		<GridItem
-			className="ee-reg-option__alt-reg"
+			className='ee-reg-option__alt-reg'
 			id={id}
 			label={__('Alternative Registration Page')}
 			size='huge'

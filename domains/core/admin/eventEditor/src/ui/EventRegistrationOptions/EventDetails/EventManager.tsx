@@ -13,7 +13,7 @@ const EventManager: React.FC<Props> = ({ eventManagers, managerId, onManagerChan
 	const options = useMemo(() => eventManagers && entityListToSelectOptions(eventManagers), [eventManagers]);
 
 	return (
-		<GridItem id={id} label={__('Event Manager')} className="ee-reg-option__event-manager">
+		<GridItem id={id} label={__('Event Manager')} className='ee-reg-option__event-manager'>
 			<div className='ee-reg-option__value'>
 				<Select
 					flow='inline'

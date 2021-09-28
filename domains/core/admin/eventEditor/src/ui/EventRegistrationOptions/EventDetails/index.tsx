@@ -19,7 +19,7 @@ const EventDetails: React.FC<Partial<EventRegistrationOptionsProps>> = ({
 	phoneNumber,
 	status,
 }) => (
-	<Grid className='ee-grid--one'>	
+	<Grid className='ee-grid--one'>
 		<Heading as='h3' className='ee-edtr-section-heading'>
 			{__('Event Details')}
 		</Heading>
@@ -29,7 +29,7 @@ const EventDetails: React.FC<Partial<EventRegistrationOptionsProps>> = ({
 				<EventManager eventManagers={eventManagers} managerId={managerId} onManagerChange={onManagerChange} />
 				<EventPhoneNumber phoneNumber={phoneNumber} onPhoneNumberChange={onPhoneNumberChange} />
 				<Donations allowDonations={allowDonations} onDonationsChange={onDonationsChange} />
-		</div>
+			</div>
 		</GridItem>
 	</Grid>
 );
