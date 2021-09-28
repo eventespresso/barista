@@ -64,8 +64,8 @@ export const EventRegistrationOptions: React.FC<Partial<EventRegistrationOptions
 
 	return (
 		<Grid className={className}>
-			<EventDetails {...eventDetails}/>
-			<RegistrationOptions {...registrationOptions}/>
+			<EventDetails {...eventDetails} />
+			<RegistrationOptions {...registrationOptions} />
 		</Grid>
 	);
 };
