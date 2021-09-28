@@ -14,7 +14,7 @@ import type { Ticket } from '@eventespresso/edtr-services';
 const isOnSale = (ticket: Ticket, ignoreFlag = false): boolean => {
 	return (
 		(!ignoreFlag && isBooleanTrue(ticket.isOnSale)) ||
-		(diff('minutes', parseISO(ticket.startDate), now) < 0 && diff('minutes', parseISO(ticket.endDate), now) > 0)
+		(diff('seconds', parseISO(ticket.startDate), now) < 0 && diff('seconds', parseISO(ticket.endDate), now) > 0)
 	);
 };
 

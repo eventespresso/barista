@@ -12,5 +12,5 @@ import { NOW as now } from '@eventespresso/constants';
  * @param ignoreFlag Whether to ignore the boolean flag from the object and recalculate the value
  */
 export const isExpired = (entity: Ticket | Datetime, ignoreFlag = false): boolean => {
-	return (!ignoreFlag && isBooleanTrue(entity.isExpired)) || diff('minutes', parseISO(entity.endDate), now) < 0;
+	return (!ignoreFlag && isBooleanTrue(entity.isExpired)) || diff('seconds', parseISO(entity.endDate), now) < 0;
 };

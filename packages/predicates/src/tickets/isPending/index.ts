@@ -13,7 +13,7 @@ import type { Ticket } from '@eventespresso/edtr-services';
  * @param ignoreFlag Whether to ignore the boolean flag from the object and recalculate the value
  */
 const isPending = (ticket: Ticket, ignoreFlag = false): boolean => {
-	return (!ignoreFlag && isBooleanTrue(ticket.isPending)) || diff('minutes', parseISO(ticket.startDate), now) > 0;
+	return (!ignoreFlag && isBooleanTrue(ticket.isPending)) || diff('seconds', parseISO(ticket.startDate), now) > 0;
 };
 
 export default isPending;
