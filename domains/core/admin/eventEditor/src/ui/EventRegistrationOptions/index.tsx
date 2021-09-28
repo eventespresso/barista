@@ -1,23 +1,34 @@
 import { __ } from '@eventespresso/i18n';
-import { Grid, Heading } from '@eventespresso/ui-components';
+import classNames from 'classnames';
+import { Grid, Heading, GridItem } from '@eventespresso/ui-components';
 import { noop } from '@eventespresso/utils';
 import { withFeature } from '@eventespresso/services';
 
-import ActiveStatus from './ActiveStatus';
-import AltRegPage from './AltRegPage';
-import DefaultRegistrationStatus from './DefaultRegistrationStatus';
-import Donations from './Donations';
-import EventManager from './EventManager';
-import EventPhoneNumber from './EventPhoneNumber';
-import MaxRegistrations from './MaxRegistrations';
-import TicketSelector from './TicketSelector';
+import ActiveStatus from './EventDetails/ActiveStatus';
+import AltRegPage from './RegistrationOptions/AltRegPage';
+import DefaultRegistrationStatus from './RegistrationOptions/DefaultRegistrationStatus';
+import Donations from './EventDetails/Donations';
+import EventManager from './EventDetails/EventManager';
+import EventPhoneNumber from './EventDetails/EventPhoneNumber';
+import MaxRegistrations from './RegistrationOptions/MaxRegistrations';
+import TicketSelector from './RegistrationOptions/TicketSelector';
+
+import RegistrationOptions from './RegistrationOptions';
+import EventDetails from './EventDetails';
 import withData from './withData';
 
 import type { EventRegistrationOptionsProps } from './types';
 
 import './style.scss';
 
-const columns = { base: 1, sm: 2, md: 4 };
+const className = classNames(
+	'ee-edtr-section',
+	'ee-grid--two',
+	'ee-grid--size-sm',
+	'ee-grid--size-md',
+	'ee-grid--size-lg',
+	'ee-reg-option',
+);
 
 export const EventRegistrationOptions: React.FC<Partial<EventRegistrationOptionsProps>> = ({
 	allowDonations,
@@ -37,35 +48,36 @@ export const EventRegistrationOptions: React.FC<Partial<EventRegistrationOptions
 	onMaxRegChange = noop,
 	phoneNumber,
 	status,
-}) => (
-	<div className='ee-event-registration-options ee-edtr-section'>
-		<Heading as='h3' className='ee-edtr-section-heading'>
-			{__('Registration Options')}
-		</Heading>
-		<Grid columns={columns} spacing='1.25rem'>
-			<ActiveStatus status={status} onStatusChange={onStatusChange} />
+}) => {
+	const eventDetails = {
+		allowDonations,
+		eventManagers,
+		managerId,
+		onDonationsChange,
+		onManagerChange,
+		onPhoneNumberChange,
+		onStatusChange,
+		phoneNumber,
+		status,
+	}
 
-			<DefaultRegistrationStatus
-				defaultRegStatus={defaultRegStatus}
-				onDefaultRegStatusChange={onDefaultRegStatusChange}
-			/>
+	const registrationOptions = {
+		altRegPage,
+		defaultRegStatus,
+		displayTicketSelector,
+		maxReg,
+		onAltRegPageChange,
+		onDefaultRegStatusChange,
+		onTicketSelectorChange,
+		onMaxRegChange,
+	}
 
-			<MaxRegistrations maxReg={maxReg} onMaxRegChange={onMaxRegChange} />
-
-			<TicketSelector
-				displayTicketSelector={displayTicketSelector}
-				onTicketSelectorChange={onTicketSelectorChange}
-			/>
-
-			<Donations allowDonations={allowDonations} onDonationsChange={onDonationsChange} />
-
-			<EventPhoneNumber phoneNumber={phoneNumber} onPhoneNumberChange={onPhoneNumberChange} />
-
-			<EventManager eventManagers={eventManagers} managerId={managerId} onManagerChange={onManagerChange} />
-
-			<AltRegPage altRegPage={altRegPage} onAltRegPageChange={onAltRegPageChange} />
+	return (
+		<Grid className={className}>
+			<EventDetails {...eventDetails} />
+			<RegistrationOptions {...registrationOptions}	/>
 		</Grid>
-	</div>
-);
+	)
+};
 
 export default withFeature('use_reg_options_meta_box')(withData(EventRegistrationOptions));

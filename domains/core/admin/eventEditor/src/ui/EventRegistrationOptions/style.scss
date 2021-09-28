@@ -1,144 +1,92 @@
 @import '~@eventespresso/styles/src/mixins/breakpoints';
 
-.ee-event-registration-options {
-	.ee-grid__item {
-		box-sizing: border-box;
-		flex-direction: column-reverse;
-		height: unset;
-		padding: var(--ee-padding-tiny) var(--ee-padding-small) var(--ee-padding-small);
-		text-align: unset;
-		border-radius: var(--ee-border-radius-default);
+.ee-grid.ee-grid .ee-grid__item.ee-reg-option {
+	&__active-status,
+	&__event-manager,
+	&__event-phone,
+	&__event-donations,
+	&__default-status,
+	&__ticket,
+	&__max-reg,
+  &__alt-reg {
+		display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: none;
+		height: 80px;
+		padding-bottom: 0;
 
-		@include min1080px {
-			padding: var(--ee-padding-smaller) var(--ee-padding-default) var(--ee-padding-small);
+		.ee-grid__item.ee-reg-option__active-status {
+			box-shadow: none;
 		}
 
-		label {
-			margin: var(--ee-margin-small) 0;
-		}
+		.ee-tabbable-text {
+			padding-left: 12px;
 
-		.ee-reg-option__value {
-			margin: 0;
-
-			.ee-select-wrapper--inline,
-			.ee-tabbable-text:not(.ee-tabbable-text--no-text) {
-				color: var(--ee-default-text-color-super-low-contrast);
-				font-size: var(--ee-font-size-big);
-				font-weight: 700;
-				height: var(--ee-font-size-extreme);
-				margin: 0;
-				position: relative;
-
-				@include min1280px {
-					font-size: var(--ee-font-size-bigger);
-				}
-			}
-
-			.ee-tabbable-text:not(.ee-tabbable-text--no-text) {
-				max-width: 100%;
-			}
-
-			.ee-tabbable-text {
-				left: calc(var(--ee-padding-micro) * -1);
-
-				&__inner_wrapper {
-					height: var(--ee-font-size-huge);
-					line-height: var(--ee-font-size-huge);
-					max-width: 100%;
-					overflow: hidden;
-					white-space: nowrap;
-				}
-			}
-
-			.ee-select-wrapper--inline {
-				height: 100%;
-				left: calc(var(--ee-padding-smaller) * -1);
-				max-height: 100%;
-				padding: 0;
-				width: calc(100% + var(--ee-padding-default));
-
-				.ee-select--inline {
-					color: inherit;
-					font-size: inherit;
-					height: 100%;
-					padding: 0 var(--ee-padding-default) 0 var(--ee-padding-tiny);
-
-					option {
-						font-size: var(--ee-font-size-default);
-					}
-				}
-
-				> div {
-					font-size: var(--ee-font-size-default);
-					right: 0.375rem;
-					width: 1rem;
-				}
+			.ee-tabbable-text__inner_wrapper {
+				margin-right: auto;
+				
 			}
 		}
 
-		&:not([class*='status']) {
-			.ee-grid__item-label {
-				color: var(--ee-default-text-color-high-contrast);
-			}
-		}
-
-		.ee-grid__item-label,
-		.ee-tabbable-text.ee-tabbable-text--no-text {
-			font-size: var(--ee-font-size-smaller);
-			letter-spacing: 1px;
+		.ee-switch {
+			padding-left: 14px;
 		}
 
 		.ee-grid__item-label {
-			color: var(--ee-default-text-color-high-contrast);
-			font-weight: 400;
-			margin: 0;
-			max-width: unset;
-			text-align: start !important;
-			text-shadow: none !important;
+			text-align: right;
+			padding-right: 50px;
+			font-size: var(--ee-font-size-default);
 		}
 
-		.ee-tabbable-text.ee-tabbable-text--no-text {
-			color: var(--ee-default-text-color);
-			font-weight: 400;
-			position: relative;
-		}
+		.ee-reg-option__value, 
+		.chakra-switch,
+		.ee-grid__item-label {
+			width: 50%;
+		}		
 
-		&.ee-status-background {
-			.ee-reg-option__value {
-				color: var(--ee-color-white) !important;
-				width: 100%;
+		.ee-select-wrapper {
+			width: 100%;
 
-				.ee-select-wrapper--inline {
-					.ee-select--inline {
-						background-color: transparent !important;
-						color: var(--ee-color-white) !important;
-						font-size: var(--ee-font-size-big);
-
-						@include min1080px {
-							font-size: var(--ee-font-size-bigger);
-						}
-
-						option {
-							font-size: var(--ee-font-size-big);
-						}
-					}
-
-					> div {
-						color: var(--ee-color-white) !important;
-					}
+			.ee-select {
+				&.ee-select {
+					font-size: var(--ee-font-size-bigger);
+					font-weight: bold;
 				}
 			}
+		}
+	}	
 
-			.ee-grid__item-label {
-				color: var(--ee-color-white) !important;
-			}
+	&__max-reg,
+	&__event-phone,
+	&__default-status, 
+	&__active-status {
+		.ee-tabbable-text, .ee-inline-edit__input {
+			font-size: var(--ee-font-size-bigger);
+			font-weight: bold;
 		}
 	}
 
-	&__alt-reg.ee-grid__item {
-		.ee-reg-option__value .ee-tabbable-text:not(.ee-tabbable-text--no-text) {
-			font-size: var(--ee-font-size-default);
-			font-weight: 500;
+	&__default-status, 
+	&__active-status {
+		#ee-event-registration-active-status-select {
+			background-color: var(--ee-status-color-blue);
+    	color: var(--ee-color-white);
 		}
+
+		#ee-event-registration-default-status-select {
+			background-color: var(--ee-status-color-green);
+			color: var(--ee-color-white);
+		}
+
+
+		.chakra-select__icon-wrapper {
+			color: var(--ee-color-white);
+		}
+	}
+
+	&__event-donations,
+	&__alt-reg {
+		padding-bottom: 16px;
 	}
 }

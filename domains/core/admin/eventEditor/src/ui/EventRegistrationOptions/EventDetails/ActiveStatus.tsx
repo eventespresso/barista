@@ -1,25 +1,22 @@
 import { useMemo } from 'react';
 import classNames from 'classnames';
+// import { Box } from "@chakra-ui/react"
 
 import { __ } from '@eventespresso/i18n';
 import { GridItem, SelectWithLabel } from '@eventespresso/ui-components';
 import { datetimeStatus } from '@eventespresso/constants';
 import { objectToSelectOptions } from '@eventespresso/utils';
-import { datetimeStatusBgColorClassName } from '@eventespresso/helpers';
-import type { EventRegistrationOptionsProps } from './types';
+import type { EventRegistrationOptionsProps } from '../types';
 
 interface Props extends Pick<EventRegistrationOptionsProps, 'status' | 'onStatusChange'> {}
 
 const ActiveStatus: React.FC<Props> = ({ status, onStatusChange }) => {
-	const bgColorClassName = datetimeStatusBgColorClassName(null);
-	const className = classNames('ee-status-background', bgColorClassName);
-
 	const id = 'ee-event-registration-active-status';
 
 	const options = useMemo(() => objectToSelectOptions(datetimeStatus), []);
 
 	return (
-		<GridItem className={className} id={id} label={__('Active status')} size='small'>
+		<GridItem label={__('Active status')} className="ee-reg-option__active-status">
 			<div className='ee-reg-option__value'>
 				<SelectWithLabel
 					flow='inline'

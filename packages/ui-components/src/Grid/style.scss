@@ -3,14 +3,36 @@
 .ee-grid.ee-grid {
 	display: grid;
 	grid-gap: var(--ee-padding-tiny);
-	grid-template-columns: repeat(24, minmax(0, 1fr)) !important;
 	margin: var(--ee-margin-tiny) 0;
 
-	@include min667px {
-		grid-gap: var(--ee-padding-smaller);
+	&--one {
+		grid-template-columns: repeat(1, minmax(0, 1fr));	
 	}
-	@include min960px {
-		grid-gap: var(--ee-padding-small);
+
+	&--two {
+		grid-template-columns: repeat(2, minmax(0, 1fr));	
+	}
+
+	&--size {
+		&-lg {
+			@include min1920px {
+				grid-gap: var(--ee-padding-default);
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+		}
+
+		&-md {
+			@include min960px {
+				grid-gap: var(--ee-padding-small);
+			}
+		}
+
+		&-sm {
+			@include max1024px {
+				grid-gap: var(--ee-padding-smaller);
+				grid-template-columns: repeat(1, minmax(0, 1fr));
+			}
+		}
 	}
 
 	.ee-grid__item {
@@ -20,304 +42,29 @@
 	}
 
 	.ee-grid__item.ee-grid__item {
-		align-items: flex-start;
 		background: #fff;
 		background: var(--ee-background-color);
 		box-shadow: var(--ee-box-shadow-tiny-diffuse);
+    border-radius: var(--ee-border-radius-default);
 		box-sizing: border-box;
 		color: var(--ee-default-text-color);
-		display: flex;
 		height: unset;
-		justify-content: space-around;
 		padding: var(--ee-padding-small);
-		grid-column-start: span 24;
-
-		@include min480px {
-			grid-column-start: span 12;
-		}
-		@include min1024px {
-			grid-column-start: span 8;
-		}
-		@include min1280px {
-			grid-column-start: span 6;
-		}
-		@include min1920px {
-			grid-column-start: span 5;
-		}
 
 		&--size {
 			&-smaller {
-				grid-column-start: span 12;
-
-				@include min480px {
-					grid-column-start: span 9;
-				}
-				@include min600px {
-					grid-column-start: span 8;
-				}
-				@include min667px {
-					grid-column-start: span 8;
-				}
-				@include min960px {
-					grid-column-start: span 8;
-				}
-				@include min1024px {
-					grid-column-start: span 5;
-				}
-				@include min1280px {
-					grid-column-start: span 4;
-				}
-				@include min1600px {
-					grid-column-start: span 3;
-				}
 			}
 
 			&-small {
-				@include min480px {
-					grid-column-start: span 12;
-				}
-				@include min960px {
-					grid-column-start: span 10;
-				}
-				@include min1024px {
-					grid-column-start: span 6;
-				}
-				@include min1600px {
-					grid-column-start: span 5;
-				}
-				@include min1920px {
-					grid-column-start: span 4;
-				}
 			}
 
 			&-big {
-				@include min480px {
-					grid-column-start: span 24;
-				}
-				@include min667px {
-					grid-column-start: span 18;
-				}
-				@include min960px {
-					grid-column-start: span 16;
-				}
-				@include min1024px {
-					grid-column-start: span 12;
-				}
-				@include min1280px {
-					grid-column-start: span 12;
-				}
-				@include min1600px {
-					grid-column-start: span 12;
-				}
-				@include min1920px {
-					grid-column-start: span 6;
-				}
 			}
 
 			&-bigger {
-				@include min480px {
-					grid-column-start: span 24;
-				}
-				@include min667px {
-					grid-column-start: span 24;
-				}
-				@include min960px {
-					grid-column-start: span 16;
-				}
-				@include min1024px {
-					grid-column-start: span 12;
-				}
-				@include min1280px {
-					grid-column-start: span 12;
-				}
-				@include min1600px {
-					grid-column-start: span 10;
-				}
-				@include min1920px {
-					grid-column-start: span 8;
-				}
 			}
 
 			&-huge {
-				@include min480px {
-					grid-column-start: span 24;
-				}
-				@include min1280px {
-					grid-column-start: span 12;
-				}
-			}
-		}
-	}
-}
-
-/* 2 column admin columns don't kick in until around 850px */
-/* with sidebar menu collapsed (folded) */
-.columns-2 {
-	.ee-grid.ee-grid {
-		.ee-grid__item.ee-grid__item {
-			@include min960px {
-				grid-column-start: span 12;
-			}
-			@include min1366px {
-				grid-column-start: span 10;
-			}
-			@include min1600px {
-				grid-column-start: span 6;
-			}
-
-			&--size {
-				&-smaller {
-					@include min960px {
-						grid-column-start: span 8;
-					}
-					@include min1024px {
-						grid-column-start: span 6;
-					}
-					@include min1366px {
-						grid-column-start: span 4;
-					}
-					@include min1920px {
-						grid-column-start: span 3;
-					}
-				}
-
-				&-small {
-					@include min960px {
-						grid-column-start: span 12;
-					}
-					@include min1024px {
-						grid-column-start: span 9;
-					}
-					@include min1366px {
-						grid-column-start: span 6;
-					}
-					@include min1600px {
-						grid-column-start: span 5;
-					}
-					@include min1920px {
-						grid-column-start: span 4;
-					}
-				}
-
-				&-big {
-					@include min960px {
-						grid-column-start: span 24;
-					}
-					@include min1600px {
-						grid-column-start: span 12;
-					}
-					@include min1920px {
-						grid-column-start: span 9;
-					}
-				}
-
-				&-bigger {
-					@include min960px {
-						grid-column-start: span 24;
-					}
-					@include min1600px {
-						grid-column-start: span 12;
-					}
-					@include min1920px {
-						grid-column-start: span 9;
-					}
-				}
-
-				&-huge {
-					@include min960px {
-						grid-column-start: span 24;
-					}
-					@include min1600px {
-						grid-column-start: span 12;
-					}
-				}
-			}
-		}
-	}
-}
-
-/* 2 column admin with sidebar menu visible */
-body:not(.folded) {
-	.columns-2 {
-		.ee-grid.ee-grid {
-			.ee-grid__item.ee-grid__item {
-				@include min1024px {
-					grid-column-start: span 12;
-				}
-				@include min1366px {
-					grid-column-start: span 8;
-				}
-				@include min1600px {
-					grid-column-start: span 10;
-				}
-				@include min1920px {
-					grid-column-start: span 6;
-				}
-
-				&--size {
-					&-smaller {
-						@include min1024px {
-							grid-column-start: span 8;
-						}
-						@include min1280px {
-							grid-column-start: span 6;
-						}
-						@include min1366px {
-							grid-column-start: span 5;
-						}
-						@include min1600px {
-							grid-column-start: span 4;
-						}
-						@include min1920px {
-							grid-column-start: span 3;
-						}
-					}
-
-					&-small {
-						@include min1024px {
-							grid-column-start: span 12;
-						}
-						@include min1280px {
-							grid-column-start: span 9;
-						}
-						@include min1366px {
-							grid-column-start: span 6;
-						}
-						@include min1920px {
-							grid-column-start: span 4;
-						}
-					}
-
-					&-big {
-						@include min1024px {
-							grid-column-start: span 24;
-						}
-						@include min1280px {
-							grid-column-start: span 24;
-						}
-						@include min1600px {
-							grid-column-start: span 12;
-						}
-					}
-
-					&-bigger {
-						@include min1024px {
-							grid-column-start: span 24;
-						}
-						@include min1600px {
-							grid-column-start: span 12;
-						}
-					}
-
-					&-huge {
-						@include min1024px {
-							grid-column-start: span 24;
-						}
-						@include min1920px {
-							grid-column-start: span 12;
-						}
-					}
-				}
 			}
 		}
 	}

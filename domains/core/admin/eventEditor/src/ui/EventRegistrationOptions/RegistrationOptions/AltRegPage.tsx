@@ -1,6 +1,6 @@
 import { __ } from '@eventespresso/i18n';
 import { GridItem, InlineEditText } from '@eventespresso/ui-components';
-import type { EventRegistrationOptionsProps } from './types';
+import type { EventRegistrationOptionsProps } from '../types';
 
 interface Props extends Pick<EventRegistrationOptionsProps, 'altRegPage' | 'onAltRegPageChange'> {}
 
@@ -9,7 +9,7 @@ const AltRegPage: React.FC<Props> = ({ altRegPage, onAltRegPageChange }) => {
 
 	return (
 		<GridItem
-			className='ee-event-registration-options__alt-reg'
+			className="ee-reg-option__alt-reg"
 			id={id}
 			label={__('Alternative Registration Page')}
 			size='huge'
