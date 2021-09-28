@@ -7,9 +7,9 @@ export const GridItem: React.FC<GridItemProps> = ({ children, id, label, size, .
 
 	return (
 		<div className={className}>
-			<label className='ee-grid__item-label' id={id}>
+			{label && <label className='ee-grid__item-label' id={id}>
 				{label}
-			</label>
+			</label>}
 			{children}
 		</div>
 	);
