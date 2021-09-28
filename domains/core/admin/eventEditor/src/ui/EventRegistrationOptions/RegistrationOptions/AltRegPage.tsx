@@ -8,12 +8,7 @@ const AltRegPage: React.FC<Props> = ({ altRegPage, onAltRegPageChange }) => {
 	const id = 'ee-event-registration-alt-reg-page';
 
 	return (
-		<GridItem
-			className='ee-reg-option__alt-reg'
-			id={id}
-			label={__('Alternative Registration Page')}
-			size='huge'
-		>
+		<GridItem className='ee-reg-option__alt-reg' id={id} label={__('Alternative Registration Page')} size='huge'>
 			<div className='ee-reg-option__value'>
 				<InlineEditText
 					aria-describedby={id}

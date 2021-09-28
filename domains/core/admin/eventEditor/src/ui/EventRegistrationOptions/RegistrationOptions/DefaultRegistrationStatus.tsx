@@ -9,7 +9,7 @@ const DefaultRegistrationStatus: React.FC<Props> = ({ defaultRegStatus, onDefaul
 	const id = 'ee-event-registration-default-status';
 
 	return (
-		<GridItem id={id} label={__('Default Registration Status')} className="ee-reg-option__default-status">
+		<GridItem id={id} label={__('Default Registration Status')} className='ee-reg-option__default-status'>
 			<div className='ee-reg-option__value'>
 				<Select
 					flow='inline'
