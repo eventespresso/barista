@@ -2,7 +2,7 @@ import { __ } from '@eventespresso/i18n';
 
 import { Steps, Step } from '@eventespresso/ui-components';
 import { PrevNext } from '@eventespresso/hooks';
-import { Calculator, Calendar, Ticket } from '@eventespresso/icons';
+import { Calculator, Ticket } from '@eventespresso/icons';
 
 const TicketFormSteps: React.FC<Pick<PrevNext, 'current'>> = ({ current }) => {
 	return (
@@ -13,7 +13,6 @@ const TicketFormSteps: React.FC<Pick<PrevNext, 'current'>> = ({ current }) => {
 				icon={Calculator}
 				title={__('Price Calculator')}
 			/>
-			<Step description={__('relations between tickets and dates')} icon={Calendar} title={__('Assign Dates')} />
 		</Steps>
 	);
 };
