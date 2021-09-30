@@ -15,10 +15,10 @@
 	},
 	"sideEffects": false,
 	"dependencies": {
-		"final-form": "^4.20.2",
+		"final-form": "^4.20.4",
 		"final-form-arrays": "^3.0.2",
 		"final-form-set-field-data": "1.0.2",
-		"react-final-form": "^6.5.3",
+		"react-final-form": "^6.5.7",
 		"react-final-form-arrays": "^3.1.3",
 		"yup": "^0.32.9"
 	},

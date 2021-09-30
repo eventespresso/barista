@@ -11,8 +11,8 @@
 	},
 	"dependencies": {
 		"@typeform/embed": "^0.34.0",
-		"@wordpress/components": "^16.0.0",
-		"@wordpress/url": "^3.2.1"
+		"@wordpress/components": "^17.0.0",
+		"@wordpress/url": "^3.2.2"
 	},
 	"scripts": {
 		"lint": "eslint ./src/**/*.{ts,tsx} --format=codeframe",
