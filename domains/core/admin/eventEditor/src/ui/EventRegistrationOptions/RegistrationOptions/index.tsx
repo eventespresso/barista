@@ -1,5 +1,5 @@
 import { __ } from '@eventespresso/i18n';
-import { Grid, Heading, GridItem } from '@eventespresso/ui-components';
+import { GridCard } from '@eventespresso/ui-components';
 import { noop } from '@eventespresso/utils';
 
 import AltRegPage from './AltRegPage';
@@ -19,25 +19,20 @@ const RegistrationOptions: React.FC<Partial<EventRegistrationOptionsProps>> = ({
 	onTicketSelectorChange,
 	onMaxRegChange = noop,
 }) => (
-	<Grid className='ee-grid--one'>
-		<Heading as='h3' className='ee-edtr-section-heading'>
-			{__('Registration Options')}
-		</Heading>
-		<GridItem>
-			<div>
-				<DefaultRegistrationStatus
-					defaultRegStatus={defaultRegStatus}
-					onDefaultRegStatusChange={onDefaultRegStatusChange}
-				/>
-				<TicketSelector
-					displayTicketSelector={displayTicketSelector}
-					onTicketSelectorChange={onTicketSelectorChange}
-				/>
-				<MaxRegistrations maxReg={maxReg} onMaxRegChange={onMaxRegChange} />
-				<AltRegPage altRegPage={altRegPage} onAltRegPageChange={onAltRegPageChange} />
-			</div>
-		</GridItem>
-	</Grid>
+	<GridCard className='ee-grid--one' header={__('Registration Options')}>
+		<>
+			<DefaultRegistrationStatus
+				defaultRegStatus={defaultRegStatus}
+				onDefaultRegStatusChange={onDefaultRegStatusChange}
+			/>
+			<TicketSelector
+				displayTicketSelector={displayTicketSelector}
+				onTicketSelectorChange={onTicketSelectorChange}
+			/>
+			<MaxRegistrations maxReg={maxReg} onMaxRegChange={onMaxRegChange} />
+			<AltRegPage altRegPage={altRegPage} onAltRegPageChange={onAltRegPageChange} />
+		</>
+	</GridCard>
 );
 
 export default RegistrationOptions;

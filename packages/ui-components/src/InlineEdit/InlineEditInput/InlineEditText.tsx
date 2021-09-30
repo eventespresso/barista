@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 
 import { InlineEdit } from '@eventespresso/adapters';
+import { withLabel } from '../../withLabel';
 import Preview from './Preview';
 import type { InlineEditProps } from './types';
 
@@ -22,3 +23,5 @@ export const InlineEditText: React.FC<InlineEditProps> = ({ className, lineCount
 		/>
 	);
 };
+
+export const InlineEditTextWithLabel = withLabel(InlineEditText);

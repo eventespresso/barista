@@ -4,5 +4,9 @@ export interface GridItemProps extends Size {
 	children: JSX.Element;
 	className?: string;
 	id?: string;
-	label?: string;
+}
+
+export interface GridCardProps extends GridItemProps {
+	children: JSX.Element;
+	header?: string;
 }

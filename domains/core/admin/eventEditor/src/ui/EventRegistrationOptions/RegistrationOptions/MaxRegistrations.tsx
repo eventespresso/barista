@@ -1,5 +1,5 @@
 import { __ } from '@eventespresso/i18n';
-import { GridItem, InlineEditText } from '@eventespresso/ui-components';
+import { InlineEditTextWithLabel } from '@eventespresso/ui-components';
 import type { EventRegistrationOptionsProps } from '../types';
 
 interface Props extends Pick<EventRegistrationOptionsProps, 'maxReg' | 'onMaxRegChange'> {}
@@ -9,17 +9,17 @@ const MaxRegistrations: React.FC<Props> = ({ maxReg, onMaxRegChange }) => {
 	const strValue = maxReg && String(maxReg);
 
 	return (
-		<GridItem id={id} label={__('Max Registrations per Transaction')} className='ee-reg-option__max-reg'>
-			<div className='ee-reg-option__value'>
-				<InlineEditText
-					aria-describedby={id}
-					id={`${id}-inline-edit`}
-					onChange={onMaxRegChange}
-					tag='h4'
-					value={strValue}
-				/>
-			</div>
-		</GridItem>
+		<InlineEditTextWithLabel
+			id={id}
+			label={__('Max Registrations per Transaction')}
+			className='ee-reg-option__max-reg'
+			labelClassName='ee-grid__item-label'
+			labelPosition='left-middle'
+			aria-describedby={id}
+			onChange={onMaxRegChange}
+			tag='h4'
+			value={strValue}
+		/>
 	);
 };
 

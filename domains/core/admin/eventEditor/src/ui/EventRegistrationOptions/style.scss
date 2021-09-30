@@ -1,92 +1,74 @@
 @import '~@eventespresso/styles/src/mixins/breakpoints';
 
-.ee-grid.ee-grid .ee-grid__item.ee-reg-option {
-	&__active-status,
-	&__event-manager,
-	&__event-phone,
-	&__event-donations,
-	&__default-status,
-	&__ticket,
-	&__max-reg,
-  &__alt-reg {
-		display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: none;
-		height: 80px;
-		padding-bottom: 0;
+.ee-grid.ee-grid {
+	.ee-reg-option {
+		&__active-status,
+		&__event-manager,
+		&__event-phone,
+		&__event-donations,
+		&__default-status,
+		&__ticket,
+		&__max-reg,
+		&__alt-reg {
+			min-height: 42px;
 
-		.ee-grid__item.ee-reg-option__active-status {
-			box-shadow: none;
-		}
+			.ee-tabbable-text {
+				padding-left: 12px;
 
-		.ee-tabbable-text {
-			padding-left: 12px;
-
-			.ee-tabbable-text__inner_wrapper {
-				margin-right: auto;
-				
-			}
-		}
-
-		.ee-switch {
-			padding-left: 14px;
-		}
-
-		.ee-grid__item-label {
-			text-align: right;
-			padding-right: 50px;
-			font-size: var(--ee-font-size-default);
-		}
-
-		.ee-reg-option__value, 
-		.chakra-switch,
-		.ee-grid__item-label {
-			width: 50%;
-		}		
-
-		.ee-select-wrapper {
-			width: 100%;
-
-			.ee-select {
-				&.ee-select {
-					font-size: var(--ee-font-size-bigger);
-					font-weight: bold;
+				.ee-tabbable-text__inner_wrapper {
+					margin-right: auto;
 				}
 			}
 		}
-	}	
 
-	&__max-reg,
-	&__event-phone,
-	&__default-status, 
-	&__active-status {
-		.ee-tabbable-text, .ee-inline-edit__input {
+		&__max-reg,
+		&__event-phone,
+		&__default-status,
+		&__active-status,
+		&__event-manager,
+		&__alt-reg {
 			font-size: var(--ee-font-size-bigger);
+			color: var(--ee-color-grey-7);
 			font-weight: bold;
+
+			span.ee-tabbable-text__inner_wrapper {
+				line-height: normal;
+			}
+		}
+
+		&__default-status,
+		&__active-status {
+			color: var(--ee-color-white);
+
+			&:hover {
+				color: var(--ee-color-white);
+			}
+
+			h3.ee-edtr-section-heading.ee-heading.ee-heading {
+				font-size: calc(var(--ee-font-size-huge) * 1.375);
+			}
+		}
+
+		&__event-donations,
+		&__ticket {
+			display: flex;
+			align-items: center;
+			padding-left: 14px;
 		}
 	}
+}
 
-	&__default-status, 
-	&__active-status {
-		#ee-event-registration-active-status-select {
-			background-color: var(--ee-status-color-blue);
-    	color: var(--ee-color-white);
-		}
-
-		#ee-event-registration-default-status-select {
-			background-color: var(--ee-status-color-green);
-			color: var(--ee-color-white);
-		}
-
-
-		.chakra-select__icon-wrapper {
-			color: var(--ee-color-white);
-		}
+.ee-edtr-section {
+	.ee-input-label {
+		white-space: normal;
 	}
 
-	&__event-donations,
-	&__alt-reg {
-		padding-bottom: 16px;
+	.ee-grid-card .chakra-select__icon-wrapper {
+		color: var(--ee-color-white);
+	}
+
+	h3.chakra-heading.ee-heading.ee-grid-card__heading {
+		font-size: calc(var(--ee-font-size-huge) * 1.375);
+		margin-bottom: 15px;
 	}
 }

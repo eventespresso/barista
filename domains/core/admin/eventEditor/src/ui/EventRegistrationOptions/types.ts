@@ -23,3 +23,10 @@ export interface EventRegistrationOptionsProps extends Pick<Event, PickedProps> 
 	onStatusChange: InlineEditProps['onChange'];
 	onTicketSelectorChange: SwitchProps['onChangeValue'];
 }
+export interface WrapperProps {
+	children?: JSX.Element;
+	className?: string;
+	id?: string;
+	label?: string;
+	header?: string;
+}
