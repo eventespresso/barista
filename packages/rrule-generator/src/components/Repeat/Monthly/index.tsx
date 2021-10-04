@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import { __ } from '@eventespresso/i18n';
-import { Divider, NumberInput } from '@eventespresso/ui-components';
+import { Divider, NumberInput, Stack, Label } from '@eventespresso/ui-components';
 
 import On from './On';
 import OnThe from './OnThe';
@@ -29,21 +29,23 @@ const Monthly: React.FC<BaseProps> = ({ id }) => {
 	);
 
 	return (
-		<div className='rrule-generator__form-group-row rrule-generator__form-group-row--align-items-start rrule-generator__form-group-row--no-label rrule-generator__repeat-monthly'>
-			<label className='rrule-generator__labelled-input'>
-				<span>{__('every')}</span>
-				<Divider orientation='vertical' size='tiny' />
-				<NumberInput
-					aria-label={__('Repeat monthly interval')}
-					id={`${id}-interval`}
-					name={`${id}-interval`}
-					onChange={onChangeInterval}
-					showStepper={false}
-					value={monthly?.interval}
-					visibleDigits={3}
-				/>
-				<span>{__('month(s)')}</span>
-			</label>
+		<Stack className='rrule-generator__form-group-row rrule-generator__form-group-row--align-items-start rrule-generator__form-group-row--no-label rrule-generator__repeat-monthly'>
+			<Label label={__('every')} />
+			{/* <label className='rrule-generator__labelled-input'>
+				<span>{__('every')}</span> */}
+			{/* <Divider orientation='vertical' size='tiny' /> */}
+			<NumberInput
+				aria-label={__('Repeat monthly interval')}
+				id={`${id}-interval`}
+				name={`${id}-interval`}
+				onChange={onChangeInterval}
+				showStepper={false}
+				value={monthly?.interval}
+				visibleDigits={3}
+			/>
+			{/* <span>{__('month(s)')}</span>
+			</label> */}
+			<Label label={__('month(s)')} />
 
 			{monthlyModes?.includes('ON') && (
 				<On id={`${id}-on`} isTheOnlyMode={isTheOnlyMode} onChangeMode={onChangeMode} />
@@ -51,7 +53,7 @@ const Monthly: React.FC<BaseProps> = ({ id }) => {
 			{monthlyModes?.includes('ON_THE') && (
 				<OnThe id={`${id}-onThe`} isTheOnlyMode={isTheOnlyMode} onChangeMode={onChangeMode} />
 			)}
-		</div>
+		</Stack>
 	);
 };
 

@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { Select } from '@eventespresso/ui-components';
+import { Select, Stack } from '@eventespresso/ui-components';
 
 import Yearly from './Yearly';
 import Monthly from './Monthly';
@@ -26,7 +26,7 @@ const Frequency: React.FC<FrequencyProps> = ({ id, frequency, onChange }) => {
 	);
 
 	return (
-		<div className='rrule-generator__frequency'>
+		<Stack className='rrule-generator__frequency'>
 			<Select
 				className='rrule-generator__select'
 				id={id}
@@ -49,7 +49,7 @@ const Frequency: React.FC<FrequencyProps> = ({ id, frequency, onChange }) => {
 			{frequency === 'WEEKLY' && <Weekly id={`${id}-weekly`} />}
 			{frequency === 'DAILY' && <Daily id={`${id}-daily`} />}
 			{frequency === 'HOURLY' && <Hourly id={`${id}-hourly`} />}
-		</div>
+		</Stack>
 	);
 };
 

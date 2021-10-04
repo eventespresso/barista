@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
 import { DateTimePicker, DatePicker, DatePickerProps } from '@eventespresso/dates';
+import { Row } from '@eventespresso/ui-components';
 
 import { useRRuleConfig } from '../../hooks';
 
@@ -25,9 +26,9 @@ const OnDate: React.FC<OnDateProps> = ({ id, date, label, maxDate, onChange }) =
 	);
 
 	return (
-		<div className='rrule-generator__on-date'>
+		<Row className='rrule-generator__on-date'>
 			<DateComponent {...calendarAttributes} maxDate={maxDate} onChange={onChange} />
-		</div>
+		</Row>
 	);
 };
 

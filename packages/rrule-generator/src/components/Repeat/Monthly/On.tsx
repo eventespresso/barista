@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { range } from 'ramda';
 
 import { __ } from '@eventespresso/i18n';
-import { Divider, Radio, Select } from '@eventespresso/ui-components';
+import { Divider, Radio, Select, Stack } from '@eventespresso/ui-components';
 
 import { useRRuleState } from '../../../hooks';
 import { OnChangeSelect } from '../../types';
@@ -26,7 +26,7 @@ const On: React.FC<OnProps> = ({ id, isTheOnlyMode, onChangeMode }) => {
 	);
 
 	return (
-		<div className='rrule-generator__on'>
+		<Stack className='rrule-generator__on'>
 			{!isTheOnlyMode && (
 				<Radio
 					aria-label={__('Repeat monthly on')}
@@ -58,7 +58,7 @@ const On: React.FC<OnProps> = ({ id, isTheOnlyMode, onChangeMode }) => {
 					</option>
 				))}
 			</Select>
-		</div>
+		</Stack>
 	);
 };
 

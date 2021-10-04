@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 
 import { __ } from '@eventespresso/i18n';
+import { Row, Label, Stack } from '@eventespresso/ui-components';
 
 import OnDate from '../OnDate';
 import { useRRuleState } from '../../hooks';
@@ -18,12 +19,13 @@ const Start: React.FC<BaseProps> = ({ id }) => {
 	);
 
 	return (
-		<div className='rrule-generator__form-group-row'>
-			<label htmlFor={id}>
+		<Row className='rrule-generator__form-group-row'>
+			<Label label={__('Start')} id={id} />
+			{/* <label htmlFor={id}>
 				<strong>{__('Start')}</strong>
-			</label>
+			</label> */}
 			<OnDate date={start.date} id={id} label={__('Start')} onChange={onChangeStart} />
-		</div>
+		</Row>
 	);
 };
 

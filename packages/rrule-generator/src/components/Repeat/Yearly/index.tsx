@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 
+import { Stack } from '@eventespresso/ui-components';
 import On from './On';
 import OnThe from './OnThe';
 import { useRRuleState, useRRuleConfig } from '../../../hooks';
@@ -19,14 +20,14 @@ const Yearly: React.FC<BaseProps> = ({ id }) => {
 	);
 
 	return (
-		<div className='rrule-generator__form-group-row rrule-generator__form-group-row--align-items-start rrule-generator__form-group-row--no-label'>
+		<Stack className='rrule-generator__form-group-row rrule-generator__form-group-row--align-items-start rrule-generator__form-group-row--no-label'>
 			{yearlyModes?.includes('ON') && (
 				<On id={`${id}-on`} isTheOnlyMode={isTheOnlyMode} onChangeMode={onChangeMode} />
 			)}
 			{yearlyModes?.includes('ON_THE') && (
 				<OnThe id={`${id}-onThe`} isTheOnlyMode={isTheOnlyMode} onChangeMode={onChangeMode} />
 			)}
-		</div>
+		</Stack>
 	);
 };
 
