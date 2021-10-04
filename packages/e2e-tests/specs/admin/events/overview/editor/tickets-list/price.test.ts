@@ -40,7 +40,7 @@ describe(namespace, () => {
 
 		const ticketTotal = await tpcSafari.getTicketTotal();
 
-		// Since there are no modifiers, totol is equal to base price
+		// Since there are no modifiers, total is equal to base price
 		expect(Number(ticketTotal)).toBe(13);
 
 		// Now lets submit.

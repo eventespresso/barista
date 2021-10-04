@@ -7,7 +7,7 @@ const registrar = new EventRegistrar();
 const edtrGlider = new EDTRGlider();
 
 describe(namespace, () => {
-	it('should check if registration was succesful and the reg status is approved', async () => {
+	it('should check if registration was successful and the reg status is approved', async () => {
 		await createNewEvent({ title: 'Two Dates Two Tickets' });
 
 		await editEntityCard({

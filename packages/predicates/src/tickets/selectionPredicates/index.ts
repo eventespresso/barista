@@ -56,7 +56,7 @@ export const uniqTicketsByMinQty = <T extends Pick<Partial<Ticket>, 'id' | 'quan
 		const nonNegativeExistingQty = parseInfinity(acc[item.id].quantity, Infinity);
 		const nonNegativeNewQty = parseInfinity(item.quantity, Infinity);
 
-		// if new quantity is less than exisitng one
+		// if new quantity is less than existing one
 		if (nonNegativeNewQty < nonNegativeExistingQty) {
 			// we will replace the existing item with the new one
 			return { ...acc, [item.id]: item };

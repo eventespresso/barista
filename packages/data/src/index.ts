@@ -10,7 +10,7 @@ export * from './types';
 export * from './DataProvider';
 export * from './withDataProvider';
 
-// export everything explicitely instead of export *
+// export everything explicitly instead of export *
 export {
 	gql,
 	makeVar,

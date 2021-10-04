@@ -14,7 +14,7 @@ const testCases = [
 		result: true,
 	},
 	{
-		desc: 'checks for unequality for different amounts',
+		desc: 'checks for inequality for different amounts',
 		amount1: '8.453',
 		amount2: '7.453',
 		result: false,

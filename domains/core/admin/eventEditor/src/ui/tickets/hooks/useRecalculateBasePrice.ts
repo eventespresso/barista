@@ -43,7 +43,7 @@ const useRecalculateBasePrice = (ticketId: EntityId): Callback => {
 				{ ...newBasePrice, amount: newBasePriceAmount },
 				// add the existing ones, just in case we are dealing with aliens,
 				// don't get me wrong, because only they can have other prices without a base price,
-				// may be their taxation systen works differently, who knows ¯\_(ツ)_/¯
+				// may be their taxation system works differently, who knows ¯\_(ツ)_/¯
 				...priceModifiers,
 			];
 

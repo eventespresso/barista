@@ -81,7 +81,7 @@ export const ELEMENT_BLOCKS: Array<ElementBlock> = [
 	{
 		label: __('Email Address'),
 		type: 'EMAIL',
-		desc: __('adds a text input that only accets a valid email address'),
+		desc: __('adds a text input that only accepts a valid email address'),
 	},
 	{
 		label: __('Email Confirmation'),
@@ -206,7 +206,7 @@ export const ELEMENT_BLOCKS: Array<ElementBlock> = [
 	{
 		label: __('Reset Button'),
 		type: 'RESET',
-		desc: __('adds a button that will reset the form back to its orginial state.'),
+		desc: __('adds a button that will reset the form back to its original state.'),
 	},
 ];
 

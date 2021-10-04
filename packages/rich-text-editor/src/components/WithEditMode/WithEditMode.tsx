@@ -27,7 +27,7 @@ export const WithEditMode: React.FC<WithEditModeProps> = ({ isDisabled, visualEd
 			// if the new tab is index 1, i.e. HTML Editor
 			if (index === 1) {
 				ifMounted(() => {
-					// update the local state to make sure it's upto date
+					// update the local state to make sure it's up to date
 					const html = editorStateToHtml(editorState);
 					setValue(html);
 				});

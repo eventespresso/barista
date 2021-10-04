@@ -24,7 +24,7 @@ const usePricesPolling = (): void => {
 				startPolling(pollInterval);
 			} else {
 				// Since poll interval has changed to falsy
-				// We need to stop ponting our missiles towards the target
+				// We need to stop pointing our missiles towards the target
 				stopPolling();
 			}
 		}

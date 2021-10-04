@@ -16,7 +16,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@master
-            - name: Check for taget RC branches
+            - name: Check for target RC branches
               # It exits if there is no target RC branch
               run: |
                   source tools/utils.sh \

@@ -26,7 +26,7 @@ const TicketCard: React.FC<SimpleEntityRendererProps<RemTicket>> = ({ entity: ti
 						1. interval value, like 10 in "10 days", 15 in "15 minutes"
 						2. the interval e.g. "days", "weeks"
 						3. position (before/after) with respect to start or end date
-						4. the date ("start" or "end") for which the position is sepcified
+						4. the date ("start" or "end") for which the position is specified
 						The final string may look like this:
 						"3 days before the start date"
 						*/
@@ -52,7 +52,7 @@ const TicketCard: React.FC<SimpleEntityRendererProps<RemTicket>> = ({ entity: ti
 						1. interval value, like 10 in "10 days", 15 in "15 minutes"
 						2. the interval e.g. "days", "weeks"
 						3. position (before/after) with respect to start or end date
-						4. the date ("start" or "end") for which the position is sepcified
+						4. the date ("start" or "end") for which the position is specified
 						The final string may look like this:
 						"3 days before the start date"
 						*/

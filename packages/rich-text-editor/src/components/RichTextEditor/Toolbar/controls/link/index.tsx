@@ -13,7 +13,7 @@ const Link: React.FC<ToolbarControlProps<'link'>> = (props) => {
 	const [currentEntity, setCurrentEntity] = useState(editorState ? getSelectionEntity(editorState) : null);
 	const [currentValues, setCurrentValues] = useState<URLData>({ url: '', title: '', openInNewTab: false });
 
-	// update currently selected enity when cursor position changes
+	// update currently selected entity when cursor position changes
 	useEffect(() => {
 		setCurrentEntity(editorState ? getSelectionEntity(editorState) : null);
 	}, [editorState]);
@@ -34,7 +34,7 @@ const Link: React.FC<ToolbarControlProps<'link'>> = (props) => {
 		}
 	}, [currentEntity, editorState]);
 
-	// update currently selected enity details when cursor position changes
+	// update currently selected entity details when cursor position changes
 	useEffect(() => {
 		setSelectionValues();
 	}, [setSelectionValues]);

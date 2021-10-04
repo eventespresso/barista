@@ -30,7 +30,7 @@ const useSyncTPC2RFF = (initialPrices?: TpcPriceModifier[]) => {
 		mutators.updateFieldValue('deletedPrices', deletedPrices);
 	}, [deletedPrices, mutators, prices, ticket]);
 
-	// This effect on mount, feeds intial prices to TPC
+	// This effect on mount, feeds initial prices to TPC
 	useEffect(() => {
 		// If we are lucky
 		if (initialPrices) {

@@ -31,7 +31,7 @@ const calculateBasePrice = (ticketTotal: number, prices: DataState['prices']): n
 		Object.values(orderToPriceMap)
 	);
 
-	// Save the price upto 6 decimals places
+	// Save the price up to 6 decimals places
 	const amount = parsedAmount(newBasePriceAmount).toFixed(TPC_PRICE_DECIMAL_PLACES);
 
 	return parsedAmount(amount);

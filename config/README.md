@@ -27,7 +27,7 @@ Here are a few changes we make to the ejected CRA config.
 -   ### Included paths
 
     Since webpack loaders (like Babel, ESLint, ts-loader etc.) require limited paths to watch for transformation, we need so specify all the paths in `include` option to `babel-loader`, which is done by generating `paths.includePaths` using the same above function.<br />
-    **Note:** We also have some global types in [/types/global.ts](../types/global.ts). These types should also be added to the inlcuded paths in order to transform TS.
+    **Note:** We also have some global types in [/types/global.ts](../types/global.ts). These types should also be added to the included paths in order to transform TS.
 
 -   ### Changes to Webpack ManifestPlugin
 

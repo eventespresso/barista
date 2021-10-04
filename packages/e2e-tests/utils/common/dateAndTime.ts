@@ -3,7 +3,7 @@ import { DEFAULT_DATE_FORMAT, DEFAULT_TIME_FORMAT } from '@eventespresso/constan
 import { getEEDOMData } from './DOMData';
 
 /**
- * Formate the date object using the website format settigs
+ * Format the date object using the website format settings
  */
 export const formatDateTime =
 	(formatStr?: string) =>

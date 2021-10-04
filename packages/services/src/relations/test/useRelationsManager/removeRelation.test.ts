@@ -10,7 +10,7 @@ describe('RelationsManager.removeRelation()', () => {
 	const pathToRelatedEntityIds = ['datetimes', existingRelationalEntityId, 'tickets'];
 	const existingRelatedEntityId = path(pathToRelatedEntityIds, relationalData)[0];
 
-	it('makes no difference when trying to remove a non-existant relation', () => {
+	it('makes no difference when trying to remove a non-existent relation', () => {
 		const { result } = renderHook(() => useRelationsManager(relationalData));
 
 		const options: RelationFunctionProps<'datetimes'> = {

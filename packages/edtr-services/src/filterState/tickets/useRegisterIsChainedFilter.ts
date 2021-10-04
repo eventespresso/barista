@@ -24,7 +24,7 @@ const useRegisterIsChainedFilter: VoidFunction = () => {
 	 * to make sure the stale state is not bound to the filter callback.
 	 */
 	const [isChainedFilter, isChainedDeps] = useIsChainedFilter();
-	// To avoid multiple filter registrations, we will store the aleady registered
+	// To avoid multiple filter registrations, we will store the already registered
 	// filter unSubscribe callback in ref to use it to remove the existing filter.
 	const unSubIsChainedFilterRef = useRef<VoidFunction>();
 

@@ -6,7 +6,7 @@ import { actWait } from '@eventespresso/utils/src/test';
 import useInitPriceTypeTestCache from '@eventespresso/edtr-services/src/apollo/queries/priceTypes/test/useInitPriceTypeTestCache';
 
 describe('useDefaultBasePrice', () => {
-	it('returns the deafult base price when a base price type exists', async () => {
+	it('returns the default base price when a base price type exists', async () => {
 		const { result } = renderHook(
 			() => {
 				return useDefaultBasePrice();

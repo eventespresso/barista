@@ -130,7 +130,7 @@ export function markAsModified<Item extends LocalOnlyFields>(items: Array<Item>,
 
 /**
  * If the `topLevelSection` is not set,
- * it attemps to set the first addded section as the top level one
+ * it attempts to set the first added section as the top level one
  */
 export const maybeSetTopLevelSection = (addedSectionId: string) => {
 	return R.when<FormState, FormState>(

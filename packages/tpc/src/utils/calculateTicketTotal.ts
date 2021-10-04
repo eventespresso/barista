@@ -30,7 +30,7 @@ const calculateTicketTotal = (prices: DataState['prices']): number => {
 	}
 
 	// lets divide them into teams based on ther `order`
-	// Since the keys are numberic, it should be sorted by default
+	// Since the keys are numeric, it should be sorted by default
 	const orderToPriceMap = groupByProp('order', priceModifiers);
 
 	// final nail in the coffin
