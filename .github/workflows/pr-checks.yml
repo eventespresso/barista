@@ -5,6 +5,14 @@ on: [pull_request]
 env:
     PLAYWRIGHT_BROWSERS_PATH: 0 # See https://playwright.dev/docs/ci/#caching-browsers
 
+    # Cancels (by default) all previous workflow runs for pull requests that have not completed.
+concurrency:
+    # The concurrency group contains the workflow name and the branch name for pull requests
+    # or the commit hash for any other events.
+    group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.sha }}
+    # Cancel only if the commit message does not contain "no-cancel"
+    cancel-in-progress: ${{ !contains(github.event.commits[0].message, 'no-cancel') }}
+
 jobs:
     # JOB to check if the files in a path have changed
     what-is-hit:
