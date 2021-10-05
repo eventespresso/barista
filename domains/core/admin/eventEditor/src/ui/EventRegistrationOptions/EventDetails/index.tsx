@@ -20,12 +20,10 @@ const EventDetails: React.FC<Partial<EventRegistrationOptionsProps>> = ({
 	status,
 }) => (
 	<GridCard className='ee-event-details' header={__('Event Details')}>
-		<>
-			<ActiveStatus status={status} onStatusChange={onStatusChange} />
-			<EventManager eventManagers={eventManagers} managerId={managerId} onManagerChange={onManagerChange} />
-			<EventPhoneNumber phoneNumber={phoneNumber} onPhoneNumberChange={onPhoneNumberChange} />
-			<Donations allowDonations={allowDonations} onDonationsChange={onDonationsChange} />
-		</>
+		<ActiveStatus status={status} onStatusChange={onStatusChange} />
+		<EventManager eventManagers={eventManagers} managerId={managerId} onManagerChange={onManagerChange} />
+		<EventPhoneNumber phoneNumber={phoneNumber} onPhoneNumberChange={onPhoneNumberChange} />
+		<Donations allowDonations={allowDonations} onDonationsChange={onDonationsChange} />
 	</GridCard>
 );
 

@@ -20,18 +20,13 @@ const RegistrationOptions: React.FC<Partial<EventRegistrationOptionsProps>> = ({
 	onMaxRegChange = noop,
 }) => (
 	<GridCard className='ee-reg-options' header={__('Registration Options')}>
-		<>
-			<DefaultRegistrationStatus
-				defaultRegStatus={defaultRegStatus}
-				onDefaultRegStatusChange={onDefaultRegStatusChange}
-			/>
-			<TicketSelector
-				displayTicketSelector={displayTicketSelector}
-				onTicketSelectorChange={onTicketSelectorChange}
-			/>
-			<MaxRegistrations maxReg={maxReg} onMaxRegChange={onMaxRegChange} />
-			<AltRegPage altRegPage={altRegPage} onAltRegPageChange={onAltRegPageChange} />
-		</>
+		<DefaultRegistrationStatus
+			defaultRegStatus={defaultRegStatus}
+			onDefaultRegStatusChange={onDefaultRegStatusChange}
+		/>
+		<TicketSelector displayTicketSelector={displayTicketSelector} onTicketSelectorChange={onTicketSelectorChange} />
+		<MaxRegistrations maxReg={maxReg} onMaxRegChange={onMaxRegChange} />
+		<AltRegPage altRegPage={altRegPage} onAltRegPageChange={onAltRegPageChange} />
 	</GridCard>
 );
 
