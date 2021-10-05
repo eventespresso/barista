@@ -5,20 +5,19 @@ import type { EventRegistrationOptionsProps } from '../types';
 interface Props extends Pick<EventRegistrationOptionsProps, 'maxReg' | 'onMaxRegChange'> {}
 
 const MaxRegistrations: React.FC<Props> = ({ maxReg, onMaxRegChange }) => {
-	const id = 'ee-event-registration-max-reg';
 	const strValue = maxReg && String(maxReg);
 
 	return (
 		<InlineEditTextWithLabel
-			id={id}
+			id='ee-event-registration-max-reg'
 			label={__('Max Registrations per Transaction')}
-			className='ee-reg-option__max-reg'
+			className='ee-edtr-option ee-edtr-option__max-reg'
 			labelClassName='ee-grid__item-label'
 			labelPosition='left-middle'
-			aria-describedby={id}
 			onChange={onMaxRegChange}
 			tag='h4'
 			value={strValue}
+			wrapperClassName='ee-edtr-option__wrapper ee-edtr-option__max-reg-wrapper'
 		/>
 	);
 };

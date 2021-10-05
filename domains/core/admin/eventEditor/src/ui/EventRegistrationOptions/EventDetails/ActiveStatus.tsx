@@ -11,25 +11,29 @@ import type { EventRegistrationOptionsProps } from '../types';
 interface Props extends Pick<EventRegistrationOptionsProps, 'status' | 'onStatusChange'> {}
 
 const ActiveStatus: React.FC<Props> = ({ status, onStatusChange }) => {
-	const bgColorClassName = datetimeStatusBgColorClassName(null);
-	const className = classNames('ee-status-background', bgColorClassName, 'ee-reg-option__active-status');
-	const id = 'ee-event-registration-active-status';
+	const className = classNames(
+		'ee-status-background',
+		'ee-edtr-option',
+		'ee-edtr-option__active-status',
+		datetimeStatusBgColorClassName(null)
+	);
 
 	const options = useMemo(() => objectToSelectOptions(datetimeStatus), []);
 
 	return (
 		<SelectWithLabel
 			className={className}
-			label={__('Active status')}
 			fitContainer
 			flow='inline'
-			id={`${id}-select`}
+			id='ee-event-registration-active-status-select'
+			label={__('Active status')}
+			labelClassName='ee-grid__item-label'
+			labelPosition='left-middle'
 			noBorderColor
 			onChangeValue={onStatusChange}
 			options={options}
 			value={status}
-			labelClassName='ee-grid__item-label'
-			labelPosition='left-middle'
+			wrapperClassName='ee-edtr-option__wrapper ee-edtr-option__active-status-wrapper'
 		/>
 	);
 };
