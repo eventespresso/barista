@@ -1,74 +1,39 @@
 @import '~@eventespresso/styles/src/mixins/breakpoints';
 
 .ee-grid.ee-grid {
-	.ee-reg-option {
-		&__active-status,
-		&__event-manager,
-		&__event-phone,
-		&__event-donations,
-		&__default-status,
-		&__ticket,
-		&__max-reg,
-		&__alt-reg {
-			min-height: 42px;
+	.ee-edtr-option {
+		font-size: var(--ee-font-size-big);
+		color: var(--ee-default-text-color-low-contrast);
+		font-weight: 700;
 
-			.ee-tabbable-text {
-				padding-left: 12px;
-
-				.ee-tabbable-text__inner_wrapper {
-					margin-right: auto;
-				}
-			}
-		}
-
-		&__max-reg,
-		&__event-phone,
-		&__default-status,
-		&__active-status,
-		&__event-manager,
-		&__alt-reg {
+		@include min1024px {
 			font-size: var(--ee-font-size-bigger);
-			color: var(--ee-color-grey-7);
-			font-weight: bold;
-
-			span.ee-tabbable-text__inner_wrapper {
-				line-height: normal;
-			}
 		}
 
-		&__default-status,
-		&__active-status {
+		&__active-status,
+		&__default-reg-status,
+		&__active-status-wrapper .chakra-select__icon-wrapper,
+		&__default-reg-status-wrapper .chakra-select__icon-wrapper {
 			color: var(--ee-color-white);
 
 			&:hover {
 				color: var(--ee-color-white);
 			}
+		}
 
-			h3.ee-edtr-section-heading.ee-heading.ee-heading {
-				font-size: calc(var(--ee-font-size-huge) * 1.375);
+		.ee-tabbable-text {
+			padding-inline-start: var(--ee-padding-small);
+
+			.ee-tabbable-text__inner_wrapper {
+				margin-right: auto;
+				line-height: normal;
 			}
 		}
 
-		&__event-donations,
-		&__ticket {
+		&.ee-switch {
 			display: flex;
 			align-items: center;
-			padding-left: 14px;
+			padding: var(--ee-padding-small);
 		}
-	}
-}
-
-.ee-edtr-section {
-	.ee-input-label {
-		white-space: normal;
-	}
-
-	.ee-grid-card .chakra-select__icon-wrapper {
-		color: var(--ee-color-white);
-	}
-
-	h3.chakra-heading.ee-heading.ee-grid-card__heading {
-		font-size: calc(var(--ee-font-size-huge) * 1.375);
-		margin-bottom: 15px;
 	}
 }
