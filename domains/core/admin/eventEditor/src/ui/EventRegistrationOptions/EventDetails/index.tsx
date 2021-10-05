@@ -19,7 +19,7 @@ const EventDetails: React.FC<Partial<EventRegistrationOptionsProps>> = ({
 	phoneNumber,
 	status,
 }) => (
-	<GridCard className='ee-grid--one' header={__('Event Details')}>
+	<GridCard className='ee-event-details' header={__('Event Details')}>
 		<>
 			<ActiveStatus status={status} onStatusChange={onStatusChange} />
 			<EventManager eventManagers={eventManagers} managerId={managerId} onManagerChange={onManagerChange} />

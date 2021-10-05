@@ -19,7 +19,7 @@ const RegistrationOptions: React.FC<Partial<EventRegistrationOptionsProps>> = ({
 	onTicketSelectorChange,
 	onMaxRegChange = noop,
 }) => (
-	<GridCard className='ee-grid--one' header={__('Registration Options')}>
+	<GridCard className='ee-reg-options' header={__('Registration Options')}>
 		<>
 			<DefaultRegistrationStatus
 				defaultRegStatus={defaultRegStatus}
