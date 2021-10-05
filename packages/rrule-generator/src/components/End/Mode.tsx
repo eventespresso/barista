@@ -25,7 +25,15 @@ const Mode: React.FC<ModeProps> = ({ id, mode, onChange }) => {
 
 	return (
 		<>
-			<Select id={id} value={mode} name={id} onBlur={onChangeMode} onChange={onChangeMode} width='auto'>
+			<Select
+				className='rrule-generator__end-after'
+				id={id}
+				value={mode}
+				name={id}
+				onBlur={onChangeMode}
+				onChange={onChangeMode}
+				width='auto'
+			>
 				{endModes.map((endMode) => {
 					return (
 						<option key={endMode} value={endMode}>

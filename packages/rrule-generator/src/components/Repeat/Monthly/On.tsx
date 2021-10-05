@@ -40,8 +40,6 @@ const On: React.FC<OnProps> = ({ id, isTheOnlyMode, onChangeMode }) => {
 				</Radio>
 			)}
 
-			<Divider orientation='vertical' size='micro' />
-
 			<Select
 				aria-label={__('Repeat monthly on a day')}
 				id={`${id}-day`}

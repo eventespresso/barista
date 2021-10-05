@@ -7,7 +7,7 @@
 		font-size: var(--ee-font-size-default);
 		font-family: var(--ee-admin-font-family);
 		line-height: var(--ee-icon-button-size); // 42px
-		padding-right: var(--ee-padding-tiny);
+
 		text-align: right;
 	}
 
@@ -23,6 +23,7 @@
 			display: flex;
 			flex-wrap: wrap;
 			margin-bottom: 1rem;
+			width: 100%;
 
 			&:last-child {
 				margin-bottom: 0;
@@ -40,6 +41,10 @@
 
 	&__frequency {
 		flex: 0 1 80%;
+		// > .ee-select-wrapper {
+		// 	min-width: 214px;
+		// 	// border: 1px solid red;
+		// }
 	}
 
 	&__on,
@@ -48,25 +53,37 @@
 		display: flex;
 		margin-top: 1rem;
 		width: 100%;
+		flex-direction: row;
 
 		span {
 			font-size: var(--ee-font-size-default);
 			font-family: var(--ee-admin-font-family);
-			margin: 0 var(--ee-margin-micro);
+			margin-right: var(--ee-margin-micro);
+			margin: 0;
 			white-space: nowrap;
+			// text-align: left;
+			// width: 45px;
 		}
 
 		.ee-select-wrapper {
-			width: auto;
+			// width: auto;
 
-			select {
-				width: auto;
+			.rrule-generator__month {
+				min-width: 115px;
 			}
 		}
 
 		.ee-radio__wrapper {
+			margin: 0;
+
 			+ span {
 				padding-left: 0;
+			}
+
+			label.chakra-radio {
+				text-align: left;
+				min-width: 95px;
+				// border: 1px solid red;
 			}
 		}
 	}
@@ -108,25 +125,30 @@
 			}
 		}
 
-		@at-root select#{&} {
-			height: 2rem;
+		// @at-root select#{&} {
+		// 	height: 2rem;
 
-			&--medium-width {
-				min-width: 6rem !important;
-			}
-		}
+		// 	&--medium-width {
+		// 		min-width: 6rem !important;
+		// 	}
+		// }
 
-		&.rrule-generator {
-			&__day {
-				width: 50px;
-			}
+		// &.rrule-generator {
+		// 	// &__day {
+		// 	// 	width: 50px;
+		// 	// }
 
-			&__month {
-				min-width: 60px;
-				width: 140px;
-			}
-		}
+		// 	&__day,
+		// 	&__month {
+		// 		min-width: 115px;
+		// 	}
+		// }
 	}
+
+	// &__day,
+	// &__month {
+	// 	min-width: 115px;
+	// }
 
 	&__repeat {
 		&-daily,
@@ -135,4 +157,46 @@
 			margin-top: 1rem;
 		}
 	}
+
+	// &__frequency > .ee-select-wrapper,
+	// &__end-after,
+	// .react-datepicker__input-container {
+	// 	width: 214px;
+	// 	// border: 1px solid red;
+	// }
+
+	// &__form-group-row {
+	// 	align-items: baseline;
+	// }
+	// select {
+	// 	width: 115px !important;
+	// }
+	.react-datepicker__input-container,
+	&__frequency > .ee-select-wrapper,
+	&__end-after.chakra-select.ee-select {
+		width: 210px;
+	}
+
+	.rrule-text {
+		margin-bottom: 1rem;
+	}
+
+	.col-form-label {
+		align-self: baseline;
+		font-weight: bold;
+	}
+
+	.chakra-numberinput__field,
+	label {
+		padding-right: var(--ee-padding-small);
+	}
+
+	.chakra-radio__label {
+		margin-right: 0;
+	}
 }
+
+// .rrule-generator__end-after {
+// 	width: 214px !important;
+// 	border: 1px solid red !important;
+// }

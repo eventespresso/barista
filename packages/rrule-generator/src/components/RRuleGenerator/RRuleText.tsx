@@ -13,7 +13,7 @@ const RRuleText: React.FC<RRuleTextProps> = ({ rRuleString }) => {
 		ruleText && (
 			<>
 				<div className='rrule-text'>{ruleText}</div>
-				<Divider size='small' />
+				{/* <Divider size='small' /> */}
 			</>
 		)
 	);
