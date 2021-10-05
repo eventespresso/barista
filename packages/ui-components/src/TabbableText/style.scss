@@ -11,6 +11,13 @@
 	padding: var(--ee-padding-micro) var(--ee-padding-tiny) var(--ee-padding-micro) var(--ee-padding-micro);
 	position: relative;
 
+	&--no-text {
+		color: var(--ee-default-text-color-low-contrast);
+		font-size: var(--ee-font-size-small);
+		font-weight: 500;
+	}
+	// &--is-disabled {}
+
 	p {
 		font-size: var(--ee-font-size-default);
 		line-height: var(--ee-font-size-bigger);
