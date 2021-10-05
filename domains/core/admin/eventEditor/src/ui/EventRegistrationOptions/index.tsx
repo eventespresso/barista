@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { Grid } from '@eventespresso/ui-components';
 import { noop } from '@eventespresso/utils';
 import { withFeature } from '@eventespresso/services';
@@ -10,15 +9,6 @@ import withData from './withData';
 import type { EventRegistrationOptionsProps } from './types';
 
 import './style.scss';
-
-const className = classNames(
-	'ee-edtr-section',
-	'ee-grid--two',
-	'ee-grid--size-sm',
-	'ee-grid--size-md',
-	'ee-grid--size-lg',
-	'ee-reg-option'
-);
 
 export const EventRegistrationOptions: React.FC<Partial<EventRegistrationOptionsProps>> = ({
 	allowDonations,
@@ -63,7 +53,7 @@ export const EventRegistrationOptions: React.FC<Partial<EventRegistrationOptions
 	};
 
 	return (
-		<Grid className={className}>
+		<Grid className='ee-edtr-section ee-edtr-cards' maxColumns={2} size='big'>
 			<EventDetails {...eventDetails} />
 			<RegistrationOptions {...registrationOptions} />
 		</Grid>
