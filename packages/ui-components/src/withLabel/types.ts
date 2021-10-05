@@ -21,4 +21,5 @@ export interface WithLabelProps extends Pick<LabelProps, 'id' | 'label'>, Requir
 	labelClassName?: string;
 	labelPosition?: LabelPosition;
 	noPadding?: boolean;
+	wrapperClassName?: string;
 }

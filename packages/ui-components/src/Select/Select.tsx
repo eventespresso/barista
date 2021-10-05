@@ -11,15 +11,19 @@ import type { SelectProps } from './types';
 import './style.scss';
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps & React.ComponentProps<typeof InlineSelect>>(
-	({ fitContainer, flow, id, noBorderColor, onChangeInstantValue, size, ...props }, ref) => {
+	({ fitContainer, flow, id, noBorderColor, onChangeInstantValue, size, wrapperClassName, ...props }, ref) => {
 		const className = classNames(
 			'ee-select',
 			noBorderColor && 'ee-select--no-border-color',
 			props.className,
 			size && size !== 'default' && [`ee-select--${size}`]
 		);
-		const wrapperClassName = classNames('ee-select-wrapper', fitContainer && 'ee-select-wrapper--fit-container');
-		const rootProps = useMemo(() => ({ className: wrapperClassName, width: 'max-content' }), [wrapperClassName]);
+		const wrapperClass = classNames(
+			wrapperClassName,
+			'ee-select-wrapper',
+			fitContainer && 'ee-select-wrapper--fit-container'
+		);
+		const rootProps = useMemo(() => ({ className: wrapperClass, width: 'max-content' }), [wrapperClass]);
 
 		if (flow === 'inline') {
 			return (

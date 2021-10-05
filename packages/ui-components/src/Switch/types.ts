@@ -1,3 +1,5 @@
 import type { SwitchProps as SwitchAdapterProps } from '@eventespresso/adapters';
 
-export interface SwitchProps extends SwitchAdapterProps {}
+export interface SwitchProps extends SwitchAdapterProps {
+	wrapperClass?: string;
+}
