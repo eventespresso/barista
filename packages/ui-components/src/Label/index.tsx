@@ -12,10 +12,13 @@ export interface LabelProps extends RequiredIndicatorProps {
 	className?: string;
 }
 
+export const labelIDGenerator = (id: string) => `${id}-label`;
+
 export const Label: React.FC<LabelProps> = ({ ariaLabel, className, hidden = false, id, label, isRequired }) => {
+	const labelID = labelIDGenerator(id);
 	const labelClassName = classNames('ee-input-label', hidden && 'screen-reader-text', className);
 	return (
-		<label aria-label={ariaLabel || label} className={labelClassName} id={`${id}-label`} htmlFor={id}>
+		<label aria-label={ariaLabel || label} className={labelClassName} id={labelID} htmlFor={id}>
 			{label}
 			<RequiredIndicator isRequired={isRequired} />
 		</label>
