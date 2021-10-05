@@ -1,12 +1,15 @@
+import type { GridProps as GridAdapterProps } from '@eventespresso/adapters';
 import type { Size } from '../../';
 
+export interface GridProps extends GridAdapterProps, Size {
+	className?: string;
+	maxColumns?: number;
+}
 export interface GridItemProps extends Size {
-	children: JSX.Element;
 	className?: string;
 	id?: string;
 }
 
 export interface GridCardProps extends GridItemProps {
-	children: JSX.Element;
 	header?: string;
 }
