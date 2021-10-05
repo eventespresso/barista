@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import classNames from 'classnames';
 
-import { Label } from '../Label';
+import { Label, labelIDGenerator } from '../Label';
 
 import type { AnyObject } from '@eventespresso/utils';
 import type { WithLabelProps } from './types';
@@ -17,32 +17,38 @@ const withLabel = <P extends AnyObject>(
 	const WithLabel: React.FC<P & WithLabelProps & RefProps> = ({
 		fontWeightNormal,
 		forwardedRef,
+		id,
+		isRequired,
 		label,
 		labelClassName,
 		labelPosition = 'top-left',
 		noPadding,
-		isRequired,
+		wrapperClassName,
 		...props
 	}) => {
 		const className = classNames(
 			'ee-input__wrapper',
-			labelClassName,
+			wrapperClassName,
 			label && 'ee-input-label__wrapper',
 			label && labelPosition && `ee-input-label__wrapper--${labelPosition}`,
 			fontWeightNormal && `ee-input-label__wrapper--font-weight-normal`,
 			noPadding && `ee-input-label__wrapper--no-padding`
 		);
 
-		const id = props.id && 'ee-' + props.id;
-
 		return label ? (
 			<div className={className}>
-				<Label ariaLabel={props['aria-label'] || label} id={id} label={label} isRequired={isRequired} />
+				<Label
+					ariaLabel={props['aria-label'] || label}
+					className={labelClassName}
+					id={id}
+					label={label}
+					isRequired={isRequired}
+				/>
 				<WrappedComponent
 					{...(props as P)}
 					aria-label={null} // avoid duplicate aria-label
 					id={id}
-					aria-labelledby={`${id}-label`}
+					aria-labelledby={labelIDGenerator(id)}
 					ref={forwardedRef}
 				/>
 			</div>
