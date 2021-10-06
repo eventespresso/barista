@@ -59,7 +59,7 @@ const OnThe: React.FC<OnProps> = ({ id, isTheOnlyMode, onChangeMode }) => {
 				value={onThe.which}
 			/>
 
-			<Divider orientation='vertical' size='micro' />
+			<Divider orientation='vertical' size='tiny' />
 
 			<Select
 				id={`${id}-day`}

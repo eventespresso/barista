@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import { __ } from '@eventespresso/i18n';
-import { Row, NumberInput, Stack, Label } from '@eventespresso/ui-components';
+import { Row, NumberInput, Stack, Label, Divider } from '@eventespresso/ui-components';
 
 import On from './On';
 import OnThe from './OnThe';
@@ -30,7 +30,7 @@ const Monthly: React.FC<BaseProps> = ({ id }) => {
 
 	return (
 		<Stack className='rrule-generator__form-group-row rrule-generator__form-group-row--align-items-start rrule-generator__form-group-row--no-label rrule-generator__repeat-monthly'>
-			<Row>
+			<Row className='rrule-generator-repeat-every'>
 				<Label label={__('every')} />
 				{/* <label className='rrule-generator__labelled-input'>
 				<span>{__('every')}</span> */}
@@ -46,6 +46,7 @@ const Monthly: React.FC<BaseProps> = ({ id }) => {
 				/>
 				{/* <span>{__('month(s)')}</span>
 			</label> */}
+				{/* <Divider orientation='vertical' size='tiny' /> */}
 				<Label label={__('month(s)')} />
 			</Row>
 

@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { __ } from '@eventespresso/i18n';
 
-import { Divider, NumberInput, Stack, Label } from '@eventespresso/ui-components';
+import { Row, NumberInput, Stack, Label } from '@eventespresso/ui-components';
 
 import { useRRuleState } from '../../../hooks';
 import { SHORT_DAYS } from '../../../constants';
@@ -34,21 +34,22 @@ const Weekly: React.FC<BaseProps> = ({ id }) => {
 		<Stack className='rrule-generator__form-group-row rrule-generator__form-group-row--align-items-start rrule-generator__form-group-row--no-label rrule-generator__repeat-weekly'>
 			{/* <label className='rrule-generator__labelled-input'>
 				<span>{__('every')}</span> */}
-			<Label label={__('every')} />
-			{/* <Divider orientation='vertical' size='tiny' /> */}
-			<NumberInput
-				aria-label={__('Repeat weekly interval')}
-				id={`${id}-interval`}
-				name={`${id}-interval`}
-				onChange={onChangeInterval}
-				showStepper={false}
-				value={weekly?.interval}
-				visibleDigits={3}
-			/>
-			{/* <span>{__('week(s)')}</span>
+			<Row>
+				<Label label={__('every')} />
+				{/* <Divider orientation='vertical' size='tiny' /> */}
+				<NumberInput
+					aria-label={__('Repeat weekly interval')}
+					id={`${id}-interval`}
+					name={`${id}-interval`}
+					onChange={onChangeInterval}
+					showStepper={false}
+					value={weekly?.interval}
+					visibleDigits={3}
+				/>
+				{/* <span>{__('week(s)')}</span>
 			</label> */}
-			<Label label={__('week(s)')} />
-
+				<Label label={__('week(s)')} />
+			</Row>
 			{/* TODO arrange days according to week start day */}
 			<div className='rrule-generator__week-day-checkbox-group'>
 				{Object.entries(weekly?.days).map(([dayName, isDayActive]) => {

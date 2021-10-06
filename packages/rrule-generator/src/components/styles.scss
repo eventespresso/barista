@@ -61,6 +61,9 @@
 			margin-right: var(--ee-margin-micro);
 			margin: 0;
 			white-space: nowrap;
+			padding: 0 var(--ee-padding-tiny);
+			// border: 1px solid red;
+			// padding-left: 5px;
 			// text-align: left;
 			// width: 45px;
 		}
@@ -77,7 +80,8 @@
 			margin: 0;
 
 			+ span {
-				padding-left: 0;
+				// padding-left: 0;
+				// padding-left: 5px;
 			}
 
 			label.chakra-radio {
@@ -188,7 +192,11 @@
 
 	.chakra-numberinput__field,
 	label {
-		padding-right: var(--ee-padding-small);
+		padding: 0 var(--ee-padding-tiny) 0 0;
+	}
+
+	.chakra-numberinput {
+		margin-right: var(--ee-margin-tiny);
 	}
 
 	.chakra-radio__label {
