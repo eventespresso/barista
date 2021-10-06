@@ -37,13 +37,13 @@ add_action(
             'FHEE__EventEspresso_core_domain_services_capabilities_FeatureFlags',
             function ($capabilities) {
                 return array_merge($capabilities, [
+                    'use_advanced_event_editor'  => true,
                     'use_bulk_edit'              => true,
                     'use_default_ticket_manager' => true,
                     'use_event_description_rte'  => true,
                     'use_experimental_rte'       => true,
-                    'use_reg_options_meta_box'   => true,
-                    'ee_advanced_event_editor'   => true,
                     'use_reg_form_builder'       => true,
+                    'use_reg_options_meta_box'   => true,
                 ]);
             }
         );
