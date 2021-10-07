@@ -1,4 +1,4 @@
-import { saveVideo } from 'playwright-video';
+import { saveVideo, PageVideoCapture } from 'playwright-video';
 
 import {
 	createNewEvent,
@@ -24,8 +24,10 @@ const tamrover = new TAMRover('datetime');
 
 const namespace = 'date-capacity-vs-ticket-qty';
 
+let capture: PageVideoCapture;
+
 beforeAll(async () => {
-	await saveVideo(page, `artifacts/${namespace}.mp4`);
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 
 	await createNewEvent({ title: namespace });
 
@@ -60,6 +62,10 @@ beforeAll(async () => {
 
 	// Lets now remove all the filters for tickets to make sure we can view all the tickets
 	await ticketsParser.removeAllFilters();
+});
+
+afterAll(async () => {
+	await capture?.stop();
 });
 
 describe(namespace, () => {
