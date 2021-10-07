@@ -22,55 +22,58 @@
 			align-items: center;
 			display: flex;
 			flex-wrap: wrap;
-			margin-bottom: 1rem;
+			margin-block-end: var(--ee-margin-small);
 			width: 100%;
 
 			&:last-child {
-				margin-bottom: 0;
-			}
-
-			&--align-items-start {
-				align-items: flex-start;
-			}
-
-			&--no-label {
-				flex-direction: column;
+				margin-block-end: 0;
 			}
 		}
 	}
 
 	&__frequency {
 		flex: 0 1 80%;
-		// > .ee-select-wrapper {
-		// 	min-width: 214px;
-		// 	// border: 1px solid red;
-		// }
+
+		> {
+			* {
+				margin-block-end: var(--ee-margin-small);
+			}
+
+			section > {
+				margin-block-end: 0;
+
+				* {
+					margin-block-end: var(--ee-margin-small);
+				}
+
+				:last-child {
+					margin-block-end: 0;
+				}
+			}
+
+			:last-child {
+				margin-block-end: 0;
+			}
+		}
 	}
 
 	&__on,
 	&__on-the {
 		align-items: center;
 		display: flex;
-		margin-top: 1rem;
 		width: 100%;
 		flex-direction: row;
 
 		span {
 			font-size: var(--ee-font-size-default);
 			font-family: var(--ee-admin-font-family);
-			margin-right: var(--ee-margin-micro);
+			margin-inline-end: var(--ee-margin-micro);
 			margin: 0;
 			white-space: nowrap;
 			padding: 0 var(--ee-padding-tiny);
-			// border: 1px solid red;
-			// padding-left: 5px;
-			// text-align: left;
-			// width: 45px;
 		}
 
 		.ee-select-wrapper {
-			// width: auto;
-
 			.rrule-generator__month {
 				min-width: 115px;
 			}
@@ -79,40 +82,9 @@
 		.ee-radio__wrapper {
 			margin: 0;
 
-			+ span {
-				// padding-left: 0;
-				// padding-left: 5px;
-			}
-
 			label.chakra-radio {
 				text-align: left;
 				min-width: 95px;
-				// border: 1px solid red;
-			}
-		}
-	}
-
-	&__labelled-input {
-		@at-root label#{&} {
-			align-items: center;
-			display: flex !important;
-			flex: initial;
-			margin: 0 !important;
-			padding: 0;
-			max-width: none;
-
-			.ee-number-input {
-				margin-right: var(--ee-margin-smaller);
-			}
-
-			span {
-				color: var(--ee-color-primary-high-contrast);
-				font-size: var(--ee-font-size-default);
-
-				+ input {
-					margin-left: 0.5rem;
-					margin-right: 0.5rem !important;
-				}
 			}
 		}
 	}
@@ -120,7 +92,7 @@
 	&__form-control {
 		.rrule-generator & {
 			color: var(--ee-default-text-color-high-contrast);
-			margin-right: 1rem;
+			margin-inline-end: var(--ee-margin-small);
 			min-width: 140px;
 			width: 100%;
 
@@ -128,61 +100,20 @@
 				color: var(--ee-default-text-color-high-contrast);
 			}
 		}
-
-		// @at-root select#{&} {
-		// 	height: 2rem;
-
-		// 	&--medium-width {
-		// 		min-width: 6rem !important;
-		// 	}
-		// }
-
-		// &.rrule-generator {
-		// 	// &__day {
-		// 	// 	width: 50px;
-		// 	// }
-
-		// 	&__day,
-		// 	&__month {
-		// 		min-width: 115px;
-		// 	}
-		// }
 	}
 
-	// &__day,
-	// &__month {
-	// 	min-width: 115px;
-	// }
-
-	&__repeat {
-		&-daily,
-		&-monthly,
-		&-weekly {
-			margin-top: 1rem;
-		}
-	}
-
-	// &__frequency > .ee-select-wrapper,
-	// &__end-after,
-	// .react-datepicker__input-container {
-	// 	width: 214px;
-	// 	// border: 1px solid red;
-	// }
-
-	// &__form-group-row {
-	// 	align-items: baseline;
-	// }
-	// select {
-	// 	width: 115px !important;
-	// }
 	.react-datepicker__input-container,
 	&__frequency > .ee-select-wrapper,
-	&__end-after.chakra-select.ee-select {
+	&__select-end.chakra-select.ee-select {
 		width: 210px;
 	}
 
+	&__label-every label {
+		color: var(--ee-color-primary);
+	}
+
 	.rrule-text {
-		margin-bottom: 1rem;
+		margin-block-end: var(--ee-margin-small);
 	}
 
 	.col-form-label {
@@ -196,15 +127,10 @@
 	}
 
 	.chakra-numberinput {
-		margin-right: var(--ee-margin-tiny);
+		margin-inline-end: var(--ee-margin-tiny);
 	}
 
 	.chakra-radio__label {
-		margin-right: 0;
+		margin-inline-end: 0;
 	}
 }
-
-// .rrule-generator__end-after {
-// 	width: 214px !important;
-// 	border: 1px solid red !important;
-// }

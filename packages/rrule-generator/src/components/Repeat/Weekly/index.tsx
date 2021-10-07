@@ -31,12 +31,9 @@ const Weekly: React.FC<BaseProps> = ({ id }) => {
 	);
 
 	return (
-		<Stack className='rrule-generator__form-group-row rrule-generator__form-group-row--align-items-start rrule-generator__form-group-row--no-label rrule-generator__repeat-weekly'>
-			{/* <label className='rrule-generator__labelled-input'>
-				<span>{__('every')}</span> */}
-			<Row>
+		<Stack>
+			<Row className='rrule-generator__label-every'>
 				<Label label={__('every')} />
-				{/* <Divider orientation='vertical' size='tiny' /> */}
 				<NumberInput
 					aria-label={__('Repeat weekly interval')}
 					id={`${id}-interval`}
@@ -46,12 +43,10 @@ const Weekly: React.FC<BaseProps> = ({ id }) => {
 					value={weekly?.interval}
 					visibleDigits={3}
 				/>
-				{/* <span>{__('week(s)')}</span>
-			</label> */}
 				<Label label={__('week(s)')} />
 			</Row>
 			{/* TODO arrange days according to week start day */}
-			<div className='rrule-generator__week-day-checkbox-group'>
+			<Row className='rrule-generator__week-day-checkbox-group'>
 				{Object.entries(weekly?.days).map(([dayName, isDayActive]) => {
 					const dayId = `${id}-${dayName}`;
 
@@ -59,7 +54,6 @@ const Weekly: React.FC<BaseProps> = ({ id }) => {
 						<label htmlFor={dayId} key={dayName} className={isDayActive ? 'active' : ''}>
 							<input
 								checked={isDayActive}
-								className='rrule-generator__form-control rrule-generator__input'
 								id={dayId}
 								name={dayId}
 								onChange={onChangeDays}
@@ -69,7 +63,7 @@ const Weekly: React.FC<BaseProps> = ({ id }) => {
 						</label>
 					);
 				})}
-			</div>
+			</Row>
 		</Stack>
 	);
 };

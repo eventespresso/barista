@@ -14,12 +14,9 @@ const Daily: React.FC<BaseProps> = ({ id }) => {
 	const onChangeInterval = useIntervalUpdater('daily', setRepeatInterval);
 
 	return (
-		<Stack className='rrule-generator__form-group-row rrule-generator__form-group-row--align-items-start rrule-generator__form-group-row--no-label rrule-generator__repeat-daily'>
-			<Row>
+		<Stack>
+			<Row className='rrule-generator__label-every'>
 				<Label label={__('every')} />
-				{/* <label className='rrule-generator__labelled-input'>
-				<span>{__('every')}</span>
-				<Divider orientation='vertical' size='tiny' /> */}
 				<NumberInput
 					aria-label={__('Repeat daily interval')}
 					id={`${id}-interval`}
@@ -29,8 +26,6 @@ const Daily: React.FC<BaseProps> = ({ id }) => {
 					value={daily?.interval}
 					visibleDigits={3}
 				/>
-				{/* <span>{__('day(s)')}</span>
-			</label> */}
 				<Label label={__('day(s)')} />
 			</Row>
 		</Stack>

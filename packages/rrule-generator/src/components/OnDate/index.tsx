@@ -26,7 +26,7 @@ const OnDate: React.FC<OnDateProps> = ({ id, date, label, maxDate, onChange }) =
 	);
 
 	return (
-		<Row className='rrule-generator__on-date'>
+		<Row>
 			<DateComponent {...calendarAttributes} maxDate={maxDate} onChange={onChange} />
 		</Row>
 	);

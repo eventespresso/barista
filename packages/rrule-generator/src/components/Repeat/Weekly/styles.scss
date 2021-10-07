@@ -5,7 +5,6 @@
 		&-checkbox-group {
 			display: flex;
 			justify-content: flex-end;
-			margin-top: 1rem;
 
 			input[type='checkbox'] {
 				position: absolute;
@@ -16,7 +15,6 @@
 
 					border: var(--ee-border-width) solid var(--ee-border-color);
 					border-right: none;
-					// border-radius: 50%;
 					display: inline-flex;
 					padding: var(--ee-padding-smaller) var(--ee-padding-micro);
 					height: var(--ee-height-big);
@@ -32,7 +30,7 @@
 				}
 
 				&:checked ~ span {
-					background-color: rgb(41, 122, 188);
+					background-color: var(--ee-color-primary);
 					border-color: transparent;
 					color: white;
 				}
@@ -41,8 +39,6 @@
 			label {
 				flex: none;
 				padding: 0;
-				// padding-left: 0.5rem;
-				// padding-right: 0.5rem;
 
 				&:first-child {
 					input[type='checkbox'] {

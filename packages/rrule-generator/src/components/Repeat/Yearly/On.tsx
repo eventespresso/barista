@@ -62,7 +62,7 @@ const On: React.FC<OnProps> = ({ id, isTheOnlyMode, onChangeMode }) => {
 				id={`${id}-month`}
 				name={`${id}-month`}
 				aria-label={__('Repeat yearly on month')}
-				className='rrule-generator__select rrule-generator__month'
+				className='rrule-generator__month'
 				value={on.month}
 				isDisabled={!isActive}
 				onBlur={onChangeMonth}

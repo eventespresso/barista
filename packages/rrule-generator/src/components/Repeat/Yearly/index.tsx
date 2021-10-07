@@ -20,7 +20,7 @@ const Yearly: React.FC<BaseProps> = ({ id }) => {
 	);
 
 	return (
-		<Stack className='rrule-generator__form-group-row rrule-generator__form-group-row--align-items-start rrule-generator__form-group-row--no-label'>
+		<Stack>
 			{yearlyModes?.includes('ON') && (
 				<On id={`${id}-on`} isTheOnlyMode={isTheOnlyMode} onChangeMode={onChangeMode} />
 			)}

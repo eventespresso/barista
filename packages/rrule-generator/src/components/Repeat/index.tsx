@@ -16,9 +16,6 @@ const Repeat: React.FC<BaseProps> = ({ id }) => {
 	return (
 		<Row className='rrule-generator__form-group-row'>
 			<Label id={frequencyId} className='col-form-label' label={__('Repeat')} />
-			{/* <label htmlFor={frequencyId} className='col-form-label'>
-				<strong>{__('Repeat')}</strong>
-			</label> */}
 			<Frequency frequency={frequency} id={frequencyId} onChange={setRepeatFrequency} />
 		</Row>
 	);
