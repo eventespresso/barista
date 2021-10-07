@@ -1,6 +1,6 @@
 import { __ } from '@eventespresso/i18n';
 import { InlineEditTextWithLabel } from '@eventespresso/ui-components';
-import type { EventRegistrationOptionsProps } from '../types';
+import type { EventRegistrationOptionsProps } from './types';
 
 interface Props extends Pick<EventRegistrationOptionsProps, 'phoneNumber' | 'onPhoneNumberChange'> {}
 

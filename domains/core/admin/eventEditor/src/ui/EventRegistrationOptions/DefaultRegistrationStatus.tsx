@@ -3,7 +3,7 @@ import { __ } from '@eventespresso/i18n';
 import classNames from 'classnames';
 import { SelectWithLabel } from '@eventespresso/ui-components';
 import { regStatusOptions } from '@eventespresso/predicates';
-import type { EventRegistrationOptionsProps } from '../types';
+import type { EventRegistrationOptionsProps } from './types';
 
 interface Props extends Pick<EventRegistrationOptionsProps, 'defaultRegStatus' | 'onDefaultRegStatusChange'> {}
 

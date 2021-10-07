@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { __ } from '@eventespresso/i18n';
 import { entityListToSelectOptions } from '@eventespresso/utils';
 import { SelectWithLabel } from '@eventespresso/ui-components';
-import type { EventRegistrationOptionsProps } from '../types';
+import type { EventRegistrationOptionsProps } from './types';
 
 interface Props extends Pick<EventRegistrationOptionsProps, 'eventManagers' | 'managerId' | 'onManagerChange'> {}
 

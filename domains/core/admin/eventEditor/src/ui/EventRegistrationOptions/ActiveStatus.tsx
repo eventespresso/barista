@@ -6,7 +6,7 @@ import { SelectWithLabel } from '@eventespresso/ui-components';
 import { datetimeStatus } from '@eventespresso/constants';
 import { objectToSelectOptions } from '@eventespresso/utils';
 import { datetimeStatusBgColorClassName } from '@eventespresso/helpers';
-import type { EventRegistrationOptionsProps } from '../types';
+import type { EventRegistrationOptionsProps } from './types';
 
 interface Props extends Pick<EventRegistrationOptionsProps, 'status' | 'onStatusChange'> {}
 
