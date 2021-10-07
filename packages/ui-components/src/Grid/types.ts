@@ -1,13 +1,16 @@
 import type { GridProps as GridAdapterProps } from '@eventespresso/adapters';
-import type { Size } from '../../';
 
-export interface GridProps extends GridAdapterProps, Size {
+export interface GridProps extends GridAdapterProps {
 	className?: string;
 	maxColumns?: number;
+	size?: 'smaller' | 'small' | 'default' | 'big' | 'bigger';
 }
-export interface GridItemProps extends Size {
+
+export interface GridItemProps {
 	className?: string;
+	colSpan?: number;
 	id?: string;
+	rowSpan?: number;
 }
 
 export interface GridCardProps extends GridItemProps {
