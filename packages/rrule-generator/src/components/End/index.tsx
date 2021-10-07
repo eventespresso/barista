@@ -1,5 +1,5 @@
 import { __ } from '@eventespresso/i18n';
-import { Row, Label } from '@eventespresso/ui-components';
+import { Row, Label, Divider } from '@eventespresso/ui-components';
 
 import EndAfter from './After';
 import OnDate from './OnDate';
@@ -15,11 +15,8 @@ const End: React.FC<BaseProps> = ({ id }) => {
 	return (
 		<Row className='rrule-generator__form-group-row'>
 			<Label id={endModeId} label={__('End')} className='col-form-label' />
-			{/* <label htmlFor={endModeId} className='col-form-label'>
-				<strong>{__('End')}</strong>
-			</label> */}
-
 			<Mode id={endModeId} mode={end.mode} onChange={setEndMode} />
+			<Divider orientation='vertical' size='tiny' />
 
 			{end.mode === 'AFTER' && (
 				<EndAfter
