@@ -17,7 +17,7 @@ const Donations: React.FC<Props> = ({ allowDonations: isChecked, onDonationsChan
 			debounceDelay={5000}
 			labelClassName='ee-grid__item-label'
 			labelPosition='left-middle'
-			wrapperClass='ee-edtr-option__wrapper ee-edtr-option__event-donations-wrapper'
+			wrapperClassName='ee-edtr-option__wrapper ee-edtr-option__event-donations-wrapper'
 		/>
 	);
 };
