@@ -35,7 +35,7 @@ export class DateEditor extends EntityEditor {
 				: filter === 'sales'
 				? '#ee-dates-list-sales-control'
 				: filter === 'search'
-				? '#ee-ee-search-input-dates-list'
+				? '#ee-search-input-dates-list'
 				: '';
 
 		if (!selector) {
