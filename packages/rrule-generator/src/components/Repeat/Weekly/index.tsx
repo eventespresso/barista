@@ -32,7 +32,7 @@ const Weekly: React.FC<BaseProps> = ({ id }) => {
 
 	return (
 		<Stack>
-			<Row className='rrule-generator__label-every'>
+			<Row>
 				<Label label={__('every')} />
 				<NumberInput
 					aria-label={__('Repeat weekly interval')}
@@ -51,15 +51,20 @@ const Weekly: React.FC<BaseProps> = ({ id }) => {
 					const dayId = `${id}-${dayName}`;
 
 					return (
-						<label htmlFor={dayId} key={dayName} className={isDayActive ? 'active' : ''}>
+						<label
+							htmlFor={dayId}
+							key={dayName}
+							className={`ee-weekly-label ${isDayActive ? 'active' : ''}`}
+						>
 							<input
+								className='ee-weekly-input'
 								checked={isDayActive}
 								id={dayId}
 								name={dayId}
 								onChange={onChangeDays}
 								type='checkbox'
 							/>
-							<span>{SHORT_DAYS?.[dayName]}</span>
+							<span className='ee-weekly-span'>{SHORT_DAYS?.[dayName]}</span>
 						</label>
 					);
 				})}

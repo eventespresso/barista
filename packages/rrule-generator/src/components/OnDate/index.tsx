@@ -27,7 +27,7 @@ const OnDate: React.FC<OnDateProps> = ({ id, date, label, maxDate, onChange }) =
 
 	return (
 		<Row>
-			<DateComponent {...calendarAttributes} maxDate={maxDate} onChange={onChange} />
+			<DateComponent className='ee-datepicker' {...calendarAttributes} maxDate={maxDate} onChange={onChange} />
 		</Row>
 	);
 };

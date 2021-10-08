@@ -15,7 +15,7 @@ const Hourly: React.FC<BaseProps> = ({ id }) => {
 
 	return (
 		<Stack>
-			<Row className='rrule-generator__label-every'>
+			<Row>
 				<Label label={__('every')} />
 				<NumberInput
 					aria-label={__('Repeat hourly interval')}

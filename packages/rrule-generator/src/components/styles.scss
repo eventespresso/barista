@@ -2,18 +2,17 @@
 @import '~@eventespresso/styles/src/variables';
 
 .rrule-generator {
-	label {
+	.ee-input-label,
+	.ee-weekly-label {
 		flex: 0 1 20%;
 		font-size: var(--ee-font-size-default);
 		font-family: var(--ee-admin-font-family);
 		line-height: var(--ee-icon-button-size); // 42px
-
 		text-align: right;
-	}
+		align-self: baseline;
 
-	.ee-input__wrapper {
-		label {
-			margin: 0 var(--ee-margin-micro);
+		&.col-form-label {
+			font-weight: bold;
 		}
 	}
 
@@ -39,7 +38,7 @@
 				margin-block-end: var(--ee-margin-small);
 			}
 
-			section > {
+			.ee-container > {
 				margin-block-end: 0;
 
 				* {
@@ -82,7 +81,7 @@
 		.ee-radio__wrapper {
 			margin: 0;
 
-			label.chakra-radio {
+			label {
 				text-align: left;
 				min-width: 95px;
 			}
@@ -104,33 +103,19 @@
 
 	.react-datepicker__input-container,
 	&__frequency > .ee-select-wrapper,
-	&__select-end.chakra-select.ee-select {
+	&__select-end.ee-select {
 		width: 210px;
-	}
-
-	&__label-every label {
-		color: var(--ee-color-primary);
 	}
 
 	.rrule-text {
 		margin-block-end: var(--ee-margin-small);
 	}
 
-	.col-form-label {
-		align-self: baseline;
-		font-weight: bold;
-	}
-
-	.chakra-numberinput__field,
-	label {
+	.ee-input-label {
 		padding: 0 var(--ee-padding-tiny) 0 0;
 	}
 
-	.chakra-numberinput {
+	.ee-number-input {
 		margin-inline-end: var(--ee-margin-tiny);
-	}
-
-	.chakra-radio__label {
-		margin-inline-end: 0;
 	}
 }

@@ -6,21 +6,21 @@
 			display: flex;
 			justify-content: flex-end;
 
-			input[type='checkbox'] {
+			.ee-weekly-input {
 				position: absolute;
 				left: -100vw;
 
-				~ span {
+				~ .ee-weekly-span {
 					align-items: center;
 
 					border: var(--ee-border-width) solid var(--ee-border-color);
 					border-right: none;
 					display: inline-flex;
 					padding: var(--ee-padding-smaller) var(--ee-padding-micro);
-					height: var(--ee-height-big);
+					height: var(--ee-icon-button-size);
 					justify-content: center;
 					text-align: center;
-					width: var(--ee-height-big);
+					width: var(--ee-icon-button-size-huge);
 
 					&:hover {
 						background: var(--ee-color-primary);
@@ -29,20 +29,20 @@
 					}
 				}
 
-				&:checked ~ span {
+				&:checked ~ .ee-weekly-span {
 					background-color: var(--ee-color-primary);
 					border-color: transparent;
 					color: white;
 				}
 			}
 
-			label {
+			.ee-weekly-label {
 				flex: none;
 				padding: 0;
 
 				&:first-child {
-					input[type='checkbox'] {
-						~ span {
+					.ee-weekly-input {
+						~ .ee-weekly-span {
 							border-top-left-radius: var(--ee-border-radius-small);
 							border-bottom-left-radius: var(--ee-border-radius-small);
 						}
@@ -50,8 +50,8 @@
 				}
 
 				&:last-child {
-					input[type='checkbox'] {
-						~ span {
+					.ee-weekly-input {
+						~ .ee-weekly-span {
 							border-right: var(--ee-border-width) solid var(--ee-border-color);
 							border-top-right-radius: var(--ee-border-radius-small);
 							border-bottom-right-radius: var(--ee-border-radius-small);

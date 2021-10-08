@@ -30,7 +30,7 @@ const Monthly: React.FC<BaseProps> = ({ id }) => {
 
 	return (
 		<Stack>
-			<Row className='rrule-generator__label-every'>
+			<Row>
 				<Label label={__('every')} />
 				<NumberInput
 					aria-label={__('Repeat monthly interval')}
