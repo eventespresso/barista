@@ -53,7 +53,7 @@ const withLabel = <P extends AnyObject>(
 				/>
 			</div>
 		) : (
-			<WrappedComponent {...(props as P)} ref={forwardedRef} />
+			<WrappedComponent {...(props as P)} id={id} ref={forwardedRef} />
 		);
 	};
 
