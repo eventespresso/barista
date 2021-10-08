@@ -23,7 +23,7 @@ const DatesByMonthControl: React.FC<DatesByMonthControlProps> = ({ datesByMonth,
 
 	return (
 		<SelectWithLabel
-			id='dates-by-month'
+			id='ee-dates-by-month'
 			label={__('dates by month')}
 			onChangeValue={setDatesByMonth}
 			options={monthsListWithAllDates}

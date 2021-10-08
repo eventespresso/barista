@@ -49,7 +49,7 @@ export const PatternEditor: React.FC = () => {
 			<RRuleEditor
 				desc={__('defines a rule or repeating pattern for generating event dates that occur regularly')}
 				icon={Repeat}
-				id='r-rule'
+				id='ee-r-rule'
 				onChange={onChangeRRule}
 				rRuleString={rRule}
 				sidebarLabel={__('Recurrence Pattern')}
@@ -68,7 +68,7 @@ export const PatternEditor: React.FC = () => {
 				<RRuleEditor
 					desc={__('defines a rule or repeating pattern that will remove dates from those generated above')}
 					icon={CloseCircleOutlined}
-					id='ex-rule'
+					id='ee-ex-rule'
 					onChange={onChangeExRule}
 					rRuleString={exRule}
 					sidebarLabel={__('Exclusion Pattern')}

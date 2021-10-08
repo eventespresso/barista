@@ -10,7 +10,7 @@ const StatusControl: React.FC = () => {
 
 	return (
 		<SelectWithLabel
-			id='dates-list-status-control'
+			id='ee-dates-list-status-control'
 			label={labels.status}
 			onChangeValue={setStatus}
 			options={options}

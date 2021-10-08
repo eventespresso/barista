@@ -13,7 +13,7 @@ const StatusControl: React.FC = () => {
 
 	return (
 		<SelectWithLabel
-			id='tickets-list-status-control'
+			id='ee-tickets-list-status-control'
 			label={labels.status}
 			onChangeValue={setStatus}
 			options={options}
