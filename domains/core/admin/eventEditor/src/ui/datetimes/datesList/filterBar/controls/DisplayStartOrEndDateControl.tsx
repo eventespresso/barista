@@ -13,7 +13,7 @@ const DisplayStartOrEndDateControl: React.FC = () => {
 
 	return (
 		<SelectWithLabel
-			id='dates-list-display-control'
+			id='ee-dates-list-display-control'
 			label={labels.displayStartOrEndDate}
 			value={displayStartOrEndDate}
 			options={options}
