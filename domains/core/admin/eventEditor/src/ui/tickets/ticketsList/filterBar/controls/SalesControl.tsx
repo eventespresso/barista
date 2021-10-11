@@ -13,7 +13,7 @@ const SalesControl: React.FC = () => {
 
 	return (
 		<SelectWithLabel
-			id='tickets-list-sales-control'
+			id='ee-tickets-list-sales-control'
 			label={labels.sales}
 			onChangeValue={setSales}
 			options={options}

@@ -36,7 +36,7 @@ describe('REM', () => {
 		await page.click('text=Add New Date');
 		await page.click('text=Add Recurring Dates');
 
-		await page.selectOption('#r-rule-repeat-frequency', {
+		await page.selectOption('#ee-r-rule-repeat-frequency', {
 			label: 'Daily',
 		});
 

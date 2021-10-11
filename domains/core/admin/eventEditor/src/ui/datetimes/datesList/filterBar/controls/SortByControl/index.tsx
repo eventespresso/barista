@@ -34,7 +34,7 @@ const SortByControl: React.FC = () => {
 			draggableItems={draggableItems}
 			droppableId={datetimesDroppableId}
 			entityType={TypeName.datetimes}
-			id='dates-list-sort-by-control'
+			id='ee-dates-list-sort-by-control'
 			label={labels.sortBy}
 			renderDraggableItem={renderDraggableItem}
 			onChangeValue={setSortBy}
