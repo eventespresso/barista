@@ -11,7 +11,7 @@ const SalesControl: React.FC = () => {
 
 	return (
 		<SelectWithLabel
-			id='dates-list-sales-control'
+			id='ee-dates-list-sales-control'
 			label={labels.sales}
 			onChangeValue={setSales}
 			options={options}

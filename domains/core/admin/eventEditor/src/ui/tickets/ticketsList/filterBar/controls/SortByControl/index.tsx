@@ -37,7 +37,7 @@ const SortByControl: React.FC = () => {
 			draggableItems={draggableItems}
 			droppableId={ticketDroppableId}
 			entityType={TypeName.tickets}
-			id='tickets-list-sort-by-control'
+			id='ee-tickets-list-sort-by-control'
 			label={labels.sortBy}
 			onChangeValue={setSortBy}
 			options={options}
