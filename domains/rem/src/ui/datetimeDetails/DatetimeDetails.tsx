@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-import * as R from 'ramda';
-
 import { Datetime } from '@eventespresso/edtr-services';
 import { FormWithConfig } from '@eventespresso/ee-components';
 import useDatetimeFormConfig from './useDateFormConfig';
@@ -15,12 +13,10 @@ const DatetimeDetails: React.FC<DatetimeDetailsProps> = () => {
 	const { dateDetails } = useFormState();
 	const formConfig = useDatetimeFormConfig(templateDate, { initialValues: dateDetails });
 
-	const hasEmptyFormData = R.isEmpty(dateDetails);
-
 	return (
 		<>
-			<DateTemplate setTemplate={setTemplateDate} hideAddNew={!hasEmptyFormData} />
-			{(templateDate || !hasEmptyFormData) && <FormWithConfig {...formConfig} formWrapper={FormWrapper} />}
+			<DateTemplate setTemplate={setTemplateDate} />
+			<FormWithConfig {...formConfig} formWrapper={FormWrapper} />
 		</>
 	);
 };

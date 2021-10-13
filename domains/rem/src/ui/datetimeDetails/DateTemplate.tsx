@@ -10,10 +10,9 @@ import { EntityOptionsRow } from '../EntityOptionsRow';
 
 interface DateTemplateProps {
 	setTemplate: (date: AnyObject) => void;
-	hideAddNew?: boolean;
 }
 
-const DateTemplate: React.FC<DateTemplateProps> = ({ setTemplate, hideAddNew }) => {
+const DateTemplate: React.FC<DateTemplateProps> = ({ setTemplate }) => {
 	const [selectedDateId, setSelectedDateId] = useState('');
 	const onChangeValue = useCallback((value) => setSelectedDateId(value), []);
 
@@ -34,7 +33,7 @@ const DateTemplate: React.FC<DateTemplateProps> = ({ setTemplate, hideAddNew }) 
 
 	return (
 		<EntityOptionsRow
-			hideAddNew={hideAddNew}
+			hideAddNew={true}
 			onAddNew={onAddNew}
 			selectExisting={selectExisting}
 			selectExistingID={selectExistingID}
