@@ -10,29 +10,32 @@ import { EntityOptionsRow } from '../EntityOptionsRow';
 
 interface DateTemplateProps {
 	setTemplate: (date: AnyObject) => void;
+	hideAddNew?: boolean;
 }
 
-const DateTemplate: React.FC<DateTemplateProps> = ({ setTemplate }) => {
+const DateTemplate: React.FC<DateTemplateProps> = ({ setTemplate, hideAddNew }) => {
 	const [selectedDateId, setSelectedDateId] = useState('');
 	const onChangeValue = useCallback((value) => setSelectedDateId(value), []);
 
 	const allDates = useDatetimes();
-
-	const options = useMemo(() => entityListToSelectOptions(allDates, { label: __('Select…'), value: '' }), [allDates]);
 	const datetime = useDatetimeItem({ id: selectedDateId });
-	const onClick = useCallback(() => setTemplate(datetime || {}), [datetime, setTemplate]);
+	const options = useMemo(() => entityListToSelectOptions(allDates), [allDates]);
+
+	const onSelectTemplate = useCallback(() => setTemplate(datetime), [datetime, setTemplate]);
+	const onAddNew = useCallback(() => setTemplate({}), [setTemplate]);
 
 	const selectExistingID = 'existing-datetime';
 	const selectExisting = (
 		<>
 			<Select id={selectExistingID} options={options} onChangeValue={onChangeValue} />
-			<Button buttonText={__('Select')} onClick={onClick} isDisabled={!selectedDateId} />
+			<Button buttonText={__('Select')} onClick={onSelectTemplate} isDisabled={!selectedDateId} />
 		</>
 	);
 
 	return (
 		<EntityOptionsRow
-			onAddNew={onClick}
+			hideAddNew={hideAddNew}
+			onAddNew={onAddNew}
 			selectExisting={selectExisting}
 			selectExistingID={selectExistingID}
 			type='datetime'

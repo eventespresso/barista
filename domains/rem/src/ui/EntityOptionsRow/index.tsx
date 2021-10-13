@@ -4,6 +4,7 @@ import { __, sprintf } from '@eventespresso/i18n';
 import './style.scss';
 
 interface EntityOptionsRowProps {
+	hideAddNew?: boolean;
 	onAddNew: VoidFunction;
 	selectExisting: React.ReactNode;
 	selectExistingID: string;
@@ -11,6 +12,7 @@ interface EntityOptionsRowProps {
 }
 
 export const EntityOptionsRow: React.FC<EntityOptionsRowProps> = ({
+	hideAddNew,
 	onAddNew,
 	selectExisting,
 	selectExistingID,
@@ -32,22 +34,26 @@ export const EntityOptionsRow: React.FC<EntityOptionsRowProps> = ({
 					</label>
 					<div className='ee-entity-option__input'>{selectExisting}</div>
 				</div>
-				<div className='ee-entity-option__separator'>{__('or')}</div>
-				<div className='ee-entity-option__option'>
-					<label className={'ee-focus-priority-5'} id={addNewDescribedByID}>
-						{
-							/* translators: Add new "date / ticket" and insert details manually */
-							sprintf(__('Add new %s and insert details manually'), entityType)
-						}
-					</label>
-					<Button
-						aria-describedby={addNewDescribedByID}
-						buttonText={__('Add New')}
-						icon={Plus}
-						id={addNewID}
-						onClick={onAddNew}
-					/>
-				</div>
+				{!hideAddNew && (
+					<>
+						<div className='ee-entity-option__separator'>{__('or')}</div>
+						<div className='ee-entity-option__option'>
+							<label className={'ee-focus-priority-5'} id={addNewDescribedByID}>
+								{
+									/* translators: Add new "date / ticket" and insert details manually */
+									sprintf(__('Add new %s and insert details manually'), entityType)
+								}
+							</label>
+							<Button
+								aria-describedby={addNewDescribedByID}
+								buttonText={__('Add New')}
+								icon={Plus}
+								id={addNewID}
+								onClick={onAddNew}
+							/>
+						</div>
+					</>
+				)}
 			</div>
 		</div>
 	);

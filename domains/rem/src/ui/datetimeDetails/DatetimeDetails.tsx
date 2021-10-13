@@ -15,13 +15,14 @@ const DatetimeDetails: React.FC<DatetimeDetailsProps> = () => {
 	const { dateDetails } = useFormState();
 	const formConfig = useDatetimeFormConfig(templateDate, { initialValues: dateDetails });
 
-	// if date details have not been set already
-	// and we have no template date set
-	if (R.isEmpty(dateDetails) && !templateDate) {
-		return <DateTemplate setTemplate={setTemplateDate} />;
-	}
+	const hasEmptyFormData = R.isEmpty(dateDetails);
 
-	return <FormWithConfig {...formConfig} formWrapper={FormWrapper} />;
+	return (
+		<>
+			<DateTemplate setTemplate={setTemplateDate} hideAddNew={!hasEmptyFormData} />
+			{(templateDate || !hasEmptyFormData) && <FormWithConfig {...formConfig} formWrapper={FormWrapper} />}
+		</>
+	);
 };
 
 export default DatetimeDetails;
