@@ -7,6 +7,7 @@ import { uuid } from '@eventespresso/utils';
 import { TpcPriceModifier } from '../types';
 import usePriceToTpcModifier from './usePriceToTpcModifier';
 import useDefaultBasePrice from './useDefaultBasePrice';
+import { enforceBasePriceOrder } from '../utils';
 
 type PrepTemplatePrices = (templatePrices: Array<Price>, addBasePrice?: boolean) => Array<TpcPriceModifier>;
 
@@ -47,7 +48,7 @@ const usePrepTemplatePrices = (): PrepTemplatePrices => {
 			});
 
 			//sort'em
-			const sortedPrices = sortByPriceOrderIdAsc(prices);
+			const sortedPrices = enforceBasePriceOrder(sortByPriceOrderIdAsc(prices));
 
 			if (!addBasePrice) {
 				// if we're not going to add a base price,

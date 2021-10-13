@@ -1,9 +1,11 @@
 import { useCallback } from 'react';
 import { any, append, findIndex, has, insert, last, update } from 'ramda';
 
-import { DataStateReducer, StateInitializer, DataState } from './types';
 import { entityHasGuid, isTax, sortByPriceOrderIdAsc } from '@eventespresso/predicates';
+
+import { DataStateReducer, StateInitializer, DataState } from './types';
 import { TpcPriceModifier } from '../types';
+import { enforceBasePriceOrder } from '../utils';
 
 export const initialState: DataState = {
 	ticket: null,
@@ -124,7 +126,7 @@ const useDataReducer = (initializer: StateInitializer): DataStateReducer => {
 
 					if (isOrderChanged) {
 						// sort them by order
-						updatedPrices = sortByPriceOrderIdAsc(updatedPrices);
+						updatedPrices = enforceBasePriceOrder(sortByPriceOrderIdAsc(updatedPrices));
 					}
 
 					isTaxable = any(isTax, updatedPrices);

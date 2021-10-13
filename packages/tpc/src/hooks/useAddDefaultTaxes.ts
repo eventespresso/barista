@@ -6,6 +6,7 @@ import { getDefaultTaxes, sortByPriceOrderIdAsc, getGuids } from '@eventespresso
 import usePricesPollInterval from './usePricesPollInterval';
 import { useDataState } from '../data';
 import usePriceToTpcModifier from './usePriceToTpcModifier';
+import { enforceBasePriceOrder } from '../utils';
 
 const useAddDefaultTaxes = (): VoidFunction => {
 	const allPrices = usePrices();
@@ -29,7 +30,7 @@ const useAddDefaultTaxes = (): VoidFunction => {
 		const newPrices = [...prices, ...newTpcDefaultTaxPriceModifiers];
 
 		//sort'em
-		const sortedPrices = sortByPriceOrderIdAsc(newPrices);
+		const sortedPrices = enforceBasePriceOrder(sortByPriceOrderIdAsc(newPrices));
 
 		setPrices(sortedPrices);
 	}, [convertPriceToTpcModifier, defaultTaxPrices, prices, setPrices, setPricesPollInterval]);
