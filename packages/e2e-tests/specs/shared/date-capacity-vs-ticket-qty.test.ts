@@ -69,7 +69,7 @@ afterAll(async () => {
 });
 
 const scrollToAddNewTicketBtn = async () =>
-	(await page.$('[type=button] >> text=Add New Ticket')).scrollIntoViewIfNeeded;
+	await (await page.$('[type=button] >> text=Add New Ticket')).scrollIntoViewIfNeeded();
 
 describe(namespace, () => {
 	it('tests the default date capacity and ticket quantity', async () => {
