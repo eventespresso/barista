@@ -68,6 +68,8 @@ afterAll(async () => {
 	await capture?.stop();
 });
 
+const focusAddNewTicketBtn = async () => await page.focus('[type=button] >> text=Add New Ticket');
+
 describe(namespace, () => {
 	it('tests the default date capacity and ticket quantity', async () => {
 		const oldDateCapacity = await getDateCapacityByName(oldDateName);
@@ -80,6 +82,7 @@ describe(namespace, () => {
 		const newTicketQuantity = await getTicketQuantityByName(newTicketName);
 		expect(newTicketQuantity).toBe('∞');
 		// Default ticket quantity is 100 by default
+		await focusAddNewTicketBtn(); // for debugging
 		expect(oldTicketQuantity).toBe('100');
 	});
 
@@ -93,6 +96,7 @@ describe(namespace, () => {
 
 		let oldTicketQuantity = await getTicketQuantityByName(oldTicketName);
 		// This should not have changed, because it's already less than old date capacity
+		await focusAddNewTicketBtn(); // for debugging
 		expect(oldTicketQuantity).toBe('100');
 
 		// Set the old date capacity to 90
@@ -100,10 +104,12 @@ describe(namespace, () => {
 
 		oldTicketQuantity = await getTicketQuantityByName(oldTicketName);
 		// This should now be set to 90
+		await focusAddNewTicketBtn(); // for debugging
 		expect(oldTicketQuantity).toBe('90');
 
 		// New ticket quantity should remain unchanged
 		let newTicketQuantity = await getTicketQuantityByName(newTicketName);
+		await focusAddNewTicketBtn(); // for debugging
 		expect(newTicketQuantity).toBe('∞');
 
 		const newDate = await dateEditor.getItemBy('name', newDateName);
@@ -115,6 +121,7 @@ describe(namespace, () => {
 
 		// This should now be set to 300
 		newTicketQuantity = await getTicketQuantityByName(newTicketName);
+		await focusAddNewTicketBtn(); // for debugging
 		expect(newTicketQuantity).toBe('300');
 
 		oldTicketQuantity = await getTicketQuantityByName(oldTicketName);
@@ -127,6 +134,7 @@ describe(namespace, () => {
 		await dateEditor.editDateBy('name', newDateName, { capacity: '200' });
 
 		const newTicketQuantity = await getTicketQuantityByName(newTicketName);
+		await focusAddNewTicketBtn(); // for debugging
 		expect(newTicketQuantity).toBe('200');
 	});
 
@@ -136,6 +144,7 @@ describe(namespace, () => {
 		await addNewDate({ name: 'One more new date', capacity: '60' });
 
 		const newTicketQuantity = await getTicketQuantityByName(newTicketName);
+		await focusAddNewTicketBtn(); // for debugging
 		expect(newTicketQuantity).toBe('60');
 
 		const oldTicketQuantity = await getTicketQuantityByName(oldTicketName);
@@ -156,6 +165,7 @@ describe(namespace, () => {
 
 		// Now the old ticket quantity should have changed from 90 to 60
 		const oldTicketQuantity = await getTicketQuantityByName(oldTicketName);
+		await focusAddNewTicketBtn(); // for debugging
 		expect(oldTicketQuantity).toBe('60');
 	});
 });
