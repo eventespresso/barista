@@ -26,7 +26,7 @@ const adjacentFormItemProps = {
 	className: 'ee-form-item-pair',
 };
 
-const useDateFormConfig = (datetime: Datetime, config?: Partial<EspressoFormProps>): DateFormConfig => {
+const useDateFormConfig = (datetime: Partial<Datetime>, config?: Partial<EspressoFormProps>): DateFormConfig => {
 	const initialValues: DateFormShape = useMemo(
 		() => ({
 			...DATE_DEFAULTS,
