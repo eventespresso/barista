@@ -1,6 +1,5 @@
 @import '~@eventespresso/styles/src/mixins/breakpoints';
 
-
 .columns-1 {
 	--ee-grid-column-modifier: 0;
 }
@@ -79,29 +78,49 @@
 		--ee-grid-size-column-modifier: 2;
 	}
 
-	--ee-grid-columns: calc( 4 + var(--ee-grid-size-column-modifier) - var(--ee-grid-column-modifier) );
+	--ee-grid-columns: calc(4 + var(--ee-grid-size-column-modifier) - var(--ee-grid-column-modifier));
 	--ee-grid-gap: var(--ee-padding-small);
 
 	&--size {
 		&-smaller {
-			--ee-grid-columns: calc( 6 + var(--ee-grid-size-column-modifier) - var(--ee-grid-column-modifier) );
+			--ee-grid-columns: calc(6 + var(--ee-grid-size-column-modifier) - var(--ee-grid-column-modifier));
 			--ee-grid-gap: var(--ee-padding-tiny);
 		}
 		&-small {
-			--ee-grid-columns: calc( 5 + var(--ee-grid-size-column-modifier) - var(--ee-grid-column-modifier) );
+			--ee-grid-columns: calc(5 + var(--ee-grid-size-column-modifier) - var(--ee-grid-column-modifier));
 			--ee-grid-gap: var(--ee-padding-smaller);
 		}
 		&-big {
-			--ee-grid-columns: calc( 3 + var(--ee-grid-size-column-modifier) - var(--ee-grid-column-modifier) );
+			--ee-grid-columns: calc(3 + var(--ee-grid-size-column-modifier) - var(--ee-grid-column-modifier));
 			--ee-grid-gap: var(--ee-padding-default);
 		}
 		&-bigger {
-			--ee-grid-columns: calc( 2 + var(--ee-grid-size-column-modifier) - var(--ee-grid-column-modifier) );
+			--ee-grid-columns: calc(2 + var(--ee-grid-size-column-modifier) - var(--ee-grid-column-modifier));
 			--ee-grid-gap: var(--ee-padding-default);
 		}
 	}
 
 	--ee-grid-max-cols: 2;
+
+	@include max360px {
+		--ee-grid-max-cols: 1;
+	}
+	@include max600px {
+		--ee-grid-max-cols: 2;
+		.ee-input__wrapper {
+			align-items: flex-start !important;
+			flex-direction: column !important;
+		}
+	}
+	@include max960px {
+		--ee-grid-max-cols: 3;
+	}
+	@include max1280px {
+		--ee-grid-max-cols: 4;
+	}
+	@include max1600px {
+		--ee-grid-max-cols: 5;
+	}
 
 	&--max-cols-1 {
 		--ee-grid-max-cols: 1;
@@ -133,31 +152,9 @@
 			flex-direction: column;
 		}
 	}
-	@include max360px {
-		--ee-grid-max-cols: 1;
-	}
-	@include max600px {
-		--ee-grid-max-cols: 2;
-		.ee-input__wrapper {
-			align-items: flex-start !important;
-			flex-direction: column !important;
-		}
-	}
-	@include max960px {
-		--ee-grid-max-cols: 3;
-	}
-	@include max1280px {
-		--ee-grid-max-cols: 4;
-	}
-	@include max1600px {
-		--ee-grid-max-cols: 5;
-	}
 
 	gap: var(--ee-grid-gap);
-	grid-template-columns: repeat(
-		min( var(--ee-grid-columns), var(--ee-grid-max-cols) ),
-		minmax(0, 1fr)
-	);
+	grid-template-columns: repeat(min(var(--ee-grid-columns), var(--ee-grid-max-cols)), minmax(0, 1fr));
 
 	&__item {
 		&--col-span {
