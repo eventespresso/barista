@@ -19,13 +19,20 @@ export const iconMap: { [key in DateType]: React.ReactNode } = {
 	exDate: <CloseCircleFilled />,
 };
 
-const GeneratedDatetime: React.FC<GeneratedDatetimeProps> = ({ date, ISOStr, type, toggleExDate }) => {
+const GeneratedDatetime: React.FC<GeneratedDatetimeProps> = ({
+	date,
+	exDatesLimitReached,
+	ISOStr,
+	type,
+	toggleExDate,
+}) => {
 	const bgClassName = getBgClassName(type);
 	const className = classNames('ee-generated-datetime__body', bgClassName);
 
 	const gDateLabel = formatDate(date);
 
 	const onClickTrash = useCallback(() => toggleExDate(ISOStr), [toggleExDate, ISOStr]);
+	const isDisabled = type === 'gDate' && exDatesLimitReached;
 
 	return (
 		<li className={'ee-generated-datetime'}>
@@ -38,7 +45,8 @@ const GeneratedDatetime: React.FC<GeneratedDatetimeProps> = ({ date, ISOStr, typ
 					borderless
 					className={iconClassMap[type]}
 					icon={iconActionMap[type]}
-					onClick={onClickTrash}
+					isDisabled={isDisabled}
+					onClick={!isDisabled ? onClickTrash : null}
 					tooltip={tooltipMap[type]}
 				/>
 			</div>

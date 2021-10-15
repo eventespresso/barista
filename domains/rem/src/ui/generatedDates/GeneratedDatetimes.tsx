@@ -5,11 +5,14 @@ import { setTimeFromDate } from '@eventespresso/dates';
 import GeneratedDatetime from './GeneratedDatetime';
 import { GeneratedDatetimesProps } from './types';
 import { useFormState } from '../../data';
+import { R_DATE_LIMIT } from '../../constants';
 
 const GeneratedDatetimes: React.FC<GeneratedDatetimesProps> = ({ datetimes }) => {
-	const { addExDate, removeRDate, removeExDate, dateDetails } = useFormState();
+	const { addExDate, removeRDate, removeExDate, dateDetails, exDates } = useFormState();
 
 	const setStartTime = useMemo(() => setTimeFromDate(dateDetails?.startTime), [dateDetails?.startTime]);
+
+	const exDatesLimitReached = exDates.length >= R_DATE_LIMIT;
 
 	return (
 		<ul className={'ee-generated-datetime__list'}>
@@ -23,6 +26,7 @@ const GeneratedDatetimes: React.FC<GeneratedDatetimesProps> = ({ datetimes }) =>
 				return (
 					<GeneratedDatetime
 						date={setStartTime(date)}
+						exDatesLimitReached={exDatesLimitReached}
 						key={ISOStr}
 						ISOStr={ISOStr}
 						number={index + 1}

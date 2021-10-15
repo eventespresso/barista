@@ -46,3 +46,5 @@ export const TICKET_FIELDS_TO_USE: Array<keyof Ticket> = ['id', 'name', 'descrip
 
 /* The namespace to use for actions/filters */
 export const NAMESPACE = 'rem';
+
+export const R_DATE_LIMIT = 20;
