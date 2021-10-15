@@ -15,7 +15,7 @@
 	&__start-input,
 	&__end-input {
 		display: flex;
-		flex-wrap: wrap;
+		align-items: baseline;
 	}
 
 	&-legend {
@@ -42,7 +42,7 @@
 			flex-flow: row;
 			height: var(--ee-icon-button-size-big);
 			justify-content: flex-start;
-			margin: 0 ;
+			margin: 0;
 			margin-inline-end: var(--ee-margin-smaller);
 
 			span {
