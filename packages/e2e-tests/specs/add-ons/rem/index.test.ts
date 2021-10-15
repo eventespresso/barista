@@ -48,8 +48,6 @@ describe('REM', () => {
 
 		await clickButton('Next');
 
-		await page.click('#ee-add-new-datetime');
-
 		await page.focus('.ee-render-fields >> text=Name');
 
 		await page.type('.ee-render-fields >> text=Name', 'New date');
