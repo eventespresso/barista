@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { setSeconds } from 'date-fns';
+import * as R from 'ramda';
 
 import { NOW } from '@eventespresso/constants';
 import { setTimeToNoon } from '@eventespresso/dates';
@@ -25,6 +26,18 @@ export const useIntervalUpdater = (
 		},
 		[repeatKey, setRepeatInterval]
 	);
+};
+
+export const enforceEndLimits = (state: RRuleState, config = DEFAULT_CONFIG): RRuleState => {
+	// If end mode is set to number of executions and it crosses the limit
+	if (state.end.mode === 'AFTER' && state.end.after > config.maxExecutions) {
+		return R.assocPath(['end', 'after'], config.maxExecutions, state);
+	}
+	// If end mode is set to date and it crosses the limit
+	if (state.end.mode === 'ON_DATE' && state.end.date > config.maxEndDate) {
+		return R.assocPath(['end', 'date'], config.maxEndDate, state);
+	}
+	return state;
 };
 
 export const getDefaultRRuleState = (config = DEFAULT_CONFIG): RRuleState => {

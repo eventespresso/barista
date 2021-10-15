@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { RRuleGeneratorProps } from '../components/types';
 import useRRuleState from './useRRuleState';
 import useRRuleConfig from './useRRuleConfig';
-import { computeRRuleFromString, computeRRuleToString } from '../utils';
+import { computeRRuleFromString, computeRRuleToString, enforceEndLimits } from '../utils';
 
 const useStateListener = ({ onChange, value, hideStart }: RRuleGeneratorProps): void => {
 	const { hash, getData, setData } = useRRuleState();
@@ -13,7 +13,7 @@ const useStateListener = ({ onChange, value, hideStart }: RRuleGeneratorProps): 
 	useEffect(() => {
 		if (value) {
 			const data = computeRRuleFromString(getData(), value, config);
-			setData(data);
+			setData(enforceEndLimits(data, config));
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value]);
