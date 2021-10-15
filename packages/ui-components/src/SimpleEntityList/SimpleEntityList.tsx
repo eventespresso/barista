@@ -5,7 +5,7 @@ import { useDisclosure } from '@eventespresso/hooks';
 import type { Entity } from '@eventespresso/data';
 
 import Container from './Container';
-import EntityTemplate from './EntityTemplate';
+import { EntityTemplate } from './EntityTemplate';
 import type { SimpleEntityListProps } from './types';
 
 import './style.scss';

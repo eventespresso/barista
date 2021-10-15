@@ -6,7 +6,7 @@ import { Button } from '../../Button';
 import './style.scss';
 
 interface EntityOptionsRowProps {
-	onAddNew: VoidFunction;
+	onAddNew?: VoidFunction;
 	selectExisting: React.ReactNode;
 	selectExistingID: string;
 }
@@ -24,19 +24,23 @@ export const EntityOptionsRow: React.FC<EntityOptionsRowProps> = ({ onAddNew, se
 					</label>
 					<div className='ee-entity-option__input'>{selectExisting}</div>
 				</div>
-				<div className='ee-entity-option__separator'>{__('or')}</div>
-				<div className='ee-entity-option__option'>
-					<label className={'ee-focus-priority-5'} id={addNewDescribedByID}>
-						{__('Add new and insert details manually')}
-					</label>
-					<Button
-						aria-describedby={addNewDescribedByID}
-						buttonText={__('Add New')}
-						icon={Plus}
-						id={addNewID}
-						onClick={onAddNew}
-					/>
-				</div>
+				{onAddNew ? (
+					<>
+						<div className='ee-entity-option__separator'>{__('or')}</div>
+						<div className='ee-entity-option__option'>
+							<label className={'ee-focus-priority-5'} id={addNewDescribedByID}>
+								{__('Add new and insert details manually')}
+							</label>
+							<Button
+								aria-describedby={addNewDescribedByID}
+								buttonText={__('Add New')}
+								icon={Plus}
+								id={addNewID}
+								onClick={onAddNew}
+							/>
+						</div>
+					</>
+				) : null}
 			</div>
 		</div>
 	);
