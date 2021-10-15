@@ -24,7 +24,7 @@ export const EntityOptionsRow: React.FC<EntityOptionsRowProps> = ({
 
 	return (
 		<div className='ee-entity-option__wrapper'>
-			<div className={`ee-entity-option__options ${hideAddNew ? 'ee-entity-option__options--single' : ''}`}>
+			<div className={`ee-entity-option__options${hideAddNew ? ' ee-entity-option__options--single' : ''}`}>
 				<div className='ee-entity-option__option'>
 					<label className={'ee-focus-priority-5'} htmlFor={`ee-select-${selectExistingID}`}>
 						{
