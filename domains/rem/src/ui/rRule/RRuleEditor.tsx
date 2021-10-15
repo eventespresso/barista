@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 
 import { FormSectionSidebar } from '@eventespresso/form';
-import PatternEditor from './PatternEditor';
+import RRuleGenerator from './RRuleGenerator';
 import type { RRuleEditorProps } from './types';
 
 import './style.scss';
@@ -12,7 +12,7 @@ const RRuleEditor: React.FC<RRuleEditorProps> = ({ desc, icon, id, onChange, rRu
 	return (
 		<div className={wrapperClassName}>
 			{sidebarLabel && <FormSectionSidebar desc={desc} Icon={icon} title={sidebarLabel} />}
-			<PatternEditor id={id} onChange={onChange} rRuleString={rRuleString} type={type} />
+			<RRuleGenerator id={id} onChange={onChange} rRuleString={rRuleString} type={type} />
 		</div>
 	);
 };

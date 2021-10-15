@@ -11,7 +11,7 @@ interface CommonProps {
 
 export interface EditorControlsProps {}
 
-export interface PatternEditorProps extends CommonProps {}
+export interface RRuleGeneratorProps extends CommonProps {}
 
 export interface RRuleEditorProps extends CommonProps, EditorControlsProps {
 	icon?: React.ComponentType<{ className?: string }>;

@@ -8,18 +8,19 @@ import { getMaxDatesLimit } from '../../utils';
 import type { PatternType } from './types';
 
 const useRRuleLimits = (type: PatternType): Pick<RRuleConfig, 'maxEndDate' | 'maxExecutions'> => {
-	const { rRule, exDates } = useFormState();
+	const { rRule, exRule, exDates } = useFormState();
 
-	let maxEndDate: Date;
+	const rule = type === 'exclusion' ? exRule : rRule;
 
 	// Manually excluded dates (exDates) will increase the number of allowed dates
-	const maxExecutions = getMaxDatesLimit(rRule) + exDates.length;
+	const maxExecutions = getMaxDatesLimit(rule) + exDates.length;
 
 	// replace end date with count to set the limit on number of dates
-	const rRuleToUse = rRule.replace(/UNTIL=[^;]+?;/, `COUNT=${maxExecutions};`);
+	const rRuleToUse = rule.replace(/UNTIL=[^;]+?;/, `COUNT=${maxExecutions};`);
 
 	const rruleSet = useRRuleSetFromState(rRuleToUse);
 
+	let maxEndDate: Date;
 	if (type === 'recurrence') {
 		const generatedDates = rruleSet.all((date, i) => {
 			return i < maxExecutions + 1;
