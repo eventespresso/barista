@@ -16,6 +16,7 @@ export type GeneratedDateClassName =
 export interface GeneratedDatetimeProps extends GeneratedDate {
 	number: number;
 	toggleExDate: FSM['addRDate']; // signature is same as addRDate
+	exDatesLimitReached?: boolean;
 }
 
 export interface GeneratedDatetimesProps {
