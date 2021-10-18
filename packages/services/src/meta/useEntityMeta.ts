@@ -12,47 +12,52 @@ export const useEntityMeta = (metaReactiveVar: ReactiveVar<EntityMetaMap>): MEM 
 
 	const getMetaValue = useCallback<MEM['getMetaValue']>(
 		(entityId, metaKey, defaultValue) => {
-			return metaMap?.[entityId]?.[metaKey] || defaultValue;
+			return metaReactiveVar()?.[entityId]?.[metaKey] || defaultValue;
 		},
-		[metaMap]
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[metaReactiveVar, metaMap]
 	);
 
 	const setMetaValue = useCallback<MEM['setMetaValue']>(
 		(entityId, metaKey, metaValue) => {
-			const newMetaMap = assocPath([entityId, metaKey], metaValue, metaMap);
+			const newMetaMap = assocPath([entityId, metaKey], metaValue, metaReactiveVar());
 			metaReactiveVar(newMetaMap);
 		},
-		[metaReactiveVar, metaMap]
+		[metaReactiveVar]
 	);
 
 	const deleteMeta = useCallback<MEM['deleteMeta']>(
 		(entityId, metaKey) => {
-			const newMetaMap = dissocPath<EntityMetaMap>([entityId, metaKey], metaMap);
+			const newMetaMap = dissocPath<EntityMetaMap>([entityId, metaKey], metaReactiveVar());
 			metaReactiveVar(newMetaMap);
 		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[metaReactiveVar, metaMap]
 	);
 
 	const getEntityMeta = useCallback<MEM['getEntityMeta']>(
 		(entityId) => {
-			return metaMap?.[entityId];
+			return metaReactiveVar()?.[entityId];
 		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[metaMap]
 	);
 
 	const setEntityMeta = useCallback<MEM['setEntityMeta']>(
 		(entityId, entityMeta) => {
-			const newMetaMap = assocPath([entityId], entityMeta, metaMap);
+			const newMetaMap = assocPath([entityId], entityMeta, metaReactiveVar());
 			metaReactiveVar(newMetaMap);
 		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[metaReactiveVar, metaMap]
 	);
 
 	const deleteEntityMeta = useCallback<MEM['deleteEntityMeta']>(
 		(entityId) => {
-			const newMetaMap = dissocPath<EntityMetaMap>([entityId], metaMap);
+			const newMetaMap = dissocPath<EntityMetaMap>([entityId], metaReactiveVar());
 			metaReactiveVar(newMetaMap);
 		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[metaReactiveVar, metaMap]
 	);
 
@@ -67,11 +72,12 @@ export const useEntityMeta = (metaReactiveVar: ReactiveVar<EntityMetaMap>): MEM 
 
 	const mergeMetaMap = useCallback<MEM['mergeMetaMap']>(
 		(newMetaMap) => {
-			const mergedMetaMap = mergeDeepRight(metaMap, newMetaMap);
+			const mergedMetaMap = mergeDeepRight(metaReactiveVar(), newMetaMap);
 
 			metaReactiveVar(mergedMetaMap);
 		},
-		[metaMap, metaReactiveVar]
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[metaReactiveVar, metaMap]
 	);
 
 	return useMemo(
