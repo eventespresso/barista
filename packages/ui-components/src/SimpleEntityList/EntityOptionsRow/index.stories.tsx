@@ -34,5 +34,12 @@ const selectExisting = (
 );
 
 export const Default = () => {
-	return <EntityOptionsRow selectExisting={selectExisting} selectExistingID={selectExistingID} onAddNew={noop} />;
+	return (
+		<EntityOptionsRow
+			entityType='datetime'
+			selectExisting={selectExisting}
+			selectExistingID={selectExistingID}
+			onAddNew={noop}
+		/>
+	);
 };

@@ -1,17 +1,23 @@
 import { Plus } from '@eventespresso/icons';
-import { __ } from '@eventespresso/i18n';
+import { __, sprintf } from '@eventespresso/i18n';
 
 import { Button } from '../../Button';
 
 import './style.scss';
 
 interface EntityOptionsRowProps {
+	entityType: string;
 	onAddNew?: VoidFunction;
 	selectExisting: React.ReactNode;
 	selectExistingID: string;
 }
 
-export const EntityOptionsRow: React.FC<EntityOptionsRowProps> = ({ onAddNew, selectExisting, selectExistingID }) => {
+export const EntityOptionsRow: React.FC<EntityOptionsRowProps> = ({
+	entityType,
+	onAddNew,
+	selectExisting,
+	selectExistingID,
+}) => {
 	const addNewID = `ee-add-new-entity`;
 	const addNewDescribedByID = `${addNewID}-description`;
 
@@ -20,7 +26,10 @@ export const EntityOptionsRow: React.FC<EntityOptionsRowProps> = ({ onAddNew, se
 			<div className='ee-entity-option__options'>
 				<div className='ee-entity-option__option'>
 					<label className={'ee-focus-priority-5'} htmlFor={`ee-select-${selectExistingID}`}>
-						{__('Select an existing one to use as a template.')}
+						{
+							/* translators: entity type to select */
+							sprintf(__('Select an existing %s to use as a template.'), entityType)
+						}
 					</label>
 					<div className='ee-entity-option__input'>{selectExisting}</div>
 				</div>
@@ -29,7 +38,10 @@ export const EntityOptionsRow: React.FC<EntityOptionsRowProps> = ({ onAddNew, se
 						<div className='ee-entity-option__separator'>{__('or')}</div>
 						<div className='ee-entity-option__option'>
 							<label className={'ee-focus-priority-5'} id={addNewDescribedByID}>
-								{__('Add new and insert details manually')}
+								{
+									/* translators: entity type to add */
+									sprintf(__('Add a new %s and insert details manually'), entityType)
+								}
 							</label>
 							<Button
 								aria-describedby={addNewDescribedByID}

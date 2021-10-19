@@ -4,6 +4,7 @@ import { SimpleEntityList } from '@eventespresso/ui-components';
 import { useTickets, useTicketPrices } from '@eventespresso/edtr-services';
 import { useTimeZoneTime } from '@eventespresso/services';
 import { usePrepTemplatePrices } from '@eventespresso/tpc';
+import { __ } from '@eventespresso/i18n';
 
 import TicketCard from './TicketCard';
 import { useFormState, RemTicket } from '../../data';
@@ -44,6 +45,7 @@ const Tickets: React.FC = () => {
 			className='rem-tickets'
 			deleteEntity={deleteEntity}
 			entities={entities}
+			entityType={__('ticket')}
 			templates={templates}
 			EntityRenderer={TicketCard}
 		/>

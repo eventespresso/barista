@@ -9,7 +9,12 @@ import { Select } from '../Select';
 import { EntityOptionsRow } from './EntityOptionsRow';
 import { EntityTemplateProps } from './types';
 
-export const EntityTemplate = <E extends Entity>({ addEntity, templates, onAddNew }: EntityTemplateProps<E>) => {
+export const EntityTemplate = <E extends Entity>({
+	addEntity,
+	entityType,
+	templates,
+	onAddNew,
+}: EntityTemplateProps<E>) => {
 	const [selectedEntityId, setSelectedEntityId] = useState('');
 
 	const onChangeValue = useCallback((value) => setSelectedEntityId(value), []);
@@ -28,5 +33,12 @@ export const EntityTemplate = <E extends Entity>({ addEntity, templates, onAddNe
 		</>
 	);
 
-	return <EntityOptionsRow onAddNew={onAddNew} selectExisting={selectExisting} selectExistingID={selectExistingID} />;
+	return (
+		<EntityOptionsRow
+			entityType={entityType}
+			onAddNew={onAddNew}
+			selectExisting={selectExisting}
+			selectExistingID={selectExistingID}
+		/>
+	);
 };

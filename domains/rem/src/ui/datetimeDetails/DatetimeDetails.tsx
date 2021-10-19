@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Datetime, useDatetimes } from '@eventespresso/edtr-services';
 import { FormWithConfig } from '@eventespresso/ee-components';
 import { EntityTemplate } from '@eventespresso/ui-components';
+import { __ } from '@eventespresso/i18n';
 
 import useDatetimeFormConfig from './useDateFormConfig';
 import type { DatetimeDetailsProps } from './types';
@@ -18,7 +19,7 @@ const DatetimeDetails: React.FC<DatetimeDetailsProps> = () => {
 
 	return (
 		<>
-			<EntityTemplate addEntity={setTemplateDate} templates={allDates} />
+			<EntityTemplate addEntity={setTemplateDate} entityType={__('datetime')} templates={allDates} />
 			<FormWithConfig
 				// add the key to ensure the form resets when template is changed
 				// because description field uses RTE in uncontrolled mode,

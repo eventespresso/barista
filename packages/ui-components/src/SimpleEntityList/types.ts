@@ -4,6 +4,7 @@ import { IconButtonProps } from '../Button';
 
 export interface EntityTemplateProps<E extends Entity> {
 	className?: string;
+	entityType: string;
 	templates: Array<E>;
 	addEntity: (entity: Partial<E>) => void;
 	deleteEntity?: (entity: Partial<E>) => void;
@@ -20,6 +21,7 @@ export interface SimpleEntityRendererProps<E extends Entity> {
 
 export interface SimpleEntityListProps<E extends Entity> extends EntityTemplateProps<E> {
 	entities: Array<E>;
+	entityType: string;
 	EntityRenderer: React.ComponentType<SimpleEntityRendererProps<E>>;
 	ContentRenderer: React.ComponentType<SimpleEntityListContentProps<E>>;
 }

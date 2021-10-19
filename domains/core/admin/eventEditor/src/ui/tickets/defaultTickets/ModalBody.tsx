@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { SimpleEntityList, DebugInfo } from '@eventespresso/ui-components';
 import { useTickets, useTicketPrices } from '@eventespresso/edtr-services';
 import { usePrepTemplatePrices } from '@eventespresso/tpc';
+import { __ } from '@eventespresso/i18n';
 
 import { DefaultTicket, useDataState } from './data';
 import TicketCard from './TicketCard';
@@ -59,6 +60,7 @@ const ModalBody: React.FC = () => {
 				addEntity={addEntity}
 				deleteEntity={deleteEntity}
 				entities={entities}
+				entityType={__('ticket')}
 				templates={templates as any}
 				EntityRenderer={TicketCard}
 			/>
