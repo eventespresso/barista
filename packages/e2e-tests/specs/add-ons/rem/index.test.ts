@@ -58,7 +58,7 @@ describe('REM', () => {
 			label: 'Free Ticket',
 		});
 
-		await page.click('.ee-entity-option__input [type=button] >> text=Add');
+		await page.click('.ee-entity-option__input [type=button] >> text=Select');
 
 		await clickButton('Next');
 
