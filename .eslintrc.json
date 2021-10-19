@@ -41,6 +41,7 @@
 		"@typescript-eslint/no-use-before-define": "off",
 		"comma-dangle": "off",
 		"ee-barista/no-circular-imports": "error",
+		"ee-barista/no-stories-i18n": "error",
 		"jest/valid-title": "off",
 		"jest/no-conditional-expect": "off",
 		"jest/no-standalone-expect": ["error", { "additionalTestBlockFunctions": ["test.jestPlaywrightDebug"] }],

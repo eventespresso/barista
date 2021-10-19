@@ -63,5 +63,26 @@ module.exports = {
 				};
 			},
 		},
+		'no-stories-i18n': {
+			create: function (context) {
+				return {
+					ImportDeclaration(node) {
+						const importSource = node.source.value;
+						const path = context.getFilename();
+
+						if (
+							path.endsWith('.stories.tsx') &&
+							importSource.endsWith('/i18n') &&
+							node.specifiers.some((specifier) => specifier.imported.name.startsWith('_'))
+						) {
+							context.report({
+								node: node,
+								message: 'Stories should not be translated.',
+							});
+						}
+					},
+				};
+			},
+		},
 	},
 };
