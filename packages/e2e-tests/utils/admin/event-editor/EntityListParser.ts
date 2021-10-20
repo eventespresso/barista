@@ -7,6 +7,12 @@ export type ListView = 'card' | 'table';
 export type Field = 'name' | 'dbId' | 'status';
 export type Item = ElementHandle<SVGElement | HTMLElement>;
 
+/**
+ * This class helps you to parse an entity list and
+ * get different information about the list.
+ *
+ * For example dates and tickets list.
+ */
 export class EntityListParser {
 	entityType: EntityType;
 
@@ -307,7 +313,7 @@ export class EntityListParser {
 	/**
 	 * Retrieve the cache ids of all the entities in the list, regardless of the filters.
 	 */
-	getAllCacheds = async <T extends boolean>(asArray?: T): Promise<T extends true ? Array<string> : string> => {
+	getAllCacheIds = async <T extends boolean>(asArray?: T): Promise<T extends true ? Array<string> : string> => {
 		const idsStr = await page.$eval(this.getCacheIdsSelector(), (selector) =>
 			selector?.getAttribute('data-cache-ids')
 		);
@@ -378,7 +384,7 @@ export class EntityListParser {
 	 */
 	createWaitForListUpdate = async (): Promise<() => Promise<JSHandle<boolean>>> => {
 		// Lets save the cache IDs before update
-		const cacheIdsBeforeUpdate = await this.getAllCacheds(false);
+		const cacheIdsBeforeUpdate = await this.getAllCacheIds(false);
 
 		return async () => {
 			return await page.waitForFunction(

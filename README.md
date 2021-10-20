@@ -16,6 +16,14 @@ Run the following commands:
     1. To open Storybook, run `yarn sb`
     2. You can also install barista as a WordPress plugin. Goto `/wp-content/plugins` in your WordPress installation and run the above commands and then run `yarn dev:all`
 
+## Development configuration
+
+You can go through the [Development configuration](config/README.md) to know how development environment works.
+
+## Know more
+
+To know about this project in depth, you can go through [Wiki](https://github.com/eventespresso/barista/wiki) or start reading about one of the main use cases/domains we have - [Event Editor](./domains/core/admin/eventEditor/README.md)
+
 ### Contribute to Barista
 
 Barista is an open-source project and welcomes all contributors.
