@@ -67,7 +67,7 @@ Now, to abstract the complexity, we have [useRelationsManager](../../../../packa
 
 We use the same Relations Manager to manage the state for Ticket Assignment Manager, another part of EDTR with complex requirements.
 
-### Read more:
+### Read more
 
 -   [Addons integration](../../../../docs/addons.md)
 -   [Data layer](../../../../docs/data.md)
