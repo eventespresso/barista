@@ -18,7 +18,7 @@ const TimePicker: React.FC<FieldRendererProps> = ({
 	return (
 		<div className={classname}>
 			<TimePickerAdapter
-				{...input as any}
+				{...input}
 				locale={locale}
 				timeFormat={timeFormat}
 				value={value}

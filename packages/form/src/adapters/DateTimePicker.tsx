@@ -18,7 +18,7 @@ const DateTimePicker: React.FC<FieldRendererProps> = ({ className, input: { onCh
 	return (
 		<div className={htmlClass}>
 			<DateTimePickerAdapter
-				{...input as any}
+				{...input}
 				dateFormat={dateTimeFormat}
 				timeFormat={timeFormat}
 				locale={locale}
