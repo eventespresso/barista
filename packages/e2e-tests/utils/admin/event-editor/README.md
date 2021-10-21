@@ -1,10 +1,10 @@
 # E2E tests for Event Editor
 
-There are many utilities created for writing E2E test for Event Editor.
+There are many utilities created for writing E2E tests for Event Editor.
 
 ## [`createNewEvent`](./createNewEvent.ts)
 
-This functions abstracts the creation of an event. This is the utility that will be used before any other logic in the tests. You can use this utility inside `beforeAll()` or similar.
+This function abstracts the creation of an event. This is the utility that will be used before any other logic in the tests. You can use this utility inside `beforeAll()` or similar.
 
 ## [`EDTRGlider`](./EDTRGlider.ts)
 

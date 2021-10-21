@@ -9,7 +9,8 @@ Event Editor (shortly called as EDTR) is one of the main domains (use cases) of 
 -   Ticket(s) have Price(s) `(1:n)`, Registration(s) `(1:n)`
 -   Every Price is related to a PriceType `(1:1)`
 -   All these entities have properties like Name/Title, Description etc.
--   Every Datetime and Ticket has a Start and End date, which eventually become the start and end dates for the Event.
+-   Every Datetime and Ticket has a Start and End date.
+-   Start and End dates of the datetimes eventually become the start and end dates for the Event.
 
 So, to organize all of this, we divide EDTR into different sections:
 
