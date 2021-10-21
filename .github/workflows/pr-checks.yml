@@ -45,6 +45,7 @@ jobs:
                   fetch-depth: ${{ ( matrix.task != 'test' && 1 ) || 0 }} # 0 for test, 1 otherwise
 
             - name: Set test CLI args
+              # Run all unit tests if the commit message contains "test-all"
               if: ${{ matrix.task == 'test' && !contains(github.event.commits[0].message, 'test-all') }}
               run: echo "CLI_ARGS=--changedSince ${{ github.event.pull_request.base.sha }}" >> $GITHUB_ENV
 
