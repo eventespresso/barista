@@ -10,10 +10,9 @@ const DatePicker: React.FC<FieldRendererProps> = ({ className, input: { onChange
 	const htmlClass = classNames(className, 'ee-date-picker', 'ee-calendar-datetime-picker', 'ee-input-base-wrapper');
 
 	const { locale, dateFormat } = useFormConfig();
-
 	return (
 		<div className={htmlClass}>
-			<DatepickerAdapter {...input} dateFormat={dateFormat} locale={locale} {...props} onChange={onChange} />
+			<DatepickerAdapter {...input as any} dateFormat={dateFormat} locale={locale} {...props} onChange={onChange} />
 		</div>
 	);
 };
