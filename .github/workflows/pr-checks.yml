@@ -50,7 +50,7 @@ jobs:
               run: echo "CLI_ARGS=--changedSince ${{ github.event.pull_request.base.sha }}" >> $GITHUB_ENV
 
             - name: Run ${{ matrix.task }}
-              # Run the task only if JS is affected
+              # Run the task only if JS is affected.
               if: ${{ needs.what-is-hit.outputs.js == 'true' }}
               run: yarn ${{ matrix.task }}:ci ${{ env.CLI_ARGS }}
 
