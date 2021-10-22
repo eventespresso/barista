@@ -10,8 +10,7 @@ concurrency:
     # The concurrency group contains the workflow name and the branch name for pull requests
     # or the commit hash for any other events.
     group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.sha }}
-    # Cancel only if the commit message does not contain "no-cancel"
-    cancel-in-progress: ${{ !contains(github.event.commits[0].message, 'no-cancel') }}
+    cancel-in-progress: true
 
 jobs:
     # JOB to check if the files in a path have changed
@@ -44,9 +43,13 @@ jobs:
                   # To make sure all history is fetched for jest --changedSince to work as expected
                   fetch-depth: ${{ ( matrix.task != 'test' && 1 ) || 0 }} # 0 for test, 1 otherwise
 
+            - name: Get last commit message
+              id: last-commit
+              run: echo "::set-output name=message::$(git show -s --format=%s)"
+
             - name: Set test CLI args
               # Run all unit tests if the commit message contains "test-all".
-              if: ${{ matrix.task == 'test' && !contains(github.event.commits[0].message, 'test-all') }}
+              if: ${{ matrix.task == 'test' && !contains(steps.last-commit.outputs.message, 'test-all') }}
               run: echo "CLI_ARGS=--changedSince ${{ github.event.pull_request.base.sha }}" >> $GITHUB_ENV
 
             - name: Run ${{ matrix.task }}
