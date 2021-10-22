@@ -22,6 +22,7 @@
 
 			span:not(.ee-radio) {
 				white-space: nowrap;
+				color: var(--ee-default-text-color-high-contrast);
 
 				[dir='rtl'] & {
 					margin-left: var(--ee-margin-tiny);
