@@ -45,7 +45,7 @@ jobs:
 
             - name: Get last commit message
               id: last-commit
-              run: echo "::set-output name=message::$(git show -s --format=%s)"
+              run: echo "::set-output name=message::$(git log --no-merges --pretty="format:%s" -1)"
 
             - name: Set test CLI args
               # Run all unit tests if the commit message contains "test-all".
