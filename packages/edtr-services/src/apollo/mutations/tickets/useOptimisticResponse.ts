@@ -21,7 +21,6 @@ export const TICKET_DEFAULTS: Ticket = {
 	isOnSale: false,
 	isPending: true,
 	isRequired: false,
-	isTaxable: false,
 	max: -1,
 	min: 0,
 	name: '',

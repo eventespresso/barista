@@ -21,7 +21,6 @@ export const FIELD_NAMES: Array<keyof Ticket> = [
 	'description',
 	'isDefault',
 	'isRequired',
-	'isTaxable',
 	'isTrashed',
 	'max',
 	'min',

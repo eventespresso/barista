@@ -9,7 +9,7 @@ import { TpcPriceModifier } from '../types';
 
 // The fields that need to be synced from TPC to ticket edit form
 // This is to avoid ticket.name being synced
-const TPC_TICKET_FIELDS_TO_SYNC: Array<keyof Ticket> = ['isTaxable', 'price', 'reverseCalculate'];
+const TPC_TICKET_FIELDS_TO_SYNC: Array<keyof Ticket> = ['price', 'reverseCalculate'];
 
 /**
  * A custom hook which subscribes and TPC data and updates

@@ -14,7 +14,6 @@ export const TICKET_ATTRIBUTES: any = gql`
 		isPending
 		isRequired
 		isSoldOut
-		isTaxable
 		isTrashed
 		max
 		min

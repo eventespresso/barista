@@ -8,7 +8,6 @@ export interface TicketBaseInput {
 	endDate?: string | Date;
 	isDefault?: boolean;
 	isRequired?: boolean;
-	isTaxable?: boolean;
 	isTrashed?: boolean;
 	max?: number;
 	min?: number;

@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
-import { any, append, findIndex, has, insert, last, update } from 'ramda';
+import { append, findIndex, has, insert, last, update } from 'ramda';
 
-import { entityHasGuid, isTax, sortByPriceOrderIdAsc } from '@eventespresso/predicates';
+import { entityHasGuid, sortByPriceOrderIdAsc } from '@eventespresso/predicates';
 
 import { DataStateReducer, StateInitializer, DataState } from './types';
 import { TpcPriceModifier } from '../types';
@@ -33,15 +33,7 @@ const useDataReducer = (initializer: StateInitializer): DataStateReducer => {
 		(state, action) => {
 			const { type, id, index, fieldValues, ticketPrice, price, prices } = action;
 
-			let isTaxable: boolean,
-				newPrices: Array<TpcPriceModifier>,
-				priceIndex: number,
-				order: number,
-				priceToUpdate: TpcPriceModifier,
-				updatedPrice: TpcPriceModifier,
-				retainedPrices: Array<TpcPriceModifier>,
-				updatedPrices: Array<TpcPriceModifier>,
-				newState: DataState;
+			let newState: DataState;
 
 			// if TPC is disabled, we only allow changing of price name and description
 			if (state.isDisabled && (type !== 'UPDATE_PRICE' || !hasOnlyNameOrDesc(fieldValues))) {
@@ -69,13 +61,11 @@ const useDataReducer = (initializer: StateInitializer): DataStateReducer => {
 					break;
 
 				case 'UPDATE_TICKET_PRICE':
-					isTaxable = any(isTax, state.prices);
 					newState = {
 						...state,
 						ticket: {
 							...state.ticket,
 							price: ticketPrice,
-							isTaxable,
 						},
 					};
 					break;
@@ -87,7 +77,8 @@ const useDataReducer = (initializer: StateInitializer): DataStateReducer => {
 					};
 					break;
 
-				case 'ADD_PRICE':
+				case 'ADD_PRICE': {
+					let order: number;
 					if (index !== undefined) {
 						const orderOfThePriceAtIndex = state.prices?.[index - 1]?.order || 0;
 						// add only 1 to make sure the price is added just after the index
@@ -97,7 +88,7 @@ const useDataReducer = (initializer: StateInitializer): DataStateReducer => {
 						order = +orderOfTheLastPrice + 10;
 					}
 
-					newPrices =
+					const newPrices =
 						index !== undefined
 							? insert(index, { ...price, order }, state.prices)
 							: append({ ...price, order }, state.prices);
@@ -107,54 +98,47 @@ const useDataReducer = (initializer: StateInitializer): DataStateReducer => {
 						prices: newPrices,
 					};
 					break;
+				}
 
-				case 'UPDATE_PRICE':
+				case 'UPDATE_PRICE': {
 					// find the index of the price to update
-					priceIndex = findIndex(entityHasGuid(id), state.prices);
+					const priceIndex = findIndex(entityHasGuid(id), state.prices);
 					// if price id does not exist
 					if (priceIndex < 0) {
 						return state;
 					}
 					// get the price object
-					priceToUpdate = state.prices[priceIndex];
+					const priceToUpdate = state.prices[priceIndex];
 
 					// update the price object
-					updatedPrice = { ...priceToUpdate, ...fieldValues, isModified: true };
+					const updatedPrice = { ...priceToUpdate, ...fieldValues, isModified: true };
 
 					// update the prices list
-					updatedPrices = update(priceIndex, updatedPrice, state.prices);
+					let updatedPrices = update(priceIndex, updatedPrice, state.prices);
 
 					if (isOrderChanged) {
 						// sort them by order
 						updatedPrices = enforceBasePriceOrder(sortByPriceOrderIdAsc(updatedPrices));
 					}
 
-					isTaxable = any(isTax, updatedPrices);
 					newState =
 						priceIndex > -1
 							? {
 									...state,
 									prices: updatedPrices,
-									ticket: {
-										...state.ticket,
-										isTaxable,
-									},
 							  }
 							: state;
 					break;
+				}
 
-				case 'DELETE_PRICE':
-					retainedPrices = state.prices.filter(({ id: priceId }) => id !== priceId);
-					isTaxable = any(isTax, retainedPrices);
+				case 'DELETE_PRICE': {
+					const retainedPrices = state.prices.filter(({ id: priceId }) => id !== priceId);
 					newState = {
 						...state,
 						prices: retainedPrices,
-						ticket: {
-							...state.ticket,
-							isTaxable,
-						},
 					};
 					break;
+				}
 
 				case 'ADD_PRICE_TO_DELETED':
 					if (state.deletedPrices.includes(id)) {

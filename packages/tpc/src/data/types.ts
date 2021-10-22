@@ -6,7 +6,7 @@ import type { BaseProps, TpcPriceModifier } from '../types';
 
 export interface TpcTicket
 	extends Partial<Entity>,
-		Partial<Pick<Ticket, 'id' | 'isTaxable' | 'name' | 'price' | 'reverseCalculate'>> {}
+		Partial<Pick<Ticket, 'id' | 'name' | 'price' | 'reverseCalculate'>> {}
 
 export interface DataState extends Prices {
 	ticket: TpcTicket;
