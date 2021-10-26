@@ -7,8 +7,8 @@ beforeAll(async () => {
 	await Goto.eventsListPage();
 });
 
-describe('name here', () => {
-	it('does something', async () => {
+describe('Event table filters', () => {
+	it('Monthly filter', async () => {
 		let options = await (await page.$('select#month_range')).$$('option');
 
 		for (let i = 0; i < options.length; i++) {
