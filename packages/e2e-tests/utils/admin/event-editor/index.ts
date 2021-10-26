@@ -24,3 +24,4 @@ export * from './removeLastTicket';
 export * from './setListDisplayControl';
 export * from './setPrice';
 export * from './setPrices';
+export * from './DateFormatter';
