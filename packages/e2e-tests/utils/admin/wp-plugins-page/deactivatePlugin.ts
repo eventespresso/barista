@@ -1,5 +1,6 @@
-import { switchUserToAdmin, switchUserToTest, visitAdminPage } from '@e2eUtils/wp';
+import { switchUserToAdmin, switchUserToTest } from '@e2eUtils/wp';
 import { EE_DEBUG } from '@e2eUtils/misc';
+import { Goto } from '@e2eUtils/admin';
 
 import { isPluginNetworkActive } from './isPluginNetworkActive';
 
@@ -10,7 +11,7 @@ import { isPluginNetworkActive } from './isPluginNetworkActive';
  */
 export async function deactivatePlugin(plugin: string): Promise<void> {
 	await switchUserToAdmin();
-	await visitAdminPage('plugins.php', null);
+	await Goto.pluginsPage();
 
 	if (await isPluginNetworkActive(plugin)) {
 		EE_DEBUG && console.log(`Plugin "${plugin}" is network active.`);

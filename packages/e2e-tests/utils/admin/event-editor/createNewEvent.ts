@@ -1,11 +1,9 @@
-const menuLinkSelector = '.toplevel_page_espresso_events > a';
+import { Goto } from '@e2eUtils/admin';
 
 const ticketsListSelector = '#ee-entity-list-tickets .ee-entity-list__card-view';
 
 export async function createNewEvent({ title }: any = {}) {
-	await page.waitForSelector(menuLinkSelector);
-
-	await page.click(menuLinkSelector);
+	await Goto.eventsListPage();
 
 	await page.click('#add-new-event');
 

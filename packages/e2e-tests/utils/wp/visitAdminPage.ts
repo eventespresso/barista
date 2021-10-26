@@ -11,7 +11,7 @@ import { getPageError } from './getPageError';
  * @param {string} adminPath String to be serialized as pathname.
  * @param {string} query String to be serialized as query portion of URL.
  */
-export async function visitAdminPage(adminPath: string, query: string): Promise<void> {
+export async function visitAdminPage(adminPath: string, query = ''): Promise<void> {
 	const adminPage = createURL(join('wp-admin', adminPath), query);
 
 	await page.goto(adminPage);
