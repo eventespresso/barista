@@ -1,4 +1,4 @@
-import { monthYearDateFromat } from '@e2eUtils/admin/event-editor';
+import { DateFormatter } from '@e2eUtils/admin/event-editor';
 
 export const tableSelectFilter = async (
 	filterSelector: string,
@@ -34,7 +34,7 @@ export const tableSelectFilter = async (
 
 					// start date text can be in some format set by the user in WP date format settings
 					//if isDate true "November 24, 2021 8:00 am" becomes "November 2021"
-					if (isDate) columnText = await monthYearDateFromat(columnText);
+					if (isDate) columnText = await DateFormatter.monthYearDateFromat(columnText);
 
 					// ensure to trim the values before assertion
 					// somtimes the result for columnText is all lower case so to prevent inequality convert to lower case all the words
