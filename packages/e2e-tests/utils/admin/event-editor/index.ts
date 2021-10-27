@@ -17,7 +17,6 @@ export * from './fillDateTicketForm';
 export * from './getDateCapacityByName';
 export * from './getTicketPrice';
 export * from './getTicketQuantityByName';
-export * from './monthYearDateFromat';
 export * from './removeAllDates';
 export * from './removeAllPriceModifiers';
 export * from './removeAllTickets';

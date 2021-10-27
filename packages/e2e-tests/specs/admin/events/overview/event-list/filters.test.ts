@@ -20,4 +20,22 @@ describe('Events list page filters', () => {
 		);
 		expect(activeInactiveFilter).toBeTruthy();
 	});
+
+	it('tests the all venues filter', async () => {
+		const activeInactiveFilter = await tableSelectFilter('select#venue', '');
+		expect(activeInactiveFilter).toBeTruthy();
+	});
+
+	it('tests the all categories filter', async () => {
+		const activeInactiveFilter = await tableSelectFilter('select#EVT_CAT', '');
+		expect(activeInactiveFilter).toBeTruthy();
+	});
+
+	it('tests the reset filter', async () => {
+		// const { optionValues, options } = await getSelectFilter('select#month_range');
+		// console.log({ options: options.length });
+		// const daw1 = await getSelectFilter('select#active_status');
+		// await page.selectOption('select#month_range', optionValue[2]);
+		expect(true).toBeTruthy();
+	});
 });

@@ -1,11 +1,6 @@
 import { DateFormatter } from '@e2eUtils/admin/event-editor';
 
-export const tableSelectFilter = async (
-	filterSelector: string,
-	filterColumnSelector: string,
-	hasAssertionColumn = false,
-	isDate = false
-) => {
+export const getSelectFilter = async (filterSelector: string) => {
 	// lets get the first select element
 	const select = await page.$(filterSelector);
 	// lets get all its option elements
@@ -14,6 +9,17 @@ export const tableSelectFilter = async (
 	const optionValuePromises = options.map((option) => option.getAttribute('value'));
 	// The option values without the first empty or literally 'none' value
 	const optionValues = (await Promise.all(optionValuePromises)).filter((option) => option && option !== 'none');
+
+	return { optionValues, options };
+};
+
+export const tableSelectFilter = async (
+	filterSelector: string,
+	filterColumnSelector: string,
+	hasAssertionColumn = false,
+	isDate = false
+) => {
+	const { optionValues, options } = await getSelectFilter(filterSelector);
 
 	if (optionValues.length) {
 		// loop through all of the optionValues that is available inside the select filter
@@ -26,7 +32,7 @@ export const tableSelectFilter = async (
 
 			// hasAssertionColumn - if theres no comparison from selection into column results data
 			// check if tableRows has more than one index because the first index/[0] will be the header of the column
-			if (hasAssertionColumn && tableRows.length > 1) {
+			if (hasAssertionColumn && tableRows.length > 1 && filterColumnSelector) {
 				// lets loop through all the rows for assertions
 				for (const row of tableRows) {
 					// getting the desired inner text in a column
