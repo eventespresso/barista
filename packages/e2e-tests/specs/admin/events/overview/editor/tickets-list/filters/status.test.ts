@@ -1,4 +1,4 @@
-import { addNewTicket, createNewEvent, TicketEditor, EDTRGlider } from '@e2eUtils/admin/event-editor';
+import { addNewTicket, createNewEvent, TicketEditor, EDTRGlider } from '@e2eUtils/admin/events';
 import { EventRegistrar } from '@e2eUtils/public/reg-checkout';
 import { data } from '../../../../../../shared/data';
 

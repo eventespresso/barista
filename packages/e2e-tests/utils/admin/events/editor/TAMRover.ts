@@ -4,7 +4,7 @@ import { assocPath } from 'ramda';
 import { clickButton, respondToAlert } from '@e2eUtils/common';
 import { EE_DEBUG } from '@e2eUtils/misc';
 import { EntityListParser, Field, Item } from './EntityListParser';
-import { EntityType } from '../../../types';
+import { EntityType } from '../../../../types';
 
 export type ForType = EntityType | 'all';
 

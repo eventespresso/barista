@@ -1,4 +1,4 @@
-import { createNewEvent, DateEditor, TicketEditor } from '@e2eUtils/admin/event-editor';
+import { createNewEvent, DateEditor, TicketEditor } from '@e2eUtils/admin/events';
 
 const namespace = 'event-editor-copy-entity';
 const dateEditor = new DateEditor();

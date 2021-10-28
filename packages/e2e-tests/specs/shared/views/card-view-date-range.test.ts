@@ -1,4 +1,4 @@
-import { createNewEvent, setListDisplayControl, EntityListParser } from '@e2eUtils/admin/event-editor';
+import { createNewEvent, setListDisplayControl, EntityListParser } from '@e2eUtils/admin/events';
 import { selectDateFromNextMonth } from '@e2eUtils/common';
 
 const namespace = 'event.entities.edit.calendar.date.range';

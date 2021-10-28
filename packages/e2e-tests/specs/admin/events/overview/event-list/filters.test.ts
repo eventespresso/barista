@@ -1,4 +1,4 @@
-import { assertListFilter, resetFilter, selectDefaultOption } from '@e2eUtils/admin/event-editor';
+import { assertFilterOptions, resetFilter, selectDefaultOption } from '@e2eUtils/admin/events';
 import { Goto } from '@e2eUtils/admin';
 
 beforeAll(async () => {
@@ -12,12 +12,12 @@ beforeEach(async () => {
 describe('Events list page filters', () => {
 	// eslint-disable-next-line jest/no-disabled-tests
 	it.skip('tests the month/year filter', async () => {
-		const monthYearFilter = await assertListFilter('#month_range', 'td.start_date_time', true, true);
+		const monthYearFilter = await assertFilterOptions('#month_range', 'td.start_date_time', true, true);
 		expect(monthYearFilter).toBeTruthy();
 	});
 
 	it('tests the active/inactive filter', async () => {
-		const activeInactiveFilter = await assertListFilter(
+		const activeInactiveFilter = await assertFilterOptions(
 			'#active_status',
 			'td.name.column-name span.ee-status-text-small',
 			true
@@ -26,12 +26,12 @@ describe('Events list page filters', () => {
 	});
 
 	it('tests the all venues filter', async () => {
-		const venuesFilter = await assertListFilter('#venue', '');
+		const venuesFilter = await assertFilterOptions('#venue', '');
 		expect(venuesFilter).toBeTruthy();
 	});
 
 	it('tests the all categories filter', async () => {
-		const categoriesFilter = await assertListFilter('#EVT_CAT', '');
+		const categoriesFilter = await assertFilterOptions('#EVT_CAT', '');
 		expect(categoriesFilter).toBeTruthy();
 	});
 

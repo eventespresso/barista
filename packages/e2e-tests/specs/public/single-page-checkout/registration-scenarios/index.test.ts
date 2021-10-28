@@ -1,6 +1,6 @@
 import { saveVideo } from 'playwright-video';
 
-import { addNewTicket, createNewEvent, EDTRGlider, TicketEditor } from '@e2eUtils/admin/event-editor';
+import { addNewTicket, createNewEvent, EDTRGlider, TicketEditor } from '@e2eUtils/admin/events';
 import { EventRegistrar } from '@e2eUtils/public/reg-checkout';
 
 const namespace = 'event.free-event.registration';

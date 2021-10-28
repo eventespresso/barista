@@ -1,5 +1,5 @@
-import { addNewDate, addNewTicket } from './';
-import { EntityType } from '../../../types';
+import { addNewDate, addNewTicket } from '..';
+import { EntityType } from '../../../../types';
 
 interface Props {
 	entityType: EntityType;

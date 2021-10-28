@@ -13,7 +13,7 @@ import {
 	TPCSafari,
 	TicketEditor,
 	getTicketPrice,
-} from '@e2eUtils/admin/event-editor';
+} from '@e2eUtils/admin/events';
 
 const editor = new TicketEditor();
 const tpcSafari = new TPCSafari();

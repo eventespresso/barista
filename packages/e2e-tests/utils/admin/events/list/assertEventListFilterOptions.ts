@@ -31,7 +31,7 @@ export const getSelectFilter = async (selector: string) => {
 	return { optionValues, options };
 };
 
-export const assertListFilter = async (
+export const assertFilterOptions = async (
 	filterSelector: string,
 	filterColumnSelector: string,
 	hasAssertionColumn = false,

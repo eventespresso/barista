@@ -1,6 +1,6 @@
-import { EntityListParser } from '@e2eUtils/admin/event-editor';
+import { EntityListParser } from '@e2eUtils/admin/events';
 import { clickButton } from '@e2eUtils/common';
-import { fillDateTicketForm, DateTicketFormArgs } from './';
+import { fillDateTicketForm, DateTicketFormArgs } from '..';
 import { setPrice } from './setPrice';
 
 const parser = new EntityListParser('ticket');

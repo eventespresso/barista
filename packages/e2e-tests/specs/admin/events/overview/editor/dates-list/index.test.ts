@@ -1,6 +1,6 @@
 import { saveVideo } from 'playwright-video';
 
-import { addNewDate, createNewEvent, EntityListParser } from '@e2eUtils/admin/event-editor';
+import { addNewDate, createNewEvent, EntityListParser } from '@e2eUtils/admin/events';
 
 const parser = new EntityListParser('datetime');
 

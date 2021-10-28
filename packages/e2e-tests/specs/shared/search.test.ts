@@ -1,4 +1,4 @@
-import { addNewDate, addNewTicket, createNewEvent, DateEditor, TicketEditor } from '@e2eUtils/admin/event-editor';
+import { addNewDate, addNewTicket, createNewEvent, DateEditor, TicketEditor } from '@e2eUtils/admin/events';
 import { entities } from '../../constants';
 
 const namespace = 'eventEditor.filters.search';

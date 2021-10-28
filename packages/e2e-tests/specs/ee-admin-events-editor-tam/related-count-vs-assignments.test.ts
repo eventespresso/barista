@@ -1,6 +1,6 @@
 import { saveVideo } from 'playwright-video';
 
-import { createNewEvent, EntityListParser, TAMRover, GetMapProps, ListView } from '@e2eUtils/admin/event-editor';
+import { createNewEvent, EntityListParser, TAMRover, GetMapProps, ListView } from '@e2eUtils/admin/events';
 import { clickLabel } from '@e2eUtils/common';
 import { EntityType } from '../../types';
 

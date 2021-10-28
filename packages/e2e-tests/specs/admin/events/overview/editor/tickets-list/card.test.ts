@@ -1,6 +1,6 @@
 import { saveVideo } from 'playwright-video';
 
-import { createNewEvent, getTicketQuantityByName, TicketEditor } from '@e2eUtils/admin/event-editor';
+import { createNewEvent, getTicketQuantityByName, TicketEditor } from '@e2eUtils/admin/events';
 
 const namespace = 'event.tickets.card.view.inline-inputs';
 

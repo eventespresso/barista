@@ -1,4 +1,4 @@
-import { addNewTicket, createNewEvent, TicketEditor } from '@e2eUtils/admin/event-editor';
+import { addNewTicket, createNewEvent, TicketEditor } from '@e2eUtils/admin/events';
 import { data } from '../../../../../../shared/data';
 
 const namespace = 'eventEditor.tickets.sortBy';

@@ -2,7 +2,7 @@ import { saveVideo } from 'playwright-video';
 import { NOW } from '@eventespresso/constants';
 import { add, getMonthName } from '@eventespresso/dates';
 
-import { createNewEvent, setListDisplayControl, DateEditor, DateFields } from '@e2eUtils/admin/event-editor';
+import { createNewEvent, setListDisplayControl, DateEditor, DateFields } from '@e2eUtils/admin/events';
 
 import { expectCardToContain } from '../../../../../../assertions';
 

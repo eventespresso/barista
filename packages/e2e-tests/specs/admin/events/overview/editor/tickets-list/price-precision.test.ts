@@ -1,4 +1,4 @@
-import { createNewEvent, getTicketPrice, TicketEditor, TPCSafari } from '@e2eUtils/admin/event-editor';
+import { createNewEvent, getTicketPrice, TicketEditor, TPCSafari } from '@e2eUtils/admin/events';
 
 import { crazyTestCases } from './data';
 

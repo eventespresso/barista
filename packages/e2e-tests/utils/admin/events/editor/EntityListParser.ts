@@ -1,7 +1,7 @@
 import { clickButton } from '@e2eUtils/common';
 import type { Page, ElementHandle, JSHandle } from 'playwright-core';
 
-import { EntityType } from '../../../types';
+import { EntityType } from '../../../../types';
 
 export type ListView = 'card' | 'table';
 export type Field = 'name' | 'dbId' | 'status';

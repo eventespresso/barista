@@ -1,4 +1,4 @@
-import { addNewTicket, createNewEvent, TicketEditor } from '@e2eUtils/admin/event-editor';
+import { addNewTicket, createNewEvent, TicketEditor } from '@e2eUtils/admin/events';
 
 const namespace = 'event.tickets.delete';
 

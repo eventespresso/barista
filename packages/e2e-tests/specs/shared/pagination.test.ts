@@ -1,4 +1,4 @@
-import { addNewEntity, createNewEvent, EntityListParser } from '@e2eUtils/admin/event-editor';
+import { addNewEntity, createNewEvent, EntityListParser } from '@e2eUtils/admin/events';
 import { getPaginationSize } from '../../assertions';
 import { entities } from '../../constants';
 

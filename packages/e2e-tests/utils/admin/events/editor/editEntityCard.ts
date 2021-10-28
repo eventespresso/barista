@@ -1,5 +1,5 @@
 import { EntityListParser } from './EntityListParser';
-import type { EntityType } from '../../../types';
+import type { EntityType } from '../../../../types';
 
 interface Props {
 	capacity?: string;

@@ -1,6 +1,6 @@
 import { saveVideo } from 'playwright-video';
 
-import { addNewDate, createNewEvent, DateEditor, TicketEditor } from '@e2eUtils/admin/event-editor';
+import { addNewDate, createNewEvent, DateEditor, TicketEditor } from '@e2eUtils/admin/events';
 
 const namespace = 'event.dates.delete';
 

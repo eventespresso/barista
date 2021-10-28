@@ -1,4 +1,4 @@
-import { createNewEvent, EntityListParser } from '@e2eUtils/admin/event-editor';
+import { createNewEvent, EntityListParser } from '@e2eUtils/admin/events';
 
 const namespace = 'event-editor-switch-list-view';
 const parser = new EntityListParser();

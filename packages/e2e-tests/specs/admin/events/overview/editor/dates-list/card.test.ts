@@ -1,6 +1,6 @@
 import { saveVideo } from 'playwright-video';
 
-import { createNewEvent, DateEditor, getDateCapacityByName } from '@e2eUtils/admin/event-editor';
+import { createNewEvent, DateEditor, getDateCapacityByName } from '@e2eUtils/admin/events';
 
 const namespace = 'event.dates.card.view.inline-inputs';
 

@@ -1,7 +1,7 @@
 import { saveVideo } from 'playwright-video';
 import { path } from 'ramda';
 
-import { createNewEvent, TAMRover } from '@e2eUtils/admin/event-editor';
+import { createNewEvent, TAMRover } from '@e2eUtils/admin/events';
 import { addDatesAndTickets } from './utils';
 
 const tamrover = new TAMRover();

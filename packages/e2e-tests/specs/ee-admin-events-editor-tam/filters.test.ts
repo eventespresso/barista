@@ -3,7 +3,7 @@ import { saveVideo } from 'playwright-video';
 import { PLUS_ONE_MONTH } from '@eventespresso/constants';
 
 import { clickButton, clickLabel } from '@e2eUtils/common';
-import { createNewEvent, DateEditor } from '@e2eUtils/admin/event-editor';
+import { createNewEvent, DateEditor } from '@e2eUtils/admin/events';
 
 import { addDatesAndTickets } from './utils';
 

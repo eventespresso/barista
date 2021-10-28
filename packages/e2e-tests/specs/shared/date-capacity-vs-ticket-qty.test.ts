@@ -11,7 +11,7 @@ import {
 	getTicketQuantityByName,
 	DateEditor,
 	EntityListParser,
-} from '@e2eUtils/admin/event-editor';
+} from '@e2eUtils/admin/events';
 import { clickLabel } from '@e2eUtils/common';
 
 const newTicketName = 'New Ticket';

@@ -1,4 +1,4 @@
-import { addNewDate, createNewEvent, DateEditor } from '@e2eUtils/admin/event-editor';
+import { addNewDate, createNewEvent, DateEditor } from '@e2eUtils/admin/events';
 import { data } from '../../../../../../shared/data';
 
 const namespace = 'eventEditor.dates.sortBy';

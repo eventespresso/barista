@@ -6,7 +6,7 @@ import {
 	TAMRover,
 	DateEditor,
 	TicketEditor,
-} from '@e2eUtils/admin/event-editor';
+} from '@e2eUtils/admin/events';
 
 const dateEditor = new DateEditor();
 const ticketEditor = new TicketEditor();

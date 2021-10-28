@@ -1,6 +1,6 @@
 import { saveVideo } from 'playwright-video';
 
-import { addNewDate, createNewEvent, DateEditor, EDTRGlider, TicketEditor } from '@e2eUtils/admin/event-editor';
+import { addNewDate, createNewEvent, DateEditor, EDTRGlider, TicketEditor } from '@e2eUtils/admin/events';
 import { EventRegistrar } from '@e2eUtils/public/reg-checkout';
 
 const namespace = 'eventDates.filters.sales';

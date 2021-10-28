@@ -1,6 +1,6 @@
 import { saveVideo } from 'playwright-video';
 
-import { createNewEvent, EntityEditor } from '@e2eUtils/admin/event-editor';
+import { createNewEvent, EntityEditor } from '@e2eUtils/admin/events';
 import { entities } from '../../../constants';
 
 const namespace = 'event.views.table.inline-edit';
