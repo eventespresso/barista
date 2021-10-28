@@ -1,10 +1,28 @@
-import { DateFormatter } from '@e2eUtils/admin/event-editor';
+import { DateFormatter } from '@e2eUtils/admin';
 
-export const getSelectFilter = async (filterSelector: string) => {
-	// lets get the first select element
-	const select = await page.$(filterSelector);
+export const resetFilter = async () => {
+	// select the unique identity for reset filters button
+	const selector = '#Extend_Events_Admin_List_Table-table-frm > .tablenav.top > a.button.button-secondary';
+	// hit the reset filters button
+	await Promise.all([page.waitForNavigation(), page.click(selector)]);
+};
+
+export const selectDefaultOption = async (selector: string) => {
 	// lets get all its option elements
-	const options = await select.$$('option');
+	const options = await page.$$(`select${selector} option`);
+	// select the first/default option in select and get the innertext then trim the string
+	const content = (await options[0].innerText()).trim();
+	// select the default value in selector
+	await page.selectOption(`select${selector}`, {
+		label: content,
+	});
+
+	return content;
+};
+
+export const getSelectFilter = async (selector: string) => {
+	// lets get all its option elements
+	const options = await page.$$(`select${selector} option`);
 	// lets convert the array of options to the array of promises that resolve to option value
 	const optionValuePromises = options.map((option) => option.getAttribute('value'));
 	// The option values without the first empty or literally 'none' value
@@ -13,7 +31,7 @@ export const getSelectFilter = async (filterSelector: string) => {
 	return { optionValues, options };
 };
 
-export const tableSelectFilter = async (
+export const assertListFilter = async (
 	filterSelector: string,
 	filterColumnSelector: string,
 	hasAssertionColumn = false,

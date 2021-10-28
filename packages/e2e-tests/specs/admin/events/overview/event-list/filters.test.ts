@@ -1,20 +1,24 @@
-import { tableSelectFilter } from '@e2eUtils/admin/event-editor';
+import { assertListFilter, resetFilter, selectDefaultOption } from '@e2eUtils/admin/event-editor';
 import { Goto } from '@e2eUtils/admin';
 
 beforeAll(async () => {
 	await Goto.eventsListPage();
 });
 
+beforeEach(async () => {
+	await resetFilter();
+});
+
 describe('Events list page filters', () => {
 	// eslint-disable-next-line jest/no-disabled-tests
 	it.skip('tests the month/year filter', async () => {
-		const monthYearFilter = await tableSelectFilter('select#month_range', 'td.start_date_time', true, true);
+		const monthYearFilter = await assertListFilter('#month_range', 'td.start_date_time', true, true);
 		expect(monthYearFilter).toBeTruthy();
 	});
 
 	it('tests the active/inactive filter', async () => {
-		const activeInactiveFilter = await tableSelectFilter(
-			'select#active_status',
+		const activeInactiveFilter = await assertListFilter(
+			'#active_status',
 			'td.name.column-name span.ee-status-text-small',
 			true
 		);
@@ -22,20 +26,24 @@ describe('Events list page filters', () => {
 	});
 
 	it('tests the all venues filter', async () => {
-		const activeInactiveFilter = await tableSelectFilter('select#venue', '');
-		expect(activeInactiveFilter).toBeTruthy();
+		const venuesFilter = await assertListFilter('#venue', '');
+		expect(venuesFilter).toBeTruthy();
 	});
 
 	it('tests the all categories filter', async () => {
-		const activeInactiveFilter = await tableSelectFilter('select#EVT_CAT', '');
-		expect(activeInactiveFilter).toBeTruthy();
+		const categoriesFilter = await assertListFilter('#EVT_CAT', '');
+		expect(categoriesFilter).toBeTruthy();
 	});
 
 	it('tests the reset filter', async () => {
-		// const { optionValues, options } = await getSelectFilter('select#month_range');
-		// console.log({ options: options.length });
-		// const daw1 = await getSelectFilter('select#active_status');
-		// await page.selectOption('select#month_range', optionValue[2]);
-		expect(true).toBeTruthy();
+		//gather all unique indentity for select element
+		const selectorList = ['#month_range', '#active_status', '#venue', '#EVT_CAT'];
+		// loop all list of select element identity
+		for (const selector of selectorList) {
+			const selectDefault = await selectDefaultOption(selector);
+			// ensure the default select innertext will not be empty.
+			expect(selectDefault).toBeTruthy();
+		}
+		await resetFilter();
 	});
 });
