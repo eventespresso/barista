@@ -8,7 +8,6 @@
 		width: var(--ee-font-size-default);
 
 		&[data-checked] {
-			background: var(--ee-color-primary);
 			border-color: var(--ee-color-primary);
 			color: var(--ee-text-on-primary);
 		}
