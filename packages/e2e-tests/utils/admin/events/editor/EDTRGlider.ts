@@ -1,4 +1,5 @@
 const ticketsListSelector = '#ee-entity-list-tickets .ee-entity-list__card-view';
+
 /**
  * Helper class to deal with EDTR.
  */
@@ -26,14 +27,14 @@ export class EDTRGlider {
 	setMaxRegistrations = async (value: number, updateEvent = true) => {
 		await page.fill('#max-registrants', String(value));
 
-		await this.updateEvent(updateEvent);
+		await this.saveEvent(updateEvent);
 	};
 
 	/**
 	 * Updates the event by clicking the Publish/update button
 	 */
-	updateEvent = async (update = true) => {
-		if (update) {
+	saveEvent = async (save = true) => {
+		if (save) {
 			await Promise.all([page.waitForNavigation(), page.click('#publish')]);
 			await this.waitForEdtr2Load();
 		}
@@ -58,7 +59,7 @@ export class EDTRGlider {
 			await metabox.$eval('text=Address Information', (e) => e.closest('p').querySelector('input').click());
 		}
 
-		await this.updateEvent(updateEvent);
+		await this.saveEvent(updateEvent);
 	};
 
 	/**

@@ -1,6 +1,6 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
 
-import { createNewEvent, TicketEditor, EDTRGlider } from '@e2eUtils/admin/event-editor';
+import { createNewEvent, TicketEditor, EDTRGlider } from '@e2eUtils/admin/events';
 import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
 import { getInputValue } from '@e2eUtils/common';
 
@@ -72,7 +72,7 @@ describe('WP User tests', () => {
 		await ticketEditor.fillAndSubmitForm();
 
 		// Update the event
-		await edtrGlider.updateEvent();
+		await edtrGlider.saveEvent();
 
 		// open the same ticket form again
 		await ticketEditor.openEditForm();
@@ -90,7 +90,7 @@ describe('WP User tests', () => {
 		await ticketEditor.fillAndSubmitForm();
 
 		// Update the event
-		await edtrGlider.updateEvent();
+		await edtrGlider.saveEvent();
 
 		// open the same ticket form again
 		await ticketEditor.openEditForm();

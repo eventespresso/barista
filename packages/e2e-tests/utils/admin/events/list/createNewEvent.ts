@@ -1,22 +1,15 @@
 import { Goto } from '@e2eUtils/admin';
 
-const ticketsListSelector = '#ee-entity-list-tickets .ee-entity-list__card-view';
+import { EDTRGlider } from '../editor';
+
+const edtrGlider = new EDTRGlider();
 
 export async function createNewEvent({ title }: any = {}) {
 	await Goto.eventsListPage();
 
-	await page.click('#add-new-event');
+	await Promise.all([page.waitForNavigation(), page.click('#add-new-event')]);
 
-	await page.focus('#titlewrap #title');
+	await page.fill('#titlewrap #title', title);
 
-	await page.type('#titlewrap #title', title);
-
-	await Promise.all([
-		// Wait for page load after the event is published
-		page.waitForNavigation(),
-		page.click('#publishing-action #publish'),
-	]);
-
-	// Wait for tickets list lazy load
-	await page.waitForSelector(ticketsListSelector);
+	await edtrGlider.saveEvent();
 }
