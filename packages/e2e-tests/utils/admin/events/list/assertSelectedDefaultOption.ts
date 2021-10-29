@@ -1,5 +1,3 @@
-import { resetFilter } from '@e2eUtils/admin/events';
-
 export const assertSelectedDefaultOption = async (selector: string, value: string) => {
 	// lets get all its option elements
 	const options = await page.$$(`select${selector} option`);
@@ -11,7 +9,6 @@ export const assertSelectedDefaultOption = async (selector: string, value: strin
 	});
 	// assert default value in a select filter
 	expect(content).toBe(value);
-	// trigger the reset filter
-	await resetFilter();
+
 	return content;
 };

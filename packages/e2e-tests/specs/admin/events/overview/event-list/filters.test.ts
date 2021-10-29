@@ -37,13 +37,15 @@ describe('Events list page filters', () => {
 	});
 
 	it('tests the reset filter', async () => {
-		//gather all unique indentity for select element and it's default value
+		// gather all unique indentity for select element and it's default value
 		const selectorList = [
 			{ value: 'Select a Month/Year', selector: '#month_range' },
 			{ value: 'Show Active/Inactive', selector: '#active_status' },
 			{ value: 'All Venues', selector: '#venue' },
 			{ value: 'All Categories', selector: '#EVT_CAT' },
 		];
+		// trigger the reset filter first
+		await resetFilter();
 		// loop all list of select element identity
 		for (const { value, selector } of selectorList) {
 			// check default value and asset every iteration
