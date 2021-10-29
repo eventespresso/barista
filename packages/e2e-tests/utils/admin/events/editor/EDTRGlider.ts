@@ -1,3 +1,4 @@
+const ticketsListSelector = '#ee-entity-list-tickets .ee-entity-list__card-view';
 /**
  * Helper class to deal with EDTR.
  */
@@ -34,6 +35,7 @@ export class EDTRGlider {
 	updateEvent = async (update = true) => {
 		if (update) {
 			await Promise.all([page.waitForNavigation(), page.click('#publish')]);
+			await this.waitForEdtr2Load();
 		}
 	};
 
@@ -57,5 +59,13 @@ export class EDTRGlider {
 		}
 
 		await this.updateEvent(updateEvent);
+	};
+
+	/**
+	 * Wait for EDTR to load.
+	 */
+	waitForEdtr2Load = async () => {
+		// Wait for tickets list lazy load
+		await page.waitForSelector(ticketsListSelector);
 	};
 }

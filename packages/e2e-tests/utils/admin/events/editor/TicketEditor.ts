@@ -80,7 +80,7 @@ export class TicketEditor extends EntityEditor {
 	/**
 	 * Opens the edit form for the ticket identified by the field and its value.
 	 */
-	fillAndSubmitForm = async (formData: TicketFields): Promise<void> => {
+	fillAndSubmitForm = async (formData: TicketFields = {}): Promise<void> => {
 		// Fill in the details
 		await fillDateTicketForm(formData);
 		// Move to the last step
