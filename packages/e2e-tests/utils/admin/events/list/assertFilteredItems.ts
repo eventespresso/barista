@@ -1,25 +1,5 @@
 import { DateFormatter } from '@e2eUtils/admin';
 
-export const resetFilter = async () => {
-	// select the unique identity for reset filters button
-	const selector = '#Extend_Events_Admin_List_Table-table-frm > .tablenav.top > a.button.button-secondary';
-	// hit the reset filters button
-	await Promise.all([page.waitForNavigation(), page.click(selector)]);
-};
-
-export const selectDefaultOption = async (selector: string) => {
-	// lets get all its option elements
-	const options = await page.$$(`select${selector} option`);
-	// select the first/default option in select and get the innertext then trim the string
-	const content = (await options[0].innerText()).trim();
-	// select the default value in selector
-	await page.selectOption(`select${selector}`, {
-		label: content,
-	});
-
-	return content;
-};
-
 export const getSelectFilter = async (selector: string) => {
 	// lets get all its option elements
 	const options = await page.$$(`select${selector} option`);
@@ -31,7 +11,7 @@ export const getSelectFilter = async (selector: string) => {
 	return { optionValues, options };
 };
 
-export const assertFilterOptions = async (
+export const assertFilteredItems = async (
 	filterSelector: string,
 	filterColumnSelector: string,
 	hasAssertionColumn = false,
