@@ -1,5 +1,6 @@
 import { clickButton } from '@e2eUtils/common';
-import { DateEditor } from '@e2eUtils/admin/events';
+
+import { DateEditor } from './DateEditor';
 import { DateTicketFormArgs, fillDateTicketForm } from './fillDateTicketForm';
 
 const editor = new DateEditor();
