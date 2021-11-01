@@ -2,7 +2,7 @@ import { ApolloClient, InMemoryCache, InMemoryCacheConfig, FieldReadFunction } f
 import type { NormalizedCacheObject } from '@apollo/client';
 import { BatchHttpLink } from '@apollo/client/link/batch-http';
 
-const graphqlEndpoint = window?.eventEspressoData?.api?.graphqlEndpoint || '';
+const graphqlEndpoint = window?.eventEspressoData?.api?.graphqlEndpoint || '/graphql';
 const nonce = window?.eventEspressoData?.api?.restApiNonce || '';
 
 const getReadFunction = (type: string): FieldReadFunction => {
@@ -30,12 +30,13 @@ export const getClient = (): ApolloClient<NormalizedCacheObject> => {
 	// add nonce only if exists.
 	const headers = nonce
 		? {
+				// 'X-WP-Nonce' is used by WP GraphQL to authenticate the user.
 				'X-WP-Nonce': nonce,
 		  }
 		: null;
 
 	const link = new BatchHttpLink({
-		uri: graphqlEndpoint || '/graphql',
+		uri: graphqlEndpoint,
 		headers,
 	});
 
