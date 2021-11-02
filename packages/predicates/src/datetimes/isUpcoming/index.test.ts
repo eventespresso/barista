@@ -18,7 +18,7 @@ describe('isUpcoming', () => {
 
 	it('should return `true` if startDate is in the future and ignoreFlag is true', () => {
 		datetimes.forEach((datetime) => {
-			const newDatetime = { ...datetime, startDate: formatISO(add('days', NOW, 2)), isUpcoming: true };
+			const newDatetime = { ...datetime, startDate: formatISO(add('days', NOW, 2)), isUpcoming: false };
 			const result = isUpcoming(newDatetime, true);
 			expect(result).toBe(true);
 		});
