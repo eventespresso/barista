@@ -1,5 +1,6 @@
 import { is } from 'ramda';
 
+import { isInfinite } from '@eventespresso/utils';
 import type { Datetime } from '@eventespresso/edtr-services';
 
 /**
@@ -7,7 +8,7 @@ import type { Datetime } from '@eventespresso/edtr-services';
  * @return {boolean} true if capacity property is valid and unlimited
  */
 const validInfiniteCapacityLimit = ({ capacity }: Datetime): boolean => {
-	return is(Number, capacity) && !isFinite(capacity);
+	return is(Number, capacity) && isInfinite(capacity);
 };
 
 export default validInfiniteCapacityLimit;

@@ -1,8 +1,8 @@
-import { isBooleanTrue } from '@eventespresso/utils';
+import { isBooleanTrue, isInfinite } from '@eventespresso/utils';
 import type { Ticket } from '@eventespresso/edtr-services';
 
 const isSoldOut = (ticket: Ticket): boolean =>
 	isBooleanTrue(ticket.isSoldOut) ||
-	(isFinite(ticket.quantity) && ticket.quantity > -1 && ticket.quantity <= ticket.sold);
+	(!isInfinite(ticket.quantity) && ticket.quantity > -1 && ticket.quantity <= ticket.sold);
 
 export default isSoldOut;
