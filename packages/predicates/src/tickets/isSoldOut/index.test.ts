@@ -3,75 +3,94 @@ import { nodes as tickets } from '@eventespresso/edtr-services/src/apollo/querie
 
 const testCases = [
 	{
-		desc: 'returns true when ticket.isSoldOut is true BUT sold is less than quantity',
-		sold: 5,
-		quantity: 10,
+		desc: 'returns the value of isSoldOut flag if it is true',
+		sold: null,
+		quantity: null,
 		soldOut: true,
 		result: true,
 	},
 	{
-		desc: 'returns true when ticket.isSoldOut is true AND sold is equal to quantity',
-		sold: 10,
-		quantity: 10,
-		soldOut: true,
-		result: true,
-	},
-	{
-		desc: 'returns true when ticket.isSoldOut is true AND sold is greater than quantity',
-		sold: 10,
-		quantity: 5,
-		soldOut: true,
-		result: true,
-	},
-	{
-		desc: 'returns true when ticket.isSoldOut is true BUT quantity is infinite',
-		sold: 10,
-		quantity: -1,
-		soldOut: true,
-		result: true,
-	},
-	{
-		desc: 'returns false when ticket.isSoldOut is false AND sold is less than quantity',
-		sold: 5,
-		quantity: 10,
-		soldOut: true,
-		result: true,
-	},
-	{
-		desc: 'returns true when ticket.isSoldOut is false BUT sold is equal to quantity',
-		sold: 10,
-		quantity: 10,
+		desc: 'returns the value of isSoldOut flag if it is false',
+		sold: null,
+		quantity: null,
 		soldOut: false,
+		result: false,
+	},
+	{
+		desc: 'returns true when isSoldOut is null AND sold is equal to quantity',
+		sold: 10,
+		quantity: 10,
+		soldOut: null,
 		result: true,
 	},
 	{
-		desc: 'returns true when ticket.isSoldOut is false BUT sold is greater than quantity',
+		desc: 'returns true when isSoldOut is null AND sold is greater than quantity',
 		sold: 10,
 		quantity: 5,
-		soldOut: true,
+		soldOut: null,
 		result: true,
 	},
 	{
-		desc: 'returns true when ticket.isSoldOut is false BUT quantity is infinite',
+		desc: 'returns false when isSoldOut is null BUT quantity is infinite',
 		sold: 10,
 		quantity: -1,
-		soldOut: true,
+		soldOut: null,
+		result: false,
+	},
+	{
+		desc: 'returns false when isSoldOut is null AND sold is less than quantity',
+		sold: 5,
+		quantity: 10,
+		soldOut: null,
+		result: false,
+	},
+	{
+		desc: 'returns true when isSoldOut is null BUT sold is equal to quantity',
+		sold: 10,
+		quantity: 10,
+		soldOut: null,
 		result: true,
+	},
+	{
+		desc: 'returns true when isSoldOut is null BUT sold is greater than quantity',
+		sold: 10,
+		quantity: 5,
+		soldOut: null,
+		result: true,
+	},
+	{
+		desc: 'returns `false` if isSoldOut is null and quantity is infitine (-1)',
+		sold: 10,
+		quantity: -1,
+		soldOut: null,
+		result: false,
+	},
+	{
+		desc: 'returns `false` if isSoldOut is null and quantity is infitine (null)',
+		sold: 10,
+		quantity: null,
+		soldOut: null,
+		result: false,
+	},
+	{
+		desc: 'returns `false` if isSoldOut is null and quantity is infitine (undefined)',
+		sold: 10,
+		quantity: undefined,
+		soldOut: null,
+		result: false,
 	},
 ];
 
-describe('isSoldOut', () => {
-	tickets.forEach((ticket) => {
-		testCases.forEach(({ desc, quantity, sold, soldOut, result }) => {
-			const newTicket = {
-				...ticket,
-				isSoldOut: soldOut,
-				quantity,
-				sold,
-			};
-			it(desc, () => {
-				expect(isSoldOut(newTicket)).toBe(result);
-			});
+describe('ticket.isSoldOut', () => {
+	testCases.forEach(({ desc, quantity, sold, soldOut, result }) => {
+		const newDatetime = {
+			...tickets[0],
+			isSoldOut: soldOut,
+			quantity,
+			sold,
+		};
+		it(desc, () => {
+			expect(isSoldOut(newDatetime)).toBe(result);
 		});
 	});
 });
