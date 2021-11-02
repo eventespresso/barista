@@ -19,10 +19,10 @@ This package contains the Event Editor (EDTR) specific services, mostly related 
     The most important service that this package provides is the data rehydration of the Apollo cache. It reads the DOM data and updates/rehydrates the local cache to avoid network requests being sent for the initial data. It does so in [`useCacheRehydration`](./src/apollo/initialization/useCacheRehydration.ts).
 
 -   Queries
-    It provides all the data queries required for EDTR. The queries and all the related utilities are places in `src/apollo/queries` directory, organized into entity types.
+    It provides all the data queries required for EDTR. The queries and all the related utilities can be found in the `src/apollo/queries` directory, organized into entity types.
 
 -   Mutations
-    It provides all the mutations required for EDTR. The mutations and all the related utilities are places in `src/apollo/mutations` directory, organized into entity types.
+    It provides all the mutations required for EDTR. The mutations and all the related utilities can be found in the `src/apollo/mutations` directory, organized into entity types.
 
 ## Query Examples
 
