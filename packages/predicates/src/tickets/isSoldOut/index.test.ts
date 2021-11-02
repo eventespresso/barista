@@ -83,14 +83,14 @@ const testCases = [
 
 describe('ticket.isSoldOut', () => {
 	testCases.forEach(({ desc, quantity, sold, soldOut, result }) => {
-		const newDatetime = {
+		const newTicket = {
 			...tickets[0],
 			isSoldOut: soldOut,
 			quantity,
 			sold,
 		};
 		it(desc, () => {
-			expect(isSoldOut(newDatetime)).toBe(result);
+			expect(isSoldOut(newTicket)).toBe(result);
 		});
 	});
 });
