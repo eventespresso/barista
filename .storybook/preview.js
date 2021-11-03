@@ -3,6 +3,9 @@ import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 
 import { ThemeProvider, Box } from '@eventespresso/adapters';
 
+// default styles
+import '@eventespresso/styles/src/themes/default/index.scss';
+
 const withTheme = (StoryFn) => (
 	<ThemeProvider>
 		<Box
