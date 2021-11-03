@@ -82,7 +82,9 @@ function getCommandArgs() {
  * Converts a comma separated string values to array
  * "ab, cd,ef " => ["ab", "cd", "ef"]
  *
- * @param {string[]} str
+ * @param {string} str
+ *
+ * @return {string[]}
  */
 function commaStrToArray(str = '') {
 	return R.map(R.trim, R.split(',', str)).filter(Boolean);
