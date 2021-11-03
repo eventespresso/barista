@@ -11,7 +11,7 @@ export default {
 
 export const Default = withContext((args) => <PatternEditor {...args} />);
 
-export const DefaultRTE = withContext((args) => (
+export const DefaultRTL = withContext((args) => (
 	<div dir='rtl'>
 		<PatternEditor {...args} />
 	</div>
