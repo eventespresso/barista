@@ -6,7 +6,6 @@ const stories = ['../domains/**/src/ui/**/*.stories.tsx', '../packages/**/src/**
 module.exports = {
 	addons: [
 		'@storybook/addon-knobs',
-		'@storybook/addon-storysource',
 		'@storybook/addon-viewport',
 		'@storybook/addon-a11y',
 		,
@@ -46,21 +45,6 @@ module.exports = {
 			exclude: ['/node_modules/'],
 		});
 
-		return {
-			...config,
-			resolve: {
-				...config.resolve,
-				alias: {
-					...config.resolve.alias,
-					/**
-					 * Fix for storybook issue in Chakra UI
-					 * @see https://github.com/chakra-ui/chakra-ui/issues/2527#issuecomment-728161743
-					 */
-					'@emotion/core': path.resolve(__dirname, '../node_modules/@emotion/react'),
-					'emotion-theming': path.resolve(__dirname, '../node_modules/@emotion/react'),
-					'@emotion/styled': path.resolve(__dirname, '../node_modules/@emotion/styled'),
-				},
-			},
-		};
+		return config;
 	},
 };
