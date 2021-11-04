@@ -4,12 +4,23 @@ import { EDTRGlider } from '../editor';
 
 const edtrGlider = new EDTRGlider();
 
-export async function createNewEvent({ title }: any = {}) {
+type Args = {
+	title?: string;
+	description?: string;
+};
+
+export async function createNewEvent({ title, description }: Args = {}) {
 	await Goto.eventsListPage();
 
 	await Promise.all([page.waitForNavigation(), page.click('#add-new-event')]);
 
-	await page.fill('#titlewrap #title', title);
+	await page.fill('#titlewrap #title', title || '');
+
+	if (description) {
+		await page.click('#content-html');
+
+		await page.fill('#wp-content-editor-container textarea.wp-editor-area', description);
+	}
 
 	await edtrGlider.saveEvent();
 }
