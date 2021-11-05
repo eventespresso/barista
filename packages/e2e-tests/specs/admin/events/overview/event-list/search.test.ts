@@ -2,18 +2,11 @@ import { createNewEvent } from '@e2eUtils/admin/events';
 import { EventsListSurfer, Goto } from '@e2eUtils/admin';
 import { uuid } from '@eventespresso/utils';
 import { pluck } from 'ramda';
+import { eventList } from '../../../../shared/data';
 
 const eventsListSurfer = new EventsListSurfer();
 
 describe('Search events', () => {
-	// Initialize event title to be created for search testing
-	const eventList = [
-		{ title: 'Test One', description: 'Some description for test one event' },
-		{ title: 'Test Two', description: 'Some description for test two event' },
-		{ title: 'Test Three', description: 'Some description for test three event' },
-		{ title: 'Test Four', description: 'Some description for test four event' },
-	];
-
 	const eventTitles = pluck('title', eventList);
 
 	beforeAll(async () => {

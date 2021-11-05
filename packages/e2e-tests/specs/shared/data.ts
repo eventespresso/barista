@@ -31,3 +31,10 @@ export const data = [
 		name: '6',
 	},
 ];
+
+export const eventList = [
+	{ title: 'Test One', description: 'Some description for test one event' },
+	{ title: 'Test Two', description: 'Some description for test two event' },
+	{ title: 'Test Three', description: 'Some description for test three event' },
+	{ title: 'Test Four', description: 'Some description for test four event' },
+];
