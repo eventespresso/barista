@@ -1,7 +1,7 @@
 import { WPListTable, BulkActionsPosition } from '../../WPListTable';
 import { ElementHandle } from '../../../../types';
 
-export class EventListSurfer extends WPListTable {
+export class EventsListSurfer extends WPListTable {
 	/**
 	 * Resets the list filters
 	 */
