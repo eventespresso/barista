@@ -1,7 +1,9 @@
 import { createNewEvent } from '@e2eUtils/admin/events';
-import { Goto } from '@e2eUtils/admin';
+import { EventListSurfer, Goto } from '@e2eUtils/admin';
 import { uuid } from '@eventespresso/utils';
 import { pluck } from 'ramda';
+
+const eventListSurfer = new EventListSurfer();
 
 describe('Search events', () => {
 	// Initialize event title to be created for search testing
@@ -102,16 +104,13 @@ describe('Search events', () => {
 	for (const { desc, search, expectedCount, expectedTitles } of testCases) {
 		it(desc, async () => {
 			// Enter the text in search input
-			await page.fill('input#toplevel_page_espresso_events-search-input', search);
-
-			// Click the search input
-			await Promise.all([page.waitForNavigation(), page.click('input:has-text("Search Events")')]);
+			await eventListSurfer.searchFor(search);
 
 			// count the number of results, discarding the no results row
-			const tableRows = await page.$$('table.wp-list-table tbody#the-list tr');
+			const tableRows = await eventListSurfer.getListItems();
 
 			// check if there is rows contain 'no items found'
-			const hasNoItems = (await tableRows[0].innerText()).includes('No items found.');
+			const hasNoItems = await eventListSurfer.hasNoItems();
 			// if hasNoItems is true, use it for count else get the table rows count length
 			const count = hasNoItems ? 0 : tableRows.length;
 
@@ -125,9 +124,7 @@ describe('Search events', () => {
 			// check expectedCount first if it is greater than 0
 			if (expectedCount) {
 				// get all the inner text value where event title is located
-				const titles = await Promise.all(
-					tableRows.map(async (row) => (await row.$('td.column-name a.row-title')).innerText())
-				);
+				const titles = await Promise.all(tableRows.map(eventListSurfer.getEventName));
 				// loop all titles
 				for (const expectedTitle of expectedTitles) {
 					// check if search title is inside the array of expectedTitle

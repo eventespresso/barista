@@ -14,7 +14,7 @@ import { getPageError } from './getPageError';
 export async function visitAdminPage(adminPath: string, query = ''): Promise<void> {
 	const adminPage = createURL(join('wp-admin', adminPath), query);
 
-	await page.goto(adminPage);
+	await Promise.all([page.waitForNavigation(), page.goto(adminPage)]);
 
 	if (isCurrentURL('wp-login.php')) {
 		await loginUser();

@@ -1,11 +1,11 @@
 import { clickButton } from '@e2eUtils/common';
-import type { Page, ElementHandle, JSHandle } from 'playwright-core';
+import type { Page, JSHandle } from 'playwright-core';
 
-import { EntityType } from '../../../../types';
+import { EntityType, ElementHandle } from '../../../../types';
 
 export type ListView = 'card' | 'table';
 export type Field = 'name' | 'dbId' | 'status';
-export type Item = ElementHandle<SVGElement | HTMLElement>;
+export type Item = ElementHandle;
 
 /**
  * This class helps you to parse an entity list and
