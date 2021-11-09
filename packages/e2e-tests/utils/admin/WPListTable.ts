@@ -207,11 +207,18 @@ export class WPListTable {
 	};
 
 	/**
+	 * Trash the selected items in the list
+	 */
+	trash = async () => {
+		await this.selectBulkAction({ label: 'Move to Trash' });
+		await this.applyBulkAction();
+	};
+
+	/**
 	 * Trash all the items in the list
 	 */
 	trashAll = async (): Promise<void> => {
-		await this.selectBulkAction({ label: 'Move to Trash' });
 		await this.selectAll();
-		await this.applyBulkAction();
+		await this.trash();
 	};
 }

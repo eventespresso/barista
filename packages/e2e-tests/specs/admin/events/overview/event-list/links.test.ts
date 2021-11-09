@@ -1,7 +1,8 @@
 import { createNewEvent } from '@e2eUtils/admin/events';
-import { Goto } from '@e2eUtils/admin';
+import { EventsListSurfer, Goto } from '@e2eUtils/admin';
 import { eventList } from '../../../../shared/data';
-import { ElementHandle } from 'playwright-core';
+
+const eventsListSurfer = new EventsListSurfer();
 
 beforeAll(async () => {
 	// Loop and create event base on the eventList
@@ -12,77 +13,52 @@ beforeAll(async () => {
 });
 
 describe('Events overview clickable actions/links', () => {
-	const rowTitleList = async (rows: ElementHandle<SVGElement | HTMLElement>[]) => {
-		const titleList = await Promise.all(
-			rows.map(async (row) => (await row.$('td.column-name a.row-title')).innerText())
-		);
-
-		return titleList;
-	};
-
-	const tableRowsChecker = async () => {
-		const tableRows = await page.$$('table.wp-list-table tbody#the-list tr');
-		const hasNoItems = (await tableRows[0].innerText()).includes('No items found.');
-
-		const count = hasNoItems ? 0 : tableRows.length;
-
-		return { tableRows, count };
-	};
-
-	const moveToTrash = async () => {
-		await page.selectOption('select#bulk-action-selector-', 'trash_events');
-		await Promise.all([page.waitForNavigation(), page.click('input#doaction')]);
-	};
-
 	it('View all events', async () => {
-		await Promise.all([page.waitForNavigation(), page.click('a:has-text("View All Events")')]);
+		// first click view all events
+		await eventsListSurfer.getToView('View All Events');
 		let titleList: string[];
 
-		const { tableRows, count } = await tableRowsChecker();
+		// get the number and elements of rows availble
+		const { tableRows, count } = await eventsListSurfer.tableRowsChecker();
 
 		if (count) {
+			// assert if count is greater than or equal to one
 			expect(count).toBeGreaterThanOrEqual(1);
-
+			// get only rows that is only contain "Test One" event name
 			const filteredRows = (
 				await Promise.all(
 					tableRows.map(async (row) => {
-						const title = await (await row.$('td.column-name a.row-title')).innerText();
+						const title = await eventsListSurfer.getEventName(row);
 						return title === 'Test One' ? row : null;
 					})
 				)
 			).filter(Boolean);
 
+			// get only the value of a checkbox base on the filteredRows result
 			const fetchInputValue = await Promise.all(
 				filteredRows.map(
 					async (ro) => await (await ro.$('.check-column input[type="checkbox"]')).getAttribute('value')
 				)
 			);
 
+			// check all the checkbox that the value contain in fetchInputValue
 			for (const iterator of fetchInputValue) {
 				await page.check(`.check-column input[value="${iterator}"]`);
 			}
-
-			await moveToTrash();
-			const { tableRows: removeIndividual } = await tableRowsChecker();
-
-			// const dawwwww = await Promise.all(
-			// 	rowsChecker.map(async (ro) => await (await ro.$('td.column-name a.row-title')).innerText())
-			// );
-			titleList = await rowTitleList(removeIndividual);
+			// after selecting all the roes that contain "Test One" trash all the selected rows
+			await eventsListSurfer.trash();
+			// check if the the selected rows i already removed then assert
+			const removeIndividual = await eventsListSurfer.getListItems();
+			titleList = await Promise.all(removeIndividual.map(eventsListSurfer.getEventName));
+			// assert the rows that contain "Test One"
 			expect(titleList).not.toContain('Test One');
-			await page.check('input#cb-select-all-1');
-			await moveToTrash();
 
-			// expect(titleList).toBe(0);
-
-			const { tableRows: removeAll, count: countCkecker } = await tableRowsChecker();
-			// titleList = await rowTitleList(removeAll);
-			// console.log({ countCkecker });
-			// if (!countCkecker) {
-			// 	const titleList = await rowTitleList(removeAll);
+			// trash all remaining rows to test the select all
+			await eventsListSurfer.trashAll();
+			// check number of rows left
+			const { count: countCkecker } = await eventsListSurfer.tableRowsChecker();
+			// assert remove all rows
 			expect(countCkecker).toBe(0);
-			// 	console.log({ titleList });
-			// }
 		} else {
 			expect(count).toBe(0);
 		}

@@ -18,6 +18,21 @@ export class EventsListSurfer extends WPListTable {
 	 * Get the name of an event from <tr /> handle
 	 */
 	getEventName = async (item: ElementHandle): Promise<string> => {
-		return (await item.$('td.column-name a.row-title')).innerText();
+		return await (await item.$('td.column-name a.row-title')).innerText();
+	};
+
+	/**
+	 * Check how many rows in a table
+	 */
+	tableRowsChecker = async () => {
+		// count the number of results, discarding the no results row
+		const tableRows = await this.getListItems();
+
+		// check if there is rows contain 'no items found'
+		const hasNoItems = await this.hasNoItems();
+		// if hasNoItems is true, use it for count else get the table rows count length
+		const count = hasNoItems ? 0 : tableRows.length;
+
+		return { tableRows, count };
 	};
 }
