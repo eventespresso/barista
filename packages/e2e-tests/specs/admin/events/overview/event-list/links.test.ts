@@ -15,52 +15,44 @@ beforeAll(async () => {
 describe('Events overview clickable actions/links', () => {
 	it('View all events', async () => {
 		// first click view all events
-		await eventsListSurfer.getToView('View All Events');
-		let titleList: string[];
+		await eventsListSurfer.goToView('View All Events');
 
 		// get the number and elements of rows availble
-		const { tableRows, count } = await eventsListSurfer.tableRowsChecker();
+		const count = await eventsListSurfer.getItemCount();
 
 		if (count) {
-			// assert if count is greater than or equal to one
-			expect(count).toBeGreaterThanOrEqual(1);
 			// get only rows that is only contain "Test One" event name
-			const filteredRows = (
-				await Promise.all(
-					tableRows.map(async (row) => {
-						const title = await eventsListSurfer.getEventName(row);
-						return title === 'Test One' ? row : null;
-					})
-				)
-			).filter(Boolean);
-
-			// get only the value of a checkbox base on the filteredRows result
-			const fetchInputValue = await Promise.all(
-				filteredRows.map(
-					async (ro) => await (await ro.$('.check-column input[type="checkbox"]')).getAttribute('value')
-				)
-			);
+			const filteredRows = await eventsListSurfer.filterRowsByName('Test One');
 
 			// check all the checkbox that the value contain in fetchInputValue
-			for (const iterator of fetchInputValue) {
-				await page.check(`.check-column input[value="${iterator}"]`);
+			for (const item of filteredRows) {
+				await eventsListSurfer.selectItemCheckbox(item);
 			}
-			// after selecting all the roes that contain "Test One" trash all the selected rows
-			await eventsListSurfer.trash();
-			// check if the the selected rows i already removed then assert
-			const removeIndividual = await eventsListSurfer.getListItems();
-			titleList = await Promise.all(removeIndividual.map(eventsListSurfer.getEventName));
-			// assert the rows that contain "Test One"
-			expect(titleList).not.toContain('Test One');
 
-			// trash all remaining rows to test the select all
-			await eventsListSurfer.trashAll();
-			// check number of rows left
-			const { count: countCkecker } = await eventsListSurfer.tableRowsChecker();
-			// assert remove all rows
-			expect(countCkecker).toBe(0);
-		} else {
-			expect(count).toBe(0);
+			// Check first the total count in view all events
+			const countForViewAllBefore = await eventsListSurfer.getViewCount('View All Events');
+			// Check first the total count in trash
+			const countForTrashBefore = await eventsListSurfer.getViewCount('Trash');
+
+			// after selecting all the rows that contain "Test One" trash all the selected rows
+			await eventsListSurfer.trashSelected();
+
+			// Check the total count in view all events after trashing
+			const countForViewAllAfter = await eventsListSurfer.getViewCount('View All Events');
+			// Check the total count in trash after trashing
+			const countForTrashAfter = await eventsListSurfer.getViewCount('Trash');
+
+			expect(countForViewAllBefore).toBeGreaterThan(countForViewAllAfter);
+			expect(countForTrashBefore).toBeLessThan(countForTrashAfter);
 		}
+
+		it('', async () => {
+			await eventsListSurfer.goToView('Trash');
+
+			const firstItem = await eventsListSurfer.getFirstListItem();
+			const restoreLink = await eventsListSurfer.getItemActionLinkByText(firstItem, 'Restore from Trash');
+			expect(0).toBe(0);
+			await page.goto(restoreLink);
+		});
 	});
 });

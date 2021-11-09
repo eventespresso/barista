@@ -22,17 +22,19 @@ export class EventsListSurfer extends WPListTable {
 	};
 
 	/**
-	 * Check how many rows in a table
+	 * Filter the event rows by name
 	 */
-	tableRowsChecker = async () => {
-		// count the number of results, discarding the no results row
+	filterRowsByName = async (name: string): Promise<ElementHandle[]> => {
 		const tableRows = await this.getListItems();
+		const filteredRows = (
+			await Promise.all(
+				tableRows.map(async (row) => {
+					const title = await this.getEventName(row);
+					return title === name ? row : null;
+				})
+			)
+		).filter(Boolean);
 
-		// check if there is rows contain 'no items found'
-		const hasNoItems = await this.hasNoItems();
-		// if hasNoItems is true, use it for count else get the table rows count length
-		const count = hasNoItems ? 0 : tableRows.length;
-
-		return { tableRows, count };
+		return filteredRows;
 	};
 }

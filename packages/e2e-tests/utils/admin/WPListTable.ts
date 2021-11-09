@@ -146,9 +146,22 @@ export class WPListTable {
 	};
 
 	/**
+	 * Get the item count in the given view e.g. "Trash", "Draft"
+	 */
+	getViewCount = async (view: string): Promise<number> => {
+		const wrapper = await this.getViewLinksWrapper();
+
+		const li = await wrapper.$(`li:has-text("${view}")`);
+
+		const count = await (await li.$('span.count')).innerText();
+
+		return Number(count.replace(/[()]/g, ''));
+	};
+
+	/**
 	 * Goto a specific view by text e.g. "Trash", "Draft"
 	 */
-	getToView = async (text: string): Promise<void> => {
+	goToView = async (text: string): Promise<void> => {
 		const href = await this.getViewLinkByText(text);
 
 		await Promise.all([page.waitForNavigation(), page.goto(href)]);
@@ -196,6 +209,17 @@ export class WPListTable {
 	};
 
 	/**
+	 * Whether the list is empty
+	 */
+	getItemCount = async (excludeNoItemsFound = true): Promise<number> => {
+		if ((await this.hasNoItems()) && excludeNoItemsFound) {
+			return 0;
+		}
+		const items = await this.getListItems();
+		return items.length;
+	};
+
+	/**
 	 * Select all the items in the list
 	 */
 	selectAll = async () => {
@@ -209,7 +233,7 @@ export class WPListTable {
 	/**
 	 * Trash the selected items in the list
 	 */
-	trash = async () => {
+	trashSelected = async () => {
 		await this.selectBulkAction({ label: 'Move to Trash' });
 		await this.applyBulkAction();
 	};
@@ -219,6 +243,14 @@ export class WPListTable {
 	 */
 	trashAll = async (): Promise<void> => {
 		await this.selectAll();
-		await this.trash();
+		await this.trashSelected();
+	};
+
+	/**
+	 * Check the selected items in the list
+	 */
+	selectItemCheckbox = async (item: ElementHandle): Promise<void> => {
+		const checkbox = await item.$('.check-column input[type="checkbox"]');
+		await checkbox.check();
 	};
 }
