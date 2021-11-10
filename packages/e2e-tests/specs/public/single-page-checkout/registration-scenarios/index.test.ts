@@ -1,7 +1,6 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
 
 import { addNewTicket, createNewEvent, EDTRGlider, TicketEditor } from '@e2eUtils/admin/events';
-import { Goto } from '@e2eUtils/admin';
 import { assertRegSuccess, EventRegistrar } from '@e2eUtils/public/reg-checkout';
 
 const namespace = 'event.free-event.registration';
@@ -22,10 +21,6 @@ const edtrGlider = new EDTRGlider();
 
 describe(namespace, () => {
 	it('should show thank you message if everything went well', async () => {
-		await Goto.themesPage();
-
-		await page.waitForTimeout(15000);
-
 		await createNewEvent({ title: 'Free event' });
 
 		await ticketEditor.updateQuantityInline(null, 75);
