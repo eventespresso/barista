@@ -45,3 +45,13 @@ export enum EdtrGlobalModals {
 	TAM = 'tam',
 	TPC = 'tpc',
 }
+
+export enum QueryURLRegStatus {
+	APPROVED = 'RAP',
+	PENDING = 'RPP',
+	WAITLIST = 'RWL',
+	INCOMPLETE = 'RIC',
+	NOT_APPROVED = 'RNA',
+	DECLINED = 'RDC',
+	CANCELLED = 'RCN',
+}

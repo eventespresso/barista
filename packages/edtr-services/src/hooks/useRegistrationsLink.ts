@@ -5,13 +5,15 @@ import { ADMIN_ROUTES } from '@eventespresso/constants';
 import { useConfig, getAdminUrl } from '@eventespresso/services';
 
 import { useEventId } from '../apollo/queries';
+import { QueryURLRegStatus } from '../types';
 
 export type RegistrationsLinkArgs = {
 	datetime_id?: number;
 	ticket_id?: number;
+	_reg_status?: QueryURLRegStatus;
 };
 
-export const useRegistrationsLink = ({ datetime_id, ticket_id }: RegistrationsLinkArgs): string => {
+export const useRegistrationsLink = (args: RegistrationsLinkArgs): string => {
 	const { siteUrl } = useConfig();
 	const eventId = useEventId();
 
@@ -22,9 +24,8 @@ export const useRegistrationsLink = ({ datetime_id, ticket_id }: RegistrationsLi
 		});
 		return addQueryArgs(adminUrl, {
 			event_id: eventId,
-			datetime_id: datetime_id || undefined,
-			ticket_id: ticket_id || undefined,
 			return: 'edit',
+			...args,
 		});
-	}, [datetime_id, eventId, siteUrl.admin, ticket_id]);
+	}, [args, eventId, siteUrl.admin]);
 };
