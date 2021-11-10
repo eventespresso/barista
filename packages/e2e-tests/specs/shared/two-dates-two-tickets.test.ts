@@ -1,5 +1,5 @@
 import { addNewDate, addNewTicket, createNewEvent, editEntityCard, EDTRGlider } from '@e2eUtils/admin/events';
-import { EventRegistrar } from '@e2eUtils/public/reg-checkout';
+import { assertRegSuccess, EventRegistrar } from '@e2eUtils/public/reg-checkout';
 
 const namespace = 'event.entities.reigstration-2';
 
@@ -35,15 +35,12 @@ describe(namespace, () => {
 				fname: 'Joe',
 				lname: 'Doe',
 				email: 'test@example.com',
-				address: '3868  Burton Avenue',
+				address: '3868 Burton Avenue',
 			},
 		});
 
-		const title = await page.$eval('h1.entry-title', (el) => el.textContent);
-		expect(title).toContain('Thank You');
+		const content = await assertRegSuccess();
 
-		const content = await page.$eval('.entry-content', (el) => el.textContent);
-		expect(content).toContain('Congratulations');
 		expect(content).toContain('Approved');
 	});
 });

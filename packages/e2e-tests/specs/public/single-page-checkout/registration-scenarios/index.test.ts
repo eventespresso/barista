@@ -1,7 +1,7 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
 
 import { addNewTicket, createNewEvent, EDTRGlider, TicketEditor } from '@e2eUtils/admin/events';
-import { EventRegistrar } from '@e2eUtils/public/reg-checkout';
+import { assertRegSuccess, EventRegistrar } from '@e2eUtils/public/reg-checkout';
 
 const namespace = 'event.free-event.registration';
 
@@ -36,8 +36,8 @@ describe(namespace, () => {
 			},
 		});
 
-		const content = await page.$eval('.entry-content', (el) => el.textContent);
-		expect(content).toContain('Your registration has been successfully processed.');
-		expect(content).toContain('View Full Order Confirmation Receipt');
+		const content = await assertRegSuccess();
+
+		expect(content).toContain('Approved');
 	});
 });
