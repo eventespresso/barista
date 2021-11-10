@@ -154,7 +154,7 @@ export class WPListTable {
 		const li = await wrapper.$(`li:has-text("${view}")`);
 
 		const count = await (await li.$('span.count')).innerText();
-
+		// replace open and close parenthesis into empty string
 		return Number(count.replace(/[()]/g, ''));
 	};
 
@@ -209,7 +209,7 @@ export class WPListTable {
 	};
 
 	/**
-	 * Whether the list is empty
+	 * the number of items in list
 	 */
 	getItemCount = async (excludeNoItemsFound = true): Promise<number> => {
 		if ((await this.hasNoItems()) && excludeNoItemsFound) {

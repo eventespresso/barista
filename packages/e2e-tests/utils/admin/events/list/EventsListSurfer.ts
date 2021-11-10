@@ -22,9 +22,9 @@ export class EventsListSurfer extends WPListTable {
 	};
 
 	/**
-	 * Filter the event rows by name
+	 *  Get the list of event rows filtered by name
 	 */
-	filterRowsByName = async (name: string): Promise<ElementHandle[]> => {
+	getRowsByName = async (name: string): Promise<ElementHandle[]> => {
 		const tableRows = await this.getListItems();
 		const filteredRows = (
 			await Promise.all(
