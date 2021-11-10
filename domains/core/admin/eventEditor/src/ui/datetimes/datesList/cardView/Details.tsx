@@ -1,10 +1,9 @@
 import { useCallback, useMemo } from 'react';
 
 import { __ } from '@eventespresso/i18n';
-import { ADMIN_ROUTES, EMPTY_OBJECT } from '@eventespresso/constants';
+import { EMPTY_OBJECT } from '@eventespresso/constants';
 import { SimpleTextEditorModal } from '@eventespresso/ee-components';
-import { useConfig, getAdminUrl } from '@eventespresso/services';
-import { useDatetimeMutator, useEventId, useVenues, hooks } from '@eventespresso/edtr-services';
+import { useDatetimeMutator, useVenues, hooks } from '@eventespresso/edtr-services';
 import { VenueSelector } from '@eventespresso/ui-components';
 import { findEntityByGuid } from '@eventespresso/predicates';
 
@@ -14,14 +13,6 @@ import useDateCardDetailsItems from '../../hooks/useDateCardDetailsItems';
 import type { DateItemProps } from '../types';
 
 const Details: React.FC<DateItemProps> = ({ entity: datetime }) => {
-	const { siteUrl } = useConfig();
-
-	const adminUrl = useMemo(() => {
-		return getAdminUrl({ adminSiteUrl: siteUrl.admin, page: ADMIN_ROUTES.REGISTRATIONS });
-	}, [siteUrl.admin]);
-
-	const eventId = useEventId();
-
 	const { updateEntity } = useDatetimeMutator(datetime.id);
 
 	const onUpdate = useCallback(
@@ -68,7 +59,7 @@ const Details: React.FC<DateItemProps> = ({ entity: datetime }) => {
 
 			{detailsItems}
 
-			<DateDetailsPanel adminUrl={adminUrl} entity={datetime} eventId={eventId} />
+			<DateDetailsPanel entity={datetime} />
 		</>
 	);
 };

@@ -2,26 +2,19 @@ import { useMemo } from 'react';
 
 import { __ } from '@eventespresso/i18n';
 
-import { EntityDetailsPanel, EntityDetailsPanelSold } from '@eventespresso/ui-components';
-import DateRegistrationsLink from '../../DateRegistrationsLink';
+import { EntityDetailsPanel } from '@eventespresso/ui-components';
+import { DateRegistrationsLink } from '../DateRegistrationsLink';
+import { DateSoldLink } from '../DateSoldLink';
 import DateCapacity from './DateCapacity';
 import type { DateItemProps } from '../types';
 
-const DateDetailsPanel: React.FC<DateItemProps> = ({ adminUrl, entity: datetime, eventId }) => {
+const DateDetailsPanel: React.FC<DateItemProps> = ({ entity: datetime }) => {
 	const details = useMemo(
 		() => [
 			{
 				id: 'ee-event-date-sold',
 				label: __('sold'),
-				value: (
-					<EntityDetailsPanelSold
-						adminUrl={adminUrl}
-						dbId={datetime.dbId}
-						eventId={eventId}
-						sold={datetime.sold}
-						type='date'
-					/>
-				),
+				value: <DateSoldLink datetime={datetime} />,
 			},
 			{
 				id: 'ee-event-date-capacity',
@@ -35,7 +28,7 @@ const DateDetailsPanel: React.FC<DateItemProps> = ({ adminUrl, entity: datetime,
 				value: <DateRegistrationsLink datetime={datetime} />,
 			},
 		],
-		[adminUrl, datetime, eventId]
+		[datetime]
 	);
 
 	return <EntityDetailsPanel details={details} className='ee-editor-date-details-sold-rsrvd-cap-div' />;

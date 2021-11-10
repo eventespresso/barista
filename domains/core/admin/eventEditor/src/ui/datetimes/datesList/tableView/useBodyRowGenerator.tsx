@@ -13,7 +13,7 @@ import type { EntityId } from '@eventespresso/data';
 import type { DatetimesFilterStateManager } from '@eventespresso/edtr-services';
 import type { BodyRowGeneratorFn } from '@eventespresso/ee-components';
 
-import DateRegistrationsLink from '../../DateRegistrationsLink';
+import { DateRegistrationsLink } from '../DateRegistrationsLink';
 import DateActionsMenu from '../../datesList/actionsMenu/DateActionsMenu';
 import DateCapacity from '../cardView/DateCapacity';
 import { EditableName } from '../editable';

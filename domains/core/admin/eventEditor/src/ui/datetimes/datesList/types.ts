@@ -4,7 +4,4 @@ import type { Datetime, DatetimesFilterStateManager } from '@eventespresso/edtr-
 
 export interface DatesListViewProps extends EntityListViewProps<DatetimesFilterStateManager> {}
 
-export interface DateItemProps extends EntityListItemProps<Datetime> {
-	adminUrl?: string;
-	eventId?: number;
-}
+export interface DateItemProps extends EntityListItemProps<Datetime> {}

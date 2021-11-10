@@ -7,12 +7,10 @@ interface Props {
 	datetime: Datetime;
 }
 
-const DateRegistrationsLink: React.FC<Props> = ({ datetime }) => {
+export const DateRegistrationsLink: React.FC<Props> = ({ datetime }) => {
 	const regListUrl = useRegistrationsLink({ datetime_id: datetime.dbId });
 
 	const tooltip = __('view ALL registrations for this date.');
 
 	return <RegistrationsLink href={regListUrl} tooltip={tooltip} />;
 };
-
-export default DateRegistrationsLink;
