@@ -2,10 +2,9 @@ import { useCallback, useMemo } from 'react';
 
 import { __ } from '@eventespresso/i18n';
 
-import { ADMIN_ROUTES, EMPTY_OBJECT } from '@eventespresso/constants';
+import { EMPTY_OBJECT } from '@eventespresso/constants';
 import { SimpleTextEditorModal } from '@eventespresso/ee-components';
-import { useConfig, getAdminUrl } from '@eventespresso/services';
-import { useTicketMutator, useEventId, hooks } from '@eventespresso/edtr-services';
+import { useTicketMutator, hooks } from '@eventespresso/edtr-services';
 
 import { EditableName, EditablePrice } from '../editable';
 import TicketDetailsPanel from './TicketDetailsPanel';
@@ -13,14 +12,6 @@ import TicketDetailsPanel from './TicketDetailsPanel';
 import type { TicketItemProps } from '../types';
 
 const Details: React.FC<Partial<TicketItemProps>> = ({ entity: ticket }) => {
-	const { siteUrl } = useConfig();
-
-	const adminUrl = useMemo(() => {
-		return getAdminUrl({ adminSiteUrl: siteUrl.admin, page: ADMIN_ROUTES.REGISTRATIONS });
-	}, [siteUrl.admin]);
-
-	const eventId = useEventId();
-
 	const { updateEntity } = useTicketMutator(ticket.id);
 
 	const onUpdate = useCallback(
@@ -49,7 +40,7 @@ const Details: React.FC<Partial<TicketItemProps>> = ({ entity: ticket }) => {
 
 			<EditablePrice className='entity-card-details__price' entity={ticket} />
 
-			<TicketDetailsPanel adminUrl={adminUrl} entity={ticket} eventId={eventId} />
+			<TicketDetailsPanel entity={ticket} />
 		</>
 	);
 };
