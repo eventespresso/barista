@@ -1,6 +1,7 @@
 @import '~@eventespresso/styles/src/mixins/breakpoints.scss';
 
 .ee-editor-details-reg-url-link {
+	align-items: center;
 	border-color: transparent;
 	border-radius: var(--ee-border-radius-small);
 	box-shadow: none;
@@ -8,6 +9,7 @@
 	display: inline-flex;
 	font-size: var(--ee-font-size-default);
 	height: var(--ee-icon-button-size);
+	justify-content: center;
 	line-height: var(--ee-font-size-default);
 	margin: 0 auto calc(var(--ee-font-size-bigger) / -4);
 	outline-style: none;
