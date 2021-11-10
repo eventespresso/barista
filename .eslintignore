@@ -4,6 +4,6 @@
 **/coverage/**
 **/build/**
 **/.git/**
-**/public/**
+/public/**
 !.eslintrc.js
 **/**/*.ts
