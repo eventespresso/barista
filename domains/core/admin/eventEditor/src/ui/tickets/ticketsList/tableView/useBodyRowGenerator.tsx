@@ -17,7 +17,7 @@ import type { TicketsFilterStateManager } from '@eventespresso/edtr-services';
 import TicketActionsMenu from '@edtrUI/tickets/ticketsList/actionsMenu/TicketActionsMenu';
 import TicketQuantity from '../cardView/TicketQuantity';
 import { EditableName } from '../editable';
-import TicketRegistrationsLink from '../../TicketRegistrationsLink';
+import { TicketRegistrationsLink } from '../TicketRegistrationsLink';
 import Checkbox from './Checkbox';
 
 type TicketsTableBodyRowGen = BodyRowGeneratorFn<TicketsFilterStateManager>;

@@ -5,10 +5,7 @@ import type { Ticket, TicketsFilterStateManager } from '@eventespresso/edtr-serv
 
 export interface TicketsListViewProps extends EntityListViewProps<TicketsFilterStateManager> {}
 
-export interface TicketItemProps extends EntityListItemProps<Ticket> {
-	adminUrl?: string;
-	eventId?: number;
-}
+export interface TicketItemProps extends EntityListItemProps<Ticket> {}
 
 export interface EditablePriceProps extends InlineEditCurrencyProps {
 	className?: string;

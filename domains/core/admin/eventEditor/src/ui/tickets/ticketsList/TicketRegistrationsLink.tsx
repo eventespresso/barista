@@ -7,7 +7,7 @@ interface Props {
 	ticket: Ticket;
 }
 
-const TicketRegistrationsLink: React.FC<Props> = ({ ticket }) => {
+export const TicketRegistrationsLink: React.FC<Props> = ({ ticket }) => {
 	const regListUrl = useRegistrationsLink({ ticket_id: ticket.dbId });
 
 	const countTitle = __('total registrations.');
@@ -19,5 +19,3 @@ const TicketRegistrationsLink: React.FC<Props> = ({ ticket }) => {
 		</ItemCount>
 	);
 };
-
-export default TicketRegistrationsLink;
