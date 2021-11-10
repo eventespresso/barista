@@ -31,7 +31,7 @@ import { getHooks } from '@eventespresso/ioc';
 const hooks = getHooks<Actions, Filters>();
 ```
 
-Now you can `hooks` from above to safely add/remove actions and filters with the defined types above.
+Now you can use the `hooks` var from above to safely add/remove actions and filters with the defined types above.
 
 ```ts
 // Here the arguements passed to addAction are strongly typed.
