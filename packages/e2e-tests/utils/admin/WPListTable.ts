@@ -253,4 +253,20 @@ export class WPListTable {
 		const checkbox = await item.$('.check-column input[type="checkbox"]');
 		await checkbox.check();
 	};
+
+	/**
+	 * check all the event checkbox that is selected to delete permanently
+	 */
+	checkAllDeletePermanently = async () => {
+		await page.check(
+			'#eventespressoadmin-pageseventsform-sectionsconfirmeventdeletionform-events input[type="checkbox"]'
+		);
+	};
+
+	/**
+	 * check the confirmation checkbox for delete permanently
+	 */
+	checkConfirmDeletePermanently = async () => {
+		await page.check('#eventespressoadmin-pageseventsform-sectionsconfirmeventdeletionform-backup-yes');
+	};
 }
