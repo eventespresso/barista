@@ -5,11 +5,13 @@ import { hasTempId } from '@eventespresso/predicates';
 
 import useUpdateTicketCache from './useUpdateTicketCache';
 import type { TicketMutationCallbackFn, TicketMutationCallbackFnArgs } from '../types';
+import useUpdateDatesCache from './useUpdateDatesCache';
 
 const useOnUpdateTicket = (): TicketMutationCallbackFn => {
 	const { addRelation, removeRelation, updateRelations } = useRelations();
 
 	const updateTicketCache = useUpdateTicketCache();
+	const updateDatesCache = useUpdateDatesCache();
 
 	const onUpdateTicket = useCallback(
 		({ cache, tickets, ticket, datetimeIds, priceIds }: TicketMutationCallbackFnArgs): void => {
@@ -21,6 +23,7 @@ const useOnUpdateTicket = (): TicketMutationCallbackFn => {
 			// if related datetimes are passed
 			// may be empty array to remove relations
 			if (datetimeIds) {
+				updateDatesCache({ datetimeIds, ticket });
 				// make sure to remove ticket from
 				// all existing relations
 				removeRelation({
@@ -84,7 +87,7 @@ const useOnUpdateTicket = (): TicketMutationCallbackFn => {
 				updateTicketCache({ cache, tickets, ticket, action: 'update' });
 			}
 		},
-		[addRelation, removeRelation, updateRelations, updateTicketCache]
+		[addRelation, removeRelation, updateDatesCache, updateRelations, updateTicketCache]
 	);
 
 	return onUpdateTicket;

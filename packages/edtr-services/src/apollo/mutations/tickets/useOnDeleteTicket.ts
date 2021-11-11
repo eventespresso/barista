@@ -5,11 +5,13 @@ import { getGuids, hasTempId } from '@eventespresso/predicates';
 import updatePriceCache from './updatePriceCache';
 import useUpdateTicketCache from './useUpdateTicketCache';
 import type { TicketMutationCallbackFn, TicketMutationCallbackFnArgs } from '../types';
+import useUpdateDatesCache from './useUpdateDatesCache';
 
 const useOnDeleteTicket = (): TicketMutationCallbackFn => {
 	const { dropRelations, removeRelation } = useRelations();
 
 	const updateTicketCache = useUpdateTicketCache();
+	const updateDatesCache = useUpdateDatesCache();
 
 	const onDeleteTicket = useCallback(
 		({ cache, tickets, ticket, deletePermanently }: TicketMutationCallbackFnArgs): void => {
@@ -18,6 +20,8 @@ const useOnDeleteTicket = (): TicketMutationCallbackFn => {
 				const { nodes = [] } = tickets;
 				const ticketIn = getGuids(nodes);
 				const { id: ticketId } = ticket;
+
+				updateDatesCache({ datetimeIds: [], ticket });
 
 				// Update prices cache for the changed tickets,
 				// to avoid refetching of prices.
@@ -44,7 +48,7 @@ const useOnDeleteTicket = (): TicketMutationCallbackFn => {
 			// Update ticket cache after price cache is updated.
 			updateTicketCache({ cache, tickets, ticket: { ...ticket, isTrashed: true }, action });
 		},
-		[dropRelations, removeRelation, updateTicketCache]
+		[dropRelations, removeRelation, updateDatesCache, updateTicketCache]
 	);
 
 	return onDeleteTicket;
