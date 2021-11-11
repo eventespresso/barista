@@ -61,6 +61,7 @@ const useBulkEditTickets = (): BulkEditTickets => {
 					...input,
 				},
 			};
+			// fetch the affected dates.
 			const refetchQueries = unnest(input.uniqueInputs.map((input) => affectedDatesQueries({ input }))).filter(
 				Boolean
 			);
