@@ -31,10 +31,9 @@ const useActions = (datetimeId: EntityId): Actions => {
 
 	const copyDate = useCallback(() => {
 		const newDatetime = R.pick(
-			['capacity', 'description', 'endDate', 'isPrimary', 'name', 'order', 'reserved', 'sold', 'startDate'],
+			['capacity', 'description', 'endDate', 'isPrimary', 'name', 'order', 'startDate'],
 			datetime
 		);
-
 		return createEntity({ ...newDatetime, eventId, tickets });
 	}, [createEntity, datetime, eventId, tickets]);
 
