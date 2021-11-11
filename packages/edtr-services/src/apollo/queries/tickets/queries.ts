@@ -34,7 +34,7 @@ export const TICKET_ATTRIBUTES: any = gql`
 
 export const GET_TICKET: any = gql`
 	query GET_TICKET($id: ID!) {
-		ticket(id: $id) {
+		espressoTicket(id: $id) {
 			...ticketAttributes
 		}
 	}

@@ -20,7 +20,7 @@ const useDatetimeItem = ({ id }: EntityItemProps): Datetime => {
 	);
 	const { data } = useCacheQuery<DatetimeItem>(options);
 
-	return useMemoStringify(data?.datetime);
+	return useMemoStringify(data?.espressoDatetime);
 };
 
 export default useDatetimeItem;

@@ -16,7 +16,7 @@ export const RECURRENCE_ATTRIBUTES: any = gql`
 
 export const GET_RECURRENCE: any = gql`
 	query GET_RECURRENCE($id: ID!) {
-		recurrence(id: $id) {
+		espressoRecurrence(id: $id) {
 			...recurrenceAttributes
 		}
 	}

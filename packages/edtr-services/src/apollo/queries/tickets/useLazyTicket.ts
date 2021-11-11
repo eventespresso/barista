@@ -18,7 +18,7 @@ const useLazyTicket = (): GetTicket => {
 					id,
 				},
 			});
-			return data?.ticket;
+			return data?.espressoTicket;
 		},
 		[getData]
 	);

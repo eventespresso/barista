@@ -20,7 +20,7 @@ const useTicketItem = ({ id }: EntityItemProps): Ticket => {
 	);
 	const { data } = useCacheQuery<TicketItem>(options);
 
-	return useMemoStringify(data?.ticket);
+	return useMemoStringify(data?.espressoTicket);
 };
 
 export default useTicketItem;

@@ -74,7 +74,7 @@ export interface Datetime extends Entity, Trashable {
 }
 
 export interface DatetimeItem {
-	datetime: Datetime;
+	espressoDatetime: Datetime;
 }
 
 export type DatetimeEdge<Connection = 'EspressoRootQueryDatetimesConnection'> = EntityEdge<Datetime, Connection>;
@@ -130,7 +130,7 @@ export interface Ticket extends Entity, Trashable {
 }
 
 export interface TicketItem {
-	ticket: Ticket;
+	espressoTicket: Ticket;
 }
 
 export type TicketEdge = EntityEdge<Ticket, 'EspressoRootQueryTicketsConnection'>;

@@ -10,7 +10,7 @@ export interface Recurrence extends Entity {
 }
 
 export interface RecurrenceItem {
-	recurrence: Recurrence;
+	espressoRecurrence: Recurrence;
 }
 
 export type RecurrenceEdge<Connection = 'EspressoRootQueryRecurrencesConnection'> = EntityEdge<Recurrence, Connection>;

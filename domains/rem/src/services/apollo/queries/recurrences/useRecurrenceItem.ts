@@ -20,7 +20,7 @@ const useRecurrenceItem = ({ id }: EntityItemProps): Recurrence => {
 	);
 	const { data } = useCacheQuery<RecurrenceItem>(options);
 
-	return useMemoStringify(data?.recurrence);
+	return useMemoStringify(data?.espressoRecurrence);
 };
 
 export default useRecurrenceItem;

@@ -13,12 +13,12 @@ const cacheConfig: InMemoryCacheConfig = {
 	typePolicies: {
 		Query: {
 			fields: {
-				datetime: getReadFunction('EspressoDatetime'),
+				espressoDatetime: getReadFunction('EspressoDatetime'),
 				espressoEvent: getReadFunction('EspressoEvent'),
-				ticket: getReadFunction('EspressoTicket'),
-				price: getReadFunction('EspressoPrice'),
-				priceType: getReadFunction('EspressoPriceType'),
-				recurrence: getReadFunction('EspressoRecurrence'),
+				espressoTicket: getReadFunction('EspressoTicket'),
+				espressoPrice: getReadFunction('EspressoPrice'),
+				espressoPriceType: getReadFunction('EspressoPriceType'),
+				espressoRecurrence: getReadFunction('EspressoRecurrence'),
 			},
 		},
 	},

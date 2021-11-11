@@ -27,7 +27,7 @@ export const DATETIME_ATTRIBUTES: any = gql`
 
 export const GET_DATETIME: any = gql`
 	query GET_DATETIME($id: ID!) {
-		datetime(id: $id) {
+		espressoDatetime(id: $id) {
 			...datetimeAttributes
 		}
 	}

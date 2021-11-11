@@ -18,7 +18,7 @@ const useLazyDatetime = (): Callback => {
 					id,
 				},
 			});
-			return data?.datetime;
+			return data?.espressoDatetime;
 		},
 		[getData]
 	);
