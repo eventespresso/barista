@@ -11,5 +11,3 @@ export { default as useDatetimeQueryOptions } from './useDatetimeQueryOptions';
 export { default as useDatetimes } from './useDatetimes';
 
 export { default as useRelatedDatetimes } from './useRelatedDatetimes';
-
-export { default as useRefreshDatetimes } from './useRefreshDatetimes';

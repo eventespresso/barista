@@ -31,6 +31,7 @@ export type {
 	OperationVariables,
 	QueryHookOptions,
 	ReactiveVar,
+	InternalRefetchQueriesInclude,
 } from '@apollo/client';
 
 export type { ExecutionResult } from 'graphql';

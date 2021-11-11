@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react';
-import { identity } from 'ramda';
+import { identity, unnest } from 'ramda';
 
 import { useMutationWithFeedback, MutationType } from '@eventespresso/data';
 import type { TicketPred } from '@eventespresso/predicates';
@@ -11,6 +11,7 @@ import { BulkUpdateTicketInput, BULK_UPDATE_TICKETS } from './';
 import { SINGULAR_ENTITY_NAME } from '../../../constants';
 import { cacheNodesFromBulkInput, updateTicketFlags } from '../utils';
 import useOnUpdateTicket from './useOnUpdateTicket';
+import useAffectedDatesQueries from './useAffectedDatesQueries';
 
 interface BulkEditTickets {
 	updateEntities: (input: BulkUpdateTicketInput) => ReturnType<ReturnType<typeof useMutationWithFeedback>>;
@@ -22,6 +23,7 @@ const useBulkEditTickets = (): BulkEditTickets => {
 	const queryOptions = useTicketQueryOptions();
 	const updateTicketList = useUpdateTicketList();
 	const onUpdateTicket = useOnUpdateTicket();
+	const affectedDatesQueries = useAffectedDatesQueries();
 
 	const updateTickets = useMutationWithFeedback({
 		typeName: SINGULAR_ENTITY_NAME.TICKET,
@@ -59,9 +61,13 @@ const useBulkEditTickets = (): BulkEditTickets => {
 					...input,
 				},
 			};
-			return updateTickets({ variables, update: updateEntityList(input) });
+			const refetchQueries = unnest(input.uniqueInputs.map((input) => affectedDatesQueries({ input }))).filter(
+				Boolean
+			);
+
+			return updateTickets({ variables, update: updateEntityList(input), refetchQueries });
 		},
-		[updateTickets, updateEntityList]
+		[updateTickets, updateEntityList, affectedDatesQueries]
 	);
 
 	return useMemo(() => ({ updateEntities }), [updateEntities]);

@@ -15,6 +15,7 @@ import type { MutationHandler, MutationUpdater } from '../types';
 import { TicketsList, Ticket } from '../../';
 import type { TicketCommonInput } from './types';
 import { BOOLEAN_FIELDS, NUMERIC_FIELDS } from './constants';
+import useAffectedDatesQueries from './useAffectedDatesQueries';
 
 type MH = MutationHandler<Ticket, TicketCommonInput>;
 
@@ -24,6 +25,7 @@ const useMutationHandler = (): MH => {
 	const onCreateTicket = useOnCreateTicket();
 	const onUpdateTicket = useOnUpdateTicket();
 	const onDeleteTicket = useOnDeleteTicket();
+	const affectedDatesQueries = useAffectedDatesQueries();
 
 	const getMutationVariables = useMutationVariables();
 	const getOptimisticResponse = useOptimisticResponse();
@@ -77,11 +79,14 @@ const useMutationHandler = (): MH => {
 				// no optimistic response for default tickets
 				return { variables, onUpdate };
 			}
+
+			const refetchQueries = affectedDatesQueries({ input, mutationType });
+
 			const optimisticResponse = getOptimisticResponse(mutationType, normalizedInput);
 
-			return { variables, optimisticResponse, onUpdate };
+			return { variables, optimisticResponse, onUpdate, refetchQueries };
 		},
-		[getMutationVariables, getOptimisticResponse, onUpdate]
+		[affectedDatesQueries, getMutationVariables, getOptimisticResponse, onUpdate]
 	);
 
 	return mutator;
