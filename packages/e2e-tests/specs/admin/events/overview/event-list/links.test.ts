@@ -1,3 +1,5 @@
+import { saveVideo, PageVideoCapture } from 'playwright-video';
+
 import { createNewEvent, EDTRGlider } from '@e2eUtils/admin/events';
 import { EventsListSurfer, Goto } from '@e2eUtils/admin';
 import { eventList } from '../../../../shared/data';
@@ -5,7 +7,12 @@ import { eventList } from '../../../../shared/data';
 const eventsListSurfer = new EventsListSurfer();
 const edtrGlider = new EDTRGlider();
 
+let capture: PageVideoCapture;
+
+const namespace = 'events-overview-clickable-actions-links';
+
 beforeAll(async () => {
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 	// Loop and create event base on the eventList
 	for (const args of [...eventList, ...eventList]) {
 		await createNewEvent(args);
@@ -13,7 +20,11 @@ beforeAll(async () => {
 	await Goto.eventsListPage();
 });
 
-describe('Events overview clickable actions/links', () => {
+afterAll(async () => {
+	await capture?.stop();
+});
+
+describe(namespace, () => {
 	it('View all events link test', async () => {
 		// first click view all events
 		await eventsListSurfer.goToView('View All Events');
@@ -55,10 +66,10 @@ describe('Events overview clickable actions/links', () => {
 		await eventsListSurfer.goToView('Trash');
 
 		// get the number and elements of rows availble
-		const countBeforeTrash = await eventsListSurfer.getViewCount('Trash');
+		const countBeforeRestore = await eventsListSurfer.getViewCount('Trash');
 
 		// check if there is event in trash
-		if (countBeforeTrash) {
+		if (countBeforeRestore) {
 			// get the first event in trash
 			const firstItem = await eventsListSurfer.getFirstListItem();
 			// got to "restore from trash" action link for the selected first event
@@ -68,7 +79,7 @@ describe('Events overview clickable actions/links', () => {
 			// check again the trash count if it is already less than before
 			const countAfterRestore = await eventsListSurfer.getViewCount('Trash');
 			// assert the before and after trash count
-			expect(countBeforeTrash).toBeGreaterThan(countAfterRestore);
+			expect(countBeforeRestore).toBeGreaterThan(countAfterRestore);
 		}
 
 		// go to "Trash" link again
