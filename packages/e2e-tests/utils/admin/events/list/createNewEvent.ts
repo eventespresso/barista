@@ -7,10 +7,10 @@ const edtrGlider = new EDTRGlider();
 type Args = {
 	title?: string;
 	description?: string;
-	toSave?: boolean;
+	shouldPublish?: boolean;
 };
 
-export async function createNewEvent({ title, description, toSave = true }: Args = {}) {
+export async function createNewEvent({ title, description, shouldPublish = true }: Args = {}) {
 	await Goto.eventsListPage();
 
 	await Promise.all([page.waitForNavigation(), page.click('#add-new-event')]);
@@ -23,5 +23,5 @@ export async function createNewEvent({ title, description, toSave = true }: Args
 		await page.fill('#wp-content-editor-container textarea.wp-editor-area', description);
 	}
 
-	await edtrGlider.saveEvent(toSave);
+	await edtrGlider.saveEvent(shouldPublish);
 }
