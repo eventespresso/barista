@@ -3,8 +3,6 @@ import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { createNewEvent, EDTRGlider } from '@e2eUtils/admin/events';
 import { EventsListSurfer, Goto } from '@e2eUtils/admin';
 import { eventList } from '../../../../shared/data';
-import { DateFormatter } from '@e2eUtils/admin';
-import { formatDateTime } from '@e2eUtils/common';
 
 const eventsListSurfer = new EventsListSurfer();
 const edtrGlider = new EDTRGlider();
@@ -17,7 +15,7 @@ beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 	// Loop and create event base on the eventList
 	for (const args of [...eventList, ...eventList]) {
-		// await createNewEvent(args);
+		await createNewEvent(args);
 	}
 	await Goto.eventsListPage();
 });
