@@ -170,4 +170,61 @@ describe(namespace, () => {
 		// then assert the before and after edit or publish the draft item
 		expect(countAfterDraft).toBeGreaterThan(countAfterDraftEdit);
 	});
+
+	it('Today and This month link test', async () => {
+		// go to this month link first to count the event list
+		await eventsListSurfer.goToView('This Month');
+		// count the event list inside the this month link
+		const countMonthBeforeUpdate = await eventsListSurfer.getItemCount();
+		// go to today link first to count the event list
+		await eventsListSurfer.goToView('Today');
+		// count the event list inside the today link
+		const countTodayBeforeUpdate = await eventsListSurfer.getItemCount();
+		// go to view all events link first to count the available event for date start update
+		await eventsListSurfer.goToView('View All Events');
+		// create new event for today and month link test
+		await createNewEvent(eventList[0]);
+		await Goto.eventsListPage();
+
+		// get the first event in view all event link
+		const eventFirstItem = await eventsListSurfer.getFirstListItem();
+		// then go to edit link for the first selected event
+		const eventEditLink = await eventsListSurfer.getItemActionLinkByText(eventFirstItem, 'Edit');
+		await page.goto(eventEditLink);
+		// click the edit start and end dates button at the event dates to update the start date into todays date
+		await page.click('button#popover-trigger-7');
+		// initialize date for start date update
+		const dateToday = new Date();
+		// format the date into something like "November 12, 2021 8:56 PM"
+		const intlOptions: Intl.DateTimeFormatOptions = {
+			month: 'long',
+			day: 'numeric',
+			year: 'numeric',
+			hour: 'numeric',
+			minute: '2-digit',
+			hour12: true,
+		};
+		const startDate = Intl.DateTimeFormat('en-US', intlOptions).format(dateToday);
+
+		// focus first the start date field
+		await page.focus('.date-range-picker__start-input input');
+		// then fill in the start date field into todays date
+		await page.fill('.date-range-picker__start-input input', startDate);
+		//  click save to update the start date
+		await page.click('button:has-text("save")');
+		// go back to event list
+		await Goto.eventsListPage();
+		// go to this month link for count ckecking
+		await eventsListSurfer.goToView('This Month');
+		// count the event list inside the this month link after update the start date into todays date
+		const countMonthAfterUpdate = await eventsListSurfer.getItemCount();
+		// go to this today link for count ckecking
+		await eventsListSurfer.goToView('Today');
+		// count the event list inside the today link after update the start date into todays date
+		const countTodayAfterUpdate = await eventsListSurfer.getItemCount();
+		// assert the before and after count event at the today link after the start date updated
+		expect(countTodayBeforeUpdate).toBeLessThan(countTodayAfterUpdate);
+		// assert the before and after count event at the this month link after the start date updated
+		expect(countMonthBeforeUpdate).toBeLessThan(countMonthAfterUpdate);
+	});
 });
