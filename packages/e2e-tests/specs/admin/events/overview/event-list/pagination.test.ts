@@ -5,6 +5,12 @@ import { eventData } from '../../../../shared/data';
 const eventsListSurfer = new EventsListSurfer();
 
 beforeAll(async () => {
+	// generate bunch of events for pagination
+	const eventDataFOrPagination = Array(10).fill(eventData.bulkEvents);
+	// create bunch events for testing
+	for (const args of eventDataFOrPagination) {
+		await createNewEvent(args);
+	}
 	await Goto.eventsListPage();
 });
 
@@ -12,19 +18,6 @@ describe('Test overview pagination', () => {
 	it('test pagination', async () => {
 		// first click view all events
 		await eventsListSurfer.goToView('View All Events');
-
-		// get the number and elements of rows availble
-		const count = await eventsListSurfer.getItemCount();
-
-		// check if there is no event in view all event if true create events
-		if (!count) {
-			// create events for testing
-			for (const args of eventData.upcomingNextMonth) {
-				await createNewEvent(args);
-			}
-			await Goto.eventsListPage();
-		}
-
 		// count all events
 		const countAllEventsList = await eventsListSurfer.getViewCount('View All Events');
 		// click screen option to get the pagination set
