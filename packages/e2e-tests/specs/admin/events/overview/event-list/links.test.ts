@@ -30,12 +30,6 @@ describe(namespace, () => {
 		await eventsListSurfer.goToView(link);
 		// count the event list inside the this link
 		const countBeforeUpdate = await eventsListSurfer.getItemCount();
-
-		// // go to today link first to count the event list
-		// await eventsListSurfer.goToView('Today');
-		// // count the event list inside the today link
-		// const countTodayBeforeUpdate = await eventsListSurfer.getItemCount();
-
 		// go to view all events link first to count the available event for date start update
 		await eventsListSurfer.goToView('View All Events');
 		// create new event for today and month link test
@@ -74,16 +68,6 @@ describe(namespace, () => {
 		await eventsListSurfer.goToView(link);
 		// count the event list inside the this month link after update the start date into todays date
 		const countfterUpdate = await eventsListSurfer.getItemCount();
-
-		// // go to this today link for count ckecking
-		// await eventsListSurfer.goToView('Today');
-		// // count the event list inside the today link after update the start date into todays date
-		// const countTodayAfterUpdate = await eventsListSurfer.getItemCount();
-
-		// // assert the before and after count event at the today link after the start date updated
-		// expect(countTodayBeforeUpdate).toBeLessThan(countTodayAfterUpdate);
-		// // assert the before and after count event at the this month link after the start date updated
-		// expect(countMonthBeforeUpdate).toBeLessThan(countMonthAfterUpdate);
 
 		return { countBeforeUpdate, countfterUpdate };
 	};
