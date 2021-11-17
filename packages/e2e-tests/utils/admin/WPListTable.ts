@@ -210,15 +210,7 @@ export class WPListTable {
 	};
 
 	/**
-<<<<<<< HEAD
-<<<<<<< HEAD
 	 * the number of items in list
-=======
-	 * Whether the list is empty
->>>>>>> 2d902f8a... Update code for view all event.
-=======
-	 * the number of items in list
->>>>>>> 4cd0988c... Fixing request changes and e2e test trash link.
 	 */
 	getItemCount = async (excludeNoItemsFound = true): Promise<number> => {
 		if ((await this.hasNoItems()) && excludeNoItemsFound) {
