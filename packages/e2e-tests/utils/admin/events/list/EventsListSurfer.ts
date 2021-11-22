@@ -64,6 +64,23 @@ export class EventsListSurfer extends WPListTable {
 	};
 
 	/**
+	 *  Get the list of event rows filtered by status
+	 */
+	getRowsByStatus = async (status: string): Promise<ElementHandle[]> => {
+		const tableRows = await this.getListItems();
+		const filteredRows = (
+			await Promise.all(
+				tableRows.map(async (row) => {
+					const title = await this.getEventStatus(row);
+					return title === status ? row : null;
+				})
+			)
+		).filter(Boolean);
+
+		return filteredRows;
+	};
+
+	/**
 	 *  Delete seleted rows in event list that contain example "Test One"
 	 */
 	selectEventToTrash = async (name: string): Promise<void> => {

@@ -77,3 +77,44 @@ export const eventData = {
 	bulkEventThree: { title: 'Test Three', description: 'Some description for test three event' },
 	bulkEventFour: { title: 'Test Four', description: 'Some description for test four event' },
 };
+
+// export const eventData = {
+
+// 	// active events
+// 	active: {
+// 		title: 'Test active event',
+// 		description: 'Some description for active event',
+// 		status: ACTIVE,
+// 		startDate: ( now - 1 day ),
+// 		endDate: ( now + 1 day ),
+// 	},
+
+// 	todayOnly: {
+// 		title: 'Test today event',
+// 		description: 'Some description for today event',
+// 		status: ACTIVE,
+// 		startDate: ( now - 2 hours),
+// 		endDate: ( now + 2 hours),
+// 	},
+
+// 	// expired events
+// 	expired: {
+// 		title: 'Test expired event',
+// 		description: 'Some description for expired event',
+// 		status: EXPIRED,
+// 		startDate: ( now - 20 days ),
+// 		endDate: ( now - 19 days ),
+// 	},
+
+// 	// upcoming events
+// 	upcoming: {
+// 		title: 'Test upcoming event',
+// 		description: 'Some description for upcoming event',
+// 		status: PENDING,
+// 		startDate: ( now + 20 days ),
+// 		endDate: ( now + 20 days + 2 hours),
+// 	},
+
+// 	// more event test data
+
+// };
