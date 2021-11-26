@@ -256,13 +256,11 @@ export class EventsListSurfer extends WPListTable {
 		await Goto.eventsListPage();
 
 		// go to view all event
-		const countEvents = await this.viewLinkAndCountEvents(linkname);
+		await this.viewLinkAndCountEvents(linkname);
 		// const defaultPage = await this.getDefaultPerPage();
 		const totalPage = await this.getTotalPagePagination();
 		await this.detleteAllEventsByPaginate(totalPage);
 		await this.trashAll();
-		const afterDelete = await this.viewLinkAndCountEvents(linkname);
-		// console.log({ countEvents, defaultPage, totalPage, afterDelete });
 	};
 
 	confirmAllDeletePermanently = async () => {
@@ -281,11 +279,33 @@ export class EventsListSurfer extends WPListTable {
 		const countEvents = await this.viewLinkAndCountEvents('Trash');
 		// const defaultPage = await this.getDefaultPerPage();
 		const totalPage = await this.getTotalPagePagination();
-		await this.selectAll();
-		await page.selectOption('select#bulk-action-selector-', { value: 'delete_events' });
-		await this.applyBulkAction();
-		// await this.selectBulkAction({ label: 'Delete Permanently' });
-		// await this.detleteAllEventsPermanently(totalPage);
-		await this.confirmAllDeletePermanently();
+
+		// loop the pagination per page
+		for (let pages = 1; pages < totalPage; pages++) {
+			const tableRows = await this.getListItems();
+			const filteredRows = await Promise.all(
+				tableRows.map(async (row) => {
+					return await (
+						await row.$('th.check-column .ee-event-list-bulk-select-event')
+					).getAttribute('value');
+				})
+			);
+			await this.selectAll();
+			await page.selectOption('select#bulk-action-selector-', { value: 'delete_events' });
+			await this.applyBulkAction();
+
+			for (const iterator of filteredRows) {
+				await page.check(
+					`#eventespressoadmin-pageseventsform-sectionsconfirmeventdeletionform-events-${iterator}-yes-lbl`
+				);
+			}
+
+			// check the confirmation checkbox for delete permanently
+			await this.checkConfirmDeletePermanently();
+			// click the confirm button to delete event/s permanently
+			await Promise.all([page.waitForLoadState(), page.click('text="Confirm"')]);
+			await Goto.eventsListPage();
+			await this.viewLinkAndCountEvents('Trash');
+		}
 	};
 }
