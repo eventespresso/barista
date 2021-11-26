@@ -25,9 +25,9 @@ beforeAll(async () => {
 	await Goto.eventsListPage();
 });
 
-// afterAll(async () => {
-// 	await capture?.stop();
-// });
+afterAll(async () => {
+	await capture?.stop();
+});
 
 describe('View all events link test', () => {
 	let filteredRows: ElementHandle[];

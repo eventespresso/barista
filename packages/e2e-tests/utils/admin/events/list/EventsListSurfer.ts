@@ -281,7 +281,7 @@ export class EventsListSurfer extends WPListTable {
 		const totalPage = await this.getTotalPagePagination();
 
 		// loop the pagination per page
-		for (let pages = 1; pages < totalPage; pages++) {
+		for (let pages = 0; pages < totalPage; pages++) {
 			const tableRows = await this.getListItems();
 			const filteredRows = await Promise.all(
 				tableRows.map(async (row) => {

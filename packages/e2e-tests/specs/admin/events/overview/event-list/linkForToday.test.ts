@@ -16,9 +16,9 @@ beforeAll(async () => {
 	await Goto.eventsListPage();
 });
 
-afterAll(async () => {
-	await capture?.stop();
-});
+// afterAll(async () => {
+// 	await capture?.stop();
+// });
 
 describe('Today link test', () => {
 	let startDate: string;
@@ -28,6 +28,13 @@ describe('Today link test', () => {
 	it('Count event list for this today link before creating new', async () => {
 		// go to event link and return total count events
 		countBeforeUpdate = await activeEventsTest.goToViewAndCount('Today');
+		// assert count this today link, before creating active event this today
+		expect(countBeforeUpdate).toBe(0);
+	});
+
+	it('Count event list for this today link before creating new', async () => {
+		// go to event link and return total count events
+		const countBeforeUpdate = await activeEventsTest.viewLinkAndCountEvents('Today');
 		// assert count this today link, before creating active event this today
 		expect(countBeforeUpdate).toBe(0);
 	});
