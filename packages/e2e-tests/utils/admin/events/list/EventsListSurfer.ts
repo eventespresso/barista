@@ -256,7 +256,7 @@ export class EventsListSurfer extends WPListTable {
 		await Goto.eventsListPage();
 
 		// go to view all event
-		await this.viewLinkAndCountEvents(linkname);
+		await this.goToViewAndCount(linkname);
 		// const defaultPage = await this.getDefaultPerPage();
 		const totalPage = await this.getTotalPagePagination();
 		await this.detleteAllEventsByPaginate(totalPage);
@@ -276,7 +276,7 @@ export class EventsListSurfer extends WPListTable {
 
 	deleteAllPermanentlyFromTrash = async () => {
 		await Goto.eventsListPage();
-		const countEvents = await this.viewLinkAndCountEvents('Trash');
+		await this.goToView('Trash');
 		// const defaultPage = await this.getDefaultPerPage();
 		const totalPage = await this.getTotalPagePagination();
 
@@ -305,7 +305,7 @@ export class EventsListSurfer extends WPListTable {
 			// click the confirm button to delete event/s permanently
 			await Promise.all([page.waitForLoadState(), page.click('text="Confirm"')]);
 			await Goto.eventsListPage();
-			await this.viewLinkAndCountEvents('Trash');
+			await this.goToViewAndCount('Trash');
 		}
 	};
 }

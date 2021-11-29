@@ -20,9 +20,9 @@ beforeAll(async () => {
 	await Goto.eventsListPage();
 });
 
-// afterAll(async () => {
-// 	await capture?.stop();
-// });
+afterAll(async () => {
+	await capture?.stop();
+});
 
 describe('Trash link test', () => {
 	let countBeforeRestore: number;
