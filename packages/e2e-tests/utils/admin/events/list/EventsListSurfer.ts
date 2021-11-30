@@ -217,6 +217,9 @@ export class EventsListSurfer extends WPListTable {
 		}
 	};
 
+	/**
+	 * get default per page for pagination
+	 */
 	getDefaultPerPage = async (): Promise<number> => {
 		// click screen option to get the pagination set
 		await page.click('#show-settings-link');
@@ -227,6 +230,9 @@ export class EventsListSurfer extends WPListTable {
 		return Number(paginationEvents);
 	};
 
+	/**
+	 * get total page for pagination
+	 */
 	getTotalPagePagination = async () => {
 		// get how many set of page in pagination
 		const totalPages = await (await page.$('span.total-pages')).innerText();
@@ -234,7 +240,10 @@ export class EventsListSurfer extends WPListTable {
 		return Number(totalPages);
 	};
 
-	detleteAllEventsByPaginate = async (totalPages: number) => {
+	/**
+	 * delete all events by pagination
+	 */
+	detleteAllEvents = async (totalPages: number) => {
 		// loop the pagination per page
 		for (let pages = 1; pages < totalPages; pages++) {
 			// trash all selected events
@@ -242,30 +251,24 @@ export class EventsListSurfer extends WPListTable {
 		}
 	};
 
-	detleteAllEventsPermanently = async (totalPages: number) => {
-		// loop the pagination per page
-		for (let pages = 1; pages < totalPages; pages++) {
-			// trash all selected events
-			await this.selectAll();
-			await this.selectBulkAction({ label: 'Delete Permanently' });
-			await this.applyBulkAction();
-		}
-	};
-
+	/**
+	 * delete all events by link per paginate
+	 */
 	deleteAllEventsByLink = async (linkname: string) => {
 		await Goto.eventsListPage();
 
 		// go to view all event
 		await this.goToViewAndCount(linkname);
-		// const defaultPage = await this.getDefaultPerPage();
 		const totalPage = await this.getTotalPagePagination();
-		await this.detleteAllEventsByPaginate(totalPage);
+		// trash all event by link
+		await this.detleteAllEvents(totalPage);
 		await this.trashAll();
 	};
 
+	/**
+	 * trigger confirm delete permanently
+	 */
 	confirmAllDeletePermanently = async () => {
-		// select all the event checkbox that is selected to delete permanently
-		await this.checkAllDeletePermanently();
 		// check the confirmation checkbox for delete permanently
 		await this.checkConfirmDeletePermanently();
 		// click the confirm button to delete event/s permanently
@@ -274,38 +277,51 @@ export class EventsListSurfer extends WPListTable {
 		await Goto.eventsListPage();
 	};
 
+	/**
+	 * fetch events ID's
+	 */
+	getEventID = async (tableRows: ElementHandle[]): Promise<string[]> => {
+		return await Promise.all(
+			tableRows.map(async (row) => {
+				// get event id value
+				return await (await row.$('th.check-column .ee-event-list-bulk-select-event')).getAttribute('value');
+			})
+		);
+	};
+
+	/**
+	 * check all events to delete permanently
+	 */
+	checkEventToDeletePermanently = async (rows: string[]) => {
+		for (const eventId of rows) {
+			// check event to delete permanently
+			await page.check(
+				`#eventespressoadmin-pageseventsform-sectionsconfirmeventdeletionform-events-${eventId}-yes-lbl`
+			);
+		}
+	};
+
+	/**
+	 * remove all events from trash permanently
+	 */
 	deleteAllPermanentlyFromTrash = async () => {
 		await Goto.eventsListPage();
 		await this.goToView('Trash');
-		// const defaultPage = await this.getDefaultPerPage();
 		const totalPage = await this.getTotalPagePagination();
-
 		// loop the pagination per page
 		for (let pages = 0; pages < totalPage; pages++) {
+			// fetch all events from trash
 			const tableRows = await this.getListItems();
-			const filteredRows = await Promise.all(
-				tableRows.map(async (row) => {
-					return await (
-						await row.$('th.check-column .ee-event-list-bulk-select-event')
-					).getAttribute('value');
-				})
-			);
+			// get IDs by its event
+			const filteredRows = await this.getEventID(tableRows);
+			// checl all events from trash
 			await this.selectAll();
-			await page.selectOption('select#bulk-action-selector-', { value: 'delete_events' });
-			await this.applyBulkAction();
-
-			for (const iterator of filteredRows) {
-				await page.check(
-					`#eventespressoadmin-pageseventsform-sectionsconfirmeventdeletionform-events-${iterator}-yes-lbl`
-				);
-			}
-
-			// check the confirmation checkbox for delete permanently
-			await this.checkConfirmDeletePermanently();
-			// click the confirm button to delete event/s permanently
-			await Promise.all([page.waitForLoadState(), page.click('text="Confirm"')]);
-			await Goto.eventsListPage();
-			await this.goToViewAndCount('Trash');
+			// trigger delete permanently from bulk
+			await this.selectDeletePermanently();
+			// select all the event checkbox to delete permanently
+			await this.checkEventToDeletePermanently(filteredRows);
+			// confirmation for delete permanently
+			await this.confirmAllDeletePermanently();
 		}
 	};
 }
