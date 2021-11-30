@@ -5,21 +5,32 @@ import { eventData } from '../../../../shared/data';
 const eventsListSurfer = new EventsListSurfer();
 
 beforeAll(async () => {
-	// generate bunch of events for pagination
-	const eventDataFOrPagination = Array(10).fill(eventData.bulkEvents);
+	// generate lots of events for pagination
+	const eventDataFOrPagination = Array(5).fill(Object.values(eventData));
+	// delete all events for starting point
+	await eventsListSurfer.deleteAllEventsByLink('View All Events');
+	// delete permanently all events at trash link
+	await eventsListSurfer.deleteAllPermanentlyFromTrash();
+	console.log({ eventDataFOrPagination: Object.values(eventData) });
+
 	// create bunch events for testing
-	for (const args of eventDataFOrPagination) {
-		await createNewEvent(args);
+	for (const event of Object.values(eventData)) {
+		await createNewEvent(event);
 	}
 	await Goto.eventsListPage();
 });
 
 describe('Test overview pagination', () => {
+	it('Count how many events from "Vew all events"', async () => {
+		// count all events from view all events
+		const countAllEventsList = await eventsListSurfer.goToViewAndCount('View All Events');
+		// assert count events from View all views link
+		expect(countAllEventsList).toBe(36);
+	});
+
 	it('test pagination', async () => {
-		// first click view all events
-		await eventsListSurfer.goToView('View All Events');
-		// count all events
-		const countAllEventsList = await eventsListSurfer.getViewCount('View All Events');
+		// count all events from view all events
+		const countAllEventsList = await eventsListSurfer.goToViewAndCount('View All Events');
 		// click screen option to get the pagination set
 		await page.click('#show-settings-link');
 		// get the default per page
