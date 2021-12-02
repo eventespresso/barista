@@ -34,7 +34,7 @@ describe('Today link test', () => {
 
 	it('Count event list for this today link before creating new', async () => {
 		// go to event link and return total count events
-		const countBeforeUpdate = await activeEventsTest.goToViewAndCount('Today');
+		countBeforeUpdate = await activeEventsTest.goToViewAndCount('Today');
 		// assert count this today link, before creating active event this today
 		expect(countBeforeUpdate).toBe(0);
 	});
