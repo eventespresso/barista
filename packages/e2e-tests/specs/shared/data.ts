@@ -101,6 +101,8 @@ export const eventData = {
 		title: 'Test upcoming event',
 		description: 'Some description for upcoming event',
 		status: 'PENDING',
+		startDate: DateFormatter.eventDateFormat(addDays(NOW, 20)),
+		endDate: DateFormatter.addDaysAndHours(NOW, 20, 2),
 	},
 
 	// data to use for multiple insertion of events like paginations and others
