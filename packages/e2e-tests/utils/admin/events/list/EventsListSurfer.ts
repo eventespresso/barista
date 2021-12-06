@@ -202,6 +202,7 @@ export class EventsListSurfer extends WPListTable {
 		const totalPage = await this.getTotalPagePagination();
 		// loop the pagination per page
 		for (let pages = 0; pages < totalPage; pages++) {
+			await this.goToView('Trash');
 			// fetch all events from trash
 			const tableRows = await this.getListItems();
 			// get IDs by its event
