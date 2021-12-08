@@ -2,7 +2,7 @@ import { saveVideo, PageVideoCapture } from 'playwright-video';
 
 import { createNewEvent, EDTRGlider } from '@e2eUtils/admin/events';
 import { EventsListSurfer, Goto } from '@e2eUtils/admin';
-import { eventList } from '../../../../shared/data';
+import { eventData } from '../../../../shared/data';
 
 const eventsListSurfer = new EventsListSurfer();
 const edtrGlider = new EDTRGlider();
@@ -13,8 +13,8 @@ const namespace = 'events-overview-clickable-actions-links';
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
-	// Loop and create event base on the eventList
-	for (const args of [...eventList, ...eventList]) {
+	// Loop and create event base on the eventData
+	for (const args of [...eventData.upcomingNextMonth, ...eventData.upcomingNextMonth]) {
 		await createNewEvent(args);
 	}
 	await Goto.eventsListPage();
@@ -84,7 +84,7 @@ describe(namespace, () => {
 
 		// go to "Trash" link again
 		await eventsListSurfer.goToView('Trash');
-		// get the number and elements of rows availble
+		// get the number and elements of rows available
 		const countBeforeDeletePermanently = await eventsListSurfer.getViewCount('Trash');
 
 		// check if there is event in trash
@@ -141,8 +141,7 @@ describe(namespace, () => {
 		const countBeforeDraft = await eventsListSurfer.getViewCount('Draft');
 		//create a draft event
 		await createNewEvent({
-			title: 'Draft test event',
-			description: 'Draft test description',
+			...eventData.upcomingNextMonth[0],
 			shouldPublish: false,
 		});
 		// go back to event list page
@@ -183,7 +182,7 @@ describe(namespace, () => {
 		// go to view all events link first to count the available event for date start update
 		await eventsListSurfer.goToView('View All Events');
 		// create new event for today and month link test
-		await createNewEvent(eventList[0]);
+		await createNewEvent(eventData.todayOnly);
 		await Goto.eventsListPage();
 
 		// get the first event in view all event link
