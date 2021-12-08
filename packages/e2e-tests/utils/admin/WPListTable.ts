@@ -154,6 +154,7 @@ export class WPListTable {
 		const li = await wrapper.$(`li:has-text("${view}")`);
 
 		const count = await (await li.$('span.count')).innerText();
+
 		// replace open and close parenthesis into empty string
 		return Number(count.replace(/[()]/g, ''));
 	};
@@ -220,6 +221,16 @@ export class WPListTable {
 	};
 
 	/**
+	 * go to specific link i.e. "Draft" or "View all events" etc. and count events
+	 */
+	goToViewAndCount = async (linkName: string): Promise<number> => {
+		// go to this link first to count the event list
+		await this.goToView(linkName);
+		// count the event list inside the this link
+		return await this.getViewCount(linkName);
+	};
+
+	/**
 	 * Select all the items in the list
 	 */
 	selectAll = async () => {
@@ -268,5 +279,13 @@ export class WPListTable {
 	 */
 	checkConfirmDeletePermanently = async () => {
 		await page.check('#eventespressoadmin-pageseventsform-sectionsconfirmeventdeletionform-backup-yes');
+	};
+
+	/**
+	 * select delete permanently in bulk option
+	 */
+	selectDeletePermanently = async () => {
+		await page.selectOption('select#bulk-action-selector-', { value: 'delete_events' });
+		await this.applyBulkAction();
 	};
 }

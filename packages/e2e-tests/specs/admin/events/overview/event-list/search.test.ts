@@ -2,16 +2,20 @@ import { createNewEvent } from '@e2eUtils/admin/events';
 import { EventsListSurfer, Goto } from '@e2eUtils/admin';
 import { uuid } from '@eventespresso/utils';
 import { pluck } from 'ramda';
-import { eventList } from '../../../../shared/data';
+import { eventData } from '../../../../shared/data';
 
 const eventsListSurfer = new EventsListSurfer();
 
 describe('Search events', () => {
-	const eventTitles = pluck('title', eventList);
+	const eventTitles = pluck('title', Object.values(eventData));
 
 	beforeAll(async () => {
-		// Loop and create event base on the eventList
-		for (const args of eventList) {
+		// delete all events from view all events link
+		await eventsListSurfer.deleteAllEventsByLink('View All Events');
+		// delete permanently all events at trash link
+		await eventsListSurfer.deleteAllPermanentlyFromTrash();
+		// Loop and create event base on the eventData
+		for (const args of Object.values(eventData)) {
 			await createNewEvent(args);
 		}
 		await Goto.eventsListPage();
