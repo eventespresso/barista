@@ -1,8 +1,9 @@
+@import '~@eventespresso/styles/src/mixins/breakpoints';
+
 .rrule-generator {
 	.rrule-text {
 		color: white;
 		font-size: 1rem;
-		margin-left: 20%;
 		outline: none;
 		border-radius: var(--ee-border-width);
 		font-family: var(--ee-admin-font-family);
@@ -12,6 +13,10 @@
 
 		&-label {
 			color: white;
+		}
+
+		@include min360px {
+			margin-left: 20%;
 		}
 	}
 
