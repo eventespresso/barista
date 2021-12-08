@@ -75,5 +75,10 @@ body.ee-modal-open {
 		max-height: 100vh;
 		top: 0;
 		z-index: 100000;
+
+		.ee-modal {
+			margin: 0;
+			max-height: 100%;
+		}
 	}
 }
