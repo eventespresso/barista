@@ -5,7 +5,7 @@ import { parse, getDaysInMonth } from 'date-fns';
 import { range } from 'ramda';
 
 import { NOW } from '@eventespresso/constants';
-import { Divider, Radio, Select, Stack } from '@eventespresso/ui-components';
+import { Radio, Row, Select } from '@eventespresso/ui-components';
 
 import { MONTHS } from '../../../constants';
 import { useRRuleState } from '../../../hooks';
@@ -44,7 +44,7 @@ const On: React.FC<OnProps> = ({ id, isTheOnlyMode, onChangeMode }) => {
 	);
 
 	return (
-		<Stack className='rrule-generator__on'>
+		<Row className='rrule-generator__on'>
 			{!isTheOnlyMode && (
 				<Radio
 					aria-label={__('Repeat yearly on')}
@@ -76,8 +76,6 @@ const On: React.FC<OnProps> = ({ id, isTheOnlyMode, onChangeMode }) => {
 				))}
 			</Select>
 
-			<Divider orientation='vertical' size='tiny' />
-
 			<Select
 				id={`${id}-day`}
 				name={`${id}-day`}
@@ -95,7 +93,7 @@ const On: React.FC<OnProps> = ({ id, isTheOnlyMode, onChangeMode }) => {
 					</option>
 				))}
 			</Select>
-		</Stack>
+		</Row>
 	);
 };
 

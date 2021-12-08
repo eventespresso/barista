@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import { __ } from '@eventespresso/i18n';
-import { Divider, Radio, Select, Stack } from '@eventespresso/ui-components';
+import { Divider, Radio, Select, Row } from '@eventespresso/ui-components';
 
 import { DAYS } from '../../../constants';
 import PositionSelect from '../PositionSelect';
@@ -37,7 +37,7 @@ const OnThe: React.FC<OnProps> = ({ id, isTheOnlyMode, onChangeMode }) => {
 	);
 
 	return (
-		<Stack className='rrule-generator__on-the'>
+		<Row className='rrule-generator__on-the'>
 			{!isTheOnlyMode && (
 				<Radio
 					aria-label={__('Repeat monthly on the')}
@@ -77,7 +77,7 @@ const OnThe: React.FC<OnProps> = ({ id, isTheOnlyMode, onChangeMode }) => {
 					</option>
 				))}
 			</Select>
-		</Stack>
+		</Row>
 	);
 };
 
