@@ -77,38 +77,3 @@ export const eventData = {
 	bulkEventThree: { title: 'Test Three', description: 'Some description for test three event' },
 	bulkEventFour: { title: 'Test Four', description: 'Some description for test four event' },
 };
-
-// export const eventData = {
-
-// 	// active events
-// 	active: {
-// 		title: 'Test active event',
-// 		description: 'Some description for active event',
-// 		status: ACTIVE,
-// 		startDate: ( now - 1 day ),
-// 		endDate: ( now + 1 day ),
-// 	},
-
-	// expired events
-	expired: {
-		title: 'Test expired event',
-		description: 'Some description for expired event',
-		status: 'EXPIRED',
-	},
-
-	// upcoming events
-	upcoming: {
-		title: 'Test upcoming event',
-		description: 'Some description for upcoming event',
-		status: 'PENDING',
-		startDate: DateFormatter.eventDateFormat(addDays(NOW, 20)),
-		endDate: DateFormatter.addDaysAndHours(NOW, 20, 2),
-	},
-
-	// data to use for multiple insertion of events like paginations and others
-	bulkEventOne: { title: 'Test One', description: 'Some description for test one event' },
-	bulkEventAnotherOne: { title: 'Test One', description: 'Some description for test one event' },
-	bulkEventTwo: { title: 'Test Two', description: 'Some description for test two event' },
-	bulkEventThree: { title: 'Test Three', description: 'Some description for test three event' },
-	bulkEventFour: { title: 'Test Four', description: 'Some description for test four event' },
-};

@@ -64,7 +64,7 @@ describe('Test overview pagination', () => {
 			// assert event count every page pagination
 			if (totalPages - 1 === pages) {
 				// assert last page
-				expect(countLastPageRows).toBe(countLastPageRows);
+				expect(countRowsPerPage).toBe(countLastPageRows);
 			} else {
 				// assert page count
 				expect(countRowsPerPage).toBe(defaultPerPage);

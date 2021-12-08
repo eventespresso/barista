@@ -32,13 +32,6 @@ describe('This Month link test', () => {
 		expect(countBeforeUpdate).toBe(0);
 	});
 
-	it('Count event list for this month link before creating new', async () => {
-		// go to event link and return total count events
-		countBeforeUpdate = await activeEventsTest.goToViewAndCount('This Month');
-		// assert count this month link, before creating active event this month
-		expect(countBeforeUpdate).toBe(0);
-	});
-
 	it('Create new event for active now ', async () => {
 		// create new event and return newly event counts and number of events added
 		const { createNewEvent, countAddedEvent } = await activeEventsTest.createActiveEvent(eventData.todayOnly);
