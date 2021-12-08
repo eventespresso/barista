@@ -4,70 +4,97 @@
 .rrule-generator {
 	.ee-input-label,
 	.ee-weekly-label {
-		flex: 0 1 20%;
+		align-self: baseline;
+		flex: 0 0 20%;
 		font-size: var(--ee-font-size-default);
 		font-family: var(--ee-admin-font-family);
 		line-height: var(--ee-icon-button-size); // 42px
-		text-align: right;
-		align-self: baseline;
+		text-align: end;
 
 		&.col-form-label {
 			font-weight: bold;
 		}
 	}
 
-	&__form-group {
-		&-row {
-			align-items: center;
-			display: flex;
-			flex-wrap: wrap;
-			margin-block-end: var(--ee-margin-small);
-			width: 100%;
+	&__form-group-row {
+		flex-direction: column;
+		margin-block-end: var(--ee-margin-small);
+		width: 100%;
 
-			&:last-child {
-				margin-block-end: 0;
+		&:last-child {
+			margin-block-end: 0;
+		}
+
+		> .ee-container {
+			@include max360px {
+				align-items: flex-start;
+				justify-content: flex-start;
+			}
+			@include min600px {
+				flex: 0 1 80%;
+				flex-wrap: wrap;
+			}
+		}
+
+		> div.ee-container {
+			width: 100%;
+		}
+
+		@include min600px {
+			flex-direction: row;
+		}
+
+		@include max600px {
+			.ee-divider--vertical {
+				flex-basis: 100%;
+				height: 0;
+				margin-block-end: var(--ee-margin-small);
 			}
 		}
 	}
 
 	&__frequency {
-		flex: 0 1 80%;
 
-		> {
-			* {
-				margin-block-end: var(--ee-margin-small);
+		> div {
+			margin-block-end: var(--ee-margin-small);
+		}
+
+		.ee-container > div {
+			margin-inline-end: var(--ee-margin-small);
+
+			&:last-child {
+				margin-inline-end: 0;
 			}
+		}
 
-			.ee-container > {
-				margin-block-end: 0;
+		> .ee-select-wrapper {
+			display: inline-block;
 
-				* {
-					margin-block-end: var(--ee-margin-small);
-				}
-
-				:last-child {
-					margin-block-end: 0;
-				}
-			}
-
-			:last-child {
-				margin-block-end: 0;
+			.ee-select {
+				width: 100%;
 			}
 		}
 	}
 
 	&__on,
 	&__on-the {
-		align-items: center;
-		display: flex;
-		width: 100%;
 		flex-direction: row;
+		flex-wrap: wrap;
+		width: 100%;
+
+		> div {
+			margin-inline-end: var(--ee-margin-small);
+		}
 
 		span {
 			font-size: var(--ee-font-size-default);
 			font-family: var(--ee-admin-font-family);
 			margin-inline: var(--ee-margin-micro);
 			white-space: nowrap;
+		}
+
+		> span {
+			margin-inline-end: var(--ee-margin-small);
 		}
 
 		.ee-select-wrapper {
@@ -102,7 +129,7 @@
 	.react-datepicker__input-container,
 	&__frequency > .ee-select-wrapper,
 	&__select-end.ee-select {
-		width: 210px;
+		width: 156px;
 	}
 
 	.rrule-text {
