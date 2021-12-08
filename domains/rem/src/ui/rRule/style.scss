@@ -8,8 +8,13 @@
 .rrule-generator {
 	&-wrapper {
 		display: flex;
+		flex-direction: column;
 		margin: 0 auto;
 		max-width: 900px;
+
+		@media only screen and (min-width: 767px) {
+			flex-direction: row;
+		}
 
 		/* will only target the max dates warning notification */
 		.ee-inline-notification {

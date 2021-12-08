@@ -15,22 +15,24 @@ const End: React.FC<BaseProps> = ({ id }) => {
 	return (
 		<Row className='rrule-generator__form-group-row'>
 			<Label id={endModeId} label={__('End')} className='col-form-label' />
-			<Mode id={endModeId} mode={end.mode} onChange={setEndMode} />
-			<Divider orientation='vertical' size='tiny' />
+			<Row>
+				<Mode id={endModeId} mode={end.mode} onChange={setEndMode} />
+				<Divider orientation='vertical' size='tiny' />
 
-			{end.mode === 'AFTER' && (
-				<EndAfter
-					after={end.after}
-					fontWeightNormal
-					id={`${id}-after`}
-					label={__('occurrences')}
-					labelPosition='right-middle'
-					noPadding
-					onChange={setEndAfter}
-				/>
-			)}
+				{end.mode === 'AFTER' && (
+					<EndAfter
+						after={end.after}
+						fontWeightNormal
+						id={`${id}-after`}
+						label={__('occurrences')}
+						labelPosition='right-middle'
+						noPadding
+						onChange={setEndAfter}
+					/>
+				)}
 
-			{end.mode === 'ON_DATE' && <OnDate id={`${id}-date`} date={end.date} onChange={setEndDate} />}
+				{end.mode === 'ON_DATE' && <OnDate id={`${id}-date`} date={end.date} onChange={setEndDate} />}
+			</Row>
 		</Row>
 	);
 };

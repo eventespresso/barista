@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
 
-import { Stack } from '@eventespresso/ui-components';
 import On from './On';
 import OnThe from './OnThe';
 import { useRRuleState, useRRuleConfig } from '../../../hooks';
@@ -20,14 +19,14 @@ const Yearly: React.FC<BaseProps> = ({ id }) => {
 	);
 
 	return (
-		<Stack>
+		<>
 			{yearlyModes?.includes('ON') && (
 				<On id={`${id}-on`} isTheOnlyMode={isTheOnlyMode} onChangeMode={onChangeMode} />
 			)}
 			{yearlyModes?.includes('ON_THE') && (
 				<OnThe id={`${id}-onThe`} isTheOnlyMode={isTheOnlyMode} onChangeMode={onChangeMode} />
 			)}
-		</Stack>
+		</>
 	);
 };
 

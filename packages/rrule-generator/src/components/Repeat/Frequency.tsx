@@ -13,8 +13,6 @@ import { useRRuleConfig } from '../../hooks';
 import { FrequencyProps } from './types';
 import { FREQUENCY } from '../../constants';
 
-import './styles.scss';
-
 const Frequency: React.FC<FrequencyProps> = ({ id, frequency, onChange }) => {
 	const { frequencies: frequencyTypes } = useRRuleConfig();
 

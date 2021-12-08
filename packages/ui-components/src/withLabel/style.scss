@@ -27,42 +27,38 @@
 			margin: 0 var(--ee-margin-nano) var(--ee-margin-nano);
 		}
 
-		@include min1080px {
-
-			&--bottom-left,
-			&--bottom-center,
-			&--bottom-right {
-				flex-direction: column-reverse;
-				label {
-					margin: var(--ee-margin-nano) var(--ee-margin-nano) 0;
-				}
+		&--bottom-left,
+		&--bottom-center,
+		&--bottom-right {
+			flex-direction: column-reverse;
+			label {
+				margin: var(--ee-margin-nano) var(--ee-margin-nano) 0;
 			}
+		}
 
-			&--left-top,
-			&--left-middle,
-			&--left-bottom {
-				flex-direction: row;
-				label {
-					margin: 0 0 0 var(--ee-margin-nano);
-				}
+		&--left-top,
+		&--left-middle,
+		&--left-bottom {
+			flex-direction: row;
+			label {
+				margin: 0 0 0 var(--ee-margin-nano);
 			}
+		}
 
-			&--right-top,
-			&--right-middle,
-			&--right-bottom {
-				flex-direction: row-reverse;
-				label {
-					margin: 0 var(--ee-margin-nano) 0 0;
-				}
+		&--right-top,
+		&--right-middle,
+		&--right-bottom {
+			flex-direction: row-reverse;
+			label {
+				margin: 0 var(--ee-margin-nano) 0 0;
 			}
+		}
 
-			&--top-center,
-			&--bottom-center,
-			&--left-middle,
-			&--right-middle {
-				align-items: center;
-			}
-
+		&--top-center,
+		&--bottom-center,
+		&--left-middle,
+		&--right-middle {
+			align-items: center;
 		}
 	}
 }

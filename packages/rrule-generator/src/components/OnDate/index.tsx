@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
 
 import { DateTimePicker, DatePicker, DatePickerProps } from '@eventespresso/dates';
-import { Row } from '@eventespresso/ui-components';
 
 import { useRRuleConfig } from '../../hooks';
 
@@ -25,11 +24,7 @@ const OnDate: React.FC<OnDateProps> = ({ id, date, label, maxDate, onChange }) =
 		[date, id, label, locale]
 	);
 
-	return (
-		<Row>
-			<DateComponent className='ee-datepicker' {...calendarAttributes} maxDate={maxDate} onChange={onChange} />
-		</Row>
-	);
+	return <DateComponent className='ee-datepicker' {...calendarAttributes} maxDate={maxDate} onChange={onChange} />;
 };
 
 export default OnDate;

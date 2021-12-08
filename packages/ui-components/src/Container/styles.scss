@@ -14,20 +14,27 @@
 
 	// row
 	&--inline {
-		flex-flow: row nowrap;
+		align-items: center;
+		flex-direction: column;
+		flex-wrap: nowrap;
 
 		&-reverse {
-			flex-flow: row-reverse nowrap;
+			flex-direction: column-reverse;
 		}
 
-		@include max480px {
-			flex-direction: column;
+		@include min360px {
+			flex-direction: row;
+
+			&-reverse {
+				flex-direction: row-reverse;
+			}
 		}
 	}
 
 	// stack
 	&--vertical {
-		flex-flow: column nowrap;
+		flex-direction: column;
+		flex-wrap: nowrap;
 		height: 100%;
 	}
 
@@ -38,11 +45,11 @@
 		box-sizing: border-box;
 		display: flex;
 		flex-flow: row wrap;
-		padding: var(--ee-padding-micro);
+		padding: 0;
 		width: 100%;
 
-		@include max480px {
-			padding: 0;
+		@include min600px {
+			padding: var(--ee-padding-micro);
 		}
 	}
 
@@ -51,10 +58,10 @@
 		box-sizing: border-box;
 		display: flex;
 		flex-flow: column nowrap;
-		padding: var(--ee-padding-micro);
+		padding: 0;
 
-		@include max480px {
-			padding: 0;
+		@include min600px {
+			padding: var(--ee-padding-micro);
 		}
 	}
 
