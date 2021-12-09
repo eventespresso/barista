@@ -285,7 +285,7 @@ export class WPListTable {
 	 * select delete permanently in bulk option
 	 */
 	selectDeletePermanently = async () => {
-		await page.selectOption('select#bulk-action-selector-', { value: 'delete_events' });
+		await this.selectBulkAction({ label: 'Delete Permanently' });
 		await this.applyBulkAction();
 	};
 }
