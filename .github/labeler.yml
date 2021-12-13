@@ -89,9 +89,8 @@ C: tests 🧪:
 - packages/e2e-tests/**/*
 - packages/storybook/*
 - packages/storybook/**/*
-- **/tests/*
-- **/*.test.*
 - jest.config.ts
+- any ['**/tests/*', '**/*.test.*']
 
 C: UI/UX 🚽:
 - packages/ee-components/*
@@ -126,6 +125,9 @@ D: Packages 📦:
 D: REM ♺:
 - domains/rem/*
 - domains/rem/**/*
+
+D: REPO 💾:
+- any ['!domains/*', '!domains/**/*']
 
 D: WP admin 🏠:
 - domains/wpPluginsPage/*
