@@ -1,0 +1,138 @@
+"C: accessibility ♿":
+- packages/i18n/*
+- packages/i18n/**/*
+
+"C: assets 💎":
+- packages/adapters/*
+- packages/adapters/**/*
+- packages/icons/*
+- packages/icons/**/*
+- yarn.lock
+
+"C: automation & deployment ⚙️":
+- .github/*
+- .github/**/*
+- .husky/*
+- .husky/**/*
+- eslint/*
+- tools/*
+- .eslintignore
+- .eslintrc.json
+- .prettierrc.js
+
+"C: build-process 🔨":
+- config/*
+- scripts/*
+- .wp-env.json
+- babel.config.js
+- composer.*
+- lerna.json
+- package.json
+- tsconfig.*
+- workspaces.json
+
+"C: data systems 🗑":
+- packages/constants/*
+- packages/constants/**/*
+- packages/data/*
+- packages/data/**/*
+- packages/dates/*
+- packages/dates/**/*
+- packages/edtr-services/*
+- packages/edtr-services/**/*
+- packages/form/*
+- packages/form/**/*
+- packages/form-builder/*
+- packages/form-builder/**/*
+- packages/rich-text-editor/*
+- packages/rich-text-editor/**/*
+- packages/rrule-generator/*
+- packages/rrule-generator/**/*
+- packages/storage/*
+- packages/storage/**/*
+- packages/toaster/*
+- packages/toaster/**/*
+- packages/tpc/*
+- packages/tpc/**/*
+
+"C: documentation 📑":
+- docs/*
+- docs/**/*
+- any ['**/*.md']
+
+"C: services 🤝":
+- packages/events/*
+- packages/events/**/*
+- packages/helpers/*
+- packages/helpers/**/*
+- packages/hooks/*
+- packages/hooks/**/*
+- packages/ioc/*
+- packages/ioc/**/*
+- packages/plugins/*
+- packages/plugins/**/*
+- packages/predicates/*
+- packages/predicates/**/*
+- packages/registry/*
+- packages/registry/**/*
+- packages/services/*
+- packages/services/**/*
+- packages/slot-fill/*
+- packages/slot-fill/**/*
+- packages/utils/*
+- packages/utils/**/*
+
+"C: tests 🧪":
+- .storybook/*
+- storybook-static/*
+- packages/e2e-tests/*
+- packages/e2e-tests/**/*
+- packages/storybook/*
+- packages/storybook/**/*
+- jest.config.ts
+- any ['**/tests/*', '**/*.test.*']
+
+"C: UI/UX 🚽":
+- packages/ee-components/*
+- packages/ee-components/**/*
+- packages/react-exit-modal-typeform/*
+- packages/react-exit-modal-typeform/**/*
+- packages/styles/*
+- packages/styles/**/*
+- packages/ui-components/*
+- packages/ui-components/**/*
+
+"D: EDTR ✏️":
+- domains/eventEditor/*
+- domains/eventEditor/**/*
+
+"D: EE CORE ☕":
+- domains/core/*
+- domains/core/**/*
+
+"D: Event Smart 🛒":
+- domains/eventSmart/*
+- domains/eventSmart/**/*
+
+"D: GB Blocks 🧱":
+- domains/blocks/*
+- domains/blocks/**/*
+
+"D: Packages 📦":
+- packages/*
+- packages/**/*
+
+"D: REM ♺":
+- domains/rem/*
+- domains/rem/**/*
+
+"D: REPO 💾":
+- any ['!domains/*', '!domains/**/*']
+
+"D: WP admin 🏠":
+- domains/wpPluginsPage/*
+- domains/wpPluginsPage/**/*
+
+"D: WP User Add-on 👤":
+- domains/wpUser/*
+- domains/wpUser/**/*
