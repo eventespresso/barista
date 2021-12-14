@@ -1,6 +1,6 @@
 .ee-tabbable-text {
 	align-items: center;
-	border-color: var(--ee-background-color); // essentially no border by default
+	border-color: transparent; // essentially no border by default
 	border-radius: var(--ee-border-radius-small);
 	border-width: var(--ee-border-width);
 	display: inline-flex;
