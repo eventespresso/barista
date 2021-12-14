@@ -20,7 +20,7 @@
 - .eslintrc.json
 - .prettierrc.js
 
-"C: build-process 🔨":
+"C: build process 🔨":
 - config/*
 - scripts/*
 - .wp-env.json
@@ -136,3 +136,6 @@
 "D: WP User Add-on 👤":
 - domains/wpUser/*
 - domains/wpUser/**/*
+
+"S:1 new 👶🏻":
+- any ['*', '**/*']
