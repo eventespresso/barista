@@ -71,4 +71,5 @@ export interface RowProps {
 	as?: 'div' | 'section';
 	className?: string;
 	reverse?: boolean;
+	style?: object;
 }
