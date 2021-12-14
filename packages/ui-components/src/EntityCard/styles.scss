@@ -139,5 +139,48 @@
 				order: 3;
 			}
 		}
+
+		&--image-bg {
+			backdrop-filter: blur(5px);
+			background-blend-mode: lighten;
+			background-color: rgba(255, 255, 255, 0.25);
+			background-position: right center;
+			background-repeat: no-repeat;
+			background-size: cover;
+
+			.ee-venue-selector__preview .ee-heading,
+			.entity-card__details .entity-card-details__name,
+			.ee-tabbable-text .ee-tabbable-text__inner_wrapper,
+			.ee-venue-selector__preview .ee-heading svg.ee-svg.ee-svg {
+  				color: var(--ee-default-text-color-super-high-contrast) !important;
+			}
+
+			.entity-card__sidebar {
+				backdrop-filter: blur(5px);
+				opacity: .8;
+			}
+
+			.ee-tabbable-text,
+			.ee-entity-details__label,
+			.ee-entity-details__value > a,
+			.ee-entity-details__value > div {
+				backdrop-filter: blur(5px);
+				background-color: rgba(255, 255, 255, .25);
+				border-radius: var(--ee-border-radius-small);
+			}
+
+			.ee-entity-details__value > a.ee-link {
+				color: var(--ee-color-blue-high-contrast);
+			}
+
+			.ee-entity-details-panel .ee-entity-details__label {
+				box-sizing: border-box;
+				display: inline-block;
+				font-weight: 500;
+				margin-inline: auto;
+				padding-inline: 1rem;
+				width: fit-content;
+			}
+		}
 	}
 }
