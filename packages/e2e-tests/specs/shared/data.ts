@@ -65,6 +65,7 @@ export const eventData = {
 	upcoming: {
 		title: 'Test upcoming event',
 		description: 'Some description for upcoming event',
+		category: 'Sample category',
 		status: 'PENDING',
 		startDate: DateFormatter.eventDateFormat(addDays(NOW, 20)),
 		endDate: DateFormatter.addDaysAndHours(NOW, 20, 2),
