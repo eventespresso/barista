@@ -1,3 +1,4 @@
+import { ElementHandle } from 'packages/e2e-tests/types';
 import { WPListTable } from '../../WPListTable';
 
 type Args = {
@@ -52,5 +53,28 @@ export class CategoryManager extends WPListTable {
 		await this.gotoAddNewCategory();
 		// save new category
 		await this.saveNewCategory({ title, description });
+	};
+
+	// Get the name of an category from <tr /> handle
+	getCategoryName = async (item: ElementHandle): Promise<string> => {
+		return await (await item.$('td.column-name a.row-title')).innerText();
+	};
+
+	// Get the list of rows filtered by category name
+	getCategoryByName = async (name: string): Promise<ElementHandle[]> => {
+		// get all list of category
+		const tableRows = await wpListTable.getListItems();
+		// filter category by name
+		const filteredRows = (
+			await Promise.all(
+				tableRows.map(async (row) => {
+					// action to filter list item by category name
+					const eventData = await this.getCategoryName(row);
+					return eventData === name ? row : null;
+				})
+			)
+		).filter(Boolean);
+
+		return filteredRows;
 	};
 }
