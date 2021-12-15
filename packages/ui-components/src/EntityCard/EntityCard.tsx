@@ -24,7 +24,7 @@ const EntityCard: React.FC<EntityCardProps> = ({
 	const rowClassName = classNames('entity-card', bg && 'entity-card--image-bg');
 	const sidebarClassName = classNames(sidebarClass, 'entity-card__sidebar');
 	const beforeSidebar = (
-		<Sidebar align={'wide'} before className={sidebarClassName} >
+		<Sidebar align={'wide'} before className={sidebarClassName}>
 			{sidebar}
 		</Sidebar>
 	);
