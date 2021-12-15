@@ -4,7 +4,7 @@ import { categoryData } from '../../../shared/data';
 
 const categoryManager = new CategoryManager();
 
-const namespace = 'categories-create-category';
+const namespace = 'categories-category-shortcode';
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
@@ -32,5 +32,21 @@ describe('Create new category test', () => {
 			await categoryManager.createNewCategory(categoryData.sample);
 		// assert category count before and after added one category
 		expect(countCategoryAfterAddedOne).toBe(countCategoryBeforeAddOne);
+	});
+
+	it('Get category shorcode for sample category', async () => {
+		//Get the list of rows filtered by category title
+		const filteredRows = await categoryManager.getCategoryByName(categoryData.sample.title);
+		// assert filtered category
+		expect(filteredRows.length).toBe(Object.values(categoryData).length);
+	});
+
+	it('Check category shortcode if match to sample catery', async () => {
+		// get shortcode in category list base on category title
+		const getShortCode = await categoryManager.getShortCode(categoryData.sample.title);
+		// Generate category shortcode base on category title
+		const createShortcode = categoryManager.shortcodeGenerator(categoryData.sample.title);
+		// assert shortcode if match
+		expect(getShortCode).toBe(createShortcode);
 	});
 });
