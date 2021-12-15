@@ -1,0 +1,16 @@
+name: "Auto PR Labeler"
+on:
+  # see: https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#pull_request_target
+  pull_request_target:
+    types: [opened, closed, reopened, ready_for_review, review_requested, review_request_removed]
+
+jobs:
+  auto-pr-labeler:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: eventespresso/actions/packages/auto-pr-labeler@main
+      with:
+        org: "eventespresso"
+        repo: "barista"
+        prNumber: ${{github.event.number}}
+        token: ${{ secrets.GITHUB_TOKEN }}
