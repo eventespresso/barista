@@ -5,10 +5,10 @@ on:
     types: [opened, closed, reopened, ready_for_review, review_requested, review_request_removed]
 
 jobs:
-  auto-pr-labeler:
+  assign-labels:
     runs-on: ubuntu-latest
     steps:
-      - uses: eventespresso/actions/packages/auto-pr-labeler@main
+    - uses: eventespresso/actions/packages/auto-pr-labeler@main
       with:
         org: "eventespresso"
         repo: "barista"
