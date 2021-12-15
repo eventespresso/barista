@@ -13,4 +13,4 @@ jobs:
         org: ${{ github.event.repository.owner.name }}
         repo: ${{ github.event.repository.name }}
         prNumber: ${{github.event.issue.number}}
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.GH_ACTIONS_ACCESS_TOKEN }}
