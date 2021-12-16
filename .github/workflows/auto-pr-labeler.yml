@@ -10,6 +10,6 @@ jobs:
     steps:
     - uses: eventespresso/actions/packages/auto-pr-labeler@main
       with:
-        ownerRepo: ${{ env.GITHUB_REPOSITORY || 'eventespresso/barista' }}
+        ownerRepo: ${{ env.GITHUB_REPOSITORY }} # || 'eventespresso/barista'
         prNumber: ${{ github.event.number }}
         token: ${{ secrets.GH_ACTIONS_ACCESS_TOKEN }}
