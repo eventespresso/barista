@@ -83,3 +83,10 @@ export const eventData = {
 export const categoryData = {
 	sample: { title: 'Sample category', description: 'Sample category description' },
 };
+
+// data use create sample category
+export const defaultRegStatusOptions = {
+	RAP: { value: 'RAP', text: 'Approved' },
+	RNA: { value: 'RNA', text: 'Not Approved' },
+	RPP: { value: 'RPP', text: 'Pending Payment' },
+};
