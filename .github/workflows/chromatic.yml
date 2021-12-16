@@ -18,6 +18,7 @@ jobs:
               uses: eventespresso/actions/packages/checkout-and-yarn@main
               with:
                   fetch-depth: 0 # 👈 Required to retrieve git history
+                  cache-version: ${{ secrets.GH_ACTIONS_CACHE_VERSION }}
 
               # 👇 Adds Chromatic as a step in the workflow
             - name: Deploy to Chromatic
