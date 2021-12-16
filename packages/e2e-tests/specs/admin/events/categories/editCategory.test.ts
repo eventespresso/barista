@@ -1,5 +1,6 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { Goto, CategoryManager } from '@e2eUtils/admin';
+import { categoryData } from '../../../shared/data';
 
 const categoryManager = new CategoryManager();
 
@@ -9,6 +10,8 @@ let capture: PageVideoCapture;
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 	await Goto.eventsListPage();
+	// process to delete all categories in a list
+	await categoryManager.processToDeleteAllCategory();
 });
 
 afterAll(async () => {
@@ -16,40 +19,24 @@ afterAll(async () => {
 });
 
 describe('Edit category test', () => {
-	let countCategory: number;
-	let countCategoryAfterAddedOne: number;
-
 	it('Remove all existing category and count category list', async () => {
-		// go to category tab
-		await categoryManager.gotoCategories();
-		// count category if there is any
-		countCategory = await categoryManager.getViewCount('All');
-		// if there is any category exist remove all, otherwise do nothing
-		if (countCategory) {
-			await categoryManager.deleteAllCategory();
-		}
-		// count again category
-		const countCategoryAfterRemoveALl = await categoryManager.getViewCount('All');
+		// count again category after delete all
+		const countCategoryAfterDeleteAll = await categoryManager.getViewCount('All');
 		// assert category reamaining, suppose to be it is equal to zero for starting
-		expect(countCategoryAfterRemoveALl).toBe(0);
+		expect(countCategoryAfterDeleteAll).toBe(0);
 	});
 
 	it('Create one sample category', async () => {
 		// create one sample category
-		await categoryManager.createNewCategory({
-			title: 'Sample category',
-			description: 'Sample category description',
-		});
-		// go to category tab
-		await categoryManager.gotoCategories();
-		// count category if the new created category is already exist
-		countCategoryAfterAddedOne = await categoryManager.getViewCount('All');
-		const countAddedEvent = countCategoryAfterAddedOne - countCategory;
-		// assert remaing category
-		expect(countCategoryAfterAddedOne).toBe(countCategory + countAddedEvent);
+		const { before: countCategoryBeforeAddOne, after: countCategoryAfterAddedOne } =
+			await categoryManager.createNewCategory(categoryData.sample);
+		// assert category count before and after added one category
+		expect(countCategoryAfterAddedOne).toBe(countCategoryBeforeAddOne);
 	});
 
 	it('Update existing category', async () => {
+		// count category if the new created category is already exist
+		const countCategoryAfterAddedOne = await categoryManager.getViewCount('All');
 		// get the first event in trash
 		const firstItem = await categoryManager.getFirstListItem();
 		// got to "restore from trash" action link for the selected first event

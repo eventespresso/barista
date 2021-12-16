@@ -78,3 +78,8 @@ export const eventData = {
 	bulkEventThree: { title: 'Test Three', description: 'Some description for test three event' },
 	bulkEventFour: { title: 'Test Four', description: 'Some description for test four event' },
 };
+
+// data use create sample category
+export const categoryData = {
+	sample: { title: 'Sample category', description: 'Sample category description' },
+};
