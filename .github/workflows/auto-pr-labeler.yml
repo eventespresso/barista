@@ -1,7 +1,7 @@
 name: "Auto PR Labeler"
 on:
-  # see: https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#pull_request
   pull_request:
+    # see: https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#pull_request
     types: [opened, closed, reopened, ready_for_review, review_requested, review_request_removed]
 
 jobs:
@@ -11,5 +11,5 @@ jobs:
     - uses: eventespresso/actions/packages/auto-pr-labeler@main
       with:
         ownerRepo: ${{ env.GITHUB_REPOSITORY }}
-        prNumber: ${{github.event.issue.number}}
+        prNumber: ${{ github.event.issue.number }}
         token: ${{ secrets.GH_ACTIONS_ACCESS_TOKEN }}
