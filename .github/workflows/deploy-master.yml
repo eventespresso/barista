@@ -22,6 +22,8 @@ jobs:
 
             - name: Checkout and yarn
               uses: eventespresso/actions/packages/checkout-and-yarn@main
+              with:
+                  cache-version: ${{ secrets.GH_ACTIONS_CACHE_VERSION }}
 
             # Build the core domains along with all the packages
             # because all packages will goto core

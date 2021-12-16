@@ -42,6 +42,7 @@ jobs:
               with:
                   # To make sure all history is fetched for jest --changedSince to work as expected
                   fetch-depth: ${{ ( matrix.task != 'test' && 1 ) || 0 }} # 0 for test, 1 otherwise
+                  cache-version: ${{ secrets.GH_ACTIONS_CACHE_VERSION }}
 
             - name: Get last commit message
               id: last-commit
