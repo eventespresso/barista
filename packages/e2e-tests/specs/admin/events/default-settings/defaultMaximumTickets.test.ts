@@ -47,6 +47,32 @@ describe('Default maximum tickets allowed test', () => {
 		expect(countEventsAfterCreatedNew).toBe(countAddedEvent + countEvents);
 	});
 
+	it('Change default maximum tickets allowed to two', async () => {
+		await defaultSettingsManager.gotoDefaultSettings();
+		await page.fill('#update_default_event_settings-default-max-tickets', '2');
+		// await page.click('#default_event_settings_save');
+		await Promise.all([page.waitForNavigation(), page.click('#default_event_settings_save')]);
+		// for (const iterator of [1, 2]) {
+		// }
+		await Goto.eventsListPage();
+		expect(0).toBe(0);
+	});
+
+	it('Check if default maximum tickets allowed is already changed', async () => {
+		await defaultSettingsManager.gotoDefaultSettings();
+		// await page.goto(await gotoNewReg.getAttribute('href'));
+		const getDefaultMaximum = await (
+			await page.$('#update_default_event_settings-default-max-tickets')
+		).getAttribute('value');
+		console.log({ getDefaultMaximum });
+
+		// await Promise.all([page.waitForNavigation(), page.click('#default_event_settings_save')]);
+		// for (const iterator of [1, 2]) {
+		// }
+		await Goto.eventsListPage();
+		expect(0).toBe(0);
+	});
+
 	it('Create sample ticket', async () => {
 		// get the first event in trash
 		const firstItem = await defaultSettingsManager.getFirstListItem();
@@ -64,7 +90,21 @@ describe('Default maximum tickets allowed test', () => {
 		await page.click('.ee-modal__footer span:has-text("Skip prices - assign dates")');
 		await page.click('#ee-ticket-assignments-manager-table-data-cell-row-0-col-1 button');
 		await page.click('button[type="submit"]');
-		console.log({ firstItem });
+		await Goto.eventsListPage();
+		const firstItemAfterTicketAdded = await defaultSettingsManager.getFirstListItem();
+		// got to "restore from trash" action link for the selected first event
+		const restoreLinkAfterTicketAdded = await defaultSettingsManager.getItemActionLinkByText(
+			firstItemAfterTicketAdded,
+			'Registrations'
+		);
+		await page.goto(restoreLinkAfterTicketAdded);
+		// const gotoNewReg = await page.$('a:has-text("Add New Registration")');
+		// await page.goto(await gotoNewReg.getAttribute('href'));
+		// link.getAttribute('href')
+		await Promise.all([page.waitForNavigation(), page.click('a:has-text("Add New Registration")')]);
+		// await page.click('a:has-text("Add New Registration');
+		const countQty = await page.$$('.ticket-selector-tbl-qty-slct option');
+		console.log({ countQty: countQty.length });
 
 		expect(0).toBe(0);
 	});
