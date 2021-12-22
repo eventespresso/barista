@@ -1,6 +1,6 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
-import { defaultRegStatusOptions } from '../../../shared/data';
+import { defaultSettingsData } from '../../../shared/data';
 
 const defaultSettingsManager = new DefaultSettingsManager();
 
@@ -23,24 +23,26 @@ describe('Default registration status test', () => {
 		// Get selected default status and return weither option value or innertext of the option
 		const getSelectedDefaultStatus = await defaultSettingsManager.getSelectedDefaultStatus({ value: true });
 		// assert the current selected registration status
-		expect(getSelectedDefaultStatus).toBe(defaultRegStatusOptions[getSelectedDefaultStatus].value);
+		expect(getSelectedDefaultStatus).toBe(
+			defaultSettingsData.defaultRegStatusOptions[getSelectedDefaultStatus].value
+		);
 	});
 
 	it('Select approved default registration status', async () => {
 		// Process to select default registration status base on option value
 		const afterSelectStatus = await defaultSettingsManager.processToSelectRegStatus(
-			defaultRegStatusOptions.RAP.value
+			defaultSettingsData.defaultRegStatusOptions.RAP.value
 		);
 		// assert before and after selecting new registration status
-		expect(afterSelectStatus).toBe(defaultRegStatusOptions.RAP.value);
+		expect(afterSelectStatus).toBe(defaultSettingsData.defaultRegStatusOptions.RAP.value);
 	});
 
 	it('Select not approved default registration status', async () => {
 		// Process to select default registration status base on option value
 		const afterSelectStatus = await defaultSettingsManager.processToSelectRegStatus(
-			defaultRegStatusOptions.RNA.value
+			defaultSettingsData.defaultRegStatusOptions.RNA.value
 		);
 		// assert before and after selecting new registration status
-		expect(afterSelectStatus).toBe(defaultRegStatusOptions.RNA.value);
+		expect(afterSelectStatus).toBe(defaultSettingsData.defaultRegStatusOptions.RNA.value);
 	});
 });

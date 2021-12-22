@@ -217,4 +217,31 @@ export class EventsListSurfer extends WPListTable {
 			await this.confirmAllDeletePermanently();
 		}
 	};
+
+	/**
+	 * Trigger add new ticket button
+	 */
+	clickAddNewTicket = async (): Promise<void> => {
+		await page.click(
+			'#ee-event-editor .ee-entity-list__footer button[type="button"] span:has-text("Add New Ticket")'
+		);
+	};
+
+	/**
+	 * Create sample event ticket
+	 */
+	createTicketEvent = async ({ name, description }: { name: string; description: string }): Promise<void> => {
+		// Click name field to active
+		await page.click('input[name="name"]');
+		// Fill in name ticket field
+		await page.fill('input[name="name"]', name);
+		// Fill in ticket description
+		await page.fill('.public-DraftEditor-content', description);
+		// Click skip prices
+		await page.click('.ee-modal__footer span:has-text("Skip prices - assign dates")');
+		// Click ticket assignment button
+		await page.click('#ee-ticket-assignments-manager-table-data-cell-row-0-col-1 button');
+		// Save new ticket
+		await page.click('button[type="submit"]');
+	};
 }

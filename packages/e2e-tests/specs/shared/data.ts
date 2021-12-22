@@ -90,3 +90,17 @@ export const defaultRegStatusOptions = {
 	RNA: { value: 'RNA', text: 'Not Approved' },
 	RPP: { value: 'RPP', text: 'Pending Payment' },
 };
+
+export const defaultSettingsData = {
+	defaultRegStatusOptions: {
+		RAP: { value: 'RAP', text: 'Approved' },
+		RNA: { value: 'RNA', text: 'Not Approved' },
+		RPP: { value: 'RPP', text: 'Pending Payment' },
+	},
+	defaultMaxTicket: '2',
+};
+
+export const ticketData = {
+	name: 'Ticket sample name',
+	description: 'Ticket sample description',
+};
