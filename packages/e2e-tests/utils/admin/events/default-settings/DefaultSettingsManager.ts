@@ -101,10 +101,17 @@ export class DefaultSettingsManager extends WPListTable {
 	/**
 	 * Set new value for default maximum ticket allowed
 	 */
-	setNewValueForDefaultMaxTIcket = async (value: string): Promise<void> => {
+	setNewValueForDefaultMaxTicket = async (value: string): Promise<void> => {
 		//Fill in or change the value of default maximum ticket allowed
 		await this.fillDefaultMaxTicket(value);
 		// Save value set on default maximum ticket allowed
 		await this.saveDefaultMaxTicket();
+	};
+
+	/**
+	 * Set new value for default maximum ticket allowed
+	 */
+	getEventRegMaxTicket = async (): Promise<string> => {
+		return await (await page.$('#max-registrants')).getAttribute('value');
 	};
 }
