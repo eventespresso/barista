@@ -95,7 +95,7 @@ export class DefaultSettingsManager extends WPListTable {
 	};
 
 	/**
-	 * Set new value for default maximum ticket allowed
+	 * get "Max Registrations per Transaction" value under "Registration Options"
 	 */
 	getEventRegMaxTicket = async (): Promise<string> => {
 		return await (await page.$('#max-registrants')).getAttribute('value');
