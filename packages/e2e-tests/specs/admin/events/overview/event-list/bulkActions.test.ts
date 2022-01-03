@@ -8,7 +8,7 @@ const namespace = 'events-bulk-actions-links';
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
-	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	// capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 	// delete all events from view all events link
 	await eventsListSurfer.deleteAllEventsByLink('View All Events');
 	await eventsListSurfer.deleteAllEventsByLink('Draft');
@@ -19,7 +19,7 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-	await capture?.stop();
+	// await capture?.stop();
 });
 
 describe('Test overview bulk actions', () => {

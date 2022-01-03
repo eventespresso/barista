@@ -244,4 +244,13 @@ export class EventsListSurfer extends WPListTable {
 		// Save new ticket
 		await page.click('button[type="submit"]');
 	};
+
+	/**
+	 * Remove all event from link actions (View all events, Draft, Trash)
+	 */
+	cleanUpEvents = async (): Promise<void> => {
+		await this.deleteAllEventsByLink('View All Events');
+		await this.deleteAllEventsByLink('Draft');
+		await this.deleteAllPermanentlyFromTrash();
+	};
 }
