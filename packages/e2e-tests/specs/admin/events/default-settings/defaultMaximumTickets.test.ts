@@ -1,7 +1,8 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
-import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
+import { Goto, DefaultSettingsManager, RegistrationOptions } from '@e2eUtils/admin';
 
 const defaultSettingsManager = new DefaultSettingsManager();
+const registrationOptions = new RegistrationOptions();
 
 const namespace = 'default-settings-default-maximum-tickets-allowed';
 let capture: PageVideoCapture;
@@ -19,18 +20,14 @@ afterAll(async () => {
 
 describe('Default maximum tickets allowed test', () => {
 	it('Change default maximum ticket allowed and test', async () => {
-		// Get the default value set on default maximum ticket allowed field
-		const getDefaultMaxBeforeChange = await defaultSettingsManager.getDefaultMaxTicket();
 		// Set new value for default maximum ticket allowed
 		await defaultSettingsManager.setNewValueForDefaultMaxTicket('7');
 		await Goto.eventsListPage();
 		// trigger add new event button
 		await Promise.all([page.waitForNavigation(), page.click('#add-new-event')]);
 		// check maximum ticket allowed at EDTR
-		const checkEDTRMaxTicket = await defaultSettingsManager.getEventRegMaxTicket();
-		// get added number
-		const getAdded = Number(checkEDTRMaxTicket) - Number(getDefaultMaxBeforeChange);
+		const checkEDTRMaxTicket = await registrationOptions.getEventRegMaxTicket();
 		// assert maximum ticket allowed at EDTR
-		expect(Number(checkEDTRMaxTicket)).toBe(getAdded + Number(getDefaultMaxBeforeChange));
+		expect(checkEDTRMaxTicket).toBe('7');
 	});
 });

@@ -85,20 +85,6 @@ export class DefaultSettingsManager extends WPListTable {
 	};
 
 	/**
-	 * Go to add new registration
-	 */
-	goToAddNewReg = async (): Promise<void> => {
-		await Promise.all([page.waitForNavigation(), page.click('a:has-text("Add New Registration")')]);
-	};
-
-	/**
-	 * Check if the value exist in select option innertext
-	 */
-	checkSelectOptionValue = async (value: string): Promise<string> => {
-		return await (await page.$(`.ticket-selector-tbl-qty-slct option:has-text("${value}")`)).innerText();
-	};
-
-	/**
 	 * Set new value for default maximum ticket allowed
 	 */
 	setNewValueForDefaultMaxTicket = async (value: string): Promise<void> => {
@@ -106,12 +92,5 @@ export class DefaultSettingsManager extends WPListTable {
 		await this.fillDefaultMaxTicket(value);
 		// Save value set on default maximum ticket allowed
 		await this.saveDefaultMaxTicket();
-	};
-
-	/**
-	 * get "Max Registrations per Transaction" value under "Registration Options"
-	 */
-	getEventRegMaxTicket = async (): Promise<string> => {
-		return await (await page.$('#max-registrants')).getAttribute('value');
 	};
 }
