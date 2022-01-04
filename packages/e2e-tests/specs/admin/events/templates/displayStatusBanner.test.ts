@@ -1,9 +1,11 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { Goto, TemplatesManager, EventsListSurfer, createNewEvent } from '@e2eUtils/admin';
+import { SingleEventPageManager } from '@e2eUtils/frontend';
 import { eventData } from '../../../shared/data';
 
 const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();
+const singleEventPageManager = new SingleEventPageManager();
 
 const namespace = 'templates-display-status-banner-category';
 let capture: PageVideoCapture;
@@ -25,7 +27,7 @@ afterAll(async () => {
 describe('Display status banner test', () => {
 	it('Set display status banner to yes', async () => {
 		// set display status banner to yes
-		await templatesManager.selectStatusBanner({ value: '1' });
+		await templatesManager.setAndSaveDisplayStatusBanner({ value: '1' });
 		// get selected display status banner value
 		const getSelectedValue = await templatesManager.getSelectedStatusBanner({ text: true });
 		// assert display status banner value, it should be equal to "Yes"
@@ -51,7 +53,7 @@ describe('Display status banner test', () => {
 		const restoreLink = await eventsListSurfer.getItemActionLinkByText(firstItem, 'View');
 		await page.goto(restoreLink);
 		// get status banner text
-		const checkBannerText = await templatesManager.getBannerInnerText();
+		const checkBannerText = await singleEventPageManager.getBannerInnerText();
 		// assert banner text
 		expect(checkBannerText).toBe(eventStatusText);
 	});

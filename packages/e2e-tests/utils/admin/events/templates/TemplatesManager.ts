@@ -28,17 +28,10 @@ export class TemplatesManager {
 	/**
 	 * select display status banner
 	 */
-	selectStatusBanner = async ({ value }: { value: string }): Promise<void> => {
+	setAndSaveDisplayStatusBanner = async ({ value }: { value: string }): Promise<void> => {
 		// set display status banner
 		await page.selectOption('select#display_status_banner_single', { value });
 		// save changes from templates tab
 		await Promise.all([page.waitForNavigation(), page.click('#template_settings_save')]);
-	};
-
-	/**
-	 * get banner innertext
-	 */
-	getBannerInnerText = async (): Promise<string> => {
-		return await (await page.$('span.ee-status')).innerText();
 	};
 }
