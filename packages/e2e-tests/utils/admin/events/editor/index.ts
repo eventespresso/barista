@@ -2,6 +2,7 @@ export * from './DateEditor';
 export * from './EDTRGlider';
 export * from './EntityEditor';
 export * from './EntityListParser';
+export * from './RegistrationOptions';
 export * from './TAMRover';
 export * from './TPCSafari';
 export * from './TicketEditor';
