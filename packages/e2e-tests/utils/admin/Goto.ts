@@ -12,6 +12,13 @@ export class Goto {
 	}
 
 	/**
+	 * Navigates to "/wp-admin/admin.php?page=espresso_venues"
+	 */
+	static async venuesPage() {
+		await visitAdminPage('admin.php', 'page=espresso_venues');
+	}
+
+	/**
 	 * Navigates to "/wp-admin/plugins.php"
 	 */
 	static async pluginsPage() {

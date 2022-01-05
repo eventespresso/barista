@@ -4,13 +4,13 @@ import { EDTRGlider } from '../editor';
 
 const edtrGlider = new EDTRGlider();
 
-type Args = {
+export type Args = {
 	title?: string;
 	description?: string;
 	shouldPublish?: boolean;
 };
 
-async function fillEventFields({ title, description }: Args) {
+export async function fillEventFields({ title, description }: Args) {
 	// fill in title event field
 	await page.fill('#titlewrap #title', title || '');
 
@@ -21,11 +21,15 @@ async function fillEventFields({ title, description }: Args) {
 	}
 }
 
-export async function createNewEvent({ title, description, shouldPublish = true }: Args = {}) {
-	await Goto.eventsListPage();
-
+export async function triggerAddNewEvent() {
 	// trigger add new event button
 	await Promise.all([page.waitForNavigation(), page.click('#add-new-event')]);
+}
+
+export async function createNewEvent({ title, description, shouldPublish = true }: Args = {}) {
+	await Goto.eventsListPage();
+	// trigger add new event button
+	await triggerAddNewEvent();
 	// fill in event title and description
 	await fillEventFields({ title, description });
 	// save event

@@ -79,6 +79,8 @@ export const eventData = {
 	bulkEventFour: { title: 'Test Four', description: 'Some description for test four event' },
 };
 
+export const eventVenueData = { title: 'Test venue title', description: 'Test venue description' };
+
 // data use create sample category
 export const categoryData = {
 	sample: { title: 'Sample category', description: 'Sample category description' },
