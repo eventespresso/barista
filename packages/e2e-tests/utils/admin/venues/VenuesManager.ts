@@ -1,6 +1,12 @@
-import { fillEventFields as fillVenueFields, Args, WPListTable, EDTRGlider } from '@e2eUtils/admin';
+import {
+	fillEventFields as fillVenueFields,
+	Args,
+	WPListTable,
+	EDTRGlider,
+	createNewEvent as createVenue,
+} from '@e2eUtils/admin';
 
-// const edtrGlider = new EDTRGlider();
+const edtrGlider = new EDTRGlider();
 
 export class VenuesManager extends WPListTable {
 	/**
@@ -25,7 +31,7 @@ export class VenuesManager extends WPListTable {
 	 */
 	saveVenue = async (save = true) => {
 		if (save) {
-			await Promise.all([page.waitForNavigation(), page.click('#publish')]);
+			await Promise.all([page.waitForNavigation(), page.click('#postbox-container-1 #publish')]);
 			// await page.waitForSelector(ticketsListSelector);
 		}
 	};
@@ -33,13 +39,23 @@ export class VenuesManager extends WPListTable {
 	/**
 	 * create new venue
 	 */
-	createNewVenue = async ({ title, description }: Args = {}): Promise<void> => {
-		// trigger add new venue
+	createNewVenue = async ({ title, description, shouldPublish = true }: Args = {}): Promise<void> => {
+		// // trigger add new venue
 		await this.triggerAddNewVenue();
 		//  fill in venue fields
 		await fillVenueFields({ title, description });
-		// save venue
-		await this.saveVenue(true);
+		// await createVenue({ title, description });
+		// await page.fill('#titlewrap #title', title || '');
+
+		// // fill in event description
+		// if (description) {
+		// 	await page.click('#content-html');
+		// 	await page.fill('#wp-content-editor-container textarea.wp-editor-area', description);
+		// }
+		// // save venue
+		await Promise.all([page.waitForNavigation(), page.click('#publish')]);
+		// await this.saveVenue(shouldPublish);
 		// await edtrGlider.saveEvent(true);
+		await page.waitForSelector('#poststuff');
 	};
 }

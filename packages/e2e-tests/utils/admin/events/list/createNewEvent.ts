@@ -26,14 +26,19 @@ export async function triggerAddNewEvent() {
 	await Promise.all([page.waitForNavigation(), page.click('#add-new-event')]);
 }
 
-export async function createNewEvent({ title, description, shouldPublish = true }: Args = {}) {
-	await Goto.eventsListPage();
-	// trigger add new event button
-	await triggerAddNewEvent();
+export async function fillAndSaveEvent({ title, description, shouldPublish = true }: Args = {}) {
 	// fill in event title and description
 	await fillEventFields({ title, description });
 	// save event
 	await edtrGlider.saveEvent(shouldPublish);
+}
+
+export async function createNewEvent({ title, description, shouldPublish = true }: Args = {}) {
+	await Goto.eventsListPage();
+	// trigger add new event button
+	await triggerAddNewEvent();
+	// fill and save events
+	await fillAndSaveEvent({ title, description, shouldPublish });
 }
 
 export async function createMultipleEvents({ title, description, shouldPublish = true }: Args = {}) {
