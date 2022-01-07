@@ -1,13 +1,4 @@
-import {
-	fillEventFields as fillVenueFields,
-	Args,
-	WPListTable,
-	EDTRGlider,
-	createNewEvent as createVenue,
-} from '@e2eUtils/admin';
-
-const edtrGlider = new EDTRGlider();
-
+import { fillEventFields as fillVenueFields, Args, WPListTable } from '@e2eUtils/admin';
 export class VenuesManager extends WPListTable {
 	/**
 	 * get total page for pagination
@@ -29,33 +20,44 @@ export class VenuesManager extends WPListTable {
 	/**
 	 * Updates the venue by clicking the publish button
 	 */
-	saveVenue = async (save = true) => {
-		if (save) {
-			await Promise.all([page.waitForNavigation(), page.click('#postbox-container-1 #publish')]);
-			// await page.waitForSelector(ticketsListSelector);
-		}
+	saveVenue = async () => {
+		await Promise.all([page.waitForNavigation(), page.click('#postbox-container-1 #publish')]);
 	};
 
 	/**
 	 * create new venue
 	 */
-	createNewVenue = async ({ title, description, shouldPublish = true }: Args = {}): Promise<void> => {
+	createNewVenue = async ({ title, description }: Args = {}): Promise<void> => {
 		// // trigger add new venue
 		await this.triggerAddNewVenue();
 		//  fill in venue fields
 		await fillVenueFields({ title, description });
-		// await createVenue({ title, description });
-		// await page.fill('#titlewrap #title', title || '');
-
-		// // fill in event description
-		// if (description) {
-		// 	await page.click('#content-html');
-		// 	await page.fill('#wp-content-editor-container textarea.wp-editor-area', description);
-		// }
-		// // save venue
-		await Promise.all([page.waitForNavigation(), page.click('#publish')]);
-		// await this.saveVenue(shouldPublish);
-		// await edtrGlider.saveEvent(true);
+		// save venue
+		await this.saveVenue();
+		// wait to load venue content
 		await page.waitForSelector('#poststuff');
+	};
+
+	/**
+	 * create new venue
+	 */
+	deleteAllVenue = async (): Promise<void> => {
+		// Trash all the items in the list
+		await this.trashAll();
+		//  Goto a specific view
+		await this.goToView('Trash');
+		// Select all the items in the list
+		await this.selectAll();
+		// Select a given value in the bulk actions dropdown.
+		await this.selectBulkAction({ label: 'Delete' });
+		//Applies the bulk actions
+		await this.applyBulkAction();
+	};
+
+	/**
+	 * Set and select venue
+	 */
+	setAndSelectVenue = async (title: string): Promise<void> => {
+		await page.selectOption('select.ee-event-venue', { label: title });
 	};
 }

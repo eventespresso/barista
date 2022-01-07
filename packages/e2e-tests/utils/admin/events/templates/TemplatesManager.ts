@@ -26,13 +26,31 @@ export class TemplatesManager {
 	};
 
 	/**
+	 * Save changes in templates
+	 */
+	saveTemplatesChanges = async (): Promise<void> => {
+		// save changes from templates tab
+		await Promise.all([page.waitForNavigation(), page.click('#template_settings_save')]);
+	};
+
+	/**
 	 * select display status banner
 	 */
 	setAndSaveDisplayStatusBanner = async ({ value }: { value: string }): Promise<void> => {
 		// set display status banner
 		await page.selectOption('select#display_status_banner_single', { value });
 		// save changes from templates tab
-		await Promise.all([page.waitForNavigation(), page.click('#template_settings_save')]);
+		await this.saveTemplatesChanges();
+	};
+
+	/**
+	 * select display status banner
+	 */
+	setAndSaveDisplayVenueDetails = async ({ value }: { value: string }): Promise<void> => {
+		// set display status banner
+		await page.selectOption('select#display_venue', { value });
+		// save changes from templates tab
+		await this.saveTemplatesChanges();
 	};
 
 	/**
