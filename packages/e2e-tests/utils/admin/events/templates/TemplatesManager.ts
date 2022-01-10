@@ -25,17 +25,11 @@ export class TemplatesManager {
 		}
 	};
 
-	/**
-	 * Save changes in templates
-	 */
 	saveTemplatesChanges = async (): Promise<void> => {
 		// save changes from templates tab
 		await Promise.all([page.waitForNavigation(), page.click('#template_settings_save')]);
 	};
 
-	/**
-	 * select display status banner
-	 */
 	setAndSaveDisplayStatusBanner = async ({ value }: { value: string }): Promise<void> => {
 		// set display status banner
 		await page.selectOption('select#display_status_banner_single', { value });
@@ -43,9 +37,6 @@ export class TemplatesManager {
 		await this.saveTemplatesChanges();
 	};
 
-	/**
-	 * select display status banner
-	 */
 	setAndSaveDisplayVenueDetails = async ({ value }: { value: string }): Promise<void> => {
 		// set display status banner
 		await page.selectOption('select#display_venue', { value });
@@ -53,17 +44,11 @@ export class TemplatesManager {
 		await this.saveTemplatesChanges();
 	};
 
-	/**
-	 * set use custom display order
-	 */
 	setCustomDisplayOrder = async ({ value }: { value: string }): Promise<void> => {
 		// set display status banner
 		await page.selectOption('select#EED_Events_Single_use_sortable_display_order', { value });
 	};
 
-	/**
-	 * get event single sortable attribute
-	 */
 	getEventSingleSortableAttribute = async (attribute: string): Promise<string> => {
 		return await (await page.$('ul#event-single-sortable-js')).getAttribute(attribute);
 	};
