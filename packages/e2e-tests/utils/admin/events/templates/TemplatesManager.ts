@@ -75,4 +75,8 @@ export class TemplatesManager {
 	getEventListingUrl = async (): Promise<string> => {
 		return await (await page.$('.metabox-holder :nth-match(table, 2) tbody > tr #event_listings_url')).innerText();
 	};
+
+	setEventSlug = async (slug: string): Promise<void> => {
+		await page.fill('#event_cpt_slug', slug);
+	};
 }
