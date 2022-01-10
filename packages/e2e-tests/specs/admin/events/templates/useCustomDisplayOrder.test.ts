@@ -18,7 +18,7 @@ afterAll(async () => {
 	await capture?.stop();
 });
 
-describe('Display status banner test', () => {
+describe('Use custom display order test', () => {
 	it('Set use custom display order to No', async () => {
 		// set custom display order to "No"
 		await templatesManager.setCustomDisplayOrder({ value: '0' });

@@ -9,9 +9,6 @@ type Args = {
 const wpListTable = new WPListTable();
 
 export class CategoryManager extends WPListTable {
-	/**
-	 * remove all category
-	 */
 	deleteAllCategory = async (): Promise<void> => {
 		// select all category list
 		await wpListTable.selectAll();
@@ -42,9 +39,6 @@ export class CategoryManager extends WPListTable {
 		return { countBeforeDeleteAllCategory, countCategoryAfterDeleteAll };
 	};
 
-	/**
-	 * save new category
-	 */
 	saveNewCategory = async ({ title, description }: Args): Promise<void> => {
 		// fill in category title
 		await page.fill('#category_name', title);
@@ -54,27 +48,18 @@ export class CategoryManager extends WPListTable {
 		await Promise.all([page.waitForNavigation(), page.click('input[type="submit"][value="Save and Close"]')]);
 	};
 
-	/**
-	 * go to add new category
-	 */
 	gotoAddNewCategory = async (): Promise<void> => {
 		const linkAddCategpry = await page.$(`a:has-text("Add New Category")`);
 		const hrefAddCategpry = await linkAddCategpry.getAttribute('href');
 		await Promise.all([page.waitForNavigation(), page.goto(hrefAddCategpry)]);
 	};
 
-	/**
-	 * go to category tab
-	 */
 	gotoCategories = async (): Promise<void> => {
 		const linkCategories = await page.$(`.nav-tab-wrapper a:has-text("Categories")`);
 		const hrefCategories = await linkCategories.getAttribute('href');
 		await Promise.all([page.waitForNavigation(), page.goto(hrefCategories)]);
 	};
 
-	/**
-	 * Create new category
-	 */
 	createNewCategory = async ({
 		title,
 		description,
