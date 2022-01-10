@@ -21,18 +21,25 @@ describe('Event listings URL test', () => {
 	let getEventSlug: string;
 
 	it('Get the base url', async () => {
+		// Get base URL at templates tab event listing pages
 		getBaseUrl = await templatesManager.getBaseUrl();
+		// assert base url if it is not empty
 		expect(getBaseUrl).toBeTruthy();
 	});
 
 	it('Get the url slug', async () => {
+		// Get event slug at templates tab event listing pages
 		getEventSlug = await templatesManager.getEventSlug();
+		// assert event slug if it is not empty
 		expect(getEventSlug).toBeTruthy();
 	});
 
 	it('Get event listing url', async () => {
+		// Get event listing URL at templates tab event listing pages
 		const getEventListingUrl = await templatesManager.getEventListingUrl();
+		// compose url and compare to event listing url
 		const toCompareUrl = `${getBaseUrl.trim()}${getEventSlug && getEventSlug.trim()}/`;
+		// assert compose url if equal to event listing url
 		expect(getEventListingUrl).toBe(toCompareUrl);
 	});
 });
