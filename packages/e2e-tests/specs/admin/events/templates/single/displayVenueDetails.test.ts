@@ -1,13 +1,13 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { Goto, TemplatesManager, EDTRGlider, EventsListSurfer, createNewEvent, VenuesManager } from '@e2eUtils/admin';
-import { eventVenueData, eventData } from '../../../shared/data';
+import { eventVenueData, eventData } from '../../../../shared/data';
 
 const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();
 const venuesManager = new VenuesManager();
 const edtrGlider = new EDTRGlider();
 
-const namespace = 'templates-display-venue-details';
+const namespace = 'templates-single-display-venue-details';
 let capture: PageVideoCapture;
 
 beforeAll(async () => {

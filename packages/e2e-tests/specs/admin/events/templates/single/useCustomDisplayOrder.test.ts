@@ -3,7 +3,7 @@ import { Goto, TemplatesManager } from '@e2eUtils/admin';
 
 const templatesManager = new TemplatesManager();
 
-const namespace = 'templates-use-custom-display-order';
+const namespace = 'templates-single-use-custom-display-order';
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
