@@ -52,4 +52,27 @@ export class TemplatesManager {
 	getEventSingleSortableAttribute = async (attribute: string): Promise<string> => {
 		return await (await page.$('ul#event-single-sortable-js')).getAttribute(attribute);
 	};
+
+	/**
+	 * Get base URL at templates tab event listing pages
+	 */
+	getBaseUrl = async (): Promise<string> => {
+		return await (await page.$('.metabox-holder :nth-match(table, 2) tbody > tr:nth-child(2) td p')).innerText();
+	};
+
+	/**
+	 * Get event slug at templates tab event listing pages
+	 */
+	getEventSlug = async (): Promise<string> => {
+		return await (
+			await page.$('.metabox-holder :nth-match(table, 2) tbody > tr:nth-child(2) td p #event_cpt_slug')
+		).getAttribute('value');
+	};
+
+	/**
+	 * Get event listing URL at templates tab event listing pages
+	 */
+	getEventListingUrl = async (): Promise<string> => {
+		return await (await page.$('.metabox-holder :nth-match(table, 2) tbody > tr #event_listings_url')).innerText();
+	};
 }
