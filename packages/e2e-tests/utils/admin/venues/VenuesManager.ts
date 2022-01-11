@@ -1,4 +1,17 @@
-import { fillEventFields as fillVenueFields, Args, WPListTable } from '@e2eUtils/admin';
+import {
+	fillEventFields as fillVenueFields,
+	Args,
+	WPListTable,
+	Goto,
+	createNewEvent,
+	EDTRGlider,
+} from '@e2eUtils/admin';
+
+const edtrGlider = new EDTRGlider();
+
+interface ArgsVenue extends Args {
+	venueTitle: string;
+}
 export class VenuesManager extends WPListTable {
 	getTotalPagePagination = async () => {
 		// get how many set of page in pagination
@@ -44,5 +57,58 @@ export class VenuesManager extends WPListTable {
 
 	setAndSelectVenue = async (title: string): Promise<void> => {
 		await page.selectOption('select.ee-event-venue', { label: title });
+	};
+
+	// this function is to delete all venues first then create one and return the before and after count venue
+	processToCreateNewVenue = async ({ title, description }: Args = {}): Promise<{
+		countAfterCreate: number;
+		countBeforeCreate: number;
+		addedVenue: number;
+	}> => {
+		await Goto.venuesPage();
+		// create new venue
+		await this.deleteAllVenue();
+		// count venue before create one
+		const countBeforeCreate = await this.getViewCount('View All Venues');
+		// create new venue
+		await this.createNewVenue({ title, description });
+		// go to venue main page
+		await Goto.venuesPage();
+		// count venue after create one
+		const countAfterCreate = await this.getViewCount('View All Venues');
+		// count added venue
+		const addedVenue = countAfterCreate - countBeforeCreate;
+
+		return { countAfterCreate, countBeforeCreate, addedVenue };
+	};
+
+	// this function is to create new event first then assign the venue that already created then return before and after count event
+	processToAssignVenueAtEvent = async ({
+		title,
+		description,
+		shouldPublish,
+		venueTitle,
+	}: ArgsVenue): Promise<{
+		countAfterCreate: number;
+		countBeforeCreate: number;
+		addedVenue: number;
+	}> => {
+		await Goto.eventsListPage();
+		//count event before create one
+		const countBeforeCreate = await this.getViewCount('View All Events');
+		// fill in event fields and not published yet until venue is not selected
+		await createNewEvent({ title, description, shouldPublish });
+		// set and select venue for event
+		await this.setAndSelectVenue(venueTitle);
+		// now save the new event
+		await edtrGlider.saveEvent(true);
+		// go to event main page
+		await Goto.eventsListPage();
+		//count event after created one
+		const countAfterCreate = await this.getViewCount('View All Events');
+		// count added event
+		const addedVenue = countAfterCreate - countBeforeCreate;
+
+		return { countAfterCreate, countBeforeCreate, addedVenue };
 	};
 }
