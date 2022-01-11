@@ -1,15 +1,20 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
-import { Goto, TemplatesManager, VenuesManager } from '@e2eUtils/admin';
+import { Goto, TemplatesManager, EDTRGlider, EventsListSurfer, createNewEvent, VenuesManager } from '@e2eUtils/admin';
 import { eventVenueData, eventData } from '../../../../shared/data';
 
 const templatesManager = new TemplatesManager();
+const eventsListSurfer = new EventsListSurfer();
 const venuesManager = new VenuesManager();
+const edtrGlider = new EDTRGlider();
 
 const namespace = 'templates-single-display-venue-details';
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	await Goto.eventsListPage();
+	// Remove all events
+	await eventsListSurfer.cleanUpEvents();
 });
 
 afterAll(async () => {
@@ -18,28 +23,41 @@ afterAll(async () => {
 
 describe('Display venue details test', () => {
 	it('Create new venue', async () => {
-		// this function is to delete all venues first then create one and return the before and after count venue
-		const { countAfterCreate, countBeforeCreate, addedVenue } = await venuesManager.processToCreateNewVenue(
-			eventVenueData
-		);
+		await Goto.venuesPage();
+		// create new venue
+		await venuesManager.deleteAllVenue();
+		// count venue before create one
+		const countBeforeCreate = await venuesManager.getViewCount('View All Venues');
+		// create new venue
+		await venuesManager.createNewVenue(eventVenueData);
+		// go to venue main page
+		await Goto.venuesPage();
+		// count venue after create one
+		const countAfterCreate = await venuesManager.getViewCount('View All Venues');
+		// count added venue
+		const addedVenue = countAfterCreate - countBeforeCreate;
 		// assert added venue
 		expect(countAfterCreate).toBe(countBeforeCreate + addedVenue);
-		expect(addedVenue).not.toBe(0);
 	});
 
 	it('Create new event and set created venue', async () => {
-		// this function is to create new event first then assign the venue that already created then return before and after count event
-		const { countAfterCreate, countBeforeCreate, addedEvent, getVenueTitle } =
-			await venuesManager.processToAssignVenueAtEvent({
-				...eventData.upcoming,
-				shouldPublish: false,
-				venueTitle: eventVenueData.title,
-			});
+		await Goto.eventsListPage();
+		//count event before create one
+		const countBeforeCreate = await venuesManager.getViewCount('View All Events');
+		// fill in event fields and not published yet until venue is not selected
+		await createNewEvent({ ...eventData.upcoming, shouldPublish: false });
+		// set and select venue for event
+		await venuesManager.setAndSelectVenue(eventVenueData.title);
+		// now save the new event
+		await edtrGlider.saveEvent(true);
+		// go to event main page
+		await Goto.eventsListPage();
+		//count event after created one
+		const countAfterCreate = await venuesManager.getViewCount('View All Events');
+		// count added event
+		const addedVenue = countAfterCreate - countBeforeCreate;
 		// assert added event
-		expect(countAfterCreate).toBe(countBeforeCreate + addedEvent);
-		// assert venue title at first event
-		expect(eventVenueData.title).toBe(getVenueTitle);
-		expect(countAfterCreate).not.toBe(0);
+		expect(countAfterCreate).toBe(countBeforeCreate + addedVenue);
 	});
 
 	it('Set display venue details to "Yes" and check if venue title display at frontend single event', async () => {
