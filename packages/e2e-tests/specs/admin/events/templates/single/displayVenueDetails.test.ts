@@ -24,6 +24,7 @@ describe('Display venue details test', () => {
 		);
 		// assert added venue
 		expect(countAfterCreate).toBe(countBeforeCreate + addedVenue);
+		expect(addedVenue).not.toBe(0);
 	});
 
 	it('Create new event and set created venue', async () => {
@@ -38,6 +39,7 @@ describe('Display venue details test', () => {
 		expect(countAfterCreate).toBe(countBeforeCreate + addedEvent);
 		// assert venue title at first event
 		expect(eventVenueData.title).toBe(getVenueTitle);
+		expect(countAfterCreate).not.toBe(0);
 	});
 
 	it('Set display venue details to "Yes" and check if venue title display at frontend single event', async () => {
