@@ -31,12 +31,17 @@ export class VenuesManager extends WPListTable {
 		await Promise.all([page.waitForNavigation(), page.click('#postbox-container-1 #publish')]);
 	};
 
-	createNewVenue = async ({ title, description }: Args = {}): Promise<void> => {
-		await this.triggerAddNewVenue();
-		await fillVenueFields({ title, description });
-		await this.saveVenue();
-		// wait to load venue content
-		await page.waitForSelector('#poststuff');
+	createNewVenue = async ({ title, description }: Args = {}): Promise<number> => {
+		try {
+			await this.triggerAddNewVenue();
+			await fillVenueFields({ title, description });
+			await this.saveVenue();
+			// wait to load venue content
+			await page.waitForSelector('#poststuff');
+			return 1;
+		} catch (e) {
+			return 0;
+		}
 	};
 
 	/**
@@ -70,14 +75,12 @@ export class VenuesManager extends WPListTable {
 		await this.deleteAllVenue();
 		// count venue before create one
 		const countBeforeCreate = await this.getViewCount('View All Venues');
-		// create new venue
-		await this.createNewVenue({ title, description });
+		// create new venue and count added venue
+		const addedVenue = await this.createNewVenue({ title, description });
 		// go to venue main page
 		await Goto.venuesPage();
 		// count venue after create one
 		const countAfterCreate = await this.getViewCount('View All Venues');
-		// count added venue
-		const addedVenue = countAfterCreate - countBeforeCreate;
 
 		return { countAfterCreate, countBeforeCreate, addedVenue };
 	};
@@ -91,24 +94,43 @@ export class VenuesManager extends WPListTable {
 	}: ArgsVenue): Promise<{
 		countAfterCreate: number;
 		countBeforeCreate: number;
-		addedVenue: number;
+		addedEvent: number;
+		getVenueTitle: string;
 	}> => {
 		await Goto.eventsListPage();
+		let addedEvent: number = 0;
 		//count event before create one
-		const countBeforeCreate = await this.getViewCount('View All Events');
-		// fill in event fields and not published yet until venue is not selected
-		await createNewEvent({ title, description, shouldPublish });
-		// set and select venue for event
-		await this.setAndSelectVenue(venueTitle);
-		// now save the new event
-		await edtrGlider.saveEvent(true);
+		const countBeforeCreate = await this.goToViewAndCount('View All Events');
+		if (!countBeforeCreate) {
+			// fill in event fields and not published yet until venue is not selected
+			await createNewEvent({ title, description, shouldPublish });
+			// set and select venue for event
+			await this.setAndSelectVenue(venueTitle);
+			// now save the new event
+			await edtrGlider.saveEvent(true);
+			// add plus one after created one event
+			addedEvent = 1;
+		} else {
+			// get the first event
+			const firstItem = await this.getFirstListItem();
+			// go to view action to check the venue details
+			const restoreLink = await this.getItemActionLinkByText(firstItem, 'Edit');
+			await page.goto(restoreLink);
+			// set and select venue for event
+			await this.setAndSelectVenue(venueTitle);
+			// now save the new event
+			await edtrGlider.saveEvent(true);
+		}
+
 		// go to event main page
 		await Goto.eventsListPage();
 		//count event after created one
-		const countAfterCreate = await this.getViewCount('View All Events');
-		// count added event
-		const addedVenue = countAfterCreate - countBeforeCreate;
+		const countAfterCreate = await this.goToViewAndCount('View All Events');
+		// get the first event
+		const firstItem = await this.getFirstListItem();
+		// get venue title at first event list
+		const getVenueTitle = await (await firstItem.$('.column-venue')).innerText();
 
-		return { countAfterCreate, countBeforeCreate, addedVenue };
+		return { countAfterCreate, countBeforeCreate, addedEvent, getVenueTitle };
 	};
 }

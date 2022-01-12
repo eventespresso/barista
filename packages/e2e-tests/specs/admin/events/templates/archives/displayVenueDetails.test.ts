@@ -1,9 +1,8 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
-import { Goto, TemplatesManager, EventsListSurfer, VenuesManager } from '@e2eUtils/admin';
+import { TemplatesManager, VenuesManager } from '@e2eUtils/admin';
 import { eventVenueData, eventData } from '../../../../shared/data';
 
 const templatesManager = new TemplatesManager();
-const eventsListSurfer = new EventsListSurfer();
 const venuesManager = new VenuesManager();
 
 const namespace = 'templates-single-display-venue-details';
@@ -11,9 +10,6 @@ let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
-	await Goto.eventsListPage();
-	// Remove all events
-	await eventsListSurfer.cleanUpEvents();
 });
 
 afterAll(async () => {
@@ -32,13 +28,16 @@ describe('Display venue details test', () => {
 
 	it('Create new event and set created venue', async () => {
 		// this function is to create new event first then assign the venue that already created then return before and after count event
-		const { countAfterCreate, countBeforeCreate, addedVenue } = await venuesManager.processToAssignVenueAtEvent({
-			...eventData.upcoming,
-			shouldPublish: false,
-			venueTitle: eventVenueData.title,
-		});
+		const { countAfterCreate, countBeforeCreate, addedEvent, getVenueTitle } =
+			await venuesManager.processToAssignVenueAtEvent({
+				...eventData.upcoming,
+				shouldPublish: false,
+				venueTitle: eventVenueData.title,
+			});
 		// assert added event
-		expect(countAfterCreate).toBe(countBeforeCreate + addedVenue);
+		expect(countAfterCreate).toBe(countBeforeCreate + addedEvent);
+		// assert venue title at first event
+		expect(eventVenueData.title).toBe(getVenueTitle);
 	});
 
 	it('Set display venue details to "Yes" and check if venue title display at evetn listing url page', async () => {
