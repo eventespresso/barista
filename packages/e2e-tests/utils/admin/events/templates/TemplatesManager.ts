@@ -20,15 +20,17 @@ export class TemplatesManager extends WPListTable {
 	getSelectedStatusBanner = async ({ value = false, text = false }): Promise<string> => {
 		// select the option for registration default status
 		const wrapper = await page.$('select#display_status_banner_single option[selected="selected"]');
-
+		let resultData: string;
 		// if value is equal to true return the value of selected option
 		if (value) {
-			return await wrapper.getAttribute('value');
+			resultData = await wrapper.getAttribute('value');
 		}
 		// if text is equal to true return the innertext of selected option
 		if (text) {
-			return await wrapper.innerText();
+			resultData = await wrapper.innerText();
 		}
+
+		return resultData.trim();
 	};
 
 	saveTemplatesChanges = async (): Promise<void> => {
@@ -98,7 +100,6 @@ export class TemplatesManager extends WPListTable {
 		// set display status banner to yes
 		await this.setAndSaveDisplayStatusBanner({ status, single });
 		// get selected display status banner value
-		const getSelectedValue = await this.getSelectedStatusBanner({ text: true });
-		return getSelectedValue.trim();
+		return await this.getSelectedStatusBanner({ text: true });
 	};
 }

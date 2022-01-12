@@ -12,10 +12,7 @@ let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
-	// Remove all event from link actions (View all events, Draft, Trash)
 	await Goto.eventsListPage();
-	// Remove all event from link actions (View all events, Draft, Trash)
-	await eventsListSurfer.cleanUpEvents();
 	//  go to templates tab
 	await templatesManager.gotoTemplates();
 });
@@ -33,13 +30,17 @@ describe('Display status banner - single test', () => {
 	});
 
 	it('Create new sample event', async () => {
-		// create sample upcoming event
-		await createNewEvent(eventData.upcoming);
 		await Goto.eventsListPage();
 		// count event from view all event link action
 		const countEvent = await eventsListSurfer.getViewCount('View All Events');
+		if (!countEvent) {
+			await createNewEvent(eventData.upcoming);
+			await Goto.eventsListPage();
+		}
+		// count event from view all event link action after created one
+		const countEventAfter = await eventsListSurfer.getViewCount('View All Events');
 		// assert count from view all event link
-		expect(countEvent).toBeTruthy();
+		expect(countEventAfter).toBeTruthy();
 	});
 
 	it('Check if banner exist', async () => {
