@@ -16,7 +16,7 @@ afterAll(async () => {
 	await capture?.stop();
 });
 
-describe('Display venue details test', () => {
+describe('Display venue details - single test', () => {
 	it('Create new venue', async () => {
 		// this function is to delete all venues first then create one and return the before and after count venue
 		const { countAfterCreate, countBeforeCreate, addedVenue } = await venuesManager.processToCreateNewVenue(
