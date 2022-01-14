@@ -3,7 +3,7 @@ import { Goto, TemplatesManager } from '@e2eUtils/admin';
 
 const templatesManager = new TemplatesManager();
 
-const namespace = 'templates-event-listing-url';
+const namespace = 'templates-archives-event-listing-url';
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
