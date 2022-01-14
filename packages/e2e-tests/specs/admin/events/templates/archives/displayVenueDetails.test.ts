@@ -1,5 +1,5 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
-import { Goto, TemplatesManager, VenuesManager } from '@e2eUtils/admin';
+import { TemplatesManager, VenuesManager } from '@e2eUtils/admin';
 import { eventVenueData, eventData } from '../../../../shared/data';
 
 const templatesManager = new TemplatesManager();
@@ -42,18 +42,17 @@ describe('Display venue details test', () => {
 		expect(countAfterCreate).not.toBe(0);
 	});
 
-	it('Set display venue details to "Yes" and check if venue title display at frontend single event', async () => {
+	it('Set display venue details to "Yes" and check if venue title display at evetn listing url page', async () => {
 		//  go to templates tab
 		await templatesManager.gotoTemplates();
 		// set and select display venue details to 'Yes'
 		await templatesManager.setAndSaveDisplayVenueDetails({ value: '1' });
-		// go to event main page
-		await Goto.eventsListPage();
-		// get the first event
-		const firstItem = await venuesManager.getFirstListItem();
-		// go to view action to check the venue details
-		const restoreLink = await venuesManager.getItemActionLinkByText(firstItem, 'View');
-		await page.goto(restoreLink);
+		//  go to templates tab
+		await templatesManager.gotoTemplates();
+		// Get event listing URL at templates tab event listing pages
+		const getEventListingUrl = await templatesManager.getEventListingUrl();
+		// go to event listing url
+		await page.goto(getEventListingUrl);
 		// check if venue title is exist at frontend single event
 		const checkVenueContainer = await (await page.$('.espresso-venue-dv a span')).innerText();
 		// assert venue title if exist
