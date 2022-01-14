@@ -11,11 +11,11 @@ const namespace = 'templates-archives-display-description';
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
-	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	// capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 });
 
 afterAll(async () => {
-	await capture?.stop();
+	// await capture?.stop();
 });
 
 describe('Display description - archives test', () => {
@@ -28,23 +28,17 @@ describe('Display description - archives test', () => {
 	let getFirstEventDescription: string;
 
 	it('Create new venue if there is no existing one', async () => {
-		// go to venue main page
-		await Goto.venuesPage();
-		// count venue if there is existing one or not
-		let countVenue = await venuesManager.goToViewAndCount('View All Venues');
-		// if there is no existing venue create one else do nothing
-		if (!countVenue) {
-			// create new venue and count added venue
-			await venuesManager.createNewVenue(eventVenueData);
-			// go to venue main page
-			await Goto.venuesPage();
-			countVenue = await venuesManager.goToViewAndCount('View All Venues');
-		}
+		// this function is to delete all venues first then create one and return the before and after count venue
+		const { countAfterCreate, countBeforeCreate, addedVenue } = await venuesManager.processToCreateNewVenue(
+			eventVenueData
+		);
 		// get the first venue
 		const firstItem = await venuesManager.getFirstListItem();
 		getFirstVenueTitle = await venuesManager.getVenueName(firstItem);
 
-		expect(countVenue).not.toBe(0);
+		// assert added venue
+		expect(countAfterCreate).toBe(countBeforeCreate + addedVenue);
+		expect(addedVenue).not.toBe(0);
 		expect(getFirstVenueTitle).toBeTruthy();
 	});
 
