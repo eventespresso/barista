@@ -104,11 +104,6 @@ export class VenuesManager extends WPListTable {
 		if (!countBeforeCreate) {
 			// fill in event fields and not published yet until venue is not selected
 			await createNewEvent({ title, description, shouldPublish });
-			// set and select venue for event
-			await this.setAndSelectVenue(venueTitle);
-			// now save the new event
-			await edtrGlider.saveEvent(true);
-			// add plus one after created one event
 			addedEvent = 1;
 		} else {
 			// get the first event
@@ -116,11 +111,12 @@ export class VenuesManager extends WPListTable {
 			// go to view action to check the venue details
 			const restoreLink = await this.getItemActionLinkByText(firstItem, 'Edit');
 			await page.goto(restoreLink);
-			// set and select venue for event
-			await this.setAndSelectVenue(venueTitle);
-			// now save the new event
-			await edtrGlider.saveEvent(true);
 		}
+
+		// set and select venue for event
+		await this.setAndSelectVenue(venueTitle);
+		// now save the new event
+		await edtrGlider.saveEvent(true);
 
 		// go to event main page
 		await Goto.eventsListPage();
