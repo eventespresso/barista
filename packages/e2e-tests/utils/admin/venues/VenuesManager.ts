@@ -5,12 +5,10 @@ import {
 	Goto,
 	createNewEvent,
 	EDTRGlider,
-	EventsListSurfer,
 } from '@e2eUtils/admin';
 import { ElementHandle } from 'packages/e2e-tests/types';
 
 const edtrGlider = new EDTRGlider();
-const eventsListSurfer = new EventsListSurfer();
 
 interface ArgsVenue extends Args {
 	venueTitle: string;
@@ -31,7 +29,7 @@ export class VenuesManager extends WPListTable {
 	 * Get the name of an venue from <tr /> handle
 	 */
 	getVenueName = async (item: ElementHandle): Promise<string> => {
-		return await eventsListSurfer.getEventName(item);
+		return await (await item.$('td.column-name a.row-title')).innerText();
 	};
 
 	/**
