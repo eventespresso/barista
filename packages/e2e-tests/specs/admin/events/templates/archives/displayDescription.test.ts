@@ -25,6 +25,27 @@ describe('Display description - archives test', () => {
 	// this variable is to assert first event description into archive
 	let getFirstEventDescription: string;
 
+	// process to set display description and return selected status for checking
+	const processToSetDisplayDescription = async ({
+		status,
+	}: {
+		status: string;
+	}): Promise<{
+		getSelectedValue: string;
+	}> => {
+		//  go to templates tab
+		await templatesManager.gotoTemplates();
+		// set display description to "full description" and save
+		await templatesManager.setAndSaveDisplayDescription({ status });
+		// get the selected display description after selecting one
+		const getSelectedValue = await templatesManager.getSelectedDisplayDescription();
+		// go to event listing url
+		const getEventListingUrl = await templatesManager.getEventListingUrl();
+		await page.goto(getEventListingUrl);
+
+		return { getSelectedValue };
+	};
+
 	it('Create new event if there is no existing one', async () => {
 		await Goto.eventsListPage();
 		//count event if there is existing one or not
@@ -73,15 +94,8 @@ describe('Display description - archives test', () => {
 	});
 
 	it('Set display description to "full description"', async () => {
-		//  go to templates tab
-		await templatesManager.gotoTemplates();
-		// set display description to "full description" and save
-		await templatesManager.setAndSaveDisplayDescription({ status: '2' });
-		// get the selected display description after selecting one
-		const getSelectedValue = await templatesManager.getSelectedDisplayDescription();
-		// go to event listing url
-		const getEventListingUrl = await templatesManager.getEventListingUrl();
-		await page.goto(getEventListingUrl);
+		// process to set display description and return selected status for checking
+		const { getSelectedValue } = await processToSetDisplayDescription({ status: '2' });
 		// get event description at archive link
 		const getDescriptionAtArchiveLink = await (
 			await page.$(`.event-content p:has-text("${getFirstEventDescription}")`)
@@ -95,15 +109,8 @@ describe('Display description - archives test', () => {
 
 	it('Set display description to "excerpt (short desc)"', async () => {
 		await Goto.eventsListPage();
-		// go to templates tab
-		await templatesManager.gotoTemplates();
-		// set display description to "excerpt (short desc)" and save
-		await templatesManager.setAndSaveDisplayDescription({ status: '1' });
-		// get the selected display description after selecting one
-		const getSelectedValue = await templatesManager.getSelectedDisplayDescription();
-		// go to event listing url
-		const getEventListingUrl = await templatesManager.getEventListingUrl();
-		await page.goto(getEventListingUrl);
+		// process to set display description and return selected status for checking
+		const { getSelectedValue } = await processToSetDisplayDescription({ status: '1' });
 		// check and get excerpt value
 		const getExcerptText = await (
 			await page.$(`.event-content a:has-text("Continue reading ${getFirstEventStatus}${getFirstEventTitle}")`)
@@ -117,14 +124,10 @@ describe('Display description - archives test', () => {
 
 	it('Set display description to "none"', async () => {
 		await Goto.eventsListPage();
-		// go to templates tab
-		await templatesManager.gotoTemplates();
-		// set display description to "none" and save
-		await templatesManager.setAndSaveDisplayDescription({ status: '0' });
-		// get the selected display description after selecting one
-		const getSelectedValue = await templatesManager.getSelectedDisplayDescription();
+		// process to set display description and return selected status for checking
+		const { getSelectedValue } = await processToSetDisplayDescription({ status: '0' });
 		// get event description at archive link suppose to be null
-		const getDescriptionAtArchiveLink = await page?.$(`.event-content > p`);
+		const getDescriptionAtArchiveLink = await page?.$(`.event-content p:has-text("${getFirstEventDescription}")`);
 
 		// assert if selected display description is "none"
 		expect(getSelectedValue).toBe('none');
