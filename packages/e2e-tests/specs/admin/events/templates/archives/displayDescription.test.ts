@@ -10,11 +10,11 @@ const namespace = 'templates-archives-display-description';
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
-	// capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 });
 
 afterAll(async () => {
-	// await capture?.stop();
+	await capture?.stop();
 });
 
 describe('Display description - archives test', () => {
