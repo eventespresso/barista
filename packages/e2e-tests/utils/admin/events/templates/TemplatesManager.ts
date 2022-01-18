@@ -18,7 +18,7 @@ export class TemplatesManager extends WPListTable {
 	 * Get selected status banner at templates section
 	 */
 	getSelectedStatusBanner = async ({ value = false, text = false }): Promise<string> => {
-		// select the option for registration default status
+		// get selected option for status banner
 		const wrapper = await page.$('select#display_status_banner_single option[selected="selected"]');
 		let resultData: string;
 		// if value is equal to true return the value of selected option
@@ -31,6 +31,18 @@ export class TemplatesManager extends WPListTable {
 		}
 
 		return resultData.trim();
+	};
+
+	/**
+	 * Get selected display description at templates section
+	 */
+	getSelectedDisplayDescription = async (): Promise<string> => {
+		// get selected option for display description
+		const resultText = await (
+			await page.$('select#EED_Events_Archive_display_description option[selected="selected"]')
+		).innerText();
+
+		return resultText.trim();
 	};
 
 	saveTemplatesChanges = async (): Promise<void> => {
@@ -46,6 +58,12 @@ export class TemplatesManager extends WPListTable {
 			// set display status banner at archive settings
 			await page.selectOption('select#EED_Events_Archive_display_status_banner', { value: status });
 		}
+		// save changes from templates tab
+		await this.saveTemplatesChanges();
+	};
+
+	setAndSaveDisplayDescription = async ({ status }: { status: string }): Promise<void> => {
+		await page.selectOption('select#EED_Events_Archive_display_description', { value: status });
 		// save changes from templates tab
 		await this.saveTemplatesChanges();
 	};

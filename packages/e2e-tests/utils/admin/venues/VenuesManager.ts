@@ -6,6 +6,7 @@ import {
 	createNewEvent,
 	EDTRGlider,
 } from '@e2eUtils/admin';
+import { ElementHandle } from 'packages/e2e-tests/types';
 
 const edtrGlider = new EDTRGlider();
 
@@ -22,6 +23,13 @@ export class VenuesManager extends WPListTable {
 
 	triggerAddNewVenue = async (): Promise<void> => {
 		await Promise.all([page.waitForNavigation(), page.click('#add-new-venue')]);
+	};
+
+	/**
+	 * Get the name of an venue from <tr /> handle
+	 */
+	getVenueName = async (item: ElementHandle): Promise<string> => {
+		return await (await item.$('td.column-name a.row-title')).innerText();
 	};
 
 	/**

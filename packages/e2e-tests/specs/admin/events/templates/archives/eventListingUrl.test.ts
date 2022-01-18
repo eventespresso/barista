@@ -16,7 +16,7 @@ afterAll(async () => {
 	await capture?.stop();
 });
 
-describe('Event listings URL test', () => {
+describe('Event listings URL - archives test', () => {
 	let getBaseUrl: string;
 	let getEventSlug: string;
 
