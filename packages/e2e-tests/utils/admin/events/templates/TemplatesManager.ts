@@ -69,8 +69,30 @@ export class TemplatesManager extends WPListTable {
 	};
 
 	setAndSaveDisplayVenueDetails = async ({ value }: { value: string }): Promise<void> => {
-		// set display status banner
+		// set display venue details at archive settings
 		await page.selectOption('select#display_venue', { value });
+		// save changes from templates tab
+		await this.saveTemplatesChanges();
+	};
+
+	/**
+	 * Get selected display ticket selector at templates archive section
+	 */
+	getSelectedDisplayTicketSelector = async (): Promise<string> => {
+		// get selected option for display description
+		const resultText = await (
+			await page.$('select#EED_Events_Archive_display_ticket_selector option[selected="selected"]')
+		).innerText();
+
+		return resultText.trim();
+	};
+
+	/**
+	 * set and save display ticket selector at template archive section
+	 */
+	setAndSaveDisplayTicketSelector = async ({ value }: { value: string }): Promise<void> => {
+		// set display ticket selector at archive settings
+		await page.selectOption('select#EED_Events_Archive_display_ticket_selector', { value });
 		// save changes from templates tab
 		await this.saveTemplatesChanges();
 	};
