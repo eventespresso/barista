@@ -97,13 +97,50 @@ export class TemplatesManager extends WPListTable {
 		await this.saveTemplatesChanges();
 	};
 
-	setCustomDisplayOrder = async ({ value }: { value: string }): Promise<void> => {
-		// set display status banner
-		await page.selectOption('select#EED_Events_Single_use_sortable_display_order', { value });
+	// set custom display order and get custom order classname value
+	setCustomDisplayOrder = async ({ value, archive }: { value: string; archive: boolean }): Promise<string> => {
+		// set custom display order
+		if (archive) {
+			await page.selectOption('select#EED_Events_Archive_use_sortable_display_order', { value });
+		} else {
+			await page.selectOption('select#EED_Events_Single_use_sortable_display_order', { value });
+		}
+
+		await this.saveTemplatesChanges();
+		// get event sortable attribute classname value
+		return await this.getEventSingleSortableAttribute({
+			attribute: 'class',
+			archive,
+		});
 	};
 
-	getEventSingleSortableAttribute = async (attribute: string): Promise<string> => {
-		return await (await page.$('ul#event-single-sortable-js')).getAttribute(attribute);
+	getSelectedCustomDisplayOrder = async ({ archive }: { archive?: boolean }): Promise<string> => {
+		let resultText: string = '';
+		if (archive) {
+			resultText = await (
+				await page.$('select#EED_Events_Archive_use_sortable_display_order option[selected="selected"]')
+			).innerText();
+		} else {
+			resultText = await (
+				await page.$('select#EED_Events_Single_use_sortable_display_order option[selected="selected"]')
+			).innerText();
+		}
+
+		return resultText.trim();
+	};
+
+	getEventSingleSortableAttribute = async ({
+		attribute,
+		archive,
+	}: {
+		attribute: string;
+		archive: boolean;
+	}): Promise<string> => {
+		if (archive) {
+			return await (await page.$('ul#event-archive-sortable-js')).getAttribute(attribute);
+		} else {
+			return await (await page.$('ul#event-single-sortable-js')).getAttribute(attribute);
+		}
 	};
 
 	/**
@@ -141,5 +178,15 @@ export class TemplatesManager extends WPListTable {
 		await this.setAndSaveDisplayStatusBanner({ status, single });
 		// get selected display status banner value
 		return await this.getSelectedStatusBanner({ text: true });
+	};
+
+	/**
+	 * this function is to set and save custom display order and return selected value and classname for custom order
+	 */
+	processToSetCustomDisplayOrder = async ({ value, archive }: { value: string; archive: boolean }) => {
+		const getClassName = await this.setCustomDisplayOrder({ value, archive });
+		const getSelectedValue = await this.getSelectedCustomDisplayOrder({ archive });
+
+		return { getClassName, getSelectedValue };
 	};
 }
