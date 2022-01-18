@@ -180,4 +180,20 @@ export class TemplatesManager extends WPListTable {
 
 		return { getClassName, getSelectedValue };
 	};
+
+	setAndSaveDisplayDatetimes = async ({ value }: { value: string }): Promise<void> => {
+		// set display datetimes
+		await page.selectOption('select#EED_Events_Archive_display_datetimes', { value });
+		// save changes from templates tab
+		await this.saveTemplatesChanges();
+	};
+
+	getSelectedDisplayDatetimes = async (): Promise<string> => {
+		// get selected option for display datetimes
+		const resultText = await (
+			await page.$('select#EED_Events_Archive_display_datetimes option[selected="selected"]')
+		).innerText();
+
+		return resultText.trim();
+	};
 }
