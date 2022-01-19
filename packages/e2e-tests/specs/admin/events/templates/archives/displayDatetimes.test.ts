@@ -20,7 +20,7 @@ afterAll(async () => {
 
 describe('Display datetimes - archive test', () => {
 	// this function is to set display datetimes and return the selected value for confirmation
-	const processToSetDisplayDatetimes = async ({
+	const setDisplayDatetimes = async ({
 		value,
 	}: {
 		value: string;
@@ -30,10 +30,6 @@ describe('Display datetimes - archive test', () => {
 		await templatesManager.gotoTemplates();
 		await templatesManager.setAndSaveDisplayDatetimes({ value });
 		const getSelectedValue = await templatesManager.getSelectedDisplayDatetimes();
-		// Get event listing URL at templates tab event listing pages
-		const getEventListingUrl = await templatesManager.getEventListingUrl();
-		// go to event listing url
-		await page.goto(getEventListingUrl);
 
 		return { getSelectedValue };
 	};
@@ -52,7 +48,8 @@ describe('Display datetimes - archive test', () => {
 	});
 
 	it('Set display datetimes to "Yes"', async () => {
-		const { getSelectedValue } = await processToSetDisplayDatetimes({ value: '1' });
+		const { getSelectedValue } = await setDisplayDatetimes({ value: '1' });
+		await templatesManager.gotoEventListing();
 		// get date time header text if exist
 		const getDatetimesHeaderText = await (await page?.$('.event-datetimes > h3')).innerText();
 
@@ -64,7 +61,8 @@ describe('Display datetimes - archive test', () => {
 
 	it('Set display datetimes to "No"', async () => {
 		await Goto.eventsListPage();
-		const { getSelectedValue } = await processToSetDisplayDatetimes({ value: '0' });
+		const { getSelectedValue } = await setDisplayDatetimes({ value: '0' });
+		await templatesManager.gotoEventListing();
 		// get date time container element if exist
 		const getDatetimesContainerElement = await page?.$('.event-datetimes');
 

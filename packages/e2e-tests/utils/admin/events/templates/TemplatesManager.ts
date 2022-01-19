@@ -157,6 +157,13 @@ export class TemplatesManager extends WPListTable {
 		return await (await page.$('.metabox-holder :nth-match(table, 2) tbody > tr #event_listings_url')).innerText();
 	};
 
+	gotoEventListing = async (): Promise<void> => {
+		// Get event listing URL at templates tab event listing pages
+		const getEventListingUrl = await this.getEventListingUrl();
+		// go to event listing url
+		await page.goto(getEventListingUrl);
+	};
+
 	setEventSlug = async (slug: string): Promise<void> => {
 		await page.fill('#event_cpt_slug', slug);
 	};
