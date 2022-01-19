@@ -100,11 +100,10 @@ export class TemplatesManager extends WPListTable {
 	// set custom display order and get custom order classname value
 	setCustomDisplayOrder = async ({ value, archive }: { value: string; archive: boolean }): Promise<string> => {
 		// set custom display order
-		if (archive) {
-			await page.selectOption('select#EED_Events_Archive_use_sortable_display_order', { value });
-		} else {
-			await page.selectOption('select#EED_Events_Single_use_sortable_display_order', { value });
-		}
+		const selectID = archive
+			? 'EED_Events_Archive_use_sortable_display_order'
+			: 'EED_Events_Single_use_sortable_display_order';
+		await page.selectOption(`select#${selectID}`, { value });
 
 		await this.saveTemplatesChanges();
 		// get event sortable attribute classname value
@@ -115,16 +114,10 @@ export class TemplatesManager extends WPListTable {
 	};
 
 	getSelectedCustomDisplayOrder = async ({ archive }: { archive?: boolean }): Promise<string> => {
-		let resultText: string = '';
-		if (archive) {
-			resultText = await (
-				await page.$('select#EED_Events_Archive_use_sortable_display_order option[selected="selected"]')
-			).innerText();
-		} else {
-			resultText = await (
-				await page.$('select#EED_Events_Single_use_sortable_display_order option[selected="selected"]')
-			).innerText();
-		}
+		const selectID = archive
+			? 'EED_Events_Archive_use_sortable_display_order'
+			: 'EED_Events_Single_use_sortable_display_order';
+		const resultText = await (await page.$(`select#${selectID} option[selected="selected"]`)).innerText();
 
 		return resultText.trim();
 	};
@@ -136,11 +129,9 @@ export class TemplatesManager extends WPListTable {
 		attribute: string;
 		archive: boolean;
 	}): Promise<string> => {
-		if (archive) {
-			return await (await page.$('ul#event-archive-sortable-js')).getAttribute(attribute);
-		} else {
-			return await (await page.$('ul#event-single-sortable-js')).getAttribute(attribute);
-		}
+		const selectID = archive ? 'event-archive-sortable-js' : 'event-single-sortable-js';
+
+		return await (await page.$(`ul#${selectID}`)).getAttribute(attribute);
 	};
 
 	/**
