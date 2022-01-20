@@ -20,7 +20,10 @@ export class DateFormatter {
 			hour12: true,
 		};
 		// format the date
-		return Intl.DateTimeFormat('en-US', intlOptions).format(date);
+		const format = Intl.DateTimeFormat('en-US', intlOptions).format(date);
+		let count = 0;
+		// extract second comma at date format
+		return format.replace(/,/g, (match) => (++count === 2 ? '' : match));
 	};
 
 	// adding days and hours in todays date

@@ -203,4 +203,21 @@ export class TemplatesManager extends WPListTable {
 
 		return resultText.trim();
 	};
+
+	setAndSaveDisplayExpiredEvents = async ({ value }: { value: string }): Promise<void> => {
+		await this.gotoTemplates();
+		// set display expired events at archive settings
+		await page.selectOption('select#EED_Events_Archive_display_expired_events', { value });
+		// save changes from templates tab
+		await this.saveTemplatesChanges();
+	};
+
+	getSelectedDisplayExpiredEvents = async (): Promise<string> => {
+		// get selected option for display expired events
+		const resultText = await (
+			await page.$('select#EED_Events_Archive_display_expired_events option[selected="selected"]')
+		).innerText();
+
+		return resultText.trim();
+	};
 }
