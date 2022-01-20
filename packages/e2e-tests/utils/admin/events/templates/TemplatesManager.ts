@@ -157,6 +157,13 @@ export class TemplatesManager extends WPListTable {
 		return await (await page.$('.metabox-holder :nth-match(table, 2) tbody > tr #event_listings_url')).innerText();
 	};
 
+	gotoEventListing = async (): Promise<void> => {
+		// Get event listing URL at templates tab event listing pages
+		const getEventListingUrl = await this.getEventListingUrl();
+		// go to event listing url
+		await page.goto(getEventListingUrl);
+	};
+
 	setEventSlug = async (slug: string): Promise<void> => {
 		await page.fill('#event_cpt_slug', slug);
 	};
@@ -179,5 +186,21 @@ export class TemplatesManager extends WPListTable {
 		const getSelectedValue = await this.getSelectedCustomDisplayOrder({ archive });
 
 		return { getClassName, getSelectedValue };
+	};
+
+	setAndSaveDisplayDatetimes = async ({ value }: { value: string }): Promise<void> => {
+		// set display datetimes
+		await page.selectOption('select#EED_Events_Archive_display_datetimes', { value });
+		// save changes from templates tab
+		await this.saveTemplatesChanges();
+	};
+
+	getSelectedDisplayDatetimes = async (): Promise<string> => {
+		// get selected option for display datetimes
+		const resultText = await (
+			await page.$('select#EED_Events_Archive_display_datetimes option[selected="selected"]')
+		).innerText();
+
+		return resultText.trim();
 	};
 }
