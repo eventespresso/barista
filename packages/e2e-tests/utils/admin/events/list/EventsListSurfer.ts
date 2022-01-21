@@ -253,4 +253,26 @@ export class EventsListSurfer extends WPListTable {
 		await this.deleteAllEventsByLink('Draft');
 		await this.deleteAllPermanentlyFromTrash();
 	};
+
+	setAndSaveEventDates = async ({
+		startDate,
+		endDate,
+		shouldPublish = true,
+	}: {
+		startDate?: string;
+		endDate?: string;
+		shouldPublish?: boolean;
+	} = {}): Promise<void> => {
+		await page.click('button#popover-trigger-7');
+		await page.fill('.date-range-picker__start-input input', startDate);
+		await page.fill('.date-range-picker__end-input input', endDate);
+		await page.click('.ee-date-time-range-picker > button');
+		if (shouldPublish) {
+			await Promise.all([page.waitForNavigation(), page.click('input#publish')]);
+		}
+	};
+
+	removeEventDatesFilter = async () => {
+		await page?.click('button.ee-filter-tag__close-btn');
+	};
 }
