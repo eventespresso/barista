@@ -53,25 +53,27 @@ describe('Display expired events - archives test', () => {
 	it('Set display expired events to "Yes"', async () => {
 		await templatesManager.setAndSaveDisplayExpiredEvents({ value: '1' });
 		const getSelected = await templatesManager.getSelectedDisplayExpiredEvents();
+		// assert selected value for expired notice, suppose to "Yes"
+		expect(getSelected).toBe('Yes');
+		// now go to the frontend to verify that expired events do actually appear
 		await templatesManager.gotoEventListing();
 		// get the element container for expired notice
 		const getExpiredNotice = await page?.$('.ee-event-expired-notice');
 		// assert element container for expired notice
 		expect(getExpiredNotice).toBeTruthy();
-		// assert selected value for expired notice, suppose to "Yes"
-		expect(getSelected).toBe('Yes');
 	});
 
 	it('Set display expired events to "No"', async () => {
 		await Goto.eventsListPage();
 		await templatesManager.setAndSaveDisplayExpiredEvents({ value: '0' });
 		const getSelected = await templatesManager.getSelectedDisplayExpiredEvents();
+		// assert selected value for expired notice, suppose to "No"
+		expect(getSelected).toBe('No');
+		// now go to the frontend to verify that expired events are no longer displayed
 		await templatesManager.gotoEventListing();
 		// get the element container for expired notice
 		const getExpiredNotice = await page?.$('.ee-event-expired-notice');
 		// assert element container for expired notice, suppose to be null
 		expect(getExpiredNotice).toBe(null);
-		// assert selected value for expired notice, suppose to "No"
-		expect(getSelected).toBe('No');
 	});
 });
