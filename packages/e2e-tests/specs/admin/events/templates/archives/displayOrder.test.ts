@@ -29,21 +29,35 @@ describe('Display order - archives test', () => {
 	});
 
 	it('Drag "dates and times" to into first list', async () => {
-		const ulElement = page.$('.ui-sortable');
-		const liElement = page.$('#datetimes');
-		const ulElementBound = await (await ulElement).boundingBox();
-		const liElementBound = await (await liElement).boundingBox();
+		const dataTransfer = await page.evaluateHandle(() => new DataTransfer());
+		await page.dispatchEvent('#datetimes', 'dragstart', { dataTransfer });
+		await page.dispatchEvent('.ui-sortable', 'drop', { dataTransfer });
 
-		await page.mouse.move(liElementBound.x, liElementBound.y - 600);
-		await page.mouse.down();
-		await page.mouse.move(ulElementBound.x, ulElementBound.y);
-		// console.log({
-		// 	xxxx: liElementBound.x - 200,
-		// 	yyyyy: liElementBound.y - 200,
-		// 	width: liElementBound.width,
-		// 	height: liElementBound.height,
-		// });
-		// console.log({ xxxx: ulElementBound.x, yyyyy: ulElementBound.y });
+		// const liElement = await page.$('#datetimes');
+		// const ulElement = await page.$('.ui-sortable');
+
+		// if (liElement && ulElement) {
+		// 	const liElementBound = await liElement.boundingBox();
+		// 	const ulElementBound = await ulElement.boundingBox();
+
+		// 	if (liElementBound && ulElementBound) {
+		// 		await page.mouse.move(liElementBound.x, liElementBound.y - 1000);
+		// 		await page.mouse.down();
+		// 		// await page.mouse.move(ulElementBound.x, ulElementBound.y);
+		// 		// await page.mouse.down();
+		// 	}
+		// }
+
+		// await page.mouse.move(liElementBound.x, liElementBound.y - 200);
+		// await page.mouse.down();
+		// await page.mouse.move(ulElementBound.x, ulElementBound.y);
+		// // console.log({
+		// // 	xxxx: liElementBound.x - 200,
+		// // 	yyyyy: liElementBound.y - 200,
+		// // 	width: liElementBound.width,
+		// // 	height: liElementBound.height,
+		// // });
+		// // console.log({ xxxx: ulElementBound.x, yyyyy: ulElementBound.y });
 
 		// await page.mouse.down();
 		await page.$('.button-primary.save');
