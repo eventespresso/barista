@@ -237,4 +237,21 @@ export class TemplatesManager extends WPListTable {
 
 		return resultText.trim();
 	};
+
+	setAndSaveShowTicketSaleInfo = async ({ value }: { value: string }): Promise<void> => {
+		await this.gotoTemplates();
+		// set show ticket sale info at ticket selector settings
+		await page.selectOption('select#ticket_selector_settings_tbl-show-ticket-sale-columns', { value });
+		// save changes from templates tab
+		await this.saveTemplatesChanges();
+	};
+
+	getSelectedShowTicketSaleInfo = async (): Promise<string> => {
+		// get selected option for show ticket sale info
+		const resultText = await (
+			await page.$('select#ticket_selector_settings_tbl-show-ticket-sale-columns option[selected="selected"]')
+		).innerText();
+
+		return resultText.trim();
+	};
 }
