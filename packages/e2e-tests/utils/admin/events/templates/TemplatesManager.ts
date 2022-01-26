@@ -1,3 +1,4 @@
+import { ElementHandle } from 'playwright-core';
 import { WPListTable } from '../../WPListTable';
 
 type StatusBannerArgs = {
@@ -277,5 +278,19 @@ export class TemplatesManager extends WPListTable {
 		).innerText();
 
 		return resultText.trim();
+	};
+
+	/**
+	 * get sold label at event listing page
+	 */
+	getSoldLabel = async (): Promise<ElementHandle<SVGElement | HTMLElement>> => {
+		return await page?.$('.tckt-slctr-tkt-details-this-ticket-sold-th span');
+	};
+
+	/**
+	 * show ticket info at event listing page
+	 */
+	showTicketDetails = async (): Promise<void> => {
+		await page.$eval('.event-tickets .tckt-slctr-tbl-tr > td', (el: any) => el.click('a.display-the-hidden'));
 	};
 }
