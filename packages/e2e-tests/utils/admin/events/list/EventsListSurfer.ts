@@ -254,6 +254,30 @@ export class EventsListSurfer extends WPListTable {
 		await this.deleteAllPermanentlyFromTrash();
 	};
 
+	removeEventDatesFilter = async () => {
+		await page?.click('button.ee-filter-tag__close-btn');
+	};
+
+	removeEventTicketDatesFilter = async () => {
+		await page?.click('#ee-entity-list-tickets button.ee-filter-tag__close-btn');
+	};
+
+	publishEventChanges = async (shouldPublish: boolean): Promise<void> => {
+		if (shouldPublish) {
+			await Promise.all([page.waitForNavigation(), page.click('input#publish')]);
+			await page.waitForSelector('#ee-event-editor');
+		}
+	};
+
+	saveEventAndTicketDatesChanges = async (): Promise<void> => {
+		await page.click('.ee-date-time-range-picker > button');
+	};
+
+	fillEventAndTicketDates = async (startDate: string, endDate: string): Promise<void> => {
+		await page.fill('.date-range-picker__start-input input', startDate);
+		await page.fill('.date-range-picker__end-input input', endDate);
+	};
+
 	setAndSaveEventDates = async ({
 		startDate,
 		endDate,
@@ -263,16 +287,24 @@ export class EventsListSurfer extends WPListTable {
 		endDate?: string;
 		shouldPublish?: boolean;
 	} = {}): Promise<void> => {
-		await page.click('button#popover-trigger-7');
-		await page.fill('.date-range-picker__start-input input', startDate);
-		await page.fill('.date-range-picker__end-input input', endDate);
-		await page.click('.ee-date-time-range-picker > button');
-		if (shouldPublish) {
-			await Promise.all([page.waitForNavigation(), page.click('input#publish')]);
-		}
+		await page.click('#ee-entity-list-datetimes button#popover-trigger-7');
+		await this.fillEventAndTicketDates(startDate, endDate);
+		await this.saveEventAndTicketDatesChanges();
+		await this.publishEventChanges(shouldPublish);
 	};
 
-	removeEventDatesFilter = async () => {
-		await page?.click('button.ee-filter-tag__close-btn');
+	setAndSaveEventTicketDates = async ({
+		startDate,
+		endDate,
+		shouldPublish = true,
+	}: {
+		startDate?: string;
+		endDate?: string;
+		shouldPublish?: boolean;
+	} = {}): Promise<void> => {
+		await page.click('#ee-entity-list-tickets button.ee-edit-calendar-date-range-btn');
+		await this.fillEventAndTicketDates(startDate, endDate);
+		await this.saveEventAndTicketDatesChanges();
+		await this.publishEventChanges(shouldPublish);
 	};
 }

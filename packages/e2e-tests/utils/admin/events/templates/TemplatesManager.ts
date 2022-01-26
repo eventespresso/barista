@@ -293,4 +293,27 @@ export class TemplatesManager extends WPListTable {
 	showTicketDetails = async (): Promise<void> => {
 		await page.$eval('.event-tickets .tckt-slctr-tbl-tr > td', (el: any) => el.click('a.display-the-hidden'));
 	};
+
+	/**
+	 * set and save for show expired tickets at ticket selector template settings
+	 */
+	setAndSaveShowExpiredTickets = async ({ value }: { value: string }): Promise<void> => {
+		await this.gotoTemplates();
+		// set show expired ticket at ticket selector settings
+		await page.selectOption('select#ticket_selector_settings_tbl-show-expired-tickets', { value });
+		// save changes from templates tab
+		await this.saveTemplatesChanges();
+	};
+
+	/**
+	 * get selected value for show expired tickets at ticket selector template settings
+	 */
+	getSelectedShowExpiredTickets = async (): Promise<string> => {
+		// get selected option for show expired ticket
+		const resultText = await (
+			await page.$('select#ticket_selector_settings_tbl-show-expired-tickets option[selected="selected"]')
+		).innerText();
+
+		return resultText.trim();
+	};
 }
