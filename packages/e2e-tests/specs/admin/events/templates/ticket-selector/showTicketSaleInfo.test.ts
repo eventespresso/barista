@@ -9,13 +9,12 @@ const namespace = 'templates-ticket-selector-show-ticket-sale-info';
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
-	// capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
-	// Remove all event from link actions (View all events, Draft, Trash)
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 	await Goto.eventsListPage();
 });
 
 afterAll(async () => {
-	// await capture?.stop();
+	await capture?.stop();
 });
 
 describe('Show ticket sale info - ticket selector test', () => {
@@ -35,32 +34,47 @@ describe('Show ticket sale info - ticket selector test', () => {
 	it('Set show ticket details to "Yes', async () => {
 		// set show ticket details to "Yes"
 		await templatesManager.setAndSaveShowTicketDetails({ value: '1' });
-		// get selected value for show ticket details
+		// get selected value for show ticket details to test show ticket sale info settings
 		const getSelectedValue = await templatesManager.getSelectedShowTicketDetails();
 		// assert selected value, suppose to be "Yes"
 		expect(getSelectedValue).toBe('Yes');
 	});
 
 	it('Set show ticket sale info to "Yes', async () => {
+		// set show ticket sale info to "Yes"
 		await templatesManager.setAndSaveShowTicketSaleInfo({ value: '1' });
+		// get selected value for show ticket sale info
 		const getSelectedValue = await templatesManager.getSelectedShowTicketSaleInfo();
-		console.log({ getSelectedValue });
+		// assert selected value suppose to be "Yes"
+		expect(getSelectedValue).toBe('Yes');
 
+		// go to event listing page
 		await templatesManager.gotoEventListing();
-		// await Promise.all([
-		// 	page.waitForLoadState(),
-		// 	page.click('.event-tickets .tckt-slctr-tbl-tr > td a.display-the-hidden'),
-		// ]);
+		// show ticket details at event listing page
+		await templatesManager.showTicketDetails();
+		// check if sold info is appear at ticket details
+		const getSoldLabel = await (await templatesManager.getSoldLabel()).innerText();
+		// assert sold label after cheking
+		expect(getSoldLabel.trim()).toBe('Sold');
+	});
 
-		// const daw = await page.$('.event-tickets .tckt-slctr-tbl-tr > td a.display-the-hidden');
-		// await daw.click();
-		await page.$eval('.event-tickets .tckt-slctr-tbl-tr > td ', (el: any) => el.click('a.display-the-hidden'));
-		const getSoldLabel = await (await page.$('.tckt-slctr-tkt-details-this-ticket-sold-th span')).innerText();
-		console.log({ getSoldLabel });
+	it('Set show ticket sale info to "No', async () => {
+		// go to main event page
+		await Goto.eventsListPage();
+		// set show ticket sale info to "Yes"
+		await templatesManager.setAndSaveShowTicketSaleInfo({ value: '0' });
+		// get selected value for show ticket sale info
+		const getSelectedValue = await templatesManager.getSelectedShowTicketSaleInfo();
+		// assert selected value suppose to be "No"
+		expect(getSelectedValue).toBe('No');
 
-		// await page.dispatchEvent('.event-tickets .tckt-slctr-tbl-tr > td a.display-the-hidden', 'click');
-
-		// await daw.click('a.display-the-hidden');
-		expect(0).toBe(0);
+		// go to event listing page
+		await templatesManager.gotoEventListing();
+		// show ticket details at event listing page
+		await templatesManager.showTicketDetails();
+		// check if sold info is appear at ticket details, suppose to be null after selecting show to 'No
+		const getSoldLabel = await templatesManager.getSoldLabel();
+		// assert sold label, suppose to be null
+		expect(getSoldLabel).toBe(null);
 	});
 });

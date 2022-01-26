@@ -10,7 +10,6 @@ let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
-	// Remove all event from link actions (View all events, Draft, Trash)
 	await Goto.eventsListPage();
 });
 
