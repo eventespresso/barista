@@ -1,3 +1,4 @@
+import { ElementHandle } from 'playwright-core';
 import { WPListTable } from '../../WPListTable';
 
 type StatusBannerArgs = {
@@ -274,6 +275,43 @@ export class TemplatesManager extends WPListTable {
 		// get selected option for show ticket sale info
 		const resultText = await (
 			await page.$('select#ticket_selector_settings_tbl-show-ticket-sale-columns option[selected="selected"]')
+		).innerText();
+
+		return resultText.trim();
+	};
+
+	/**
+	 * get sold label at event listing page
+	 */
+	getSoldLabel = async (): Promise<ElementHandle<SVGElement | HTMLElement>> => {
+		return await page?.$('.tckt-slctr-tkt-details-this-ticket-sold-th span');
+	};
+
+	/**
+	 * show ticket info at event listing page
+	 */
+	showTicketDetails = async (): Promise<void> => {
+		await page.$eval('.event-tickets .tckt-slctr-tbl-tr > td', (el: any) => el.click('a.display-the-hidden'));
+	};
+
+	/**
+	 * set and save for show expired tickets at ticket selector template settings
+	 */
+	setAndSaveShowExpiredTickets = async ({ value }: { value: string }): Promise<void> => {
+		await this.gotoTemplates();
+		// set show expired ticket at ticket selector settings
+		await page.selectOption('select#ticket_selector_settings_tbl-show-expired-tickets', { value });
+		// save changes from templates tab
+		await this.saveTemplatesChanges();
+	};
+
+	/**
+	 * get selected value for show expired tickets at ticket selector template settings
+	 */
+	getSelectedShowExpiredTickets = async (): Promise<string> => {
+		// get selected option for show expired ticket
+		const resultText = await (
+			await page.$('select#ticket_selector_settings_tbl-show-expired-tickets option[selected="selected"]')
 		).innerText();
 
 		return resultText.trim();
