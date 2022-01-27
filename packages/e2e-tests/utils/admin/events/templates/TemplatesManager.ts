@@ -188,6 +188,9 @@ export class TemplatesManager extends WPListTable {
 		return { getClassName, getSelectedValue };
 	};
 
+	/**
+	 * set and save for display datetimes at archive template settings
+	 */
 	setAndSaveDisplayDatetimes = async ({ value }: { value: string }): Promise<void> => {
 		// set display datetimes
 		await page.selectOption('select#EED_Events_Archive_display_datetimes', { value });
@@ -195,6 +198,9 @@ export class TemplatesManager extends WPListTable {
 		await this.saveTemplatesChanges();
 	};
 
+	/**
+	 * get selected value for display datetimes at archive template settings
+	 */
 	getSelectedDisplayDatetimes = async (): Promise<string> => {
 		// get selected option for display datetimes
 		const resultText = await (
@@ -204,6 +210,9 @@ export class TemplatesManager extends WPListTable {
 		return resultText.trim();
 	};
 
+	/**
+	 * set and save for display expired events at archive template settings
+	 */
 	setAndSaveDisplayExpiredEvents = async ({ value }: { value: string }): Promise<void> => {
 		await this.gotoTemplates();
 		// set display expired events at archive settings
@@ -212,6 +221,9 @@ export class TemplatesManager extends WPListTable {
 		await this.saveTemplatesChanges();
 	};
 
+	/**
+	 * get selected value for display expired events at archive template settings
+	 */
 	getSelectedDisplayExpiredEvents = async (): Promise<string> => {
 		// get selected option for display expired events
 		const resultText = await (
@@ -221,6 +233,9 @@ export class TemplatesManager extends WPListTable {
 		return resultText.trim();
 	};
 
+	/**
+	 * set and save for show ticket details at ticket selector template settings
+	 */
 	setAndSaveShowTicketDetails = async ({ value }: { value: string }): Promise<void> => {
 		await this.gotoTemplates();
 		// set show ticket details at ticket selector settings
@@ -229,10 +244,36 @@ export class TemplatesManager extends WPListTable {
 		await this.saveTemplatesChanges();
 	};
 
+	/**
+	 * get selected value for show ticket details at ticket selector template settings
+	 */
 	getSelectedShowTicketDetails = async (): Promise<string> => {
 		// get selected option for show ticket details
 		const resultText = await (
 			await page.$('select#ticket_selector_settings_tbl-show-ticket-details option[selected="selected"]')
+		).innerText();
+
+		return resultText.trim();
+	};
+
+	/**
+	 * set and save for show ticket sale info at ticket selector template settings
+	 */
+	setAndSaveShowTicketSaleInfo = async ({ value }: { value: string }): Promise<void> => {
+		await this.gotoTemplates();
+		// set show ticket sale info at ticket selector settings
+		await page.selectOption('select#ticket_selector_settings_tbl-show-ticket-sale-columns', { value });
+		// save changes from templates tab
+		await this.saveTemplatesChanges();
+	};
+
+	/**
+	 * get selected value for show ticket sale info at ticket selector template settings
+	 */
+	getSelectedShowTicketSaleInfo = async (): Promise<string> => {
+		// get selected option for show ticket sale info
+		const resultText = await (
+			await page.$('select#ticket_selector_settings_tbl-show-ticket-sale-columns option[selected="selected"]')
 		).innerText();
 
 		return resultText.trim();
