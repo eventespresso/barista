@@ -29,24 +29,31 @@ describe('Display order - archives test', () => {
 	});
 
 	it('Drag "dates and times" to into first list', async () => {
-		const dataTransfer = await page.evaluateHandle(() => new DataTransfer());
-		await page.dispatchEvent('#datetimes', 'dragstart', { dataTransfer });
-		await page.dispatchEvent('.ui-sortable', 'drop', { dataTransfer });
+		// const dataTransfer = await page.evaluateHandle(() => new DataTransfer());
+		// await page.waitForSelector('#event-archive-sortable-js');
+		// await page.dispatchEvent('#event-archive-sortable-js > li:last-child', 'dragstart', { dataTransfer });
+		// await page.waitForSelector('#event-archive-sortable-js');
+		// await page.dispatchEvent('#event-archive-sortable-js > li:first-child', 'drop', { dataTransfer });
 
-		// const liElement = await page.$('#datetimes');
-		// const ulElement = await page.$('.ui-sortable');
+		// await page.dispatchEvent('#event-archive-sortable-js > li:last-child', 'dragstart', { dataTransfer });
+		// await page.dispatchEvent('#event-archive-sortable-js', 'drop', { dataTransfer });
 
-		// if (liElement && ulElement) {
-		// 	const liElementBound = await liElement.boundingBox();
-		// 	const ulElementBound = await ulElement.boundingBox();
+		const liElement = await page.$('#event-archive-sortable-js > li:first-child');
+		const ulElement = await page.$('#event-archive-sortable-js > li:last-child');
 
-		// 	if (liElementBound && ulElementBound) {
-		// 		await page.mouse.move(liElementBound.x, liElementBound.y - 1000);
-		// 		await page.mouse.down();
-		// 		// await page.mouse.move(ulElementBound.x, ulElementBound.y);
-		// 		// await page.mouse.down();
-		// 	}
-		// }
+		if (liElement && ulElement) {
+			const liElementBound = await liElement.boundingBox();
+			await page.waitForSelector('#event-archive-sortable-js');
+			const ulElementBound = await ulElement.boundingBox();
+			await page.waitForSelector('#event-archive-sortable-js');
+			if (liElementBound && ulElementBound) {
+				await page.mouse.move(liElementBound.x, liElementBound.y);
+				await page.mouse.down();
+				await page.waitForSelector('#event-archive-sortable-js');
+				await page.mouse.move(ulElementBound.x, ulElementBound.y);
+				await page.mouse.down();
+			}
+		}
 
 		// await page.mouse.move(liElementBound.x, liElementBound.y - 200);
 		// await page.mouse.down();
