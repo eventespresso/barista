@@ -1,9 +1,11 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { Goto, TemplatesManager, EventsListSurfer, createNewEvent } from '@e2eUtils/admin';
+import { SingleEventPageManager } from '@e2eUtils/frontend';
 import { eventData } from '../../../../shared/data';
 
 const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();
+const singleEventPageManager = new SingleEventPageManager();
 
 const namespace = 'templates-ticket-selector-show-ticket-sale-info';
 let capture: PageVideoCapture;
@@ -51,9 +53,9 @@ describe('Show ticket sale info - ticket selector test', () => {
 		// go to event listing page
 		await templatesManager.gotoEventListing();
 		// show ticket details at event listing page
-		await templatesManager.showTicketDetails();
+		await singleEventPageManager.showTicketDetails();
 		// check if sold info is appear at ticket details
-		const getSoldLabel = await (await templatesManager.getSoldLabel()).innerText();
+		const getSoldLabel = await (await singleEventPageManager.getSoldLabel()).innerText();
 		// assert sold label after cheking
 		expect(getSoldLabel.trim()).toBe('Sold');
 	});
@@ -71,9 +73,9 @@ describe('Show ticket sale info - ticket selector test', () => {
 		// go to event listing page
 		await templatesManager.gotoEventListing();
 		// show ticket details at event listing page
-		await templatesManager.showTicketDetails();
+		await singleEventPageManager.showTicketDetails();
 		// check if sold info is appear at ticket details, suppose to be null after selecting show to 'No
-		const getSoldLabel = await templatesManager.getSoldLabel();
+		const getSoldLabel = await singleEventPageManager.getSoldLabel();
 		// assert sold label, suppose to be null
 		expect(getSoldLabel).toBe(null);
 	});
