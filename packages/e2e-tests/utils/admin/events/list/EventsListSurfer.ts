@@ -307,4 +307,22 @@ export class EventsListSurfer extends WPListTable {
 		await this.saveEventAndTicketDatesChanges();
 		await this.publishEventChanges(shouldPublish);
 	};
+
+	newEventDates = async ({
+		startDate,
+		endDate,
+		dateTitle,
+		dateDescription,
+	}: { startDate?: string; endDate?: string; dateTitle?: string; dateDescription?: string } = {}): Promise<void> => {
+		page.click('text=Add New Date');
+		page.click('text=Add Single Date');
+		await page.fill('.section-body #name', dateTitle);
+		await page.click('.public-DraftEditor-content');
+		await page.fill('.public-DraftEditor-content', dateDescription);
+		await page.fill('input#startDate', startDate);
+		await page.fill('input#endDate', endDate);
+		page.click('text=Save and assign tickets');
+		await page.click('#ee-ticket-assignments-manager-table-data-cell-row-0-col-1 button.ee-tam-relation-btn');
+		await page.click('.ee-modal__footer button[type="submit"]');
+	};
 }
