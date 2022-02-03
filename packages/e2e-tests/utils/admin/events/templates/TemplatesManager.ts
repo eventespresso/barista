@@ -316,4 +316,50 @@ export class TemplatesManager extends WPListTable {
 
 		return resultText.trim();
 	};
+
+	/**
+	 * set and save for show date & time filter at ticket selector template settings
+	 */
+	setAndSaveShowDateAndTimeFilter = async ({ value }: { value: string }): Promise<void> => {
+		await this.gotoTemplates();
+		// set show expired ticket at ticket selector settings
+		await page.selectOption('select#ticket_selector_settings_tbl-show-datetime-selector', { value });
+		// save changes from templates tab
+		await this.saveTemplatesChanges();
+	};
+
+	/**
+	 * get selected value for show date & time filter  at ticket selector template settings
+	 */
+	getSelectedShowDateAndTimeFilter = async (): Promise<string> => {
+		// get selected option for show expired ticket
+		const resultText = await (
+			await page.$('select#ticket_selector_settings_tbl-show-datetime-selector option[selected="selected"]')
+		).innerText();
+
+		return resultText.trim();
+	};
+
+	/**
+	 * set and save for date & time filter threshold at ticket selector template settings
+	 */
+	setAndSaveDateAndTimeFilterThreshold = async ({ value }: { value: string }): Promise<void> => {
+		await this.gotoTemplates();
+		// set show expired ticket at ticket selector settings
+		await page.selectOption('select#ticket_selector_settings_tbl-datetime-selector-threshold', { value });
+		// save changes from templates tab
+		await this.saveTemplatesChanges();
+	};
+
+	/**
+	 * get selected value for date & time filter threshold at ticket selector template settings
+	 */
+	getSelectedDateAndTimeFilterThreshold = async (): Promise<string> => {
+		// get selected option for show expired ticket
+		const resultText = await (
+			await page.$('select#ticket_selector_settings_tbl-datetime-selector-threshold option[selected="selected"]')
+		).innerText();
+
+		return resultText.trim();
+	};
 }

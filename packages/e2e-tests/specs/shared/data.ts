@@ -42,6 +42,8 @@ export const eventData = {
 		status: 'ACTIVE',
 		startDate: DateFormatter.eventDateFormat(subDays(NOW, 1)),
 		endDate: DateFormatter.eventDateFormat(addDays(NOW, 1)),
+		dateTitle: 'Date one title',
+		dateDescription: 'Date one description',
 	},
 
 	todayOnly: {
@@ -50,6 +52,8 @@ export const eventData = {
 		status: 'ACTIVE',
 		startDate: DateFormatter.eventDateFormat(subHours(NOW, 2)),
 		endDate: DateFormatter.eventDateFormat(addHours(NOW, 2)),
+		dateTitle: 'Date two title',
+		dateDescription: 'Date two description',
 	},
 
 	// expired events
@@ -59,6 +63,8 @@ export const eventData = {
 		status: 'EXPIRED',
 		startDate: DateFormatter.eventDateFormat(subDays(NOW, 20)),
 		endDate: DateFormatter.eventDateFormat(subDays(NOW, 19)),
+		dateTitle: 'Date three title',
+		dateDescription: 'Date three description',
 	},
 
 	// upcoming events
@@ -69,6 +75,8 @@ export const eventData = {
 		status: 'PENDING',
 		startDate: DateFormatter.eventDateFormat(addDays(NOW, 20)),
 		endDate: DateFormatter.addDaysAndHours(NOW, 20, 2),
+		dateTitle: 'Date four title',
+		dateDescription: 'Date four description',
 	},
 
 	// data to use for multiple insertion of events like paginations and others

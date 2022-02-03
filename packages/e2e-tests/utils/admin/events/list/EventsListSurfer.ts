@@ -254,14 +254,23 @@ export class EventsListSurfer extends WPListTable {
 		await this.deleteAllPermanentlyFromTrash();
 	};
 
+	/**
+	 * Remove event dates filter to show also some expired event dates
+	 */
 	removeEventDatesFilter = async () => {
 		await page?.click('button.ee-filter-tag__close-btn');
 	};
 
+	/**
+	 * Remove event dates filter to show also some expired tickets
+	 */
 	removeEventTicketDatesFilter = async () => {
 		await page?.click('#ee-entity-list-tickets button.ee-filter-tag__close-btn');
 	};
 
+	/**
+	 * Publish any changes at events
+	 */
 	publishEventChanges = async (shouldPublish: boolean): Promise<void> => {
 		if (shouldPublish) {
 			await Promise.all([page.waitForNavigation(), page.click('input#publish')]);
@@ -273,11 +282,24 @@ export class EventsListSurfer extends WPListTable {
 		await page.click('.ee-date-time-range-picker > button');
 	};
 
+	/**
+	 * This function is for update to fill in event start and end date
+	 */
 	fillEventAndTicketDates = async (startDate: string, endDate: string): Promise<void> => {
 		await page.fill('.date-range-picker__start-input input', startDate);
 		await page.fill('.date-range-picker__end-input input', endDate);
 	};
 
+	/**
+	 * This function is to trigger submit after filling in new event dates and tickets
+	 */
+	eventDateAndTicketSumbit = async () => {
+		await page.click('.ee-modal__footer button[type="submit"]');
+	};
+
+	/**
+	 * This function is to trigger update event date and fill in start and end date then publish
+	 */
 	setAndSaveEventDates = async ({
 		startDate,
 		endDate,
@@ -293,6 +315,9 @@ export class EventsListSurfer extends WPListTable {
 		await this.publishEventChanges(shouldPublish);
 	};
 
+	/**
+	 * This function is to trigger update ticket and fill in start and end date then publish
+	 */
 	setAndSaveEventTicketDates = async ({
 		startDate,
 		endDate,
@@ -306,5 +331,63 @@ export class EventsListSurfer extends WPListTable {
 		await this.fillEventAndTicketDates(startDate, endDate);
 		await this.saveEventAndTicketDatesChanges();
 		await this.publishEventChanges(shouldPublish);
+	};
+
+	/**
+	 * This function is to trigger add new date for add single date then save after fill in all required fields
+	 */
+	newEventDates = async ({
+		startDate,
+		endDate,
+		dateTitle,
+		dateDescription,
+	}: { startDate?: string; endDate?: string; dateTitle?: string; dateDescription?: string } = {}): Promise<void> => {
+		page.click('text=Add New Date');
+		page.click('text=Add Single Date');
+		await page.fill('.section-body #name', dateTitle);
+		await page.click('.public-DraftEditor-content');
+		await page.fill('.public-DraftEditor-content', dateDescription);
+		await page.fill('input#startDate', startDate);
+		await page.fill('input#endDate', endDate);
+		page.click('text=Save and assign tickets');
+		await page.click('#ee-ticket-assignments-manager-table-data-cell-row-0-col-1 button.ee-tam-relation-btn');
+		await this.eventDateAndTicketSumbit();
+	};
+
+	/**
+	 * This function is to trigger add new ticket then save after fill in all required fields
+	 */
+	newTicket = async ({
+		startDate,
+		endDate,
+		ticketTitle,
+		ticketDescription,
+	}: {
+		startDate?: string;
+		endDate?: string;
+		ticketTitle?: string;
+		ticketDescription?: string;
+	} = {}): Promise<void> => {
+		await page.click('text=Add New Ticket');
+		await page.fill('#startDate', startDate);
+		await page.fill('#endDate', endDate);
+		await page.fill('.sections-wrapper .section-body #name', ticketTitle);
+		await page.fill('.sections-wrapper .public-DraftEditor-content', ticketDescription);
+		await page.click('text=Skip prices - assign dates');
+		await page.click('#ee-ticket-assignments-manager-table-data-cell-row-0-col-1 button');
+		await this.eventDateAndTicketSumbit();
+		await page.waitForSelector('#ee-event-editor');
+	};
+
+	countEventDates = async (): Promise<number> => {
+		const countEventDates = await page?.$$('#ee-entity-list-datetimes .ee-entity-list-item');
+		return countEventDates.length;
+	};
+
+	countTickets = async (): Promise<number> => {
+		const countTickets = await page?.$$(
+			'#ee-entity-list-tickets .ee-entity-list__card-view > .ee-entity-paper-frame-wrapper'
+		);
+		return countTickets.length;
 	};
 }
