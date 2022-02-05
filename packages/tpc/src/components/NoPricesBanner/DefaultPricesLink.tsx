@@ -1,5 +1,5 @@
 import { ADMIN_ROUTES } from '@eventespresso/constants';
-import { Link } from '@eventespresso/ui-components';
+import { TextLink } from '@eventespresso/ui-components';
 import { useConfig, getAdminUrl } from '@eventespresso/services';
 
 const DefaultPricesLink: React.FC = ({ children }) => {
@@ -8,7 +8,7 @@ const DefaultPricesLink: React.FC = ({ children }) => {
 	} = useConfig();
 	const href = getAdminUrl({ adminSiteUrl: admin, page: ADMIN_ROUTES.PRICES });
 
-	return <Link href={href}>{children}</Link>;
+	return <TextLink href={href}>{children}</TextLink>;
 };
 
 export default DefaultPricesLink;

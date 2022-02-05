@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 
 import { Image } from '@eventespresso/adapters';
-import { Button, Heading, Link } from '../../';
+import { Button, Heading, TextLink } from '../../';
 import type { UpsellProps } from '../types';
 
 import '../style.scss';
@@ -33,9 +33,9 @@ export const BaseTemplate: React.FC<UpsellProps> = ({
 				{mainText && <p className={`${prefixClassName}__main-text`}>{mainText}</p>}
 				<div className={`${prefixClassName}__base__cta`}>
 					{cTA && (
-						<Link href={cTALink} size='small'>
+						<TextLink href={cTALink} size='small'>
 							{cTA}
-						</Link>
+						</TextLink>
 					)}
 					{altCTAText && (
 						<Button buttonType='default' size='small'>
