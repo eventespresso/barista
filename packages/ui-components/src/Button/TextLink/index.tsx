@@ -1,21 +1,24 @@
 import { forwardRef } from 'react';
 import classNames from 'classnames';
+import { External } from '@eventespresso/icons';
 
 import { withTooltip } from '../../withTooltip';
-import type { LinkProps } from '../types';
+import type { TextLinkProps } from '../types';
 
 import '../style.scss';
 import './style.scss';
 
-const PlainLink = forwardRef<HTMLAnchorElement, LinkProps>(
-	({ children, href, icon, target = '_blank', ...props }, ref) => {
+const PlainLink = forwardRef<HTMLAnchorElement, TextLinkProps>(
+	({ children, href, icon, showExternalIcon, target = '_blank', ...props }, ref) => {
 		const className = classNames(
 			props.className,
 			'ee-btn-base',
-			'ee-icon-button',
 			'ee-link',
-			!icon && 'ee-link--no-icon'
+			icon && 'ee-icon-button',
+			typeof children === 'string' && 'ee-link--no-icon'
 		);
+
+		const external = showExternalIcon && <External />;
 
 		return (
 			<a
@@ -27,9 +30,10 @@ const PlainLink = forwardRef<HTMLAnchorElement, LinkProps>(
 				ref={ref}
 			>
 				{icon ? icon : children}
+				{external}
 			</a>
 		);
 	}
 );
 
-export const Link = withTooltip(PlainLink);
+export const TextLink = withTooltip(PlainLink);

@@ -26,9 +26,10 @@ export interface ButtonProps extends Omit<ButtonAdapterProps, 'size'>, Size {
 }
 export interface ButtonGroupProps extends Omit<ButtonGroupAdapterProps, 'size'>, Size {}
 
-export interface LinkProps extends Omit<ButtonAdapterProps, 'icon'> {
+export interface TextLinkProps extends Omit<ButtonAdapterProps, 'icon'> {
 	target?: '_blank' | '_parent' | '_self' | '_top';
 	className?: string;
 	href: string;
 	icon?: React.ReactNode;
+	showExternalIcon?: boolean;
 }
