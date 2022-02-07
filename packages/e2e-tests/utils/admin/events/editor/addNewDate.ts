@@ -8,6 +8,8 @@ const editor = new DateEditor();
 export const addNewDate = async (fields: DateTicketFormArgs) => {
 	await page.click('text=Add New Date');
 
+	fields.singleDate !== undefined && (await page.click('text=Add Single Date'));
+
 	await fillDateTicketForm(fields);
 
 	await clickButton('Save and assign tickets');

@@ -1,11 +1,19 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
-import { addDays } from 'date-fns';
 import { NOW } from '@eventespresso/constants';
-import { Goto, TemplatesManager, EventsListSurfer, createNewEvent, DateFormatter } from '@e2eUtils/admin';
+import {
+	Goto,
+	TemplatesManager,
+	EventsListSurfer,
+	createNewEvent,
+	addNewDate,
+	addNewTicket,
+	EDTRGlider,
+} from '@e2eUtils/admin';
 import { eventData } from '../../../../shared/data';
 
 const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();
+const edtrGlider = new EDTRGlider();
 
 const namespace = 'templates-ticket-selector-show-date-and-time-filter';
 let capture: PageVideoCapture;
@@ -42,43 +50,44 @@ describe('Show date and time filter - ticket selector test', () => {
 			await page.goto(restoreLink);
 		}
 		// count event date before creating new 2 event dates
-		const countEventDateBeforeCreate = await eventsListSurfer.countEventDates();
+		const countEventDateBeforeCreate = await edtrGlider.countEventDates();
 		// assert event dates before creating new, suppose to be equal to one for default existing one event date
 		expect(countEventDateBeforeCreate).toBe(1);
 
 		// create 2 sample event dates for date filter
-		for (const iterator of slicedEvents) {
-			await eventsListSurfer.newEventDates(iterator);
+		for (const event of slicedEvents) {
+			// await eventsListSurfer.newEventDates(event);
+			await addNewDate({ description: event.description, name: event.title, singleDate: true });
 		}
 
 		// count event date after creating new 2 event dates
-		const countEventDateAfterCreate = await eventsListSurfer.countEventDates();
+		const countEventDateAfterCreate = await edtrGlider.countEventDates();
 		// assert count after create, suppose to be count is equal to 3
 		expect(countEventDateAfterCreate).toBe(slicedEvents.length + countEventDateBeforeCreate);
 
 		// count tickets before creating new 3 tickets
-		const countTicketBeforeCreate = await eventsListSurfer.countTickets();
+		const countTicketBeforeCreate = await edtrGlider.countTickets();
 		// assert count ticket before create new, suppose to be count ticket is equal to one by default
 		expect(countTicketBeforeCreate).toBe(1);
 
 		// create 3 sample tickets for date filter
 		for (const iterator of [1, 2, 3]) {
+			NOW.setDate(NOW.getDate() + iterator * 30);
 			// This function is to trigger add new ticket then save after fill in all required fields
-			await eventsListSurfer.newTicket({
-				startDate: DateFormatter.eventDateFormat(addDays(NOW, iterator * 30)),
-				endDate: DateFormatter.eventDateFormat(addDays(NOW, iterator * 30 + 1)),
-				ticketTitle: 'Ticket test',
-				ticketDescription: 'Ticket test description',
+			await addNewTicket({
+				name: 'Ticket test',
+				description: 'Ticket test description',
+				startDate: NOW,
 			});
 		}
 
 		// publish after creating event dates and tickets
-		await eventsListSurfer.publishEventChanges(true);
+		await edtrGlider.saveEvent(true);
 		// wait edtr container to load
 		await page.waitForSelector('#ee-event-editor');
 
 		// count tickets after creating new 3 tickets
-		const countTicketAfterCreate = await eventsListSurfer.countTickets();
+		const countTicketAfterCreate = await edtrGlider.countTickets();
 		// assert count ticket after create new 3 ticket, suppose to be equal to 4 because there is already existing 1 by default
 		expect(countTicketAfterCreate).toBe(countTicketBeforeCreate + 3);
 
