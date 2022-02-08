@@ -18,9 +18,11 @@ export class TemplatesManager extends WPListTable {
 	/**
 	 * Get selected status banner at templates section
 	 */
-	getSelectedStatusBanner = async ({ value = false, text = false }): Promise<string> => {
+	getSelectedStatusBanner = async ({ value = false, text = false, single = true }): Promise<string> => {
 		// get selected option for status banner
-		const wrapper = await page.$('select#display_status_banner_single option[selected="selected"]');
+		const selectID = single ? 'display_status_banner_single' : 'EED_Events_Archive_display_status_banner';
+		const wrapper = await page.$(`select#${selectID} option[selected="selected"]`);
+
 		let resultData: string;
 		// if value is equal to true return the value of selected option
 		if (value) {
@@ -69,11 +71,34 @@ export class TemplatesManager extends WPListTable {
 		await this.saveTemplatesChanges();
 	};
 
-	setAndSaveDisplayVenueDetails = async ({ value }: { value: string }): Promise<void> => {
+	/**
+	 * Set and save display venue details at templates archive section
+	 */
+	setAndSaveDisplayVenueDetails = async ({
+		value,
+		archive = false,
+	}: {
+		value: string;
+		archive: boolean;
+	}): Promise<void> => {
 		// set display venue details at archive settings
-		await page.selectOption('select#display_venue', { value });
+		// await page.selectOption('select#display_venue', { value });
+		const selectID = archive ? 'EED_Events_Archive_display_venue' : 'display_venue';
+		await page.selectOption(`select#${selectID}`, { value });
 		// save changes from templates tab
 		await this.saveTemplatesChanges();
+	};
+
+	/**
+	 * get selected display venue details at templates archive section
+	 */
+	getSelectedDisplayVenueDetails = async ({ archive = false }: { archive: boolean }): Promise<string> => {
+		// get selected option for display venue details
+		// const resultText = await (await page.$('select#display_venue option[selected="selected"]')).innerText();
+		const selectID = archive ? 'EED_Events_Archive_display_venue' : 'display_venue';
+		const resultText = await (await page.$(`select#${selectID} option[selected="selected"]`)).innerText();
+
+		return resultText.trim();
 	};
 
 	/**
@@ -98,7 +123,9 @@ export class TemplatesManager extends WPListTable {
 		await this.saveTemplatesChanges();
 	};
 
-	// set custom display order and get custom order classname value
+	/**
+	 * set custom display order and get custom order classname value
+	 */
 	setCustomDisplayOrder = async ({ value, archive }: { value: string; archive: boolean }): Promise<string> => {
 		// set custom display order
 		const selectID = archive
@@ -114,6 +141,9 @@ export class TemplatesManager extends WPListTable {
 		});
 	};
 
+	/**
+	 * get selected custom display at templates tab
+	 */
 	getSelectedCustomDisplayOrder = async ({ archive }: { archive?: boolean }): Promise<string> => {
 		const selectID = archive
 			? 'EED_Events_Archive_use_sortable_display_order'
@@ -176,7 +206,7 @@ export class TemplatesManager extends WPListTable {
 		// set display status banner to yes
 		await this.setAndSaveDisplayStatusBanner({ status, single });
 		// get selected display status banner value
-		return await this.getSelectedStatusBanner({ text: true });
+		return await this.getSelectedStatusBanner({ text: true, single });
 	};
 
 	/**
@@ -358,6 +388,29 @@ export class TemplatesManager extends WPListTable {
 		// get selected option for show expired ticket
 		const resultText = await (
 			await page.$('select#ticket_selector_settings_tbl-datetime-selector-threshold option[selected="selected"]')
+		).innerText();
+
+		return resultText.trim();
+	};
+
+	/**
+	 * set and save for reset event list settings at archive
+	 */
+	setAndSaveResetEventListSettings = async ({ value }: { value: string }): Promise<void> => {
+		await this.gotoTemplates();
+		// set reset event list settings at ticket selector settings
+		await page.selectOption('select#EED_Events_Archive_reset_event_list_settings', { value });
+		// save changes from templates tab
+		await this.saveTemplatesChanges();
+	};
+
+	/**
+	 * get selected value for reset event list settings at archive
+	 */
+	getSelectedResetEventListSettings = async (): Promise<string> => {
+		// get selected option for reset event list settings
+		const resultText = await (
+			await page.$('select#EED_Events_Archive_reset_event_list_settings option[selected="selected"]')
 		).innerText();
 
 		return resultText.trim();
