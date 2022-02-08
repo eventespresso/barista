@@ -69,4 +69,36 @@ export class EDTRGlider {
 		// Wait for tickets list lazy load
 		await page.waitForSelector(ticketsListSelector);
 	};
+
+	/**
+	 * count ticket of an events at EDTR section
+	 */
+	countTickets = async (): Promise<number> => {
+		const countTickets = await page?.$$(
+			'#ee-entity-list-tickets .ee-entity-list__card-view > .ee-entity-paper-frame-wrapper'
+		);
+		return countTickets.length;
+	};
+
+	/**
+	 * count event dates at EDTR section
+	 */
+	countEventDates = async (): Promise<number> => {
+		const countEventDates = await page?.$$('#ee-entity-list-datetimes .ee-entity-list-item');
+		return countEventDates.length;
+	};
+
+	/**
+	 * Remove event dates filter to show also some expired tickets
+	 */
+	removeEventTicketDatesFilter = async () => {
+		await page?.click('#ee-entity-list-tickets button.ee-filter-tag__close-btn');
+	};
+
+	/**
+	 * Remove event dates filter to show also some expired event dates
+	 */
+	removeEventDatesFilter = async () => {
+		await page?.click('button.ee-filter-tag__close-btn');
+	};
 }

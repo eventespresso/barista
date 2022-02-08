@@ -6,6 +6,7 @@ const formatDate = formatDateTime();
 export type DateTicketFormArgs = CommonEntityFields & {
 	capacity?: string;
 	quantity?: string;
+	singleDate?: boolean;
 };
 
 export const fillDateTicketForm = async ({

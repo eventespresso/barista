@@ -1,9 +1,11 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
-import { Goto, TemplatesManager, createNewEvent, EventsListSurfer } from '@e2eUtils/admin';
-import { eventData } from '../../../../shared/data';
+import { Goto, TemplatesManager, createNewEvent, EventsListSurfer, DateEditor, EDTRGlider } from '@e2eUtils/admin';
+import { eventData, data } from '../../../../shared/data';
 
 const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();
+const dateEditor = new DateEditor();
+const edtrGlider = new EDTRGlider();
 
 const namespace = 'templates-archives-display-expired-events';
 let capture: PageVideoCapture;
@@ -35,9 +37,17 @@ describe('Display expired events - archives test', () => {
 			const restoreLink = await templatesManager.getItemActionLinkByText(firstItem, 'Edit');
 			await page.goto(restoreLink);
 			// remove filter events to show expired events
-			await eventsListSurfer.removeEventDatesFilter();
+			await edtrGlider.removeEventDatesFilter();
 		}
-		await eventsListSurfer.setAndSaveEventDates({ ...eventData.expired });
+
+		// get first evet in a list or by dbId if exist
+		const item = await dateEditor.getItem();
+		// update event date into expired one
+		await dateEditor.editDate(item, {
+			name: eventData.expired.title,
+			description: eventData.expired.description,
+			...data[0], // this data is for expired dates
+		});
 
 		await Goto.eventsListPage();
 		const countAfterChecking = await templatesManager.goToViewAndCount('View All Events');

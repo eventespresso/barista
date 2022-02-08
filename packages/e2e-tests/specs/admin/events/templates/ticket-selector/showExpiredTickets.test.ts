@@ -1,9 +1,10 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
-import { Goto, TemplatesManager, EventsListSurfer, createNewEvent } from '@e2eUtils/admin';
-import { eventData } from '../../../../shared/data';
+import { Goto, TemplatesManager, EventsListSurfer, createNewEvent, addNewTicket, EDTRGlider } from '@e2eUtils/admin';
+import { eventData, data } from '../../../../shared/data';
 
 const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();
+const edtrGlider = new EDTRGlider();
 
 const namespace = 'templates-ticket-selector-show-expired-tickets';
 let capture: PageVideoCapture;
@@ -36,8 +37,13 @@ describe('Show expired ticket - ticket selector test', () => {
 			await page.goto(restoreLink);
 		}
 		// remove filter events to show expired tickets
-		await eventsListSurfer.removeEventTicketDatesFilter();
-		await eventsListSurfer.setAndSaveEventTicketDates({ ...eventData.expired });
+		await edtrGlider.removeEventTicketDatesFilter();
+		// create expired ticket
+		await addNewTicket({
+			...data[0], // expired dates
+			name: eventData.expired.title,
+			description: eventData.expired.description,
+		});
 
 		await Goto.eventsListPage();
 		// count event from view all event link action after created one
