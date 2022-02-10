@@ -82,7 +82,6 @@ export class TemplatesManager extends WPListTable {
 		archive: boolean;
 	}): Promise<void> => {
 		// set display venue details at archive settings
-		// await page.selectOption('select#display_venue', { value });
 		const selectID = archive ? 'EED_Events_Archive_display_venue' : 'display_venue';
 		await page.selectOption(`select#${selectID}`, { value });
 		// save changes from templates tab
@@ -94,7 +93,6 @@ export class TemplatesManager extends WPListTable {
 	 */
 	getSelectedDisplayVenueDetails = async ({ archive = false }: { archive: boolean }): Promise<string> => {
 		// get selected option for display venue details
-		// const resultText = await (await page.$('select#display_venue option[selected="selected"]')).innerText();
 		const selectID = archive ? 'EED_Events_Archive_display_venue' : 'display_venue';
 		const resultText = await (await page.$(`select#${selectID} option[selected="selected"]`)).innerText();
 
