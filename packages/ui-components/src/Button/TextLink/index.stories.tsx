@@ -20,7 +20,7 @@ const Template: TextLinkStory = (args) => (
 export const Default: TextLinkStory = Template.bind({});
 
 export const ExternalLink: TextLinkStory = Template.bind({});
-ExternalLink.args = { showExternalIcon };
+ExternalLink.args = { showExternalIcon: true };
 
 export const WithIcon: TextLinkStory = Template.bind({});
 WithIcon.args = { icon: <Groups /> };
