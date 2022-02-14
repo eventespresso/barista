@@ -413,4 +413,27 @@ export class TemplatesManager extends WPListTable {
 
 		return resultText.trim();
 	};
+
+	/**
+	 * set and save for date and time filter max checcked at ticket selector
+	 */
+	setAndSaveDateAndTimeMax = async ({ value }: { value: string }): Promise<void> => {
+		await this.gotoTemplates();
+		// set reset event list settings at ticket selector settings
+		await page.fill('#ticket_selector_settings_tbl-datetime-selector-max-checked', value);
+		// save changes from templates tab
+		await this.saveTemplatesChanges();
+	};
+
+	/**
+	 * get selected value for date and time filter max checcked at ticket selector
+	 */
+	getSelectedDateAndTimeMax = async (): Promise<string> => {
+		// get selected option for date and time filter max checcked
+		const resultText = await (
+			await page.$('#ticket_selector_settings_tbl-datetime-selector-max-checked')
+		).getAttribute('value');
+
+		return resultText.trim();
+	};
 }
