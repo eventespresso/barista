@@ -1,13 +1,20 @@
 .ee-link.ee-link {
 	background-color: unset;
 	box-shadow: none !important;
+	box-sizing: border-box;
 	color: var(--ee-color-blue);
+	padding: 1px var(--ee-padding-tiny) 2px;
 
 	&:not(:hover):not(:focus) {
 		border-color: transparent;
 	}
 
 	&--no-icon {
-		padding: 0;
+		height: unset;
+		width: unset;
+	}
+
+	svg.ee-svg.ee-svg--external {
+		margin-inline-end: 0;
 	}
 }

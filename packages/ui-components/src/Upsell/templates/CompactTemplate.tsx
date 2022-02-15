@@ -1,4 +1,4 @@
-import { Heading, Link } from '../../';
+import { Heading, TextLink } from '../../';
 import type { UpsellProps } from '../types';
 
 import '../style.scss';
@@ -13,9 +13,9 @@ export const CompactTemplate: React.FC<UpsellProps> = ({ className, cTA, cTALink
 			</Heading>
 			<div className={`${prefixClassName}__cta`}>
 				{cTA && (
-					<Link href={cTALink} size='small'>
+					<TextLink href={cTALink} size='small'>
 						{cTA}
-					</Link>
+					</TextLink>
 				)}
 			</div>
 			{dismissBtn}

@@ -4,11 +4,12 @@ import { IconProps } from '../types';
 const Desktop = (props: IconProps): JSX.Element => {
 	return (
 		<svg
-			fill='currentColor'
 			aria-hidden='true'
+			fill='currentColor'
 			height='1.5em'
-			width='1.5em'
 			viewBox='0 0 16 16'
+			width='1.5em'
+			xmlns='http://www.w3.org/2000/svg'
 			className='ee-svg--desktop'
 			{...props}
 		>

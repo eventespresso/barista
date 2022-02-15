@@ -4,10 +4,10 @@ import { IconProps } from '../types';
 const Groups = (props: IconProps): JSX.Element => {
 	return (
 		<svg
-			xmlns='http://www.w3.org/2000/svg'
-			width='1.5em'
 			height='1.5em'
 			viewBox='0 1 20 20'
+			width='1.5em'
+			xmlns='https://www.w3.org/2000/svg'
 			className='ee-svg--groups'
 			{...props}
 		>

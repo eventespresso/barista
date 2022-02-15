@@ -6,7 +6,5 @@
 	height="1.5em"
 	width="1.5em"
 >
-<path
-		d="M4 19.8h8.9v-1.5H4v1.5zm8.9-15.6H4v1.5h8.9V4.2zm-8.9 7v1.5h16v-1.5H4z"
-	/>
+<path d="M4 19.8h8.9v-1.5H4v1.5zm8.9-15.6H4v1.5h8.9V4.2zm-8.9 7v1.5h16v-1.5H4z" />
 </svg>

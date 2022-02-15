@@ -6,7 +6,7 @@ import { Building, Edit } from '@eventespresso/icons';
 import { useOnClickOutside, usePrevious } from '@eventespresso/hooks';
 import { entityListToSelectOptions } from '@eventespresso/utils';
 
-import { Link } from '../Button';
+import { TextLink } from '../Button';
 import { Heading } from '../Heading';
 import { SelectWithLabel } from '../Select';
 import { TabbableText } from '../TabbableText';
@@ -116,9 +116,9 @@ export const VenueSelector: React.FC<VenueSelectorProps> = ({
 	}
 	const addNewVenue = createVenueLink && (
 		<div className='ee-venue-selector__add-new'>
-			<Link className='ee-venue-selector__add-new-link' href={createVenueLink}>
+			<TextLink className='ee-venue-selector__add-new-link' href={createVenueLink} showExternalIcon>
 				{__('Add New Venue')}
-			</Link>
+			</TextLink>
 		</div>
 	);
 

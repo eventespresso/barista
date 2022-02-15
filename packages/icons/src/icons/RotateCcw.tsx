@@ -1,10 +1,11 @@
 import withClassName from '../withClassName';
 import { IconProps } from '../types';
 
-const RotateCCW = (props: IconProps): JSX.Element => {
+const RotateCcw = (props: IconProps): JSX.Element => {
 	return (
 		<svg
 			aria-hidden='true'
+			fill='currentColor'
 			height='1.5em'
 			viewBox='0 0 20 20'
 			width='1.5em'
@@ -16,4 +17,4 @@ const RotateCCW = (props: IconProps): JSX.Element => {
 	);
 };
 
-export default withClassName(RotateCCW, 'rotate-ccw');
+export default withClassName(RotateCcw, 'rotate-ccw');

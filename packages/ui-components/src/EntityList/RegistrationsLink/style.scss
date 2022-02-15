@@ -7,10 +7,10 @@
 	box-shadow: none;
 	box-sizing: border-box;
 	display: inline-flex;
-	font-size: var(--ee-font-size-default);
+	font-size: var(--ee-font-size-bigger);
 	height: var(--ee-icon-button-size);
 	justify-content: center;
-	line-height: var(--ee-font-size-default);
+	line-height: var(--ee-font-size-bigger);
 	margin: 0 auto calc(var(--ee-font-size-bigger) / -4);
 	outline-style: none;
 	text-decoration: none !important;
@@ -19,6 +19,11 @@
 	&.ee-btn-base {
 		margin: 0;
 		position: relative;
+	}
+
+	&.ee-icon-button {
+		font-size: var(--ee-font-size-default);
+		line-height: var(--ee-font-size-default);
 	}
 
 	path {

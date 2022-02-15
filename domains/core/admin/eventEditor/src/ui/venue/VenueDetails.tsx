@@ -5,7 +5,7 @@ import { Image } from '@eventespresso/adapters';
 import { useEvent, useEventMutator, useVenues } from '@eventespresso/edtr-services';
 import { isInfinite } from '@eventespresso/utils';
 import { findEntityByGuid } from '@eventespresso/predicates';
-import { Address, Container, Heading, Link, VenueSelector } from '@eventespresso/ui-components';
+import { Address, Container, Heading, TextLink, VenueSelector } from '@eventespresso/ui-components';
 import { MapMarker, Phone, VenueSeat } from '@eventespresso/icons';
 
 import { useVenueLink } from './useVenueLink';
@@ -92,9 +92,9 @@ export const VenueDetails: React.FC = () => {
 							</div>
 						</div>
 						<div className='ee-event-venue__actions'>
-							<Link className='ee-event-venue__edit-link' href={editVenueLink}>
+							<TextLink className='ee-event-venue__edit-link' href={editVenueLink} showExternalIcon>
 								{__('Edit this Venue')}
-							</Link>
+							</TextLink>
 						</div>
 					</div>
 				</div>

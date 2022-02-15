@@ -1,4 +1,4 @@
-import { NewEntityOption, Link } from '@eventespresso/ui-components';
+import { NewEntityOption, TextLink } from '@eventespresso/ui-components';
 import { EdtrSlots } from '@eventespresso/services';
 import { NewDateOption } from '@eventespresso/edtr-services';
 import { UpCircleFilled } from '@eventespresso/icons';
@@ -25,7 +25,7 @@ export const AddNewDateUpsell: React.FC<NewDateUpsellProps> = ({ output, slot })
 			{({ count }) => {
 				const isOnlyButton = count === 1;
 
-				const link = <Link href={cTALink}>{cTA}</Link>;
+				const link = <TextLink href={cTALink}>{cTA}</TextLink>;
 
 				if (isOnlyButton) {
 					return link;

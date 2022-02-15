@@ -118,7 +118,10 @@
 			width: 2rem;
 
 			svg.ee-svg.ee-svg {
+				color: var(--ee-default-text-color-low-contrast) ! important;
+				height: 1.5rem;
 				margin: 0;
+				width: 1.5rem;
 			}
 		}
 
@@ -185,12 +188,6 @@
 			margin: 0;
 			width: min-content;
 		}
-	}
-
-	svg.ee-svg.ee-svg {
-		color: var(--ee-default-text-color-low-contrast) ! important;
-		height: 1.5rem;
-		width: 1.5rem;
 	}
 }
 
