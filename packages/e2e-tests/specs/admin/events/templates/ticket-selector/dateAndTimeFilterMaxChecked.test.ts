@@ -19,13 +19,13 @@ const namespace = 'templates-ticket-selector-date-and-time-filter-max-checked';
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
-	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	// capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 	await eventsListSurfer.deleteAllEventsByLink('View All Events');
 	await Goto.eventsListPage();
 });
 
 afterAll(async () => {
-	await capture?.stop();
+	// await capture?.stop();
 });
 
 describe('Date and time filter max checked - ticket selector test', () => {
@@ -107,11 +107,11 @@ describe('Date and time filter max checked - ticket selector test', () => {
 
 	it('Set date & time filter max checked to "2"', async () => {
 		// set and save for date & time filter max checked at ticket selector template settings
-		await templatesManager.setAndSaveDateAndTimeMax({ value: '3' });
+		await templatesManager.setAndSaveDateAndTimeMax({ value: '2' });
 		// get selected value for date & time filter max checked at ticket selector template settings
 		getSelectedMaxValue = await templatesManager.getSelectedDateAndTimeMax();
 		// assert selected filter max
-		expect(getSelectedMaxValue).toBe('3');
+		expect(getSelectedMaxValue).toBe('2');
 	});
 
 	it('Test if filter check only 2 checkboxes', async () => {
