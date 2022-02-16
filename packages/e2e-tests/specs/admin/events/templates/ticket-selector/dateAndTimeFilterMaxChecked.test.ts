@@ -19,13 +19,13 @@ const namespace = 'templates-ticket-selector-date-and-time-filter-max-checked';
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
-	// capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 	await eventsListSurfer.deleteAllEventsByLink('View All Events');
 	await Goto.eventsListPage();
 });
 
 afterAll(async () => {
-	// await capture?.stop();
+	await capture?.stop();
 });
 
 describe('Date and time filter max checked - ticket selector test', () => {
