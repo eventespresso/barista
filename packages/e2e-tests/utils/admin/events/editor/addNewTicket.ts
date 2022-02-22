@@ -6,7 +6,11 @@ import { setPrice } from './setPrice';
 
 const parser = new EntityListParser('ticket');
 
-export const addNewTicket = async ({ amount, ...fields }: DateTicketFormArgs & { amount?: number }) => {
+export const addNewTicket = async ({
+	amount,
+	setDirectPrice = false,
+	...fields
+}: DateTicketFormArgs & { amount?: number; setDirectPrice?: boolean }) => {
 	await page.click('text=Add New Ticket');
 
 	await fillDateTicketForm(fields);
@@ -15,6 +19,11 @@ export const addNewTicket = async ({ amount, ...fields }: DateTicketFormArgs & {
 	if (amount !== undefined) {
 		await clickButton('Set ticket prices');
 
+		// if (setDirectPrice) {
+		// 	// Set price amount
+		// 	await page.fill(`.ee-input__price-field`, (amount || '').toString());
+		// } else {
+
 		await page.waitForSelector('text=Add default prices');
 
 		await page.click('text=Add default prices');
@@ -22,6 +31,7 @@ export const addNewTicket = async ({ amount, ...fields }: DateTicketFormArgs & {
 		await setPrice({ amount, isBasePrice: true } as any);
 
 		await clickButton('Save and assign dates');
+		// }
 	} else {
 		await clickButton('Skip prices - assign dates');
 	}
