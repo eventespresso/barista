@@ -32,6 +32,9 @@ afterAll(async () => {
 describe('One Max Attendees and more tickets - ticket selector test', () => {
 	let getFirstEventId: string;
 	let getSetMaxValue: string;
+	let getSetValueSecondRow: string;
+	const ticketAmount: number = 10;
+	const ticketAmountPlusTax: number = Number((ticketAmount * 0.15 + ticketAmount).toFixed(2));
 	const ticketDetails: {
 		titles: string[];
 		ids: string[];
@@ -55,7 +58,7 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 				description: `Ticket date description - test ${ticket}`,
 				startDate: NOW,
 				setDirectPrice: true,
-				amount: 10,
+				amount: ticketAmount,
 			});
 		}
 
@@ -99,10 +102,12 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 		const restoreLink = await eventsListSurfer.getItemActionLinkByText(firstItem, 'View');
 		await page.goto(restoreLink);
 
+		const ticketDetailsWrapper = `table#tkt-slctr-tbl-${getFirstEventId} > tbody > tr.tckt-slctr-tbl-tr`;
+
 		// get all ticket rows at frontend
-		const getTicketRows = await page.$$(`table#tkt-slctr-tbl-${getFirstEventId} > tbody > tr.tckt-slctr-tbl-tr`);
+		const getTicketRows = await page.$$(ticketDetailsWrapper);
 		// loop all tickets and check the value
-		for (const row of getTicketRows) {
+		for (const [index, row] of getTicketRows.entries()) {
 			// check ticket title
 			const checkTicketTitle = await (await row.$('.tckt-slctr-tbl-td-name strong')).innerText();
 			// assert ticket title
@@ -111,7 +116,27 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 			// check ticket price
 			const checkTicketPrice = await (await row.$('.tckt-slctr-tbl-td-price .tckt-price--nowrap')).innerText();
 			// assert ticket price
-			expect(checkTicketPrice).toBe('$0.00 (USD)');
+			if (index === 0) {
+				expect(checkTicketPrice).toBe(`$0.00 (USD)`);
+				// await row.selectOption('td.tckt-slctr-tbl-td-qty select.ticket-selector-tbl-qty-slct', { value: '4' });
+			} else {
+				expect(checkTicketPrice).toBe(`$${String(ticketAmountPlusTax)} (USD)`);
+			}
+
+			// if (index === 1) {
+			// await row.selectOption('select.ticket-selector-tbl-qty-slct', { value: '4' });
+			// }
+
+			const checkFirstQtyOptions = await (
+				await row.$('.ticket-selector-tbl-qty-slct option:first-child')
+			).getAttribute('value');
+			expect(checkFirstQtyOptions).toBe('0');
+
+			const checkLastQtyOptions = await (
+				await row.$('.ticket-selector-tbl-qty-slct option:last-child')
+			).getAttribute('value');
+			expect(checkLastQtyOptions).toBe('10');
+			// console.log({ checkFirstQtyOptions, checkLastQtyOptions });
 
 			// check radio button value
 			const checkRadioBtnValue = await (
@@ -120,33 +145,54 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 			// assert radio button value
 			expect(ticketDetails.ids.includes(checkRadioBtnValue)).toBeTruthy();
 		}
-		expect(1).toBe(1);
+
+		// const daw = await page.$('select.ticket-selector-tbl-qty-slct');
+		// await getTicketRows[1].selectOption('select.ticket-selector-tbl-qty-slct', { value: '4' });
+		await page.selectOption(`${ticketDetailsWrapper}:nth-child(3) select.ticket-selector-tbl-qty-slct`, {
+			value: '4',
+		});
+
+		// const resultText = await (
+		// 	await page.$(`${ticketDetailsWrapper}:nth-child(3) select.ticket-selector-tbl-qty-slct`)
+		// ).getAttribute('value');
+		getSetValueSecondRow = await page.$eval(
+			`${ticketDetailsWrapper}:nth-child(3) select.ticket-selector-tbl-qty-slct`,
+			(sel: any) => sel.value
+		);
+		console.log({ getSetValueSecondRow });
 	});
 
-	// it('Trigger register button and check ticket details', async () => {
-	// 	// select one row of ticket before trigger register
-	// 	await page.click(`.tckt-slctr-tbl-td-qty input[value="${ticketDetails.ids[1]}-${getSetMaxValue}"]`);
+	it('Trigger register button and check ticket details', async () => {
+		// tigger Register Now button
+		await Promise.all([page.waitForNavigation(), page.click(`.ticket-selector-submit-btn`)]);
 
-	// 	// tigger Register Now button
-	// 	await Promise.all([page.waitForNavigation(), page.click(`.ticket-selector-submit-btn`)]);
+		// check desciption ticket
+		const getDescriptionTicket = await (
+			await page.$('table.spco-ticket-details tr td:nth-child(1) .line-item-desc-spn p')
+		).innerText();
+		// assert description ticket
+		expect(getDescriptionTicket).toBe(ticketDetails.titles[1].replace('title', 'description'));
 
-	// 	// check desciption ticket
-	// 	const getDescriptionTicket = await (
-	// 		await page.$('table.spco-ticket-details tr td:nth-child(1) .line-item-desc-spn p')
-	// 	).innerText();
-	// 	// assert description ticket
-	// 	expect(getDescriptionTicket).toBe(ticketDetails.titles[1].replace('title', 'description'));
+		// check ticket quantity after trigger register
+		const getTicketQty = await (await page.$('table.spco-ticket-details tr td:nth-child(2)')).innerText();
+		// assert quantity
+		expect(getTicketQty).toBe(getSetValueSecondRow);
 
-	// 	// check ticket quantity after trigger register
-	// 	const getTicketQty = await (await page.$('table.spco-ticket-details tr td:nth-child(2)')).innerText();
-	// 	// assert quantity
-	// 	expect(getTicketQty).toBe('1');
+		const getTicketPrice = await (await page.$('table.spco-ticket-details tr td:nth-child(3)')).innerText();
+		// assert price
+		expect(getTicketPrice).toBe(`$${ticketAmountPlusTax}`);
 
-	// 	// check number of attendees after trigger register
-	// 	const getNumberAttendees = await (
-	// 		await page.$('#spco-step-attendee_information-display-hdr .spco-step-big-nmbr')
-	// 	).innerText();
-	// 	// assert max attendees
-	// 	expect(getNumberAttendees).toBe(getSetMaxValue);
-	// });
+		const getTicketTotal = await (await page.$('table.spco-ticket-details tr td:nth-child(4)')).innerText();
+		// assert total
+		expect(getTicketPrice).toBe(`$${ticketAmountPlusTax * Number(getSetValueSecondRow)}`);
+
+		// // check number of attendees after trigger register
+		// const getNumberAttendees = await (
+		// 	await page.$('#spco-step-attendee_information-display-hdr .spco-step-big-nmbr')
+		// ).innerText();
+		// // assert max attendees
+		// expect(getNumberAttendees).toBe(getSetMaxValue);
+
+		console.log({ getDescriptionTicket, getTicketQty, getSetValueSecondRow, getSetMaxValue, getTicketTotal });
+	});
 });
