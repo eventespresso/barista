@@ -10,6 +10,7 @@ import {
 	addNewTicket,
 } from '@e2eUtils/admin';
 import { eventData } from '../../../../shared/data';
+import { ElementHandle } from 'packages/e2e-tests/types';
 
 const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();
@@ -34,11 +35,12 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 	let getSetMaxValue: string;
 	let getSetValueSecondRow: string;
 	const ticketAmount: number = 10;
-	const ticketAmountPlusTax: number = Number((ticketAmount * 0.15 + ticketAmount).toFixed(2));
+	const ticketAmountPlusTax: string = (ticketAmount * 0.15 + ticketAmount).toFixed(2);
 	const ticketDetails: {
 		titles: string[];
 		ids: string[];
 	} = { titles: [], ids: [] };
+	let ticketRows: any = [];
 
 	it('Create new sample event with more ticket for frontend test', async () => {
 		// create new event
@@ -69,7 +71,7 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 		// assert set max, suppose to be 1 after set
 		expect(getSetMaxValue).toBe('10');
 		// get all tickets added
-		const ticketRows = await page.$$('#ee-entity-list-tickets .ee-entity-list__card-view > .ee-entity-list-item');
+		ticketRows = await page.$$('#ee-entity-list-tickets .ee-entity-list__card-view > .ee-entity-list-item');
 
 		// loop all tickets and get ticket title and id
 		for (const row of ticketRows) {
@@ -120,12 +122,8 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 				expect(checkTicketPrice).toBe(`$0.00 (USD)`);
 				// await row.selectOption('td.tckt-slctr-tbl-td-qty select.ticket-selector-tbl-qty-slct', { value: '4' });
 			} else {
-				expect(checkTicketPrice).toBe(`$${String(ticketAmountPlusTax)} (USD)`);
+				expect(checkTicketPrice).toBe(`$${ticketAmountPlusTax} (USD)`);
 			}
-
-			// if (index === 1) {
-			// await row.selectOption('select.ticket-selector-tbl-qty-slct', { value: '4' });
-			// }
 
 			const checkFirstQtyOptions = await (
 				await row.$('.ticket-selector-tbl-qty-slct option:first-child')
@@ -183,8 +181,17 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 		expect(getTicketPrice).toBe(`$${ticketAmountPlusTax}`);
 
 		const getTicketTotal = await (await page.$('table.spco-ticket-details tr td:nth-child(4)')).innerText();
+		console.log({
+			getDescriptionTicket,
+			getTicketQty,
+			getSetValueSecondRow,
+			getSetMaxValue,
+			getTicketTotal,
+			ticketAmountPlusTax,
+			daw: Number(ticketAmountPlusTax) * Number(getSetValueSecondRow),
+		});
 		// assert total
-		expect(getTicketPrice).toBe(`$${ticketAmountPlusTax * Number(getSetValueSecondRow)}`);
+		expect(getTicketTotal).toBe(`$${(Number(ticketAmountPlusTax) * Number(getSetValueSecondRow)).toFixed(2)}`);
 
 		// // check number of attendees after trigger register
 		// const getNumberAttendees = await (
@@ -192,7 +199,24 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 		// ).innerText();
 		// // assert max attendees
 		// expect(getNumberAttendees).toBe(getSetMaxValue);
+	});
 
-		console.log({ getDescriptionTicket, getTicketQty, getSetValueSecondRow, getSetMaxValue, getTicketTotal });
+	it('Set minimum ticket value to 4 and max value to 6 and test DOM value', async () => {
+		await Goto.eventsListPage();
+		// get first event
+		const firstItem = await eventsListSurfer.getFirstListItem();
+		getFirstEventId = await (await firstItem.$('td.column-id')).innerText();
+		const restoreLink = await eventsListSurfer.getItemActionLinkByText(firstItem, 'Edit');
+		await page.goto(restoreLink);
+
+		ticketRows = await page.$$('#ee-entity-list-tickets .ee-entity-list__card-view > .ee-entity-list-item');
+
+		const daw = await ticketRows[1].$('[aria-label="ticket main menu"]');
+		await daw.click();
+		const agay = await ticketRows[1].$('text=edit ticket');
+		await agay.click();
+		await page.click('[aria-label="Minimum Quantity"]');
+		await page.fill('[aria-label="Minimum Quantity"]', '5');
+		expect(1).toBe(1);
 	});
 });
