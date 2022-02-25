@@ -192,13 +192,6 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 		});
 		// assert total
 		expect(getTicketTotal).toBe(`$${(Number(ticketAmountPlusTax) * Number(getSetValueSecondRow)).toFixed(2)}`);
-
-		// // check number of attendees after trigger register
-		// const getNumberAttendees = await (
-		// 	await page.$('#spco-step-attendee_information-display-hdr .spco-step-big-nmbr')
-		// ).innerText();
-		// // assert max attendees
-		// expect(getNumberAttendees).toBe(getSetMaxValue);
 	});
 
 	it('Set minimum ticket value to 4 and max value to 6 and test DOM value', async () => {
@@ -215,8 +208,31 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 		await daw.click();
 		const agay = await ticketRows[1].$('text=edit ticket');
 		await agay.click();
+
+		// await Promise.all([page.waitForLoadState(), agay.click()]);
+		await page.waitForSelector('.ee-form-item--has-info');
+		await page.click(
+			'.chakra-modal__content-container .sections-wrapper .ee-render-fields .ee-form-item__switch #isRequired'
+		);
+		await Promise.all([
+			page.waitForLoadState(),
+			// page.focus('.chakra-modal__content-container .sections-wrapper > ee-form-section-wrapper:nth-child(3) svg'),
+			// page.click('.chakra-modal__content-container .sections-wrapper > ee-form-section-wrapper:nth-child(3) svg'),
+			// page.click('.chakra-modal__content-container .sections-wrapper > ee-form-section-wrapper:nth-child(3) svg'),
+			page.click(
+				'.chakra-modal__content-container .sections-wrapper > ee-form-section-wrapper:nth-child(3) .ee-render-fields .ee-form-item__switch #isRequired'
+			),
+			page.fill('[aria-label="Quantity For Sale"]', '5'),
+		]);
+
+		await page.waitForSelector('.ee-entity-edit-modal');
+
+		await page.click('.ee-form-section-wrapper input#isRequired');
+
+		await page.focus('[aria-label="Quantity For Sale"]');
+		await page.fill('[aria-label="Quantity For Sale"]', '5');
 		await page.click('[aria-label="Minimum Quantity"]');
-		await page.fill('[aria-label="Minimum Quantity"]', '5');
+		await page.fill('.ee-render-fields .ee-form-item__number .chakra-numberinput__field', '5');
 		expect(1).toBe(1);
 	});
 });
