@@ -10,7 +10,8 @@ import {
 	addNewTicket,
 } from '@e2eUtils/admin';
 import { eventData } from '../../../../shared/data';
-import { ElementHandle } from 'packages/e2e-tests/types';
+// import { ElementHandle } from 'packages/e2e-tests/types';
+import type { ElementHandle } from 'playwright-core';
 
 const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();
@@ -34,6 +35,7 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 	let getFirstEventId: string;
 	let getSetMaxValue: string;
 	let getSetValueSecondRow: string;
+	let getTicketRows: ElementHandle<SVGElement | HTMLElement>[];
 	const ticketAmount: number = 10;
 	const ticketAmountPlusTax: string = (ticketAmount * 0.15 + ticketAmount).toFixed(2);
 	const ticketDetails: {
@@ -107,7 +109,7 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 		const ticketDetailsWrapper = `table#tkt-slctr-tbl-${getFirstEventId} > tbody > tr.tckt-slctr-tbl-tr`;
 
 		// get all ticket rows at frontend
-		const getTicketRows = await page.$$(ticketDetailsWrapper);
+		getTicketRows = await page.$$(ticketDetailsWrapper);
 		// loop all tickets and check the value
 		for (const [index, row] of getTicketRows.entries()) {
 			// check ticket title
@@ -202,37 +204,81 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 		const restoreLink = await eventsListSurfer.getItemActionLinkByText(firstItem, 'Edit');
 		await page.goto(restoreLink);
 
-		ticketRows = await page.$$('#ee-entity-list-tickets .ee-entity-list__card-view > .ee-entity-list-item');
+		ticketRows = await page.click(
+			'#ee-entity-list-tickets .ee-entity-list__card-view > .ee-entity-list-item:nth-child(2) [aria-label="ticket main menu"]'
+		);
 
-		const daw = await ticketRows[1].$('[aria-label="ticket main menu"]');
-		await daw.click();
-		const agay = await ticketRows[1].$('text=edit ticket');
-		await agay.click();
+		await page.click('#menu-list-71-menuitem-74');
+		await page.focus('#min');
+		await page.fill('#min', '4');
+		await page.focus('#max');
+		await page.fill('#max', '6');
+		await page.click('#field-192-label');
+		await page.click('text=Skip prices - assign dates');
+		// await page.click('button[type=submit]');
+		await Promise.all([page.waitForLoadState(), page.click('button[type=submit]')]);
+		await Goto.eventsListPage();
+
+		// get first event
+		const firstItemAgain = await eventsListSurfer.getFirstListItem();
+		// get first event ID for examine DOM value at next test
+		getFirstEventId = await (await firstItemAgain.$('td.column-id')).innerText();
+
+		// go to frontend to test DOM value
+		const goToFrontEnd = await eventsListSurfer.getItemActionLinkByText(firstItemAgain, 'View');
+		await page.goto(goToFrontEnd);
+
+		const ticketDetailsWrapper = `table#tkt-slctr-tbl-${getFirstEventId} > tbody > tr.tckt-slctr-tbl-tr`;
+
+		// get all ticket rows at frontend
+		getTicketRows = await page.$$(ticketDetailsWrapper);
+
+		for (const [index, row] of getTicketRows.entries()) {
+			if (index === 1) {
+				const checkFirstQtyOptions = await (
+					await row.$('.ticket-selector-tbl-qty-slct option:first-child')
+				).getAttribute('value');
+				// expect(checkFirstQtyOptions).toBe('0');
+
+				const checkLastQtyOptions = await (
+					await row.$('.ticket-selector-tbl-qty-slct option:last-child')
+				).getAttribute('value');
+				// expect(checkLastQtyOptions).toBe('10');
+				console.log({ checkFirstQtyOptions, checkLastQtyOptions });
+			}
+		}
+
+		// await Promise.all([page.waitForNavigation(), page.click('text=Submit')]);
+		// const daw = await ticketRows[1].$('[aria-label="ticket main menu"]');
+		// await daw.click();
+		// const agay = await ticketRows[1].$('text=edit ticket');
+		// await agay.click();
 
 		// await Promise.all([page.waitForLoadState(), agay.click()]);
-		await page.waitForSelector('.ee-form-item--has-info');
-		await page.click(
-			'.chakra-modal__content-container .sections-wrapper .ee-render-fields .ee-form-item__switch #isRequired'
-		);
-		await Promise.all([
-			page.waitForLoadState(),
-			// page.focus('.chakra-modal__content-container .sections-wrapper > ee-form-section-wrapper:nth-child(3) svg'),
-			// page.click('.chakra-modal__content-container .sections-wrapper > ee-form-section-wrapper:nth-child(3) svg'),
-			// page.click('.chakra-modal__content-container .sections-wrapper > ee-form-section-wrapper:nth-child(3) svg'),
-			page.click(
-				'.chakra-modal__content-container .sections-wrapper > ee-form-section-wrapper:nth-child(3) .ee-render-fields .ee-form-item__switch #isRequired'
-			),
-			page.fill('[aria-label="Quantity For Sale"]', '5'),
-		]);
+		// await page.waitForSelector('.ee-form-item--has-info');
+		// await page.click(
+		// 	'.chakra-modal__content-container .sections-wrapper .ee-render-fields .ee-form-item__switch #isRequired'
+		// );
 
-		await page.waitForSelector('.ee-entity-edit-modal');
+		// await Promise.all([
+		// 	page.waitForLoadState(),
+		// 	// page.focus('.chakra-modal__content-container .sections-wrapper > ee-form-section-wrapper:nth-child(3) svg'),
+		// 	// page.click('.chakra-modal__content-container .sections-wrapper > ee-form-section-wrapper:nth-child(3) svg'),
+		// 	// page.click('.chakra-modal__content-container .sections-wrapper > ee-form-section-wrapper:nth-child(3) svg'),
+		// 	page.click(
+		// 		'.chakra-modal__content-container .sections-wrapper > ee-form-section-wrapper:nth-child(3) .ee-render-fields .ee-form-item__switch #isRequired'
+		// 	),
+		// 	page.fill('[aria-label="Quantity For Sale"]', '5'),
+		// ]);
 
-		await page.click('.ee-form-section-wrapper input#isRequired');
+		// await page.waitForSelector('.ee-entity-edit-modal');
 
-		await page.focus('[aria-label="Quantity For Sale"]');
-		await page.fill('[aria-label="Quantity For Sale"]', '5');
-		await page.click('[aria-label="Minimum Quantity"]');
-		await page.fill('.ee-render-fields .ee-form-item__number .chakra-numberinput__field', '5');
+		// await page.click('.ee-form-section-wrapper input#isRequired');
+
+		// await page.focus('[aria-label="Quantity For Sale"]');
+		// await page.fill('[aria-label="Quantity For Sale"]', '5');
+		// await page.click('[aria-label="Minimum Quantity"]');
+		// await page.fill('.ee-render-fields .ee-form-item__number .chakra-numberinput__field', '5');
 		expect(1).toBe(1);
 	});
 });
