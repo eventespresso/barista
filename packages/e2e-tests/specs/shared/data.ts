@@ -87,6 +87,21 @@ export const eventData = {
 	bulkEventFour: { title: 'Test Four', description: 'Some description for test four event' },
 };
 
+export const ticketData = {
+	expired: {
+		name: 'Test expired ticket',
+		description: 'Some description for expired ticket',
+		startDate: sub('days', NOW, 20),
+		endDate: sub('days', NOW, 22),
+	},
+	goesOnSale: {
+		name: 'Test goes on sale ticket',
+		description: 'Some description for goes on sale ticket',
+		startDate: add('days', NOW, 20),
+		endDate: add('days', NOW, 22),
+	},
+};
+
 export const eventVenueData = { title: 'Test venue title', description: 'Test venue description' };
 
 // data use create sample category

@@ -8,18 +8,24 @@ import {
 	EDTRGlider,
 	RegistrationOptions,
 	addNewTicket,
+	TicketEditor,
 } from '@e2eUtils/admin';
-import { eventData } from '../../../../shared/data';
+import { sub, add } from '@eventespresso/dates';
+import { formatDateTime } from '@e2eUtils/common';
+import { eventData, ticketData } from '../../../../shared/data';
 // import { ElementHandle } from 'packages/e2e-tests/types';
 import type { ElementHandle } from 'playwright-core';
 
 const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();
 const registrationOptions = new RegistrationOptions();
+const ticketEditor = new TicketEditor();
 const edtrGlider = new EDTRGlider();
 
 const namespace = 'single-page-more-ticket-selector-ten-max-attendees';
 let capture: PageVideoCapture;
+
+const formatDate = formatDateTime();
 
 beforeAll(async () => {
 	// capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
@@ -214,6 +220,9 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 		await page.focus('#max');
 		await page.fill('#max', '6');
 		await page.click('#field-192-label');
+		const isCheck = await page.isChecked('#isRequired');
+		console.log({ isCheck });
+
 		await page.click('text=Skip prices - assign dates');
 		// await page.click('button[type=submit]');
 		await Promise.all([page.waitForLoadState(), page.click('button[type=submit]')]);
@@ -238,47 +247,47 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 				const checkFirstQtyOptions = await (
 					await row.$('.ticket-selector-tbl-qty-slct option:first-child')
 				).getAttribute('value');
-				// expect(checkFirstQtyOptions).toBe('0');
+				expect(checkFirstQtyOptions).toBe('4');
 
 				const checkLastQtyOptions = await (
 					await row.$('.ticket-selector-tbl-qty-slct option:last-child')
 				).getAttribute('value');
-				// expect(checkLastQtyOptions).toBe('10');
+				expect(checkLastQtyOptions).toBe('6');
 				console.log({ checkFirstQtyOptions, checkLastQtyOptions });
 			}
 		}
+	});
 
-		// await Promise.all([page.waitForNavigation(), page.click('text=Submit')]);
-		// const daw = await ticketRows[1].$('[aria-label="ticket main menu"]');
-		// await daw.click();
-		// const agay = await ticketRows[1].$('text=edit ticket');
-		// await agay.click();
+	it('Set ticket to expired and goes on sale', async () => {
+		await Goto.eventsListPage();
+		// get first event
+		const firstItem = await eventsListSurfer.getFirstListItem();
+		getFirstEventId = await (await firstItem.$('td.column-id')).innerText();
+		const restoreLink = await eventsListSurfer.getItemActionLinkByText(firstItem, 'Edit');
+		await page.goto(restoreLink);
 
-		// await Promise.all([page.waitForLoadState(), agay.click()]);
-		// await page.waitForSelector('.ee-form-item--has-info');
-		// await page.click(
-		// 	'.chakra-modal__content-container .sections-wrapper .ee-render-fields .ee-form-item__switch #isRequired'
-		// );
+		// get all tickets added
+		ticketRows = await page.$$('#ee-entity-list-tickets .ee-entity-list__card-view > .ee-entity-list-item');
+		console.log({ ticketRows: ticketRows.length });
 
-		// await Promise.all([
-		// 	page.waitForLoadState(),
-		// 	// page.focus('.chakra-modal__content-container .sections-wrapper > ee-form-section-wrapper:nth-child(3) svg'),
-		// 	// page.click('.chakra-modal__content-container .sections-wrapper > ee-form-section-wrapper:nth-child(3) svg'),
-		// 	// page.click('.chakra-modal__content-container .sections-wrapper > ee-form-section-wrapper:nth-child(3) svg'),
-		// 	page.click(
-		// 		'.chakra-modal__content-container .sections-wrapper > ee-form-section-wrapper:nth-child(3) .ee-render-fields .ee-form-item__switch #isRequired'
-		// 	),
-		// 	page.fill('[aria-label="Quantity For Sale"]', '5'),
-		// ]);
+		for (const ticket of ticketRows) {
+			await ticket.click('.ee-container__sidebar--before .ee-edit-calendar-date-range-btn');
+			// await ticketEditor.editTicket(ticket, ticketData.goesOnSale);
+			// startDate: add('days', NOW, 20),
+			// 		endDate: add('days', NOW, 22),
+			// ee-dropdown-menu__list
+			await page.click('.ee-dropdown-menu__list:nth-child(1)');
+			const startDate = add('days', NOW, 20);
+			const endDate = add('days', NOW, 22);
+			await page.focus('input[aria-label="Start Date"]');
+			await page.fill('input[aria-label="Start Date"]', await formatDate(startDate));
 
-		// await page.waitForSelector('.ee-entity-edit-modal');
-
-		// await page.click('.ee-form-section-wrapper input#isRequired');
-
-		// await page.focus('[aria-label="Quantity For Sale"]');
-		// await page.fill('[aria-label="Quantity For Sale"]', '5');
-		// await page.click('[aria-label="Minimum Quantity"]');
-		// await page.fill('.ee-render-fields .ee-form-item__number .chakra-numberinput__field', '5');
+			await page.focus('input[aria-label="End Date"]');
+			await page.fill('input[aria-label="End Date"]', await formatDate(endDate));
+			await page.click('text=Skip prices - assign dates');
+			// await page.click('button[type=submit]');
+			await Promise.all([page.waitForLoadState(), page.click('button[type=submit]')]);
+		}
 		expect(1).toBe(1);
 	});
 });
