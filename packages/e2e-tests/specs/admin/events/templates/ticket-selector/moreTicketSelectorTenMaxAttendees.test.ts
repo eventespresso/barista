@@ -48,7 +48,7 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 		titles: string[];
 		ids: string[];
 	} = { titles: [], ids: [] };
-	let ticketRows: any = [];
+	// let ticketRows: any = [];
 
 	it('Create new sample event with more ticket for frontend test', async () => {
 		// create new event
@@ -60,13 +60,14 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 		await edtrGlider.removeEventTicketDatesFilter();
 		// add new three tickets
 		for (const ticket of [1, 2, 3]) {
-			NOW.setDate(NOW.getDate() - 10);
-
+			// NOW.setDate(NOW.getDate() - 10);
+			const dateNow = NOW;
+			const startDate = sub('days', dateNow, 10);
 			// create new ticket
 			await addNewTicket({
 				name: `Ticket date title - test ${ticket}`,
 				description: `Ticket date description - test ${ticket}`,
-				startDate: NOW,
+				startDate,
 				setDirectPrice: true,
 				amount: ticketAmount,
 			});
@@ -79,7 +80,7 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 		// assert set max, suppose to be 1 after set
 		expect(getSetMaxValue).toBe('10');
 		// get all tickets added
-		ticketRows = await page.$$('#ee-entity-list-tickets .ee-entity-list__card-view > .ee-entity-list-item');
+		const ticketRows = await page.$$('#ee-entity-list-tickets .ee-entity-list__card-view > .ee-entity-list-item');
 
 		// loop all tickets and get ticket title and id
 		for (const row of ticketRows) {
@@ -210,7 +211,7 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 		const restoreLink = await eventsListSurfer.getItemActionLinkByText(firstItem, 'Edit');
 		await page.goto(restoreLink);
 
-		ticketRows = await page.click(
+		await page.click(
 			'#ee-entity-list-tickets .ee-entity-list__card-view > .ee-entity-list-item:nth-child(2) [aria-label="ticket main menu"]'
 		);
 
@@ -267,26 +268,84 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 		await page.goto(restoreLink);
 
 		// get all tickets added
-		ticketRows = await page.$$('#ee-entity-list-tickets .ee-entity-list__card-view > .ee-entity-list-item');
+		const ticketRows = await page.$$('#ee-entity-list-tickets .ee-entity-list__card-view > .ee-entity-list-item');
 		console.log({ ticketRows: ticketRows.length });
 
-		for (const ticket of ticketRows) {
-			await ticket.click('.ee-container__sidebar--before .ee-edit-calendar-date-range-btn');
-			// await ticketEditor.editTicket(ticket, ticketData.goesOnSale);
-			// startDate: add('days', NOW, 20),
-			// 		endDate: add('days', NOW, 22),
-			// ee-dropdown-menu__list
-			await page.click('.ee-dropdown-menu__list:nth-child(1)');
-			const startDate = add('days', NOW, 20);
-			const endDate = add('days', NOW, 22);
-			await page.focus('input[aria-label="Start Date"]');
-			await page.fill('input[aria-label="Start Date"]', await formatDate(startDate));
+		for (const [index, ticket] of ticketRows.entries()) {
+			if (index >= 0 && index <= 1) {
+				const triggerEdit = await ticket.$('button[aria-label="Edit Ticket Sale Dates"]');
+				await triggerEdit.click();
+				// await ticketEditor.editTicket(ticket, ticketData.goesOnSale);
+				// startDate: add('days', NOW, 20),
+				// 		endDate: add('days', NOW, 22),
+				// ee-dropdown-menu__list
+				// await page.click('.ee-dropdown-menu__list:nth-child(1)');
+				const dateNow = NOW;
+				const startDate = add('days', dateNow, 20);
+				const endDate = add('days', dateNow, 22);
+				// NOW.setDate(NOW.getDate() + iterator * 30);
+				console.log({ index, startDate, endDate });
+				await page.focus('.date-range-picker__start-input input');
+				await page.fill('.date-range-picker__start-input input', await formatDate(startDate));
 
-			await page.focus('input[aria-label="End Date"]');
-			await page.fill('input[aria-label="End Date"]', await formatDate(endDate));
-			await page.click('text=Skip prices - assign dates');
-			// await page.click('button[type=submit]');
-			await Promise.all([page.waitForLoadState(), page.click('button[type=submit]')]);
+				await page.focus('.date-range-picker__end-input input');
+				await page.fill('.date-range-picker__end-input input', await formatDate(endDate));
+				// await page.click('text=Skip prices - assign dates');
+				// await page.click('button[type=submit]');
+				await Promise.all([page.waitForLoadState(), page.click('button[aria-label="save"]')]);
+			} else {
+				const triggerEdit = await ticket.$('button[aria-label="Edit Ticket Sale Dates"]');
+				await triggerEdit.click();
+				// await ticketEditor.editTicket(ticket, ticketData.goesOnSale);
+				// startDate: add('days', NOW, 20),
+				// 		endDate: add('days', NOW, 22),
+				// ee-dropdown-menu__list
+				// await page.click('.ee-dropdown-menu__list:nth-child(1)');
+				const dateNow = NOW;
+				const startDate = sub('days', dateNow, 22);
+				const endDate = sub('days', dateNow, 20);
+				console.log({ index, startDate, endDate });
+				await page.focus('.date-range-picker__start-input input');
+				await page.fill('.date-range-picker__start-input input', await formatDate(startDate));
+
+				await page.focus('.date-range-picker__end-input input');
+				await page.fill('.date-range-picker__end-input input', await formatDate(endDate));
+				// await page.click('text=Skip prices - assign dates');
+				// await page.click('button[type=submit]');
+				await Promise.all([page.waitForLoadState(), page.click('button[aria-label="save"]')]);
+			}
+		}
+		expect(1).toBe(1);
+	});
+
+	it('Test the DOM if goes on sale and expired ticket is reflected', async () => {
+		await Goto.eventsListPage();
+		await templatesManager.gotoTemplates();
+		await templatesManager.setAndSaveShowExpiredTickets({ value: '1' });
+		const selectedValue = await templatesManager.getSelectedShowExpiredTickets();
+		console.log({ selectedValue });
+		await Goto.eventsListPage();
+		// get first event
+		const firstItem = await eventsListSurfer.getFirstListItem();
+		getFirstEventId = await (await firstItem.$('td.column-id')).innerText();
+		const restoreLink = await eventsListSurfer.getItemActionLinkByText(firstItem, 'View');
+		await page.goto(restoreLink);
+
+		const ticketDetailsWrapper = `table#tkt-slctr-tbl-${getFirstEventId} > tbody > tr.tckt-slctr-tbl-tr`;
+
+		// get all ticket rows at frontend
+		getTicketRows = await page.$$(ticketDetailsWrapper);
+
+		for (const [index, row] of getTicketRows.entries()) {
+			if (index >= 0 && index <= 1) {
+				const goesOnsale = await (await row.$('.tckt-slctr-tbl-td-qty .ticket-pending')).innerText();
+				expect(goesOnsale).toBe('Goes On Sale');
+				console.log({ goesOnsale });
+			} else {
+				const expired = await (await row.$('.tckt-slctr-tbl-td-qty .ticket-sales-expired')).innerText();
+				expect(expired).toBe('Expired');
+				console.log({ expired });
+			}
 		}
 		expect(1).toBe(1);
 	});
