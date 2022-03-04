@@ -1,3 +1,5 @@
+import type { ElementHandle } from 'playwright-core';
+
 const ticketsListSelector = '#ee-entity-list-tickets .ee-entity-list__card-view';
 
 /**
@@ -78,6 +80,13 @@ export class EDTRGlider {
 			'#ee-entity-list-tickets .ee-entity-list__card-view > .ee-entity-paper-frame-wrapper'
 		);
 		return countTickets.length;
+	};
+
+	/**
+	 * get ticket rows of an events at EDTR section
+	 */
+	ticketRows = async (): Promise<ElementHandle<SVGElement | HTMLElement>[]> => {
+		return await page?.$$('#ee-entity-list-tickets .ee-entity-list__card-view > .ee-entity-list-item');
 	};
 
 	/**

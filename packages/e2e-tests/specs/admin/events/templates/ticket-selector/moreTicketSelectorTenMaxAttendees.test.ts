@@ -80,7 +80,8 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 		// assert set max, suppose to be 1 after set
 		expect(getSetMaxValue).toBe('10');
 		// get all tickets added
-		const ticketRows = await page.$$('#ee-entity-list-tickets .ee-entity-list__card-view > .ee-entity-list-item');
+		// const ticketRows = await page.$$('#ee-entity-list-tickets .ee-entity-list__card-view > .ee-entity-list-item');
+		const ticketRows = await edtrGlider.ticketRows();
 
 		// loop all tickets and get ticket title and id
 		for (const row of ticketRows) {
@@ -338,9 +339,11 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 
 		for (const [index, row] of getTicketRows.entries()) {
 			if (index >= 0 && index <= 1) {
-				const goesOnsale = await (await row.$('.tckt-slctr-tbl-td-qty .ticket-pending')).innerText();
-				expect(goesOnsale).toBe('Goes On Sale');
-				console.log({ goesOnsale });
+				const goesOnsale = await (await row.$('.tckt-slctr-tbl-td-qty span.ticket-pending')).innerHTML();
+				// const checking = goesOnsale == 'Goes On Sale';
+				// const daw = typeof goesOnsale;
+				// console.log({ goesOnsale, checking: JSON.stringify(goesOnsale) });
+				expect(goesOnsale).toBe('Goes&nbsp;On&nbsp;Sale');
 			} else {
 				const expired = await (await row.$('.tckt-slctr-tbl-td-qty .ticket-sales-expired')).innerText();
 				expect(expired).toBe('Expired');
