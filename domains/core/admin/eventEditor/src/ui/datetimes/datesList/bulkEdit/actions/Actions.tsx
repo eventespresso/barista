@@ -77,4 +77,4 @@ const Actions: React.FC = () => {
 	);
 };
 
-export default withFeature('use_bulk_edit')(Actions);
+export default withFeature('ee_event_editor_bulk_edit')(Actions);

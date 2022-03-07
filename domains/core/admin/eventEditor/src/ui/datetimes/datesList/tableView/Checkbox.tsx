@@ -9,4 +9,4 @@ const Checkbox: React.FC<ActionCheckboxProps> = (props) => {
 	return <ActionCheckbox {...props} visibleEntityIds={visibleDatetimeIds} />;
 };
 
-export default withFeature('use_bulk_edit')(Checkbox);
+export default withFeature('ee_event_editor_bulk_edit')(Checkbox);
