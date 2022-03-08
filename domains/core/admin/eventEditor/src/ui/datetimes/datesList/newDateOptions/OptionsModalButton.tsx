@@ -13,7 +13,16 @@ const OptionsModalButton: React.FC = ({ children }) => {
 		openWithData({ children });
 	}, [children, openWithData]);
 
-	return <Button buttonText={__('Add New Date')} icon={Calendar} mr={2} onClick={onClick} size='big' />;
+	return (
+		<Button
+			buttonText={__('Add New Date')}
+			buttonType='primary'
+			icon={Calendar}
+			mr={2}
+			onClick={onClick}
+			size='big'
+		/>
+	);
 };
 
 export default OptionsModalButton;
