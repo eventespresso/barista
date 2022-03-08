@@ -110,4 +110,13 @@ export class EDTRGlider {
 	removeEventDatesFilter = async () => {
 		await page?.click('button.ee-filter-tag__close-btn');
 	};
+
+	/**
+	 * Trigger main menu for specific ticket
+	 */
+	ticketMainMenu = async (row: number) => {
+		await page.click(
+			`#ee-entity-list-tickets .ee-entity-list__card-view > .ee-entity-list-item:nth-child(${row}) [aria-label="ticket main menu"]`
+		);
+	};
 }
