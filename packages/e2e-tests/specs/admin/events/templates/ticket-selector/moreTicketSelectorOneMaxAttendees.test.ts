@@ -20,13 +20,13 @@ const namespace = 'single-page-more-ticket-selector-one-max-attendees';
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
-	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	// capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 	await eventsListSurfer.deleteAllEventsByLink('View All Events');
 	await Goto.eventsListPage();
 });
 
 afterAll(async () => {
-	await capture?.stop();
+	// await capture?.stop();
 });
 
 describe('One Max Attendees and more tickets - ticket selector test', () => {
@@ -104,7 +104,8 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 			// check ticket title
 			const checkTicketTitle = await (await row.$('.tckt-slctr-tbl-td-name strong')).innerText();
 			// assert ticket title
-			expect(ticketDetails.titles.includes(checkTicketTitle)).toBeTruthy();
+			const isTitleExist = ticketDetails.titles.includes(checkTicketTitle);
+			expect(isTitleExist).toBe(true);
 
 			// check ticket price
 			const checkTicketPrice = await (await row.$('.tckt-slctr-tbl-td-price .tckt-price--nowrap')).innerText();
@@ -116,7 +117,8 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 				await row.$('.tckt-slctr-tbl-td-qty input[type="hidden"]')
 			).getAttribute('value');
 			// assert radio button value
-			expect(ticketDetails.ids.includes(checkRadioBtnValue)).toBeTruthy();
+			const isRadioBtnValueExist = ticketDetails.ids.includes(checkRadioBtnValue);
+			expect(isRadioBtnValueExist).toBe(true);
 		}
 	});
 
