@@ -27,13 +27,13 @@ let capture: PageVideoCapture;
 const formatDate = formatDateTime();
 
 beforeAll(async () => {
-	// capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 	await eventsListSurfer.deleteAllEventsByLink('View All Events');
 	await Goto.eventsListPage();
 });
 
 afterAll(async () => {
-	// await capture?.stop();
+	await capture?.stop();
 });
 
 describe('One Max Attendees and more tickets - ticket selector test', () => {
