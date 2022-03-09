@@ -38,7 +38,6 @@ add_action(
             function ($capabilities) {
                 return array_merge($capabilities, [
                     'use_advanced_event_editor'  => true,
-                    'ee_event_editor_bulk_edit'    => true,
                     'use_default_ticket_manager' => true,
                     'use_event_description_rte'  => true,
                     'use_experimental_rte'       => true,
