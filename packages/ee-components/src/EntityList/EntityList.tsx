@@ -1,5 +1,5 @@
 import { __ } from '@eventespresso/i18n';
-import { useFeature, useStatus } from '@eventespresso/services';
+import { useCurrentUserCan, useStatus } from '@eventespresso/services';
 import { Slot } from '@eventespresso/slot-fill';
 import { CollapsibleLegend, EmptyState, Pagination, EntityList as EntityListUI } from '@eventespresso/ui-components';
 import type { EntityListFilterStateManager } from '@eventespresso/services';
@@ -23,7 +23,8 @@ const EntityList = <ELFS extends EntityListFilterStateManager<any>>({
 	const { isError, isLoading } = useStatus();
 	const error = isError(entityType);
 	const loading = isLoading(entityType);
-	const showBulkActions = useFeature('ee_event_editor_bulk_edit');
+	const currentUserCan = useCurrentUserCan();
+	const showBulkActions = currentUserCan('ee_event_editor_bulk_edit');
 
 	let entityList: React.ReactNode;
 
