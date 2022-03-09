@@ -27,13 +27,13 @@ let capture: PageVideoCapture;
 const formatDate = formatDateTime();
 
 beforeAll(async () => {
-	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	// capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 	await eventsListSurfer.deleteAllEventsByLink('View All Events');
 	await Goto.eventsListPage();
 });
 
 afterAll(async () => {
-	await capture?.stop();
+	// await capture?.stop();
 });
 
 describe('One Max Attendees and more tickets - ticket selector test', () => {
@@ -67,7 +67,6 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 				name: `Ticket date title - test ${ticket}`,
 				description: `Ticket date description - test ${ticket}`,
 				startDate,
-				setDirectPrice: true,
 				amount: ticketAmount,
 			});
 		}
@@ -390,5 +389,66 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 				expect(expired).toBe('Expired');
 			}
 		}
+	});
+
+	it('Change visibility of the ticket to members only', async () => {
+		// go back to event overview
+		await Goto.eventsListPage();
+
+		// get first event
+		const firstItem = await eventsListSurfer.getFirstListItem();
+		// go to edtr to edit ticket
+		const restoreLink = await eventsListSurfer.getItemActionLinkByText(firstItem, 'Edit');
+		await page.goto(restoreLink);
+
+		// get all ticket
+		const edtrTicketRows = await edtrGlider.ticketRows();
+
+		// loop all ticket to into members only
+		for (const [index, ticket] of edtrTicketRows.entries()) {
+			// select second ticket in a row and trigger main menu to update min and max ticket quantity
+			await edtrGlider.ticketMainMenu(index + 1);
+			console.log({ index });
+			const mainMenu = await ticket.$(`#ee-entity-list-tickets [aria-label="ticket main menu"]`);
+			mainMenu.click();
+			// click edit ticket
+			await page.click('#menu-list-71-menuitem-74');
+
+			const dateNow = NOW;
+			// plus 22 days for end date (for goes on sale/pending)
+			const endDate = add('days', dateNow, 22);
+
+			// focus first the field
+			await page.focus('.date-range-picker__start-input input');
+			// fill in start date value
+			await page.fill('.date-range-picker__start-input input', await formatDate(dateNow));
+
+			// focus first the field
+			await page.focus('.date-range-picker__end-input input');
+			// fill in end date value
+			await page.fill('.date-range-picker__end-input input', await formatDate(endDate));
+
+			await page.selectOption('select#visibility', { value: 'MEMBERS_ONLY' });
+			// // focus first the minimum quantity ticket field
+			// await page.focus('#min');
+			// // set minimum quantity ticket field
+			// await page.fill('#min', '4');
+			// // focus first the maximum quantity ticket field
+			// await page.focus('#max');
+			// // set maximum quantity ticket field
+			// await page.fill('#max', '6');
+			// // switch on for required ticket
+			// await page.click('text= Required Ticket');
+			// // check if required ticket already switch on
+			// const isCheck = await page.isChecked('#isRequired');
+			// // assert required ticket value
+			// expect(isCheck).toBe(true);
+
+			// click skip prices
+			await page.click('text=Skip prices - assign dates');
+			// submit after updates
+			await Promise.all([page.waitForLoadState(), page.click('button[type=submit]')]);
+		}
+		expect(1).toBe(1);
 	});
 });
