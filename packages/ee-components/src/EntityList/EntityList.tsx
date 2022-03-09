@@ -23,7 +23,7 @@ const EntityList = <ELFS extends EntityListFilterStateManager<any>>({
 	const { isError, isLoading } = useStatus();
 	const error = isError(entityType);
 	const loading = isLoading(entityType);
-	const showBulkActions = useFeature('use_bulk_edit');
+	const showBulkActions = useFeature('ee_event_editor_bulk_edit');
 
 	let entityList: React.ReactNode;
 

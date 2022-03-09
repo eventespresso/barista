@@ -11,7 +11,7 @@ import { entityPlurals } from './constants';
  * @example
  * const currentUserCan = useCurrentUserCan();
  *
- * if (currentUserCan('use_bulk_edit'))
+ * if (currentUserCan('ee_event_editor_bulk_edit'))
  *
  * @returns {CurrentUserCan}
  */
