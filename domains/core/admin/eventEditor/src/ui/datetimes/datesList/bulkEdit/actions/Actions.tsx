@@ -5,7 +5,7 @@ import { __ } from '@eventespresso/i18n';
 import { BulkActions } from '@eventespresso/ee-components';
 import { Collapsible } from '@eventespresso/ui-components';
 import { useDisclosure, useMemoStringify } from '@eventespresso/hooks';
-import { withFeature } from '@eventespresso/services';
+import { withPermission } from '@eventespresso/services';
 import { useDatesListFilterState, hooks } from '@eventespresso/edtr-services';
 import { DatetimeStatus } from '@eventespresso/predicates';
 import { useBulkEdit } from '@eventespresso/services';
@@ -77,4 +77,4 @@ const Actions: React.FC = () => {
 	);
 };
 
-export default withFeature('ee_event_editor_bulk_edit')(Actions);
+export default withPermission('ee_event_editor_bulk_edit')(Actions);

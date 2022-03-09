@@ -7,7 +7,7 @@ import { useDisclosure, useMemoStringify } from '@eventespresso/hooks';
 import { useTickets, useTicketsListFilterState } from '@eventespresso/edtr-services';
 import { SOLD_TICKET_ERROR_MESSAGE } from '@eventespresso/tpc';
 import { entitiesWithGuIdInArray, TicketsStatus } from '@eventespresso/predicates';
-import { withFeature, useBulkEdit } from '@eventespresso/services';
+import { withPermission, useBulkEdit } from '@eventespresso/services';
 import type { BulkActionsProps } from '@eventespresso/ui-components';
 
 import Checkbox from '../../tableView/Checkbox';
@@ -83,4 +83,4 @@ const Actions: React.FC = () => {
 	);
 };
 
-export default withFeature('ee_event_editor_bulk_edit')(Actions);
+export default withPermission('ee_event_editor_bulk_edit')(Actions);

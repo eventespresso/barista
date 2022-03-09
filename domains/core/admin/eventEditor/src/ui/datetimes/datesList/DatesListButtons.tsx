@@ -6,7 +6,7 @@ import { Ticket } from '@eventespresso/icons';
 import { Button, ButtonRow } from '@eventespresso/ui-components';
 import { EdtrGlobalModals, useDatetimes, useTickets } from '@eventespresso/edtr-services';
 import { useGlobalModal } from '@eventespresso/registry';
-import { withFeature } from '@eventespresso/services';
+import { withPermission } from '@eventespresso/services';
 
 import { BaseProps } from '../../ticketAssignmentsManager';
 import { NewDateButton } from './newDateOptions';
@@ -39,4 +39,4 @@ const DatesListButtons: React.FC = () => {
 	);
 };
 
-export default withFeature('use_advanced_event_editor')(DatesListButtons);
+export default withPermission('ee_advanced_event_editor')(DatesListButtons);
