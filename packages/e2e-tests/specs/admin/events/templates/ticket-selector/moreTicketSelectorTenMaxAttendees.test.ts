@@ -8,6 +8,7 @@ import {
 	EDTRGlider,
 	RegistrationOptions,
 	addNewTicket,
+	EntityEditor,
 } from '@e2eUtils/admin';
 import { SingleEventPageManager } from '@e2eUtils/frontend';
 import { sub, add } from '@eventespresso/dates';
@@ -19,6 +20,7 @@ const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();
 const registrationOptions = new RegistrationOptions();
 const edtrGlider = new EDTRGlider();
+const entityEditor = new EntityEditor();
 const singleEventPageManager = new SingleEventPageManager();
 
 const namespace = 'single-page-more-ticket-selector-ten-max-attendees';
@@ -407,26 +409,32 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 		// loop all ticket to into members only
 		for (const [index, ticket] of edtrTicketRows.entries()) {
 			// select second ticket in a row and trigger main menu to update min and max ticket quantity
-			await edtrGlider.ticketMainMenu(index + 1);
-			console.log({ index });
-			const mainMenu = await ticket.$(`#ee-entity-list-tickets [aria-label="ticket main menu"]`);
-			mainMenu.click();
+			// await edtrGlider.ticketMainMenu(index + 1);
+			// entityEditor.openEditForm(ticket);
+			// console.log({ index });
+			// const mainMenu = await ticket.$(`#ee-entity-list-tickets [aria-label="ticket main menu"]`);
+			// mainMenu.click();
 			// click edit ticket
-			await page.click('#menu-list-71-menuitem-74');
+			// await page.click('#menu-list-71-menuitem-74');
+			// await page.click('text=edit ticket');
+			const triggerMainMenu = await ticket.$('[aria-label="ticket main menu"]');
+			triggerMainMenu.click();
+			const triggerEditTIcket = await ticket.$('[data-index="0"]');
+			await triggerEditTIcket.click();
 
 			const dateNow = NOW;
 			// plus 22 days for end date (for goes on sale/pending)
 			const endDate = add('days', dateNow, 22);
 
 			// focus first the field
-			await page.focus('.date-range-picker__start-input input');
+			await page.focus('#startDate');
 			// fill in start date value
-			await page.fill('.date-range-picker__start-input input', await formatDate(dateNow));
+			await page.fill('#startDate', await formatDate(dateNow));
 
 			// focus first the field
-			await page.focus('.date-range-picker__end-input input');
+			await page.focus('#endDate');
 			// fill in end date value
-			await page.fill('.date-range-picker__end-input input', await formatDate(endDate));
+			await page.fill('#endDate', await formatDate(endDate));
 
 			await page.selectOption('select#visibility', { value: 'MEMBERS_ONLY' });
 			// // focus first the minimum quantity ticket field
