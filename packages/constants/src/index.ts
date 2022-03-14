@@ -1,4 +1,5 @@
 export * from './adminRoutes';
+export * from './capabilities';
 export * from './dateFnsFormats';
 export * from './datetime';
 export * from './defaultDates';
