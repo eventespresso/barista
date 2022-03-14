@@ -14,5 +14,5 @@ jobs:
       with:
         owner: 'eventespresso'
         repo: 'barista'
-        prNumber: ${{ github.event.number }}
+        prNumber: ${{ github.event.pull_request.number }}
         token: ${{ secrets.GH_ACTIONS_ACCESS_TOKEN }}
