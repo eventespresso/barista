@@ -8,11 +8,13 @@ export const GET_CURRENT_USER: any = gql`
 			description
 			email
 			firstName
+			isa
 			lastName
 			locale
 			name
 			nicename
 			nickname
+			roles
 			username
 		}
 	}
