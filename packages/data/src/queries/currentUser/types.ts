@@ -7,13 +7,13 @@ export interface User {
 	email: string;
 	firstName: string;
 	id: string;
-	isa: boolean;
+	isa?: boolean;
 	lastName: string;
 	locale: string;
 	name: string;
 	nicename: string;
 	nickname: string;
-	roles: Array<string>;
+	roles?: Array<string>;
 	username: string;
 	__typename?: string;
 }
