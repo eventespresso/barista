@@ -29,13 +29,13 @@ let capture: PageVideoCapture;
 const formatDate = formatDateTime();
 
 beforeAll(async () => {
-	// capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 	await eventsListSurfer.deleteAllEventsByLink('View All Events');
 	await Goto.eventsListPage();
 });
 
 afterAll(async () => {
-	// await capture?.stop();
+	await capture?.stop();
 });
 
 describe('One Max Attendees and more tickets - ticket selector test', () => {
@@ -336,7 +336,7 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 
 		// loop all tickets and check it's status
 		for (const [index, ticket] of edtrTicketRows.entries()) {
-			// check first two ticket for pening and other for expired
+			// check first two ticket for pending and other for expired
 			if (index >= 0 && index <= 1) {
 				// get innertext status for pending
 				const checkPendingStatus = await (await ticket.$('.ee-entity-status-label')).innerText();
@@ -408,94 +408,67 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 
 		// get all ticket
 		const edtrTicketRows = await edtrGlider.ticketRows();
-		// await edtrGlider.ticketMainMenu(1);
-		// console.log({ edtrTicketRows: edtrTicketRows.length });
 
-		// const triggerEditTIcket: any = edtrTicketRows[2].$('[aria-label="ticket main menu"]');
-		// await triggerEditTIcket.click();
-		// const triggerEditTIcket = await page.$(
-		// 	`#ee-entity-list-tickets .ee-entity-list__card-view > .ee-entity-list-item:nth-child(1) #menu-list-71-menuitem-74`
-		// );
-		// await triggerEditTIcket.click();
-		// await page.click('#menu-list-71-menuitem-74');
-
-		// // loop all ticket to into members only
+		// loop all ticket
 		for (const [index, ticket] of edtrTicketRows.entries()) {
-			// select second ticket in a row and trigger main menu to update min and max ticket quantity
-			// const daw = await (await ticket.$('.ee-entity-actions-menu')).innerHTML();
-			// console.log({ daw });
+			// set third and fourth ticket visibility to memebers only
+			if (index > 1) {
+				// trigger ticket main menu to select edit
+				const triggerMainMenu: any = await ticket?.$('[tooltip="ticket main menu"]');
+				await triggerMainMenu.click();
 
-			// await edtrGlider.ticketMainMenu(index + 1);
-			const triggerMainMenu: any = await ticket?.$('[tooltip="ticket main menu"]');
-			await triggerMainMenu.click();
+				// click edit menu to update ticket visibility
+				const triggerEdit: any = await ticket?.$('.chakra-menu__menu-list > button:nth-child(1)');
+				await triggerEdit.click();
 
-			const triggerEdit: any = await ticket?.$('.chakra-menu__menu-list > button:nth-child(1)');
-			await triggerEdit.click();
+				// plus 5 days for end date
+				const endDate = add('days', NOW, 5);
+				// focus first the field
+				await page.focus('#startDate');
+				// fill in start date value
+				await page.fill('#startDate', await formatDate(NOW));
+				// // focus first the field
+				await page.focus('#endDate');
+				// fill in end date value
+				await page.fill('#endDate', await formatDate(endDate));
 
-			// click edit ticket
-			// await page.click('#menu-list-71-menuitem-74');
-			// await page.click('text="edit ticket"');
-			// entityEditor.openEditForm(ticket);
-			// console.log({ index });
-			// const mainMenu = await ticket.$(`#ee-entity-list-tickets [aria-label="ticket main menu"]`);
-			// mainMenu.click();
-			// click edit ticket
-			// await page.click('#menu-list-71-menuitem-74');
-			// await page.click('text=edit ticket');
-			// const triggerMainMenu = await ticket.$('[aria-label="ticket main menu"]');
-			// triggerMainMenu.click();
-			// // const triggerEditTIcket = await ticket.$('[data-index="0"]');
-			// const triggerEditTIcket = await page.$(
-			// 	`#ee-entity-list-tickets .ee-entity-list__card-view > .ee-entity-list-item:nth-child(${
-			// 		index + 1
-			// 	}) #menu-list-71-menuitem-74`
-			// );
-			// // await ticket.click('#menu-list-71-menuitem-74');
-			// await triggerEditTIcket.click();
+				// set ticket to visibility members only
+				await page.selectOption('select#visibility', { value: 'MEMBERS_ONLY' });
+				const resultText = await page.$eval(
+					'select#visibility',
+					(sel: any) => sel.options[sel.options.selectedIndex].textContent
+				);
+				// assert selected value for visibility
+				expect(resultText).toBe('Members only');
 
-			const dateNow = NOW;
-			// plus 22 days for end date (for goes on sale/pending)
-			// const endDate = add('days', dateNow, 22);
-			const endDate = add('days', dateNow, 5);
-			// focus first the field
-			await page.focus('#startDate');
-			// fill in start date value
-			await page.fill('#startDate', await formatDate(NOW));
-			// // focus first the field
-			await page.focus('#endDate');
-			// fill in end date value
-			await page.fill('#endDate', await formatDate(endDate));
-			await page.selectOption('select#visibility', { value: 'MEMBERS_ONLY' });
-			const resultText = await page.$eval(
-				'select#visibility',
-				(sel: any) => sel.options[sel.options.selectedIndex].textContent
-			);
-			// const resultText = await (await page.$('select#visibility option[selected="selected"]')).innerText();
-			console.log({ resultText });
-			expect(resultText).toBe('Members only');
-			// // // focus first the minimum quantity ticket field
-			// // await page.focus('#min');
-			// // // set minimum quantity ticket field
-			// // await page.fill('#min', '4');
-			// // // focus first the maximum quantity ticket field
-			// // await page.focus('#max');
-			// // // set maximum quantity ticket field
-			// // await page.fill('#max', '6');
-			// // // switch on for required ticket
-			// // await page.click('text= Required Ticket');
-			// // // check if required ticket already switch on
-			// // const isCheck = await page.isChecked('#isRequired');
-			// // // assert required ticket value
-			// // expect(isCheck).toBe(true);
-			// // click skip prices
-			await page.click('text=Skip prices - assign dates');
-			// submit after updates
-			await Promise.all([page.waitForLoadState(), page.click('button[type=submit]')]);
+				// click skip prices
+				await page.click('text=Skip prices - assign dates');
+				// submit after updates
+				await Promise.all([page.waitForLoadState(), page.click('button[type=submit]')]);
+			}
 		}
-		// expect(1).toBe(1);
 	});
 	it('Test DOM for ticket members only', async () => {
-		// await page.goto(restoreLink);
-		expect(1).toBe(1);
+		await Goto.eventsListPage();
+		// get first event
+		const firstItem = await eventsListSurfer.getFirstListItem();
+		// get view link for first event row
+		const getEventViewLink = await (await firstItem.$('.view a')).getAttribute('href');
+
+		// get first event ID for examine DOM
+		getFirstEventId = await (await firstItem.$('td.column-id')).innerText();
+
+		// hover account bar to click logout
+		await page.hover('#wp-admin-bar-my-account');
+		// click logout to test DOM
+		await Promise.all([page.waitForNavigation(), page.click('#wp-admin-bar-logout')]);
+		await page.goto(getEventViewLink);
+
+		// get all ticket rows at frontend
+		frontendticketWrapper = await singleEventPageManager.getTicketwrapper(getFirstEventId);
+		getTicketRows = await singleEventPageManager.getTicketRows(frontendticketWrapper);
+
+		// expect to be 2 result of ticket rows after we set the two ticket to memebers only for visibility
+		expect(getTicketRows.length).toBe(2);
 	});
 });
