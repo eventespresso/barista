@@ -29,13 +29,13 @@ let capture: PageVideoCapture;
 const formatDate = formatDateTime();
 
 beforeAll(async () => {
-	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	// capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 	await eventsListSurfer.deleteAllEventsByLink('View All Events');
 	await Goto.eventsListPage();
 });
 
 afterAll(async () => {
-	await capture?.stop();
+	// await capture?.stop();
 });
 
 describe('One Max Attendees and more tickets - ticket selector test', () => {
@@ -285,69 +285,37 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 
 		// loop all ticket to update start and end date
 		for (const [index, ticket] of edtrTicketRows.entries()) {
-			// set first two ticket to pending for goes on sale and others to expired
-			if (index >= 0 && index <= 1) {
-				// tirgger edit ticket date
-				const triggerEdit = await ticket.$('button[aria-label="Edit Ticket Sale Dates"]');
-				await triggerEdit.click();
+			// trigger edit ticket date
+			const triggerEdit = await ticket.$('button[aria-label="Edit Ticket Sale Dates"]');
+			await triggerEdit.click();
 
-				const dateNow = NOW;
-				// plus 20 days for start date (for goes on sale/pending)
-				const startDate = add('days', dateNow, 20);
-				// plus 22 days for end date (for goes on sale/pending)
-				const endDate = add('days', dateNow, 22);
+			const dateNow = NOW;
+			// add 20 or subtract 22 days for start date
+			const startDate = index < 2 ? add('days', dateNow, 20) : sub('days', dateNow, 22);
+			// add 22 or subtract 20 days for end date
+			const endDate = index < 2 ? add('days', dateNow, 22) : sub('days', dateNow, 20);
 
-				// focus first the field
-				await page.focus('.date-range-picker__start-input input');
-				// fill in start date value
-				await page.fill('.date-range-picker__start-input input', await formatDate(startDate));
+			// focus first the field
+			await page.focus('.date-range-picker__start-input input');
+			// fill in start date value
+			await page.fill('.date-range-picker__start-input input', await formatDate(startDate));
 
-				// focus first the field
-				await page.focus('.date-range-picker__end-input input');
-				// fill in end date value
-				await page.fill('.date-range-picker__end-input input', await formatDate(endDate));
-
-				// save changes
-				await Promise.all([page.waitForLoadState(), page.click('button[aria-label="save"]')]);
-			} else {
-				// tirgger edit ticket date
-				const triggerEdit = await ticket.$('button[aria-label="Edit Ticket Sale Dates"]');
-				await triggerEdit.click();
-
-				const dateNow = NOW;
-				// subtract 22 days for start date (for expired)
-				const startDate = sub('days', dateNow, 22);
-				// subtract 20 days for end date (for expired)
-				const endDate = sub('days', dateNow, 20);
-
-				// focus first the field
-				await page.focus('.date-range-picker__start-input input');
-				// fill in start date value
-				await page.fill('.date-range-picker__start-input input', await formatDate(startDate));
-
-				// focus first the field
-				await page.focus('.date-range-picker__end-input input');
-				// fill in end date value
-				await page.fill('.date-range-picker__end-input input', await formatDate(endDate));
-				// save changes
-				await Promise.all([page.waitForLoadState(), page.click('button[aria-label="save"]')]);
-			}
+			// focus first the field
+			await page.focus('.date-range-picker__end-input input');
+			// fill in end date value
+			await page.fill('.date-range-picker__end-input input', await formatDate(endDate));
+			// save changes
+			await Promise.all([page.waitForLoadState(), page.click('button[aria-label="save"]')]);
 		}
 
 		// loop all tickets and check it's status
 		for (const [index, ticket] of edtrTicketRows.entries()) {
+			// get innertext status for pending
+			const ticketStatus = await (await ticket.$('.ee-entity-status-label')).innerText();
 			// check first two ticket for pending and other for expired
-			if (index >= 0 && index <= 1) {
-				// get innertext status for pending
-				const checkPendingStatus = await (await ticket.$('.ee-entity-status-label')).innerText();
-				// assert status
-				expect(checkPendingStatus).toBe('PENDING');
-			} else {
-				// get innertext status for expired
-				const checkExpiredStatus = await (await ticket.$('.ee-entity-status-label')).innerText();
-				// assert status
-				expect(checkExpiredStatus).toBe('EXPIRED');
-			}
+			const expectedStatus = index < 2 ? 'PENDING' : 'EXPIRED';
+			// assert status
+			expect(ticketStatus).toBe(expectedStatus);
 		}
 	});
 
