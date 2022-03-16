@@ -8,7 +8,6 @@ import {
 	EDTRGlider,
 	RegistrationOptions,
 	addNewTicket,
-	EntityEditor,
 } from '@e2eUtils/admin';
 import { SingleEventPageManager } from '@e2eUtils/frontend';
 import { sub, add } from '@eventespresso/dates';
@@ -20,7 +19,6 @@ const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();
 const registrationOptions = new RegistrationOptions();
 const edtrGlider = new EDTRGlider();
-const entityEditor = new EntityEditor();
 const singleEventPageManager = new SingleEventPageManager();
 
 const namespace = 'single-page-more-ticket-selector-ten-max-attendees';
@@ -29,13 +27,13 @@ let capture: PageVideoCapture;
 const formatDate = formatDateTime();
 
 beforeAll(async () => {
-	// capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 	await eventsListSurfer.deleteAllEventsByLink('View All Events');
 	await Goto.eventsListPage();
 });
 
 afterAll(async () => {
-	// await capture?.stop();
+	await capture?.stop();
 });
 
 describe('One Max Attendees and more tickets - ticket selector test', () => {
