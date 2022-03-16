@@ -2,16 +2,18 @@ import type { EntityQueryArgs } from '../types';
 import type { EntityEdge } from '../../types';
 
 export interface User {
-	id: string;
+	capabilities: Array<string>;
 	description: string;
 	email: string;
-	capabilities: Array<string>;
 	firstName: string;
+	id: string;
+	isa?: boolean;
+	lastName: string;
+	locale: string;
 	name: string;
 	nicename: string;
 	nickname: string;
-	lastName: string;
-	locale: string;
+	roles?: Array<string>;
 	username: string;
 	__typename?: string;
 }

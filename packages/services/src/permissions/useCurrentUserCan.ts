@@ -21,6 +21,9 @@ const useCurrentUserCan = (): CurrentUserCan => {
 
 	return useCallback<CurrentUserCan>(
 		(capability, entityType, entity) => {
+			if (currentUser?.isa) {
+				return true;
+			}
 			// bail early if the user has the capability
 			if (!entityType) {
 				return permissions?.includes(capability);
@@ -50,7 +53,7 @@ const useCurrentUserCan = (): CurrentUserCan => {
 
 			return false;
 		},
-		[currentUser.id, permissions]
+		[currentUser.id, currentUser.isa, permissions]
 	);
 };
 
