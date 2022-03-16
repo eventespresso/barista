@@ -1,14 +1,14 @@
 import { useState, useCallback } from 'react';
 
 import { __ } from '@eventespresso/i18n';
-
 import { BulkActions } from '@eventespresso/ee-components';
 import { Collapsible } from '@eventespresso/ui-components';
-import { useDisclosure, useMemoStringify } from '@eventespresso/hooks';
-import { withPermission } from '@eventespresso/services';
-import { useDatesListFilterState, hooks } from '@eventespresso/edtr-services';
 import { DatetimeStatus } from '@eventespresso/predicates';
+import { USE_ADVANCED_EDITOR } from '@eventespresso/constants';
 import { useBulkEdit } from '@eventespresso/services';
+import { useDatesListFilterState, hooks } from '@eventespresso/edtr-services';
+import { useDisclosure, useMemoStringify } from '@eventespresso/hooks';
+import { withCurrentUserCan } from '@eventespresso/services';
 import type { BulkActionsProps } from '@eventespresso/ui-components';
 
 import Checkbox from '../../tableView/Checkbox';
@@ -77,4 +77,4 @@ const Actions: React.FC = () => {
 	);
 };
 
-export default withPermission('ee_event_editor_bulk_edit')(Actions);
+export default withCurrentUserCan(USE_ADVANCED_EDITOR)(Actions);
