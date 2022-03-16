@@ -4,7 +4,7 @@ import * as R from 'ramda';
 import { CalendarOutlined, ControlOutlined, ProfileOutlined } from '@eventespresso/icons';
 import { useUtcISOToSiteDate, useSiteDateToUtcISO, getEEDomData } from '@eventespresso/services';
 import { startAndEndDateFixer, useTicketItem, hooks, useTicketPrices } from '@eventespresso/edtr-services';
-import { PLUS_ONE_MONTH } from '@eventespresso/constants';
+import { PLUS_ONE_MONTH, USE_ADVANCED_EDITOR } from '@eventespresso/constants';
 import { useMemoStringify } from '@eventespresso/hooks';
 import { setDefaultTime } from '@eventespresso/dates';
 import { EntityId } from '@eventespresso/data';
@@ -13,7 +13,7 @@ import type { EspressoFormProps, FormSectionProps } from '@eventespresso/form';
 import type { Ticket, TicketFormConfig } from '@eventespresso/edtr-services';
 import { EndDateFieldWrapper } from '@eventespresso/ee-components';
 import { preparePricesForTpc, usePriceToTpcModifier } from '@eventespresso/tpc';
-import { usePermissions } from '@eventespresso/services';
+import { useCurrentUserCan } from '@eventespresso/services';
 
 import { validate } from './formValidation';
 
@@ -41,8 +41,7 @@ const adjacentFormItemProps = {
 
 export const useTicketFormConfig = (id: EntityId, config?: EspressoFormProps): TicketFormConfig => {
 	const ticket = useTicketItem({ id });
-	const permissions = usePermissions();
-	const userHasAdvancedEditor = permissions?.includes('ee_advanced_event_editor');
+	const currentUserCan = useCurrentUserCan();
 
 	const toUtcISO = useSiteDateToUtcISO();
 	const toSiteDate = useUtcISOToSiteDate();
@@ -228,7 +227,7 @@ export const useTicketFormConfig = (id: EntityId, config?: EspressoFormProps): T
 		};
 	}, []);
 
-	if (userHasAdvancedEditor) {
+	if (currentUserCan(USE_ADVANCED_EDITOR)) {
 		sections.push(detailsSection);
 	}
 
