@@ -1,3 +1,5 @@
+import type { ElementHandle } from 'playwright-core';
+
 const ticketsListSelector = '#ee-entity-list-tickets .ee-entity-list__card-view';
 
 /**
@@ -81,6 +83,13 @@ export class EDTRGlider {
 	};
 
 	/**
+	 * get ticket rows of an events at EDTR section
+	 */
+	ticketRows = async (): Promise<ElementHandle<SVGElement | HTMLElement>[]> => {
+		return await page?.$$('#ee-entity-list-tickets .ee-entity-list__card-view > .ee-entity-list-item');
+	};
+
+	/**
 	 * count event dates at EDTR section
 	 */
 	countEventDates = async (): Promise<number> => {
@@ -100,5 +109,14 @@ export class EDTRGlider {
 	 */
 	removeEventDatesFilter = async () => {
 		await page?.click('button.ee-filter-tag__close-btn');
+	};
+
+	/**
+	 * Trigger main menu for specific ticket
+	 */
+	ticketMainMenu = async (row: number) => {
+		await page.click(
+			`#ee-entity-list-tickets .ee-entity-list__card-view > .ee-entity-list-item:nth-child(${row}) [aria-label="ticket main menu"]`
+		);
 	};
 }
