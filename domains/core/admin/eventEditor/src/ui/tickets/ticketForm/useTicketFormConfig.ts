@@ -9,7 +9,7 @@ import { useMemoStringify } from '@eventespresso/hooks';
 import { setDefaultTime } from '@eventespresso/dates';
 import { EntityId } from '@eventespresso/data';
 import { __ } from '@eventespresso/i18n';
-import type { EspressoFormProps, FieldProps, FormSectionProps } from '@eventespresso/form';
+import type { EspressoFormProps, FieldProps } from '@eventespresso/form';
 import type { Ticket, TicketFormConfig } from '@eventespresso/edtr-services';
 import { EndDateFieldWrapper } from '@eventespresso/ee-components';
 import { preparePricesForTpc, usePriceToTpcModifier } from '@eventespresso/tpc';
