@@ -85,77 +85,27 @@ export const useTicketFormConfig = (id: EntityId, config?: EspressoFormProps): T
 		);
 	}, [endDate, getTicketPrices, priceToTpcModifier, startDate, ticket]);
 
-	const sections = useMemo(() => {
-		return hooks.applyFilters(
-			'eventEditor.ticketForm.sections',
-			[
-				{
-					name: 'basics',
-					icon: ProfileOutlined,
-					title: __('Basics'),
-					fields: [
-						{
-							name: 'name',
-							label: __('Name'),
-							fieldType: 'text',
-						},
-						{
-							name: 'description',
-							label: __('Description'),
-							fieldType: 'simple-text-editor',
-						},
-					],
-				},
-				{
-					name: 'sales',
-					icon: CalendarOutlined,
-					title: __('Ticket Sales'),
-					fields: [
-						{
-							name: 'startDate',
-							label: __('Start Date'),
-							fieldType: 'datetimepicker',
-							required: true,
-							formControlProps: adjacentFormItemProps,
-						},
-						{
-							name: 'endDate',
-							label: __('End Date'),
-							fieldType: 'datetimepicker',
-							required: true,
-							wrapper: EndDateFieldWrapper,
-							formControlProps: adjacentFormItemProps,
-						},
-					],
-				},
-				{
-					name: 'details',
-					icon: ControlOutlined,
-					title: __('Details'),
-					fields: [
-						{
-							name: 'quantity',
-							label: __('Quantity For Sale'),
-							fieldType: 'number',
-							parseAsInfinity: true,
-							max: 1000000,
-							min: -1,
-							info:
-								__('The maximum number of this ticket available for sale.') +
-								'\n' +
-								__('Set to 0 to stop sales, or leave blank for no limit.'),
-							width: 'small',
-							formControlProps: adjacentFormItemProps,
-						},
-					],
-				},
-			],
-			ticket
-		);
-	}, [ticket]);
+	const publicFields: Array<FieldProps> = useMemo(() => {
+		return [
+			{
+				name: 'quantity',
+				label: __('Quantity For Sale'),
+				fieldType: 'number',
+				parseAsInfinity: true,
+				max: 1000000,
+				min: -1,
+				info:
+					__('The maximum number of this ticket available for sale.') +
+					'\n' +
+					__('Set to 0 to stop sales, or leave blank for no limit.'),
+				width: 'small',
+				formControlProps: adjacentFormItemProps,
+			},
+		];
+	}, []);
 
 	const advancedFields: Array<FieldProps> = useMemo(() => {
-		return [
+		return publicFields.concat([
 			{
 				name: 'uses',
 				label: __('Number of Uses'),
@@ -226,15 +176,64 @@ export const useTicketFormConfig = (id: EntityId, config?: EspressoFormProps): T
 				info: __('Where the ticket can be viewed throughout the UI.'),
 				options: VISIBILITY_OPTIONS,
 			},
-		];
-	}, []);
+		]);
+	}, [publicFields]);
 
-	if (currentUserCan(USE_ADVANCED_EDITOR)) {
-		const detailsSection: FormSectionProps | undefined = sections.find((section) => section.name === 'details');
-		if (typeof detailsSection !== undefined) {
-			detailsSection.fields.concat(advancedFields);
-		}
-	}
+	const ticketDetailsFields = currentUserCan(USE_ADVANCED_EDITOR) ? advancedFields : publicFields;
+
+	const sections = useMemo(() => {
+		return hooks.applyFilters(
+			'eventEditor.ticketForm.sections',
+			[
+				{
+					name: 'basics',
+					icon: ProfileOutlined,
+					title: __('Basics'),
+					fields: [
+						{
+							name: 'name',
+							label: __('Name'),
+							fieldType: 'text',
+						},
+						{
+							name: 'description',
+							label: __('Description'),
+							fieldType: 'simple-text-editor',
+						},
+					],
+				},
+				{
+					name: 'sales',
+					icon: CalendarOutlined,
+					title: __('Ticket Sales'),
+					fields: [
+						{
+							name: 'startDate',
+							label: __('Start Date'),
+							fieldType: 'datetimepicker',
+							required: true,
+							formControlProps: adjacentFormItemProps,
+						},
+						{
+							name: 'endDate',
+							label: __('End Date'),
+							fieldType: 'datetimepicker',
+							required: true,
+							wrapper: EndDateFieldWrapper,
+							formControlProps: adjacentFormItemProps,
+						},
+					],
+				},
+				{
+					name: 'details',
+					icon: ControlOutlined,
+					title: __('Details'),
+					fields: ticketDetailsFields,
+				},
+			],
+			ticket
+		);
+	}, [ticket, ticketDetailsFields]);
 
 	return useMemo(
 		() => ({
