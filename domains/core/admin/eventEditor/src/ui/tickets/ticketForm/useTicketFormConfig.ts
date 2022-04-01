@@ -9,7 +9,7 @@ import { useMemoStringify } from '@eventespresso/hooks';
 import { setDefaultTime } from '@eventespresso/dates';
 import { EntityId } from '@eventespresso/data';
 import { __ } from '@eventespresso/i18n';
-import type { EspressoFormProps, FormSectionProps } from '@eventespresso/form';
+import type { EspressoFormProps, FieldProps } from '@eventespresso/form';
 import type { Ticket, TicketFormConfig } from '@eventespresso/edtr-services';
 import { EndDateFieldWrapper } from '@eventespresso/ee-components';
 import { preparePricesForTpc, usePriceToTpcModifier } from '@eventespresso/tpc';
@@ -85,6 +85,102 @@ export const useTicketFormConfig = (id: EntityId, config?: EspressoFormProps): T
 		);
 	}, [endDate, getTicketPrices, priceToTpcModifier, startDate, ticket]);
 
+	const publicFields: Array<FieldProps> = useMemo(() => {
+		return [
+			{
+				name: 'quantity',
+				label: __('Quantity For Sale'),
+				fieldType: 'number',
+				parseAsInfinity: true,
+				max: 1000000,
+				min: -1,
+				info:
+					__('The maximum number of this ticket available for sale.') +
+					'\n' +
+					__('Set to 0 to stop sales, or leave blank for no limit.'),
+				width: 'small',
+				formControlProps: adjacentFormItemProps,
+			},
+		];
+	}, []);
+
+	const advancedFields: Array<FieldProps> = useMemo(() => {
+		return publicFields.concat([
+			{
+				name: 'uses',
+				label: __('Number of Uses'),
+				fieldType: 'number',
+				parseAsInfinity: true,
+				max: 1000,
+				min: 0,
+				info:
+					__(
+						'Controls the total number of times this ticket can be used, regardless of the number of dates it is assigned to.'
+					) +
+					'\n' +
+					__(
+						'Example: A ticket might have access to 4 different dates, but setting this field to 2 would mean that the ticket could only be used twice. Leave blank for no limit.'
+					),
+				width: 'small',
+				formControlProps: adjacentFormItemProps,
+			},
+			{
+				name: 'min',
+				label: __('Minimum Quantity'),
+				fieldType: 'number',
+				max: 1000000,
+				min: 0,
+				info:
+					__(
+						'The minimum quantity that can be selected for this ticket. Use this to create ticket bundles or graduated pricing.'
+					) +
+					'\n' +
+					__('Leave blank for no minimum.'),
+				width: 'small',
+				formControlProps: adjacentFormItemProps,
+			},
+			{
+				name: 'max',
+				label: __('Maximum Quantity'),
+				fieldType: 'number',
+				parseAsInfinity: true,
+				max: 1000000,
+				min: -1,
+				info:
+					__(
+						'The maximum quantity that can be selected for this ticket. Use this to create ticket bundles or graduated pricing.'
+					) +
+					'\n' +
+					__('Leave blank for no maximum.'),
+				width: 'small',
+				formControlProps: adjacentFormItemProps,
+			},
+			{
+				name: 'isRequired',
+				label: __('Required Ticket'),
+				fieldType: 'switch',
+				info: __('If enabled, the ticket must be selected and will appear first in frontend ticket lists.'),
+				width: 'small',
+				formControlProps: adjacentFormItemProps,
+			},
+			{
+				name: 'isTrashed',
+				label: __('Trash'),
+				fieldType: 'switch',
+				formControlProps: adjacentFormItemProps,
+			},
+			{
+				name: 'visibility',
+				label: __('Visibility'),
+				fieldType: 'select',
+				info: __('Where the ticket can be viewed throughout the UI.'),
+				options: VISIBILITY_OPTIONS,
+			},
+		]);
+	}, [publicFields]);
+
+	const ticketDetailsFields = currentUserCan(USE_ADVANCED_EDITOR) ? advancedFields : publicFields;
+
 	const sections = useMemo(() => {
 		return hooks.applyFilters(
 			'eventEditor.ticketForm.sections',
@@ -128,108 +224,16 @@ export const useTicketFormConfig = (id: EntityId, config?: EspressoFormProps): T
 						},
 					],
 				},
+				{
+					name: 'details',
+					icon: ControlOutlined,
+					title: __('Details'),
+					fields: ticketDetailsFields,
+				},
 			],
 			ticket
 		);
-	}, [ticket]);
-
-	const detailsSection: FormSectionProps = useMemo(() => {
-		return {
-			name: 'details',
-			icon: ControlOutlined,
-			title: __('Details'),
-			fields: [
-				{
-					name: 'quantity',
-					label: __('Quantity For Sale'),
-					fieldType: 'number',
-					parseAsInfinity: true,
-					max: 1000000,
-					min: -1,
-					info:
-						__('The maximum number of this ticket available for sale.') +
-						'\n' +
-						__('Set to 0 to stop sales, or leave blank for no limit.'),
-					width: 'small',
-					formControlProps: adjacentFormItemProps,
-				},
-				{
-					name: 'uses',
-					label: __('Number of Uses'),
-					fieldType: 'number',
-					parseAsInfinity: true,
-					max: 1000,
-					min: 0,
-					info:
-						__(
-							'Controls the total number of times this ticket can be used, regardless of the number of dates it is assigned to.'
-						) +
-						'\n' +
-						__(
-							'Example: A ticket might have access to 4 different dates, but setting this field to 2 would mean that the ticket could only be used twice. Leave blank for no limit.'
-						),
-					width: 'small',
-					formControlProps: adjacentFormItemProps,
-				},
-				{
-					name: 'min',
-					label: __('Minimum Quantity'),
-					fieldType: 'number',
-					max: 1000000,
-					min: 0,
-					info:
-						__(
-							'The minimum quantity that can be selected for this ticket. Use this to create ticket bundles or graduated pricing.'
-						) +
-						'\n' +
-						__('Leave blank for no minimum.'),
-					width: 'small',
-					formControlProps: adjacentFormItemProps,
-				},
-				{
-					name: 'max',
-					label: __('Maximum Quantity'),
-					fieldType: 'number',
-					parseAsInfinity: true,
-					max: 1000000,
-					min: -1,
-					info:
-						__(
-							'The maximum quantity that can be selected for this ticket. Use this to create ticket bundles or graduated pricing.'
-						) +
-						'\n' +
-						__('Leave blank for no maximum.'),
-					width: 'small',
-					formControlProps: adjacentFormItemProps,
-				},
-				{
-					name: 'isRequired',
-					label: __('Required Ticket'),
-					fieldType: 'switch',
-					info: __('If enabled, the ticket must be selected and will appear first in frontend ticket lists.'),
-					width: 'small',
-					formControlProps: adjacentFormItemProps,
-				},
-				{
-					name: 'isTrashed',
-					label: __('Trash'),
-					fieldType: 'switch',
-					formControlProps: adjacentFormItemProps,
-				},
-				{
-					name: 'visibility',
-					label: __('Visibility'),
-					fieldType: 'select',
-					info: __('Where the ticket can be viewed throughout the UI.'),
-					options: VISIBILITY_OPTIONS,
-				},
-			],
-		};
-	}, []);
-
-	if (currentUserCan(USE_ADVANCED_EDITOR)) {
-		sections.push(detailsSection);
-	}
+	}, [ticket, ticketDetailsFields]);
 
 	return useMemo(
 		() => ({
