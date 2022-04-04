@@ -8,7 +8,7 @@ import { withLabel } from '../../withLabel';
 import './style.scss';
 
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>((props, ref) => {
-	const className = classNames('ee-text-input', props.className);
+	const className = classNames('ee-text-input ee-base-input', props.className);
 
 	return <TextInputAdapter {...props} className={className} ref={ref} />;
 });
