@@ -1,6 +1,6 @@
 @import '~@eventespresso/styles/src/mixins/breakpoints.scss';
 
-.ee-rspnsv-table.ee-ticket-price-calculator {
+.ee-ticket-price-calculator.ee-rspnsv-table {
 	width: 100%;
 
 	table {
@@ -36,48 +36,88 @@
 		width: 100%;
 	}
 
+	tfoot.ee-rspnsv-table-footer {
+		@include max782px {
+			.ee-rspnsv-table-footer-row {
+				position: relative;
+				width: 100%;
+				height: 84px;
+
+				.ee-col-0,
+				.ee-col-1,
+				.ee-col-2,
+				.ee-col-3 {
+					display: none;
+					padding: 0;
+				}
+
+				.ee-ticket-price-calculator-total-label {
+					float: left;
+					margin: 0;
+					margin-block-start: var(--ee-padding-smaller);
+					min-width: unset;
+					padding-right: var(--ee-padding-smaller);
+					text-align: right;
+					vertical-align: middle;
+					width: calc(38.2% -  48px);
+				}
+
+				.ee-ticket-price-calculator__amount {
+					padding-left: var(--ee-padding-micro);
+					position: absolute;
+					right: 0;
+					width: 61.8%;
+				}
+
+				.ee-ticket-price-calculator__actions {
+					min-width: 48px;
+					padding: 0;
+					position: absolute;
+					right: 62.5%;
+					top: var(--ee-padding-small);
+					width: 48px;
+				}
+			}
+		}
+	}
+
 	.ee-ticket-price-calculator {
 		&__price-id {
 			&.ee-rspnsv-table-header-th,
-			&.ee-rspnsv-table-body-td,
+			&.ee-rspnsv-table-body-td  .ee-rspnsv-table-mobile-only-column-value,
 			&.ee-rspnsv-table-footer-th {
-				min-width: 20px;
-				width: 40px;
+				width: clamp(20px, 40px, 80px);
 			}
 		}
 		&__price-order {
 			&.ee-rspnsv-table-header-th,
-			&.ee-rspnsv-table-body-td,
+			&.ee-rspnsv-table-body-td  .ee-rspnsv-table-mobile-only-column-value,
 			&.ee-rspnsv-table-footer-th {
-				min-width: 40px;
-				width: 60px;
+				width: clamp(44px, 64px, 128px);
 			}
 		}
 
 		&__price-type {
 			&.ee-rspnsv-table-header-th,
-			&.ee-rspnsv-table-body-td,
+			&.ee-rspnsv-table-body-td  .ee-rspnsv-table-mobile-only-column-value,
 			&.ee-rspnsv-table-footer-th {
-				min-width: 120px;
-				width: 160px;
+				width: clamp(180px, 220px, 260px);
 			}
 		}
 		&__price-name,
 		&__price-desc {
 			&.ee-rspnsv-table-header-th,
-			&.ee-rspnsv-table-body-td,
+			&.ee-rspnsv-table-body-td  .ee-rspnsv-table-mobile-only-column-value,
 			&.ee-rspnsv-table-footer-th {
-				min-width: 120px;
-				width: auto;
+				width: clamp(180px, 240px, 360px);
 			}
 		}
 
 		&__amount {
 			&.ee-rspnsv-table-header-th,
-			&.ee-rspnsv-table-body-td,
+			&.ee-rspnsv-table-body-td  .ee-rspnsv-table-mobile-only-column-value,
 			&.ee-rspnsv-table-footer-th {
-				min-width: 120px;
-				width: 240px;
+				width: clamp(160px, 200px, 240px);
 			}
 
 			&.ee-rspnsv-table-header-th.ee-rspnsv-table-header-th.ee-number-column {
@@ -87,10 +127,9 @@
 
 		&__actions {
 			&.ee-rspnsv-table-header-th,
-			&.ee-rspnsv-table-body-td,
+			&.ee-rspnsv-table-body-td  .ee-rspnsv-table-mobile-only-column-value,
 			&.ee-rspnsv-table-footer-th {
-				min-width: 85px;
-				width: 160px;
+				width: max(104px, 100%);
 			}
 
 			.ee-icon-button {
@@ -101,46 +140,6 @@
 		&__total .ee-input-base.ee-input-base.ee-input:disabled {
 			background: var(--ee-color-grey-14);
 			border-color: var(--ee-color-grey-9);
-		}
-
-		.ee-rspnsv-table-footer {
-			@include max782px {
-				.ee-rspnsv-table-footer-row {
-					position: relative;
-					width: 100%;
-					height: 60px;
-
-					.ee-col-0,
-					.ee-col-1,
-					.ee-col-2 {
-						display: none;
-						padding: 0;
-					}
-
-					.ee-ticket-price-calculator-total-label {
-						float: left;
-						margin: auto 0;
-						padding-right: var(--ee-padding-smaller);
-						text-align: right;
-						vertical-align: middle;
-						width: calc(38.2% - 42px);
-					}
-
-					.ee-ticket-price-calculator__amount {
-						padding-left: var(--ee-padding-smaller);
-						position: absolute;
-						right: var(--ee-padding-tiny);
-						width: calc(61.8% - var(--ee-padding-tiny));
-					}
-
-					.ee-ticket-price-calculator__actions {
-						min-width: 42px;
-						position: absolute;
-						right: 61.8%;
-						width: 42px;
-					}
-				}
-			}
 		}
 	}
 }

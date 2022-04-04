@@ -99,13 +99,13 @@
 			text-align: right;
 			vertical-align: middle;
 			visibility: visible;
-			width: 38.2%;
+			width: calc(38.2% - var(--ee-padding-smaller));
 		}
 
 		.ee-rspnsv-table-body-td .ee-rspnsv-table-mobile-only-column-value {
 			display: inline-block;
 			padding-left: var(--ee-padding-smaller);
-			width: 61.8%;
+			width: 61.8% !important;
 		}
 
 		.ee-rspnsv-table-long-label,

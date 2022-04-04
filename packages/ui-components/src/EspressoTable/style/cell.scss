@@ -1,6 +1,6 @@
 @import '~@eventespresso/styles/src/mixins/breakpoints';
 
-table.ee-rspnsv-table.ee-rspnsv-table {
+table.ee-rspnsv-table {
 	.ee-rspnsv-table {
 		&-body {
 			td {
@@ -67,12 +67,11 @@ table.ee-rspnsv-table.ee-rspnsv-table {
 		&:not(.ee-entity-list-status-stripe):not(.ee-rspnsv-table-hide-on-mobile) {
 			@include max1280px {
 				padding: var(--ee-padding-micro) var(--ee-padding-smaller);
-				width: fit-content;
 			}
 
 			@include max782px {
-				padding: var(--ee-padding-smaller) !important;
-				width: 100% !important;
+				padding: var(--ee-padding-smaller) /* !important */;
+				width: 100% /* !important */;
 			}
 		}
 

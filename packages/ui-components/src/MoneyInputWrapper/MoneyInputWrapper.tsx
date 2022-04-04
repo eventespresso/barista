@@ -34,10 +34,8 @@ export const MoneyInputWrapper: React.FC<MoneyInputWrapperProps> = ({
 	);
 
 	return (
-		<div className={className}>
-			<InputWithLabel disabled={disabled} label={label} labelPosition={labelPosition}>
-				{children}
-			</InputWithLabel>
-		</div>
+		<InputWithLabel className={className} disabled={disabled} label={label} labelPosition={labelPosition}>
+			{children}
+		</InputWithLabel>
 	);
 };
