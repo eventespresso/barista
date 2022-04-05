@@ -3,6 +3,7 @@
 .ee-rspnsv-table-body {
 	tr {
 		background: var(--ee-background-color);
+		max-width: 100%;
 
 		@include min782px {
 			min-height: 3.5rem;

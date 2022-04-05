@@ -1,5 +1,18 @@
 @import '~@eventespresso/styles/src/mixins/breakpoints.scss';
 
+
+// targets the div that wraps the modal window and controls how much screen space is taken
+// we want to go full screen on anything smaller than a big tablet in landscape (1024px)
+[data-focus-lock-disabled] > div:last-child {
+	@include max1024px {
+		height: 100vh;
+		max-height: 100vh;
+		top: 0;
+		z-index: 100000;
+	}
+}
+
+
 body.ee-modal-open {
 	overflow: hidden;
 }
@@ -9,7 +22,17 @@ body.ee-modal-open {
 	z-index: 9991;
 }
 
-.ee-modal {
+.ee-modal[role="alertdialog"] {
+
+	max-height: 95%;
+	max-width: min(95%, 75rem);
+
+	.admin-bar & {
+		max-height: calc(96% - 46px);
+		max-width: min(95%, 75rem);
+		top: 2%;
+	}
+
 	.ee-modal {
 		&__header {
 			&.ee-modal__header {
@@ -43,8 +66,14 @@ body.ee-modal-open {
 		}
 
 		&__footer {
+			flex-wrap: wrap;
+
 			&.ee-modal--with-border {
 				border-top: 0.5px solid var(--ee-border-color);
+			}
+
+			@include max782px {
+				padding: var(--ee-padding-smaller);
 			}
 		}
 		// this selector is used for specificity
@@ -65,20 +94,12 @@ body.ee-modal-open {
 			}
 		}
 	}
-}
 
-// targets the div that wraps the modal window and controls how much screen space is taken
-// we want to go full screen on anything smaller than a big tablet in landscape (1024px)
-[data-focus-lock-disabled] > div:last-child {
-	@include max1024px {
-		height: 100vh;
-		max-height: 100vh;
-		top: 0;
-		z-index: 100000;
-
-		.ee-modal {
-			margin: 0;
-			max-height: 100%;
-		}
+	@include max600px {
+		border-radius: 0;
+		margin: 0;
+		max-height: 100% !important;
+		max-width: 100% !important;
+		width: 100% !important;
 	}
 }

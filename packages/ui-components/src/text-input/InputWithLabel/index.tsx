@@ -7,6 +7,7 @@ import {
 import './style.scss';
 
 export interface InputWithLabelProps extends InputWithLabelAdapterProps {
+	className: string;
 	disabled: boolean;
 	label: React.ReactNode;
 	labelPosition?: 'left' | 'right';
@@ -14,6 +15,7 @@ export interface InputWithLabelProps extends InputWithLabelAdapterProps {
 
 export const InputWithLabel: React.FC<InputWithLabelProps> = ({
 	children,
+	className,
 	disabled,
 	label,
 	labelPosition = 'right',
@@ -24,7 +26,8 @@ export const InputWithLabel: React.FC<InputWithLabelProps> = ({
 	const rightLabel = labelPosition === 'right' && label;
 	const rightLabelClassName = rightLabel && 'ee-input-with-label__right-label';
 
-	const className = classNames(
+	const htmlClassName = classNames(
+		className && className,
 		'ee-input-with-label',
 		disabled && 'ee-input-with-label--disabled',
 		leftLabelClassName,
@@ -32,7 +35,7 @@ export const InputWithLabel: React.FC<InputWithLabelProps> = ({
 	);
 
 	return (
-		<InputWithLabelAdapter className={className} leftLabel={leftLabel} rightLabel={rightLabel}>
+		<InputWithLabelAdapter className={htmlClassName} leftLabel={leftLabel} rightLabel={rightLabel}>
 			{children}
 		</InputWithLabelAdapter>
 	);
