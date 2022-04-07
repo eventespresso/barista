@@ -2,7 +2,7 @@ import type { CommonInputProps, CommonInputEvent } from '@eventespresso/adapters
 
 type T = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
 
-export interface UseOnChange extends CommonInputProps<T> {
+export interface UseOnChange extends Omit<CommonInputProps<T>, 'onChange'> {
 	onChange?: (event: React.ChangeEvent<T>) => void;
 	isDisabled?: boolean;
 }
