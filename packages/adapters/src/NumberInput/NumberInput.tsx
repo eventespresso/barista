@@ -31,14 +31,17 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
 		},
 		ref
 	) => {
+		const ariaValueNow = String(value)?.length ? Number(value) : null;
 		const size = inputFieldProps?.size && Number(inputFieldProps?.size);
 
 		const onChangeHandler = useCallback<NumberInputProps['onChange']>(
 			(valueAsString, valueAsNumber) => {
+				console.log('%c isDisabled', 'color: HotPink;', isDisabled);
+				console.log('%c valueAsString', 'color: Yellow;', valueAsString);
+				console.log('%c valueAsNumber', 'color: Yellow;', valueAsNumber);
 				if (!isDisabled) {
-					onChangeValue?.(valueAsNumber);
-
 					onChange?.(valueAsString, valueAsNumber);
+					onChangeValue?.(valueAsNumber);
 				}
 			},
 			[isDisabled, onChange, onChangeValue]
@@ -54,6 +57,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
 		return (
 			<ChakraNumberInput
 				{...props}
+				aria-valuenow={ariaValueNow}
 				className={wrapperClass}
 				isDisabled={isDisabled}
 				onChange={onChangeHandler}

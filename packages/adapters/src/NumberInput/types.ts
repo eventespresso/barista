@@ -17,7 +17,6 @@ type Picked =
 	| 'keepWithinRange'
 	| 'max'
 	| 'min'
-	| 'onChange'
 	| 'precision'
 	| 'step'
 	| 'value';

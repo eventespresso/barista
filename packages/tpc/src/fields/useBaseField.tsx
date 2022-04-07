@@ -44,6 +44,9 @@ const useBaseField = ({
 				const value = event?.target?.value;
 				setValue(parse(value, name));
 			},
+			onChangeValue: (value) => {
+				setValue(parse(value, name));
+			},
 		};
 
 		return {

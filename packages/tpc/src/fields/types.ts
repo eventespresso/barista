@@ -7,13 +7,15 @@ import type { AnyObject } from '@eventespresso/utils';
 import type { PriceModifierProps, TpcPriceModifier } from '../types';
 
 // 'css' prop conflicts with Chakra UI component props
-export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'css' | 'max' | 'min' | 'step'>;
+export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'css' | 'max' | 'min' | 'step'> & {
+	onChangeValue?: (value: any) => void;
+};
 export type FieldValue = string | number | boolean;
 
 type SupportedInputs = 'input' | 'select' | 'textarea';
 
 // remove props that conflict/duplicate InputProps
-type ExtraNumbertProps = Omit<NumberInputProps, 'defaultValue' | 'onChange' | 'onChangeValue' | 'value'>;
+type ExtraNumberProps = Omit<NumberInputProps, 'defaultValue' | 'onChange' | 'onChangeValue' | 'value'>;
 // remove props that conflict/duplicate InputProps
 type ExtraSelectProps = Omit<
 	SelectProps,
@@ -186,7 +188,7 @@ type ExtraSelectProps = Omit<
 	| 'width'
 >;
 
-export interface BaseFieldProps<V = FieldValue> extends InputProps, ExtraNumbertProps, ExtraSelectProps {
+export interface BaseFieldProps<V = FieldValue> extends InputProps, ExtraNumberProps, ExtraSelectProps {
 	'aria-label': string;
 	children?: ((props: AnyObject) => React.ReactNode) | React.ReactNode;
 	component?: React.ComponentType | SupportedInputs;
