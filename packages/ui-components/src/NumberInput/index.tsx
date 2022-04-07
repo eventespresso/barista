@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import classNames from 'classnames';
 
 import { NumberInput as NumberInputAdapter, NumberInputProps } from '@eventespresso/adapters';
@@ -6,42 +7,45 @@ import { withLabel } from '../withLabel';
 
 import './style.scss';
 
-interface Props extends NumberInputProps {
+interface NumberProps extends NumberInputProps {
+	inputClass?: string;
 	visibleDigits?: number;
+	wrapperClass?: string;
 }
 
 const inputStepperProps = { className: 'ee-number-field-stepper' };
 
-export const NumberInput: React.FC<Props> = ({
-	id,
-	inputFieldProps,
-	onChange,
-	showStepper,
-	value,
-	visibleDigits,
-	...props
-}) => {
-	const visibleDigitsClassName =
-		showStepper === false &&
-		visibleDigits &&
-		`ee-number-input--visible-digits ee-number-input--visible-digits-${visibleDigits}`;
+export const NumberInput = forwardRef<HTMLInputElement, NumberProps>(
+	({ inputClass, onChange, showStepper, value, visibleDigits, wrapperClass, ...props }, ref) => {
+		const visibleDigitsClassName =
+			showStepper === false &&
+			visibleDigits &&
+			`ee-number-input--visible-digits ee-number-input--visible-digits-${visibleDigits}`;
 
-	const className = classNames('ee-number-input', visibleDigitsClassName, props.className);
-	const ariaValuenow = String(value)?.length ? Number(value) : null;
+		const inputClassName = classNames('ee-number-input ee-input-base', inputClass);
+		const wrapperClassName = classNames(
+			'ee-number-input__wrap',
+			visibleDigitsClassName,
+			props.className,
+			wrapperClass
+		);
 
-	return (
-		<NumberInputAdapter
-			{...props}
-			aria-valuenow={ariaValuenow}
-			className={className}
-			id={id}
-			inputFieldProps={inputFieldProps}
-			inputStepperProps={inputStepperProps}
-			onChange={onChange}
-			showStepper={showStepper}
-			value={value}
-		/>
-	);
-};
+		// const NumberValue = String(value)?.length ? Number(value) : null;
+
+		return (
+			<NumberInputAdapter
+				{...props}
+				// aria-valuenow={ariaValuenow}
+				className={inputClassName}
+				inputStepperProps={inputStepperProps}
+				onChange={onChange}
+				ref={ref}
+				showStepper={showStepper}
+				value={value}
+				wrapperClass={wrapperClassName}
+			/>
+		);
+	}
+);
 
 export const NumberInputWithLabel = withLabel(NumberInput);

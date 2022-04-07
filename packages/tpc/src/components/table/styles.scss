@@ -49,9 +49,9 @@
 				.ee-ticket-price-calculator-total-label {
 					float: left;
 					margin: 0;
-					margin-block-start: var(--ee-padding-smaller);
+					margin-block-start: var(--ee-padding-small);
 					min-width: unset;
-					padding-right: var(--ee-padding-smaller);
+					padding-right: var(--ee-padding-default);
 					text-align: right;
 					vertical-align: middle;
 					width: calc(38.2% -  48px);
@@ -69,7 +69,7 @@
 					padding: 0;
 					position: absolute;
 					right: 62.5%;
-					top: var(--ee-padding-small);
+					top: calc(var(--ee-padding-tiny) + var(--ee-padding-nano));
 					width: 48px;
 				}
 			}

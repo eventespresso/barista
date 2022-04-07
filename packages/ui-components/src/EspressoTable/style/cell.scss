@@ -101,7 +101,7 @@ table.ee-rspnsv-table {
 			&:not(.ee-entity-list-status-stripe):not(.ee-rspnsv-table-hide-on-mobile) {
 				.columns-2 & {
 					@include max1280px {
-						padding: var(--ee-padding-micro) var(--ee-padding-smaller);
+						padding: var(--ee-padding-micro);
 						width: 100%;
 					}
 				}
@@ -149,7 +149,7 @@ table.ee-rspnsv-table {
 				&.ee-rspnsv-table-body-td,
 				&.ee-rspnsv-table-footer-th {
 					&:not(.ee-entity-list-status-stripe) {
-						padding: var(--ee-padding-nano) var(--ee-padding-micro);
+						padding: var(--ee-padding-nano);
 						width: 7.5%;
 					}
 				}
@@ -160,7 +160,7 @@ table.ee-rspnsv-table {
 				&.ee-rspnsv-table-body-td,
 				&.ee-rspnsv-table-footer-th {
 					&:not(.ee-entity-list-status-stripe) {
-						padding: var(--ee-padding-nano) var(--ee-padding-smaller);
+						padding: var(--ee-padding-nano);
 						width: 12.5%;
 					}
 				}
@@ -171,7 +171,7 @@ table.ee-rspnsv-table {
 				&.ee-rspnsv-table-body-td,
 				&.ee-rspnsv-table-footer-th {
 					&:not(.ee-entity-list-status-stripe) {
-						padding: var(--ee-padding-nano) var(--ee-padding-smaller);
+						padding: var(--ee-padding-nano);
 						width: 15%;
 					}
 				}
@@ -182,7 +182,7 @@ table.ee-rspnsv-table {
 				&.ee-rspnsv-table-body-td,
 				&.ee-rspnsv-table-footer-th {
 					&:not(.ee-entity-list-status-stripe) {
-						padding: var(--ee-padding-nano) var(--ee-padding-smaller);
+						padding: var(--ee-padding-nano);
 						width: 20%;
 					}
 				}

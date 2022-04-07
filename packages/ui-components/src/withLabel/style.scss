@@ -24,34 +24,25 @@
 
 		label,
 		legend {
-			margin: 0 var(--ee-margin-nano) var(--ee-margin-nano);
+			margin: 0 var(--ee-margin-tiny);
 		}
 
 		&--bottom-left,
 		&--bottom-center,
 		&--bottom-right {
 			flex-direction: column-reverse;
-			label {
-				margin: var(--ee-margin-nano) var(--ee-margin-nano) 0;
-			}
 		}
 
 		&--left-top,
 		&--left-middle,
 		&--left-bottom {
 			flex-direction: row;
-			label {
-				margin: 0 0 0 var(--ee-margin-nano);
-			}
 		}
 
 		&--right-top,
 		&--right-middle,
 		&--right-bottom {
 			flex-direction: row-reverse;
-			label {
-				margin: 0 var(--ee-margin-nano) 0 0;
-			}
 		}
 
 		&--top-center,
@@ -61,8 +52,4 @@
 			align-items: center;
 		}
 	}
-}
-
-.ee-base-input + .ee-base-input {
-	margin-bottom: var(--ee-margin-micro);
 }

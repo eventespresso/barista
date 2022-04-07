@@ -62,7 +62,7 @@ export * from './TabbableText';
 export * from './Tabs';
 export * from './Tag';
 export * from './TagSelector';
-export * from './text-input';
+export * from './TextInput';
 export * from './Textarea';
 export * from './TimezoneTimeInfo';
 export * from './Tooltip';
