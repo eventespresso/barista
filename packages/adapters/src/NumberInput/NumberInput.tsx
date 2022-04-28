@@ -36,9 +36,6 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
 
 		const onChangeHandler = useCallback<NumberInputProps['onChange']>(
 			(valueAsString, valueAsNumber) => {
-				console.log('%c isDisabled', 'color: HotPink;', isDisabled);
-				console.log('%c valueAsString', 'color: Yellow;', valueAsString);
-				console.log('%c valueAsNumber', 'color: Yellow;', valueAsNumber);
 				if (!isDisabled) {
 					onChange?.(valueAsString, valueAsNumber);
 					onChangeValue?.(valueAsNumber);
