@@ -43,7 +43,7 @@ const useReorderTickets = (filteredEntityIds: Array<EntityId>): ReorderTickets =
 			data: {
 				espressoTickets,
 			},
-        });
+		});
 
 	}, [allUpdatedEntities, updateSortOrder, queryOptions, updateTicketList]);
 
