@@ -1,6 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
 
-import { __ } from '@eventespresso/i18n';
 import { ticketDroppableId } from '@eventespresso/constants';
 import type { EntityId } from '@eventespresso/data';
 import type { EntityTableProps } from '@eventespresso/ee-components';
