@@ -1,6 +1,5 @@
 import { useCallback, useState, useMemo, useEffect } from 'react';
 import { clone } from 'ramda';
-import { useDebouncedCallback } from 'use-debounce';
 import type { MutationResult } from '@apollo/client';
 
 import { __ } from '@eventespresso/i18n';
@@ -35,8 +34,7 @@ const REORDER_ENTITIES = gql`
 
 export interface ReorderEntities<E extends Entity> {
 	allReorderedEntities: Array<E>;
-	cancel: VoidFunction;
-	done: VoidFunction;
+	updateSortOrder: () => Promise<boolean>;
 	result: MutationResult;
 	sortEntities: SortCallback<E>;
 	updateEntityList?: VoidFunction;
@@ -52,14 +50,8 @@ export const useReorderEntities = <E extends Entity>({
 
 	const [mutate, result] = useMutation(REORDER_ENTITIES);
 
-	const runMutation = useDebouncedCallback(mutate, 5000); // delay in MS
-
-	useEffect(() => {
-		setAllOrderedEntities(filteredEntities);
-	}, [filteredEntities]);
-
-	const done = useCallback(() => {
-		runMutation({
+	const updateSortOrder = useCallback(async () => {
+		await mutate({
 			variables: {
 				input: {
 					clientMutationId: 'REORDER_ENTITIES',
@@ -68,21 +60,19 @@ export const useReorderEntities = <E extends Entity>({
 				},
 			},
 		});
+		toaster.success({ message: __('order updated') });
+		return true;
+	}, [allEntityGuids, entityType, mutate, toaster]);
 
-		toaster.success({ message: __('reordering has been applied') });
-	}, [allEntityGuids, entityType, runMutation, toaster]);
-
-	const cancel = useCallback(() => {
-		runMutation.cancel();
-	}, [runMutation]);
+	useEffect(() => {
+		setAllOrderedEntities(filteredEntities);
+	}, [filteredEntities]);
 
 	const sortEntities = useCallback<SortCallback<E>>(
 		({ allEntities: allEntitiesList, newIndex, oldIndex }) => {
 			if (newIndex === oldIndex || newIndex < 0 || oldIndex < 0) {
 				return;
 			}
-			// cancel existing debounce
-			cancel();
 
 			const entityIds = clone(allReorderedEntities.map(({ id }) => id));
 			let allEntities = clone(allEntitiesList);
@@ -120,11 +110,11 @@ export const useReorderEntities = <E extends Entity>({
 
 			return allEntities;
 		},
-		[allReorderedEntities, cancel]
+		[allReorderedEntities]
 	);
 
 	return useMemo(
-		() => ({ allReorderedEntities, cancel, done, result, sortEntities }),
-		[allReorderedEntities, cancel, done, result, sortEntities]
+		() => ({ allReorderedEntities, updateSortOrder, result, sortEntities }),
+		[allReorderedEntities, updateSortOrder, result, sortEntities]
 	);
 };
