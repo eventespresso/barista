@@ -24,7 +24,7 @@ const useReorderDatetimes = (filteredEntityIds: Array<EntityId>): ReorderDatetim
 
 	const datetimes = useMemo(() => filteredEntityIds.map(getDatetime), [filteredEntityIds, getDatetime]);
 
-	const { allReorderedEntities, done, sortEntities } = useReorderEntities<Datetime>({
+	const { allReorderedEntities, updateSortOrder, sortEntities } = useReorderEntities<Datetime>({
 		entityType: 'DATETIME',
 		filteredEntities: datetimes,
 	});
@@ -33,13 +33,13 @@ const useReorderDatetimes = (filteredEntityIds: Array<EntityId>): ReorderDatetim
 	const queryOptions = useDatetimeQueryOptions();
 	const updateDatetimeList = useUpdateDatetimeList();
 
-	const updateEntityList = useCallback(() => {
+	const updateEntityList = useCallback(async () => {
 		const espressoDatetimes: DatetimeEdge = {
 			nodes: allUpdatedEntities,
 			__typename: 'EspressoRootQueryDatetimesConnection',
 		};
 
-		done();
+		await updateSortOrder();
 
 		updateDatetimeList({
 			...queryOptions,
@@ -47,7 +47,7 @@ const useReorderDatetimes = (filteredEntityIds: Array<EntityId>): ReorderDatetim
 				espressoDatetimes,
 			},
 		});
-	}, [allUpdatedEntities, done, queryOptions, updateDatetimeList]);
+	}, [allUpdatedEntities, updateSortOrder, queryOptions, updateDatetimeList]);
 
 	const sortResponder = useCallback<SortResponder>(
 		({ destination, source }) => {
