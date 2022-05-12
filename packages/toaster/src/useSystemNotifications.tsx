@@ -14,19 +14,23 @@ const useSystemNotifications = (): SystemNotificationsToaster => {
 		toast.dismiss();
 	}, []);
 
-	const error = useCallback(({ message }) => {
+	const error = useCallback(({ message, duration = 3000, ...props }) => {
 		toast.success(message, {
+			autoClose: duration,
 			className,
 			icon: toasterIcons['error'],
 			position,
+			...props,
 		});
 	}, []);
 
-	const info = useCallback(({ message }): void => {
+	const info = useCallback(({ message, duration = 12000, ...props }): void => {
 		toast.success(message, {
+			autoClose: duration,
 			className,
 			icon: toasterIcons['info'],
 			position,
+			...props,
 		});
 	}, []);
 
@@ -40,31 +44,36 @@ const useSystemNotifications = (): SystemNotificationsToaster => {
 		});
 	}, []);
 
-	const success = useCallback(({ message, toastId }): void => {
+	const success = useCallback(({ message, toastId, duration = 3000, ...props }): void => {
 		toast.success(message, {
+			autoClose: duration,
 			className,
 			icon: toasterIcons['success'],
 			position,
 			toastId,
+			...props,
 		});
 	}, []);
 
-	const update = useCallback(({ key, message, type }): void => {
+	const update = useCallback(({ key, message, type, duration = 4000, ...props }): void => {
 		toast.update(key, {
-			autoClose: 4000,
+			autoClose: duration,
 			isLoading: false,
 			closeButton: true,
 			render: message,
 			icon: toasterIcons[type],
 			type,
+			...props,
 		});
 	}, []);
 
-	const warning = useCallback(({ message }): void => {
+	const warning = useCallback(({ message, duration = 3000, ...props }): void => {
 		toast.warn(message, {
+			autoClose: duration,
 			className,
 			icon: toasterIcons['warning'],
 			position,
+			...props,
 		});
 	}, []);
 

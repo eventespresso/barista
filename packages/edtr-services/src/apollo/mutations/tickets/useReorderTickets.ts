@@ -21,7 +21,7 @@ const useReorderTickets = (filteredEntityIds: Array<EntityId>): ReorderTickets =
 	const getTicket = useLazyTicket();
 	const filteredTickets = useMemo(() => filteredEntityIds.map(getTicket), [filteredEntityIds, getTicket]);
 
-	const { allReorderedEntities, done, sortEntities } = useReorderEntities<Ticket>({
+	const { allReorderedEntities, updateSortOrder, sortEntities } = useReorderEntities<Ticket>({
 		entityType: 'TICKET',
 		filteredEntities: filteredTickets,
 	});
@@ -30,13 +30,13 @@ const useReorderTickets = (filteredEntityIds: Array<EntityId>): ReorderTickets =
 
 	const queryOptions = useTicketQueryOptions();
 	const updateTicketList = useUpdateTicketList();
-	const updateEntityList = useCallback(() => {
+	const updateEntityList = useCallback(async () => {
 		const espressoTickets: TicketEdge = {
 			nodes: allUpdatedEntities,
 			__typename: 'EspressoRootQueryTicketsConnection',
 		};
 
-		done();
+		await updateSortOrder();
 
 		updateTicketList({
 			...queryOptions,
@@ -44,7 +44,7 @@ const useReorderTickets = (filteredEntityIds: Array<EntityId>): ReorderTickets =
 				espressoTickets,
 			},
 		});
-	}, [allUpdatedEntities, done, queryOptions, updateTicketList]);
+	}, [allUpdatedEntities, updateSortOrder, queryOptions, updateTicketList]);
 
 	const sortResponder = useCallback<SortResponder>(
 		({ destination, source }) => {
