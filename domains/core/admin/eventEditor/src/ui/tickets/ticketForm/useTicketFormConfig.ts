@@ -4,7 +4,7 @@ import * as R from 'ramda';
 import { CalendarOutlined, ControlOutlined, ProfileOutlined } from '@eventespresso/icons';
 import { useUtcISOToSiteDate, useSiteDateToUtcISO, getEEDomData } from '@eventespresso/services';
 import { startAndEndDateFixer, useTicketItem, hooks, useTicketPrices } from '@eventespresso/edtr-services';
-import { NOW, USE_ADVANCED_EDITOR } from '@eventespresso/constants';
+import { NOW, PLUS_ONE_MONTH, USE_ADVANCED_EDITOR } from '@eventespresso/constants';
 import { useMemoStringify } from '@eventespresso/hooks';
 import { setDefaultTime } from '@eventespresso/dates';
 import { EntityId } from '@eventespresso/data';
@@ -50,7 +50,7 @@ export const useTicketFormConfig = (id: EntityId, config?: EspressoFormProps): T
 		ticket?.startDate ? toSiteDate(ticket?.startDate) : setDefaultTime(NOW, 'start')
 	);
 	const endDate = useMemoStringify(
-		ticket?.endDate ? toSiteDate(ticket?.endDate) : setDefaultTime(NOW, 'end')
+		ticket?.endDate ? toSiteDate(ticket?.endDate) : setDefaultTime(PLUS_ONE_MONTH, 'end')
 	);
 
 	const { onSubmit } = config;
