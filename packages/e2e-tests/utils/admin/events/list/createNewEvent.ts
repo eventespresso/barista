@@ -16,8 +16,9 @@ export async function fillEventFields({ title, description }: Args) {
 
 	// fill in event description
 	if (description) {
-		await page.click('#content-html');
-		await page.fill('#wp-content-editor-container textarea.wp-editor-area', description);
+		const editorSelector = '.chakra-tabs__tab-panels .ee-rich-text-editor';
+		await page.click(editorSelector);
+		await page.type(editorSelector, description);
 	}
 }
 
