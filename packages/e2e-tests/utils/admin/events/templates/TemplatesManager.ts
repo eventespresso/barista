@@ -361,10 +361,7 @@ export class TemplatesManager extends WPListTable {
 	 */
 	getSelectedShowDateAndTimeFilter = async (): Promise<string> => {
 		// get selected option for show expired ticket
-		const resultText = await (
-			await page.$('select#ticket_selector_settings_tbl-show-datetime-selector option[selected="selected"]')
-		).innerText();
-
+		const resultText = await page.$eval('select#ticket_selector_settings_tbl-show-datetime-selector', sel => sel["options"][sel["options"]["selectedIndex"]]["textContent"]); 
 		return resultText.trim();
 	};
 
@@ -383,11 +380,7 @@ export class TemplatesManager extends WPListTable {
 	 * get selected value for date & time filter threshold at ticket selector template settings
 	 */
 	getSelectedDateAndTimeFilterThreshold = async (): Promise<string> => {
-		// get selected option for show expired ticket
-		const resultText = await (
-			await page.$('select#ticket_selector_settings_tbl-datetime-selector-threshold option[selected="selected"]')
-		).innerText();
-
+		const resultText = await page.$eval('select#ticket_selector_settings_tbl-datetime-selector-threshold', sel => sel['value']);
 		return resultText.trim();
 	};
 

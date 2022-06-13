@@ -118,13 +118,16 @@ describe('Show date and time filter - ticket selector test', () => {
 		// assert selected filter
 		expect(getSelectedValue).toBe('Maybe show date & time filter');
 
+		// set 1 in order to see the events in the next step
+		await templatesManager.setAndSaveDateAndTimeFilterThreshold({ value: '1' });
+
 		// go to event listing page
 		await templatesManager.gotoEventListing();
 		// get filter text
 		const getTextLabel = await (await page.$('text= Filter by Date')).innerText();
 		// assert innert text for filter button
-		expect(getTextLabel.trim()).toBe('Filter by Date');
-
+		expect(getTextLabel.trim().toLowerCase()).toBe('filter by date');
+			
 		// trigger filter dropdown
 		await page.click('.datetime_selector-dv button.checkbox-dropdown-selector-btn');
 		// get all filter dropdown list
