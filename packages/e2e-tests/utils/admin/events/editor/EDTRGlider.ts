@@ -10,7 +10,7 @@ export class EDTRGlider {
 	 * Returns event edit URL, inside EDTR
 	 */
 	getEventEditUrl = async () => {
-		const url = await page.$eval('.nav-tab-wrapper >> text=Edit Event', (el) => el.getAttribute('href'));
+		const url = await page.$eval('#wp-admin-bar-espresso-toolbar-events-edit a', el => el["href"]);
 		return url;
 	};
 
@@ -20,7 +20,8 @@ export class EDTRGlider {
 	getEventPermalink = async () => {
 		// It is assumed to have plain permalink structure for the site
 		// For pretty permalinks, the selector will become "#edit-slug-box #sample-permalink a"
-		return await page.$eval('#edit-slug-box #sample-permalink', (el) => el.getAttribute('href'));
+		const url = await page.$eval('#edit-slug-box #sample-permalink a', el => el["href"]);
+		return url
 	};
 
 	/**

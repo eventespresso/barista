@@ -3,16 +3,24 @@ import { saveVideo } from 'playwright-video';
 import { addNewDate, createNewEvent, DateEditor, EDTRGlider } from '@e2eUtils/admin/events';
 import { EventRegistrar } from '@e2eUtils/public/reg-checkout';
 import { data } from '../../../../../../shared/data';
+import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
+
+const defaultSettingsManager = new DefaultSettingsManager();
 
 const namespace = 'eventDates.filters.status';
 
 beforeAll(async () => {
 	await saveVideo(page, `artifacts/${namespace}.mp4`);
 
+	await Goto.eventsListPage();
+	//go to default settings tab
+	await defaultSettingsManager.gotoDefaultSettings();
+	await defaultSettingsManager.selectDefaultRegStatus('RAP');
+
 	await createNewEvent({ title: namespace });
 
 	for (const item of data) {
-		await addNewDate({ ...item, name: 'Date' + item.name });
+		await addNewDate({ ...item, name: 'Date' + item.name, singleDate: true });
 	}
 });
 
@@ -66,6 +74,8 @@ describe(namespace, () => {
 
 		// Lets register for 3 tickets to make the date sold out
 		registrar.setPermalink(await edtrGlider.getEventPermalink());
+		await registrar.gotoEventPage();
+
 		await registrar.registerForEvent({
 			tickets: [{ name: 'Free Ticket', quantity: 3 }],
 			attendeeInfo: {

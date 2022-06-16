@@ -39,15 +39,13 @@ export class EventRegistrar {
 	 * Register for the event
 	 */
 	registerForEvent = async ({ tickets, attendeeInfo, redirectURL }: RegisterOptions) => {
-		await this.gotoEventPage();
-
 		for (const { name, quantity } of tickets) {
 			await this.chooseTicketQty(name, quantity);
 		}
 
 		await this.submitTicketSelector();
 
-		await fillAttendeeInformation(attendeeInfo);
+		//await fillAttendeeInformation(attendeeInfo);
 
 		await this.submitRegistration();
 
@@ -59,7 +57,7 @@ export class EventRegistrar {
 	/**
 	 * Navigates to event page on the front-end
 	 */
-	gotoEventPage = async () => {
+	gotoEventPage =  async () => {
 		await Promise.all([page.waitForNavigation(), page.goto(this.permalink)]);
 	};
 
