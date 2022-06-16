@@ -14,7 +14,7 @@ beforeAll(async () => {
 	// i.e. Date6 will have order 2, Date5 has order 3 and so on
 	// so that we can test sort by order correctly
 	for (const item of data.reverse()) {
-		await addNewDate({ ...item, name: 'Date' + item.name });
+		await addNewDate({ ...item, name: 'Date' + item.name, singleDate: true });
 	}
 	await dateEditor.filterListBy('status', { value: 'all' });
 });
