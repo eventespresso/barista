@@ -3,6 +3,10 @@ import { saveVideo } from 'playwright-video';
 import { addNewDate, createNewEvent, DateEditor, EDTRGlider, TicketEditor } from '@e2eUtils/admin/events';
 import { EventRegistrar } from '@e2eUtils/public/reg-checkout';
 
+import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
+
+const defaultSettingsManager = new DefaultSettingsManager();
+
 const namespace = 'eventDates.filters.sales';
 
 const dateEditor = new DateEditor();
@@ -12,6 +16,13 @@ const edtrGlider = new EDTRGlider();
 
 beforeAll(async () => {
 	await saveVideo(page, `artifacts/${namespace}.mp4`);
+
+	await Goto.eventsListPage();
+	//go to default settings tab
+	await defaultSettingsManager.gotoDefaultSettings();
+	await defaultSettingsManager.selectDefaultRegStatus('RAP');
+
+	await defaultSettingsManager.setNewValueForDefaultMaxTicket('10');
 
 	await createNewEvent({ title: namespace });
 
@@ -28,13 +39,14 @@ beforeAll(async () => {
 	// 10 out of 11 will mean "above 90%"
 	await dateEditor.updateCapacityInline(null, '11');
 	// 10 out of 13 will mean "above 75%"
-	await addNewDate({ name: 'Date2', capacity: '13' });
+	await addNewDate({ name: 'Date2', capacity: '13', singleDate: true });
 	// 10 out of 18 will mean "above 50%"
-	await addNewDate({ name: 'Date3', capacity: '18' });
+	await addNewDate({ name: 'Date3', capacity: '18', singleDate: true });
 	// 10 out of 25 will mean "below 50%"
-	await addNewDate({ name: 'Date4', capacity: '25' });
+	await addNewDate({ name: 'Date4', capacity: '25', singleDate: true });
 
 	registrar.setPermalink(await edtrGlider.getEventPermalink());
+	await registrar.gotoEventPage();
 
 	await registrar.registerForEvent({
 		tickets: [{ name: 'Ticket1', quantity: 10 }],
