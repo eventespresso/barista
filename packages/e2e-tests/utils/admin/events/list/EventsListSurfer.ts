@@ -176,7 +176,7 @@ export class EventsListSurfer extends WPListTable {
 		return await Promise.all(
 			tableRows.map(async (row) => {
 				// get event id value
-				return await (await row.$('th.check-column .ee-event-list-bulk-select-event')).getAttribute('value');
+				return await (await row.$('th.check-column .ee-responsive-table-cell__content input')).getAttribute('value');
 			})
 		);
 	};
@@ -200,6 +200,7 @@ export class EventsListSurfer extends WPListTable {
 		await Goto.eventsListPage();
 		await this.goToView('Trash');
 		const totalPage = await this.getTotalPagePagination();
+		
 		// loop the pagination per page
 		for (let pages = 0; pages < totalPage; pages++) {
 			await this.goToView('Trash');

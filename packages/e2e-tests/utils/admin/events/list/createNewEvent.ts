@@ -52,5 +52,5 @@ export async function createMultipleEvents({ title, description, shouldPublish =
 	// save event
 	await edtrGlider.saveEvent(shouldPublish);
 	// tirgger add new event again
-	await Promise.all([page.waitForNavigation(), page.click('a:has-text("Add Event")')]);
+	await Promise.all([page.waitForNavigation(), page.click('a:has-text("Add New Event")')]);
 }
