@@ -20,7 +20,7 @@ beforeAll(async () => {
 	await createNewEvent({ title: namespace });
 
 	for (const item of data) {
-		await addNewDate({ ...item, name: 'Date' + item.name, singleDate: true });
+		await addNewDate({ ...item, name: 'Date' + item.name});
 	}
 });
 

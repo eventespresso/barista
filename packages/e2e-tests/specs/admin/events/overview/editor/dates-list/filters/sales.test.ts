@@ -39,11 +39,11 @@ beforeAll(async () => {
 	// 10 out of 11 will mean "above 90%"
 	await dateEditor.updateCapacityInline(null, '11');
 	// 10 out of 13 will mean "above 75%"
-	await addNewDate({ name: 'Date2', capacity: '13', singleDate: true });
+	await addNewDate({ name: 'Date2', capacity: '13' });
 	// 10 out of 18 will mean "above 50%"
-	await addNewDate({ name: 'Date3', capacity: '18', singleDate: true });
+	await addNewDate({ name: 'Date3', capacity: '18' });
 	// 10 out of 25 will mean "below 50%"
-	await addNewDate({ name: 'Date4', capacity: '25', singleDate: true });
+	await addNewDate({ name: 'Date4', capacity: '25' });
 
 	registrar.setPermalink(await edtrGlider.getEventPermalink());
 	await registrar.gotoEventPage();
