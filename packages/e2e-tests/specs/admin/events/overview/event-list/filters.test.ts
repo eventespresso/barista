@@ -13,18 +13,14 @@ beforeEach(async () => {
 
 describe('Events list page filters', () => {
 	// eslint-disable-next-line jest/no-disabled-tests
-	it.skip('tests the month/year filter', async () => {
+	it('tests the month/year filter', async () => {
 		const monthYearFilter = await assertFilteredItems('#month_range', 'td.start_date_time', true, true);
 		expect(monthYearFilter).toBeTruthy();
 	});
 
 	// eslint-disable-next-line jest/no-disabled-tests
-	it.skip('tests the active/inactive filter', async () => {
-		const activeInactiveFilter = await assertFilteredItems(
-			'#active_status',
-			'td.name.column-name span.ee-status-text-small',
-			true
-		);
+	it('tests the active/inactive filter', async () => {
+		const activeInactiveFilter = await assertFilteredItems('#active_status', '');
 		expect(activeInactiveFilter).toBeTruthy();
 	});
 
