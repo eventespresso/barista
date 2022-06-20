@@ -28,7 +28,11 @@ export class EDTRGlider {
 	 * Sets the maximum registrations value.
 	 */
 	setMaxRegistrations = async (value: number, updateEvent = true) => {
-		await page.fill('#max-registrants', String(value));
+		await page.click('div.ee-edtr-option__max-reg span.ee-tabbable-text__inner_wrapper');
+		
+		await page.click('div.ee-edtr-option__max-reg input');
+
+		await page.fill('div.ee-edtr-option__max-reg input', String(value));
 
 		await this.saveEvent(updateEvent);
 	};
