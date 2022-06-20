@@ -3,9 +3,6 @@ import { sub } from '@eventespresso/dates';
 import { addNewTicket, createNewEvent, EDTRGlider, TicketEditor } from '@e2eUtils/admin/events';
 import { EventRegistrar } from '@e2eUtils/public/reg-checkout';
 
-import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
-const defaultSettingsManager = new DefaultSettingsManager();
-
 const namespace = 'eventEditor.tickets.filters.sales';
 
 const ticketEditor = new TicketEditor();
@@ -37,7 +34,7 @@ beforeAll(async () => {
 
 	registrar.setPermalink(await edtrGlider.getEventPermalink());
 	await registrar.gotoEventPage();
-	
+
 	await registrar.registerForEvent({
 		tickets: [
 			{ name: 'Ticket1', quantity: 10 },

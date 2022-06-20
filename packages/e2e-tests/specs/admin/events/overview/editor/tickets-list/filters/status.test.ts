@@ -1,6 +1,6 @@
 import { addNewTicket, createNewEvent, TicketEditor, EDTRGlider } from '@e2eUtils/admin/events';
 import { EventRegistrar } from '@e2eUtils/public/reg-checkout';
-import { data } from '../../../../../../shared/data';
+import { dataTicket as data } from '../../../../../../shared/data';
 
 const namespace = 'eventEditor.tickets.filters.status';
 
@@ -56,6 +56,8 @@ describe(namespace, () => {
 
 		// Lets register for 3 tickets to make the date sold out
 		registrar.setPermalink(await edtrGlider.getEventPermalink());
+		await registrar.gotoEventPage();
+
 		await registrar.registerForEvent({
 			tickets: [{ name: 'Ticket3', quantity: 3 }],
 			attendeeInfo: {
