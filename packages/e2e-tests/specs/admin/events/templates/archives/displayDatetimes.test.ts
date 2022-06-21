@@ -30,7 +30,6 @@ describe('Display datetimes - archive test', () => {
 		await templatesManager.gotoTemplates();
 		await templatesManager.setAndSaveDisplayDatetimes({ value });
 		const getSelectedValue = await templatesManager.getSelectedDisplayDatetimes();
-
 		return { getSelectedValue };
 	};
 
@@ -51,7 +50,7 @@ describe('Display datetimes - archive test', () => {
 		const { getSelectedValue } = await setDisplayDatetimes({ value: '1' });
 		await templatesManager.gotoEventListing();
 		// get date time header text if exist
-		const getDatetimesHeaderText = await (await page?.$('.event-datetimes > h3')).innerText();
+		const getDatetimesHeaderText = await (await page?.$('.event-datetimes > ul')).innerText();
 
 		// assert date time header text after selecting display "Yes"
 		expect(getDatetimesHeaderText).toBeTruthy();

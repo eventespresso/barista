@@ -189,6 +189,7 @@ export class TemplatesManager extends WPListTable {
 	gotoEventListing = async (): Promise<void> => {
 		// Get event listing URL at templates tab event listing pages
 		const getEventListingUrl = await this.getEventListingUrl();
+		console.log(getEventListingUrl);
 		// go to event listing url
 		await page.goto(getEventListingUrl);
 	};
@@ -232,10 +233,7 @@ export class TemplatesManager extends WPListTable {
 	 */
 	getSelectedDisplayDatetimes = async (): Promise<string> => {
 		// get selected option for display datetimes
-		const resultText = await (
-			await page.$('select#EED_Events_Archive_display_datetimes option[selected="selected"]')
-		).innerText();
-
+		const resultText = await page.$eval('select#EED_Events_Archive_display_datetimes', sel => sel["options"][sel["options"]["selectedIndex"]]["textContent"]); 
 		return resultText.trim();
 	};
 
