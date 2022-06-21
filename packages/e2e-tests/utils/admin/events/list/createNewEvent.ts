@@ -20,12 +20,6 @@ export async function fillEventFields({ title, description }: Args) {
 		await page.click(editorSelector);
 		await page.type(editorSelector, description);
 	}
-
-	//TODO remove after Brent fixed the same Max Registration case
-	await page.click('div.ee-edtr-option__max-reg span.ee-tabbable-text__inner_wrapper');
-	await page.click('div.ee-edtr-option__max-reg input');
-	const inputValue = await page.$eval("div.ee-edtr-option__max-reg input", el => el["value"]);
-	await page.fill('div.ee-edtr-option__max-reg input', inputValue+1);
 	
 }
 
