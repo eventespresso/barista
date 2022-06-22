@@ -49,8 +49,7 @@ describe('Date and time filter max checked - ticket selector test', () => {
 			await addNewDate({
 				name: `Event date title - test ${event}`,
 				description: `Event date description - test ${event}`,
-				startDate: NOW,
-				singleDate: true,
+				startDate: NOW
 			});
 		}
 

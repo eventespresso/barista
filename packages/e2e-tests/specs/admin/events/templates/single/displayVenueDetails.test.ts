@@ -46,7 +46,7 @@ describe('Display venue details - single test', () => {
 		//  go to templates tab
 		await templatesManager.gotoTemplates();
 		// set and select display venue details to 'Yes'
-		await templatesManager.setAndSaveDisplayVenueDetails({ value: '1' });
+		await templatesManager.setAndSaveDisplayVenueDetails({ value: '1', archive: false });
 		// go to event main page
 		await Goto.eventsListPage();
 		// get the first event

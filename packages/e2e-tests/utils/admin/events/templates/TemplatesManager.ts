@@ -91,9 +91,8 @@ export class TemplatesManager extends WPListTable {
 	getSelectedDisplayVenueDetails = async ({ archive = false }: { archive: boolean }): Promise<string> => {
 		// get selected option for display venue details
 		const selectID = archive ? 'EED_Events_Archive_display_venue' : 'display_venue';
-		const resultText = await (await page.$(`select#${selectID} option[selected="selected"]`)).innerText();
-
-		return resultText.trim();
+		const resultText = await page.$eval(`select#${selectID}`, sel => sel["options"][sel["options"]["selectedIndex"]]["textContent"]); 
+        return resultText.trim();
 	};
 
 	/**
@@ -140,8 +139,8 @@ export class TemplatesManager extends WPListTable {
 		const selectID = archive
 			? 'EED_Events_Archive_use_sortable_display_order'
 			: 'EED_Events_Single_use_sortable_display_order';
-		const resultText = await (await page.$(`select#${selectID} option[selected="selected"]`)).innerText();
 
+		const resultText = await page.$eval(`select#${selectID}`, sel => sel["options"][sel["options"]["selectedIndex"]]["textContent"]); 
 		return resultText.trim();
 	};
 
@@ -161,7 +160,7 @@ export class TemplatesManager extends WPListTable {
 	 * Get base URL at templates tab event listing pages
 	 */
 	getBaseUrl = async (): Promise<string> => {
-		return await (await page.$('.metabox-holder :nth-match(table, 2) tbody > tr:nth-child(2) td p')).innerText();
+		return await (await page.$('.metabox-holder :nth-match(table, 2) tbody > tr:nth-child(2) td span')).innerText();
 	};
 
 	/**
@@ -169,7 +168,7 @@ export class TemplatesManager extends WPListTable {
 	 */
 	getEventSlug = async (): Promise<string> => {
 		return await (
-			await page.$('.metabox-holder :nth-match(table, 2) tbody > tr:nth-child(2) td p #event_cpt_slug')
+			await page.$('.metabox-holder :nth-match(table, 2) tbody > tr:nth-child(2) td #event_cpt_slug')
 		).getAttribute('value');
 	};
 
@@ -177,7 +176,7 @@ export class TemplatesManager extends WPListTable {
 	 * Get event listing URL at templates tab event listing pages
 	 */
 	getEventListingUrl = async (): Promise<string> => {
-		return await (await page.$('.metabox-holder :nth-match(table, 2) tbody > tr #event_listings_url')).innerText();
+		return await (await (await page.$('.metabox-holder :nth-match(table, 2) tbody > tr #event_listings_url')).innerText()).trim();
 	};
 
 	gotoEventListing = async (): Promise<void> => {
