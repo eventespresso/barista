@@ -8,19 +8,24 @@ export type Args = {
 	title?: string;
 	description?: string;
 	shouldPublish?: boolean;
+	wpClassicEditor?: boolean;
 };
 
-export async function fillEventFields({ title, description }: Args) {
+export async function fillEventFields({ title, description, wpClassicEditor }: Args) {
 	// fill in title event field
 	await page.fill('#titlewrap #title', title || '');
 
 	// fill in event description
 	if (description) {
-		const editorSelector = '.chakra-tabs__tab-panels .ee-rich-text-editor';
-		await page.click(editorSelector);
-		await page.type(editorSelector, description);
+		if(wpClassicEditor){
+			await page.click('#content-html');
+			await page.fill('#wp-content-editor-container textarea.wp-editor-area', description);
+		}else{
+			const editorSelector = '.chakra-tabs__tab-panels .ee-rich-text-editor';
+			await page.click(editorSelector);
+			await page.type(editorSelector, description);
+		}
 	}
-	
 }
 
 export async function triggerAddNewEvent() {

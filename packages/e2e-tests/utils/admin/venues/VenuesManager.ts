@@ -42,7 +42,8 @@ export class VenuesManager extends WPListTable {
 	createNewVenue = async ({ title, description }: Args = {}): Promise<number> => {
 		try {
 			await this.triggerAddNewVenue();
-			await fillVenueFields({ title, description });
+			const wpClassicEditor = true;
+			await fillVenueFields({ title, description, wpClassicEditor });
 			await this.saveVenue();
 			// wait to load venue content
 			await page.waitForSelector('#poststuff');

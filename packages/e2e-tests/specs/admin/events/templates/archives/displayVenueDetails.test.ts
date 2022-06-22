@@ -26,7 +26,7 @@ describe('Display venue details - archives test', () => {
 		expect(countAfterCreate).toBe(countBeforeCreate + addedVenue);
 		expect(addedVenue).not.toBe(0);
 	});
-
+	
 	it('Create new event and set created venue', async () => {
 		// this function is to create new event first then assign the venue that already created then return before and after count event
 		const { countAfterCreate, countBeforeCreate, addedEvent, getVenueTitle } =
@@ -46,7 +46,7 @@ describe('Display venue details - archives test', () => {
 		//  go to templates tab
 		await templatesManager.gotoTemplates();
 		// set and select display venue details to 'Yes'
-		await templatesManager.setAndSaveDisplayVenueDetails({ value: '1' });
+		await templatesManager.setAndSaveDisplayVenueDetails({ value: '1', archive: false });
 		//  go to templates tab
 		await templatesManager.gotoTemplates();
 		// Get event listing URL at templates tab event listing pages
