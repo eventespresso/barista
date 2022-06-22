@@ -250,11 +250,8 @@ export class TemplatesManager extends WPListTable {
 	 */
 	getSelectedDisplayExpiredEvents = async (): Promise<string> => {
 		// get selected option for display expired events
-		const resultText = await (
-			await page.$('select#EED_Events_Archive_display_expired_events option[selected="selected"]')
-		).innerText();
-
-		return resultText.trim();
+		const resultText = await page.$eval('select#EED_Events_Archive_display_expired_events', sel => sel["options"][sel["options"]["selectedIndex"]]["textContent"]); 
+        return resultText.trim();
 	};
 
 	/**
