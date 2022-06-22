@@ -41,11 +41,8 @@ export class TemplatesManager extends WPListTable {
 	 */
 	getSelectedDisplayDescription = async (): Promise<string> => {
 		// get selected option for display description
-		const resultText = await (
-			await page.$('select#EED_Events_Archive_display_description option[selected="selected"]')
-		).innerText();
-
-		return resultText.trim();
+		const resultText = await page.$eval('select#EED_Events_Archive_display_description', sel => sel["options"][sel["options"]["selectedIndex"]]["textContent"]); 
+        return resultText.trim();
 	};
 
 	saveTemplatesChanges = async (): Promise<void> => {

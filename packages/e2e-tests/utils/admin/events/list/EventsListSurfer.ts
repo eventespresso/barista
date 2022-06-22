@@ -27,7 +27,7 @@ export class EventsListSurfer extends WPListTable {
 	 * Get the status of an event from <tr /> handle
 	 */
 	getEventStatus = async (item: ElementHandle): Promise<string> => {
-		return await (await item.$('td.column-name .ee-status-text-small')).innerText();
+		return await (await item.$('td.column-name a.row-title')).getAttribute("aria-label");
 	};
 
 	/**

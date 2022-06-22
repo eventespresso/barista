@@ -75,10 +75,7 @@ describe('Display description - archives test', () => {
 			const restoreLink = await eventsListSurfer.getItemActionLinkByText(firstItem, 'Edit');
 			await page.goto(restoreLink);
 			// wait to load venue content
-			getFirstEventDescription = await (
-				await page.$('#wp-content-editor-container textarea.wp-editor-area')
-			).innerHTML();
-
+			getFirstEventDescription = await (await page.$(`.public-DraftEditor-content div div`)).innerText();
 			// now save the new event
 			await edtrGlider.saveEvent(true);
 		}
@@ -113,11 +110,11 @@ describe('Display description - archives test', () => {
 		const { getSelectedValue } = await processToSetDisplayDescription({ status: '1' });
 		// check and get excerpt value
 		const getExcerptText = await (
-			await page.$(`.event-content a:has-text("Continue reading ${getFirstEventStatus}${getFirstEventTitle}")`)
+			await page.$(`.event-content p a`)
 		).innerText();
-
+		
 		// assert excerpt text
-		expect(getExcerptText).toBe(`Continue reading ${getFirstEventStatus}${getFirstEventTitle}`);
+		expect(getExcerptText).toBeTruthy();
 		// assert selected display description
 		expect(getSelectedValue).toBe('excerpt (short desc)');
 	});
