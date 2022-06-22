@@ -21,16 +21,16 @@ export class TemplatesManager extends WPListTable {
 	getSelectedStatusBanner = async ({ value = false, text = false, single = true }): Promise<string> => {
 		// get selected option for status banner
 		const selectID = single ? 'display_status_banner_single' : 'EED_Events_Archive_display_status_banner';
-		const wrapper = await page.$(`select#${selectID} option[selected="selected"]`);
+		const selector = `select#${selectID}`;
 
 		let resultData: string;
 		// if value is equal to true return the value of selected option
 		if (value) {
-			resultData = await wrapper.getAttribute('value');
+			resultData = await page.$eval(selector, sel => sel['value']);
 		}
 		// if text is equal to true return the innertext of selected option
 		if (text) {
-			resultData = await wrapper.innerText();
+			resultData = await page.$eval(selector, sel => sel["options"][sel["options"]["selectedIndex"]]["textContent"]); 
 		}
 
 		return resultData.trim();
