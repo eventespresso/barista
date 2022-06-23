@@ -182,7 +182,6 @@ export class TemplatesManager extends WPListTable {
 	gotoEventListing = async (): Promise<void> => {
 		// Get event listing URL at templates tab event listing pages
 		const getEventListingUrl = await this.getEventListingUrl();
-		console.log(getEventListingUrl);
 		// go to event listing url
 		await page.goto(getEventListingUrl);
 	};
