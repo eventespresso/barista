@@ -23,6 +23,7 @@ describe(namespace, () => {
 		await dateEditor.updateCapacityInline(null, 2);
 
 		registrar.setPermalink(await edtrGlider.getEventPermalink());
+		await registrar.gotoEventPage();
 
 		const registrationOptions: RegisterOptions = {
 			tickets: [{ name: 'Free Ticket', quantity: 1 }],
@@ -37,6 +38,8 @@ describe(namespace, () => {
 		await registrar.registerForEvent(registrationOptions);
 
 		expect(await dateEditor.getItemCount()).toBe(1);
+
+		await registrar.gotoEventPage();
 
 		await registrar.registerForEvent(registrationOptions);
 
