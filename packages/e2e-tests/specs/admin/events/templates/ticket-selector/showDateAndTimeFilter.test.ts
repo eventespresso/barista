@@ -57,7 +57,7 @@ describe('Show date and time filter - ticket selector test', () => {
 		// create 2 sample event dates for date filter
 		for (const event of slicedEvents) {
 			// await eventsListSurfer.newEventDates(event);
-			await addNewDate({ description: event.description, name: event.title, singleDate: true });
+			await addNewDate({ description: event.description, name: event.title});
 		}
 
 		// count event date after creating new 2 event dates
