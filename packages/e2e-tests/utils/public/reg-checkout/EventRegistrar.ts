@@ -65,7 +65,7 @@ export class EventRegistrar {
 	 * Selects the given quantity for a ticket.
 	 */
 	chooseTicketQty = async (name: string, quantity: number) => {
-		await page.selectOption(`.event-tickets tr:has-text('${name}') .tckt-slctr-tbl-td-qty select`, {
+		await page.selectOption(`.tkt-slctr-tbl-wrap-dv .tkt-slctr-tbl tbody tr:has-text('${name}') td.tckt-slctr-tbl-td-qty select.ticket-selector-tbl-qty-slct`, {
 			value: String(quantity),
 		});
 	};

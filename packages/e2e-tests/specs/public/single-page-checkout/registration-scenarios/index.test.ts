@@ -27,7 +27,11 @@ describe(namespace, () => {
 
 		await addNewTicket({ amount: 100, name: 'Paid Ticket' });
 
-		await registrar.setPermalink(await edtrGlider.getEventPermalink()).registerForEvent({
+		registrar.setPermalink(await edtrGlider.getEventPermalink());
+		await registrar.gotoEventPage();
+
+
+		await registrar.registerForEvent({
 			tickets: [{ name: 'Free Ticket', quantity: 1 }],
 			attendeeInfo: {
 				fname: 'Joe',
@@ -37,7 +41,6 @@ describe(namespace, () => {
 		});
 
 		const content = await assertRegSuccess();
-
 		expect(content).toContain('Approved');
 	});
 });
