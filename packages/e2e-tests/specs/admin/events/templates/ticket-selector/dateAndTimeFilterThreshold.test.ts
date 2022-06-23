@@ -49,8 +49,7 @@ describe('Date and time filter threshold - ticket selector test', () => {
 		// create new event date
 		await addNewDate({
 			description: eventData.upcoming.description,
-			name: eventData.upcoming.title,
-			singleDate: true,
+			name: eventData.upcoming.title
 		});
 
 		// count event date after creating new one
@@ -110,17 +109,17 @@ describe('Date and time filter threshold - ticket selector test', () => {
 
 	it('Set date & time filter threshold to "2"', async () => {
 		// set and save for date & time filter threshold at ticket selector template settings
-		await templatesManager.setAndSaveDateAndTimeFilterThreshold({ value: '2' });
+		await templatesManager.setAndSaveDateAndTimeFilterThreshold({ value: '1' });
 		// get selected value for date & time filter threshold at ticket selector template settings
 		const getSelectedValue = await templatesManager.getSelectedDateAndTimeFilterThreshold();
 		// assert selected threshold
-		expect(getSelectedValue).toBe('2');
+		expect(getSelectedValue).toBe('1');
 
 		// go to event listing page
 		await templatesManager.gotoEventListing();
 		// get filter text if exist after selecting 2 for threshold
-		const getTextLabel = await (await page.$('text= Filter by Date')).innerText();
+		const getTextLabel = await (await page.$('span.checkbox-dropdown-selector-selected-spn')).innerText();
 		// assert innert text for filter button
-		expect(getTextLabel.trim()).toBe('Filter by Date');
+		expect(getTextLabel.trim().toLowerCase()).toBe('filter by date');
 	});
 });
