@@ -45,10 +45,6 @@ export class EventRegistrar {
 
 		await this.submitTicketSelector();
 
-		//Disable because cannot see the AttendeeInformation form in the Events detail page.
-		//TODO enable after team reply
-		//await fillAttendeeInformation(attendeeInfo);
-	
 		await this.submitRegistration();
 
 		if (redirectURL) {
