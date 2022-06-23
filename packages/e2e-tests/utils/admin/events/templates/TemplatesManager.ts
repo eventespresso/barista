@@ -325,10 +325,7 @@ export class TemplatesManager extends WPListTable {
 	 */
 	getSelectedShowExpiredTickets = async (): Promise<string> => {
 		// get selected option for show expired ticket
-		const resultText = await (
-			await page.$('select#ticket_selector_settings_tbl-show-expired-tickets option[selected="selected"]')
-		).innerText();
-
+		const resultText = await page.$eval('select#ticket_selector_settings_tbl-show-expired-tickets', sel => sel["options"][sel["options"]["selectedIndex"]]["textContent"]); 
 		return resultText.trim();
 	};
 

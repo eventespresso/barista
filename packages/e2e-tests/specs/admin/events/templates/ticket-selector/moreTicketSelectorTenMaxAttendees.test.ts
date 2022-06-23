@@ -214,7 +214,7 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 		await edtrGlider.ticketMainMenu(2);
 
 		// click edit ticket
-		await page.click('#menu-list-71-menuitem-74');
+		await page.click('#ee-entity-list-tickets .ee-entity-list__card-view > .ee-entity-list-item:nth-child(2) button >> text=edit ticket');
 		// focus first the minimum quantity ticket field
 		await page.focus('#min');
 		// set minimum quantity ticket field
@@ -414,6 +414,7 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 			}
 		}
 	});
+	
 	it('Test DOM for ticket members only', async () => {
 		await Goto.eventsListPage();
 		// get first event
