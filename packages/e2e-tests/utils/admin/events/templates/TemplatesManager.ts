@@ -265,10 +265,7 @@ export class TemplatesManager extends WPListTable {
 	 */
 	getSelectedShowTicketDetails = async (): Promise<string> => {
 		// get selected option for show ticket details
-		const resultText = await (
-			await page.$('select#ticket_selector_settings_tbl-show-ticket-details option[selected="selected"]')
-		).innerText();
-
+		const resultText = await page.$eval('select#ticket_selector_settings_tbl-show-ticket-details', sel => sel["options"][sel["options"]["selectedIndex"]]["textContent"]); 
 		return resultText.trim();
 	};
 
