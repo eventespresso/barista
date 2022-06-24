@@ -26,6 +26,8 @@ export async function fillEventFields({ title, description, wpClassicEditor }: A
 			await page.type(editorSelector, description);
 		}
 	}
+
+	await page.waitForSelector('text=successfully updated event');
 }
 
 export async function triggerAddNewEvent() {
