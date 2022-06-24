@@ -24,10 +24,10 @@ export async function fillEventFields({ title, description, wpClassicEditor }: A
 			const editorSelector = '.chakra-tabs__tab-panels .ee-rich-text-editor';
 			await page.click(editorSelector);
 			await page.type(editorSelector, description);
+
+			await page.waitForSelector('text=successfully updated event');
 		}
 	}
-
-	await page.waitForSelector('text=successfully updated event');
 }
 
 export async function triggerAddNewEvent() {
