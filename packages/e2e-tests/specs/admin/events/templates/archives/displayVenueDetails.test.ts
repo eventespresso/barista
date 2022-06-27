@@ -46,6 +46,8 @@ describe('Display venue details - archives test', () => {
 		//  go to templates tab
 		await templatesManager.gotoTemplates();
 		// set and select display venue details to 'Yes'
+		await templatesManager.setAndSaveDisplayVenueDetails({ value: '1', archive: true });
+		// set and select display venue details to 'Yes'
 		await templatesManager.setAndSaveDisplayVenueDetails({ value: '1', archive: false });
 		//  go to templates tab
 		await templatesManager.gotoTemplates();
