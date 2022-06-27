@@ -111,6 +111,7 @@ describe('Show date and time filter - ticket selector test', () => {
 	});
 
 	it('Set show date & time filter to "Maybe show date & time filter"', async () => {
+		await templatesManager.setAndSaveDisplayTicketSelector({ value: '1' });
 		// set and save for show date & time filter at ticket selector template settings
 		await templatesManager.setAndSaveShowDateAndTimeFilter({ value: 'maybe_datetime_selector' });
 		// get selected value for show date & time filter  at ticket selector template settings
