@@ -34,6 +34,9 @@ describe('Show ticket details - ticket selector test', () => {
 	it('Set show ticket details to "Yes', async () => {
 		// set show ticket details to "Yes"
 		await templatesManager.setAndSaveShowTicketDetails({ value: '1' });
+
+		await templatesManager.setAndSaveDisplayTicketSelector({ value: '1' });
+
 		// get selected value for show ticket details
 		const getSelectedValue = await templatesManager.getSelectedShowTicketDetails();
 		// assert selected value, suppose to be "Yes"
