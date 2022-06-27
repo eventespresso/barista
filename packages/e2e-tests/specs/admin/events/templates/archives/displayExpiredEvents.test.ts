@@ -23,22 +23,12 @@ describe('Display expired events - archives test', () => {
 	it('Create expired events', async () => {
 		// count event first before creating one
 		const countBeforeChecking = await templatesManager.goToViewAndCount('View All Events');
-		// check if there is already existing event before creating one else edit first event
-		if (!countBeforeChecking) {
-			// create new event
-			await createNewEvent({
-				...eventData.expired,
-				shouldPublish: false,
-			});
-		} else {
-			// get the first event
-			const firstItem = await templatesManager.getFirstListItem();
-			// go to view action to edit events
-			const restoreLink = await templatesManager.getItemActionLinkByText(firstItem, 'Edit');
-			await page.goto(restoreLink);
-			// remove filter events to show expired events
-			await edtrGlider.removeEventDatesFilter();
-		}
+		
+		//Create New Event
+		await createNewEvent({
+			...eventData.expired,
+			shouldPublish: false,
+		});
 
 		// get first evet in a list or by dbId if exist
 		const item = await dateEditor.getItem();
@@ -48,6 +38,8 @@ describe('Display expired events - archives test', () => {
 			description: eventData.expired.description,
 			...data[0], // this data is for expired dates
 		});
+
+		await Promise.all([page.waitForNavigation(), page.click('#publish')]);
 
 		await Goto.eventsListPage();
 		const countAfterChecking = await templatesManager.goToViewAndCount('View All Events');
