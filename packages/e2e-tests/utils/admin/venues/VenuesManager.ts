@@ -36,7 +36,7 @@ export class VenuesManager extends WPListTable {
 	 * Updates the venue by clicking the publish button
 	 */
 	saveVenue = async () => {
-		await Promise.all([page.waitForNavigation(), page.click('#postbox-container-1 #publish')]);
+		await Promise.all([page.waitForNavigation(), page.click('#publish')]);
 	};
 
 	createNewVenue = async ({ title, description }: Args = {}): Promise<number> => {
@@ -44,6 +44,7 @@ export class VenuesManager extends WPListTable {
 			await this.triggerAddNewVenue();
 			const wpClassicEditor = true;
 			await fillVenueFields({ title, description, wpClassicEditor });
+			await page.waitForSelector('#sample-permalink');
 			await this.saveVenue();
 			// wait to load venue content
 			await page.waitForSelector('#poststuff');

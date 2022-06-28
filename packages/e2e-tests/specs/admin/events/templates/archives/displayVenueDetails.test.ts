@@ -1,15 +1,24 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
-import { TemplatesManager, VenuesManager } from '@e2eUtils/admin';
+import { Goto, EventsListSurfer, TemplatesManager, VenuesManager } from '@e2eUtils/admin';
 import { eventVenueData, eventData } from '../../../../shared/data';
 
 const templatesManager = new TemplatesManager();
 const venuesManager = new VenuesManager();
+const eventsListSurfer = new EventsListSurfer();
 
 const namespace = 'templates-archives-display-venue-details';
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+
+	// delete all events from view all events link
+	await eventsListSurfer.deleteAllEventsByLink('View All Events');
+	await eventsListSurfer.deleteAllEventsByLink('Draft');
+	// delete permanently all events at trash link
+	await eventsListSurfer.deleteAllPermanentlyFromTrash();
+
+	await Goto.eventsListPage();
 });
 
 afterAll(async () => {
@@ -32,7 +41,7 @@ describe('Display venue details - archives test', () => {
 		const { countAfterCreate, countBeforeCreate, addedEvent, getVenueTitle } =
 			await venuesManager.processToAssignVenueAtEvent({
 				...eventData.upcoming,
-				shouldPublish: false,
+				shouldPublish: true,
 				venueTitle: eventVenueData.title,
 			});
 		// assert added event
