@@ -25,6 +25,8 @@ describe('Display status banner - archives test', () => {
 	it('Set display status banner to yes', async () => {
 		// first set/select value at display status banner and save then return the innertext value selected
 		const getSelectedValue = await templatesManager.setAndGetValueForDisplayStatusBanner({ status: '1' });
+		// set the display status banner true for the archive
+		await templatesManager.setAndSaveDisplayStatusBanner({status: '1', single: false})
 		// assert display status banner value, it should be equal to "Yes"
 		expect(getSelectedValue).toBe('Yes');
 	});
