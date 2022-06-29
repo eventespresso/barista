@@ -90,6 +90,8 @@ describe('Trash link test', () => {
 		await eventsListSurfer.checkEventToDeletePermanently(filteredRows);
 		// confirmation for delete permanently
 		await eventsListSurfer.confirmAllDeletePermanently();
+		//Go to Event List
+		await eventsListSurfer.goToView('View All Events');
 		// check again the trash count if it is already less than before
 		const countAfterDeletePermanently = await eventsListSurfer.getViewCount('Trash');
 		// assert the before and after trash count
