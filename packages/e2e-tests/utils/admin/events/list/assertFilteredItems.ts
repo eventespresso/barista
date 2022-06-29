@@ -18,11 +18,11 @@ export const assertFilteredItems = async (
 	isDate = false
 ) => {
 	const { optionValues, options } = await getSelectFilter(filterSelector);
-
 	if (optionValues.length) {
 		// loop through all of the optionValues that is available inside the select filter
-		for (const value of optionValues) {
+		for (const value of optionValues) {			
 			await page.selectOption(filterSelector, { value });
+
 			await Promise.all([page.waitForNavigation(), page.click('input:has-text("Filter")')]);
 
 			// These are all the rows in event list table
@@ -45,6 +45,8 @@ export const assertFilteredItems = async (
 					expect(columnText.trim().toLowerCase()).toBe(value.trim().toLowerCase());
 				}
 			}
+
+			await Promise.all([page.waitForNavigation(), page.click('a:has-text("Reset Filters")')]);
 		}
 	}
 
