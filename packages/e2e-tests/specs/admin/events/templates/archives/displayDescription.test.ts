@@ -48,37 +48,21 @@ describe('Display description - archives test', () => {
 
 	it('Create new event if there is no existing one', async () => {
 		await Goto.eventsListPage();
-		//count event if there is existing one or not
-		const countBeforeCreate = await templatesManager.getViewCount('View All Events');
-		if (!countBeforeCreate) {
-			// create new event
-			await createNewEvent({
-				...eventData.upcoming,
-				shouldPublish: false,
-			});
-			// get event description for assert
-			getFirstEventDescription = eventData.upcoming.description;
-			// get event title for assert
-			getFirstEventTitle = eventData.upcoming.title;
-			// get event status for assert
-			getFirstEventStatus = eventData.upcoming.status;
-			// now save the new event
-			await edtrGlider.saveEvent(true);
-		} else {
-			// get the first event
-			const firstItem = await eventsListSurfer.getFirstListItem();
-			// get event title for assert
-			getFirstEventTitle = await eventsListSurfer.getEventName(firstItem);
-			// get event status for assert
-			getFirstEventStatus = await eventsListSurfer.getEventStatus(firstItem);
-			// go to view action to check the venue details
-			const restoreLink = await eventsListSurfer.getItemActionLinkByText(firstItem, 'Edit');
-			await page.goto(restoreLink);
-			// wait to load venue content
-			getFirstEventDescription = await (await page.$(`.public-DraftEditor-content div div`)).innerText();
-			// now save the new event
-			await edtrGlider.saveEvent(true);
-		}
+		
+		// create new event
+		await createNewEvent({
+			...eventData.upcoming,
+			shouldPublish: false,
+		});
+		// get event description for assert
+		getFirstEventDescription = eventData.upcoming.description;
+		// get event title for assert
+		getFirstEventTitle = eventData.upcoming.title;
+		// get event status for assert
+		getFirstEventStatus = eventData.upcoming.status;
+		// now save the new event
+		await edtrGlider.saveEvent(true);
+
 		await Goto.eventsListPage();
 		// count event after checking
 		const countAfterCheckEvent = await eventsListSurfer.getViewCount('View All Events');
