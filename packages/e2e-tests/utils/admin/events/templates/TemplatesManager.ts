@@ -374,6 +374,22 @@ export class TemplatesManager extends WPListTable {
 	};
 
 	/**
+	 * reset ticket selector settings
+	 */
+	 resetTicketSelectorSettings = async (): Promise<void> => {
+		await this.gotoTemplates();
+		// reset to default
+		await this.setAndSaveResetEventListSettings({ value: '1' });
+		await this.setAndSaveShowTicketDetails({ value: '1' });
+		await this.setAndSaveShowTicketSaleInfo({ value: '1' });
+		await this.setAndSaveShowExpiredTickets({ value: '1' });
+		await this.setAndSaveShowDateAndTimeFilter({ value: 'maybe_datetime_selector' });
+		await this.setAndSaveDateAndTimeFilterThreshold({ value: '1' });
+		// save changes from templates tab
+		await this.saveTemplatesChanges();
+	};
+
+	/**
 	 * get selected value for reset event list settings at archive
 	 */
 	getSelectedResetEventListSettings = async (): Promise<string> => {

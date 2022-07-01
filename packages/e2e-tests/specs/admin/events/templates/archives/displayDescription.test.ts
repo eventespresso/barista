@@ -1,6 +1,7 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { Goto, TemplatesManager, EventsListSurfer, createNewEvent, EDTRGlider } from '@e2eUtils/admin';
 import { eventData } from '../../../../shared/data';
+import { object } from '@storybook/addon-knobs';
 
 const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();
@@ -113,6 +114,6 @@ describe('Display description - archives test', () => {
 		// assert if selected display description is "none"
 		expect(getSelectedValue).toBe('none');
 		// assert if description is not there anymore after selected display to "none"
-		expect(getDescriptionAtArchiveLink).toBe(null);
+		expect(getDescriptionAtArchiveLink).not.toBe(getFirstEventDescription)
 	});
 });

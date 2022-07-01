@@ -22,6 +22,7 @@ let capture: PageVideoCapture;
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 	await eventsListSurfer.deleteAllEventsByLink('View All Events');
+	await templatesManager.resetTicketSelectorSettings();
 	await Goto.eventsListPage();
 });
 
