@@ -20,10 +20,6 @@ jobs:
             specs: ${{ (github.event.inputs.path && steps.input.outputs.path) || steps.list.outputs.files }}
         steps:
             - uses: actions/checkout@v2
-            - name: Setup PHP
-              uses: shivammathur/setup-php@v2
-              with:
-                php-version: 7.4
             # This step outputs a JSON object of e2e test paths - {"path": []}, which is passed to the e2e matrix
             - id: list
               run: echo "::set-output name=files::{\"path\":$(ls -d packages/e2e-tests/specs/* | jq -R -s -c 'split("\n")[:-1]')}"
@@ -38,6 +34,10 @@ jobs:
             matrix: ${{ fromJSON(needs.list-e2e-specs.outputs.specs) }}
             fail-fast: false
         steps:
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                php-version: 7.4
             - name: Checkout and yarn
               uses: eventespresso/actions/packages/checkout-and-yarn@main
               with:
