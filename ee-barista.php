@@ -27,6 +27,9 @@ define('EE_BARISTA_BASENAME', plugin_basename(__FILE__));
 define('EE_BARISTA_DIR', trailingslashit(plugin_dir_path(__FILE__)));
 define('EE_BARISTA_URL', trailingslashit(plugins_url('', __FILE__)));
 
+define('WP_DEBUG', true);
+define('WP_DEBUG_DISPLAY', true);
+
 add_action(
     'AHEE__EE_System__load_espresso_addons',
     function () {
