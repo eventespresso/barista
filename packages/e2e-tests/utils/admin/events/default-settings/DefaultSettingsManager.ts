@@ -50,6 +50,18 @@ export class DefaultSettingsManager extends WPListTable {
 	};
 
 	/**
+	 * Select default editorbase on option value
+	 */
+	 selectDefaultEditor = async (optionValue: string): Promise<void> => {
+		// select delete category from bulk action
+		await page.selectOption('select#update_default_event_settings-use-advanced-editor', {
+			value: optionValue,
+		});
+		await this.updateSettingsSave();
+	};
+
+
+	/**
 	 * Process to select default registration status base on option value
 	 */
 	processToSelectRegStatus = async (optionValue: string): Promise<string> => {

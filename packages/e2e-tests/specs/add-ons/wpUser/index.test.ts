@@ -3,6 +3,9 @@ import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { createNewEvent, TicketEditor, EDTRGlider } from '@e2eUtils/admin/events';
 import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
 import { getInputValue } from '@e2eUtils/common';
+import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
+
+const defaultSettingsManager = new DefaultSettingsManager();
 
 const plugin = 'eea-wpuser-integration/eea-wpuser-integration.php';
 
@@ -13,6 +16,11 @@ const edtrGlider = new EDTRGlider();
 
 beforeAll(async () => {
 	capture = await saveVideo(page, 'artifacts/wp-user.mp4');
+
+	await Goto.eventsListPage();
+	//go to default settings tab
+	await defaultSettingsManager.gotoDefaultSettings();
+	await defaultSettingsManager.selectDefaultEditor('1');
 });
 
 afterAll(async () => {
@@ -27,9 +35,9 @@ describe('WP User tests', () => {
 
 		await ticketEditor.openEditForm();
 
-		const capabilityInput = await page.$('select#capabilityRequired');
-
-		expect(capabilityInput).toBeNull();
+		const selectExists = await page.$eval('select#capabilityRequired', () => true).catch(() => false)
+		
+		expect(selectExists).toBe(false);
 	});
 
 	it('should check the presense of "Ticket Capability Requirement" field when WP User addon IS active', async () => {

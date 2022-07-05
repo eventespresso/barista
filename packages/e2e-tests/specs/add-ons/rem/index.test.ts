@@ -4,10 +4,14 @@ import { createNewEvent } from '@e2eUtils/admin/events';
 import { clickButton } from '@e2eUtils/common';
 import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
 import { pressKeyWithModifier, EE_DEBUG } from '@e2eUtils/misc';
+import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
+
+const defaultSettingsManager = new DefaultSettingsManager();
 
 const REMPlugin = 'eea-recurring-events-manager/eea-recurring-events-manager.php';
 
 beforeAll(async () => {
+
 	await activatePlugin(REMPlugin);
 
 	try {
@@ -23,6 +27,11 @@ beforeAll(async () => {
 	}
 
 	await saveVideo(page, 'artifacts/REM.mp4');
+
+	await Goto.eventsListPage();
+	//go to default settings tab
+	await defaultSettingsManager.gotoDefaultSettings();
+	await defaultSettingsManager.selectDefaultEditor('1');
 
 	await createNewEvent({ title: 'REM-related' });
 });
