@@ -30,8 +30,9 @@
 		"start": "node scripts/start.js",
 		"storybook": "start-storybook -p 6006",
 		"test:ci": "FORCE_COLOR=true CI=true yarn test",
-		"test:e2e:watch": "jest --config packages/e2e-tests/jest.playwright.config.ts --watch --bail --forceExit",
-		"test:e2e": "jest --config packages/e2e-tests/jest.playwright.config.ts --bail --forceExit",
+		"test:e2e:watch": "jest --config packages/e2e-tests/jest.playwright.config.ts --watch --bail --forceExit --maxWorkers=1 --logHeapUsage",
+		"test:e2e": "jest --config packages/e2e-tests/jest.playwright.config.ts --bail --forceExit --maxWorkers=1 --logHeapUsage",
+		"test:e2e:clearCache": "jest --config packages/e2e-tests/jest.playwright.config.ts --clearCache",
 		"test": "node scripts/test.js",
 		"update:deps": "npx ncu -u && yarn workspaces run update-deps"
 	},
