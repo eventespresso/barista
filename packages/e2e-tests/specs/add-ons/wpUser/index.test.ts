@@ -31,9 +31,9 @@ afterAll(async () => {
 
 describe('WP User tests', () => {
 	it('should check the absense of "Ticket Capability Requirement" field when WP User addon is NOT active', async () => {
-		/*await createNewEvent({ title: 'WP User tests 1' });
+		await createNewEvent({ title: 'WP User tests 1' });
 
-		await ticketEditor.openEditForm();
+		/*await ticketEditor.openEditForm();
 
 		const selectExists = await page.$eval('select#capabilityRequired', () => true).catch(() => false)
 		

@@ -33,7 +33,7 @@ beforeAll(async () => {
 	await defaultSettingsManager.gotoDefaultSettings();
 	await defaultSettingsManager.selectDefaultEditor('1');
 
-	await createNewEvent({ title: 'REM-related' });
+	//await createNewEvent({ title: 'REM-related' });
 });
 
 afterAll(async () => {
