@@ -11,9 +11,10 @@ const defaultSettingsManager = new DefaultSettingsManager();
 const REMPlugin = 'eea-recurring-events-manager/eea-recurring-events-manager.php';
 
 beforeAll(async () => {
+	await activatePlugin('barista/ee-barista.php');
 
-	//await activatePlugin(REMPlugin);
-	/*
+	await activatePlugin(REMPlugin);
+	
 	try {
 		await page.click('text=Visit the Maintenance Page to get started');
 
@@ -32,8 +33,8 @@ beforeAll(async () => {
 	//go to default settings tab
 	await defaultSettingsManager.gotoDefaultSettings();
 	await defaultSettingsManager.selectDefaultEditor('1');
-	*/
-	//await createNewEvent({ title: 'REM-related' });
+	
+	await createNewEvent({ title: 'REM-related' });
 });
 
 afterAll(async () => {
@@ -42,7 +43,7 @@ afterAll(async () => {
 
 describe('REM', () => {
 	it('should generate 40 datetimes at the end of the end of the REM wizard', async () => {
-		/*await page.click('text=Add New Date');
+		await page.click('text=Add New Date');
 		await page.click('text=Add Recurring Dates');
 
 		await page.selectOption('#ee-r-rule-repeat-frequency', {
@@ -85,6 +86,6 @@ describe('REM', () => {
 
 		expect(generatedDatesLength).toBe(40);
 
-		await page.click('button[type=submit]');*/
+		await page.click('button[type=submit]');
 	});
 });

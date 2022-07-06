@@ -28,7 +28,7 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-	//await deactivatePlugin(plugin);
+	await deactivatePlugin(plugin);
 
 	await capture?.stop();
 });
@@ -61,7 +61,7 @@ describe('WP User tests', () => {
 	});
 
 	it('should check the visibility of "Custom Capability" input', async () => {
-		/*// by default 'customCapabilityRequired' input should be hidden
+		// by default 'customCapabilityRequired' input should be hidden
 		let customCapabilityInput = await page.$('input#customCapabilityRequired');
 		expect(customCapabilityInput).toBeNull();
 
@@ -73,11 +73,11 @@ describe('WP User tests', () => {
 		expect(customCapabilityInput).not.toBeNull();
 
 		// set "capabilityRequired" back to "none"
-		await page.selectOption('select#capabilityRequired', { label: 'none' });*/
+		await page.selectOption('select#capabilityRequired', { label: 'none' });
 	});
 
 	it('tests the persistance of the capability field(s)', async () => {
-		/*// lets change the "Capability Required" to "Read Capabilities"
+		// lets change the "Capability Required" to "Read Capabilities"
 		await page.selectOption('select#capabilityRequired', { label: 'Read Capabilities' });
 
 		// submit the form to update the ticket
@@ -112,6 +112,6 @@ describe('WP User tests', () => {
 		expect(capabilityInputValue).toBe('custom');
 
 		const customCapabilityInputValue = await getInputValue('input#customCapabilityRequired');
-		expect(customCapabilityInputValue).toBe('test');*/
+		expect(customCapabilityInputValue).toBe('test');
 	});
 });
