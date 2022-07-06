@@ -1,4 +1,4 @@
-import { saveVideo } from 'playwright-video';
+import { saveVideo, PageVideoCapture } from 'playwright-video';
 
 import { createNewEvent } from '@e2eUtils/admin/events';
 import { clickButton } from '@e2eUtils/common';
@@ -9,6 +9,8 @@ import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 const defaultSettingsManager = new DefaultSettingsManager();
 
 const REMPlugin = 'eea-recurring-events-manager/eea-recurring-events-manager.php';
+
+let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	try {
@@ -23,22 +25,24 @@ beforeAll(async () => {
 		EE_DEBUG && console.log('The site is not in maintenance mode.');
 	}
 
-	await saveVideo(page, 'artifacts/REM.mp4');
+	capture = await saveVideo(page, 'artifacts/REM.mp4');
 
 	await activatePlugin('barista/ee-barista.php');
-
-	await activatePlugin(REMPlugin);
 
 	await Goto.eventsListPage();
 	//go to default settings tab
 	await defaultSettingsManager.gotoDefaultSettings();
 	await defaultSettingsManager.selectDefaultEditor('1');
 	
+	await activatePlugin(REMPlugin);
+
 	await createNewEvent({ title: 'REM-related' });
 });
 
 afterAll(async () => {
 	await deactivatePlugin(REMPlugin);
+
+	await capture?.stop();
 });
 
 describe('REM', () => {
