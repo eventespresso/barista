@@ -12,8 +12,8 @@ const REMPlugin = 'eea-recurring-events-manager/eea-recurring-events-manager.php
 
 beforeAll(async () => {
 
-	await activatePlugin(REMPlugin);
-
+	//await activatePlugin(REMPlugin);
+	/*
 	try {
 		await page.click('text=Visit the Maintenance Page to get started');
 
@@ -32,7 +32,7 @@ beforeAll(async () => {
 	//go to default settings tab
 	await defaultSettingsManager.gotoDefaultSettings();
 	await defaultSettingsManager.selectDefaultEditor('1');
-
+	*/
 	//await createNewEvent({ title: 'REM-related' });
 });
 

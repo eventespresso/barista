@@ -17,10 +17,18 @@ const edtrGlider = new EDTRGlider();
 beforeAll(async () => {
 	capture = await saveVideo(page, 'artifacts/wp-user.mp4');
 
+	await Goto.pluginsPage();
+	
+	const getInnerHTML = await (await page.$('#the-list')).innerHTML();
+	console.log(getInnerHTML);
+
+	/*
 	await Goto.eventsListPage();
 	//go to default settings tab
 	await defaultSettingsManager.gotoDefaultSettings();
-	await defaultSettingsManager.selectDefaultEditor('1');
+	await defaultSettingsManager.selectDefaultEditor('1');*/
+
+
 });
 
 afterAll(async () => {
@@ -31,7 +39,7 @@ afterAll(async () => {
 
 describe('WP User tests', () => {
 	it('should check the absense of "Ticket Capability Requirement" field when WP User addon is NOT active', async () => {
-		await createNewEvent({ title: 'WP User tests 1' });
+		//await createNewEvent({ title: 'WP User tests 1' });
 
 		/*await ticketEditor.openEditForm();
 

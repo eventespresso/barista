@@ -38,7 +38,6 @@ jobs:
               uses: shivammathur/setup-php@v2
               with:
                 php-version: 7.4
-                tools: psalm
             - name: Setup problem matchers for PHP
               run: echo "::add-matcher::${{ runner.tool_cache }}/php.json"
             - name: Checkout and yarn
@@ -82,6 +81,3 @@ jobs:
                   SLACK_TITLE: 'E2E test failure :scream:'
                   SLACK_USERNAME: barista
                   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-           
-            - name: Run Psalm
-              run: psalm --output-format=github
