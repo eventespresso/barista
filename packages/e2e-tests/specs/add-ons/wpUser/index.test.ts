@@ -17,15 +17,12 @@ const edtrGlider = new EDTRGlider();
 beforeAll(async () => {
 	capture = await saveVideo(page, 'artifacts/wp-user.mp4');
 
-	await Promise.all([page.waitForNavigation(), activatePlugin('barista/ee-barista.php')]);
+	await activatePlugin('barista/ee-barista.php');
 	
-	await Promise.all([page.waitForNavigation(), activatePlugin(plugin)]);
-
-	/*
 	await Goto.eventsListPage();
 	//go to default settings tab
 	await defaultSettingsManager.gotoDefaultSettings();
-	await defaultSettingsManager.selectDefaultEditor('1');*/
+	await defaultSettingsManager.selectDefaultEditor('1');
 
 
 });
@@ -38,13 +35,13 @@ afterAll(async () => {
 
 describe('WP User tests', () => {
 	it('should check the absense of "Ticket Capability Requirement" field when WP User addon is NOT active', async () => {
-		//await createNewEvent({ title: 'WP User tests 1' });
+		await createNewEvent({ title: 'WP User tests 1' });
 
-		/*await ticketEditor.openEditForm();
+		await ticketEditor.openEditForm();
 
 		const selectExists = await page.$eval('select#capabilityRequired', () => true).catch(() => false)
 		
-		expect(selectExists).toBe(false);*/
+		expect(selectExists).toBe(false);
 	});
 
 	it('should check the presense of "Ticket Capability Requirement" field when WP User addon IS active', async () => {
