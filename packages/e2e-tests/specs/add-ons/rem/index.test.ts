@@ -31,9 +31,7 @@ beforeAll(async () => {
 	await page.waitForSelector('text=Plugin activated.');
 
 	await activatePlugin('barista/ee-barista.php');
-	await page.waitForSelector('text=Plugin activated.');
 
-	
 	await Goto.eventsListPage();
 	//go to default settings tab
 	await defaultSettingsManager.gotoDefaultSettings();
