@@ -45,7 +45,7 @@ describe('WP User tests', () => {
 	});
 
 	it('should check the presense of "Ticket Capability Requirement" field when WP User addon IS active', async () => {
-		/*await activatePlugin(plugin);
+		await activatePlugin(plugin);
 
 		await createNewEvent({ title: 'WP User tests 2' });
 
@@ -57,7 +57,7 @@ describe('WP User tests', () => {
 
 		const capabilityInputValue = await getInputValue('select#capabilityRequired');
 
-		expect(capabilityInputValue).toBe('none');*/
+		expect(capabilityInputValue).toBe('none');
 	});
 
 	it('should check the visibility of "Custom Capability" input', async () => {
