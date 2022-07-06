@@ -23,8 +23,6 @@ beforeAll(async () => {
 	//go to default settings tab
 	await defaultSettingsManager.gotoDefaultSettings();
 	await defaultSettingsManager.selectDefaultEditor('1');
-
-
 });
 
 afterAll(async () => {

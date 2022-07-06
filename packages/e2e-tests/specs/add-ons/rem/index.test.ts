@@ -11,10 +11,6 @@ const defaultSettingsManager = new DefaultSettingsManager();
 const REMPlugin = 'eea-recurring-events-manager/eea-recurring-events-manager.php';
 
 beforeAll(async () => {
-	await activatePlugin('barista/ee-barista.php');
-
-	await activatePlugin(REMPlugin);
-	
 	try {
 		await page.click('text=Visit the Maintenance Page to get started');
 
@@ -28,6 +24,10 @@ beforeAll(async () => {
 	}
 
 	await saveVideo(page, 'artifacts/REM.mp4');
+
+	await activatePlugin('barista/ee-barista.php');
+
+	await activatePlugin(REMPlugin);
 
 	await Goto.eventsListPage();
 	//go to default settings tab
@@ -43,7 +43,10 @@ afterAll(async () => {
 
 describe('REM', () => {
 	it('should generate 40 datetimes at the end of the end of the REM wizard', async () => {
+		await page.waitForSelector("#ee-entity-list-datetimes");
+
 		await page.click('text=Add New Date');
+
 		await page.click('text=Add Recurring Dates');
 
 		await page.selectOption('#ee-r-rule-repeat-frequency', {
