@@ -6,12 +6,14 @@
 				"wp-content/plugins/eea-recurring-events-manager": "eventespresso/eea-recurring-events-manager#dev",
 				"wp-content/plugins/eea-recurring-events-manager/assets": "./build",
 				"wp-content/plugins/eea-wpuser-integration": "eventespresso/eea-wpuser-integration#dev",
-				"wp-content/plugins/eea-wpuser-integration/assets": "./build"
+				"wp-content/plugins/eea-wpuser-integration/assets": "./build",
+				"wp-content/plugins/barista": "eventespresso/barista#master",
+				"wp-content/plugins/barista/build": "./build"
 			}
 		}
 	},
 	"mappings": {
 		"wp-content/plugins/event-espresso-core/assets": "./build"
 	},
-	"plugins": ["eventespresso/event-espresso-core#dev", "eventespresso/barista#master"]
+	"plugins": ["eventespresso/event-espresso-core#dev"]
 }

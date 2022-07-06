@@ -17,7 +17,9 @@ const edtrGlider = new EDTRGlider();
 beforeAll(async () => {
 	capture = await saveVideo(page, 'artifacts/wp-user.mp4');
 
-	await Goto.pluginsPage();
+	//await Goto.pluginsPage();
+
+	await activatePlugin('eventespresso/barista');
 
 	/*
 	await Goto.eventsListPage();
