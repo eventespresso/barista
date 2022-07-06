@@ -19,7 +19,9 @@ beforeAll(async () => {
 
 	//await Goto.pluginsPage();
 
-	await activatePlugin('eventespresso/barista');
+	await activatePlugin('barista/ee-barista.php');
+	
+	await activatePlugin(plugin);
 
 	/*
 	await Goto.eventsListPage();
