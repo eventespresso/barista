@@ -18,9 +18,6 @@ beforeAll(async () => {
 	capture = await saveVideo(page, 'artifacts/wp-user.mp4');
 
 	await Goto.pluginsPage();
-	
-	const getInnerHTML = await (await page.$('#the-list')).innerHTML();
-	console.log(getInnerHTML);
 
 	/*
 	await Goto.eventsListPage();
@@ -32,7 +29,7 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-	await deactivatePlugin(plugin);
+	//await deactivatePlugin(plugin);
 
 	await capture?.stop();
 });
