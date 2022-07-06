@@ -39,10 +39,8 @@ export async function fillAndSaveEvent({ title, description, shouldPublish = tru
 	// fill in event title and description
 	await fillEventFields({ title, description });
 
-	const getInnerHTML = await (await page.$('#poststuff')).innerHTML();
-	console.log(getInnerHTML);
 	// save event
-	//await edtrGlider.saveEvent(shouldPublish);
+	await edtrGlider.saveEvent(shouldPublish);
 }
 
 export async function createNewEvent({ title, description, shouldPublish = true }: Args = {}) {
