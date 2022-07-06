@@ -34,10 +34,6 @@ jobs:
             matrix: ${{ fromJSON(needs.list-e2e-specs.outputs.specs) }}
             fail-fast: false
         steps:
-            - name: Setup PHP
-              uses: shivammathur/setup-php@v2
-              with:
-                php-version: 7.4
             - name: Checkout and yarn
               uses: eventespresso/actions/packages/checkout-and-yarn@main
               with:
