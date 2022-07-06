@@ -29,6 +29,8 @@ beforeAll(async () => {
 
 	await activatePlugin(REMPlugin);
 	await page.waitForSelector('text=Plugin activated.');
+	
+	await page.waitForTimeout(3000);
 
 	await activatePlugin('barista/ee-barista.php');
 
@@ -48,7 +50,7 @@ afterAll(async () => {
 
 describe('REM', () => {
 	it('should generate 40 datetimes at the end of the end of the REM wizard', async () => {
-		await page.waitForSelector("#ee-entity-list-datetimes");
+		await page.waitForTimeout(3000);
 
 		await page.click('text=Add New Date');
 
