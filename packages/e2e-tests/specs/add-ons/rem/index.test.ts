@@ -26,14 +26,11 @@ beforeAll(async () => {
 	}
 
 	capture = await saveVideo(page, 'artifacts/REM.mp4');
-
-	await activatePlugin(REMPlugin);
-	await page.waitForSelector('text=Plugin activated.');
 	
-	await page.waitForTimeout(3000);
-
 	await activatePlugin('barista/ee-barista.php');
 
+	await activatePlugin(REMPlugin);
+	
 	await Goto.eventsListPage();
 	//go to default settings tab
 	await defaultSettingsManager.gotoDefaultSettings();
