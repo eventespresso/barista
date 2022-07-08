@@ -54,9 +54,9 @@ jobs:
 
             - name: Copy barista assets
               run: |
-                  cp build/static wp-content/plugins/eea-recurring-events-manager/assets/static
-                  cp build/static wp-content/plugins/eea-wpuser-integration/assets
-                  cp build wp-content/plugins/barista/build
+                  cp build/static/* wp-content/plugins/eea-recurring-events-manager/assets/static
+                  cp build/static/* wp-content/plugins/eea-wpuser-integration/assets
+                  cp build/* wp-content/plugins/barista/build
 
             - name: Setup Playwright
               uses: microsoft/playwright-github-action@v1
