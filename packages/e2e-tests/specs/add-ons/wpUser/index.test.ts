@@ -8,6 +8,7 @@ import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 const defaultSettingsManager = new DefaultSettingsManager();
 
 const plugin = 'eea-wpuser-integration/eea-wpuser-integration.php';
+const baristaPlugin = 'barista/ee-barista.php';
 
 let capture: PageVideoCapture;
 
@@ -17,7 +18,7 @@ const edtrGlider = new EDTRGlider();
 beforeAll(async () => {
 	capture = await saveVideo(page, 'artifacts/wp-user.mp4');
 
-	await activatePlugin('barista/ee-barista.php');
+	await activatePlugin(baristaPlugin);
 	
 	await Goto.eventsListPage();
 	//go to default settings tab
@@ -27,6 +28,8 @@ beforeAll(async () => {
 
 afterAll(async () => {
 	await deactivatePlugin(plugin);
+
+	await deactivatePlugin(baristaPlugin);
 
 	await capture?.stop();
 });

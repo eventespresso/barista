@@ -9,6 +9,7 @@ import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 const defaultSettingsManager = new DefaultSettingsManager();
 
 const REMPlugin = 'eea-recurring-events-manager/eea-recurring-events-manager.php';
+const baristaPlugin = 'barista/ee-barista.php';
 
 let capture: PageVideoCapture;
 
@@ -27,7 +28,7 @@ beforeAll(async () => {
 
 	capture = await saveVideo(page, 'artifacts/REM.mp4');
 	
-	await activatePlugin('barista/ee-barista.php');
+	await activatePlugin(baristaPlugin);
 
 	await activatePlugin(REMPlugin);
 	
@@ -41,6 +42,8 @@ beforeAll(async () => {
 
 afterAll(async () => {
 	await deactivatePlugin(REMPlugin);
+
+	await deactivatePlugin(baristaPlugin);
 
 	await capture?.stop();
 });
