@@ -42,6 +42,8 @@ export class CategoryManager extends WPListTable {
 	saveNewCategory = async ({ title, description }: Args): Promise<void> => {
 		// fill in category title
 		await page.fill('#category_name', title);
+		//Click on Text editor
+		await page.click('#category_desc-html');
 		// fill in category description
 		await page.fill('#wp-category_desc-editor-container textarea.wp-editor-area', description);
 		// trigger save category button
