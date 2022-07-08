@@ -8,7 +8,7 @@ const baristaPlugin = 'barista/ee-barista.php';
 const categoryManager = new CategoryManager();
 const defaultSettingsManager = new DefaultSettingsManager();
 
-const namespace = 'categories-create-category';
+const namespace = 'categories-edit-category';
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
