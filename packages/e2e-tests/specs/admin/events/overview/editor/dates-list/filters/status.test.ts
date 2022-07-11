@@ -4,7 +4,7 @@ import { addNewDate, createNewEvent, DateEditor, EDTRGlider } from '@e2eUtils/ad
 import { EventRegistrar } from '@e2eUtils/public/reg-checkout';
 import { data } from '../../../../../../shared/data';
 import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
-import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
+import { activatePlugin, deactivatePlugin, changePermalink } from '@e2eUtils/admin/wp-plugins-page';
 
 const defaultSettingsManager = new DefaultSettingsManager();
 
@@ -20,8 +20,11 @@ let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
-	await activatePlugin(baristaPlugin);
+	
+	await changePermalink();
 
+	await activatePlugin(baristaPlugin);
+	
 	await Goto.eventsListPage();
 	//go to default settings tab
 	await defaultSettingsManager.gotoDefaultSettings();
