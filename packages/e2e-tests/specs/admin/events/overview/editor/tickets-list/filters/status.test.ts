@@ -41,6 +41,9 @@ afterAll(async () => {
 
 describe(namespace, () => {
 	it('should filter tickets corresponding to status control', async () => {
+		const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+		console.log(tz);
+
 		await ticketEditor.filterListBy('status', { value: 'on-sale-and-pending' });
 
 		// By default, the status filter should be "all tickets for all dates"
