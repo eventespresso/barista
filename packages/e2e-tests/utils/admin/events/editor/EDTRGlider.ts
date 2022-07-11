@@ -20,7 +20,16 @@ export class EDTRGlider {
 	getEventPermalink = async () => {
 		// It is assumed to have plain permalink structure for the site
 		// For pretty permalinks, the selector will become "#edit-slug-box #sample-permalink a"
-		const url = await page.$eval('#edit-slug-box #sample-permalink a', el => el["href"]);
+
+		let selector = '#edit-slug-box #sample-permalink a';
+
+		const checkTagExists = await page.$eval(selector, () => true).catch(() => false)
+		
+		if(!checkTagExists){
+			selector = '#edit-slug-box #sample-permalink';
+		}
+
+		const url = await page.$eval(selector, el => el["href"]);
 		return url
 	};
 
