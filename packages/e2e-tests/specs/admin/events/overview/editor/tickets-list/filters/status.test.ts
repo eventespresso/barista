@@ -4,7 +4,7 @@ import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 import { addNewTicket, createNewEvent, TicketEditor, EDTRGlider } from '@e2eUtils/admin/events';
 import { EventRegistrar } from '@e2eUtils/public/reg-checkout';
 import { dataTicket as data } from '../../../../../../shared/data';
-import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
+import { activatePlugin, deactivatePlugin, setWordpressTimezone } from '@e2eUtils/admin/wp-plugins-page';
 
 const baristaPlugin = 'barista/ee-barista.php';
 
@@ -19,6 +19,9 @@ let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	
+	await setWordpressTimezone();
+
 	await activatePlugin(baristaPlugin);
 	
 	await Goto.eventsListPage();
@@ -41,9 +44,6 @@ afterAll(async () => {
 
 describe(namespace, () => {
 	it('should filter tickets corresponding to status control', async () => {
-		const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-		console.log(tz);
-
 		await ticketEditor.filterListBy('status', { value: 'on-sale-and-pending' });
 
 		// By default, the status filter should be "all tickets for all dates"

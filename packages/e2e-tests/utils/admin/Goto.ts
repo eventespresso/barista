@@ -38,4 +38,11 @@ export class Goto {
 	 static async optionsPermalinkPage() {
 		await visitAdminPage('options-permalink.php');
 	}
+
+	/**
+	 * Navigates to "/wp-admin/options-permalink.php"
+	 */
+	 static async optionsGeneral() {
+		await visitAdminPage('options-general.php');
+	}
 }
