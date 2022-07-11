@@ -6,6 +6,9 @@ import { TICKET_STATUS_ID } from '@eventespresso/predicates';
 
 const getStatusTextLabel = (ticket: Ticket): string => {
 	let ticketStatus = '';
+	
+	return status(ticket);
+
 	switch (status(ticket)) {
 		case TICKET_STATUS_ID.TRASHED:
 			ticketStatus = __('trashed');

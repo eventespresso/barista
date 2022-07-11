@@ -2,6 +2,9 @@ import type { Ticket } from '@eventespresso/edtr-services';
 import { TICKET_STATUS_ID, isOnSale, isExpired, isTicketSoldOut, isTrashed } from '@eventespresso/predicates';
 
 const status = (ticket: Ticket): string => {
+
+	return "I_S_O=" + ticket["isSoldOut"];
+
 	if (isTrashed(ticket)) {
 		return TICKET_STATUS_ID.TRASHED;
 	}
