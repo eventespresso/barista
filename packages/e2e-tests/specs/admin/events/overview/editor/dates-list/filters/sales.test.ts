@@ -1,9 +1,11 @@
-import { saveVideo } from 'playwright-video';
+import { saveVideo, PageVideoCapture } from 'playwright-video';
 
 import { addNewDate, createNewEvent, DateEditor, EDTRGlider, TicketEditor } from '@e2eUtils/admin/events';
 import { EventRegistrar } from '@e2eUtils/public/reg-checkout';
-
 import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
+import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
+
+const baristaPlugin = 'barista/ee-barista.php';
 
 const defaultSettingsManager = new DefaultSettingsManager();
 
@@ -14,13 +16,18 @@ const ticketEditor = new TicketEditor();
 const registrar = new EventRegistrar();
 const edtrGlider = new EDTRGlider();
 
+let capture: PageVideoCapture;
+
 beforeAll(async () => {
-	await saveVideo(page, `artifacts/${namespace}.mp4`);
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	
+	await activatePlugin(baristaPlugin);
 
 	await Goto.eventsListPage();
 	//go to default settings tab
 	await defaultSettingsManager.gotoDefaultSettings();
 	await defaultSettingsManager.selectDefaultRegStatus('RAP');
+	await defaultSettingsManager.selectDefaultEditor('1');
 
 	await defaultSettingsManager.setNewValueForDefaultMaxTicket('10');
 
@@ -57,6 +64,12 @@ beforeAll(async () => {
 		},
 		redirectURL: await edtrGlider.getEventEditUrl(),
 	});
+});
+
+afterAll(async () => {
+	await deactivatePlugin(baristaPlugin);
+	
+	await capture?.stop();
 });
 
 describe(namespace, () => {

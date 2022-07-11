@@ -1,21 +1,32 @@
-import { saveVideo } from 'playwright-video';
+import { saveVideo, PageVideoCapture } from 'playwright-video';
 
 import { addNewDate, createNewEvent, DateEditor, EDTRGlider } from '@e2eUtils/admin/events';
 import { EventRegistrar } from '@e2eUtils/public/reg-checkout';
 import { data } from '../../../../../../shared/data';
 import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
+import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
 
 const defaultSettingsManager = new DefaultSettingsManager();
 
 const namespace = 'eventDates.filters.status';
 
+const baristaPlugin = 'barista/ee-barista.php';
+
+const dateEditor = new DateEditor();
+const registrar = new EventRegistrar();
+const edtrGlider = new EDTRGlider();
+
+let capture: PageVideoCapture;
+
 beforeAll(async () => {
-	await saveVideo(page, `artifacts/${namespace}.mp4`);
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	await activatePlugin(baristaPlugin);
 
 	await Goto.eventsListPage();
 	//go to default settings tab
 	await defaultSettingsManager.gotoDefaultSettings();
 	await defaultSettingsManager.selectDefaultRegStatus('RAP');
+	await defaultSettingsManager.selectDefaultEditor('1');
 
 	await createNewEvent({ title: namespace });
 
@@ -24,9 +35,11 @@ beforeAll(async () => {
 	}
 });
 
-const dateEditor = new DateEditor();
-const registrar = new EventRegistrar();
-const edtrGlider = new EDTRGlider();
+afterAll(async () => {
+	await deactivatePlugin(baristaPlugin);
+	
+	await capture?.stop();
+});
 
 describe(namespace, () => {
 	it('should filter dates corresponding to status control', async () => {

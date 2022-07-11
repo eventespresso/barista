@@ -1,11 +1,29 @@
 import { saveVideo } from 'playwright-video';
-
+import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 import { addNewDate, createNewEvent, DateEditor, TicketEditor } from '@e2eUtils/admin/events';
+import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
 
 const namespace = 'event.dates.delete';
 
+const baristaPlugin = 'barista/ee-barista.php';
+
+const defaultSettingsManager = new DefaultSettingsManager();
+
 const dateEditor = new DateEditor();
 const ticketEditor = new TicketEditor();
+
+beforeAll(async () => {
+	await activatePlugin(baristaPlugin);
+	
+	await Goto.eventsListPage();
+	//go to default settings tab
+	await defaultSettingsManager.gotoDefaultSettings();
+	await defaultSettingsManager.selectDefaultEditor('1');
+});
+
+afterAll(async () => {
+	await deactivatePlugin(baristaPlugin);
+});
 
 beforeEach(async () => {
 	await createNewEvent({ title: namespace });
@@ -36,7 +54,7 @@ describe(namespace, () => {
 			ticketCount = await ticketEditor.getItemCount();
 			expect(dateCount).toBe(0);
 			expect(ticketCount).toBe(0);
-		} catch (error) {
+		} finally {
 			await capture.stop();
 		}
 	});
@@ -97,7 +115,7 @@ describe(namespace, () => {
 
 			itemCount = await dateEditor.getItemCount();
 			expect(itemCount).toBe(1);
-		} catch (error) {
+		} finally {
 			await capture.stop();
 		}
 	});
