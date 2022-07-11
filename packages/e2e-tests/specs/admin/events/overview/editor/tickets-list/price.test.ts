@@ -1,17 +1,35 @@
-import { saveVideo } from 'playwright-video';
-
+import { saveVideo, PageVideoCapture } from 'playwright-video';
+import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 import { createNewEvent, getTicketPrice, TicketEditor, TPCSafari } from '@e2eUtils/admin/events';
+import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
+
+const baristaPlugin = 'barista/ee-barista.php';
 
 const namespace = 'event-tickets-price-change';
 
+const editor = new TicketEditor();
+const tpcSafari = new TPCSafari();
+const defaultSettingsManager = new DefaultSettingsManager();
+
+let capture: PageVideoCapture;
+
 beforeAll(async () => {
-	await saveVideo(page, `artifacts/${namespace}.mp4`);
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	await activatePlugin(baristaPlugin);
+	
+	await Goto.eventsListPage();
+	//go to default settings tab
+	await defaultSettingsManager.gotoDefaultSettings();
+	await defaultSettingsManager.selectDefaultEditor('1');
 
 	await createNewEvent({ title: namespace });
 });
 
-const editor = new TicketEditor();
-const tpcSafari = new TPCSafari();
+afterAll(async () => {
+	await deactivatePlugin(baristaPlugin);
+	
+	await capture?.stop();
+});
 
 describe(namespace, () => {
 	it('tests the price of default free ticket', async () => {
