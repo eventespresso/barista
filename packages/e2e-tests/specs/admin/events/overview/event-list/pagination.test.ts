@@ -1,15 +1,35 @@
+import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { createMultipleEvents } from '@e2eUtils/admin/events';
-import { EventsListSurfer, Goto } from '@e2eUtils/admin';
+import { EventsListSurfer, Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 import { eventData } from '../../../../shared/data';
+import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
+
+const baristaPlugin = 'barista/ee-barista.php';
 
 const eventsListSurfer = new EventsListSurfer();
+const defaultSettingsManager = new DefaultSettingsManager();
 
+const namespace = 'events-pagination-clickable-actions-links';
+let capture: PageVideoCapture;
+
+//Disabled video on this tests due to long running time
 beforeAll(async () => {
+	await activatePlugin(baristaPlugin);
+	
+	await Goto.eventsListPage();
+	//go to default settings tab
+	await defaultSettingsManager.gotoDefaultSettings();
+	await defaultSettingsManager.selectDefaultEditor('1');
+
 	await Goto.eventsListPage();
 	// delete all events for starting point
 	await eventsListSurfer.deleteAllEventsByLink('View All Events');
 	// delete permanently all events at trash link
 	await eventsListSurfer.deleteAllPermanentlyFromTrash();
+});
+
+afterAll(async () => {
+	await deactivatePlugin(baristaPlugin);
 });
 
 describe('Test overview pagination', () => {

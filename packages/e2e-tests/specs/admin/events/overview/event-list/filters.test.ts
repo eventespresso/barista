@@ -1,10 +1,35 @@
-import { assertFilteredItems, assertSelectedDefaultOption } from '@e2eUtils/admin/events';
-import { EventsListSurfer, Goto } from '@e2eUtils/admin';
+import { saveVideo, PageVideoCapture } from 'playwright-video';
+import { assertFilteredItems, assertSelectedDefaultOption, createNewEvent } from '@e2eUtils/admin/events';
+import { EventsListSurfer, Goto, DefaultSettingsManager } from '@e2eUtils/admin';
+import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
+
+const baristaPlugin = 'barista/ee-barista.php';
 
 const eventsListSurfer = new EventsListSurfer();
+const defaultSettingsManager = new DefaultSettingsManager();
+
+const namespace = 'events-list-filters';
+let capture: PageVideoCapture;
 
 beforeAll(async () => {
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	
+	await activatePlugin(baristaPlugin);
+
 	await Goto.eventsListPage();
+	//go to default settings tab
+	await defaultSettingsManager.gotoDefaultSettings();
+	await defaultSettingsManager.selectDefaultEditor('1');
+
+	await createNewEvent({ title: namespace });
+	
+	await Goto.eventsListPage();
+});
+
+afterAll(async () => {
+	await deactivatePlugin(baristaPlugin);
+	
+	await capture?.stop();
 });
 
 beforeEach(async () => {
@@ -17,7 +42,7 @@ describe('Events list page filters', () => {
 		const monthYearFilter = await assertFilteredItems('#month_range', 'td.start_date_time', true, true);
 		expect(monthYearFilter).toBeTruthy();
 	});
-
+	
 	// eslint-disable-next-line jest/no-disabled-tests
 	it('tests the active/inactive filter', async () => {
 		const activeInactiveFilter = await assertFilteredItems('#active_status', '');

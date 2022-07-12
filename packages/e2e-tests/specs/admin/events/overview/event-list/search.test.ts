@@ -1,25 +1,47 @@
+import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { createNewEvent } from '@e2eUtils/admin/events';
-import { EventsListSurfer, Goto } from '@e2eUtils/admin';
+import { EventsListSurfer, Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 import { uuid } from '@eventespresso/utils';
 import { pluck } from 'ramda';
 import { eventData } from '../../../../shared/data';
+import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
+
+const baristaPlugin = 'barista/ee-barista.php';
 
 const eventsListSurfer = new EventsListSurfer();
+const defaultSettingsManager = new DefaultSettingsManager();
+
+const namespace = 'events-search-clickable-actions-links';
+let capture: PageVideoCapture;
+
+beforeAll(async () => {
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	await activatePlugin(baristaPlugin);
+	
+	await Goto.eventsListPage();
+	//go to default settings tab
+	await defaultSettingsManager.gotoDefaultSettings();
+	await defaultSettingsManager.selectDefaultEditor('1');
+
+	// delete all events from view all events link
+	await eventsListSurfer.deleteAllEventsByLink('View All Events');
+	// delete permanently all events at trash link
+	await eventsListSurfer.deleteAllPermanentlyFromTrash();
+	// Loop and create event base on the eventData
+	for (const args of Object.values(eventData)) {
+		await createNewEvent(args);
+	}
+	await Goto.eventsListPage();
+});
+
+afterAll(async () => {
+	await deactivatePlugin(baristaPlugin);
+	
+	await capture?.stop();
+});
 
 describe('Search events', () => {
 	const eventTitles = pluck('title', Object.values(eventData));
-
-	beforeAll(async () => {
-		// delete all events from view all events link
-		await eventsListSurfer.deleteAllEventsByLink('View All Events');
-		// delete permanently all events at trash link
-		await eventsListSurfer.deleteAllPermanentlyFromTrash();
-		// Loop and create event base on the eventData
-		for (const args of Object.values(eventData)) {
-			await createNewEvent(args);
-		}
-		await Goto.eventsListPage();
-	});
 
 	const testCases = [
 		// Search by event list titles
