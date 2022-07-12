@@ -36,8 +36,6 @@ beforeAll(async () => {
 	for (const item of data) {
 		await addNewTicket({ ...item, name: 'Ticket' + item.name });
 	}
-
-	await ticketEditor.filterListBy('status', { value: 'on-sale-and-pending' });
 });
 
 afterAll(async () => {
@@ -48,7 +46,7 @@ afterAll(async () => {
 
 describe(namespace, () => {
 	it('should filter tickets corresponding to status control', async () => {
-		/*await ticketEditor.filterListBy('status', { value: 'on-sale-and-pending' });
+		await ticketEditor.filterListBy('status', { value: 'on-sale-and-pending' });
 		
 		// By default, the status filter should be "all tickets for all dates"
 		// We added 2 upcoming and 1 on sale ticket, the default ticket is also on sale, making it 4
@@ -103,6 +101,6 @@ describe(namespace, () => {
 		//Now there should be 1 sold out ticket
 		await ticketEditor.filterListBy('status', { value: 'sold-out-only' });
 		expect(await ticketEditor.getItemCount()).toBe(1);
-		expect(await ticketEditor.getItemStatus()).toBe('sold out');*/
+		expect(await ticketEditor.getItemStatus()).toBe('sold out');
 	});
 });
