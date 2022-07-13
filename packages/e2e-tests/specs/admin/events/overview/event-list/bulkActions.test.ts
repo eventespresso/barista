@@ -132,11 +132,12 @@ describe('Test overview bulk actions', () => {
 
 		await Goto.eventsListPage();
 		// count again the trash after deleting permanently the events from trash
-		const countTrashAfterRemoveAllEvents = await eventsListSurfer.getViewCount('Trash');
+		let countTrashAfterRemoveAllEvents = await eventsListSurfer.getViewCount('Trash');
 
 		if(countTrashAfterRemoveAllEvents !== 0){
 			await eventsListSurfer.deleteAllPermanentlyFromTrash();
 			await Goto.eventsListPage();
+			countTrashAfterRemoveAllEvents = await eventsListSurfer.getViewCount('Trash');
 		}
 
 		// assert the remaining events from trash
