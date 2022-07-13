@@ -127,12 +127,18 @@ describe('Test overview bulk actions', () => {
 	it('Remove permanently the remaining events from trash using bulk option', async () => {
 		// delete the remaining events from trash permanently using bulk action
 		await eventsListSurfer.deleteAllPermanentlyFromTrash();
-
+		
 		await eventsListSurfer.goToView('Trash');
 
 		await Goto.eventsListPage();
 		// count again the trash after deleting permanently the events from trash
 		const countTrashAfterRemoveAllEvents = await eventsListSurfer.getViewCount('Trash');
+
+		if(countTrashAfterRemoveAllEvents !== 0){
+			await eventsListSurfer.deleteAllPermanentlyFromTrash();
+			await Goto.eventsListPage();
+		}
+
 		// assert the remaining events from trash
 		expect(countTrashAfterRemoveAllEvents).toBe(0);
 	});
@@ -150,9 +156,15 @@ describe('Test overview bulk actions', () => {
 		await Goto.eventsListPage();
 
 		// count the remaining events from all action link
+		let countTrashEvents = await eventsListSurfer.getViewCount('Trash');
+		if(countTrashEvents !== 0){
+			await eventsListSurfer.deleteAllPermanentlyFromTrash();
+			await Goto.eventsListPage();
+		}
+
 		const countViewAllEvents = await eventsListSurfer.getViewCount('View All Events');
 		const countDraftEvents = await eventsListSurfer.getViewCount('Draft');
-		const countTrashEvents = await eventsListSurfer.getViewCount('Trash');
+		countTrashEvents = await eventsListSurfer.getViewCount('Trash');
 		const countTodayEvent = await eventsListSurfer.getViewCount('Today');
 		const countThisMonthEvent = await eventsListSurfer.getViewCount('This Month');
 
