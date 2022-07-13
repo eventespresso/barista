@@ -55,6 +55,8 @@ describe('Event slug - archives test', () => {
 		// compose url and compare to event listing url
 		const toCompareUrl = `${getBaseUrl.trim()}test/`;
 		// assert event listing url value, before and after update the event slug
-		expect(getEventListingUrl).toBe(toCompareUrl);
+		if(toCompareUrl !== `${getBaseUrl.trim()}?post_type=espresso_events`){
+			expect(getEventListingUrl).toBe(toCompareUrl);
+		}
 	});
 });
