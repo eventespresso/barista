@@ -128,9 +128,15 @@ describe('Test overview bulk actions', () => {
 		// delete the remaining events from trash permanently using bulk action
 		await eventsListSurfer.deleteAllPermanentlyFromTrash();
 		
+		await page.waitForTimeout(4000)
+
 		await eventsListSurfer.goToView('Trash');
 
 		await Goto.eventsListPage();
+
+		const countTrashAfterRemoveAllEvents = await eventsListSurfer.getViewCount('Trash');
+
+		/*
 		// count again the trash after deleting permanently the events from trash
 		let countTrashAfterRemoveAllEvents = await eventsListSurfer.getViewCount('Trash');
 
@@ -138,7 +144,7 @@ describe('Test overview bulk actions', () => {
 			await eventsListSurfer.deleteAllPermanentlyFromTrash();
 			await Goto.eventsListPage();
 			countTrashAfterRemoveAllEvents = await eventsListSurfer.getViewCount('Trash');
-		}
+		}*/
 
 		// assert the remaining events from trash
 		expect(countTrashAfterRemoveAllEvents).toBe(0);
@@ -151,21 +157,23 @@ describe('Test overview bulk actions', () => {
 		await eventsListSurfer.deleteAllEventsByLink('Draft');
 		// remove all events from trash
 		await eventsListSurfer.deleteAllPermanentlyFromTrash();
+		
+		await page.waitForTimeout(4000)
 
 		await eventsListSurfer.goToView('Trash');
 
 		await Goto.eventsListPage();
 
 		// count the remaining events from all action link
-		let countTrashEvents = await eventsListSurfer.getViewCount('Trash');
+		/*let countTrashEvents = await eventsListSurfer.getViewCount('Trash');
 		if(countTrashEvents !== 0){
 			await eventsListSurfer.deleteAllPermanentlyFromTrash();
 			await Goto.eventsListPage();
-		}
+		}*/
 
 		const countViewAllEvents = await eventsListSurfer.getViewCount('View All Events');
 		const countDraftEvents = await eventsListSurfer.getViewCount('Draft');
-		countTrashEvents = await eventsListSurfer.getViewCount('Trash');
+		const countTrashEvents = await eventsListSurfer.getViewCount('Trash');
 		const countTodayEvent = await eventsListSurfer.getViewCount('Today');
 		const countThisMonthEvent = await eventsListSurfer.getViewCount('This Month');
 
