@@ -127,6 +127,9 @@ describe('Test overview bulk actions', () => {
 	it('Remove permanently the remaining events from trash using bulk option', async () => {
 		// delete the remaining events from trash permanently using bulk action
 		await eventsListSurfer.deleteAllPermanentlyFromTrash();
+
+		await eventsListSurfer.goToView('Trash');
+
 		await Goto.eventsListPage();
 		// count again the trash after deleting permanently the events from trash
 		const countTrashAfterRemoveAllEvents = await eventsListSurfer.getViewCount('Trash');
@@ -141,6 +144,9 @@ describe('Test overview bulk actions', () => {
 		await eventsListSurfer.deleteAllEventsByLink('Draft');
 		// remove all events from trash
 		await eventsListSurfer.deleteAllPermanentlyFromTrash();
+
+		await eventsListSurfer.goToView('Trash');
+
 		await Goto.eventsListPage();
 
 		// count the remaining events from all action link
