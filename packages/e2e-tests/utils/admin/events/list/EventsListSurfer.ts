@@ -165,6 +165,9 @@ export class EventsListSurfer extends WPListTable {
 		await this.checkConfirmDeletePermanently();
 		// click the confirm button to delete event/s permanently
 		await Promise.all([page.waitForLoadState(), page.click('text="Confirm"')]);
+
+		await page.waitForSelector('text=100%');
+
 		// go back to event page
 		await Goto.eventsListPage();
 	};
