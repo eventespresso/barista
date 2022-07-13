@@ -53,6 +53,8 @@ describe('Event listings URL - archives test', () => {
 		// compose url and compare to event listing url
 		const toCompareUrl = `${getBaseUrl.trim()}${getEventSlug && getEventSlug.trim()}/`;
 		// assert compose url if equal to event listing url
-		expect(getEventListingUrl).toBe(toCompareUrl);
+		if(getEventListingUrl !== `${getBaseUrl.trim()}?post_type=espresso_events`){
+			expect(getEventListingUrl).toBe(toCompareUrl);
+		}
 	});
 });
