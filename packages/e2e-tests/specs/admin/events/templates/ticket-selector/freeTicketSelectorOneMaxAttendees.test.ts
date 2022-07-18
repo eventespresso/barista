@@ -61,7 +61,12 @@ describe('One Max Attendees and free ticket - ticket selector test', () => {
 		expect(getSetMaxValue).toBe('1');
 
 		// get permalink for examine DOM value at next test
-		getPermalink = await (await page.$('#sample-permalink a')).getAttribute('href');
+		let selector = '#sample-permalink a';
+		const checkTagExists = await page.$eval(selector, () => true).catch(() => false)
+		if(!checkTagExists){
+			selector = '#sample-permalink';
+		}
+		getPermalink = await (await page.$(selector)).getAttribute('href');
 		// get free ticket ID for examine DOM value at next test
 		getFirstTicketId = await (await page.$('#ee-entity-list-tickets .ee-entity-dbid')).innerText();
 
