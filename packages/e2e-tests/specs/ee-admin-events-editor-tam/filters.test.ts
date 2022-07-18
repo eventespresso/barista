@@ -1,17 +1,28 @@
-import { saveVideo } from 'playwright-video';
-
+import { saveVideo, PageVideoCapture } from 'playwright-video';
+import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 import { PLUS_ONE_MONTH } from '@eventespresso/constants';
-
 import { clickButton, clickLabel } from '@e2eUtils/common';
 import { createNewEvent, DateEditor } from '@e2eUtils/admin/events';
-
+import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
 import { addDatesAndTickets } from './utils';
+
+const baristaPlugin = 'barista/ee-barista.php';
 
 const tamSelector = '.ee-ticket-assignments-manager';
 const editor = new DateEditor();
+const defaultSettingsManager = new DefaultSettingsManager();
+
+const namespace = 'tam-filters';
+let capture: PageVideoCapture;
 
 beforeAll(async () => {
-	await saveVideo(page, 'artifacts/tam-filters.mp4');
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	await activatePlugin(baristaPlugin);
+	
+	await Goto.eventsListPage();
+	//go to default settings tab
+	await defaultSettingsManager.gotoDefaultSettings();
+	await defaultSettingsManager.selectDefaultEditor('1');
 
 	await createNewEvent({ title: 'TAM Filters Test' });
 
@@ -26,6 +37,12 @@ beforeAll(async () => {
 	await addDatesAndTickets();
 
 	await clickButton('Ticket Assignments');
+});
+
+afterAll(async () => {
+	await deactivatePlugin(baristaPlugin);
+	
+	await capture?.stop();
 });
 
 describe('TAM:Filters', () => {

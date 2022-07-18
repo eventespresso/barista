@@ -1,13 +1,26 @@
-import { saveVideo } from 'playwright-video';
-
+import { saveVideo, PageVideoCapture } from 'playwright-video';
+import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 import { createNewEvent, EntityListParser, TAMRover } from '@e2eUtils/admin/events';
 import { addDatesAndTickets } from './utils';
+import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
+
+const baristaPlugin = 'barista/ee-barista.php';
 
 const tamrover = new TAMRover();
 const parser = new EntityListParser();
+const defaultSettingsManager = new DefaultSettingsManager();
+
+const namespace = 'tam-for-single-vs-global-data';
+let capture: PageVideoCapture;
 
 beforeAll(async () => {
-	await saveVideo(page, 'artifacts/tam-for-single-vs-global-data.mp4');
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	await activatePlugin(baristaPlugin);
+	
+	await Goto.eventsListPage();
+	//go to default settings tab
+	await defaultSettingsManager.gotoDefaultSettings();
+	await defaultSettingsManager.selectDefaultEditor('1');
 
 	await createNewEvent({ title: 'Test for Single Vs Global TAM data' });
 
@@ -17,6 +30,10 @@ beforeAll(async () => {
 afterAll(async () => {
 	// Close TAM modal
 	await tamrover.close();
+
+	await deactivatePlugin(baristaPlugin);
+	
+	await capture?.stop();
 });
 
 describe('TAM:SingleVsGlobalTAM', () => {

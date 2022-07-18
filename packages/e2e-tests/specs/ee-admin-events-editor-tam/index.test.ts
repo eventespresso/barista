@@ -1,14 +1,33 @@
-import { saveVideo } from 'playwright-video';
-
+import { saveVideo, PageVideoCapture } from 'playwright-video';
+import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 import { createNewEvent, removeLastTicket } from '@e2eUtils/admin/events';
 import { clickButton } from '@e2eUtils/common';
-
+import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
 import { isSubmitBtnDisabled } from '../../assertions';
 
+const baristaPlugin = 'barista/ee-barista.php';
+
+const defaultSettingsManager = new DefaultSettingsManager();
+
+const namespace = 'TAM';
+let capture: PageVideoCapture;
+
 beforeAll(async () => {
-	await saveVideo(page, 'artifacts/TAM.mp4');
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	await activatePlugin(baristaPlugin);
+	
+	await Goto.eventsListPage();
+	//go to default settings tab
+	await defaultSettingsManager.gotoDefaultSettings();
+	await defaultSettingsManager.selectDefaultEditor('1');
 
 	await createNewEvent({ title: 'TAM-related' });
+});
+
+afterAll(async () => {
+	await deactivatePlugin(baristaPlugin);
+	
+	await capture?.stop();
 });
 
 describe('TAM', () => {
