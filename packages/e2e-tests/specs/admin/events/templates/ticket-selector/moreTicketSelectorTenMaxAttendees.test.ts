@@ -8,18 +8,24 @@ import {
 	EDTRGlider,
 	RegistrationOptions,
 	addNewTicket,
+	DefaultSettingsManager,
 } from '@e2eUtils/admin';
 import { SingleEventPageManager } from '@e2eUtils/frontend';
 import { sub, add } from '@eventespresso/dates';
 import { formatDateTime } from '@e2eUtils/common';
 import { eventData } from '../../../../shared/data';
 import type { ElementHandle } from 'playwright-core';
+import { activateTheme } from '@e2eUtils/admin/wp-themes-page';
+import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
+
+const baristaPlugin = 'barista/ee-barista.php';
 
 const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();
 const registrationOptions = new RegistrationOptions();
 const edtrGlider = new EDTRGlider();
 const singleEventPageManager = new SingleEventPageManager();
+const defaultSettingsManager = new DefaultSettingsManager();
 
 const namespace = 'single-page-more-ticket-selector-ten-max-attendees';
 let capture: PageVideoCapture;
@@ -28,12 +34,22 @@ const formatDate = formatDateTime();
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	await activateTheme('twentytwenty');
+	await activatePlugin(baristaPlugin);
+	
+	await Goto.eventsListPage();
+	//go to default settings tab
+	await defaultSettingsManager.gotoDefaultSettings();
+	await defaultSettingsManager.selectDefaultEditor('1');
+
 	await eventsListSurfer.deleteAllEventsByLink('View All Events');
 	await templatesManager.resetTicketSelectorSettings();
 	await Goto.eventsListPage();
 });
 
 afterAll(async () => {
+	await deactivatePlugin(baristaPlugin);
+	
 	await capture?.stop();
 });
 
