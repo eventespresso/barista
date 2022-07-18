@@ -1,9 +1,9 @@
-import { saveVideo } from 'playwright-video';
 import { isNil } from 'ramda';
-
 import { ticketTotalTestCases } from '@eventespresso/tpc/src/utils/test/ticketTotalData';
 import { basePriceTestCases } from '@eventespresso/tpc/src/utils/test/basePriceData';
 import { getBasePrice } from '@eventespresso/predicates';
+import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
+import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
 
 import {
 	addNewTicket,
@@ -15,11 +15,22 @@ import {
 	getTicketPrice,
 } from '@e2eUtils/admin/events';
 
+const baristaPlugin = 'barista/ee-barista.php';
+
 const editor = new TicketEditor();
 const tpcSafari = new TPCSafari();
+const defaultSettingsManager = new DefaultSettingsManager();
+
+const namespace = 'calculateTicketTotal';
 
 beforeAll(async () => {
-	await saveVideo(page, 'artifacts/calculateTicketTotal.mp4');
+	await activatePlugin(baristaPlugin);
+	
+	await Goto.eventsListPage();
+	//go to default settings tab
+	await defaultSettingsManager.gotoDefaultSettings();
+	await defaultSettingsManager.selectDefaultEditor('1');
+
 	const newTicketName = 'one way ticket';
 	const newTicketAmount = 10;
 
@@ -33,6 +44,10 @@ beforeAll(async () => {
 beforeEach(async () => {
 	await tpcSafari.launch();
 	await removeAllPriceModifiers();
+});
+
+afterAll(async () => {
+	await deactivatePlugin(baristaPlugin);
 });
 
 const submitAndAssertTotal = async (total: string | number) => {
