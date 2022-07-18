@@ -10,6 +10,7 @@ import {
 	addNewTicket,
 } from '@e2eUtils/admin';
 import { eventData } from '../../../../shared/data';
+import { activateTheme } from '@e2eUtils/admin/wp-themes-page';
 
 const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();
@@ -21,6 +22,8 @@ let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	await activateTheme('twentytwenty');
+	
 	await eventsListSurfer.deleteAllEventsByLink('View All Events');
 	await templatesManager.resetTicketSelectorSettings();
 	await Goto.eventsListPage();
