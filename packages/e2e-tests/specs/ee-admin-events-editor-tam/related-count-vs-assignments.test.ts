@@ -3,6 +3,7 @@ import { saveVideo } from 'playwright-video';
 import { createNewEvent, EntityListParser, TAMRover, GetMapProps, ListView } from '@e2eUtils/admin/events';
 import { clickLabel } from '@e2eUtils/common';
 import { EntityType } from '../../types';
+import { activateTheme } from '@e2eUtils/admin/wp-themes-page';
 
 import { addDatesAndTickets } from './utils';
 
@@ -11,7 +12,8 @@ const parser = new EntityListParser('datetime', 'card');
 
 beforeAll(async () => {
 	await saveVideo(page, 'artifacts/tam-related-count-vs-assignments.mp4');
-
+	await activateTheme('twentytwenty');
+	
 	await createNewEvent({ title: 'TAM: Related Count in card and table view vs TAM Assignments' });
 
 	await addDatesAndTickets();
