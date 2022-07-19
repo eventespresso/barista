@@ -3,7 +3,7 @@ import { createNewEvent } from '@e2eUtils/admin/events';
 import { EventsListSurfer, Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 import { uuid } from '@eventespresso/utils';
 import { pluck } from 'ramda';
-import { eventData } from '../../../../shared/data';
+import { eventData } from '../shared/data';
 import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
 
 const baristaPlugin = 'barista/ee-barista.php';

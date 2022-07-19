@@ -2,7 +2,7 @@ import { saveVideo, PageVideoCapture } from 'playwright-video';
 
 import { addNewDate, createNewEvent, DateEditor, EDTRGlider } from '@e2eUtils/admin/events';
 import { EventRegistrar } from '@e2eUtils/public/reg-checkout';
-import { data } from '../../../../../../shared/data';
+import { data } from '../../shared/data';
 import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
 

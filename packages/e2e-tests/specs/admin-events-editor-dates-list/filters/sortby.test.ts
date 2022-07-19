@@ -1,7 +1,7 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
 
 import { addNewDate, createNewEvent, DateEditor } from '@e2eUtils/admin/events';
-import { data } from '../../../../../../shared/data';
+import { data } from '../../shared/data';
 import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
 
