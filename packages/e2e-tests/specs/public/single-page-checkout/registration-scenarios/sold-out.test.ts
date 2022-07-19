@@ -1,25 +1,29 @@
-import { saveVideo } from 'playwright-video';
-
+import { saveVideo, PageVideoCapture } from 'playwright-video';
+import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 import { EventsListSurfer, createNewEvent, DateEditor, EDTRGlider } from '@e2eUtils/admin/events';
 import { EventRegistrar, RegisterOptions } from '@e2eUtils/public/reg-checkout';
+import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
 
-const namespace = 'event.free.event.registration.sold.out';
+const baristaPlugin = 'barista/ee-barista.php';
 
 const eventsListSurfer = new EventsListSurfer();
 const registrar = new EventRegistrar();
 const edtrGlider = new EDTRGlider();
-
-import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
-
 const defaultSettingsManager = new DefaultSettingsManager();
 
+const namespace = 'event.free.event.registration.sold.out';
+let capture: PageVideoCapture;
+
 beforeAll(async () => {
-	await saveVideo(page, `artifacts/${namespace}.mp4`);
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	await activatePlugin(baristaPlugin);
 	
 	await Goto.eventsListPage();
-
+	//go to default settings tab
 	await defaultSettingsManager.gotoDefaultSettings();
+	await defaultSettingsManager.selectDefaultEditor('1');
 	await defaultSettingsManager.selectDefaultRegStatus('RAP');
+	
 
 	await eventsListSurfer.deleteAllEventsByLink('View All Events');
 

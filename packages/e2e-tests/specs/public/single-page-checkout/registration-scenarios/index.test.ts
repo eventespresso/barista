@@ -1,23 +1,35 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
-
+import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 import { addNewTicket, createNewEvent, EDTRGlider, TicketEditor } from '@e2eUtils/admin/events';
 import { assertRegSuccess, EventRegistrar } from '@e2eUtils/public/reg-checkout';
+import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
 
-const namespace = 'event.free-event.registration';
-
-let capture: PageVideoCapture;
-
-beforeAll(async () => {
-	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
-});
-
-afterAll(async () => {
-	await capture?.stop();
-});
+const baristaPlugin = 'barista/ee-barista.php';
 
 const ticketEditor = new TicketEditor();
 const registrar = new EventRegistrar();
 const edtrGlider = new EDTRGlider();
+const defaultSettingsManager = new DefaultSettingsManager();
+
+const namespace = 'event.free-event.registration';
+let capture: PageVideoCapture;
+
+beforeAll(async () => {
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+
+	await activatePlugin(baristaPlugin);
+	
+	await Goto.eventsListPage();
+	//go to default settings tab
+	await defaultSettingsManager.gotoDefaultSettings();
+	await defaultSettingsManager.selectDefaultEditor('1');
+});
+
+afterAll(async () => {
+	await deactivatePlugin(baristaPlugin);
+
+	await capture?.stop();
+});
 
 describe(namespace, () => {
 	it('should show thank you message if everything went well', async () => {
