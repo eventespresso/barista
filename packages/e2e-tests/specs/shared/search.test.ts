@@ -1,12 +1,27 @@
+import { saveVideo, PageVideoCapture } from 'playwright-video';
+import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 import { addNewDate, addNewTicket, createNewEvent, DateEditor, TicketEditor } from '@e2eUtils/admin/events';
 import { entities } from '../../constants';
+import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
 
-const namespace = 'eventEditor.filters.search';
+const baristaPlugin = 'barista/ee-barista.php';
 
 const dateEditor = new DateEditor();
 const ticketEditor = new TicketEditor();
+const defaultSettingsManager = new DefaultSettingsManager();
+
+const namespace = 'eventEditor.filters.search';
+let capture: PageVideoCapture;
 
 beforeAll(async () => {
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	await activatePlugin(baristaPlugin);
+	
+	await Goto.eventsListPage();
+	//go to default settings tab
+	await defaultSettingsManager.gotoDefaultSettings();
+	await defaultSettingsManager.selectDefaultEditor('1');
+
 	await createNewEvent({ title: namespace });
 
 	await addNewDate({ name: 'any date' });
@@ -16,6 +31,12 @@ beforeAll(async () => {
 	// because of sorting by name
 	await dateEditor.sortBy('order');
 	await ticketEditor.sortBy('order');
+});
+
+afterAll(async () => {
+	await deactivatePlugin(baristaPlugin);
+	
+	await capture?.stop();
 });
 
 describe(namespace, () => {

@@ -1,10 +1,33 @@
+import { saveVideo, PageVideoCapture } from 'playwright-video';
+import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 import { addNewDate, addNewTicket, createNewEvent, editEntityCard, EDTRGlider } from '@e2eUtils/admin/events';
 import { assertRegSuccess, EventRegistrar } from '@e2eUtils/public/reg-checkout';
+import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
 
-const namespace = 'event.entities.reigstration-2';
+const baristaPlugin = 'barista/ee-barista.php';
 
 const registrar = new EventRegistrar();
 const edtrGlider = new EDTRGlider();
+const defaultSettingsManager = new DefaultSettingsManager();
+
+const namespace = 'event.entities.reigstration-2';
+let capture: PageVideoCapture;
+
+beforeAll(async () => {
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	await activatePlugin(baristaPlugin);
+	
+	await Goto.eventsListPage();
+	//go to default settings tab
+	await defaultSettingsManager.gotoDefaultSettings();
+	await defaultSettingsManager.selectDefaultEditor('1');
+});
+
+afterAll(async () => {
+	await deactivatePlugin(baristaPlugin);
+	
+	await capture?.stop();
+});
 
 describe(namespace, () => {
 	it('should check if registration was successful and the reg status is approved', async () => {

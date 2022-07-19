@@ -1,10 +1,32 @@
+import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { createNewEvent, EntityListParser } from '@e2eUtils/admin/events';
+import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
+import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
+
+const baristaPlugin = 'barista/ee-barista.php';
+
+const parser = new EntityListParser();
+const defaultSettingsManager = new DefaultSettingsManager();
 
 const namespace = 'event-editor-switch-list-view';
-const parser = new EntityListParser();
+let capture: PageVideoCapture;
 
 beforeAll(async () => {
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	await activatePlugin(baristaPlugin);
+	
+	await Goto.eventsListPage();
+	//go to default settings tab
+	await defaultSettingsManager.gotoDefaultSettings();
+	await defaultSettingsManager.selectDefaultEditor('1');
+
 	await createNewEvent({ title: namespace });
+});
+
+afterAll(async () => {
+	await deactivatePlugin(baristaPlugin);
+	
+	await capture?.stop();
 });
 
 describe(namespace, () => {
