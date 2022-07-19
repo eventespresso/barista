@@ -1,6 +1,6 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { Goto, TemplatesManager, EventsListSurfer, createNewEvent, EDTRGlider, DefaultSettingsManager } from '@e2eUtils/admin';
-import { eventData } from '../../shared/data';
+import { eventData } from '../shared/data';
 import { object } from '@storybook/addon-knobs';
 import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
 

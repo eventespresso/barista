@@ -10,7 +10,7 @@ import {
 	addNewTicket,
 	DefaultSettingsManager,
 } from '@e2eUtils/admin';
-import { eventData } from '../../shared/data';
+import { eventData } from '../shared/data';
 import { activateTheme } from '@e2eUtils/admin/wp-themes-page';
 import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
 
