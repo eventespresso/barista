@@ -3,7 +3,7 @@ import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 import { NOW } from '@eventespresso/constants';
 import { add, getMonthName } from '@eventespresso/dates';
 import { createNewEvent, setListDisplayControl, TicketFields, TicketEditor } from '@e2eUtils/admin/events';
-import { expectCardToContain } from '../../../../../../assertions';
+import { expectCardToContain } from '../../assertions';
 import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
 
 const baristaPlugin = 'barista/ee-barista.php';

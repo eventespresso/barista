@@ -6,7 +6,7 @@ import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-pag
 
 import { createNewEvent, setListDisplayControl, DateEditor, DateFields } from '@e2eUtils/admin/events';
 
-import { expectCardToContain } from '../../../../../../assertions';
+import { expectCardToContain } from '../../assertions';
 
 const baristaPlugin = 'barista/ee-barista.php';
 
