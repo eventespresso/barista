@@ -34,7 +34,7 @@ afterAll(async () => {
 
 describe('Test overview pagination', () => {
 	let events = Object.values(eventData);
-	events = [...events, ...events, ...events];
+	events = [...events, ...events];
 	let countEventsBeforeAdding: number;
 	let countAfterAddedEvents: number;
 	let totalPages: number;
@@ -48,8 +48,6 @@ describe('Test overview pagination', () => {
 	});
 
 	it('Add lots of events for pagination', async () => {
-		jest.setTimeout(600000);
-
 		// generate lots of events for pagination
 		await Promise.all([page.waitForNavigation(), page.click('#add-new-event')]);
 		for (const event of events) {
