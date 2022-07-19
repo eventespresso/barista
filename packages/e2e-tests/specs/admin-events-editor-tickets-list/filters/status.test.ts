@@ -3,7 +3,7 @@ import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 
 import { addNewTicket, createNewEvent, TicketEditor, EDTRGlider } from '@e2eUtils/admin/events';
 import { EventRegistrar } from '@e2eUtils/public/reg-checkout';
-import { dataTicket as data } from '../../../../../../shared/data';
+import { dataTicket as data } from '../../shared/data';
 import { activatePlugin, deactivatePlugin, setWordpressTimezone } from '@e2eUtils/admin/wp-plugins-page';
 
 const baristaPlugin = 'barista/ee-barista.php';

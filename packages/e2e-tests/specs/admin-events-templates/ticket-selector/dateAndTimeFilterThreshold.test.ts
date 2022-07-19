@@ -10,7 +10,7 @@ import {
 	addNewTicket,
 	DefaultSettingsManager,
 } from '@e2eUtils/admin';
-import { eventData } from '../../../../shared/data';
+import { eventData } from '../../shared/data';
 import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
 
 const baristaPlugin = 'barista/ee-barista.php';

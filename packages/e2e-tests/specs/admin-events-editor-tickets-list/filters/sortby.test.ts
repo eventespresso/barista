@@ -5,7 +5,7 @@ import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-pag
 const baristaPlugin = 'barista/ee-barista.php';
 
 import { addNewTicket, createNewEvent, TicketEditor } from '@e2eUtils/admin/events';
-import { data } from '../../../../../../shared/data';
+import { data } from '../../shared/data';
 
 const namespace = 'eventEditor.tickets.sortBy';
 

@@ -1,6 +1,6 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { Goto, TemplatesManager, EventsListSurfer, createNewEvent, addNewTicket, EDTRGlider, DefaultSettingsManager } from '@e2eUtils/admin';
-import { eventData, data } from '../../../../shared/data';
+import { eventData, data } from '../../shared/data';
 import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
 
 const baristaPlugin = 'barista/ee-barista.php';
