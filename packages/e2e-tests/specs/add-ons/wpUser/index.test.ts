@@ -1,14 +1,9 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
-
 import { createNewEvent, TicketEditor, EDTRGlider } from '@e2eUtils/admin/events';
 import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
 import { getInputValue } from '@e2eUtils/common';
-import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
-
-const defaultSettingsManager = new DefaultSettingsManager();
 
 const plugin = 'eea-wpuser-integration/eea-wpuser-integration.php';
-const baristaPlugin = 'barista/ee-barista.php';
 
 let capture: PageVideoCapture;
 
@@ -17,19 +12,10 @@ const edtrGlider = new EDTRGlider();
 
 beforeAll(async () => {
 	capture = await saveVideo(page, 'artifacts/wp-user.mp4');
-
-	await activatePlugin(baristaPlugin);
-	
-	await Goto.eventsListPage();
-	//go to default settings tab
-	await defaultSettingsManager.gotoDefaultSettings();
-	await defaultSettingsManager.selectDefaultEditor('1');
 });
 
 afterAll(async () => {
 	await deactivatePlugin(plugin);
-
-	await deactivatePlugin(baristaPlugin);
 
 	await capture?.stop();
 });
