@@ -1,34 +1,21 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
-import { Goto, TemplatesManager, createNewEvent, EventsListSurfer, DateEditor, EDTRGlider, DefaultSettingsManager } from '@e2eUtils/admin';
+import { Goto, TemplatesManager, createNewEvent, EventsListSurfer, DateEditor } from '@e2eUtils/admin';
 import { eventData, data } from '../shared/data';
-import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
-
-const baristaPlugin = 'barista/ee-barista.php';
 
 const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();
 const dateEditor = new DateEditor();
-const edtrGlider = new EDTRGlider();
-const defaultSettingsManager = new DefaultSettingsManager();
 
 const namespace = 'templates-archives-display-expired-events';
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
-	await activatePlugin(baristaPlugin);
-	
-	await Goto.eventsListPage();
-	//go to default settings tab
-	await defaultSettingsManager.gotoDefaultSettings();
-	await defaultSettingsManager.selectDefaultEditor('1');
 
 	await Goto.eventsListPage();
 });
 
 afterAll(async () => {
-	await deactivatePlugin(baristaPlugin);
-	
 	await capture?.stop();
 });
 
