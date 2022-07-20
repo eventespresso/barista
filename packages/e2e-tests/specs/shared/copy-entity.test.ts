@@ -1,34 +1,21 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
-import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 import { createNewEvent, DateEditor, TicketEditor } from '@e2eUtils/admin/events';
-import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
-
-const baristaPlugin = 'barista/ee-barista.php';
 
 const dateEditor = new DateEditor();
 const ticketEditor = new TicketEditor();
-const defaultSettingsManager = new DefaultSettingsManager();
 
 const namespace = 'event-editor-copy-entity';
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
-	await activatePlugin(baristaPlugin);
 	
-	await Goto.eventsListPage();
-	//go to default settings tab
-	await defaultSettingsManager.gotoDefaultSettings();
-	await defaultSettingsManager.selectDefaultEditor('1');
-
 	await createNewEvent({ title: namespace });
 	const item = await dateEditor.getItem();
 	await dateEditor.updateNameInline(item, 'some date');
 });
 
 afterAll(async () => {
-	await deactivatePlugin(baristaPlugin);
-	
 	await capture?.stop();
 });
 

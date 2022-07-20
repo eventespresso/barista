@@ -1,5 +1,4 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
-import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 import {
 	createNewEvent,
 	removeLastTicket,
@@ -13,9 +12,6 @@ import {
 	EntityListParser,
 } from '@e2eUtils/admin/events';
 import { clickLabel } from '@e2eUtils/common';
-import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
-
-const baristaPlugin = 'barista/ee-barista.php';
 
 const newTicketName = 'New Ticket';
 const newDateName = 'New Date';
@@ -24,19 +20,12 @@ const oldDateName = 'Old Date';
 const dateEditor = new DateEditor();
 const ticketsParser = new EntityListParser('ticket');
 const tamrover = new TAMRover('datetime');
-const defaultSettingsManager = new DefaultSettingsManager();
 
 const namespace = 'date-capacity-vs-ticket-qty';
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
-	await activatePlugin(baristaPlugin);
-	
-	await Goto.eventsListPage();
-	//go to default settings tab
-	await defaultSettingsManager.gotoDefaultSettings();
-	await defaultSettingsManager.selectDefaultEditor('1');
 
 	await createNewEvent({ title: namespace });
 
@@ -74,8 +63,6 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-	await deactivatePlugin(baristaPlugin);
-	
 	await capture?.stop();
 });
 

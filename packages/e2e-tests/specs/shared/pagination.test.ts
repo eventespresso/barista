@@ -1,30 +1,16 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
-import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 import { addNewEntity, createNewEvent, EntityListParser } from '@e2eUtils/admin/events';
 import { getPaginationSize } from '../../assertions';
 import { entities } from '../../constants';
-import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
-
-const baristaPlugin = 'barista/ee-barista.php';
-
-const defaultSettingsManager = new DefaultSettingsManager();
 
 const namespace = 'event.entities.pagination';
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
-	await activatePlugin(baristaPlugin);
-	
-	await Goto.eventsListPage();
-	//go to default settings tab
-	await defaultSettingsManager.gotoDefaultSettings();
-	await defaultSettingsManager.selectDefaultEditor('1');
 });
 
 afterAll(async () => {
-	await deactivatePlugin(baristaPlugin);
-	
 	await capture?.stop();
 });
 
