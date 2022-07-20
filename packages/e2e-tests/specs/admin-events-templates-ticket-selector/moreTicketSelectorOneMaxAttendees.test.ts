@@ -8,19 +8,14 @@ import {
 	EDTRGlider,
 	RegistrationOptions,
 	addNewTicket,
-	DefaultSettingsManager,
 } from '@e2eUtils/admin';
 import { eventData } from '../shared/data';
 import { activateTheme } from '@e2eUtils/admin/wp-themes-page';
-import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
-
-const baristaPlugin = 'barista/ee-barista.php';
 
 const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();
 const registrationOptions = new RegistrationOptions();
 const edtrGlider = new EDTRGlider();
-const defaultSettingsManager = new DefaultSettingsManager();
 
 const namespace = 'single-page-more-ticket-selector-one-max-attendees';
 let capture: PageVideoCapture;
@@ -28,12 +23,6 @@ let capture: PageVideoCapture;
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 	await activateTheme('twentytwenty');
-	await activatePlugin(baristaPlugin);
-	
-	await Goto.eventsListPage();
-	//go to default settings tab
-	await defaultSettingsManager.gotoDefaultSettings();
-	await defaultSettingsManager.selectDefaultEditor('1');
 
 	await eventsListSurfer.deleteAllEventsByLink('View All Events');
 	await templatesManager.resetTicketSelectorSettings();
@@ -41,8 +30,6 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-	await deactivatePlugin(baristaPlugin);
-	
 	await capture?.stop();
 });
 

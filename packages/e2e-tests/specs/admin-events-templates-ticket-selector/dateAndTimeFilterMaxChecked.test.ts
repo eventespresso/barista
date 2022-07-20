@@ -8,37 +8,25 @@ import {
 	EDTRGlider,
 	addNewDate,
 	addNewTicket,
-	DefaultSettingsManager,
 } from '@e2eUtils/admin';
 import { eventData } from '../shared/data';
-import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
 
-const baristaPlugin = 'barista/ee-barista.php';
 
 const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();
 const edtrGlider = new EDTRGlider();
-const defaultSettingsManager = new DefaultSettingsManager();
 
 const namespace = 'templates-ticket-selector-date-and-time-filter-max-checked';
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
-	await activatePlugin(baristaPlugin);
-	
-	await Goto.eventsListPage();
-	//go to default settings tab
-	await defaultSettingsManager.gotoDefaultSettings();
-	await defaultSettingsManager.selectDefaultEditor('1');
 
 	await eventsListSurfer.deleteAllEventsByLink('View All Events');
 	await Goto.eventsListPage();
 });
 
 afterAll(async () => {
-	await deactivatePlugin(baristaPlugin);
-	
 	await capture?.stop();
 });
 
