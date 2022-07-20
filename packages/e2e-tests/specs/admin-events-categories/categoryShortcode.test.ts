@@ -1,24 +1,15 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
-import { Goto, CategoryManager, DefaultSettingsManager } from '@e2eUtils/admin';
+import { Goto, CategoryManager } from '@e2eUtils/admin';
 import { categoryData } from '../shared/data';
-import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
-
-const baristaPlugin = 'barista/ee-barista.php';
 
 const categoryManager = new CategoryManager();
-const defaultSettingsManager = new DefaultSettingsManager();
 
 const namespace = 'categories-category-shortcode';
+
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
-	await activatePlugin(baristaPlugin);
-	
-	await Goto.eventsListPage();
-	//go to default settings tab
-	await defaultSettingsManager.gotoDefaultSettings();
-	await defaultSettingsManager.selectDefaultEditor('1');
 
 	await Goto.eventsListPage();
 	// process to delete all categories in a list
@@ -26,8 +17,6 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-	await deactivatePlugin(baristaPlugin);
-	
 	await capture?.stop();
 });
 
