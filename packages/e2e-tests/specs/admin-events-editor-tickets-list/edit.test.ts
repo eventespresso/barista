@@ -1,16 +1,10 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
-import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 import { NOW } from '@eventespresso/constants';
 import { add, getMonthName } from '@eventespresso/dates';
 import { createNewEvent, setListDisplayControl, TicketFields, TicketEditor } from '@e2eUtils/admin/events';
 import { expectCardToContain } from '../../assertions';
-import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
-
-const baristaPlugin = 'barista/ee-barista.php';
 
 const namespace = 'event.tickets.edit';
-
-const defaultSettingsManager = new DefaultSettingsManager();
 
 const formData: TicketFields = {
 	name: 'new ticket name',
@@ -25,19 +19,11 @@ let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
-	await activatePlugin(baristaPlugin);
 	
-	await Goto.eventsListPage();
-	//go to default settings tab
-	await defaultSettingsManager.gotoDefaultSettings();
-	await defaultSettingsManager.selectDefaultEditor('1');
-
 	await createNewEvent({ title: namespace });
 });
 
 afterAll(async () => {
-	await deactivatePlugin(baristaPlugin);
-	
 	await capture?.stop();
 });
 
