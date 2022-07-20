@@ -1,24 +1,15 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
-import { Goto, ActiveEventsTest, DefaultSettingsManager } from '@e2eUtils/admin';
+import { Goto, ActiveEventsTest } from '@e2eUtils/admin';
 import { eventData } from '../shared/data';
-import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
-
-const baristaPlugin = 'barista/ee-barista.php';
 
 const activeEventsTest = new ActiveEventsTest();
-const defaultSettingsManager = new DefaultSettingsManager();
 
 const namespace = 'events-today-clickable-actions-links';
+
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
-	await activatePlugin(baristaPlugin);
-	
-	await Goto.eventsListPage();
-	//go to default settings tab
-	await defaultSettingsManager.gotoDefaultSettings();
-	await defaultSettingsManager.selectDefaultEditor('1');
 
 	// delete all events from view all events link
 	await activeEventsTest.deleteAllEventsByLink('View All Events');
@@ -28,8 +19,6 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-	await deactivatePlugin(baristaPlugin);
-	
 	await capture?.stop();
 });
 
