@@ -1,26 +1,15 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
-import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 import { path } from 'ramda';
 import { createNewEvent, TAMRover } from '@e2eUtils/admin/events';
 import { addDatesAndTickets } from './utils';
-import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
-
-const baristaPlugin = 'barista/ee-barista.php';
 
 const tamrover = new TAMRover();
-const defaultSettingsManager = new DefaultSettingsManager();
 
 const namespace = 'tam-toggle-assignments';
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
-	await activatePlugin(baristaPlugin);
-	
-	await Goto.eventsListPage();
-	//go to default settings tab
-	await defaultSettingsManager.gotoDefaultSettings();
-	await defaultSettingsManager.selectDefaultEditor('1');
 
 	await createNewEvent({ title: 'TAM: Toggle Assignments' });
 
@@ -30,8 +19,6 @@ beforeAll(async () => {
 afterAll(async () => {
 	// Close TAM modal
 	await tamrover.close();
-
-	await deactivatePlugin(baristaPlugin);
 	
 	await capture?.stop();
 });

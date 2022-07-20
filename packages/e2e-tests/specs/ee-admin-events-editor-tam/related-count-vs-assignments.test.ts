@@ -1,17 +1,12 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
-import { Goto, DefaultSettingsManager } from '@e2eUtils/admin';
 import { createNewEvent, EntityListParser, TAMRover, GetMapProps, ListView } from '@e2eUtils/admin/events';
 import { clickLabel } from '@e2eUtils/common';
 import { EntityType } from '../../types';
 import { activateTheme } from '@e2eUtils/admin/wp-themes-page';
 import { addDatesAndTickets } from './utils';
-import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
-
-const baristaPlugin = 'barista/ee-barista.php';
 
 const tamrover = new TAMRover();
 const parser = new EntityListParser('datetime', 'card');
-const defaultSettingsManager = new DefaultSettingsManager();
 
 const namespace = 'tam-related-count-vs-assignments';
 let capture: PageVideoCapture;
@@ -19,12 +14,6 @@ let capture: PageVideoCapture;
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 	await activateTheme('twentytwenty');
-	await activatePlugin(baristaPlugin);
-	
-	await Goto.eventsListPage();
-	//go to default settings tab
-	await defaultSettingsManager.gotoDefaultSettings();
-	await defaultSettingsManager.selectDefaultEditor('1');
 
 	await createNewEvent({ title: 'TAM: Related Count in card and table view vs TAM Assignments' });
 
@@ -32,8 +21,6 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-	await deactivatePlugin(baristaPlugin);
-	
 	await capture?.stop();
 });
 
