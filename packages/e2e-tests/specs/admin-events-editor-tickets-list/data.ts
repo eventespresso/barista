@@ -12,7 +12,7 @@ export const crazyTestCases = [
 	{
 		name: 'tests the tolerance level of the editor',
 		inputTotal: '999999999999999999999999999999999999999999',
-		expectedTotal: 1,
+		expectedTotal: 1000000.00,
 	},
 	{
 		name: 'tests the niceness of the craziness',
@@ -22,7 +22,7 @@ export const crazyTestCases = [
 	{
 		name: 'tests the arrogance of the craziness',
 		inputTotal: '999999999999999999999999999999999999999999.9999999999999999999999999999999999999',
-		expectedTotal: 1,
+		expectedTotal: 1000000.00,
 	},
 	{
 		name: 'tests the smartness of the craziness',
@@ -36,12 +36,12 @@ export const crazyTestCases = [
 	},
 	{
 		name: 'sets the price to correct round figure - ceiling',
-		inputTotal: '123456789.987654321',
-		expectedTotal: 123456789.99,
+		inputTotal: '123456.987654321',
+		expectedTotal: 123456.99,
 	},
 	{
 		name: 'sets the price to correct round figure - floor',
-		inputTotal: '123456789.123456789',
-		expectedTotal: 123456789.12,
+		inputTotal: '123456.12',
+		expectedTotal: 123456.12,
 	},
 ];
