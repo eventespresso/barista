@@ -19,6 +19,13 @@ export class Goto {
 	}
 
 	/**
+	 * Navigates to "/wp-admin/admin.php?page=pricing"
+	 */
+	 static async pricingPage() {
+		await visitAdminPage('admin.php', 'page=pricing');
+	}
+
+	/**
 	 * Navigates to "/wp-admin/plugins.php"
 	 */
 	static async pluginsPage() {
