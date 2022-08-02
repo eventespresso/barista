@@ -35,7 +35,7 @@ export class ActiveEventsTest extends EventsListSurfer {
 		const eventEditLink = await this.getItemActionLinkByText(eventFirstItem, 'Edit');
 		await page.goto(eventEditLink);
 		// click the edit start and end dates button at the event dates to update the start date into todays date
-		await page.click('button#popover-trigger-7');
+		await page.click('.ee-edit-calendar-date-range button');
 		// focus first the start date field
 		await page.focus('.date-range-picker__start-input input');
 		// then fill in the start date field into todays date

@@ -1,14 +1,19 @@
-import { saveVideo } from 'playwright-video';
-
+import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { createNewEvent, removeLastTicket } from '@e2eUtils/admin/events';
 import { clickButton } from '@e2eUtils/common';
-
 import { isSubmitBtnDisabled } from '../../assertions';
 
+const namespace = 'TAM';
+let capture: PageVideoCapture;
+
 beforeAll(async () => {
-	await saveVideo(page, 'artifacts/TAM.mp4');
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 
 	await createNewEvent({ title: 'TAM-related' });
+});
+
+afterAll(async () => {
+	await capture?.stop();
 });
 
 describe('TAM', () => {

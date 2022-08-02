@@ -1,4 +1,4 @@
-import { saveVideo } from 'playwright-video';
+import { saveVideo, PageVideoCapture } from 'playwright-video';
 
 import { createNewEvent } from '@e2eUtils/admin/events';
 import { clickButton } from '@e2eUtils/common';
@@ -7,9 +7,9 @@ import { pressKeyWithModifier, EE_DEBUG } from '@e2eUtils/misc';
 
 const REMPlugin = 'eea-recurring-events-manager/eea-recurring-events-manager.php';
 
-beforeAll(async () => {
-	await activatePlugin(REMPlugin);
+let capture: PageVideoCapture;
 
+beforeAll(async () => {
 	try {
 		await page.click('text=Visit the Maintenance Page to get started');
 
@@ -22,18 +22,25 @@ beforeAll(async () => {
 		EE_DEBUG && console.log('The site is not in maintenance mode.');
 	}
 
-	await saveVideo(page, 'artifacts/REM.mp4');
+	capture = await saveVideo(page, 'artifacts/REM.mp4');
 
+	await activatePlugin(REMPlugin);
+	
 	await createNewEvent({ title: 'REM-related' });
 });
 
 afterAll(async () => {
 	await deactivatePlugin(REMPlugin);
+
+	await capture?.stop();
 });
 
 describe('REM', () => {
 	it('should generate 40 datetimes at the end of the end of the REM wizard', async () => {
+		await page.waitForTimeout(3000);
+
 		await page.click('text=Add New Date');
+
 		await page.click('text=Add Recurring Dates');
 
 		await page.selectOption('#ee-r-rule-repeat-frequency', {

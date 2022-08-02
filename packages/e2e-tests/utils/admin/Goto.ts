@@ -19,6 +19,13 @@ export class Goto {
 	}
 
 	/**
+	 * Navigates to "/wp-admin/admin.php?page=pricing"
+	 */
+	 static async pricingPage() {
+		await visitAdminPage('admin.php', 'page=pricing');
+	}
+
+	/**
 	 * Navigates to "/wp-admin/plugins.php"
 	 */
 	static async pluginsPage() {
@@ -30,5 +37,19 @@ export class Goto {
 	 */
 	static async themesPage() {
 		await visitAdminPage('themes.php');
+	}
+
+	/**
+	 * Navigates to "/wp-admin/options-permalink.php"
+	 */
+	 static async optionsPermalinkPage() {
+		await visitAdminPage('options-permalink.php');
+	}
+
+	/**
+	 * Navigates to "/wp-admin/options-permalink.php"
+	 */
+	 static async optionsGeneral() {
+		await visitAdminPage('options-general.php');
 	}
 }

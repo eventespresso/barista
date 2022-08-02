@@ -1,13 +1,22 @@
+import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { createNewEvent, DateEditor, TicketEditor } from '@e2eUtils/admin/events';
 
-const namespace = 'event-editor-copy-entity';
 const dateEditor = new DateEditor();
 const ticketEditor = new TicketEditor();
 
+const namespace = 'event-editor-copy-entity';
+let capture: PageVideoCapture;
+
 beforeAll(async () => {
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	
 	await createNewEvent({ title: namespace });
 	const item = await dateEditor.getItem();
 	await dateEditor.updateNameInline(item, 'some date');
+});
+
+afterAll(async () => {
+	await capture?.stop();
 });
 
 describe(namespace, () => {

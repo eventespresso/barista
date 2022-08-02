@@ -10,7 +10,7 @@ export class EDTRGlider {
 	 * Returns event edit URL, inside EDTR
 	 */
 	getEventEditUrl = async () => {
-		const url = await page.$eval('.nav-tab-wrapper >> text=Edit Event', (el) => el.getAttribute('href'));
+		const url = await page.$eval('#wp-admin-bar-espresso-toolbar-events-edit a', el => el["href"]);
 		return url;
 	};
 
@@ -20,14 +20,28 @@ export class EDTRGlider {
 	getEventPermalink = async () => {
 		// It is assumed to have plain permalink structure for the site
 		// For pretty permalinks, the selector will become "#edit-slug-box #sample-permalink a"
-		return await page.$eval('#edit-slug-box #sample-permalink', (el) => el.getAttribute('href'));
+
+		let selector = '#edit-slug-box #sample-permalink a';
+
+		const checkTagExists = await page.$eval(selector, () => true).catch(() => false)
+		
+		if(!checkTagExists){
+			selector = '#edit-slug-box #sample-permalink';
+		}
+
+		const url = await page.$eval(selector, el => el["href"]);
+		return url
 	};
 
 	/**
 	 * Sets the maximum registrations value.
 	 */
 	setMaxRegistrations = async (value: number, updateEvent = true) => {
-		await page.fill('#max-registrants', String(value));
+		await page.click('div.ee-edtr-option__max-reg span.ee-tabbable-text__inner_wrapper');
+		
+		await page.click('div.ee-edtr-option__max-reg input');
+
+		await page.fill('div.ee-edtr-option__max-reg input', String(value));
 
 		await this.saveEvent(updateEvent);
 	};

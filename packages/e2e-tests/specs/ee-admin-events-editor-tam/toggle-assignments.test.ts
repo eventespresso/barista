@@ -1,13 +1,15 @@
-import { saveVideo } from 'playwright-video';
+import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { path } from 'ramda';
-
 import { createNewEvent, TAMRover } from '@e2eUtils/admin/events';
 import { addDatesAndTickets } from './utils';
 
 const tamrover = new TAMRover();
 
+const namespace = 'tam-toggle-assignments';
+let capture: PageVideoCapture;
+
 beforeAll(async () => {
-	await saveVideo(page, 'artifacts/tam-toggle-assignments.mp4');
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 
 	await createNewEvent({ title: 'TAM: Toggle Assignments' });
 
@@ -17,6 +19,8 @@ beforeAll(async () => {
 afterAll(async () => {
 	// Close TAM modal
 	await tamrover.close();
+	
+	await capture?.stop();
 });
 
 describe('TAM:ToggleAssignments', () => {

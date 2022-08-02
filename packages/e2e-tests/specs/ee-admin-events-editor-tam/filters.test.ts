@@ -1,18 +1,19 @@
-import { saveVideo } from 'playwright-video';
-
+import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { PLUS_ONE_MONTH } from '@eventespresso/constants';
-
 import { clickButton, clickLabel } from '@e2eUtils/common';
 import { createNewEvent, DateEditor } from '@e2eUtils/admin/events';
-
 import { addDatesAndTickets } from './utils';
 
 const tamSelector = '.ee-ticket-assignments-manager';
+
 const editor = new DateEditor();
 
-beforeAll(async () => {
-	await saveVideo(page, 'artifacts/tam-filters.mp4');
+const namespace = 'tam-filters';
+let capture: PageVideoCapture;
 
+beforeAll(async () => {
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	
 	await createNewEvent({ title: 'TAM Filters Test' });
 
 	/**
@@ -26,6 +27,10 @@ beforeAll(async () => {
 	await addDatesAndTickets();
 
 	await clickButton('Ticket Assignments');
+});
+
+afterAll(async () => {
+	await capture?.stop();
 });
 
 describe('TAM:Filters', () => {

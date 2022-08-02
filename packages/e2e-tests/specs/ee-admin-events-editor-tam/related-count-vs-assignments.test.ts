@@ -1,20 +1,27 @@
-import { saveVideo } from 'playwright-video';
-
+import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { createNewEvent, EntityListParser, TAMRover, GetMapProps, ListView } from '@e2eUtils/admin/events';
 import { clickLabel } from '@e2eUtils/common';
 import { EntityType } from '../../types';
-
+import { activateTheme } from '@e2eUtils/admin/wp-themes-page';
 import { addDatesAndTickets } from './utils';
 
 const tamrover = new TAMRover();
 const parser = new EntityListParser('datetime', 'card');
 
+const namespace = 'tam-related-count-vs-assignments';
+let capture: PageVideoCapture;
+
 beforeAll(async () => {
-	await saveVideo(page, 'artifacts/tam-related-count-vs-assignments.mp4');
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	await activateTheme('twentytwenty');
 
 	await createNewEvent({ title: 'TAM: Related Count in card and table view vs TAM Assignments' });
 
 	await addDatesAndTickets();
+});
+
+afterAll(async () => {
+	await capture?.stop();
 });
 
 const toggleAllFilters = async () => {

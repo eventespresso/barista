@@ -24,17 +24,17 @@ export class DefaultSettingsManager extends WPListTable {
 	 */
 	getSelectedDefaultStatus = async ({ value = false, text = false }): Promise<string> => {
 		// select the option for registration default status
-		const wrapper = await page.$(
-			'select#update_default_event_settings-default-reg-status option[selected="selected"]'
-		);
+		const selector = 'select#update_default_event_settings-default-reg-status'
 
 		// if value is equal to true return the value of selected option
 		if (value) {
-			return await wrapper.getAttribute('value');
+			const resultText = await page.$eval(selector, sel => sel['value']);
+			return resultText.trim();
 		}
 		// if text is equal to true return the innertext of selected option
 		if (text) {
-			return await wrapper.innerText();
+			const resultText = await page.$eval(selector, sel => sel["options"][sel["options"]["selectedIndex"]]["textContent"]); 
+			return resultText.trim();
 		}
 	};
 
@@ -48,6 +48,18 @@ export class DefaultSettingsManager extends WPListTable {
 		});
 		await this.updateSettingsSave();
 	};
+
+	/**
+	 * Select default editorbase on option value
+	 */
+	 selectDefaultEditor = async (optionValue: string): Promise<void> => {
+		// select delete category from bulk action
+		await page.selectOption('select#update_default_event_settings-use-advanced-editor', {
+			value: optionValue,
+		});
+		await this.updateSettingsSave();
+	};
+
 
 	/**
 	 * Process to select default registration status base on option value

@@ -131,7 +131,9 @@ export class WPListTable {
 	 * Get the wrapper of view links element
 	 */
 	getViewLinksWrapper = async (): Promise<ElementHandle> => {
-		return await page.$('ul.subsubsub');
+		const selector = 'ul.subsubsub';
+		await page.waitForSelector(selector);
+		return await page.$(selector);
 	};
 
 	/**

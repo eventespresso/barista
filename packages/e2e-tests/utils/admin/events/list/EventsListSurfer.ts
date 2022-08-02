@@ -27,7 +27,7 @@ export class EventsListSurfer extends WPListTable {
 	 * Get the status of an event from <tr /> handle
 	 */
 	getEventStatus = async (item: ElementHandle): Promise<string> => {
-		return await (await item.$('td.column-name .ee-status-text-small')).innerText();
+		return await (await item.$('td.column-name a.row-title')).getAttribute("aria-label");
 	};
 
 	/**
@@ -165,6 +165,9 @@ export class EventsListSurfer extends WPListTable {
 		await this.checkConfirmDeletePermanently();
 		// click the confirm button to delete event/s permanently
 		await Promise.all([page.waitForLoadState(), page.click('text="Confirm"')]);
+
+		await page.waitForSelector('text=100%');
+
 		// go back to event page
 		await Goto.eventsListPage();
 	};
@@ -176,7 +179,7 @@ export class EventsListSurfer extends WPListTable {
 		return await Promise.all(
 			tableRows.map(async (row) => {
 				// get event id value
-				return await (await row.$('th.check-column .ee-event-list-bulk-select-event')).getAttribute('value');
+				return await (await row.$('th.check-column .ee-responsive-table-cell__content input')).getAttribute('value');
 			})
 		);
 	};
@@ -200,6 +203,7 @@ export class EventsListSurfer extends WPListTable {
 		await Goto.eventsListPage();
 		await this.goToView('Trash');
 		const totalPage = await this.getTotalPagePagination();
+		
 		// loop the pagination per page
 		for (let pages = 0; pages < totalPage; pages++) {
 			await this.goToView('Trash');

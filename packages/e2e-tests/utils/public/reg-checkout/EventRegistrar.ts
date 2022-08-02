@@ -39,15 +39,11 @@ export class EventRegistrar {
 	 * Register for the event
 	 */
 	registerForEvent = async ({ tickets, attendeeInfo, redirectURL }: RegisterOptions) => {
-		await this.gotoEventPage();
-
 		for (const { name, quantity } of tickets) {
 			await this.chooseTicketQty(name, quantity);
 		}
 
 		await this.submitTicketSelector();
-
-		await fillAttendeeInformation(attendeeInfo);
 
 		await this.submitRegistration();
 
@@ -59,7 +55,7 @@ export class EventRegistrar {
 	/**
 	 * Navigates to event page on the front-end
 	 */
-	gotoEventPage = async () => {
+	gotoEventPage =  async () => {
 		await Promise.all([page.waitForNavigation(), page.goto(this.permalink)]);
 	};
 
@@ -67,7 +63,7 @@ export class EventRegistrar {
 	 * Selects the given quantity for a ticket.
 	 */
 	chooseTicketQty = async (name: string, quantity: number) => {
-		await page.selectOption(`.event-tickets tr:has-text('${name}') .tckt-slctr-tbl-td-qty select`, {
+		await page.selectOption(`.tkt-slctr-tbl-wrap-dv .tkt-slctr-tbl tbody tr:has-text('${name}') td.tckt-slctr-tbl-td-qty select.ticket-selector-tbl-qty-slct`, {
 			value: String(quantity),
 		});
 	};

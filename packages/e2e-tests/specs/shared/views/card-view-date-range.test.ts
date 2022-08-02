@@ -1,11 +1,20 @@
+import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { createNewEvent, setListDisplayControl, EntityListParser } from '@e2eUtils/admin/events';
 import { selectDateFromNextMonth } from '@e2eUtils/common';
 
-const namespace = 'event.entities.edit.calendar.date.range';
 const parser = new EntityListParser();
 
+const namespace = 'event.entities.edit.calendar.date.range';
+let capture: PageVideoCapture;
+
 beforeAll(async () => {
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+
 	await createNewEvent({ title: namespace });
+});
+
+afterAll(async () => {
+	await capture?.stop();
 });
 
 describe(namespace, () => {

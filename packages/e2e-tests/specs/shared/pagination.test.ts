@@ -1,8 +1,18 @@
+import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { addNewEntity, createNewEvent, EntityListParser } from '@e2eUtils/admin/events';
 import { getPaginationSize } from '../../assertions';
 import { entities } from '../../constants';
 
 const namespace = 'event.entities.pagination';
+let capture: PageVideoCapture;
+
+beforeAll(async () => {
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+});
+
+afterAll(async () => {
+	await capture?.stop();
+});
 
 describe(namespace, () => {
 	for (const entityType of entities) {

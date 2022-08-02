@@ -34,6 +34,41 @@ export const data = [
 	},
 ];
 
+export const dataTicket = [
+	{
+		name: '1',
+		// This date is in the past
+		startDate: sub('days', NOW, 40),
+		endDate: sub('days', NOW, 38),
+	},
+	{
+		name: '2',
+		// This date is in the past
+		startDate: sub('days', NOW, 10),
+		endDate: sub('days', NOW, 9),
+	},
+	{
+		name: '3',
+		// This date is in the current month
+		startDate: NOW,
+		endDate: add('days', NOW, 2),
+	},
+	{
+		name: '4',
+		isTrashed: true,
+	},
+	{
+		name: '5',
+		startDate: add('days', NOW, 10),
+		endDate: add('days', NOW, 11),
+	},
+	{
+		name: '6',
+		startDate: add('days', NOW, 12),
+		endDate: add('days', NOW, 13),
+	},
+];
+
 export const eventData = {
 	// active events
 	active: {

@@ -1,13 +1,15 @@
-import { saveVideo } from 'playwright-video';
-
+import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { createNewEvent, EntityListParser, TAMRover } from '@e2eUtils/admin/events';
 import { addDatesAndTickets } from './utils';
 
 const tamrover = new TAMRover();
 const parser = new EntityListParser();
 
+const namespace = 'tam-for-single-vs-global-data';
+let capture: PageVideoCapture;
+
 beforeAll(async () => {
-	await saveVideo(page, 'artifacts/tam-for-single-vs-global-data.mp4');
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 
 	await createNewEvent({ title: 'Test for Single Vs Global TAM data' });
 
@@ -17,6 +19,8 @@ beforeAll(async () => {
 afterAll(async () => {
 	// Close TAM modal
 	await tamrover.close();
+	
+	await capture?.stop();
 });
 
 describe('TAM:SingleVsGlobalTAM', () => {

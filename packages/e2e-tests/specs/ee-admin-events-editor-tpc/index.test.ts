@@ -1,10 +1,7 @@
-import { saveVideo } from 'playwright-video';
 import { isNil } from 'ramda';
-
 import { ticketTotalTestCases } from '@eventespresso/tpc/src/utils/test/ticketTotalData';
 import { basePriceTestCases } from '@eventespresso/tpc/src/utils/test/basePriceData';
 import { getBasePrice } from '@eventespresso/predicates';
-
 import {
 	addNewTicket,
 	createNewEvent,
@@ -19,7 +16,6 @@ const editor = new TicketEditor();
 const tpcSafari = new TPCSafari();
 
 beforeAll(async () => {
-	await saveVideo(page, 'artifacts/calculateTicketTotal.mp4');
 	const newTicketName = 'one way ticket';
 	const newTicketAmount = 10;
 

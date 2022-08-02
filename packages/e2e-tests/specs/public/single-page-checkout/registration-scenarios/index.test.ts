@@ -1,10 +1,12 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
-
 import { addNewTicket, createNewEvent, EDTRGlider, TicketEditor } from '@e2eUtils/admin/events';
 import { assertRegSuccess, EventRegistrar } from '@e2eUtils/public/reg-checkout';
 
-const namespace = 'event.free-event.registration';
+const ticketEditor = new TicketEditor();
+const registrar = new EventRegistrar();
+const edtrGlider = new EDTRGlider();
 
+const namespace = 'event.free-event.registration';
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
@@ -15,10 +17,6 @@ afterAll(async () => {
 	await capture?.stop();
 });
 
-const ticketEditor = new TicketEditor();
-const registrar = new EventRegistrar();
-const edtrGlider = new EDTRGlider();
-
 describe(namespace, () => {
 	it('should show thank you message if everything went well', async () => {
 		await createNewEvent({ title: 'Free event' });
@@ -27,7 +25,11 @@ describe(namespace, () => {
 
 		await addNewTicket({ amount: 100, name: 'Paid Ticket' });
 
-		await registrar.setPermalink(await edtrGlider.getEventPermalink()).registerForEvent({
+		registrar.setPermalink(await edtrGlider.getEventPermalink());
+		await registrar.gotoEventPage();
+
+
+		await registrar.registerForEvent({
 			tickets: [{ name: 'Free Ticket', quantity: 1 }],
 			attendeeInfo: {
 				fname: 'Joe',
@@ -37,7 +39,6 @@ describe(namespace, () => {
 		});
 
 		const content = await assertRegSuccess();
-
 		expect(content).toContain('Approved');
 	});
 });

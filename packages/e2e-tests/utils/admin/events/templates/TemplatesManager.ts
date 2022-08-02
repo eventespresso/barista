@@ -21,16 +21,16 @@ export class TemplatesManager extends WPListTable {
 	getSelectedStatusBanner = async ({ value = false, text = false, single = true }): Promise<string> => {
 		// get selected option for status banner
 		const selectID = single ? 'display_status_banner_single' : 'EED_Events_Archive_display_status_banner';
-		const wrapper = await page.$(`select#${selectID} option[selected="selected"]`);
+		const selector = `select#${selectID}`;
 
 		let resultData: string;
 		// if value is equal to true return the value of selected option
 		if (value) {
-			resultData = await wrapper.getAttribute('value');
+			resultData = await page.$eval(selector, sel => sel['value']);
 		}
 		// if text is equal to true return the innertext of selected option
 		if (text) {
-			resultData = await wrapper.innerText();
+			resultData = await page.$eval(selector, sel => sel["options"][sel["options"]["selectedIndex"]]["textContent"]); 
 		}
 
 		return resultData.trim();
@@ -41,11 +41,8 @@ export class TemplatesManager extends WPListTable {
 	 */
 	getSelectedDisplayDescription = async (): Promise<string> => {
 		// get selected option for display description
-		const resultText = await (
-			await page.$('select#EED_Events_Archive_display_description option[selected="selected"]')
-		).innerText();
-
-		return resultText.trim();
+		const resultText = await page.$eval('select#EED_Events_Archive_display_description', sel => sel["options"][sel["options"]["selectedIndex"]]["textContent"]); 
+        return resultText.trim();
 	};
 
 	saveTemplatesChanges = async (): Promise<void> => {
@@ -94,9 +91,8 @@ export class TemplatesManager extends WPListTable {
 	getSelectedDisplayVenueDetails = async ({ archive = false }: { archive: boolean }): Promise<string> => {
 		// get selected option for display venue details
 		const selectID = archive ? 'EED_Events_Archive_display_venue' : 'display_venue';
-		const resultText = await (await page.$(`select#${selectID} option[selected="selected"]`)).innerText();
-
-		return resultText.trim();
+		const resultText = await page.$eval(`select#${selectID}`, sel => sel["options"][sel["options"]["selectedIndex"]]["textContent"]); 
+        return resultText.trim();
 	};
 
 	/**
@@ -104,11 +100,8 @@ export class TemplatesManager extends WPListTable {
 	 */
 	getSelectedDisplayTicketSelector = async (): Promise<string> => {
 		// get selected option for display description
-		const resultText = await (
-			await page.$('select#EED_Events_Archive_display_ticket_selector option[selected="selected"]')
-		).innerText();
-
-		return resultText.trim();
+		const resultText = await page.$eval('select#EED_Events_Archive_display_ticket_selector', sel => sel["options"][sel["options"]["selectedIndex"]]["textContent"]); 
+        return resultText.trim();
 	};
 
 	/**
@@ -146,8 +139,8 @@ export class TemplatesManager extends WPListTable {
 		const selectID = archive
 			? 'EED_Events_Archive_use_sortable_display_order'
 			: 'EED_Events_Single_use_sortable_display_order';
-		const resultText = await (await page.$(`select#${selectID} option[selected="selected"]`)).innerText();
 
+		const resultText = await page.$eval(`select#${selectID}`, sel => sel["options"][sel["options"]["selectedIndex"]]["textContent"]); 
 		return resultText.trim();
 	};
 
@@ -167,7 +160,7 @@ export class TemplatesManager extends WPListTable {
 	 * Get base URL at templates tab event listing pages
 	 */
 	getBaseUrl = async (): Promise<string> => {
-		return await (await page.$('.metabox-holder :nth-match(table, 2) tbody > tr:nth-child(2) td p')).innerText();
+		return await (await page.$('.metabox-holder :nth-match(table, 2) tbody > tr:nth-child(2) td span')).innerText();
 	};
 
 	/**
@@ -175,7 +168,7 @@ export class TemplatesManager extends WPListTable {
 	 */
 	getEventSlug = async (): Promise<string> => {
 		return await (
-			await page.$('.metabox-holder :nth-match(table, 2) tbody > tr:nth-child(2) td p #event_cpt_slug')
+			await page.$('.metabox-holder :nth-match(table, 2) tbody > tr:nth-child(2) td #event_cpt_slug')
 		).getAttribute('value');
 	};
 
@@ -183,7 +176,7 @@ export class TemplatesManager extends WPListTable {
 	 * Get event listing URL at templates tab event listing pages
 	 */
 	getEventListingUrl = async (): Promise<string> => {
-		return await (await page.$('.metabox-holder :nth-match(table, 2) tbody > tr #event_listings_url')).innerText();
+		return await (await (await page.$('.metabox-holder :nth-match(table, 2) tbody > tr #event_listings_url')).innerText()).trim();
 	};
 
 	gotoEventListing = async (): Promise<void> => {
@@ -232,10 +225,7 @@ export class TemplatesManager extends WPListTable {
 	 */
 	getSelectedDisplayDatetimes = async (): Promise<string> => {
 		// get selected option for display datetimes
-		const resultText = await (
-			await page.$('select#EED_Events_Archive_display_datetimes option[selected="selected"]')
-		).innerText();
-
+		const resultText = await page.$eval('select#EED_Events_Archive_display_datetimes', sel => sel["options"][sel["options"]["selectedIndex"]]["textContent"]); 
 		return resultText.trim();
 	};
 
@@ -255,11 +245,8 @@ export class TemplatesManager extends WPListTable {
 	 */
 	getSelectedDisplayExpiredEvents = async (): Promise<string> => {
 		// get selected option for display expired events
-		const resultText = await (
-			await page.$('select#EED_Events_Archive_display_expired_events option[selected="selected"]')
-		).innerText();
-
-		return resultText.trim();
+		const resultText = await page.$eval('select#EED_Events_Archive_display_expired_events', sel => sel["options"][sel["options"]["selectedIndex"]]["textContent"]); 
+        return resultText.trim();
 	};
 
 	/**
@@ -278,10 +265,7 @@ export class TemplatesManager extends WPListTable {
 	 */
 	getSelectedShowTicketDetails = async (): Promise<string> => {
 		// get selected option for show ticket details
-		const resultText = await (
-			await page.$('select#ticket_selector_settings_tbl-show-ticket-details option[selected="selected"]')
-		).innerText();
-
+		const resultText = await page.$eval('select#ticket_selector_settings_tbl-show-ticket-details', sel => sel["options"][sel["options"]["selectedIndex"]]["textContent"]); 
 		return resultText.trim();
 	};
 
@@ -301,10 +285,7 @@ export class TemplatesManager extends WPListTable {
 	 */
 	getSelectedShowTicketSaleInfo = async (): Promise<string> => {
 		// get selected option for show ticket sale info
-		const resultText = await (
-			await page.$('select#ticket_selector_settings_tbl-show-ticket-sale-columns option[selected="selected"]')
-		).innerText();
-
+		const resultText = await page.$eval('select#ticket_selector_settings_tbl-show-ticket-sale-columns', sel => sel["options"][sel["options"]["selectedIndex"]]["textContent"]); 
 		return resultText.trim();
 	};
 
@@ -338,10 +319,7 @@ export class TemplatesManager extends WPListTable {
 	 */
 	getSelectedShowExpiredTickets = async (): Promise<string> => {
 		// get selected option for show expired ticket
-		const resultText = await (
-			await page.$('select#ticket_selector_settings_tbl-show-expired-tickets option[selected="selected"]')
-		).innerText();
-
+		const resultText = await page.$eval('select#ticket_selector_settings_tbl-show-expired-tickets', sel => sel["options"][sel["options"]["selectedIndex"]]["textContent"]); 
 		return resultText.trim();
 	};
 
@@ -361,10 +339,7 @@ export class TemplatesManager extends WPListTable {
 	 */
 	getSelectedShowDateAndTimeFilter = async (): Promise<string> => {
 		// get selected option for show expired ticket
-		const resultText = await (
-			await page.$('select#ticket_selector_settings_tbl-show-datetime-selector option[selected="selected"]')
-		).innerText();
-
+		const resultText = await page.$eval('select#ticket_selector_settings_tbl-show-datetime-selector', sel => sel["options"][sel["options"]["selectedIndex"]]["textContent"]); 
 		return resultText.trim();
 	};
 
@@ -383,11 +358,7 @@ export class TemplatesManager extends WPListTable {
 	 * get selected value for date & time filter threshold at ticket selector template settings
 	 */
 	getSelectedDateAndTimeFilterThreshold = async (): Promise<string> => {
-		// get selected option for show expired ticket
-		const resultText = await (
-			await page.$('select#ticket_selector_settings_tbl-datetime-selector-threshold option[selected="selected"]')
-		).innerText();
-
+		const resultText = await page.$eval('select#ticket_selector_settings_tbl-datetime-selector-threshold', sel => sel['value']);
 		return resultText.trim();
 	};
 
@@ -398,6 +369,22 @@ export class TemplatesManager extends WPListTable {
 		await this.gotoTemplates();
 		// set reset event list settings at ticket selector settings
 		await page.selectOption('select#EED_Events_Archive_reset_event_list_settings', { value });
+		// save changes from templates tab
+		await this.saveTemplatesChanges();
+	};
+
+	/**
+	 * reset ticket selector settings
+	 */
+	 resetTicketSelectorSettings = async (): Promise<void> => {
+		await this.gotoTemplates();
+		// reset to default
+		await this.setAndSaveResetEventListSettings({ value: '1' });
+		await this.setAndSaveShowTicketDetails({ value: '1' });
+		await this.setAndSaveShowTicketSaleInfo({ value: '1' });
+		await this.setAndSaveShowExpiredTickets({ value: '1' });
+		await this.setAndSaveShowDateAndTimeFilter({ value: 'maybe_datetime_selector' });
+		await this.setAndSaveDateAndTimeFilterThreshold({ value: '1' });
 		// save changes from templates tab
 		await this.saveTemplatesChanges();
 	};

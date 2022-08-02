@@ -1,10 +1,19 @@
+import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { createNewEvent, EntityListParser } from '@e2eUtils/admin/events';
 
-const namespace = 'event-editor-switch-list-view';
 const parser = new EntityListParser();
 
+const namespace = 'event-editor-switch-list-view';
+let capture: PageVideoCapture;
+
 beforeAll(async () => {
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+
 	await createNewEvent({ title: namespace });
+});
+
+afterAll(async () => {
+	await capture?.stop();
 });
 
 describe(namespace, () => {

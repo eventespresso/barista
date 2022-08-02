@@ -1,5 +1,4 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
-
 import {
 	createNewEvent,
 	removeLastTicket,
@@ -23,7 +22,6 @@ const ticketsParser = new EntityListParser('ticket');
 const tamrover = new TAMRover('datetime');
 
 const namespace = 'date-capacity-vs-ticket-qty';
-
 let capture: PageVideoCapture;
 
 beforeAll(async () => {

@@ -1,12 +1,16 @@
+import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { addNewDate, addNewTicket, createNewEvent, DateEditor, TicketEditor } from '@e2eUtils/admin/events';
 import { entities } from '../../constants';
-
-const namespace = 'eventEditor.filters.search';
 
 const dateEditor = new DateEditor();
 const ticketEditor = new TicketEditor();
 
+const namespace = 'eventEditor.filters.search';
+let capture: PageVideoCapture;
+
 beforeAll(async () => {
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+
 	await createNewEvent({ title: namespace });
 
 	await addNewDate({ name: 'any date' });
@@ -16,6 +20,10 @@ beforeAll(async () => {
 	// because of sorting by name
 	await dateEditor.sortBy('order');
 	await ticketEditor.sortBy('order');
+});
+
+afterAll(async () => {
+	await capture?.stop();
 });
 
 describe(namespace, () => {

@@ -1,19 +1,26 @@
-import { saveVideo } from 'playwright-video';
-
-import { createNewEvent, DateEditor, EDTRGlider } from '@e2eUtils/admin/events';
+import { saveVideo, PageVideoCapture } from 'playwright-video';
+import { EventsListSurfer, createNewEvent, DateEditor, EDTRGlider } from '@e2eUtils/admin/events';
 import { EventRegistrar, RegisterOptions } from '@e2eUtils/public/reg-checkout';
 
-const namespace = 'event.free.event.registration.sold.out';
-
+const eventsListSurfer = new EventsListSurfer();
 const registrar = new EventRegistrar();
 const edtrGlider = new EDTRGlider();
+const dateEditor = new DateEditor();
+
+const namespace = 'event.free.event.registration.sold.out';
+let capture: PageVideoCapture;
 
 beforeAll(async () => {
-	await saveVideo(page, `artifacts/${namespace}.mp4`);
+	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	
+	await eventsListSurfer.deleteAllEventsByLink('View All Events');
+
 	await createNewEvent({ title: 'Free event' });
 });
 
-const dateEditor = new DateEditor();
+afterAll(async () => {
+	await capture?.stop();
+});
 
 describe(namespace, () => {
 	it('should show show sold out label on date when the number of registration is the same as capacity', async () => {
@@ -23,6 +30,7 @@ describe(namespace, () => {
 		await dateEditor.updateCapacityInline(null, 2);
 
 		registrar.setPermalink(await edtrGlider.getEventPermalink());
+		await registrar.gotoEventPage();
 
 		const registrationOptions: RegisterOptions = {
 			tickets: [{ name: 'Free Ticket', quantity: 1 }],
@@ -37,6 +45,8 @@ describe(namespace, () => {
 		await registrar.registerForEvent(registrationOptions);
 
 		expect(await dateEditor.getItemCount()).toBe(1);
+
+		await registrar.gotoEventPage();
 
 		await registrar.registerForEvent(registrationOptions);
 
