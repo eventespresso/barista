@@ -2,11 +2,9 @@
 @import '~@eventespresso/styles/src/mixins/buttons';
 
 .ee-btn-base {
-	&.ee-btn {
-		@each $color, $value in $theme-colors {
-			&.ee-btn--#{$color} {
-				@include button-variant($value, $value, $color);
-			}
+	@each $color, $value in $theme-colors {
+		&.ee-btn--#{$color} {
+			@include button-variant($value, $value, $color);
 		}
 	}
 }
