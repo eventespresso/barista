@@ -1,4 +1,4 @@
-export { default as Copy } from './Copy';
-export { default as Edit } from './Edit';
-export { default as Trash } from './Trash';
+export { default as CopyEntity } from './CopyEntity';
+export { default as EditEntity } from './EditEntity';
+export { default as TrashEntity } from './TrashEntity';
 export { default as Untrash } from './Untrash';
