@@ -2,7 +2,8 @@ import { useCallback, useMemo, useRef } from 'react';
 
 import { __ } from '@eventespresso/i18n';
 import { useDisclosure } from '@eventespresso/hooks';
-import { AlertDialog, Button, ButtonType } from '../';
+import { AlertDialog, AlertType, Button } from '../';
+import { Check, ExclamationCircle } from '@eventespresso/icons';
 import type { ConfirmProps } from './types';
 
 type UseConfirmationDialog = {
@@ -11,10 +12,15 @@ type UseConfirmationDialog = {
 };
 
 const useConfirmationDialog = ({
+	addIconBG = false,
+	alertType = AlertType.PRIMARY,
+	icon = ExclamationCircle,
 	message,
+	noButtonText,
+	onCancel,
 	onConfirm,
 	title,
-	onCancel,
+	yesButtonText,
 	...props
 }: ConfirmProps): UseConfirmationDialog => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
@@ -29,30 +35,48 @@ const useConfirmationDialog = ({
 		onCancel?.();
 	}, [onCancel, onClose]);
 
-	const noButtonText = props.noButtonText || __('No');
-	const yesButtonText = props.yesButtonText || __('Yes');
-
 	return useMemo(() => {
-		const cancelButton = <Button buttonText={noButtonText} ref={cancelRef} onClick={onCancelHandler} />;
+		const cancelText = noButtonText || __('cancel');
+		const confirmText = yesButtonText || __('confirm');
+
+		const cancelButton = <Button buttonText={cancelText} ref={cancelRef} onClick={onCancelHandler} />;
 
 		const okButton = (
-			<Button buttonText={yesButtonText} buttonType={ButtonType.ACCENT} onClick={onClickHandler} ml={3} />
+			<Button buttonText={confirmText} buttonType={alertType} icon={Check} onClick={onClickHandler} />
 		);
 
 		const confirmationDialog = (
 			<AlertDialog
+				addIconBG={addIconBG}
+				alertType={alertType}
 				body={message}
 				cancelButton={cancelButton}
+				className='ee-confirmation-dialog'
 				header={title}
+				icon={icon}
 				isOpen={isOpen}
 				leastDestructiveRef={cancelRef}
 				okButton={okButton}
 				onClose={onCancelHandler}
+				{...props}
 			/>
 		);
 
 		return { confirmationDialog, onOpen };
-	}, [isOpen, message, noButtonText, onCancelHandler, onClickHandler, onOpen, title, yesButtonText]);
+	}, [
+		addIconBG,
+		alertType,
+		icon,
+		isOpen,
+		message,
+		noButtonText,
+		onCancelHandler,
+		onClickHandler,
+		onOpen,
+		props,
+		title,
+		yesButtonText,
+	]);
 };
 
 export default useConfirmationDialog;
