@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
 
 import { __ } from '@eventespresso/i18n';
-import { Copy, Edit, DropdownMenu, DropdownToggleProps } from '@eventespresso/ui-components';
+import { CopyEntity, DropdownMenu, DropdownToggleProps, EditEntity } from '@eventespresso/ui-components';
 import { EdtrGlobalModals, useTicketItem } from '@eventespresso/edtr-services';
 import { useGlobalModal } from '@eventespresso/registry';
 import { useCopyTicket } from '@eventespresso/tpc';
@@ -35,8 +35,8 @@ const TicketMainMenu: React.FC<TicketMainMenuProps> = (props) => {
 
 	return (
 		<DropdownMenu toggleProps={toggleProps}>
-			<Edit onClick={onOpenEditModal} title={__('edit ticket')} />
-			<Copy onClick={copyTicket} title={__('copy ticket')} />
+			<EditEntity onClick={onOpenEditModal} title={__('edit ticket')} />
+			<CopyEntity onClick={copyTicket} title={__('copy ticket')} />
 			<DeleteTicket ticket={ticket} />
 		</DropdownMenu>
 	);
