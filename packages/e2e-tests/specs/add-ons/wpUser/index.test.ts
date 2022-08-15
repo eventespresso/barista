@@ -16,7 +16,9 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-	await deactivatePlugin(plugin);
+	if(!IS_WP_MULTISITE_NETWORK){
+		await deactivatePlugin(plugin);
+	}
 
 	await capture?.stop();
 });
