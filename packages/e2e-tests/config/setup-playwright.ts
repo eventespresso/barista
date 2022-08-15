@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
 
+import { IS_WP_MULTISITE_NETWORK } from '../utils/dev/config';
 import { activatePlugin, deactivatePlugin } from '../utils/admin/wp-plugins-page';
 import { Goto, DefaultSettingsManager } from '../utils/admin';
 import { loginUser } from '../utils/wp';
@@ -15,14 +16,18 @@ const defaultSettingsManager = new DefaultSettingsManager();
 beforeAll(async () => {
 	await loginUser();
 
-	await activatePlugin('event-espresso-core/espresso.php');
-	await activatePlugin('barista/ee-barista.php');	
-
+	if(!IS_WP_MULTISITE_NETWORK){
+		await activatePlugin('event-espresso-core/espresso.php');
+		await activatePlugin('barista/ee-barista.php');	
+	}
+	
 	await Goto.eventsListPage();
 	await defaultSettingsManager.gotoDefaultSettings();
 	await defaultSettingsManager.selectDefaultEditor('1');
 });
 
 afterAll(async () => {
-	await deactivatePlugin('barista/ee-barista.php');
+	if(!IS_WP_MULTISITE_NETWORK){
+		await deactivatePlugin('barista/ee-barista.php');
+	}
 });
