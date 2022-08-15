@@ -1,7 +1,8 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { createNewEvent, TicketEditor, EDTRGlider } from '@e2eUtils/admin/events';
 import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
-import { getInputValue } from '@e2eUtils/common';
+import { getInputValue, itif } from '@e2eUtils/common';
+import { IS_WP_MULTISITE_NETWORK } from '../../../utils/dev/config';
 
 const plugin = 'eea-wpuser-integration/eea-wpuser-integration.php';
 
@@ -21,7 +22,8 @@ afterAll(async () => {
 });
 
 describe('WP User tests', () => {
-	it('should check the absense of "Ticket Capability Requirement" field when WP User addon is NOT active', async () => {
+	itif(!IS_WP_MULTISITE_NETWORK)('should check the absense of "Ticket Capability Requirement" field when WP User addon is NOT active', async () => {	
+		
 		await createNewEvent({ title: 'WP User tests 1' });
 
 		await ticketEditor.openEditForm();
@@ -31,7 +33,7 @@ describe('WP User tests', () => {
 		expect(selectExists).toBe(false);
 	});
 
-	it('should check the presense of "Ticket Capability Requirement" field when WP User addon IS active', async () => {
+	itif(!IS_WP_MULTISITE_NETWORK)('should check the presense of "Ticket Capability Requirement" field when WP User addon IS active', async () => {
 		await activatePlugin(plugin);
 
 		await createNewEvent({ title: 'WP User tests 2' });
@@ -47,7 +49,7 @@ describe('WP User tests', () => {
 		expect(capabilityInputValue).toBe('none');
 	});
 
-	it('should check the visibility of "Custom Capability" input', async () => {
+	itif(!IS_WP_MULTISITE_NETWORK)('should check the visibility of "Custom Capability" input', async () => {
 		// by default 'customCapabilityRequired' input should be hidden
 		let customCapabilityInput = await page.$('input#customCapabilityRequired');
 		expect(customCapabilityInput).toBeNull();
@@ -63,7 +65,7 @@ describe('WP User tests', () => {
 		await page.selectOption('select#capabilityRequired', { label: 'none' });
 	});
 
-	it('tests the persistance of the capability field(s)', async () => {
+	itif(!IS_WP_MULTISITE_NETWORK)('tests the persistance of the capability field(s)', async () => {
 		// lets change the "Capability Required" to "Read Capabilities"
 		await page.selectOption('select#capabilityRequired', { label: 'Read Capabilities' });
 
