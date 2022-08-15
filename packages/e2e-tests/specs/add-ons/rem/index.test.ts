@@ -1,5 +1,5 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
-
+import { IS_WP_MULTISITE_NETWORK } from '../../../utils/dev/config';
 import { createNewEvent } from '@e2eUtils/admin/events';
 import { clickButton } from '@e2eUtils/common';
 import { activatePlugin, deactivatePlugin } from '@e2eUtils/admin/wp-plugins-page';
@@ -24,14 +24,17 @@ beforeAll(async () => {
 
 	capture = await saveVideo(page, 'artifacts/REM.mp4');
 
-	await activatePlugin(REMPlugin);
+	if(!IS_WP_MULTISITE_NETWORK){
+		await activatePlugin(REMPlugin);
+	}
 	
 	await createNewEvent({ title: 'REM-related' });
 });
 
 afterAll(async () => {
-	await deactivatePlugin(REMPlugin);
-
+	if(!IS_WP_MULTISITE_NETWORK){
+		await deactivatePlugin(REMPlugin);
+	}
 	await capture?.stop();
 });
 
