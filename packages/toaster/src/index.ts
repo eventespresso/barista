@@ -1,5 +1,3 @@
-import './style.scss';
-
 import initToaster from './initToaster';
 
 export { initToaster };
