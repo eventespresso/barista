@@ -1,11 +1,23 @@
 import { useCallback, useMemo } from 'react';
-import { toast } from 'react-toastify';
+import { cssTransition, toast } from 'react-toastify';
 
-import type { DissmissToast, SystemNotificationsToaster, ToastProps } from './types';
 import toasterIcons from './toasterIcons';
+import 'animate.css/animate.min.css';
+import './style.scss';
+
+import type { DissmissToast, SystemNotificationsToaster, ToastProps, UpdateToast } from './types';
 
 const position = toast.POSITION.BOTTOM_RIGHT as 'bottom-right';
-const className = 'ee-toaster-notice__toast';
+const theme = 'colored'; // light   dark   colored
+
+const transition = cssTransition({
+	enter: 'animate__animated animate__bounceInRight',
+	exit: 'animate__animated animate__bounceOutRight',
+});
+const updateTransition = cssTransition({
+	enter: 'animate__animated animate__flipInX',
+	exit: 'animate__animated animate__bounceOutRight',
+});
 
 const useSystemNotifications = (): SystemNotificationsToaster => {
 	const dismiss: DissmissToast = useCallback((toastId) => toast.dismiss(toastId), []);
@@ -14,66 +26,74 @@ const useSystemNotifications = (): SystemNotificationsToaster => {
 		toast.dismiss();
 	}, []);
 
-	const error = useCallback(({ message, duration = 3000, ...props }) => {
-		toast.success(message, {
-			autoClose: duration,
-			className,
+	const error = useCallback(({ message, ...props }) => {
+		toast.error(message, {
+			autoClose: false,
+			position,
+			...props,
+			theme,
+			...props,
 			icon: toasterIcons['error'],
-			position,
-			...props,
+			transition,
 		});
 	}, []);
 
-	const info = useCallback(({ message, duration = 12000, ...props }): void => {
-		toast.success(message, {
-			autoClose: duration,
-			className,
+	const info = useCallback(({ message, ...props }): void => {
+		toast.info(message, {
+			autoClose: 10000,
+			position,
+			...props,
+			theme,
+			...props,
 			icon: toasterIcons['info'],
-			position,
-			...props,
+			transition,
 		});
 	}, []);
 
-	const loading = useCallback(({ autoClose, key: toastId, message }: ToastProps): void => {
+	const loading = useCallback(({ key: toastId, message }: ToastProps): void => {
 		toast.loading(message, {
-			autoClose,
-			className,
+			autoClose: false,
 			icon: toasterIcons['loading'],
+			isLoading: true,
 			position,
+			theme,
 			toastId,
+			transition,
 		});
 	}, []);
 
-	const success = useCallback(({ message, toastId, duration = 3000, ...props }): void => {
+	const success = useCallback(({ message, toastId, ...props }): void => {
 		toast.success(message, {
-			autoClose: duration,
-			className,
-			icon: toasterIcons['success'],
 			position,
+			theme,
 			toastId,
 			...props,
+			icon: toasterIcons['success'],
+			transition,
 		});
 	}, []);
 
-	const update = useCallback(({ key, message, type, duration = 4000, ...props }): void => {
+	const update: UpdateToast = useCallback(({ key, message, type, ...props }): void => {
 		toast.update(key, {
-			autoClose: duration,
-			isLoading: false,
-			closeButton: true,
-			render: message,
+			autoClose: 1500,
 			icon: toasterIcons[type],
+			isLoading: false,
+			render: message,
+			theme,
+			transition: updateTransition,
 			type,
 			...props,
 		});
 	}, []);
 
-	const warning = useCallback(({ message, duration = 3000, ...props }): void => {
-		toast.warn(message, {
-			autoClose: duration,
-			className,
-			icon: toasterIcons['warning'],
+	const warning = useCallback(({ message, ...props }): void => {
+		toast.warning(message, {
+			autoClose: false,
 			position,
+			theme,
 			...props,
+			icon: toasterIcons['warning'],
+			transition,
 		});
 	}, []);
 
