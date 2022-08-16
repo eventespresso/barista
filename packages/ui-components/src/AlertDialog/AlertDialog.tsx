@@ -1,24 +1,17 @@
-import { AlertDialog as AlertDialogAdapter, AlertDialogProps } from '@eventespresso/adapters';
+import classNames from 'classnames';
+
+import { AlertDialog as AlertDialogAdapter, AlertDialogProps, AlertType } from '@eventespresso/adapters';
 
 import './styles.scss';
 
-export const AlertDialog: React.FC<AlertDialogProps> = ({
-	body,
-	cancelButton,
-	header,
-	isOpen,
-	leastDestructiveRef,
-	okButton,
-	onClose,
-}) => (
-	<AlertDialogAdapter
-		body={body}
-		cancelButton={cancelButton}
-		contentClassName='ee-alert-dialog'
-		header={header}
-		isOpen={isOpen}
-		leastDestructiveRef={leastDestructiveRef}
-		okButton={okButton}
-		onClose={onClose}
-	/>
-);
+export { AlertType };
+
+export const AlertDialog: React.FC<AlertDialogProps> = ({ addIconBG, alertType, className, ...props }) => {
+	const dialogClassName = classNames(
+		className,
+		'ee-alert-dialog',
+		addIconBG && 'ee-alert-dialog--icon-bg',
+		alertType !== AlertType.DEFAULT && [`ee-alert-dialog--${alertType}`]
+	);
+	return <AlertDialogAdapter dialogClassName={dialogClassName} {...props} />;
+};

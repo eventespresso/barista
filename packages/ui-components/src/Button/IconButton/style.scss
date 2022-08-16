@@ -3,19 +3,9 @@
  * © 2020 Event Espresso
  * ------------------------------------------------------------------------- */
 
-@import '~@eventespresso/styles/src/mixins/breakpoints';
 @import '~@eventespresso/styles/src/mixins/transition';
+@import '../colors';
 
-.btn-focus {
-	border-color: var(--ee-color-primary);
-	box-shadow: var(--ee-button-box-shadow);
-}
-
-.btn-hover {
-	border-color: var(--ee-color-primary-low-contrast);
-	box-shadow: var(--ee-button-box-shadow);
-	color: var(--ee-color-primary-high-contrast);
-}
 
 .ee-btn-base {
 	&.ee-icon-button {
@@ -60,11 +50,15 @@
 		}
 
 		&:focus {
-			@extend .btn-focus;
+			border-color: var(--ee-color-primary);
+			box-shadow: var(--ee-button-box-shadow);
+			color: var(--ee-color-primary-high-contrast);
 		}
 
 		&:hover {
-			@extend .btn-hover;
+			border-color: var(--ee-color-primary-low-contrast);
+			box-shadow: var(--ee-button-box-shadow);
+			color: var(--ee-color-primary-high-contrast);
 		}
 
 		&--active {
@@ -84,6 +78,19 @@
 			&.ee-icon-button {
 				padding: 0;
 			}
+		}
+
+		&.ee-btn--primary {
+			background-color: var(--ee-color-primary);
+			color: var(--ee-text-on-primary);
+		}
+		&.ee-btn--secondary {
+			background-color: var(--ee-color-secondary);
+			color: var(--ee-text-on-secondary);
+		}
+		&.ee-btn--accent {
+			background-color: var(--ee-color-accent);
+			color: var(--ee-text-on-accent);
 		}
 
 		&-color {
@@ -156,5 +163,6 @@
 			padding: var(--ee-padding-small);
 			width: var(--ee-icon-button-size-huge);
 		}
+
 	}
 }

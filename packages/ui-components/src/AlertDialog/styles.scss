@@ -1,21 +1,91 @@
+@import '~@eventespresso/styles/src/mixins/breakpoints';
+
 .ee-alert-dialog[role='alertdialog'] {
+	border-radius: var(--ee-border-radius-default);
 	box-shadow: var(--ee-box-shadow-big);
+	box-sizing: border-box;
+	color: var(--ee-default-text-color);
 	line-height: var(--ee-line-height-modifier);
-	margin-top: 10%;
+	margin-top: 15%;
+	max-width: 100%;
+	overflow: hidden;
+	width: clamp(600px, 25vw, 85%);
+
+	@include max480px {
+		width: calc(100% - 1rem);
+	}
 
 	.ee-alert-dialog {
 		&__header {
-			color: var(--ee-default-text-color-super-low-contrast);
-			font-size: var(--ee-font-size-huge);
-			font-weight: 800;
-			padding: var(--ee-padding-default) var(--ee-padding-default) var(--ee-padding-tiny);
+			align-content: center;
+			align-items: center;
+			display: flex;
+			flex-direction: column;
+			font-size: var(--ee-font-size-bigger);
+			font-weight: 600;
+			line-height: var(--ee-font-size-huge);
+			padding: var(--ee-padding-huge) var(--ee-padding-default) var(--ee-padding-tiny);
 			position: relative;
-			text-transform: unset;
+			text-transform: none;
+
+			svg {
+				font-size: var(--ee-font-size-bigger);
+				box-sizing: border-box;
+				color: var(--ee-color-primary);
+				height: 4rem;
+				width: 4rem;
+				position: relative;
+				top: -1rem;
+			}
+
+			@include max480px {
+				font-size: var(--ee-font-size-bigger);
+
+				svg {
+					height: 3rem;
+					width: 3rem;
+					top: -.75rem;
+				}
+			}
 		}
 
 		&__body {
-			color: var(--ee-default-text-color);
 			font-size: var(--ee-font-size-default);
+			padding: var(--ee-padding-smaller) var(--ee-padding-huge);
+		}
+
+		&__footer {
+			padding: var(--ee-padding-smaller) var(--ee-padding-default) var(--ee-padding-default);
+
+			.ee-btn-base  {
+				margin: var(--ee-margin-nano);
+
+				& + .ee-btn-base {
+					margin-inline-start: var(--ee-margin-default);
+				}
+			}
+		}
+	}
+
+	&.ee-alert-dialog--icon-bg {
+		.ee-alert-dialog__header svg {
+			background: var(--ee-color-primary);
+			border-radius: 50%;
+			color: var(--ee-text-on-primary);
+			padding: 1rem;
+		}
+	}
+
+	&.ee-alert-dialog--accent {
+		.ee-alert-dialog__header svg {
+			color: var(--ee-color-accent);
+		}
+
+		&.ee-alert-dialog--icon-bg {
+			.ee-alert-dialog__header svg {
+				background: var(--ee-color-accent);
+				color: var(--ee-text-on-accent);
+			}
 		}
 	}
 }
