@@ -9,7 +9,7 @@ const Spinner = (props: IconProps): JSX.Element => {
 			viewBox='0 0 24 24'
 			height='1.5em'
 			width='1.5em'
-			className='ee-svg--spinner'
+			className='ee-svg--spinner ee-loading-spinner'
 			{...props}
 		>
 			<defs>
