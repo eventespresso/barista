@@ -1,17 +1,26 @@
 @import '~@eventespresso/styles/src/mixins/reduce-motion';
 
 :root {
-	--toastify-color-light: var(--ee-background-color);
-	--toastify-color-dark: var(--ee-default-text-color-high-contrast);
-	--toastify-color-info: var(--ee-color-bright-blue);
-	--toastify-color-success: var(--ee-color-bright-green-high-contrast);
-	--toastify-color-warning: #ffe932;
-	--toastify-color-error: #f60d59;
+	--toastify-toast-background: var(--ee-background-color);
 
+	--toastify-color-light: var(--ee-background-color);
 	--toastify-text-color-light: var(--ee-default-text-color);
+
+	--toastify-color-dark: var(--ee-default-text-color-high-contrast);
 	--toastify-text-color-dark: var(--ee-text-color-on-black);
 
-	--toastify-toast-background: var(--ee-background-color);
+	--toastify-color-info: hsl(194, 60%, 75%);
+	--toastify-text-color-info: hsl(199, 100%, 15%);
+
+	--toastify-color-success: hsl(140 100% 32%);
+	--toastify-text-color-success: hsl(140 0% 100%);
+
+	--toastify-color-warning: hsl(54, 100%, 60%);
+	--toastify-color-warning-alt: hsl(45 100% 45%);
+	--toastify-text-color-warning: hsl(54 0% 20%);
+
+	--toastify-color-error: hsl(340, 93%, 51%);
+	--toastify-text-color-error: hsl(340, 0%, 100%);
 
 	--ee-toast-icon-size: 1.6875rem;
 	--ee-toast-btn-size: 12px;
@@ -71,22 +80,22 @@
 
 				&--success {
 					svg.ee-svg.ee-svg {
-						color: var(--ee-color-bright-green-high-contrast);
-						fill: var(--ee-color-bright-green-high-contrast);
+						color: var(--toastify-color-success);
+						fill: var(--toastify-color-success);
 					}
 				}
 
 				&--warning {
 					svg.ee-svg.ee-svg {
-						color: var(--ee-color-gold);
-						fill: var(--ee-color-gold);
+						color: var(--toastify-color-warning-alt);
+						fill: var(--toastify-color-warning-alt);
 					}
 				}
 
 				&--error {
 					svg.ee-svg.ee-svg {
-						color: var(---ee-color-hot-pink);
-						fill: var(--ee-color-hot-pink);
+						color: var(--toastify-color-error);
+						fill: var(--toastify-color-error);
 					}
 				}
 			}
@@ -112,22 +121,22 @@
 
 				&--success {
 					svg.ee-svg.ee-svg {
-						color: var(--ee-color-bright-green-high-contrast);
-						fill: var(--ee-color-bright-green-high-contrast);
+						color: var(--toastify-color-success);
+						fill: var(--toastify-color-success);
 					}
 				}
 
 				&--warning {
 					svg.ee-svg.ee-svg {
-						color: var(--ee-color-gold);
-						fill: var(--ee-color-gold);
+						color: var(--toastify-color-warning-alt);
+						fill: var(--toastify-color-warning-alt);
 					}
 				}
 
 				&--error {
 					svg.ee-svg.ee-svg {
-						color: var(---ee-color-hot-pink-low-contrast);
-						fill: var(--ee-color-hot-pink-low-contrast);
+						color: var(--toastify-color-error);
+						fill: var(--toastify-color-error);
 					}
 				}
 			}
@@ -144,44 +153,49 @@
 					fill: var(--ee-color-primary);
 				}
 			}
+
 			&--info {
-				background-color: var(--ee-color-bright-blue-low-contrast);
-				color: var(--ee-text-on-bright-blue-low-contrast);
+				background-color: var(--toastify-color-info);
+				color: var(--toastify-text-color-info);
 
 				svg.ee-svg.ee-svg,
 				.Toastify__close-button svg {
-					color: var(--ee-text-on-bright-blue-low-contrast);
-					fill: var(--ee-text-on-bright-blue-low-contrast);
+					color: var(--toastify-text-color-info);
+					fill: var(--toastify-text-color-info);
 				}
 			}
+
 			&--success {
-				background-color: var(--ee-color-bright-green-high-contrast);
-				color: var(--ee-text-on-bright-green-high-contrast);
+				background-color: var(--toastify-color-success);
+				color: var(--toastify-text-color-success);
 
 				svg.ee-svg.ee-svg,
 				.Toastify__close-button svg {
-					color: var(--ee-text-on-bright-green-high-contrast);
-					fill: var(--ee-text-on-bright-green-high-contrast);
+					color: var(--toastify-text-color-success);
+					fill: var(--toastify-text-color-success);
 				}
 			}
+
 			&--warning {
-				color: var(--ee-default-text-color-high-contrast);
 				background-color: var(--toastify-color-warning);
+				color: var(--toastify-text-color-warning);
 				font-weight: 500;
 
 				svg.ee-svg.ee-svg,
 				.Toastify__close-button svg {
-					color: var(--ee-default-text-color-high-contrast);
-					fill: var(--ee-default-text-color-high-contrast);
+					color: var(--toastify-text-color-warning);
+					fill: var(--toastify-text-color-warning);
 				}
 			}
+
 			&--error {
 				background-color: var(--toastify-color-error);
+					color: var(--toastify-text-color-error);
 
 				svg.ee-svg.ee-svg,
 				.Toastify__close-button svg {
-					color: var(--ee-color-white);
-					fill: var(--ee-color-white);
+					color: var(--toastify-text-color-error);
+					fill: var(--toastify-text-color-error);
 				}
 			}
 		}
