@@ -8,7 +8,7 @@ import './style.scss';
 import type { DissmissToast, SystemNotificationsToaster, ToastProps, UpdateToast } from './types';
 
 const position = toast.POSITION.BOTTOM_RIGHT as 'bottom-right';
-const theme = 'colored'; // light   dark   colored
+const theme = 'light'; // light   dark   colored
 
 const transition = cssTransition({
 	enter: 'animate__animated animate__bounceInRight',
