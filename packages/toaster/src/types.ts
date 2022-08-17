@@ -12,8 +12,9 @@ export type KeyGenerator = (key?: number | string, prefix?: string) => string;
 export type onCloseFn = (event: React.MouseEvent) => void;
 
 interface UpdateToastProps {
-	message?: string;
+	autoClose?: number | false;
 	key: string | number;
+	message?: string;
 	type: TypeOptions;
 }
 
