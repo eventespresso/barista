@@ -134,7 +134,7 @@ export class EntityEditor extends EntityListParser {
 		await item.waitForSelector(`[type=button] >> text=${label}`);
 		await clickButton(label, item);
 		const waitForListUpdate = await this.createWaitForListUpdate();
-		await respondToAlert('Yes');
+		await respondToAlert('delete');
 		await waitForListUpdate();
 	};
 
