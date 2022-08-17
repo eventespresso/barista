@@ -3,18 +3,27 @@ import { addNewTicket, createNewEvent, TicketEditor, EDTRGlider } from '@e2eUtil
 import { EventRegistrar } from '@e2eUtils/public/reg-checkout';
 import { dataTicket as data } from '../../shared/data';
 import { setWordpressTimezone } from '@e2eUtils/admin/wp-plugins-page';
+import { DefaultSettingsManager } from '@e2eUtils/admin';
+import { defaultSettingsData } from '../../shared/data';
 
 const namespace = 'eventEditor.tickets.filters.status';
 
 const ticketEditor = new TicketEditor();
 const registrar = new EventRegistrar();
 const edtrGlider = new EDTRGlider();
+const defaultSettingsManager = new DefaultSettingsManager();
 
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 	
+	const afterSelectStatus = await defaultSettingsManager.processToSelectRegStatus(
+		defaultSettingsData.defaultRegStatusOptions.RAP.value
+	);
+	// assert before and after selecting new registration status
+	expect(afterSelectStatus).toBe(defaultSettingsData.defaultRegStatusOptions.RAP.value);
+
 	await setWordpressTimezone();
 
 	await createNewEvent({ title: namespace });

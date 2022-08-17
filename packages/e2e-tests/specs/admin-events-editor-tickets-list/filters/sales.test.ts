@@ -3,17 +3,26 @@ import { NOW } from '@eventespresso/constants';
 import { sub } from '@eventespresso/dates';
 import { addNewTicket, createNewEvent, EDTRGlider, TicketEditor } from '@e2eUtils/admin/events';
 import { EventRegistrar } from '@e2eUtils/public/reg-checkout';
+import { DefaultSettingsManager } from '@e2eUtils/admin';
+import { defaultSettingsData } from '../../shared/data';
 
 const namespace = 'eventEditor.tickets.filters.sales';
 
 const ticketEditor = new TicketEditor();
 const registrar = new EventRegistrar();
 const edtrGlider = new EDTRGlider();
+const defaultSettingsManager = new DefaultSettingsManager();
 
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+
+	const afterSelectStatus = await defaultSettingsManager.processToSelectRegStatus(
+		defaultSettingsData.defaultRegStatusOptions.RAP.value
+	);
+	// assert before and after selecting new registration status
+	expect(afterSelectStatus).toBe(defaultSettingsData.defaultRegStatusOptions.RAP.value);
 
 	await createNewEvent({ title: namespace });
 
