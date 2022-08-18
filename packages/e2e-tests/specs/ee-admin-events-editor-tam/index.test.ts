@@ -32,7 +32,7 @@ describe('TAM', () => {
 
 		await page.click('[aria-label="close modal"]');
 
-		await clickButton('Yes');
+		await clickButton('confirm');
 	});
 
 	it('if there is an assignment - the submit button should be enabled', async () => {
@@ -47,7 +47,7 @@ describe('TAM', () => {
 
 		await page.click('[aria-label="close modal"]');
 
-		await clickButton('Yes');
+		await clickButton('confirm');
 	});
 
 	describe('if there are no tickets', () => {
