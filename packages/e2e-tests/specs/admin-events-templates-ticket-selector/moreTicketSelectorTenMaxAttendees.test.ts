@@ -15,6 +15,7 @@ import { formatDateTime } from '@e2eUtils/common';
 import { eventData } from '../shared/data';
 import type { ElementHandle } from 'playwright-core';
 import { activateTheme } from '@e2eUtils/admin/wp-themes-page';
+import { setWordpressTimezone } from '@e2eUtils/admin/wp-plugins-page';
 
 const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();
@@ -29,7 +30,10 @@ const formatDate = formatDateTime();
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	
 	await activateTheme('twentytwenty');
+
+	await setWordpressTimezone();
 
 	await eventsListSurfer.deleteAllEventsByLink('View All Events');
 	await templatesManager.resetTicketSelectorSettings();
