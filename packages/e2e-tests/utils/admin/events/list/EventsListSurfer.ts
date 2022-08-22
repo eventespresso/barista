@@ -166,7 +166,7 @@ export class EventsListSurfer extends WPListTable {
 		// click the confirm button to delete event/s permanently
 		await Promise.all([page.waitForLoadState(), page.click('text="Confirm"')]);
 
-		await page.waitForSelector('text=100%');
+		await page.waitForSelector('text=job status: COMPLETE');
 
 		// go back to event page
 		await Goto.eventsListPage();

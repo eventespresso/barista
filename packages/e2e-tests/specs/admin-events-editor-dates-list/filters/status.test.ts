@@ -2,17 +2,26 @@ import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { addNewDate, createNewEvent, DateEditor, EDTRGlider } from '@e2eUtils/admin/events';
 import { EventRegistrar } from '@e2eUtils/public/reg-checkout';
 import { data } from '../../shared/data';
+import { DefaultSettingsManager } from '@e2eUtils/admin';
+import { defaultSettingsData } from '../../shared/data';
 
 const namespace = 'eventDates.filters.status';
 
 const dateEditor = new DateEditor();
 const registrar = new EventRegistrar();
 const edtrGlider = new EDTRGlider();
+const defaultSettingsManager = new DefaultSettingsManager();
 
 let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+
+	const afterSelectStatus = await defaultSettingsManager.processToSelectRegStatus(
+		defaultSettingsData.defaultRegStatusOptions.RAP.value
+	);
+	// assert before and after selecting new registration status
+	expect(afterSelectStatus).toBe(defaultSettingsData.defaultRegStatusOptions.RAP.value);
 
 	await createNewEvent({ title: namespace });
 

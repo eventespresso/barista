@@ -9,7 +9,7 @@ export const removeLastTicket = async () => {
 
 		const waitForListUpdate = await parser.createWaitForListUpdate();
 		await clickButton('trash ticket');
-		await clickButton('Yes');
+		await clickButton('confirm');
 		await waitForListUpdate();
 	} catch (error) {
 		// There may not be any ticket to remove

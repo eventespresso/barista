@@ -8,7 +8,7 @@ export const removeAllTickets = async () => {
 	while (button) {
 		await button.click();
 		await clickButton('trash ticket');
-		await clickButton('Yes');
+		await clickButton('confirm');
 
 		button = await page.$(selector);
 	}
