@@ -32,6 +32,7 @@ const config: Config.InitialOptions = {
 					height: 1080,
 				},
 			},
+			exitOnPageError: false,
 		},
 	},
 	testPathIgnorePatterns: ['/node_modules/'],
