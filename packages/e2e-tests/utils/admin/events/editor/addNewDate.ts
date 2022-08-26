@@ -1,4 +1,5 @@
 import { clickButton } from '@e2eUtils/common';
+import { IS_WP_MULTISITE_NETWORK } from '../../../../utils/dev/config';
 
 import { DateEditor } from './DateEditor';
 import { DateTicketFormArgs, fillDateTicketForm } from './fillDateTicketForm';
@@ -8,7 +9,9 @@ const editor = new DateEditor();
 export const addNewDate = async (fields: DateTicketFormArgs) => {
 	await page.click('text=Add New Date');
 
-	fields.singleDate !== undefined && (await page.click('text=Add Single Date'));
+	if(fields.singleDate !== undefined || IS_WP_MULTISITE_NETWORK){
+		await page.click('text=Add Single Date');
+	}
 
 	await fillDateTicketForm(fields);
 
