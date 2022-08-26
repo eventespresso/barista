@@ -2,7 +2,8 @@ import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { NOW } from '@eventespresso/constants';
 import { add, getMonthName } from '@eventespresso/dates';
 import { createNewEvent, setListDisplayControl, DateEditor, DateFields } from '@e2eUtils/admin/events';
-import { expectCardToContain } from '../../../../assertions';
+import { setWordpressTimezone } from '@e2eUtils/admin/wp-plugins-page';
+import { expectCardToContain } from '@eventespresso/e2e-tests/assertions';
 
 const namespace = 'event.dates.edit';
 
@@ -12,6 +13,8 @@ let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
+	
+	await setWordpressTimezone();
 
 	await createNewEvent({ title: namespace });
 });

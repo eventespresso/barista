@@ -19,7 +19,7 @@ afterAll(async () => {
 
 describe(namespace, () => {
 	it('should show thank you message if everything went well', async () => {
-		await createNewEvent({ title: 'Free event' });
+		await createNewEvent({ title: 'Free event', description: 'Free event description' });
 
 		await ticketEditor.updateQuantityInline(null, 75);
 

@@ -36,6 +36,7 @@ describe('Display venue details - single test', () => {
 	});
 
 	it('Create new event and set created venue', async () => {
+		
 		// this function is to create new event first then assign the venue that already created then return before and after count event
 		const { countAfterCreate, countBeforeCreate, addedEvent, getVenueTitle } =
 			await venuesManager.processToAssignVenueAtEvent({

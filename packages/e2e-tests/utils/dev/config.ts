@@ -7,8 +7,8 @@ let WP_ADMIN_USER = { username: '', password: '' };
 let WP_BASE_URL = '';
 
 if(IS_WP_MULTISITE_NETWORK){
-    WP_ADMIN_USER = { username: 'developers', password: '4(FuGWH7)!DqLVF(D9)F*4$5' };
-    WP_BASE_URL = 'http://e2etests.makeeventsnotwar.com'
+    WP_ADMIN_USER = { username: 'developers', password: 'password' };
+    WP_BASE_URL = 'http://e2etests.makeeventsnotwar.com';
 }else{
     WP_ADMIN_USER = { username: 'admin', password: 'password' };
     WP_BASE_URL = process.env.WP_BASE_URL || 'http://localhost:8889';

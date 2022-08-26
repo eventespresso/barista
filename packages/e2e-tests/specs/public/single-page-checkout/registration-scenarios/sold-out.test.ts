@@ -24,7 +24,7 @@ beforeAll(async () => {
 
 	await eventsListSurfer.deleteAllEventsByLink('View All Events');
 
-	await createNewEvent({ title: 'Free event' });
+	await createNewEvent({ title: 'Free event', description: 'Free event description' });
 });
 
 afterAll(async () => {

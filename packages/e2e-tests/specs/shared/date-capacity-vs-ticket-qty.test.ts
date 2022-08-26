@@ -27,7 +27,7 @@ let capture: PageVideoCapture;
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 
-	await createNewEvent({ title: namespace });
+	await createNewEvent({ title: namespace, description: namespace });
 
 	// Edit the existing date and ticket name
 	await editEntityCard({ name: oldDateName, entityType: 'datetime' });

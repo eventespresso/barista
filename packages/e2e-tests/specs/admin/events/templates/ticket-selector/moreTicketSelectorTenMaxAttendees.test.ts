@@ -15,7 +15,8 @@ import { formatDateTime } from '@e2eUtils/common';
 import type { ElementHandle } from 'playwright-core';
 import { activateTheme } from '@e2eUtils/admin/wp-themes-page';
 import { setWordpressTimezone } from '@e2eUtils/admin/wp-plugins-page';
-import { eventData } from '../../../../shared/data';
+import { DO_NOT_USE_BARISTA_STRUCTURE, IS_WP_MULTISITE_NETWORK } from '@e2eUtils/dev/config';
+import { eventData } from '@eventespresso/e2e-tests/specs/shared/data';
 
 const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();
@@ -30,8 +31,9 @@ const formatDate = formatDateTime();
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
-
-	await activateTheme('twentytwenty');
+	if(!IS_WP_MULTISITE_NETWORK){
+		await activateTheme('twentytwenty');
+	}
 
 	await setWordpressTimezone();
 
@@ -180,11 +182,18 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 
 	it('Trigger register button and check ticket details', async () => {
 		// tigger Register Now button
-		await Promise.all([
-			page.waitForNavigation(),
-			page.click(`${frontendticketWrapper} .ticket-selector-submit-btn`),
-		]);
-
+		if(DO_NOT_USE_BARISTA_STRUCTURE){
+			page.click('input.ticket-selector-submit-btn');
+			await page.waitForSelector('span.cart-results-button-spn');
+			await Promise.all([page.waitForNavigation(), page.click('a.cart-results-register-button')]);
+			await page.waitForSelector('#ee-single-page-checkout-dv');
+		}else{
+			await Promise.all([
+				page.waitForNavigation(),
+				page.click(`${frontendticketWrapper} .ticket-selector-submit-btn`),
+			]);
+		}
+		
 		// check desciption ticket
 		const getDescriptionTicket = await (
 			await page.$('table.spco-ticket-details tr td:nth-child(1) .line-item-desc-spn p')

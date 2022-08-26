@@ -11,7 +11,7 @@ let capture: PageVideoCapture;
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 
-	await createNewEvent({ title: namespace });
+	await createNewEvent({ title: namespace, description: namespace });
 
 	await addNewDate({ name: 'any date' });
 	await addNewTicket({ name: 'any ticket' });

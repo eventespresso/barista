@@ -20,7 +20,7 @@ export class EntityEditor extends EntityListParser {
 	copyButtonLabel = '';
 	deleteButtonLabel = 'delete permanently';
 	trashAlertConfirmLabel = 'delete';
-
+	
 	/**
 	 * Given an entity item, it updates the name in the inline edit input. Default to first item.
 	 */
@@ -32,6 +32,7 @@ export class EntityEditor extends EntityListParser {
 		);
 		await inlineEditPreview.click();
 		const inlineEditInput = await targetItem.$('.entity-card-details__name, .ee-entity-name >> input');
+		
 		await inlineEditInput.type(name);
 
 		const waitForListUpdate = await this.createWaitForListUpdate();

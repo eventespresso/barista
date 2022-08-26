@@ -19,7 +19,7 @@ beforeAll(async () => {
 	const newTicketName = 'one way ticket';
 	const newTicketAmount = 10;
 
-	await createNewEvent({ title: 'calculate ticket prices' });
+	await createNewEvent({ title: 'calculate ticket prices', description: 'calculate ticket prices description' });
 
 	await removeAllTickets();
 
