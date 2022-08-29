@@ -1,4 +1,5 @@
 import { fillAttendeeInformation, AttendeeInformation } from './fillAttendeeInformation';
+import { DO_NOT_USE_BARISTA_STRUCTURE } from '../../../utils/dev/config';
 
 export type RegisterOptions = {
 	tickets: Array<{ name: string; quantity: number }>;
@@ -45,6 +46,10 @@ export class EventRegistrar {
 
 		await this.submitTicketSelector();
 
+		if(DO_NOT_USE_BARISTA_STRUCTURE){
+			await fillAttendeeInformation(attendeeInfo);
+		}
+
 		await this.submitRegistration();
 
 		if (redirectURL) {
@@ -63,7 +68,14 @@ export class EventRegistrar {
 	 * Selects the given quantity for a ticket.
 	 */
 	chooseTicketQty = async (name: string, quantity: number) => {
-		await page.selectOption(`.tkt-slctr-tbl-wrap-dv .tkt-slctr-tbl tbody tr:has-text('${name}') td.tckt-slctr-tbl-td-qty select.ticket-selector-tbl-qty-slct`, {
+		let selector = '';
+		if(DO_NOT_USE_BARISTA_STRUCTURE){
+			selector = `.event-tickets tr:has-text('${name}') .tckt-slctr-tbl-td-qty select`;
+		}else{
+			selector = `.tkt-slctr-tbl-wrap-dv .tkt-slctr-tbl tbody tr:has-text('${name}') td.tckt-slctr-tbl-td-qty select.ticket-selector-tbl-qty-slct`;
+		}
+
+		await page.selectOption(selector, {
 			value: String(quantity),
 		});
 	};
@@ -72,9 +84,15 @@ export class EventRegistrar {
 	 * Submits ticket selection
 	 */
 	submitTicketSelector = async () => {
-		await Promise.all([page.waitForNavigation(), page.click('input[value="Register Now"]')]);
-
-		await page.waitForSelector('#ee-spco-attendee_information-reg-step-form');
+		if(DO_NOT_USE_BARISTA_STRUCTURE){
+			page.click('input.ticket-selector-submit-btn');
+			await page.waitForSelector('span.cart-results-button-spn');
+			await Promise.all([page.waitForNavigation(), page.click('a.cart-results-register-button')]);
+			await page.waitForSelector('#ee-single-page-checkout-dv');
+		}else{
+			await Promise.all([page.waitForNavigation(), page.click('input[value="Register Now"]')]);
+			await page.waitForSelector('#ee-spco-attendee_information-reg-step-form');
+		}
 	};
 
 	/**

@@ -2,6 +2,7 @@ import { clickButton } from '@e2eUtils/common';
 import { EntityEditor, CommonEntityFields, CommonFilters } from './EntityEditor';
 import { ListView, Item, Field } from './EntityListParser';
 import { fillDateTicketForm } from './fillDateTicketForm';
+import { DO_NOT_USE_BARISTA_STRUCTURE } from '../../../../utils/dev/config';
 
 export interface TicketFields extends CommonEntityFields {
 	quantity?: string;
@@ -16,6 +17,10 @@ export class TicketEditor extends EntityEditor {
 		this.trashButtonLabel = 'trash ticket';
 		this.copyButtonLabel = 'copy ticket';
 		this.trashAlertConfirmLabel = 'confirm'
+
+		if(DO_NOT_USE_BARISTA_STRUCTURE){
+			this.trashAlertConfirmLabel = 'yes';
+		}
 	}
 
 	/**

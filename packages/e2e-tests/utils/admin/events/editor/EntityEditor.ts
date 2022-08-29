@@ -20,7 +20,7 @@ export class EntityEditor extends EntityListParser {
 	copyButtonLabel = '';
 	deleteButtonLabel = 'delete permanently';
 	trashAlertConfirmLabel = 'delete';
-
+	
 	/**
 	 * Given an entity item, it updates the name in the inline edit input. Default to first item.
 	 */
