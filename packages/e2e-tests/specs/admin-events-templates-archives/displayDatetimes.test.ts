@@ -1,6 +1,7 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { Goto, TemplatesManager, EventsListSurfer, createNewEvent } from '@e2eUtils/admin';
 import { eventData } from '../shared/data';
+import { DO_NOT_USE_BARISTA_STRUCTURE } from '../../utils/dev/config';
 
 const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();
@@ -52,7 +53,13 @@ describe('Display datetimes - archive test', () => {
 		const { getSelectedValue } = await setDisplayDatetimes({ value: '1' });
 		await templatesManager.gotoEventListing();
 		// get date time header text if exist
-		const getDatetimesHeaderText = await (await page?.$('.event-datetimes > ul')).innerText();
+		let datetimesSelector = '';
+		if(DO_NOT_USE_BARISTA_STRUCTURE){
+			datetimesSelector = '.event-datetimes > div > ul';
+		}else{
+			datetimesSelector = '.event-datetimes > ul';
+		}
+		const getDatetimesHeaderText = await (await page?.$(datetimesSelector)).innerText();
 
 		// assert date time header text after selecting display "Yes"
 		expect(getDatetimesHeaderText).toBeTruthy();
