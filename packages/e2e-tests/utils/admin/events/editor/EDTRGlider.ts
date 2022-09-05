@@ -54,6 +54,13 @@ export class EDTRGlider {
 	 */
 	saveEvent = async (save = true) => {
 		if (save) {
+			let selector = '#sample-permalink a';
+			const checkTagExists = await page.$eval(selector, () => true).catch(() => false)
+			if(!checkTagExists){
+				selector = '#sample-permalink';
+			}
+			await page.waitForSelector(selector);
+			
 			await Promise.all([page.waitForNavigation(), page.click('#publish')]);
 			await this.waitForEdtr2Load();
 		}
