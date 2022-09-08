@@ -11,6 +11,7 @@ import {
 } from '@e2eUtils/admin';
 import { eventData } from '../shared/data';
 import { activateTheme } from '@e2eUtils/admin/wp-themes-page';
+import { IS_WP_MULTISITE_NETWORK, DO_NOT_USE_BARISTA_STRUCTURE } from '../../utils/dev/config';
 
 const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();
@@ -22,8 +23,11 @@ let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
-	await activateTheme('twentytwenty');
 
+	if(!IS_WP_MULTISITE_NETWORK){
+		await activateTheme('twentytwenty');
+	}
+	
 	await eventsListSurfer.deleteAllEventsByLink('View All Events');
 	await templatesManager.resetTicketSelectorSettings();
 	await Goto.eventsListPage();
@@ -131,7 +135,15 @@ describe('One Max Attendees and more tickets - ticket selector test', () => {
 		await page.click(`.tckt-slctr-tbl-td-qty input[value="${ticketDetails.ids[1]}-${getSetMaxValue}"]`);
 
 		// tigger Register Now button
-		await Promise.all([page.waitForNavigation(), page.click(`.ticket-selector-submit-btn`)]);
+
+		if(DO_NOT_USE_BARISTA_STRUCTURE){
+			page.click('input.ticket-selector-submit-btn');
+			await page.waitForSelector('span.cart-results-button-spn');
+			await Promise.all([page.waitForNavigation(), page.click('a.cart-results-register-button')]);
+			await page.waitForSelector('#ee-single-page-checkout-dv');
+		}else{
+			await Promise.all([page.waitForNavigation(), page.click(`.ticket-selector-submit-btn`)]);
+		}
 
 		// check desciption ticket
 		const getDescriptionTicket = await (

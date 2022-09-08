@@ -8,6 +8,7 @@ import {
 	RegistrationOptions,
 } from '@e2eUtils/admin';
 import { eventData } from '../shared/data';
+import { DO_NOT_USE_BARISTA_STRUCTURE } from '../../utils/dev/config';
 
 const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();
@@ -78,7 +79,13 @@ describe('One Max Attendees and free ticket - ticket selector test', () => {
 			await page.$(`.no-tkt-slctr-ticket-dv #ticket-selector-submit-${getFirstEventId}-btn`)
 		).getAttribute('value');
 		// assert label
-		expect(checkRegisterBtn).toBe('Register Now');
+
+		let registerNowText = 'Register Now';
+		if(DO_NOT_USE_BARISTA_STRUCTURE){
+			registerNowText = 'Add to Event Cart';
+		}
+
+		expect(checkRegisterBtn).toBe(registerNowText);
 	});
 
 	it('examine DOM and verify that all tkt-slctr- input values are correct', async () => {
@@ -151,11 +158,18 @@ describe('One Max Attendees and free ticket - ticket selector test', () => {
 
 	it('click "Register Now" button and verify that checkout loads and selected ticket is correct', async () => {
 		// tigger Register Now button
-		await Promise.all([
-			page.waitForNavigation(),
-			page.click(`.no-tkt-slctr-ticket-dv #ticket-selector-submit-${getFirstEventId}-btn`),
-		]);
-
+		if(DO_NOT_USE_BARISTA_STRUCTURE){
+			page.click('input.ticket-selector-submit-btn');
+			await page.waitForSelector('span.cart-results-button-spn');
+			await Promise.all([page.waitForNavigation(), page.click('a.cart-results-register-button')]);
+			await page.waitForSelector('#ee-single-page-checkout-dv');
+		}else{
+			await Promise.all([
+				page.waitForNavigation(),
+				page.click(`.no-tkt-slctr-ticket-dv #ticket-selector-submit-${getFirstEventId}-btn`),
+			]);
+		}
+		
 		// get title event for ticket after trigger register
 		const getEventForTicket = await (
 			await page.$('table.spco-ticket-details tr td:nth-child(1) .line-item-desc-spn')
