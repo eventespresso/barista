@@ -2,6 +2,7 @@ import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { createNewEvent, removeLastTicket } from '@e2eUtils/admin/events';
 import { clickButton } from '@e2eUtils/common';
 import { isSubmitBtnDisabled } from '../../assertions';
+import { DO_NOT_USE_BARISTA_STRUCTURE } from '../../utils/dev/config';
 
 const namespace = 'TAM';
 let capture: PageVideoCapture;
@@ -9,7 +10,7 @@ let capture: PageVideoCapture;
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 
-	await createNewEvent({ title: 'TAM-related' });
+	await createNewEvent({ title: 'TAM-related', description: 'TAM-related Description' });
 });
 
 afterAll(async () => {
@@ -32,7 +33,11 @@ describe('TAM', () => {
 
 		await page.click('[aria-label="close modal"]');
 
-		await clickButton('confirm');
+		let modalConfirmText = 'confirm'
+		if(DO_NOT_USE_BARISTA_STRUCTURE){
+			modalConfirmText = 'Yes';
+		}
+		await clickButton(modalConfirmText);
 	});
 
 	it('if there is an assignment - the submit button should be enabled', async () => {
@@ -47,7 +52,11 @@ describe('TAM', () => {
 
 		await page.click('[aria-label="close modal"]');
 
-		await clickButton('confirm');
+		let modalConfirmText = 'confirm'
+		if(DO_NOT_USE_BARISTA_STRUCTURE){
+			modalConfirmText = 'Yes';
+		}
+		await clickButton(modalConfirmText);
 	});
 
 	describe('if there are no tickets', () => {

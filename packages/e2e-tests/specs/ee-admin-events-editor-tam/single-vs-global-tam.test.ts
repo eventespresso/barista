@@ -11,7 +11,7 @@ let capture: PageVideoCapture;
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 
-	await createNewEvent({ title: 'Test for Single Vs Global TAM data' });
+	await createNewEvent({ title: 'Test for Single Vs Global TAM data', description: 'Test for Single Vs Global TAM data description' });
 
 	await addDatesAndTickets();
 });

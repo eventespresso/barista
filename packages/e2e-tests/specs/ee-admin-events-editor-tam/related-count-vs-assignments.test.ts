@@ -4,6 +4,7 @@ import { clickLabel } from '@e2eUtils/common';
 import { EntityType } from '../../types';
 import { activateTheme } from '@e2eUtils/admin/wp-themes-page';
 import { addDatesAndTickets } from './utils';
+import { IS_WP_MULTISITE_NETWORK } from '../../utils/dev/config';
 
 const tamrover = new TAMRover();
 const parser = new EntityListParser('datetime', 'card');
@@ -13,9 +14,12 @@ let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
-	await activateTheme('twentytwenty');
 
-	await createNewEvent({ title: 'TAM: Related Count in card and table view vs TAM Assignments' });
+	if(!IS_WP_MULTISITE_NETWORK){
+		await activateTheme('twentytwenty');
+	}
+		
+	await createNewEvent({ title: 'TAM: Related Count in card and table view vs TAM Assignments', description: 'TAM: Related Count in card and table view vs TAM Assignments Description' });
 
 	await addDatesAndTickets();
 });

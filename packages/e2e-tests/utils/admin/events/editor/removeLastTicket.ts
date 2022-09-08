@@ -1,5 +1,6 @@
 import { clickButton } from '@e2eUtils/common';
 import { EntityListParser } from './EntityListParser';
+import { DO_NOT_USE_BARISTA_STRUCTURE } from '../../../../utils/dev/config';
 
 const parser = new EntityListParser('ticket');
 
@@ -9,7 +10,13 @@ export const removeLastTicket = async () => {
 
 		const waitForListUpdate = await parser.createWaitForListUpdate();
 		await clickButton('trash ticket');
-		await clickButton('confirm');
+
+		let modalConfirmText = 'confirm'
+		if(DO_NOT_USE_BARISTA_STRUCTURE){
+			modalConfirmText = 'Yes';
+		}
+		await clickButton(modalConfirmText);
+
 		await waitForListUpdate();
 	} catch (error) {
 		// There may not be any ticket to remove

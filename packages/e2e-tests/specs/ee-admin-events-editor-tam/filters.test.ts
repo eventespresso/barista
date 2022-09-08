@@ -14,7 +14,7 @@ let capture: PageVideoCapture;
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 	
-	await createNewEvent({ title: 'TAM Filters Test' });
+	await createNewEvent({ title: 'TAM Filters Test', description: 'TAM Filters Test Description' });
 
 	/**
 	 * Ensure that the default date is for the next month
