@@ -25,6 +25,7 @@
 	&__inner-wrapper {
 		margin: 0 auto var(--ee-margin-smaller);
 		max-width: 100%;
+		overflow-x: auto !important;
 		table-layout: auto;
 		width: 100%;
 	}
