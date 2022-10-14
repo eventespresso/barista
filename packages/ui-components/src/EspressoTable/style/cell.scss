@@ -2,6 +2,15 @@
 
 table.ee-rspnsv-table {
 	.ee-rspnsv-table {
+		&-header,
+		&-footer {
+			th {
+				padding: var(--ee-padding-micro);
+				@include min1600px {
+					padding: var(--ee-padding-tiny);
+				}
+			}
+		}
 		&-body {
 			td {
 				&.ee-entity-list-status-stripe {
@@ -16,6 +25,11 @@ table.ee-rspnsv-table {
 							color: white;
 						}
 					}
+				}
+
+				padding: var(--ee-padding-micro);
+				@include min1600px {
+					padding: var(--ee-padding-tiny);
 				}
 			}
 		}
@@ -61,17 +75,6 @@ table.ee-rspnsv-table {
 					max-width: unset;
 					width: 0.5%;
 				}
-			}
-		}
-
-		&:not(.ee-entity-list-status-stripe):not(.ee-rspnsv-table-hide-on-mobile) {
-			@include max1280px {
-				padding: var(--ee-padding-micro) var(--ee-padding-smaller);
-			}
-
-			@include max782px {
-				padding: var(--ee-padding-smaller) /* !important */;
-				width: 100% /* !important */;
 			}
 		}
 
