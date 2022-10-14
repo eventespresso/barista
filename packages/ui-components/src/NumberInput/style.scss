@@ -41,9 +41,9 @@
 	}
 
 	.ee-number-field-stepper {
-		height: calc(var(--ee-button-height) + 2px);
+		height: calc(var(--ee-button-height) + 8px);
 		right: -3px;
-		top: 6px;
+		top: 4px;
 		z-index: 0;
 
 		> div {

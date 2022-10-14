@@ -1,7 +1,7 @@
 .ee-field {
 	&--width {
 		&-small {
-			width: 100px;
+			width: clamp(8rem, 25%, 16rem);
 		}
 
 		&-full {
