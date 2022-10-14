@@ -7,8 +7,6 @@ $input-text: 'input[type=' text ']';
 
 
 .ee-tpc.ee-modal {
-	width: min(95%, 75rem);
-
 	.ee-tpc {
 		&__body {
 			#{$input-number},
