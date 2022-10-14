@@ -12,6 +12,10 @@
 	}
 }
 
+:root {
+	--ee-admin-bar-height: 46px;
+}
+
 
 body.ee-modal-open {
 	overflow: hidden;
@@ -23,19 +27,22 @@ body.ee-modal-open {
 }
 
 .ee-modal[role="alertdialog"] {
-
-	max-height: 95%;
-	max-width: min(95%, 75rem);
+	border-radius: 0;
+	height: 100%;
+	margin: 0;
+	max-height: 100%;
+	max-width: 100%;
+	width: 100%;
 
 	.admin-bar & {
-		max-height: calc(96% - 46px);
-		max-width: min(95%, 75rem);
-		top: 2%;
+		height: calc(100% - var(--ee-admin-bar-height));
+		top: calc( var(--ee-admin-bar-height) / 2 );
 	}
 
 	.ee-modal {
 		&__header {
 			&.ee-modal__header {
+				max-width: 100%;
 				position: relative;
 				z-index: 1;
 
@@ -59,6 +66,8 @@ body.ee-modal-open {
 		}
 
 		&__body {
+			max-width: 100%;
+
 			@include max782px {
 				padding-left: var(--ee-padding-smaller);
 				padding-right: var(--ee-padding-smaller);
@@ -67,6 +76,8 @@ body.ee-modal-open {
 
 		&__footer {
 			flex-wrap: wrap;
+			max-width: 100%;
+
 
 			&.ee-modal--with-border {
 				border-top: 0.5px solid var(--ee-border-color);
@@ -95,11 +106,29 @@ body.ee-modal-open {
 		}
 	}
 
-	@include max600px {
-		border-radius: 0;
-		margin: 0;
-		max-height: 100% !important;
-		max-width: 100% !important;
-		width: 100% !important;
+	@include min1024px {
+		border-radius: var(--ee-border-radius-big);
+		max-height: 95%;
+		max-width: max(95%, 72rem);
+
+		.admin-bar & {
+			max-height: calc(95% - var(--ee-admin-bar-height));
+		}
+	}
+	@include min1600px {
+		max-height: 90%;
+		max-width: max(90%, 84rem);
+
+		.admin-bar & {
+			max-height: calc(90% - var(--ee-admin-bar-height));
+		}
+	}
+	@include min1920px {
+		max-height: 80%;
+		max-width: max(80%, 96rem);
+
+		.admin-bar & {
+			max-height: calc(80% - var(--ee-admin-bar-height));
+		}
 	}
 }
