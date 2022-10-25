@@ -1,5 +1,6 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { createNewEvent, DateEditor, TicketEditor } from '@e2eUtils/admin/events';
+import { IS_WP_MULTISITE_NETWORK } from '../../utils/dev/config';
 
 const dateEditor = new DateEditor();
 const ticketEditor = new TicketEditor();
@@ -10,7 +11,7 @@ let capture: PageVideoCapture;
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 	
-	await createNewEvent({ title: namespace });
+	await createNewEvent({ title: namespace, description: namespace });
 	const item = await dateEditor.getItem();
 	await dateEditor.updateNameInline(item, 'some date');
 });
@@ -27,6 +28,10 @@ describe(namespace, () => {
 
 				await editor.switchView(viewType);
 
+				if(IS_WP_MULTISITE_NETWORK){
+					await page.waitForTimeout(1000)
+				}
+				
 				const beforeCopyCount = await editor.getItemCount();
 
 				let item = await editor.getItem();

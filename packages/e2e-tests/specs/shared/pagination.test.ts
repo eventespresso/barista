@@ -22,7 +22,8 @@ describe(namespace, () => {
 				const newName = `new ${entityType}`;
 				const parser = new EntityListParser(entityType);
 
-				await createNewEvent({ title: `${namespace}.${entityType}` });
+				const eventText = `${namespace}.${entityType}`;
+				await createNewEvent({ title: eventText, description: eventText });
 
 				expect(await getPaginationSize(entityType)).toBe(0);
 

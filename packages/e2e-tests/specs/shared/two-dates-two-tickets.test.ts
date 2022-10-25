@@ -18,7 +18,9 @@ afterAll(async () => {
 
 describe(namespace, () => {
 	it('should check if registration was successful and the reg status is approved', async () => {
-		await createNewEvent({ title: 'Two Dates Two Tickets' });
+
+		const eventText = 'Two Dates Two Tickets';
+		await createNewEvent({ title: eventText, description: eventText });
 
 		await editEntityCard({
 			capacity: '20',
