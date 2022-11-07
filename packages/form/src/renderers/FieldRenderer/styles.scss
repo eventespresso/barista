@@ -15,4 +15,11 @@
 			white-space: nowrap;
 		}
 	}
+
+	&--has-info {
+		.chakra-portal .ee-tooltip.ee-tooltip {
+			max-width: 40rem;
+			width: clamp(20rem, 40rem, 100%);
+		}
+	}
 }
