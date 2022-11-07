@@ -24,6 +24,7 @@ const FieldRenderer: React.FC<FieldRendererProps> = ({ inline, ...props }) => {
 		info && 'ee-form-item--has-info',
 		inline && 'ee-form-item--inline',
 		`ee-form-item__${rest.fieldType}`,
+		`ee-form-item-name__${props.input.name}`,
 		formControlProps?.className
 	);
 
