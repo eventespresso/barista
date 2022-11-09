@@ -33,7 +33,9 @@ $signBorderWidth: var(--ee-border-width);
 	}
 
 	.ee-price-id {
+		box-sizing: border-box;
 		display: inline-block;
+		padding-inline-end: var(--ee-padding-micro);
 		width: 100%;
 	}
 }

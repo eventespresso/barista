@@ -67,6 +67,13 @@ body.ee-modal-open {
 
 		&__body {
 			max-width: 100%;
+			padding-inline: var(--ee-padding-smaller);
+			@include min1280px {
+				padding-inline: var(--ee-padding-small);
+			}
+			@include min1920px {
+				padding-inline: var(--ee-padding-default);
+			}
 
 			@include max782px {
 				padding-left: var(--ee-padding-smaller);

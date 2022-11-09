@@ -53,7 +53,7 @@
 
 	.ee-rspnsv-table-header .ee-rspnsv-table-header-th,
 	.ee-rspnsv-table-body .ee-rspnsv-table-body-td {
-		box-sizing: content-box;
+		box-sizing: border-box;
 		font-size: var(--ee-font-size-small);
 		text-align: left;
 
