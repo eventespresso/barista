@@ -15,6 +15,7 @@
 
 					border: var(--ee-border-width) solid var(--ee-border-color);
 					border-right: none;
+					box-sizing: border-box;
 					display: inline-flex;
 					padding: var(--ee-padding-smaller) var(--ee-padding-micro);
 					height: var(--ee-icon-button-size);
@@ -36,8 +37,9 @@
 				}
 			}
 
-			.ee-weekly-label {
+			label.ee-weekly-label:not(.ee-input-label):not(.screen-reader-text) {
 				flex: none;
+				margin-inline: 0;
 				padding: 0;
 
 				&:first-child {

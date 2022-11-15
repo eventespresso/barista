@@ -12,6 +12,7 @@ const PriceOrderInput: React.FC<PriceModifierProps> = ({ price }) => {
 	return (
 		<PriceField
 			aria-label={__('price order')}
+			className={'ee-input-width--small'}
 			component={'input'}
 			disabled={disabled}
 			field='order'

@@ -1,6 +1,6 @@
 @import '~@eventespresso/styles/src/mixins/breakpoints.scss';
 
-section.ee-new-entity-modal {
+section.ee-modal[role="alertdialog"].ee-new-entity-modal {
 	background: var(--ee-background-color);
 	border-radius: var(--ee-border-radius-default);
 	height: auto;

@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { forwardRef, useCallback } from 'react';
 import {
 	NumberInput as ChakraNumberInput,
 	NumberInputField,
@@ -7,50 +7,70 @@ import {
 	NumberDecrementStepper,
 } from '@chakra-ui/react';
 
+import { isRTL } from '@eventespresso/i18n';
+
 import type { NumberInputProps } from './types';
 
-export const NumberInput: React.FC<NumberInputProps> = ({
-	className,
-	decrementStepperProps,
-	isDisabled,
-	id,
-	incrementStepperProps,
-	inputFieldProps,
-	inputStepperProps,
-	onChange,
-	onChangeValue,
-	showStepper = true,
-	value,
-	...props
-}) => {
-	const size = inputFieldProps?.size && Number(inputFieldProps?.size);
-
-	const onChangeHandler = useCallback<NumberInputProps['onChange']>(
-		(valueAsString, valueAsNumber) => {
-			if (!isDisabled) {
-				onChangeValue?.(valueAsNumber);
-
-				onChange?.(valueAsString, valueAsNumber);
-			}
+export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
+	(
+		{
+			className,
+			decrementStepperProps,
+			isDisabled,
+			id,
+			incrementStepperProps,
+			inputFieldProps,
+			inputStepperProps,
+			onChange,
+			onChangeValue,
+			placeholder,
+			showStepper = true,
+			value,
+			wrapperClass,
+			...props
 		},
-		[isDisabled, onChange, onChangeValue]
-	);
+		ref
+	) => {
+		const ariaValueNow = String(value)?.length ? Number(value) : null;
+		const size = inputFieldProps?.size && Number(inputFieldProps?.size);
 
-	return (
-		<ChakraNumberInput
-			{...props}
-			className={className}
-			isDisabled={isDisabled}
-			onChange={onChangeHandler}
-			value={value}
-		>
-			<NumberInputField {...inputFieldProps} id={id} size={size} />
-			{showStepper && (
-				<NumberInputStepper {...inputStepperProps}>
-					<NumberIncrementStepper {...incrementStepperProps} />
-					<NumberDecrementStepper {...decrementStepperProps} />
-				</NumberInputStepper>
-			)}
-		</ChakraNumberInput>
-	);
-};
+		const onChangeHandler = useCallback<NumberInputProps['onChange']>(
+			(valueAsString, valueAsNumber) => {
+				if (!isDisabled) {
+					onChange?.(valueAsString, valueAsNumber);
+					onChangeValue?.(valueAsNumber);
+				}
+			},
+			[isDisabled, onChange, onChangeValue]
+		);
+
+		const stepper = showStepper && (
+			<NumberInputStepper {...inputStepperProps}>
+				<NumberIncrementStepper {...incrementStepperProps} />
+				<NumberDecrementStepper {...decrementStepperProps} />
+			</NumberInputStepper>
+		);
+
+		return (
+			<ChakraNumberInput
+				{...props}
+				aria-valuenow={ariaValueNow}
+				className={wrapperClass}
+				isDisabled={isDisabled}
+				onChange={onChangeHandler}
+				value={value}
+				ref={ref}
+			>
+				{isRTL() && stepper}
+				<NumberInputField
+					{...inputFieldProps}
+					className={className}
+					id={id}
+					placeholder={placeholder}
+					size={size}
+				/>
+				{!isRTL() && stepper}
+			</ChakraNumberInput>
+		);
+	}
+);

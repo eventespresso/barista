@@ -49,7 +49,7 @@
 					box-sizing: border-box;
 					display: inline-flex;
 					flex-flow:  column nowrap;
-					margin: var(--ee-margin-default) 0;
+					margin: var(--ee-margin-smaller) 0;
 					padding-right: var(--ee-padding-default);
 					width: 50%;
 
@@ -63,6 +63,10 @@
 				.ee-icon--info-circle-outlined {
 					color: var(--ee-color-primary-low-contrast);
 					margin: 0 var(--ee-margin-tiny);
+				}
+
+				@media only screen and (min-width: 782px) {
+					margin: var(--ee-margin-default) 0;
 				}
 			}
 		}
@@ -127,7 +131,7 @@
 	}
 
 	@media only screen and (min-width: 782px) {
-		.ee-form-section-sidebar {
+		.ee-form-section__sidebar {
 			flex: 0 25%;
 		}
 
@@ -143,13 +147,13 @@
 	}
 
 	@media only screen and (max-width: 782px) {
-		.ee-form-section-sidebar {
+		.ee-form-section__sidebar {
 			flex: 0 100%;
 
 			h3 {
 				margin: 0 0 var(--ee-margin-default);
 			}
-			&-icon {
+			&-icon.ee-svg.ee-svg {
 				left: unset;
 				position: absolute;
 				right: 0.25rem;

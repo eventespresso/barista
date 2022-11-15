@@ -1,6 +1,12 @@
 .ee-money-field {
 
 	$percentSignWidth: 38px;
+	 // this is the largest value for letter like M or W,
+	$signCharSize: 15px;
+	// sign label has only one border applied, the other border is adjoined with input
+	$signBorderWidth: var(--ee-border-width);
+	// sign have paddings from both horizontal sides
+	$signPaddings: calc(var(--ee-padding-micro) * 2);
 
 	&__label {
 		min-width: $percentSignWidth;
@@ -9,14 +15,13 @@
 
 	&--with-currency-sign {
 		.ee-input-with-label__left-label {
-			margin-right: $percentSignWidth;
+			margin-inline-end: calc( #{$percentSignWidth} + #{$signBorderWidth} );
 		}
 
 		.ee-currency-sign {
 			box-sizing: content-box; // added this because I needed to have separate control over width and paddings
 
 			@mixin width($charLength) {
-				$signCharSize: 15px; // this is the largest value for letter like M or W,
 
 				width: calc(#{$signCharSize * $charLength});
 			}
@@ -46,15 +51,10 @@
 	&--with-percent-sign {
 		&.ee-money-field-sign {
 			&--before {
-				margin-left: 46px;
+				margin-inline-start: calc( #{$percentSignWidth} + #{$signBorderWidth} );
 
 				@mixin marginLeft($charLength) {
-					$signCharSize: 15px;
-					// sign label has only one border applied, the other border is adjoined with input
-					$signBorderWidth: var(--ee-border-width);
-					// sign have paddings from both horizontal sides
-					$signPaddings: calc(var(--ee-padding-micro) * 2);
-					margin-left: calc(#{$signCharSize * $charLength} + #{$signBorderWidth} + #{$signPaddings});
+					margin-inline-start: calc(#{$signCharSize * $charLength} + #{$signBorderWidth} + #{$signPaddings});
 				}
 
 				&.ee-cur-sign-2 {
@@ -79,13 +79,10 @@
 			}
 
 			&--after {
-				@mixin marginRight($charLength) {
-					$percentSignWidth: 37px; // including borders
-					$signCharSize: 15px;
-					$signBorderWidth: 2px; // sign label has only one border applied, the other border is adjoined with input
-					$signPaddings: calc(var(--ee-padding-micro) * 2); // sign have paddings from both horizontal sides
+				margin-inline-end: calc( #{$percentSignWidth} + #{$signBorderWidth} );
 
-					margin-right: calc(
+				@mixin marginRight($charLength) {
+					margin-inline-end: calc(
 						#{$signCharSize * $charLength} + #{$signBorderWidth} + #{$signPaddings} - #{$percentSignWidth}
 					);
 				}

@@ -11,6 +11,6 @@ export interface OptionProps<T extends React.ReactText = React.ReactText> {
 
 export type OptionsType<T extends React.ReactText = React.ReactText> = Array<OptionProps<T>>;
 
-export interface SelectProps extends ChakraSelectProps, CommonInputProps<HTMLSelectElement> {
+export interface SelectProps extends ChakraSelectProps, Omit<CommonInputProps<HTMLInputElement>, 'onChange'> {
 	options?: OptionsType;
 }

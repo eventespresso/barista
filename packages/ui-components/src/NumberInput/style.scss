@@ -1,11 +1,10 @@
 @import '~@eventespresso/styles/src/mixins/breakpoints';
 @import '~@eventespresso/styles/src/mixins/base-styles';
 
-.ee-number-input.ee-number-input {
+.ee-number-input__wrap {
 	min-width: 3.75rem;
-	width: 60%;
 
-	input {
+	.ee-number-input {
 		z-index: 0;
 
 		@include ee-base-inputs-styles;
@@ -17,34 +16,34 @@
 		&:focus {
 			z-index: 0;
 		}
-	}
 
-	&--visible-digits {
-		input {
-			text-align: center;
-		}
+		&--visible-digits {
+			input {
+				text-align: center;
+			}
 
-		&-2 {
-			width: 3.75rem;
-		}
-		&-3 {
-			width: 4.25rem;
-		}
-		&-4 {
-			width: 4.75rem;
-		}
-		&-5 {
-			width: 5.25rem;
-		}
-		&-6 {
-			width: 5.75rem;
+			&-2 {
+				width: 3.75rem;
+			}
+			&-3 {
+				width: 4.25rem;
+			}
+			&-4 {
+				width: 4.75rem;
+			}
+			&-5 {
+				width: 5.25rem;
+			}
+			&-6 {
+				width: 5.75rem;
+			}
 		}
 	}
 
 	.ee-number-field-stepper {
-		height: calc(var(--ee-button-height) + 2px);
+		height: calc(var(--ee-button-height) + 8px);
 		right: -3px;
-		top: 6px;
+		top: 4px;
 		z-index: 0;
 
 		> div {

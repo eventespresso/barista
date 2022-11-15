@@ -17,7 +17,6 @@ type Picked =
 	| 'keepWithinRange'
 	| 'max'
 	| 'min'
-	| 'onChange'
 	| 'precision'
 	| 'step'
 	| 'value';
@@ -28,5 +27,7 @@ export interface NumberInputProps extends Pick<ChakraNumberInputProps, Picked>, 
 	inputStepperProps?: ChakraFlexProps;
 	incrementStepperProps?: ChakraBoxProps;
 	name?: string;
+	placeholder?: string;
 	showStepper?: boolean;
+	wrapperClass?: string;
 }

@@ -3,7 +3,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { getOptionValues } from '@eventespresso/utils';
 
 import { SelectWithLabel } from './Select';
-import { TextInputWithLabel } from '../text-input';
+import { TextInputWithLabel } from '../TextInput';
 
 export interface SelectWithCustomTextProps extends Omit<React.ComponentProps<typeof SelectWithLabel>, 'onChange'> {
 	inputLabel?: string;

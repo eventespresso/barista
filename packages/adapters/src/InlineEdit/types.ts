@@ -7,7 +7,7 @@ export type InputType = 'heading' | 'number' | 'textarea' | 'text';
 
 export interface InlineEditProps
 	extends Partial<ChakraEditableProps>,
-		Omit<CommonInputProps<HTMLInputElement>, 'onChangeValue'> {
+		Omit<CommonInputProps<HTMLInputElement>, 'onChange' | 'onChangeValue'> {
 	'data-testid'?: string;
 	editableInputClassName?: string;
 	inputClassName?: string;

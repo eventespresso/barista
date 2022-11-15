@@ -1,18 +1,41 @@
 $input-number: 'input[type=' number ']';
 
-.ee-input.ee-input {
-	&__price-field {
-		&--has-error {
-			// this was used to increase specificity, more info: https://sass-lang.com/documentation/at-rules/at-root
-			@at-root #{$input-number}#{&} {
-				background-color: var(--ee-text-on-red-low-contrast);
-				border-color: var(--ee-color-red-low-contrast);
+$percentSignWidth: 38px;
+// sign label has only one border applied, the other border is adjoined with input
+$signBorderWidth: var(--ee-border-width);
+
+.ee-ticket-price-calculator {
+	.ee-money-field {
+		&--with-currency-sign.ee-money-field-sign {
+			&--before .ee-input__price-field {
+				margin-inline-end: calc( #{$percentSignWidth} + #{$signBorderWidth} );
+			}
+			&--after .ee-input__price-field {
+				margin-inline-start: calc( #{$percentSignWidth} + #{$signBorderWidth} );
+			}
+		}
+
+		.ee-input {
+			&__price-field {
+				input {
+					min-width: 6rem;
+				}
+				&--has-error {
+					// this was used to increase specificity,
+					// more info: https://sass-lang.com/documentation/at-rules/at-root
+					@at-root #{$input-number}#{&} {
+						background-color: var(--ee-text-on-red-low-contrast);
+						border-color: var(--ee-color-red-low-contrast);
+					}
+				}
 			}
 		}
 	}
-}
 
-.ee-price-id {
-	display: inline-block;
-	width: 100%;
+	.ee-price-id {
+		box-sizing: border-box;
+		display: inline-block;
+		padding-inline-end: var(--ee-padding-micro);
+		width: 100%;
+	}
 }
