@@ -16,7 +16,7 @@ export const useSaveForm = (): SaveFormCb => {
 	const { getData } = useFormState();
 
 	const saveForm = useDebouncedCallback<SaveFormCb>(async (state) => {
-		console.log('state', state);
+		// console.log('state', state);
 		mutateSections(state.sections, state.deletedSections);
 		mutateElements(state.elements, state.deletedElements);
 	}, DEBOUNCE_TIME);

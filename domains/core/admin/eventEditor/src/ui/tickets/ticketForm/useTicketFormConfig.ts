@@ -1,19 +1,21 @@
 import { useMemo, useCallback } from 'react';
 import * as R from 'ramda';
 
-import { CalendarOutlined, ControlOutlined, ProfileOutlined } from '@eventespresso/icons';
-import { useUtcISOToSiteDate, useSiteDateToUtcISO, getEEDomData } from '@eventespresso/services';
-import { startAndEndDateFixer, useTicketItem, hooks, useTicketPrices } from '@eventespresso/edtr-services';
-import { NOW, PLUS_ONE_MONTH, USE_ADVANCED_EDITOR } from '@eventespresso/constants';
-import { useMemoStringify } from '@eventespresso/hooks';
-import { setDefaultTime } from '@eventespresso/dates';
-import { EntityId } from '@eventespresso/data';
 import { __ } from '@eventespresso/i18n';
+import { CalendarOutlined, ControlOutlined, ProfileOutlined } from '@eventespresso/icons';
+import { EndDateFieldWrapper } from '@eventespresso/ee-components';
+import { EntityId } from '@eventespresso/data';
+import { NOW, PLUS_ONE_MONTH, USE_ADVANCED_EDITOR } from '@eventespresso/constants';
+import { preparePricesForTpc, usePriceToTpcModifier } from '@eventespresso/tpc';
+import { setDefaultTime } from '@eventespresso/dates';
+import { startAndEndDateFixer, useTicketItem, hooks, useTicketPrices } from '@eventespresso/edtr-services';
+import { useCurrentUserCan } from '@eventespresso/services';
+import { useMemoStringify } from '@eventespresso/hooks';
+import { useUtcISOToSiteDate, useSiteDateToUtcISO } from '@eventespresso/services';
+import { VISIBILITY_OPTIONS, VISIBILITY_OPTIONS_INFO } from '@eventespresso/helpers';
+
 import type { EspressoFormProps, FieldProps } from '@eventespresso/form';
 import type { Ticket, TicketFormConfig } from '@eventespresso/edtr-services';
-import { EndDateFieldWrapper } from '@eventespresso/ee-components';
-import { preparePricesForTpc, usePriceToTpcModifier } from '@eventespresso/tpc';
-import { useCurrentUserCan } from '@eventespresso/services';
 
 import { validate } from './formValidation';
 
@@ -33,7 +35,6 @@ export const FIELD_NAMES: Array<keyof Ticket> = [
 ];
 
 const decorators = [startAndEndDateFixer];
-const VISIBILITY_OPTIONS = getEEDomData('eventEditor').ticketMeta.visibilityOptions;
 
 const adjacentFormItemProps = {
 	className: 'ee-form-item-pair',
@@ -173,7 +174,7 @@ export const useTicketFormConfig = (id: EntityId, config?: EspressoFormProps): T
 				name: 'visibility',
 				label: __('Visibility'),
 				fieldType: 'select',
-				info: __('Where the ticket can be viewed throughout the UI.'),
+				info: VISIBILITY_OPTIONS_INFO,
 				options: VISIBILITY_OPTIONS,
 			},
 		]);

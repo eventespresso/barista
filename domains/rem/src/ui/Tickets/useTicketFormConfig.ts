@@ -1,9 +1,10 @@
 import { useMemo } from 'react';
 
 import { __ } from '@eventespresso/i18n';
-import { getEEDomData, useTimeZoneTime } from '@eventespresso/services';
 import { CalendarOutlined, ControlOutlined, ProfileOutlined } from '@eventespresso/icons';
 import { Ticket } from '@eventespresso/edtr-services';
+import { useTimeZoneTime } from '@eventespresso/services';
+import { VISIBILITY_OPTIONS, VISIBILITY_OPTIONS_INFO } from '@eventespresso/helpers';
 
 import type { EspressoFormProps } from '@eventespresso/form';
 
@@ -15,8 +16,6 @@ import { RemTicket, useFormState } from '../../data';
 import { normalizeTicketForRem } from '../../utils';
 
 type TicketFormConfig = EspressoFormProps<RemTicket>;
-
-const VISIBILITY_OPTIONS = getEEDomData('eventEditor')?.ticketMeta?.visibilityOptions;
 
 const useTicketFormConfig = (ticket?: RemTicket | Ticket, config?: Partial<TicketFormConfig>): TicketFormConfig => {
 	const { utcToSiteTime } = useTimeZoneTime();
@@ -179,7 +178,7 @@ const useTicketFormConfig = (ticket?: RemTicket | Ticket, config?: Partial<Ticke
 							name: 'visibility',
 							label: __('Visibility'),
 							fieldType: 'select',
-							info: __('Where the ticket can be viewed throughout the UI.'),
+							info: VISIBILITY_OPTIONS_INFO,
 							options: VISIBILITY_OPTIONS,
 						},
 						{

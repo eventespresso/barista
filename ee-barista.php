@@ -8,7 +8,7 @@
  * @license     {@link http://eventespresso.com/support/terms-conditions/}
  * @see         Plugin Licensing
  * @link        {@link http://www.eventespresso.com}
- * Plugin Name: Event Espresso Barista
+ * Plugin Name: Barista for Event Espresso
  * Plugin URI: http://eventespresso.com/?ee_ver=ee4&utm_source=ee4_plugin_admin&utm_medium=link&utm_campaign
  * =wordpress_plugins_page&utm_content=support_link
  * Description: Serving up fresh brewed Event Espresso Packages for your development pleasure
