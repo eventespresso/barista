@@ -5,13 +5,9 @@ const VISIBILITY_OPTIONS = getEEDomData('eventEditor').ticketMeta.visibilityOpti
 
 let VISIBILITY_OPTIONS_INFO = __('Where the ticket can be viewed throughout the UI. ');
 
-VISIBILITY_OPTIONS.filter(option => typeof option.desc !== undefined && option.desc !== '')
-	.forEach(option => {
-		console.log(option);
-		VISIBILITY_OPTIONS_INFO += '\n\n' + option.label + '\n • ' + option.desc;
-	})
+VISIBILITY_OPTIONS.filter((option) => typeof option.desc !== undefined && option.desc !== '').forEach((option) => {
+	console.log(option);
+	VISIBILITY_OPTIONS_INFO += '\n\n' + option.label + '\n • ' + option.desc;
+});
 
-export {
-	VISIBILITY_OPTIONS,
-	VISIBILITY_OPTIONS_INFO
-};
+export { VISIBILITY_OPTIONS, VISIBILITY_OPTIONS_INFO };
