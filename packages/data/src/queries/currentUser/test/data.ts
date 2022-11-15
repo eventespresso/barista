@@ -14,11 +14,13 @@ export const currentUser: User = {
 	description: null,
 	email: 'user@eventespresso.com',
 	firstName: null,
+	isa: false,
 	lastName: null,
 	locale: 'en_US',
 	name: 'admin',
 	nicename: 'admin',
 	nickname: 'admin',
+	roles: ['administrator'],
 	username: 'admin',
 	__typename: 'User',
 };

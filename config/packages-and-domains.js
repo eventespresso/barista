@@ -25,11 +25,13 @@ let {
  */
 const getDomainsToWatch = () => {
 	const allDomains = getDomains();
-	// watch all domains by default
-	let domainsToWatch = allDomains;
+	// let domainsToWatch = allDomains;
+	let domainsToWatch = [];
 
 	if (includeDomains && typeof includeDomains === 'string') {
-		domainsToWatch = [];
+		if (includeDomains === 'all') {
+			domainsToWatch = allDomains;
+		}
 
 		const domainLocations = commaStrToArray(includeDomains);
 
@@ -125,6 +127,7 @@ const getIncludedPathsAndEntries = (resolveApp, resolveModule) => {
 		packagePaths.push(packagePath);
 	});
 	console.log('domains: ', Object.keys(domainEntries));
+	console.log('packages: ', Object.keys(packageEntries));
 
 	return {
 		// Also add global types to include paths for ts-loader

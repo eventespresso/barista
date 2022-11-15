@@ -21,6 +21,7 @@ const PriceTypeInput: React.FC<PriceModifierProps> = ({ price }) => {
 			disabled={disabled}
 			field='priceType'
 			price={price}
+			type='select'
 		>
 			{options.map((option) => (
 				<option key={option.id} value={option.id}>
