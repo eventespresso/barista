@@ -20,8 +20,8 @@ export const Invalid: TextareaStory = () => <Textarea isInvalid placeholder='An 
 export const Controlled: TextareaStory = () => {
 	const [value, setValue] = useState('');
 
-	const onChange = useCallback<TextareaProps['onChange']>((e) => {
-		setValue(e.target.value);
+	const onChange = useCallback <TextareaProps['onChange']>((event) => {
+		setValue((event.target as HTMLTextAreaElement).value);
 	}, []);
 
 	return (

@@ -39,4 +39,4 @@ export interface PriceFieldProps
 	field: keyof TpcPriceModifier;
 }
 
-export interface TicketPriceFieldProps extends Omit<BaseFieldProps<number>, 'getValue' | 'setValue' | 'name'> {}
+export interface TicketPriceFieldProps extends Omit<BaseFieldProps<number>, 'getValue' | 'setValue' | 'name' | 'type'> {}
