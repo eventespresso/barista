@@ -17,8 +17,13 @@ export const Actions = () => {
 	const canReadDefaultTickets = currentUserCan('read', 'default_tickets');
 
 	return (
-		<DropdownMenu noZindex toggleProps={toggleProps}>
-			<DropdownMenuItem isDisabled={!canReadDefaultTickets} onClick={open} title={__('Default tickets')} />
+		<DropdownMenu noZindex toggleProps={toggleProps} wrapperClassName='default_tickets'>
+			<DropdownMenuItem
+				className='default_tickets'
+				isDisabled={!canReadDefaultTickets}
+				onClick={open}
+				title={__('Default tickets')}
+			/>
 			{/* King's throne for other future items */}
 		</DropdownMenu>
 	);

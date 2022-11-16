@@ -20,7 +20,14 @@ export const DropdownToggle = forwardRef<HTMLButtonElement, DropdownToggleProps>
 
 		return (
 			<MenuToggle aria-label={tooltip} as='div' className={className} ref={ref}>
-				<IconButton borderless data-testid={props['data-testid']} icon={icon} size={size} tooltip={tooltip} />
+				<IconButton
+					borderless
+					data-testid={props['data-testid']}
+					icon={icon}
+					noMargin
+					size={size}
+					tooltip={tooltip}
+				/>
 			</MenuToggle>
 		);
 	}
