@@ -27,8 +27,8 @@
 	}
 
 	&__sidebar {
-		margin: var(--ee-margin-micro) var(--ee-margin-micro) var(--ee-margin-micro) auto;
-		width: var(--ee-icon-button-size); // 42px
+		margin: var(--ee-margin-micro) var(--ee-margin-tiny) var(--ee-margin-micro) auto;
+		width: calc(var(--ee-icon-button-size) + var(--ee-margin-micro)); // 42px
 
 		[dir='rtl'] & {
 			margin: var(--ee-margin-micro) auto var(--ee-margin-micro) var(--ee-margin-micro);
