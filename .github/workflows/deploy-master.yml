@@ -37,7 +37,7 @@ jobs:
                   REMOVE_JS_I18N_FILE: 'no'
 
             - name: Deploy core to cafe repo
-              run: source tools/deploy.sh "cafe" "dev" "plugins/event-espresso-core/assets" "plugins/event-espresso-core/languages"
+              run: source tools/deploy.sh "cafe" "main" "plugins/event-espresso-core/assets" "plugins/event-espresso-core/languages"
 
             # Build REM domain without packages
             # because core will load/register the packages
@@ -51,7 +51,7 @@ jobs:
                   REMOVE_JS_I18N_FILE: 'no'
 
             - name: Deploy REM to cafe repo
-              run: source tools/deploy.sh "cafe" "dev" "plugins/eea-recurring-events-manager/assets" "plugins/eea-recurring-events-manager/languages"
+              run: source tools/deploy.sh "cafe" "main" "plugins/eea-recurring-events-manager/assets" "plugins/eea-recurring-events-manager/languages"
 
             # Build WP User domain without packages
             - name: Build wpUser
@@ -64,7 +64,7 @@ jobs:
                   REMOVE_JS_I18N_FILE: 'no'
 
             - name: Deploy WP User to cafe repo
-              run: source tools/deploy.sh "cafe" "dev" "plugins/eea-wp-user-integration/assets" "plugins/eea-wp-user-integration/languages"
+              run: source tools/deploy.sh "cafe" "main" "plugins/eea-wp-user-integration/assets" "plugins/eea-wp-user-integration/languages"
 
             # Build EventSmart domain without packages
             - name: Build ES EdtrSlots
