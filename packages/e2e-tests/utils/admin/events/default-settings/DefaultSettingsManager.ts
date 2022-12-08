@@ -6,7 +6,7 @@ export class DefaultSettingsManager extends WPListTable {
 	 * go to default settings tab
 	 */
 	gotoDefaultSettings = async (): Promise<void> => {
-		const linkCategories = await page.$(`.nav-tab-wrapper a:has-text("Default Settings")`);
+		const linkCategories = await page.$('.nav-tab-wrapper a:has-text("Default Settings")');
 		const hrefCategories = await linkCategories.getAttribute('href');
 		await Promise.all([page.waitForNavigation(), page.goto(hrefCategories)]);
 	};
@@ -33,7 +33,7 @@ export class DefaultSettingsManager extends WPListTable {
 		}
 		// if text is equal to true return the innertext of selected option
 		if (text) {
-			const resultText = await page.$eval(selector, sel => sel["options"][sel["options"]["selectedIndex"]]["textContent"]); 
+			const resultText = await page.$eval(selector, sel => sel["options"][sel["options"]["selectedIndex"]]["textContent"]);
 			return resultText.trim();
 		}
 	};
