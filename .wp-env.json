@@ -1,4 +1,9 @@
 {
+	"config": {
+		"FS_METHOD": "direct",
+		"WP_DEBUG_DISPLAY": true,
+		"WP_MEMORY_LIMIT": "64M"
+	},
 	"core": "WordPress/WordPress",
 	"env": {
 		"tests": {
