@@ -6,7 +6,7 @@ export class DefaultSettingsManager extends WPListTable {
 	 * go to default settings tab
 	 */
 	gotoDefaultSettings = async (): Promise<void> => {
-		const linkCategories = await page.$(`.nav-tab-wrapper .ee-nav-label__text:has-text("Default Settings")`);
+		const linkCategories = await page.$('.nav-tab-wrapper a:has-text("Default Settings")');
 		const hrefCategories = await linkCategories.getAttribute('href');
 		await Promise.all([page.waitForNavigation(), page.goto(hrefCategories)]);
 	};

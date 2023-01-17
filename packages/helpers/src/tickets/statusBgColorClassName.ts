@@ -10,12 +10,12 @@ const statusBgColorClassName = (ticket: Ticket): string => {
 		return 'ee-status-background-color-TKE';
 	}
 
-	if (isOnSale(ticket)) {
-		return 'ee-status-background-color-TKO';
-	}
-
 	if (isTicketSoldOut(ticket)) {
 		return 'ee-status-background-color-TKS';
+	}
+
+	if (isOnSale(ticket)) {
+		return 'ee-status-background-color-TKO';
 	}
 
 	return 'ee-status-background-color-TKP';
