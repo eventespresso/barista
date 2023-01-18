@@ -72,7 +72,7 @@ jobs:
 
             # Deploy the built assets to ES tester plugin assets
             - name: Deploy to ES website repo
-              run: source tools/deploy.sh "eventsmart.com-website" "STAGING" "plugins/es-barista-tester/assets"
+              run: source tools/deploy.sh "eventsmart.com-website" "QUEUE" "plugins/es-barista-tester/assets"
               env:
                   DEPLOY_I18N: 'no'
 
@@ -82,6 +82,6 @@ jobs:
 
             # Deploy the built assets to Upsell/Notifications plugin assets
             - name: Deploy to Upsell Editor
-              run: source tools/deploy.sh "eventsmart.com-website" "STAGING" "plugins/ee-saas-notification/assets"
+              run: source tools/deploy.sh "eventsmart.com-website" "QUEUE" "plugins/ee-saas-notification/assets"
               env:
                   DEPLOY_I18N: 'no'
