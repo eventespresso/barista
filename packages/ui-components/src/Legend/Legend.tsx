@@ -30,7 +30,7 @@ const Legend: React.FC<LegendProps> = ({ columnsPerRow, direction, legendConfig,
 		() =>
 			swatches
 				? Object.entries(swatches).map(([swatchClassName, description]) => {
-						const colorSwatchClassName = 'ee-status-background-color-' + swatchClassName;
+						const colorSwatchClassName = 'ee-status-background-color--' + swatchClassName;
 
 						return {
 							className: 'ee-legend-item',
