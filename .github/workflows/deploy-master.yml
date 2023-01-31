@@ -30,12 +30,6 @@ jobs:
             - name: Build core domains and all their packages
               run: yarn build:core
 
-            # Deploy the built assets to core repo's assets/dist
-            - name: Deploy to event-espresso-core
-              run: source tools/deploy.sh "event-espresso-core"
-              env:
-                  REMOVE_JS_I18N_FILE: 'no'
-
             - name: Deploy core to cafe repo
               run: source tools/deploy.sh "cafe" "main" "plugins/event-espresso-core/assets" "plugins/event-espresso-core/languages"
 
@@ -44,24 +38,12 @@ jobs:
             - name: Build REM with its packages
               run: yarn build:rem
 
-            # Deploy the built assets to REM assets/dist
-            - name: Deploy to REM
-              run: source tools/deploy.sh "eea-recurring-events-manager"
-              env:
-                  REMOVE_JS_I18N_FILE: 'no'
-
             - name: Deploy REM to cafe repo
               run: source tools/deploy.sh "cafe" "main" "plugins/eea-recurring-events-manager/assets" "plugins/eea-recurring-events-manager/languages"
 
             # Build WP User domain without packages
             - name: Build wpUser
               run: yarn build:wpUser
-
-            # Deploy the built assets to WP User assets/dist
-            - name: Deploy to WP User
-              run: source tools/deploy.sh "eea-wpuser-integration"
-              env:
-                  REMOVE_JS_I18N_FILE: 'no'
 
             - name: Deploy WP User to cafe repo
               run: source tools/deploy.sh "cafe" "main" "plugins/eea-wp-user-integration/assets" "plugins/eea-wp-user-integration/languages"
@@ -80,8 +62,5 @@ jobs:
             - name: Build Upsell Ads
               run: yarn build:es:upsellEditor
 
-            # Deploy the built assets to Upsell/Notifications plugin assets
-            - name: Deploy to Upsell Editor
-              run: source tools/deploy.sh "eventsmart.com-website" "QUEUE" "plugins/ee-saas-notification/assets"
-              env:
-                  DEPLOY_I18N: 'no'
+            - name: Deploy Upsell Editor to cafe repo
+              run: source tools/deploy.sh "cafe" "main" "plugins/saas-notification/assets" "plugins/saas-notification/languages"
