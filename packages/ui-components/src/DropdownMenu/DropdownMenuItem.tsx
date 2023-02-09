@@ -11,7 +11,7 @@ export const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({
 	title,
 	...props
 }) => {
-	const className = classNames('ee-dropdown-menu__item', props.className);
+	const className = classNames('ee-dropdown-menu__item', `${props.className}--menu-item`);
 
 	return (
 		<MenuItem

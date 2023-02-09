@@ -21,7 +21,7 @@ export const DropdownMenu: React.FC<DropdownMenuProps> = ({
 	const wrapperClassName = classNames(
 		'ee-dropdown-menu__wrapper',
 		noZindex && 'ee-dropdown-menu__wrapper--no-z-index',
-		props.wrapperClassName
+		`${props.wrapperClassName}--dropdown-menu`
 	);
 
 	return (
