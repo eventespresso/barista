@@ -18,8 +18,8 @@ jobs:
         channel-id: ${{ secrets.SLACK_CHANNEL_ID_DEV }}
         payload: |
           {
-            "text": "<!here> RFR :point_right: <https://github.com/eventespresso/barista/pull/${{ github.event.number
-            }}|#${{ github.event.number }} ${{ github.event.pull_request.title }}>"
+            "text": "<!here> RFR :point_right: <https://github.com/eventespresso/cafe/pull/${{ github.event.number
+            }}|${{ github.event.pull_request.title }} #${{ github.event.number }}>"
           }
       env:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_TOKEN }}
