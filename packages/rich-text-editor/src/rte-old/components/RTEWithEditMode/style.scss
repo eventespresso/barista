@@ -14,6 +14,7 @@
 		line-height: var(--ee-font-size-huge);
   		min-height: clamp(10rem, 50vh, 50rem);
 		margin: var(--ee-margin-small);
+		max-width: 100% !important;
 		padding: var(--ee-padding-default);
 		resize: none;
   		width: calc(100% - var(--ee-margin-default));
