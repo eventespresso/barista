@@ -123,19 +123,9 @@ body.ee-modal-open {
 		}
 	}
 	@include min1600px {
-		max-height: 90%;
 		max-width: max(90%, 84rem);
-
-		.admin-bar & {
-			max-height: calc(90% - var(--ee-admin-bar-height));
-		}
 	}
 	@include min1920px {
-		max-height: 80%;
 		max-width: max(80%, 96rem);
-
-		.admin-bar & {
-			max-height: calc(80% - var(--ee-admin-bar-height));
-		}
 	}
 }
