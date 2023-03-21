@@ -29,7 +29,8 @@ export const TagSelector: React.FC<TagSelectorProps> = ({
 			props.initialSelectedItems = defaultValue;
 		}
 		if (!isNil(value)) {
-			props.selectedItems = value;
+			// make sure we have an array of items
+			props.selectedItems = Array.isArray(value) ? value : [value];
 		}
 		return props;
 	}, [defaultValue, value]);
