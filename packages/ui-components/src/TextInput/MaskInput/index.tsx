@@ -3,14 +3,18 @@ import InputMask from 'react-input-mask';
 import { TextInputWithLabel } from '../../TextInput';
 import { TextInputProps } from 'packages/adapters/src';
 
-type WithInputMaskProps = {
+interface WithInputMaskProps {
 	mask: string;
-};
+}
 
 const withInputMask = <P extends TextInputProps>(WrappedComponent: React.ComponentType<P>) => {
 	const WithInputMask: React.FC<WithInputMaskProps & P> = ({ mask, ...props }) => (
-		<InputMask mask={mask} maskChar={null}>
-			{(inputProps: TextInputProps) => <WrappedComponent {...(inputProps as P)} {...props} />}
+		<InputMask mask={mask} maskChar={null} value={props.value} onChange={props.onChange}>
+			{(inputProps: TextInputProps) => {
+				// Ensure that only the required props are passed down
+				const { ...restInputProps } = inputProps;
+				return <WrappedComponent {...(restInputProps as P)} {...props} />;
+			}}
 		</InputMask>
 	);
 
@@ -32,11 +36,11 @@ import React from 'react';
 import { MaskInput } from './MaskInput';
 
 const MyComponent = () => {
-  const [creditCardNumber, setCreditCardNumber] = useState('');
-
-  const handleCreditCardNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCreditCardNumber(event.target.value);
-  };
+	const [creditCardValue, setCreditCardValue] = useState<string>('');
+	const handleCreditCardChange = useCallback<TextInputProps['onChange']>(
+		(event) => setCreditCardValue(event.target.value),
+		[]
+	);
 
   return (
     <MaskInput 
