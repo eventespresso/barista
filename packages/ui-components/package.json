@@ -15,7 +15,9 @@
 	"sideEffects": [
 		"*.css"
 	],
-	"dependencies": {},
+	"dependencies": {
+		"react-input-mask": "^2.0.4"
+	},
 	"license": "GPL-3.0",
 	"gitHead": "66fae0230a22c100153cb05f5a624305efc5a8d9"
 }

@@ -146,7 +146,7 @@
 		"eslint-plugin-react": "^7.26.1",
 		"eslint-plugin-react-hooks": "^4.2.0",
 		"eslint-plugin-react-perf": "^3.3.0",
-		"eslint-plugin-testing-library": "^4.12.4",
+		"eslint-plugin-testing-library": "^3.10.2",
 		"eslint-webpack-plugin": "^2.5.4",
 		"expect-playwright": "^0.8.0",
 		"file-loader": "6.2.0",

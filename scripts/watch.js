@@ -9,7 +9,7 @@ const devConfig = config(DEVELOPMENT);
 webpack(devConfig).watch(
 	{
 		poll: true,
-		ignored: /packages\/(^[a-zA-Z\-].*)\/node_modules/,
+		ignored: /packages\/(^([a-zA-Z\-].*))\/node_modules/, // Corrected regular expression
 	},
 	(err, stats) => {
 		if (err) {
