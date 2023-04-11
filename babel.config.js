@@ -20,7 +20,7 @@ module.exports = function (api) {
 	];
 
 	const productionPlugins = [];
-	if (process.env.BUILD_POT !== 'false') {
+	if (process.env.BUILD_POT !== false) {
 		productionPlugins.push([
 			'@wordpress/babel-plugin-makepot',
 			{

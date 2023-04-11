@@ -1,72 +1,67 @@
 {
-	"root": true,
-	"env": {
-		"browser": true,
-		"es6": true
-	},
-	"extends": [
-		"eslint:recommended",
-		"plugin:@typescript-eslint/eslint-recommended",
-		"plugin:@wordpress/eslint-plugin/i18n",
-		"plugin:jest/recommended",
-		"plugin:jest-playwright/recommended",
-		"plugin:jsx-a11y/recommended",
-		"plugin:prettier/recommended",
-		"plugin:react/recommended",
-		"plugin:react-perf/recommended",
-		"react-app"
-	],
-	"globals": {
-		"Atomics": "readonly",
-		"SharedArrayBuffer": "readonly"
-	},
-	"parser": "@typescript-eslint/parser",
-	"parserOptions": {
-		"ecmaFeatures": {
-			"jsx": true
-		},
-		"ecmaVersion": 2018,
-		"sourceType": "module"
-	},
-	"plugins": ["react-hooks", "jsx-a11y", "ee-barista", "react-perf"],
-	"rules": {
-		"@typescript-eslint/ban-ts-comment": "off",
-		"@typescript-eslint/ban-ts-ignore": "off",
-		"@typescript-eslint/no-empty-interface": "off",
-		"@typescript-eslint/no-explicit-any": "off",
-		"@typescript-eslint/no-unused-vars": [
-			"error",
-			{ "vars": "all", "args": "after-used", "ignoreRestSiblings": false }
-		],
-		"@typescript-eslint/no-use-before-define": "off",
-		"comma-dangle": "off",
-		"ee-barista/no-circular-imports": "error",
-		"ee-barista/no-stories-i18n": "error",
-		"jest/valid-title": "off",
-		"jest/no-conditional-expect": "off",
-		"jest/no-standalone-expect": ["error", { "additionalTestBlockFunctions": ["test.jestPlaywrightDebug"] }],
-		"jest/valid-describe": "off",
-		"no-case-declarations": "warn",
-		"no-param-reassign": ["error", { "props": true }],
-		"no-prototype-builtins": "off",
-		"no-unused-vars": "off",
-		"react/display-name": "off",
-		"react/jsx-uses-react": "off",
-		"react/react-in-jsx-scope": "off",
-		"react/jsx-sort-props": [
-			"off",
-			{
-				"ignoreCase": true
-			}
-		],
-		"react/prop-types": "off",
-		"react/static-property-placement": "off",
-		"react-hooks/exhaustive-deps": "error",
-		"react-hooks/rules-of-hooks": "error"
-	},
-	"settings": {
-		"react": {
-			"version": "detect"
-		}
-	}
+    "root": true,
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@wordpress/eslint-plugin/i18n",
+        "plugin:jest/recommended",
+        "plugin:jest-playwright/recommended",
+        "plugin:jsx-a11y/recommended",
+        "plugin:prettier/recommended",
+        "plugin:react/recommended",
+        "plugin:react-perf/recommended",
+        "react-app"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": ["react-hooks", "jsx-a11y", "ee-barista", "react-perf"],
+    "rules": {
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/no-empty-interface": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-unused-vars": [
+            "error",
+            { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }
+        ],
+        "@typescript-eslint/no-use-before-define": "off",
+        "comma-dangle": "off",
+        "ee-barista/no-circular-imports": "error",
+        "ee-barista/no-stories-i18n": "error",
+        "jest/valid-title": "off",
+        "jest/no-conditional-expect": "off",
+        "jest/no-standalone-expect": ["error", { "additionalTestBlockFunctions": ["test.jestPlaywrightDebug"] }],
+        "jest/valid-describe": "off",
+        "no-case-declarations": "warn",
+        "no-param-reassign": ["error", { "props": true }],
+        "no-prototype-builtins": "off",
+        "no-unused-vars": "off",
+        "react/display-name": "off",
+        "react/jsx-uses-react": "off",
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-sort-props": "off",
+        "react/prop-types": "off",
+        "react/static-property-placement": "off",
+        "react-hooks/exhaustive-deps": "error",
+        "react-hooks/rules-of-hooks": "error",
+        "prettier/prettier": ["error", { "endOfLine": "auto" }]
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    }
 }

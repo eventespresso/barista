@@ -1,7 +1,7 @@
 module.exports = {
 	arrowParens: 'always',
 	bracketSpacing: true,
-	endOfLine: 'lf',
+	endOfLine: 'lf', // Use either 'lf' or 'auto', but not both
 	jsxSingleQuote: true,
 	printWidth: 120,
 	semi: true,
@@ -9,5 +9,4 @@ module.exports = {
 	tabWidth: 4,
 	trailingComma: 'es5',
 	useTabs: true,
-	endOfLine: "auto",
 };
