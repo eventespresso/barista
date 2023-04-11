@@ -12,7 +12,10 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
 			[onChange, onChangeValue, props.isDisabled]
 		);
 		const onChangeHandler = useOnChange(onChangeHandlerArg);
-		const input = <ChakraInput {...props} onChange={onChangeHandler} ref={ref} variant='unstyled' />;
+
+		const input = (
+			<ChakraInput {...props} isDisabled={props?.disabled} onChange={onChangeHandler} ref={ref} variant='unstyled' />
+		);
 
 		if (!addonBefore && !addonAfter) {
 			return input;
