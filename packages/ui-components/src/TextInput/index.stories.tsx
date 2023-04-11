@@ -1,8 +1,8 @@
-import { useState, useCallback, ChangeEvent } from 'react';
+import { useState, useCallback } from 'react';
 import type { Story, Meta } from '@storybook/react/types-6-0';
 
-import { Divider, TextInput, MaskInput } from '../';
-import { Stack, TextInputProps } from '@eventespresso/adapters';
+import { TextInput, MaskInput } from '../';
+import { TextInputProps } from '@eventespresso/adapters';
 
 export default {
 	title: 'Components/TextInput',
@@ -76,14 +76,11 @@ export const WithInputMask: TextInputStory = () => {
 
 export const WithStates: TextInputStory = () => {
 	return (
-		<Stack align='start'>
+		<>
 			<TextInput placeholder='Idle' />
-			<Divider size='small' />
 			<TextInput isInvalid placeholder='isInvalid' />
-			<Divider size='small' />
 			<TextInput isDisabled placeholder='isDisabled' />
-			<Divider size='small' />
 			<TextInput isReadOnly placeholder='isReadonly' />
-		</Stack>
+		</>
 	);
 };
