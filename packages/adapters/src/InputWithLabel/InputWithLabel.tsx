@@ -6,9 +6,7 @@ export const InputWithLabel: React.FC<InputWithLabelProps> = ({ children, classN
 	return (
 		<InputGroup className={className}>
 			{leftLabel && <InputLeftAddon className='ee-input-with-label__left-addon'>{leftLabel}</InputLeftAddon>}
-
 			{children}
-
 			{rightLabel && <InputRightAddon className='ee-input-with-label__right-addon'>{rightLabel}</InputRightAddon>}
 		</InputGroup>
 	);

@@ -9,7 +9,6 @@ import './style.scss';
 
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>((props, ref) => {
 	const className = classNames('ee-text-input ee-input-base', props.className);
-
 	return <TextInputAdapter {...props} className={className} ref={ref} />;
 });
 
