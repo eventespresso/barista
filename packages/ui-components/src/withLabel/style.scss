@@ -7,10 +7,12 @@
 .ee-input-label {
 	&__wrapper {
 		align-items: flex-start;
+		box-sizing: border-box;
 		display: flex;
 		flex-direction: column;
 		flex-wrap: nowrap;
 		padding: var(--ee-padding-tiny);
+		width: 100%;
 
 		&--font-weight-normal {
 			label {
