@@ -1,7 +1,7 @@
 import React from 'react';
 import InputMask from 'react-input-mask';
 import { TextInputWithLabel } from '../../TextInput';
-import { TextInputProps } from 'packages/adapters/src';
+import { TextInputProps } from '@eventespresso/adapters';
 
 interface WithInputMaskProps {
 	mask: string;

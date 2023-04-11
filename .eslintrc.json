@@ -56,7 +56,8 @@
         "react/prop-types": "off",
         "react/static-property-placement": "off",
         "react-hooks/exhaustive-deps": "error",
-        "react-hooks/rules-of-hooks": "error"
+        "react-hooks/rules-of-hooks": "error",
+        "prettier/prettier": ["error", { "endOfLine": "auto" }]
     },
     "settings": {
         "react": {
