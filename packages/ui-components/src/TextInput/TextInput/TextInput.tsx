@@ -1,9 +1,12 @@
 import { forwardRef } from 'react';
 import classNames from 'classnames';
 
-import { TextInput as TextInputAdapter, TextInputProps } from '@eventespresso/adapters';
+import { TextInput as TextInputAdapter, TextInputProps as TextInputAdapterProps } from '@eventespresso/adapters';
 
 import { withLabel } from '../../withLabel';
+import type { WithLabelProps } from '../../withLabel';
+
+export interface TextInputProps extends TextInputAdapterProps, WithLabelProps { }
 
 import './style.scss';
 
