@@ -12,7 +12,7 @@ export const crazyTestCases = [
 	{
 		name: 'tests the tolerance level of the editor',
 		inputTotal: '999999999999999999999999999999999999999999',
-		expectedTotal: 1000000.0,
+		expectedTotal: 1000000.00,
 	},
 	{
 		name: 'tests the niceness of the craziness',
@@ -22,7 +22,7 @@ export const crazyTestCases = [
 	{
 		name: 'tests the arrogance of the craziness',
 		inputTotal: '999999999999999999999999999999999999999999.9999999999999999999999999999999999999',
-		expectedTotal: 1000000.0,
+		expectedTotal: 1000000.00,
 	},
 	{
 		name: 'tests the smartness of the craziness',

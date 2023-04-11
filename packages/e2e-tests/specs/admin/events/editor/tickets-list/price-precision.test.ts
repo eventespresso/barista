@@ -30,7 +30,7 @@ describe(namespace, () => {
 
 			await editor.updatePriceInline(item, inputTotal);
 			const price = await getTicketPrice(item);
-			expect(Number(price)).toBe(expectedTotal.toFixed(2));
+			expect(Number(price)).toBe(expectedTotal);
 			expect(tpcSafari.getFormattedAmount(price)).toBe(tpcSafari.getFormattedAmount(expectedTotal));
 		});
 	}
