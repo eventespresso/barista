@@ -1,12 +1,10 @@
 @import '~@eventespresso/styles/src/mixins/base-styles';
 
-.ee-text-input.ee-text-input {
+.ee-input-base.ee-text-input {
 	@include ee-input-base;
 	@extend .ee-input;
 
-	&.ee-text-input {
-		&[aria-invalid='true'] {
-			border-color: var(--ee-color-accent);
-		}
+	&[aria-invalid='true'] {
+		border-color: var(--ee-color-accent);
 	}
 }

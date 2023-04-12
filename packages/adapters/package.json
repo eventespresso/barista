@@ -9,9 +9,9 @@
 	"version": "1.0.6",
 	"main": "src/index.ts",
 	"scripts": {
-		"lint": "eslint ./src/**/*.{ts,tsx} --format=codeframe",
-		"update-deps": "npx ncu -u",
-		"lint-fix": "eslint ./src/**/*.{ts,tsx} --fix"
+		"lint": "eslint ./src/**/*.{js,jsx,ts,tsx} --format=codeframe",
+		"lint-fix": "eslint ./src/**/*.{js,jsx,ts,tsx} --format=codeframe --fix",
+		"update-deps": "npx ncu -u"
 	},
 	"sideEffects": [
 		"*.css"

@@ -9,4 +9,5 @@ export interface TextInputProps
 	addonAfter?: React.ReactNode;
 	addonBeforeProps?: InputAddonProps;
 	addonAfterProps?: InputAddonProps;
+	disabled?: boolean;
 }

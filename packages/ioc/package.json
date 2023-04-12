@@ -10,8 +10,8 @@
 	"main": "src/index.ts",
 	"scripts": {
 		"lint": "eslint ./src/**/*.{ts,tsx} --format=codeframe",
-		"update-deps": "npx ncu -p yarn -u",
-		"lint-fix": "eslint ./src/**/*.{ts,tsx} --fix"
+		"lint-fix": "eslint ./src/**/*.{js,jsx,ts,tsx} --format=codeframe --fix",
+		"update-deps": "npx ncu -u"
 	},
 	"dependencies": {
 		"@wordpress/hooks": "^3.2.1"

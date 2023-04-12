@@ -1,51 +1,56 @@
 import { useState, useCallback } from 'react';
 import type { Story, Meta } from '@storybook/react/types-6-0';
 
-import { TextInput, MaskInput } from '../';
-import { TextInputProps } from '@eventespresso/adapters';
+import { TextInput, TextInputWithLabel, MaskInput } from '../';
+import { Stack } from '@eventespresso/adapters';
+import type { TextInputWithLabelProps } from '../';
 
 export default {
 	title: 'Components/TextInput',
 } as Meta;
 
-type TextInputStory = Story<TextInputProps>;
+type TextInputStory = Story<TextInputWithLabelProps>;
 const generateUniqueId = (prefix: string) => `${prefix}-${Math.random().toString(36).substr(2, 9)}`;
 
-export const Basic: TextInputStory = () => <TextInput placeholder='Basic input' />;
+export const Basic: TextInputStory = () => (
+	<Stack align='start' direction='column' spacing={16} w={480}>
+		<TextInput placeholder='Basic input' />
+	</Stack>
+);
 
 export const Controlled: TextInputStory = () => {
 	const [value, setValue] = useState('Starting...');
-	const handleChange = useCallback<TextInputProps['onChange']>((event) => setValue(event.target.value), []);
+	const handleChange = useCallback<TextInputWithLabelProps['onChange']>((event) => setValue(event.target.value), []);
 
 	return (
-		<>
+		<Stack align='start' direction='column' spacing={8} w={480}>
 			<TextInput value={value} onChange={handleChange} placeholder='Controlled input' />
 			<pre>{JSON.stringify(value, null, 2)}</pre>
-		</>
+		</Stack>
 	);
 };
 
 export const WithInputMask: TextInputStory = () => {
 	const [creditCardValue, setCreditCardValue] = useState<string>('');
-	const handleCreditCardChange = useCallback<TextInputProps['onChange']>(
+	const handleCreditCardChange = useCallback<TextInputWithLabelProps['onChange']>(
 		(event) => setCreditCardValue(event.target.value),
 		[]
 	);
 
 	const [phoneNumberValue, setPhoneNumberValue] = useState<string>('');
-	const handlePhoneNumberChange = useCallback<TextInputProps['onChange']>(
+	const handlePhoneNumberChange = useCallback<TextInputWithLabelProps['onChange']>(
 		(event) => setPhoneNumberValue(event.target.value),
 		[]
 	);
 
 	const [creditCardDateValue, setCreditCardDateValue] = useState<string>('');
-	const handleCreditCardDateChange = useCallback<TextInputProps['onChange']>(
+	const handleCreditCardDateChange = useCallback<TextInputWithLabelProps['onChange']>(
 		(event) => setCreditCardDateValue(event.target.value),
 		[]
 	);
 
 	return (
-		<>
+		<Stack align='start' direction='column' spacing={8} w={480}>
 			<MaskInput
 				label='Credit Card Number'
 				id={generateUniqueId('credit-card-number')}
@@ -70,17 +75,17 @@ export const WithInputMask: TextInputStory = () => {
 				onChange={handleCreditCardDateChange}
 				mask='99/99'
 			/>
-		</>
+		</Stack>
 	);
 };
 
 export const WithStates: TextInputStory = () => {
 	return (
-		<>
-			<TextInput placeholder='Idle' />
-			<TextInput isInvalid placeholder='isInvalid' />
-			<TextInput isDisabled placeholder='isDisabled' />
-			<TextInput isReadOnly placeholder='isReadonly' />
-		</>
+		<Stack align='start' direction='column' spacing={8} w={480}>
+			<TextInputWithLabel label='Idle' placeholder='Idle' />
+			<TextInputWithLabel isInvalid label='isInvalid' placeholder='isInvalid' />
+			<TextInputWithLabel isDisabled label='isDisabled' placeholder='isDisabled' />
+			<TextInputWithLabel isReadOnly label='isReadonly' placeholder='isReadonly' />
+		</Stack>
 	);
 };

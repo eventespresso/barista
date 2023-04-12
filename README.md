@@ -13,8 +13,9 @@ Run the following commands:
 -   `yarn`
 -   then
 
-    1. To open Storybook, run `yarn sb`
-    2. You can also install barista as a WordPress plugin. Goto `/wp-content/plugins` in your WordPress installation and run the above commands and then run `yarn dev:all`
+    1. To open Storybook, run `yarn storybook`
+    2. You can also install barista as a WordPress plugin.
+       Goto `/wp-content/plugins` in your WordPress installation and run the above commands and then run `yarn dev:all`
 
 ## Development configuration
 
