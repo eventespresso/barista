@@ -8,6 +8,7 @@
 .ee-ticket-assignments-manager.ee-ticket-assignments-manager.ee-rspnsv-table__outer_wrapper {
 	.ee-rspnsv-table {
 		background: var(--ee-background-color);
+		position: unset;
 
 		&__inner-wrapper {
 			background: var(--ee-background-color);
@@ -40,7 +41,7 @@
 						font-size: var(--ee-font-size-small);
 						font-weight: bold;
 						line-height: var(--ee-line-height-modifier);
-    					margin-inline: 1px;
+						margin-inline: 1px;
 						padding: var(--ee-padding-micro);
 						text-transform: uppercase;
 						width: calc(100% - 2px);
