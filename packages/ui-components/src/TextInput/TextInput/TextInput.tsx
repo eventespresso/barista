@@ -7,7 +7,7 @@ import { withLabel } from '../../withLabel';
 import type { WithLabelProps } from '../../withLabel';
 import './style.scss';
 
-export interface TextInputWithLabelProps extends TextInputProps, WithLabelProps { }
+export interface TextInputWithLabelProps extends TextInputProps, WithLabelProps {}
 
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>((props, ref) => {
 	const className = classNames('ee-text-input ee-input-base', props.className);
