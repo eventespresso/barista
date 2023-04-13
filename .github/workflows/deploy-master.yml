@@ -31,7 +31,7 @@ jobs:
               run: yarn build:core
 
             - name: Deploy core to cafe repo
-              run: source tools/deploy.sh "cafe" "main" "plugins/event-espresso-core/assets" "plugins/event-espresso-core/languages"
+              run: source tools/deploy.sh "cafe" "DEV" "plugins/event-espresso-core/assets" "plugins/event-espresso-core/languages"
 
             # Build REM domain without packages
             # because core will load/register the packages
@@ -39,14 +39,21 @@ jobs:
               run: yarn build:rem
 
             - name: Deploy REM to cafe repo
-              run: source tools/deploy.sh "cafe" "main" "plugins/eea-recurring-events-manager/assets" "plugins/eea-recurring-events-manager/languages"
+              run: source tools/deploy.sh "cafe" "DEV" "plugins/eea-recurring-events-manager/assets" "plugins/eea-recurring-events-manager/languages"
 
             # Build WP User domain without packages
             - name: Build wpUser
               run: yarn build:wpUser
 
             - name: Deploy WP User to cafe repo
-              run: source tools/deploy.sh "cafe" "main" "plugins/eea-wp-user-integration/assets" "plugins/eea-wp-user-integration/languages"
+              run: source tools/deploy.sh "cafe" "DEV" "plugins/eea-wp-user-integration/assets" "plugins/eea-wp-user-integration/languages"
+
+            # Build upsellAds domain without packages
+            - name: Build Upsell Ads
+              run: yarn build:es:upsellEditor
+
+            - name: Deploy Upsell Editor to cafe repo
+              run: source tools/deploy.sh "cafe" "DEV" "plugins/saas-notification/assets" "plugins/saas-notification/languages"
 
             # Build EventSmart domain without packages
             - name: Build ES EdtrSlots
@@ -57,10 +64,3 @@ jobs:
               run: source tools/deploy.sh "eventsmart.com-website" "QUEUE" "plugins/es-barista-tester/assets"
               env:
                   DEPLOY_I18N: 'no'
-
-            # Build upsellAds domain without packages
-            - name: Build Upsell Ads
-              run: yarn build:es:upsellEditor
-
-            - name: Deploy Upsell Editor to cafe repo
-              run: source tools/deploy.sh "cafe" "main" "plugins/saas-notification/assets" "plugins/saas-notification/languages"
