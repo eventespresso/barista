@@ -8,15 +8,15 @@ import type { TextInputProps } from './types';
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
 	({ addonBefore, addonAfter, addonBeforeProps, addonAfterProps, onChange, onChangeValue, ...props }, ref) => {
 		const onChangeHandlerArg = useMemo(
-			() => ({ isDisabled: props.isDisabled, onChange, onChangeValue }),
-			[onChange, onChangeValue, props.isDisabled]
+			() => ({ isDisabled: props.disabled, onChange, onChangeValue }),
+			[onChange, onChangeValue, props.disabled]
 		);
 		const onChangeHandler = useOnChange(onChangeHandlerArg);
 
 		const input = (
 			<ChakraInput
 				{...props}
-				isDisabled={props?.disabled}
+				isDisabled={props.disabled}
 				onChange={onChangeHandler}
 				ref={ref}
 				variant='unstyled'

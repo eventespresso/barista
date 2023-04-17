@@ -20,7 +20,31 @@ const useTicketItem = ({ id }: EntityItemProps): Ticket => {
 	);
 	const { data } = useCacheQuery<TicketItem>(options);
 
-	return useMemoStringify(data?.espressoTicket);
+	const memoData: any = useMemoStringify(data?.espressoTicket);
+
+	const convertStringToNumber = (visibility: string) => {
+		switch (visibility) {
+			case 'NONE':
+				return '0';
+			case 'PUBLIC':
+				return '100';
+			case 'MEMBERS_ONLY':
+				return '200';
+			case 'ADMINS_ONLY':
+				return '300';
+			case 'ADMIN_UI_ONLY':
+				return '400';
+			default:
+				return '100';
+		}
+	};
+
+	const item: any = {
+		...memoData,
+		visibility: convertStringToNumber(memoData.visibility),
+	};
+
+	return item;
 };
 
 export default useTicketItem;
