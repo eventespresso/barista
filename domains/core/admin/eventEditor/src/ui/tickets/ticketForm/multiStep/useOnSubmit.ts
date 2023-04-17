@@ -10,25 +10,9 @@ const useOnSubmit = (onClose: VoidFunction): OnSubmit => {
 	const mutateTicket = useMutateTicket();
 	const getCappedQuantity = useCappedQuantity();
 
-	const convertNumberToString = (visibility: string) => {
-		switch (visibility) {
-			case '0':
-				return 'NONE';
-			case '100':
-				return 'PUBLIC';
-			case '200':
-				return 'MEMBERS_ONLY';
-			case '300':
-				return 'ADMINS_ONLY';
-			case '400':
-				return 'ADMIN_UI_ONLY';
-			default:
-				return 'PUBLIC';
-		}
-	};
-
 	const onSubmit = useCallback(
 		async (fields) => {
+			//  get the capped quantity for ticket based on the related date(s)
 			await wait(); // wait the next event cycle to fire up isLoading for submit button
 			onClose(); // close the modal
 
@@ -39,7 +23,6 @@ const useOnSubmit = (onClose: VoidFunction): OnSubmit => {
 				isModified: Boolean(fields.id), // should be updated if there is an id
 				isNew: !fields.id, // it's new if id is empty
 				quantity,
-				visibility: convertNumberToString(fields.visibility),
 			};
 
 			await mutateTicket(input);

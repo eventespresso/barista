@@ -67,7 +67,6 @@ export const useTicketFormConfig = (id: EntityId, config?: EspressoFormProps): T
 		},
 		[onSubmit, toUtcISO]
 	);
-	// ###
 
 	const getTicketPrices = useTicketPrices();
 	const priceToTpcModifier = usePriceToTpcModifier();
