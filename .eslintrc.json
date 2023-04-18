@@ -58,7 +58,7 @@
 		"react-hooks/exhaustive-deps": "error",
 		"react-hooks/rules-of-hooks": "error",
 		"prettier/prettier": ["error", { "endOfLine": "lf" }],
-     "linebreak-style": ["error", "unix"]
+    "linebreak-style": ["error", "unix"]
 	},
 	"settings": {
 		"react": {
