@@ -15,7 +15,7 @@ export class TicketEditor extends EntityEditor {
 		this.editButtonLabel = 'edit ticket';
 		this.trashButtonLabel = 'trash ticket';
 		this.copyButtonLabel = 'copy ticket';
-		this.trashAlertConfirmLabel = 'confirm'
+		this.trashAlertConfirmLabel = 'confirm';
 	}
 
 	/**
