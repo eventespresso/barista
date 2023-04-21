@@ -47,7 +47,7 @@
 	cursor: text;
 	font-size: var(--ee-font-size-big);
 	height: auto;
-	line-height: var(--ee-font-size-huge);
+	line-height: var(--ee-font-size-4xl);
 	margin: 0;
 	overflow-x: hidden;
 	padding: var(--ee-padding-smaller);
@@ -57,7 +57,7 @@
 		box-shadow: none;
 
 		.ee-rich-text-editor {
-			line-height: var(--ee-font-size-huge);
+			line-height: var(--ee-font-size-4xl);
 			padding: var(--ee-padding-smaller);
 		}
 

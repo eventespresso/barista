@@ -1,7 +1,6 @@
 @import '~@eventespresso/styles/src/mixins/base-styles';
 
 .ee-inline-edit {
-
 	&__edit-icon.ee-svg,
 	&__edit-icon.ee-svg:hover {
 		color: var(--ee-default-text-color-super-low-contrast);
@@ -31,9 +30,8 @@
 
 .ee-infinity-sign {
 	&__inner {
-		font-size: calc(var(--ee-font-size-default) * 1.75);
+		font-size: var(--ee-font-size-4xl);
 		font-weight: 500;
-		// position: relative;
 
 		.ee-entity-list__card-view & {
 			top: -2px;

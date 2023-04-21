@@ -23,29 +23,35 @@
 		@include ee-fade-in;
 
 		.ee-rspnsv-table-body-row {
-			min-height: 3em;
+			min-height: var(--ee-font-size-6xl);
 		}
 	}
 
 	&__card-view {
+		--ee-min-card-width: calc(32 * var(--ee-base-ui-scale));
 		box-sizing: border-box;
 		display: grid;
 		gap: var(--ee-margin-big);
-		grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-		min-height: 260px;
-		padding: 0 var(--ee-padding-micro) var(--ee-padding-default);
+		min-height: var(--ee-min-card-width);
+		padding: 0 var(--ee-padding-default) var(--ee-padding-default);
 		width: 100%;
 
 		@include max480px {
 			gap: var(--ee-margin-big) 0;
-			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			--ee-min-card-width: 18 * var(--ee-base-ui-scale);
+			padding-inline: var(--ee-padding-micro);
 		}
+		grid-template-columns: repeat(auto-fit, minmax(var(--ee-min-card-width), 1fr));
 
 		.ee-entity-card-wrapper {
 			justify-self: center;
-			max-width: 600px;
-			min-width: 300px;
+			max-width: min(calc(48 * var(--ee-base-ui-scale)), 100%);
+			min-width: min(calc(36 * var(--ee-base-ui-scale)), 100%);
 			width: 100%;
+
+			@include max480px {
+				min-width: unset;
+			}
 		}
 	}
 

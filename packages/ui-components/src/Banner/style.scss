@@ -13,8 +13,8 @@
 	.ee-banner {
 		&__icon {
 			color: var(--ee-color-grey-12);
-			height: var(--ee-font-size-extreme);
-			width: var(--ee-font-size-extreme);
+			height: var(--ee-font-size-6xl);
+			width: var(--ee-font-size-6xl);
 
 			@at-root .ee-banner--info#{&} {
 				color: var(--ee-color-primary-super-low-contrast);
@@ -27,8 +27,9 @@
 
 		&__title {
 			color: var(--ee-default-text-color-super-low-contrast);
-			font-size: var(--ee-font-size-huge);
+			font-size: var(--ee-font-size-4xl);
 			font-weight: 800;
+			margin-block-end: var(--ee-margin-default);
 			padding: var(--ee-padding-tiny);
 			position: relative;
 			text-transform: unset;

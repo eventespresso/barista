@@ -114,7 +114,7 @@
 
 		&__icon {
 			color: var(--ee-color-grey-9);
-			font-size: var(--ee-font-size-huge);
+			font-size: var(--ee-font-size-4xl);
 			margin-right: var(--ee-margin-smaller);
 
 			[dir='rtl'] & {
@@ -127,8 +127,8 @@
 			}
 
 			svg {
-				height: var(--ee-font-size-huge);
-				width: var(--ee-font-size-huge);
+				height: var(--ee-font-size-4xl);
+				width: var(--ee-font-size-4xl);
 
 				@at-root .ee-form-steps--compact#{&} {
 					height: var(--ee-font-size-bigger);

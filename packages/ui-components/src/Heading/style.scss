@@ -9,14 +9,14 @@
 	text-shadow: var(--ee-text-shadow-inset-light);
 
 	@at-root .ee-edtr-section h3.ee-edtr-section-heading#{&} {
-		font-size: calc(var(--ee-font-size-huge) * 1.25);
+		font-size: calc(var(--ee-font-size-4xl) * 1.25);
 		@include min480px {
-			font-size: calc(var(--ee-font-size-huge) * 1.375);
+			font-size: calc(var(--ee-font-size-4xl) * 1.375);
 		}
 	}
 
 	@at-root h3#{&} {
-		font-size: var(--ee-font-size-huge);
+		font-size: var(--ee-font-size-4xl);
 		margin: var(--ee-margin-default) 0 0;
 	}
 	@at-root h4#{&} {
@@ -37,12 +37,12 @@
 	}
 
 	@include max480px {
-		font-size: calc(var(--ee-font-size-huge) * 1.25);
+		font-size: calc(var(--ee-font-size-4xl) * 1.25);
 		text-align: center;
 	}
 
 	@include max360px {
-		font-size: calc(var(--ee-font-size-huge) * 1.05);
+		font-size: calc(var(--ee-font-size-4xl) * 1.05);
 	}
 
 	&--top-bordered {

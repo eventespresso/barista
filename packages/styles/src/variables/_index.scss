@@ -40,60 +40,10 @@ $defaults: (
 	text-on-white: #595959,
 );
 
-$font-sizes: (
-	'font-size-micro': 0.7rem, // bumped up from 0.6rem
-	'font-size-tiny': 0.8rem, // bumped up from 0.7rem
-	'font-size-smaller': 0.875rem, // bumped up from 0.8rem
-	'font-size-small': 0.95rem, // bumped up from 0.9rem
-	'font-size-default': 1.1rem, // bumped up from 1rem
-	'font-size-big': 1.25rem, // bumped up from 1.2rem
-	'font-size-bigger': 1.5rem,
-	'font-size-huge': 2rem,
-	'font-size-extreme': 3rem,
-	'line-height-modifier': 1.5,
-) !default;
-
 $heights: (
 	'height-small': $height-small,
 	'height-default': $height-default,
 	'height-big': $height-big,
-) !default;
-
-$spacing-nano: 0.125rem;
-$spacing-micro: 0.25rem;
-$spacing-tiny: 0.5rem;
-$spacing-smaller: 0.75rem;
-$spacing-small: 1rem;
-$spacing-default: 1.5rem;
-$spacing-big: 2rem;
-$spacing-bigger: 2.5rem;
-$spacing-huge: 3rem;
-$spacing-extreme: 4rem;
-
-$margins: (
-	'margin-nano': $spacing-nano,
-	'margin-micro': $spacing-micro,
-	'margin-tiny': $spacing-tiny,
-	'margin-smaller': $spacing-smaller,
-	'margin-small': $spacing-small,
-	'margin-default': $spacing-default,
-	'margin-big': $spacing-big,
-	'margin-bigger': $spacing-bigger,
-	'margin-huge': $spacing-huge,
-	'margin-extreme': $spacing-extreme,
-) !default;
-
-$paddings: (
-	'padding-nano': $spacing-nano,
-	'padding-micro': $spacing-micro,
-	'padding-tiny': $spacing-tiny,
-	'padding-smaller': $spacing-smaller,
-	'padding-small': $spacing-small,
-	'padding-default': $spacing-default,
-	'padding-big': $spacing-big,
-	'padding-bigger': $spacing-bigger,
-	'padding-huge': $spacing-huge,
-	'padding-extreme': $spacing-extreme,
 ) !default;
 
 $others: (
