@@ -71,7 +71,7 @@ const useLockedTicketAction = (ticket: Ticket, action?: Action): LockedTicketAct
 	const yesButtonText = getConfirmButtonText(action);
 	const { confirmationDialog, onOpen } = useConfirmationDialog({
 		message: SOLD_TICKET_ERROR_MESSAGE,
-		title: __('Alert!'),
+		title: __('Price editing is disabled!'),
 		onConfirm,
 		noButtonText: __('Cancel'),
 		yesButtonText,
