@@ -15,7 +15,7 @@ let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
-	
+
 	const afterSelectStatus = await defaultSettingsManager.processToSelectRegStatus(
 		defaultSettingsData.defaultRegStatusOptions.RAP.value
 	);

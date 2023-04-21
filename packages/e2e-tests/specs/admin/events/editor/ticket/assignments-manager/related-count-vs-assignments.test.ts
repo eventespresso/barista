@@ -1,9 +1,9 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { createNewEvent, EntityListParser, TAMRover, GetMapProps, ListView } from '@e2eUtils/admin/events';
 import { clickLabel } from '@e2eUtils/common';
-import { EntityType } from 'packages/e2e-tests/types';
 import { activateTheme } from '@e2eUtils/admin/wp-themes-page';
 import { addDatesAndTickets } from './utils';
+import { EntityType } from '../../../../../../types';
 
 const tamrover = new TAMRover();
 const parser = new EntityListParser('datetime', 'card');

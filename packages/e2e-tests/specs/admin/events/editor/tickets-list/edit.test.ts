@@ -2,7 +2,7 @@ import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { NOW } from '@eventespresso/constants';
 import { add, getMonthName } from '@eventespresso/dates';
 import { createNewEvent, setListDisplayControl, TicketFields, TicketEditor } from '@e2eUtils/admin/events';
-import { expectCardToContain } from 'packages/e2e-tests/assertions';
+import { expectCardToContain } from '../../../../../assertions';
 
 const namespace = 'event.tickets.edit';
 

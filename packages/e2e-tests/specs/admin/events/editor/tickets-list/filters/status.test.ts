@@ -1,10 +1,9 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { addNewTicket, createNewEvent, TicketEditor, EDTRGlider } from '@e2eUtils/admin/events';
 import { EventRegistrar } from '@e2eUtils/public/reg-checkout';
-import { dataTicket as data } from '../../../../../shared/data';
 import { setWordpressTimezone } from '@e2eUtils/admin/wp-plugins-page';
 import { DefaultSettingsManager } from '@e2eUtils/admin';
-import { defaultSettingsData } from '../../../../../shared/data';
+import { dataTicket as data, defaultSettingsData } from '../../../../../shared/data';
 
 const namespace = 'eventEditor.tickets.filters.status';
 

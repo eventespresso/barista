@@ -27,7 +27,7 @@ describe('WP User tests', () => {
 		await ticketEditor.openEditForm();
 
 		const selectExists = await page.$eval('select#capabilityRequired', () => true).catch(() => false)
-		
+
 		expect(selectExists).toBe(false);
 	});
 
