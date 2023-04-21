@@ -1,6 +1,6 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { DefaultSettingsManager } from '@e2eUtils/admin';
-import { defaultSettingsData } from 'packages/e2e-tests/specs/shared/data';
+import { defaultSettingsData } from '../../../../shared/data';
 
 const defaultSettingsManager = new DefaultSettingsManager();
 

@@ -17,7 +17,8 @@
 		"@edtrHooks/*": ["domains/core/admin/eventEditor/src/hooks/*"],
 		"@edtrServices/*": ["domains/core/admin/eventEditor/src/services/*"],
 		"@edtrUI/*": ["domains/core/admin/eventEditor/src/ui/*"],
-		"@e2eUtils/*": ["packages/e2e-tests/utils/*"]
+		"@e2eUtils/*": ["packages/e2e-tests/utils/*"],
+		"@eventespresso/*":["packages/*"]
 	  },
 	  "resolveJsonModule": true,
 	  "skipLibCheck": true,
@@ -31,4 +32,3 @@
 	"include": ["packages", "domains"],
 	"exclude": ["node_modules", "vendor"]
   }
-  

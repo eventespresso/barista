@@ -1,7 +1,7 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { createNewEvent } from '@e2eUtils/admin/events';
 import { EventsListSurfer, Goto } from '@e2eUtils/admin';
-import { eventData } from 'packages/e2e-tests/specs/shared/data';
+import { eventData } from '../../../shared/data';
 import { ElementHandle } from 'packages/e2e-tests/types';
 
 const eventsListSurfer = new EventsListSurfer();

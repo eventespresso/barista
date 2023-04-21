@@ -3,7 +3,7 @@ import { createNewEvent } from '@e2eUtils/admin/events';
 import { EventsListSurfer, Goto } from '@e2eUtils/admin';
 import { uuid } from '@eventespresso/utils';
 import { pluck } from 'ramda';
-import { eventData } from 'packages/e2e-tests/specs/shared/data';
+import { eventData } from '../../../shared/data';
 
 const eventsListSurfer = new EventsListSurfer();
 

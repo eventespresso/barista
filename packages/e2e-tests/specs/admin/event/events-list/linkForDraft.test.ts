@@ -1,6 +1,6 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { Goto, EventsListSurfer, createNewEvent, EDTRGlider } from '@e2eUtils/admin';
-import { eventData } from 'packages/e2e-tests/specs/shared/data';
+import { eventData } from '../../../shared/data';
 
 const eventsListSurfer = new EventsListSurfer();
 const edtrGlider = new EDTRGlider();
