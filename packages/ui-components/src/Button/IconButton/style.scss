@@ -6,7 +6,6 @@
 @import '~@eventespresso/styles/src/mixins/transition';
 @import '../colors';
 
-
 .ee-btn-base {
 	&.ee-icon-button {
 		align-items: center;
@@ -24,18 +23,16 @@
 		margin: var(--ee-margin-micro);
 		min-height: var(--ee-icon-button-size);
 		min-width: var(--ee-icon-button-size);
+		padding: var(--ee-padding-tiny);
 		top: 0;
-
-		// specificity fix
-		&.ee-icon-button {
-			padding: var(--ee-padding-micro);
-			width: var(--ee-icon-button-size);
-		}
+		width: var(--ee-icon-button-size);
 
 		svg,
 		svg.ee-svg {
 			display: inline-block;
+			height: calc(var(--ee-icon-button-size) - (2 * var(--ee-padding-tiny)));
 			margin: 0;
+			width: calc(var(--ee-icon-button-size) - (2 * var(--ee-padding-tiny)));
 
 			path {
 				@include transition(fill 0.1s ease 0.1s, color 0.1s ease 0.1s !important);
@@ -116,53 +113,97 @@
 
 		&.ee-btn--tiny {
 			box-shadow: var(--ee-button-box-shadow-soft);
+			box-sizing: border-box;
 			height: var(--ee-icon-button-size-tiny);
 			min-height: var(--ee-icon-button-size-tiny);
 			min-width: var(--ee-icon-button-size-tiny);
-			padding: var(--ee-padding-nano);
+			padding: var(--ee-padding-micro);
 			width: var(--ee-icon-button-size-tiny);
+
+			svg,
+			svg.ee-svg {
+				height: calc(var(--ee-icon-button-size-tiny) - (2 * var(--ee-padding-micro)));
+				width: calc(var(--ee-icon-button-size-tiny) - (2 * var(--ee-padding-micro)));
+			}
 		}
 
 		&.ee-btn--small {
 			box-shadow: var(--ee-button-box-shadow-soft);
+			box-sizing: border-box;
 			height: var(--ee-icon-button-size-small);
 			min-height: var(--ee-icon-button-size-small);
 			min-width: var(--ee-icon-button-size-small);
+			padding: var(--ee-padding-tiny);
 			width: var(--ee-icon-button-size-small);
+
+			svg,
+			svg.ee-svg {
+				height: calc(var(--ee-icon-button-size-small) - (2 * var(--ee-padding-tiny)));
+				width: calc(var(--ee-icon-button-size-small) - (2 * var(--ee-padding-tiny)));
+			}
 		}
 
 		&.ee-btn--smaller {
+			box-sizing: border-box;
 			height: var(--ee-icon-button-size-small);
 			min-height: var(--ee-icon-button-size-small);
 			min-width: var(--ee-icon-button-size-small);
+			padding: var(--ee-padding-tiny);
 			width: var(--ee-icon-button-size-small);
+
+			svg,
+			svg.ee-svg {
+				height: calc(var(--ee-icon-button-size-small) - (2 * var(--ee-padding-tiny)));
+				width: calc(var(--ee-icon-button-size-small) - (2 * var(--ee-padding-tiny)));
+			}
 		}
 
 		&.ee-btn--big {
 			box-shadow: var(--ee-button-box-shadow-hard);
+			box-sizing: border-box;
 			height: var(--ee-icon-button-size-big);
 			min-height: var(--ee-icon-button-size-big);
 			min-width: var(--ee-icon-button-size-big);
+			padding: var(--ee-padding-tiny);
 			width: var(--ee-icon-button-size-big);
+
+			svg,
+			svg.ee-svg {
+				height: calc(var(--ee-icon-button-size-big) - (2 * var(--ee-padding-tiny)));
+				width: calc(var(--ee-icon-button-size-big) - (2 * var(--ee-padding-tiny)));
+			}
 		}
 
 		&.ee-btn--bigger {
 			box-shadow: var(--ee-button-box-shadow-hard);
+			box-sizing: border-box;
 			height: var(--ee-icon-button-size-bigger);
 			min-height: var(--ee-icon-button-size-bigger);
 			min-width: var(--ee-icon-button-size-bigger);
 			padding: var(--ee-padding-smaller);
 			width: var(--ee-icon-button-size-bigger);
+
+			svg,
+			svg.ee-svg {
+				height: calc(var(--ee-icon-button-size-bigger) - (2 * var(--ee-padding-smaller)));
+				width: calc(var(--ee-icon-button-size-bigger) - (2 * var(--ee-padding-smaller)));
+			}
 		}
 
 		&.ee-btn--huge {
 			box-shadow: var(--ee-button-box-shadow-hard);
+			box-sizing: border-box;
 			height: var(--ee-icon-button-size-huge);
 			min-height: var(--ee-icon-button-size-huge);
 			min-width: var(--ee-icon-button-size-huge);
 			padding: var(--ee-padding-small);
 			width: var(--ee-icon-button-size-huge);
-		}
 
+			svg,
+			svg.ee-svg {
+				height: calc(var(--ee-icon-button-size-huge) - (2 * var(--ee-padding-small)));
+				width: calc(var(--ee-icon-button-size-huge) - (2 * var(--ee-padding-small)));
+			}
+		}
 	}
 }
