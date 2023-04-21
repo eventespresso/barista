@@ -77,7 +77,7 @@ export const defaultToolbar: ToolBarConfig = {
 		unlink: { icon: Unlink },
 	},
 	image: {
-		icon: () => <Image size='small' />,
+		icon: () => <Image />,
 	},
 	colorPicker: {
 		icon: ColorPicker,

@@ -72,7 +72,7 @@ const WPMedia: React.FC<ToolbarButtonProps> = ({ onChange, editorState }) => {
 				role='button'
 				tabIndex={0}
 			>
-				<Image size='small' />
+				<Image />
 			</div>
 		</div>
 	);
