@@ -5,7 +5,6 @@
 @import '../variables';
 
 @import './btn';
-@import './entity-status';
 @import './font-styles';
 @import './shadows';
 
@@ -17,14 +16,10 @@ $rootVariables: map-collect(
 	$date-picker,
 	$defaults,
 	$default-text-colors,
-	$font-sizes,
 	$font-styles,
 	$heights,
-	$margins,
 	$others,
-	$paddings,
-	$shadows,
-	$statuses
+	$shadows
 );
 
 :root {
