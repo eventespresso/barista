@@ -1,0 +1,166 @@
+@import '~@eventespresso/styles/src/mixins/breakpoints';
+
+.post-type-espresso_events {
+	--ee-edtr-menu-bar-size: calc(var(--ee-icon-button-size) + var(--ee-padding-default));
+
+	--ee-edtr-menu-bar-size-small: calc(var(--ee-icon-button-size-tiny) + var(--ee-padding-default));
+
+	.ee-event-editor {
+		display: flex;
+		flex-flow: row nowrap;
+		margin: 0 0 var(--ee-margin-small);
+
+		&__menu-bar {
+			align-content: center;
+			align-items: center;
+			background: var(--ee-color-primary);
+			bottom: unset;
+			box-sizing: border-box;
+			color: var(--ee-text-on-primary);
+			display: flex;
+			flex-flow: column nowrap;
+			height: 100%;
+			justify-content: flex-start;
+			left: 160px;
+			margin: 0;
+			padding: var(--ee-margin-tiny);
+			position: fixed;
+			top: 32px;
+			width: var(--ee-edtr-menu-bar-size);
+			z-index: 100000;
+
+			@include max960px {
+				left: 36px;
+			}
+			@include max782px {
+				bottom: 0;
+				flex-flow: row wrap;
+				height: var(--ee-edtr-menu-bar-size);
+				justify-content: space-evenly;
+				left: 0;
+				top: unset;
+				width: 100vw;
+			}
+			@include max600px {
+				// height: auto;
+				height: var(--ee-edtr-menu-bar-size-small);
+			}
+
+
+			.ee-btn-base.ee-icon-button {
+				background: none !important;
+				border-width: 5px;
+				box-shadow: none !important;
+				box-sizing: content-box;
+				color: var(--ee-text-on-primary) !important;
+				margin: 0;
+				height: var(--ee-icon-button-size-micro);
+				min-height: var(--ee-icon-button-size-micro);
+				min-width: var(--ee-icon-button-size-micro);
+				width: var(--ee-icon-button-size-micro);
+
+				&:hover,
+				&--active {
+					background: var(--ee-color-primary-low-contrast) !important;
+					border-color: var(--ee-color-primary-low-contrast) !important;
+				}
+				// &--active {
+				// 	border-color: var(--ee-color-primary-super-low-contrast) !important;
+				// }
+
+				@include min600px {
+					height: var(--ee-icon-button-size-tiny);
+					min-height: var(--ee-icon-button-size-tiny);
+					min-width: var(--ee-icon-button-size-tiny);
+					width: var(--ee-icon-button-size-tiny);
+				}
+				@include min782px {
+					margin: var(--ee-margin-tiny) 0;
+					height: var(--ee-icon-button-size);
+					min-height: var(--ee-icon-button-size);
+					min-width: var(--ee-icon-button-size);
+					width: var(--ee-icon-button-size);
+				}
+
+				svg.ee-svg {
+					height: var(--ee-icon-button-size-micro);
+					width: var(--ee-icon-button-size-micro);
+
+					@include min600px {
+						height: var(--ee-icon-button-size-tiny);
+						width: var(--ee-icon-button-size-tiny);
+					}
+					@include min782px {
+						height: var(--ee-icon-button-size-small);
+						width: var(--ee-icon-button-size-small);
+					}
+				}
+			}
+		}
+
+		&__modules {
+			display: flex;
+			flex-flow: column nowrap;
+			padding: 0;
+			width: 100%;
+
+			.ee-edtr-section {
+				> .ee-edtr-section-heading.ee-heading:first-of-type,
+				> .ee-container__header > .ee-edtr-section-heading.ee-heading:first-of-type {
+					margin-top: 0;
+				}
+			}
+
+			> div {
+				margin: var(--ee-margin-small) 0;
+
+				&:first-of-type {
+					margin-top: 0;
+				}
+				&:last-of-type {
+					margin-bottom: 0;
+				}
+			}
+		}
+	}
+
+	#misc-publishing-actions {
+		display: grid;
+		grid-template-columns: auto auto;
+		padding: 0;
+		width: calc(100% - var(--ee-padding-small));
+
+		.misc-pub-section {
+			align-items: flex-end;
+			box-sizing: border-box;
+			display: flex;
+			justify-content: flex-start;
+			padding: var(--ee-padding-tiny);
+			width: 100%;
+
+			> a {
+				float: unset;
+				margin-inline-start: var(--ee-margin-tiny);
+			}
+		}
+
+		@include min600px {
+			grid-template-columns: auto auto auto;
+
+			.misc-pub-section {
+				padding: var(--ee-padding-tiny) var(--ee-padding-small);
+			}
+		}
+	}
+
+	#wpcontent, #wpfooter {
+		margin-inline-start: calc(var(--ee-edtr-menu-bar-size) + 160px);
+
+		@include max960px {
+			margin-inline-start: calc(var(--ee-edtr-menu-bar-size) + 36px);
+		}
+		@include max782px {
+			margin-inline-start: unset;
+		}
+	}
+}

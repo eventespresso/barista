@@ -164,5 +164,14 @@
 			width: var(--ee-icon-button-size-huge);
 		}
 
+		&--no-margin {
+			margin: 0;
+		}
+
+		&--no-padding {
+			&.ee-icon-button {
+				padding: 0;
+			}
+		}
 	}
 }

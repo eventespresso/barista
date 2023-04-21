@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { __ } from '@eventespresso/i18n';
 import { TypeName } from '@eventespresso/services';
@@ -17,8 +17,10 @@ import { legendConfig } from './config';
 import { RenderCardView } from './cardView';
 import { RenderTableView } from './tableView';
 import { ActiveTicketsFilters } from './filterBar';
+import { hideAllExcept } from '../../utils';
 
 const TicketsList: React.FC = () => {
+	useEffect(() => hideAllExcept([]), []);
 	const filterState = useTicketsListFilterState();
 
 	const renderList = useCallback(
