@@ -49,9 +49,6 @@ const FieldRenderer: React.FC<FieldRendererProps> = ({ inline, ...props }) => {
 				<FormLabel htmlFor={props.input.name}>{label}</FormLabel>
 				<HelperText id={tooltipKey} tooltipText={description || info} />
 			</div>
-
-			<Divider size='nano' />
-
 			{before}
 			<MappedField
 				{...rest}
