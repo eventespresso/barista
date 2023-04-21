@@ -21,23 +21,4 @@ html.wp-toolbar {
 	.ee-edtr-section {
 		padding: var(--ee-padding-small) 0;
 	}
-
-	#wpcontent {
-		padding: 0 var(--ee-padding-tiny);
-
-		#wpbody-content > .wrap {
-			margin: 0;
-			padding: 0;
-		}
-	}
-
-	@include min782px {
-		#wpcontent {
-			padding: 0 0 0 var(--ee-padding-small);
-
-			#wpbody-content > .wrap {
-				padding: var(--ee-padding-micro) var(--ee-padding-smaller) 0 0;
-			}
-		}
-	}
 }
