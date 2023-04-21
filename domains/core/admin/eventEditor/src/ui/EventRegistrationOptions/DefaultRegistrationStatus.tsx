@@ -14,8 +14,7 @@ const DefaultRegistrationStatus: React.FC<Props> = ({ defaultRegStatus, onDefaul
 	);
 	const className = classNames(
 		'ee-edtr-option ee-edtr-option__default-reg-status',
-		'ee-status-background',
-		`ee-status-background-color--${regStatusCode[0]?.code}`
+		`ee-status-bg--${regStatusCode[0]?.code}`
 	);
 
 	return (
