@@ -9,7 +9,7 @@ import {
 	RegistrationOptions,
 	addNewTicket,
 } from '@e2eUtils/admin';
-import { eventData } from 'packages/e2e-tests/specs/shared/data';
+import { eventData } from '../../../../shared/data';
 import { activateTheme } from '@e2eUtils/admin/wp-themes-page';
 
 const templatesManager = new TemplatesManager();

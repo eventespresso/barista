@@ -7,7 +7,7 @@ import { pressKeyWithModifier, EE_DEBUG } from '@e2eUtils/misc';
 
 const REMPlugin = 'eea-recurring-events-manager/eea-recurring-events-manager.php';
 
-let capture: PageVideoCapture;
+let capture: PageVideoCapture | null;
 
 beforeAll(async () => {
 	try {
@@ -25,7 +25,7 @@ beforeAll(async () => {
 	capture = await saveVideo(page, 'artifacts/REM.mp4');
 
 	await activatePlugin(REMPlugin);
-	
+
 	await createNewEvent({ title: 'REM-related' });
 });
 
@@ -36,7 +36,7 @@ afterAll(async () => {
 });
 
 describe('REM', () => {
-	it('should generate 40 datetimes at the end of the end of the REM wizard', async () => {
+	it('should generate 40 datetimes at the end of the end of the REM wizard', async (): Promise<void> => {
 		await page.waitForTimeout(3000);
 
 		await page.click('text=Add New Date');
@@ -52,6 +52,8 @@ describe('REM', () => {
 		await pressKeyWithModifier('primary', 'a');
 
 		await page.type('[name="ee-r-rule-end-after"]', '40');
+
+		await page.waitForTimeout(100);
 
 		await clickButton('Next');
 

@@ -1,6 +1,6 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { Goto, CategoryManager } from '@e2eUtils/admin';
-import { categoryData } from 'packages/e2e-tests/specs/shared/data';
+import { categoryData } from '../../../shared/data';
 
 const categoryManager = new CategoryManager();
 

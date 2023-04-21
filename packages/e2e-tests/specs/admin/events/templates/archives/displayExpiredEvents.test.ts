@@ -1,6 +1,6 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { Goto, TemplatesManager, createNewEvent, EventsListSurfer, DateEditor } from '@e2eUtils/admin';
-import { eventData, data } from 'packages/e2e-tests/specs/shared/data';
+import { eventData, data } from '../../../../shared/data';
 
 const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();
