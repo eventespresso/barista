@@ -5,9 +5,8 @@
 	border-radius: var(--ee-border-radius-small);
 	display: inline-flex;
 	flex-flow: row nowrap;
-	padding: var(--ee-padding-nano) var(--ee-padding-tiny) var(--ee-padding-micro);
-	padding-inline-end: var(--ee-padding-smaller);
 	margin: var(--ee-margin-tiny) auto var(--ee-margin-small);
+	padding: var(--ee-padding-pico) var(--ee-padding-small);
 
 	&--blue-green {
 		background-color: var(--ee-color-blue-green) !important;
@@ -35,7 +34,6 @@
 
 	svg.ee-svg.ee-svg {
 		margin: 0;
-		margin-block-start: var(--ee-margin-nano);
 		margin-inline-end: var(--ee-margin-micro);
 	}
 }
