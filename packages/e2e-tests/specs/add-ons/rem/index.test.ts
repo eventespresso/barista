@@ -37,7 +37,7 @@ afterAll(async () => {
 
 describe('REM', () => {
 	it('should generate 40 datetimes at the end of the end of the REM wizard', async (): Promise<void> => {
-		await page.waitForTimeout(5000);
+		await page.waitForTimeout(3000);
 
 		await page.click('text=Add New Date');
 
@@ -52,6 +52,8 @@ describe('REM', () => {
 		await pressKeyWithModifier('primary', 'a');
 
 		await page.type('[name="ee-r-rule-end-after"]', '40');
+
+		await page.waitForTimeout(100);
 
 		await clickButton('Next');
 
