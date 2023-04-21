@@ -12,10 +12,10 @@ import {
 import { SingleEventPageManager } from '@e2eUtils/frontend';
 import { sub, add } from '@eventespresso/dates';
 import { formatDateTime } from '@e2eUtils/common';
-import { eventData } from '../../../../shared/data';
 import type { ElementHandle } from 'playwright-core';
 import { activateTheme } from '@e2eUtils/admin/wp-themes-page';
 import { setWordpressTimezone } from '@e2eUtils/admin/wp-plugins-page';
+import { eventData } from '../../../../shared/data';
 
 const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();

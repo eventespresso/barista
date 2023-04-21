@@ -9,7 +9,7 @@ let capture: PageVideoCapture;
 
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
-	
+
 	await createNewEvent({ title: namespace });
 	const item = await dateEditor.getItem();
 	await dateEditor.updateNameInline(item, 'some date');

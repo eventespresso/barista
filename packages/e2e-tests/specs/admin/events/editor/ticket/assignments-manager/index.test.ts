@@ -1,7 +1,7 @@
 import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { createNewEvent, removeLastTicket } from '@e2eUtils/admin/events';
 import { clickButton } from '@e2eUtils/common';
-import { isSubmitBtnDisabled } from 'packages/e2e-tests/assertions';
+import { isSubmitBtnDisabled } from '../../../../../../assertions';
 
 const namespace = 'TAM';
 let capture: PageVideoCapture;
