@@ -8,7 +8,7 @@ const Strikethrough = (props: IconProps): JSX.Element => {
 			fill='currentColor'
 			height='1em'
 			width='1em'
-			viewBox='0 0 16 16'
+			viewBox='-1 -1 18 18'
 			className='ee-svg--strikethrough'
 			{...props}
 		>

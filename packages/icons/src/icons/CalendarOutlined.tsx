@@ -4,7 +4,7 @@ import { IconProps } from '../types';
 const CalendarOutlined = (props: IconProps): JSX.Element => {
 	return (
 		<svg
-			viewBox='64 64 896 896'
+			viewBox='60 80 900 900'
 			data-icon='calendar'
 			fill='currentColor'
 			aria-hidden='true'

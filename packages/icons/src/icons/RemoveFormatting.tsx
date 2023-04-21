@@ -4,7 +4,7 @@ import { IconProps } from '../types';
 const RemoveFormatting = (props: IconProps): JSX.Element => {
 	return (
 		<svg
-			viewBox='0 0 24 24'
+			viewBox='0 1 18 18'
 			fill='currentColor'
 			aria-hidden='true'
 			height='1.5em'
