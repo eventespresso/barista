@@ -3,7 +3,7 @@
 
 .ee-entity-list {
 	.entity-card {
-		--ee-sidebar-width: 10rem;
+		--ee-sidebar-width: calc(10 * var(--ee-base-ui-scale));
 		--ee-menu-width: var(--ee-icon-button-size);
 
 		align-items: stretch;

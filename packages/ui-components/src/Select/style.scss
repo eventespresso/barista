@@ -8,6 +8,7 @@
 	max-width: 100%;
 
 	@at-root .ee-input__wrapper & {
+		min-width: clamp(8rem, 100%, 10rem);
 		width: 100%;
 
 		@include min480px {

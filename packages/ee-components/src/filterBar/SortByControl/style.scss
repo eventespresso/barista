@@ -6,6 +6,7 @@
 	padding-bottom: var(--ee-padding-tiny);
 
 	.ee-input-label__wrapper {
+		min-width: clamp(9.5rem, 50%, 19rem);
 		padding-bottom: 0;
 	}
 

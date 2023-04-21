@@ -1,6 +1,5 @@
 @import '~@eventespresso/styles/src/mixins/breakpoints.scss';
 
-
 // targets the div that wraps the modal window and controls how much screen space is taken
 // we want to go full screen on anything smaller than a big tablet in landscape (1024px)
 [data-focus-lock-disabled] > div:last-child {
@@ -16,7 +15,6 @@
 	--ee-admin-bar-height: 46px;
 }
 
-
 body.ee-modal-open {
 	overflow: hidden;
 }
@@ -26,7 +24,7 @@ body.ee-modal-open {
 	z-index: 9991;
 }
 
-.ee-modal[role="alertdialog"] {
+.ee-modal[role='alertdialog'] {
 	border-radius: 0;
 	height: 100%;
 	margin: 0;
@@ -36,7 +34,12 @@ body.ee-modal-open {
 
 	.admin-bar & {
 		height: calc(100% - var(--ee-admin-bar-height));
-		top: calc( var(--ee-admin-bar-height) / 2 );
+		top: calc(var(--ee-admin-bar-height) / 2);
+
+		@include max480px {
+			height: 100%;
+			top: unset;
+		}
 	}
 
 	.ee-modal {
@@ -84,7 +87,6 @@ body.ee-modal-open {
 		&__footer {
 			flex-wrap: wrap;
 			max-width: 100%;
-
 
 			&.ee-modal--with-border {
 				border-top: 0.5px solid var(--ee-border-color);

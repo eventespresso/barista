@@ -12,7 +12,7 @@
 	font-size: var(--ee-font-size-small);
 	height: var(--ee-icon-button-size-micro);
 	margin: 0 var(--ee-margin-smaller) var(--ee-margin-tiny) 0;
-	padding: 0 var(--ee-padding-nano) var(--ee-padding-nano) var(--ee-padding-smaller);
+	padding: 0 var(--ee-padding-nano) 0 var(--ee-padding-smaller);
 	position: relative;
 
 	[dir='rtl'] & {
@@ -30,7 +30,7 @@
 		height: calc(var(--ee-icon-button-size-micro) - 6px);
 		justify-content: center;
 		margin-inline-start: var(--ee-margin-micro);
-		margin-block-start: var(--ee-padding-nano);
+		margin-block: 0;
 		outline: none !important;
 		width: calc(var(--ee-icon-button-size-micro) - 6px);
 
