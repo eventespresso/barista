@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 
 import { FormControl, FormLabel } from '@eventespresso/adapters';
-import { Divider, ErrorMessage, InfoMessage } from '@eventespresso/ui-components';
+import { ErrorMessage, InfoMessage } from '@eventespresso/ui-components';
 
 import { HelperText } from '../../HelperText';
 import MappedField from '../../adapters/MappedField';
