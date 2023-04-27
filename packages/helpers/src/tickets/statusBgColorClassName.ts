@@ -3,22 +3,22 @@ import { isOnSale, isExpired, isTicketSoldOut } from '@eventespresso/predicates'
 
 const statusBgColorClassName = (ticket: Ticket): string => {
 	if (ticket.isTrashed) {
-		return 'ee-status-background-color--TKA';
+		return 'ee-status-bg--TKA';
 	}
 
 	if (isExpired(ticket)) {
-		return 'ee-status-background-color--TKE';
+		return 'ee-status-bg--TKE';
 	}
 
 	if (isTicketSoldOut(ticket)) {
-		return 'ee-status-background-color--TKS';
+		return 'ee-status-bg--TKS';
 	}
 
 	if (isOnSale(ticket)) {
-		return 'ee-status-background-color--TKO';
+		return 'ee-status-bg--TKO';
 	}
 
-	return 'ee-status-background-color--TKP';
+	return 'ee-status-bg--TKP';
 };
 
 export default statusBgColorClassName;

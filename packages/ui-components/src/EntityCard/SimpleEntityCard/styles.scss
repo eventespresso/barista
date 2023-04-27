@@ -5,7 +5,7 @@
 	flex-flow: row nowrap;
 	margin: var(--ee-margin-tiny);
 	max-width: 19rem;
-	min-height: 8rem;
+	min-height: 7rem;
 	min-width: 10rem;
 
 	&__details {
@@ -14,6 +14,7 @@
 		display: flex;
 		flex-flow: column;
 		justify-content: space-between;
+		height: 100%;
 		line-height: var(--ee-font-size-default);
 		padding: var(--ee-padding-smaller);
 		width: 12.5rem;

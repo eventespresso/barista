@@ -13,17 +13,8 @@ $btn: (
 		1px 1px 1px rgba(0, 0, 0, 0.375),
 		2px 2px 5px rgba(0, 0, 0, 0.188),
 		-1px -1px 1px rgba(255, 255, 255, 0.75),
-		-2px -2px 5px rgba(255, 255, 255, 0.375)
+		-2px -2px 5px rgba(255, 255, 255, 0.375),
 	),
 	button-text-color: var(--ee-text-on-grey-12),
 	button-transparent-background: rgba(192, 192, 192, 0.25),
-	icon-button-size-nano: 24px,  // bumped up from 18px
-	icon-button-size-micro: 30px,  // bumped up from 24px
-	icon-button-size-tiny: 36px,  // bumped up from 30px
-	icon-button-size-small: 42px,  // bumped up from 36px
-	icon-button-size: 48px,  // bumped up from 42px
-	icon-button-size-big: 54px,  // bumped up from 48px
-	icon-button-size-bigger: 60px,  // bumped up from 54px
-	icon-button-size-huge: 66px,  // bumped up from 60px
-	icon-button-size-extreme: 72px,
 );

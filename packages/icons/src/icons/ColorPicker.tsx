@@ -4,7 +4,7 @@ import { IconProps } from '../types';
 const ColorPicker = (props: IconProps): JSX.Element => {
 	return (
 		<svg
-			viewBox='0 0 24 24'
+			viewBox='-2 -2 24 24'
 			fill='currentColor'
 			aria-hidden='true'
 			height='1.5em'

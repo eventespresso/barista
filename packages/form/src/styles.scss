@@ -48,7 +48,7 @@
 				&-pair {
 					box-sizing: border-box;
 					display: inline-flex;
-					flex-flow:  column nowrap;
+					flex-flow: column nowrap;
 					margin: var(--ee-margin-smaller) 0;
 					padding-right: var(--ee-padding-default);
 					width: 50%;
@@ -87,12 +87,12 @@
 			&-icon.ee-svg.ee-svg {
 				color: var(--ee-color-grey-14);
 				display: inline-block;
-				font-size: calc(var(--ee-font-size-extreme) * 2.5);
+				font-size: calc(var(--ee-font-size-6xl) * 2.5);
 				left: calc(var(--ee-padding-smaller) * -1);
-				height: calc(var(--ee-font-size-extreme) * 2.5);
+				height: calc(var(--ee-font-size-6xl) * 2.5);
 				position: absolute;
 				top: var(--ee-padding-big);
-				width: calc(var(--ee-font-size-extreme) * 2.5);
+				width: calc(var(--ee-font-size-6xl) * 2.5);
 				z-index: -1;
 			}
 

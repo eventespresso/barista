@@ -68,13 +68,13 @@
 	&--bigger {
 		font-size: var(--ee-font-size-bigger);
 		height: var(--ee-icon-button-size-bigger);
-		line-height: var(--ee-font-size-huge);
+		line-height: var(--ee-font-size-4xl);
 		min-height: var(--ee-icon-button-size-bigger);
 	}
 	&--huge {
-		font-size: var(--ee-font-size-huge);
+		font-size: var(--ee-font-size-lg);
 		height: var(--ee-icon-button-size-huge);
-		line-height: var(--ee-font-size-extreme);
+		line-height: var(--ee-font-size-lg);
 		min-height: var(--ee-icon-button-size-huge);
 	}
 }
@@ -104,7 +104,6 @@
 	@include ee-input-base-hover;
 
 	@include ee-input-disabled-hover;
-
 }
 
 @mixin ee-input-base {

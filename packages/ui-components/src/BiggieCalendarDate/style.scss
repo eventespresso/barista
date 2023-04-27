@@ -8,12 +8,14 @@
 		color: var(--ee-color-white);
 		flex: 0, 0, calc(var(--ee-padding-micro) * 34);
 		height: 100%;
-		min-height: calc(var(--ee-padding-micro) * 43);
-		min-width: calc(var(--ee-padding-micro) * 34);
+		margin-inline: auto;
+		max-width: var(--ee-sidebar-width);
+		min-height: calc(var(--ee-size-default) * 12);
+		min-width: var(--ee-sidebar-width);
 		padding: var(--ee-padding-micro) var(--ee-padding-micro) 0;
 		text-align: center;
-		width: 100%;
 		vertical-align: bottom;
+		width: 100%;
 	}
 
 	&__header {
@@ -34,14 +36,14 @@
 		}
 
 		&__weekday {
-			line-height: var(--ee-font-size-bigger);
-    		margin-top: var(--ee-margin-nano);
+			line-height: var(--ee-font-size-xl);
+			margin-top: var(--ee-margin-nano);
 		}
 
 		&__month {
 			font-size: calc(var(--ee-font-size-tiny) * 2);
 			font-weight: bold;
-			line-height: calc(var(--ee-font-size-tiny) * 2);
+			line-height: var(--ee-font-size-4xl);
 		}
 
 		&__month-day-sep {
@@ -58,13 +60,14 @@
 
 		&__year {
 			letter-spacing: calc(var(--ee-letter-spacing-font-size-micro));
-			line-height: var(--ee-font-size-big);
-			left: var(--ee-padding-nano);
+			line-height: var(--ee-font-size-xl);
+			// left: var(--ee-padding-pico);
+			// margin-top: var(--ee-margin-nano);
 			position: relative;
 		}
 
 		&__time {
-			line-height: var(--ee-font-size-huge);
+			line-height: var(--ee-font-size-4xl);
 		}
 	}
 

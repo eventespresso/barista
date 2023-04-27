@@ -76,5 +76,6 @@
 
 	@include max480px {
 		flex-flow: column;
+		width: 100%;
 	}
 }

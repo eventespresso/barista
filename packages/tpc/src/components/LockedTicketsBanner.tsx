@@ -9,7 +9,7 @@ const LockedTicketsBanner = () => {
 
 	return (
 		isDisabled && (
-			<Banner description={SOLD_TICKET_ERROR_MESSAGE} status='info' title={__('Editing of prices is disabled')} />
+			<Banner description={SOLD_TICKET_ERROR_MESSAGE} status='info' title={__('Price editing is disabled!')} />
 		)
 	);
 };

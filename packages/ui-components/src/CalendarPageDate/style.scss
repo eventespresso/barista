@@ -24,16 +24,16 @@
 .ee-calendar-page-date-medium {
 	.ee-calendar-page-date-wrapper-start,
 	.ee-calendar-page-date-wrapper-end {
-		height: calc(var(--ee-font-size-huge) * 2);
-		width: calc(var(--ee-font-size-huge) * 2);
+		height: calc(var(--ee-font-size-4xl) * 2);
+		width: calc(var(--ee-font-size-4xl) * 2);
 	}
 }
 
 .ee-calendar-page-date-big {
 	.ee-calendar-page-date-wrapper-start,
 	.ee-calendar-page-date-wrapper-end {
-		height: calc(var(--ee-font-size-extreme) * 2);
-		width: calc(var(--ee-font-size-extreme) * 2);
+		height: calc(var(--ee-font-size-6xl) * 2);
+		width: calc(var(--ee-font-size-6xl) * 2);
 	}
 }
 
@@ -60,14 +60,14 @@
 
 .ee-calendar-page-date-medium .ee-calendar-page-date-month {
 	font-size: var(--ee-font-size-smaller);
-	height: var(--ee-font-size-huge);
+	height: var(--ee-font-size-4xl);
 	line-height: var(--ee-font-size-bigger);
 }
 
 .ee-calendar-page-date-big .ee-calendar-page-date-month {
 	font-size: var(--ee-font-size-small);
-	height: var(--ee-font-size-extreme);
-	line-height: var(--ee-font-size-huge);
+	height: var(--ee-font-size-6xl);
+	line-height: var(--ee-font-size-4xl);
 }
 
 .ee-calendar-page-date-day {
@@ -95,14 +95,14 @@
 
 .ee-calendar-page-date-medium .ee-calendar-page-date-day {
 	font-size: var(--ee-font-size-big);
-	height: var(--ee-font-size-huge);
-	line-height: var(--ee-font-size-huge);
+	height: var(--ee-font-size-4xl);
+	line-height: var(--ee-font-size-4xl);
 }
 
 .ee-calendar-page-date-big .ee-calendar-page-date-day {
 	font-size: var(--ee-font-size-bigger);
-	height: var(--ee-font-size-extreme);
-	line-height: var(--ee-font-size-extreme);
+	height: var(--ee-font-size-6xl);
+	line-height: var(--ee-font-size-6xl);
 }
 
 .ee-calendar-page-date-to {

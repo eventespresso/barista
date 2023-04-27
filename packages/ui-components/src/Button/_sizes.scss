@@ -6,9 +6,11 @@
 
 		svg.ee-svg.ee-svg {
 			bottom: 1px;
-			height: calc(var(--ee-icon-button-size) / 2);
+			height: var(--ee-font-size-2xl);
+			margin-inline-end: var(--ee-margin-nano);
+			margin-inline-start: 0;
 			position: relative;
-			width: calc(var(--ee-icon-button-size) / 2);
+			width: var(--ee-font-size-2xl);
 		}
 
 		&.ee-btn--micro {
@@ -25,8 +27,8 @@
 			}
 
 			svg.ee-svg.ee-svg {
-				height: 0.8rem;
-				width: 0.8rem;
+				height: var(--ee-font-size-default);
+				width: var(--ee-font-size-default);
 			}
 
 			.img-wrap span {
@@ -47,8 +49,8 @@
 			}
 
 			svg.ee-svg.ee-svg {
-				height: 0.85rem;
-				width: 0.85rem;
+				height: var(--ee-font-size-big);
+				width: var(--ee-font-size-big);
 			}
 
 			.img-wrap span {
@@ -102,8 +104,8 @@
 			}
 
 			svg.ee-svg.ee-svg {
-				height: 1rem;
-				width: 1rem;
+				height: var(--ee-font-size-xl);
+				width: var(--ee-font-size-xl);
 			}
 		}
 
@@ -117,8 +119,8 @@
 			}
 
 			svg.ee-svg.ee-svg {
-				height: 0.9rem;
-				width: 0.9rem;
+				height: var(--ee-font-size-bigger);
+				width: var(--ee-font-size-bigger);
 			}
 		}
 
@@ -137,9 +139,10 @@
 			}
 
 			svg.ee-svg.ee-svg {
+				margin-inline-end: var(--ee-margin-micro);
 				[dir='rtl'] & {
-					margin-right: 0;
-					margin-left: var(--ee-margin-tiny);
+					margin-inline-end: 0;
+					margin-inline-start: var(--ee-margin-micro);
 				}
 			}
 
@@ -150,15 +153,15 @@
 
 		&.ee-btn--big {
 			svg.ee-svg.ee-svg {
-				height: 1.5rem;
-				width: 1.5rem;
+				height: var(--ee-font-size-4xl);
+				width: var(--ee-font-size-4xl);
 			}
 		}
 
 		&.ee-btn--bigger {
 			svg.ee-svg.ee-svg {
-				height: 1.75rem;
-				width: 1.75rem;
+				height: var(--ee-font-size-5xl);
+				width: var(--ee-font-size-5xl);
 			}
 		}
 
@@ -176,8 +179,8 @@
 			}
 
 			svg.ee-svg.ee-svg {
-				height: 1.75rem;
-				width: 1.75rem;
+				height: var(--ee-font-size-6xl);
+				width: var(--ee-font-size-6xl);
 			}
 
 			.img-wrap span {

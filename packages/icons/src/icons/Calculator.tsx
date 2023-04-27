@@ -6,7 +6,7 @@ const Calculator = (props: IconProps): JSX.Element => {
 		<svg
 			aria-hidden='true'
 			height='1.5em'
-			viewBox='0 0 20 20'
+			viewBox='-1 -1 22 22'
 			width='1.5em'
 			xmlns='http://www.w3.org/2000/svg'
 			className='ee-svg--calculator'

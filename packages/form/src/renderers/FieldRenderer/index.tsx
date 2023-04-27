@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 
 import { FormControl, FormLabel } from '@eventespresso/adapters';
-import { Divider, ErrorMessage, InfoMessage } from '@eventespresso/ui-components';
+import { ErrorMessage, InfoMessage } from '@eventespresso/ui-components';
 
 import { HelperText } from '../../HelperText';
 import MappedField from '../../adapters/MappedField';
@@ -49,9 +49,6 @@ const FieldRenderer: React.FC<FieldRendererProps> = ({ inline, ...props }) => {
 				<FormLabel htmlFor={props.input.name}>{label}</FormLabel>
 				<HelperText id={tooltipKey} tooltipText={description || info} />
 			</div>
-
-			<Divider size='nano' />
-
 			{before}
 			<MappedField
 				{...rest}

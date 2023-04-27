@@ -34,7 +34,7 @@
 		justify-content: center;
 		line-height: var(--ee-font-size-micro);
 		min-width: calc(var(--ee-font-size-default) + 2px);
-		padding: var(--ee-padding-micro);
+		padding: var(--ee-padding-nano);
 		position: absolute;
 		right: 0;
 		text-align: center;
@@ -49,11 +49,6 @@
 			font-size: var(--ee-font-size-tiny);
 			font-weight: bold;
 			line-height: 1;
-		}
-
-		span {
-			position: relative;
-			top: -1px;
 		}
 	}
 }

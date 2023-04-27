@@ -4,7 +4,7 @@
 	&-grid {
 		display: grid;
 		grid-template-columns: repeat(5, 1fr);
-		grid-template-rows: minmax(var(--ee-font-size-huge, auto));
+		grid-template-rows: minmax(var(--ee-font-size-4xl, auto));
 		justify-content: start;
 		line-height: var(--ee-font-size-default);
 		place-items: center start;

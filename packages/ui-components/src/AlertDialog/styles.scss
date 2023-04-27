@@ -23,17 +23,17 @@
 			flex-direction: column;
 			font-size: var(--ee-font-size-bigger);
 			font-weight: 600;
-			line-height: var(--ee-font-size-huge);
+			line-height: var(--ee-font-size-4xl);
 			padding: var(--ee-padding-huge) var(--ee-padding-default) var(--ee-padding-tiny);
 			position: relative;
 			text-transform: none;
 
 			svg {
-				font-size: var(--ee-font-size-bigger);
+				font-size: var(--ee-font-size-6xl);
 				box-sizing: border-box;
 				color: var(--ee-color-primary);
-				height: 4rem;
-				width: 4rem;
+				height: var(--ee-font-size-6xl);
+				width: var(--ee-font-size-6xl);
 				position: relative;
 				top: -1rem;
 			}
@@ -44,7 +44,7 @@
 				svg {
 					height: 3rem;
 					width: 3rem;
-					top: -.75rem;
+					top: -0.75rem;
 				}
 			}
 		}
@@ -57,7 +57,7 @@
 		&__footer {
 			padding: var(--ee-padding-smaller) var(--ee-padding-default) var(--ee-padding-default);
 
-			.ee-btn-base  {
+			.ee-btn-base {
 				margin: var(--ee-margin-nano);
 
 				& + .ee-btn-base {

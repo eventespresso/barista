@@ -2,10 +2,10 @@
 
 .ee-form-builder {
 	h3.ee-edtr-section-heading.ee-heading.ee-heading {
-		font-size: calc(var(--ee-font-size-huge) * 1.15);
+		font-size: calc(var(--ee-font-size-4xl) * 1.15);
 
 		@include min480px {
-			font-size: calc(var(--ee-font-size-huge) * 1.375);
+			font-size: calc(var(--ee-font-size-4xl) * 1.375);
 		}
 	}
 
