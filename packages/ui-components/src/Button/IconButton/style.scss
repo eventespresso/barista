@@ -23,16 +23,16 @@
 		margin: var(--ee-margin-micro);
 		min-height: var(--ee-icon-button-size);
 		min-width: var(--ee-icon-button-size);
-		padding: var(--ee-padding-tiny);
+		padding: var(--ee-padding-micro);
 		top: 0;
 		width: var(--ee-icon-button-size);
 
 		svg,
 		svg.ee-svg {
 			display: inline-block;
-			height: calc(var(--ee-icon-button-size) - (2 * var(--ee-padding-tiny)));
+			height: calc(var(--ee-icon-button-size) - (1.5 * var(--ee-padding-micro)));
 			margin: 0;
-			width: calc(var(--ee-icon-button-size) - (2 * var(--ee-padding-tiny)));
+			width: calc(var(--ee-icon-button-size) - (1.5 * var(--ee-padding-micro)));
 
 			path {
 				@include transition(fill 0.1s ease 0.1s, color 0.1s ease 0.1s !important);
@@ -117,13 +117,13 @@
 			height: var(--ee-icon-button-size-tiny);
 			min-height: var(--ee-icon-button-size-tiny);
 			min-width: var(--ee-icon-button-size-tiny);
-			padding: var(--ee-padding-micro);
+			padding: var(--ee-padding-nano);
 			width: var(--ee-icon-button-size-tiny);
 
 			svg,
 			svg.ee-svg {
-				height: calc(var(--ee-icon-button-size-tiny) - (2 * var(--ee-padding-micro)));
-				width: calc(var(--ee-icon-button-size-tiny) - (2 * var(--ee-padding-micro)));
+				height: calc(var(--ee-icon-button-size-tiny) - (1.5 * var(--ee-padding-nano)));
+				width: calc(var(--ee-icon-button-size-tiny) - (1.5 * var(--ee-padding-nano)));
 			}
 		}
 
@@ -133,13 +133,13 @@
 			height: var(--ee-icon-button-size-small);
 			min-height: var(--ee-icon-button-size-small);
 			min-width: var(--ee-icon-button-size-small);
-			padding: var(--ee-padding-tiny);
+			padding: var(--ee-padding-micro);
 			width: var(--ee-icon-button-size-small);
 
 			svg,
 			svg.ee-svg {
-				height: calc(var(--ee-icon-button-size-small) - (2 * var(--ee-padding-tiny)));
-				width: calc(var(--ee-icon-button-size-small) - (2 * var(--ee-padding-tiny)));
+				height: calc(var(--ee-icon-button-size-small) - (1.5 * var(--ee-padding-micro)));
+				width: calc(var(--ee-icon-button-size-small) - (1.5 * var(--ee-padding-micro)));
 			}
 		}
 
@@ -148,13 +148,13 @@
 			height: var(--ee-icon-button-size-small);
 			min-height: var(--ee-icon-button-size-small);
 			min-width: var(--ee-icon-button-size-small);
-			padding: var(--ee-padding-tiny);
+			padding: var(--ee-padding-micro);
 			width: var(--ee-icon-button-size-small);
 
 			svg,
 			svg.ee-svg {
-				height: calc(var(--ee-icon-button-size-small) - (2 * var(--ee-padding-tiny)));
-				width: calc(var(--ee-icon-button-size-small) - (2 * var(--ee-padding-tiny)));
+				height: calc(var(--ee-icon-button-size-small) - (1.5 * var(--ee-padding-micro)));
+				width: calc(var(--ee-icon-button-size-small) - (1.5 * var(--ee-padding-micro)));
 			}
 		}
 
@@ -169,8 +169,8 @@
 
 			svg,
 			svg.ee-svg {
-				height: calc(var(--ee-icon-button-size-big) - (2 * var(--ee-padding-tiny)));
-				width: calc(var(--ee-icon-button-size-big) - (2 * var(--ee-padding-tiny)));
+				height: calc(var(--ee-icon-button-size-big) - (1.5 * var(--ee-padding-tiny)));
+				width: calc(var(--ee-icon-button-size-big) - (1.5 * var(--ee-padding-tiny)));
 			}
 		}
 
@@ -180,13 +180,13 @@
 			height: var(--ee-icon-button-size-bigger);
 			min-height: var(--ee-icon-button-size-bigger);
 			min-width: var(--ee-icon-button-size-bigger);
-			padding: var(--ee-padding-smaller);
+			padding: var(--ee-padding-tiny);
 			width: var(--ee-icon-button-size-bigger);
 
 			svg,
 			svg.ee-svg {
-				height: calc(var(--ee-icon-button-size-bigger) - (2 * var(--ee-padding-smaller)));
-				width: calc(var(--ee-icon-button-size-bigger) - (2 * var(--ee-padding-smaller)));
+				height: calc(var(--ee-icon-button-size-bigger) - (1.5 * var(--ee-padding-tiny)));
+				width: calc(var(--ee-icon-button-size-bigger) - (1.5 * var(--ee-padding-tiny)));
 			}
 		}
 
@@ -196,13 +196,13 @@
 			height: var(--ee-icon-button-size-huge);
 			min-height: var(--ee-icon-button-size-huge);
 			min-width: var(--ee-icon-button-size-huge);
-			padding: var(--ee-padding-small);
+			padding: var(--ee-padding-smaller);
 			width: var(--ee-icon-button-size-huge);
 
 			svg,
 			svg.ee-svg {
-				height: calc(var(--ee-icon-button-size-huge) - (2 * var(--ee-padding-small)));
-				width: calc(var(--ee-icon-button-size-huge) - (2 * var(--ee-padding-small)));
+				height: calc(var(--ee-icon-button-size-huge) - (1.5 * var(--ee-padding-smaller)));
+				width: calc(var(--ee-icon-button-size-huge) - (1.5 * var(--ee-padding-smaller)));
 			}
 		}
 	}
