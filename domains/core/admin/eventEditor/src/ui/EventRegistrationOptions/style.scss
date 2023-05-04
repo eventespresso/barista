@@ -4,11 +4,11 @@
 	.ee-edtr-option {
 		color: var(--ee-default-text-color-low-contrast);
 		font-weight: 700;
-		height: var(--ee-icon-button-size-big);
+		height: var(--ee-icon-button-size);
 
 		@include min1024px {
 			font-size: var(--ee-font-size-big);
-			height: var(--ee-icon-button-size-bigger);
+			height: var(--ee-icon-button-size-big);
 		}
 
 		&__active-status,
