@@ -16,7 +16,6 @@
 		&.ee-btn--micro {
 			box-shadow: var(--ee-button-box-shadow-soft);
 			font-size: var(--ee-font-size-micro);
-			height: var(--ee-icon-button-size-micro);
 			min-height: var(--ee-icon-button-size-smaller);
 			line-height: var(--ee-icon-button-size-micro);
 			padding: 1px var(--ee-padding-tiny) 2px;
@@ -39,7 +38,6 @@
 		&.ee-btn--tiny {
 			box-shadow: var(--ee-button-box-shadow-soft);
 			font-size: var(--ee-font-size-tiny);
-			height: var(--ee-icon-button-size-tiny);
 			min-height: var(--ee-icon-button-size-smaller);
 			line-height: var(--ee-icon-button-size-tiny);
 			padding: var(--ee-padding-nano) var(--ee-padding-smaller);
@@ -62,8 +60,6 @@
 		&.ee-btn--smaller {
 			box-shadow: var(--ee-button-box-shadow-soft);
 			line-height: var(--ee-font-size-small);
-			height: var(--ee-icon-button-size-small);
-			line-height: var(--ee-icon-button-size-tiny);
 			min-height: var(--ee-icon-button-size-small);
 			letter-spacing: 1px;
 			padding: calc(var(--ee-padding-nano) + 1px) var(--ee-padding-smaller) var(--ee-padding-micro);
@@ -95,9 +91,6 @@
 
 		&.ee-btn--small {
 			box-shadow: var(--ee-button-box-shadow);
-			// height: var(--ee-icon-button-size-small);
-			// line-height: var(--ee-font-size-tiny);
-			// min-height: var(--ee-font-size-small);
 
 			span:not(.chakra-button__icon) {
 				font-size: var(--ee-font-size-small);
@@ -110,10 +103,6 @@
 		}
 
 		&.ee-btn--smaller {
-			// height: var(--ee-icon-button-size-smaller);
-			// line-height: var(--ee-font-size-micro);
-			// min-height: var(--ee-font-size-smaller);
-
 			span:not(.chakra-button__icon) {
 				font-size: var(--ee-font-size-smaller);
 			}
@@ -128,7 +117,6 @@
 		&.ee-btn--bigger {
 			box-shadow: var(--ee-button-box-shadow-hard);
 			font-size: var(--ee-font-size-big);
-			height: var(--ee-icon-button-size-big);
 			min-height: var(--ee-icon-button-size-big);
 			line-height: var(--ee-icon-button-size-big);
 			padding: var(--ee-padding-smaller) var(--ee-padding-default);
@@ -168,7 +156,6 @@
 		&.ee-btn--huge {
 			box-shadow: var(--ee-button-box-shadow-hard);
 			font-size: var(--ee-font-size-bigger);
-			height: var(--ee-icon-button-size-huge);
 			min-height: var(--ee-icon-button-size-huge);
 			line-height: var(--ee-icon-button-size-bigger);
 			padding: var(--ee-padding-smaller) var(--ee-padding-default) var(--ee-padding-small);

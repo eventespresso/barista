@@ -6,12 +6,11 @@
 	padding-bottom: var(--ee-padding-tiny);
 
 	.ee-input-label__wrapper {
-		min-width: clamp(9.5rem, 50%, 19rem);
 		padding-bottom: 0;
 	}
 
 	.ee-btn-base.ee-btn {
-		margin-block-end: var(--ee-margin-tiny);
+		margin-block-end: var(--ee-margin-micro);
 	}
 }
 
@@ -26,12 +25,8 @@
 
 			> span {
 				font-size: var(--ee-font-size-default);
-				margin-right: var(--ee-margin-tiny);
-
-				[dir='rtl'] & {
-					margin-left: var(--ee-margin-tiny);
-					margin-right: 0;
-				}
+				margin-inline-end: var(--ee-margin-tiny);
+				margin-inline-start: 0;
 			}
 		}
 	}
