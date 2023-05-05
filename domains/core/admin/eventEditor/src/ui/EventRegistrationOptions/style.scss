@@ -2,13 +2,16 @@
 
 .ee-grid.ee-grid {
 	.ee-edtr-option {
+		box-sizing: border-box;
 		color: var(--ee-default-text-color-low-contrast);
 		font-weight: 700;
 		height: var(--ee-icon-button-size);
+		line-height: var(--ee-font-size-big);
 
 		@include min1024px {
 			font-size: var(--ee-font-size-big);
 			height: var(--ee-icon-button-size-big);
+			line-height: var(--ee-font-size-bigger);
 		}
 
 		&__active-status,
