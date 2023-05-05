@@ -4,7 +4,7 @@ import { IconProps } from '../types';
 const DownCircleFilled = (props: IconProps): JSX.Element => {
 	return (
 		<svg
-			viewBox='64 64 896 896'
+			viewBox='0 0 1000 1000'
 			data-icon='down-circle'
 			fill='currentColor'
 			aria-hidden='true'

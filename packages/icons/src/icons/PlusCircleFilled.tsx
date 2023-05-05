@@ -4,7 +4,7 @@ import { IconProps } from '../types';
 const PlusCircleFilled = (props: IconProps): JSX.Element => {
 	return (
 		<svg
-			viewBox='64 64 896 896'
+			viewBox='0 0 1000 1000'
 			data-icon='plus-circle'
 			fill='currentColor'
 			aria-hidden='true'
