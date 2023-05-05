@@ -1,17 +1,20 @@
 $input-number: 'input[type=' number ']';
 
-$percentSignWidth: 38px;
+$percentSignWidth: 24px;
+$money-input-margin: calc(#{$percentSignWidth} + var(--ee-border-width) + (2 * var(--ee-padding-pico)));
 // sign label has only one border applied, the other border is adjoined with input
-$signBorderWidth: var(--ee-border-width);
 
 .ee-ticket-price-calculator {
 	.ee-money-field {
+		align-items: center;
+		display: flex;
+
 		&--with-currency-sign.ee-money-field-sign {
 			&--before .ee-input__price-field {
-				margin-inline-end: calc( #{$percentSignWidth} + #{$signBorderWidth} );
+				margin-inline-end: #{$money-input-margin};
 			}
 			&--after .ee-input__price-field {
-				margin-inline-start: calc( #{$percentSignWidth} + #{$signBorderWidth} );
+				margin-inline-start: #{$money-input-margin};
 			}
 		}
 
