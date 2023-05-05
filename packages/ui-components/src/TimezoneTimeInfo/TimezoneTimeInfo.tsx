@@ -11,8 +11,6 @@ import type { TimezoneTimeInfoProps } from './types';
 
 import './style.scss';
 
-const Icon: React.FC = () => <GlobalOutlined size='smaller' />;
-
 export const TimezoneTimeInfo: React.FC<TimezoneTimeInfoProps> = ({ siteTime, userTime, utcTime, ...props }) => {
 	const { isOpen, onClose, onToggle } = useDisclosure();
 	const className = classNames('ee-timezone-info', props.className);
@@ -22,7 +20,7 @@ export const TimezoneTimeInfo: React.FC<TimezoneTimeInfoProps> = ({ siteTime, us
 			<IconButton
 				borderless
 				className='ee-timezone-info__button'
-				icon={Icon}
+				icon={GlobalOutlined}
 				onClick={onToggle}
 				tooltip={__('click for timezone information')}
 			/>

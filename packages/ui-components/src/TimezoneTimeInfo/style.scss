@@ -1,25 +1,14 @@
 .ee-timezone-info {
 	display: inline-block;
-	margin-left: var(--ee-margin-smaller);
+	margin-inline-start: var(--ee-margin-smaller);
 	position: relative;
-
-	[dir='rtl'] & {
-		margin-left: 0;
-		margin-right: var(--ee-margin-smaller);
-	}
 
 	&__button.ee-btn-base {
 		border: none;
-
-		svg {
-			height: 100% !important;
-			padding: var(--ee-padding-tiny);
-			width: 100% !important;
-		}
 	}
 
 	[role='dialog'] {
-		left: 0;
+		inset-inline-start: 0;
 		min-width: 260px;
 		position: absolute;
 
