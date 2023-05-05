@@ -49,7 +49,7 @@ const useConfirmationDialog = ({
 			<AlertDialog
 				addIconBG={addIconBG}
 				alertType={alertType}
-				body={message}
+				body={message || __('Changes will be lost if you proceed.')}
 				cancelButton={cancelButton}
 				className='ee-confirmation-dialog'
 				header={title}
