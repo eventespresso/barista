@@ -45,6 +45,7 @@
 
 		appearance: none;
 		max-width: none; // .wp-core-ui select override
+		min-width: auto; // .wp-core-ui select override
 		line-height: 1.5;
 		padding: var(--ee-padding-micro) var(--ee-padding-bigger) var(--ee-padding-micro) var(--ee-padding-smaller);
 
@@ -76,10 +77,7 @@
 	}
 
 	.chakra-select__icon-wrapper {
-		[dir='rtl'] & {
-			left: 5px;
-			right: auto;
-		}
+		inset-inline-end: var(--ee-base-ui-scale);
 	}
 
 	> div {

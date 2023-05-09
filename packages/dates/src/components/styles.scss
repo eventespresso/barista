@@ -2,8 +2,8 @@
 @import '~@eventespresso/styles/src/mixins/transition';
 
 .react-datepicker {
-	$container-width:  calc(var(--ee-icon-button-size-big) * 7 + 2px);
-	$datetime-container-width:  calc(var(--ee-icon-button-size-big) * 9.25 + 2px);
+	$container-width: calc(var(--ee-icon-button-size-big) * 7 + 2px);
+	$datetime-container-width: calc(var(--ee-icon-button-size-big) * 9.25 + 2px);
 	$header-height: calc(var(--ee-icon-button-size-big) * 2);
 	$month-height: calc(var(--ee-icon-button-size-big) * 6 + 5px);
 	$month-container-height: calc(var(--ee-icon-button-size-big) * 8 + 5px);
@@ -24,11 +24,11 @@
 		font-size: var(--ee-font-size-small);
 	}
 
-	&.ee-datepicker,
 	&.ee-month-picker {
 		width: $container-width;
 	}
 
+	&.ee-datepicker,
 	&.ee-datetime-picker {
 		width: $datetime-container-width;
 	}
@@ -343,52 +343,64 @@
 							// use graduated coloring for time blocks
 							// so that nighttime blocks are darker than daytime blocks
 							&:hover {
-								background-color: var(--ee-color-blue-low-contrast);
-								color: var(--ee-text-on-blue);
+								&:nth-child(n + 32) {
+									background-color: var(--ee-color-blue-low-contrast);
+									color: var(--ee-text-on-blue);
+								}
 
-								&:nth-child(-n+16),
-								&:nth-child(n+33) {
+								&:nth-child(-n + 32),
+								&:nth-child(n + 65) {
 									background-color: var(--ee-color-blue);
+									color: var(--ee-text-on-blue);
 								}
 
-								&:nth-child(-n+12),
-								&:nth-child(n+37) {
+								&:nth-child(-n + 24),
+								&:nth-child(n + 73) {
 									background-color: var(--ee-color-blue-high-contrast);
+									color: var(--ee-text-on-blue-high-contrast);
 								}
 
-								&:nth-child(-n+8),
-								&:nth-child(n+41) {
+								&:nth-child(-n + 16),
+								&:nth-child(n + 81) {
 									background-color: var(--ee-color-blue-super-high-contrast);
+									color: var(--ee-text-on-blue-super-high-contrast);
 								}
 
-								&:nth-child(-n+4),
-								&:nth-child(n+45) {
+								&:nth-child(-n + 8),
+								&:nth-child(n + 89) {
 									background-color: var(--ee-color-dark-blue-high-contrast);
+									color: var(--ee-text-on-dark-blue-high-contrast);
 								}
 							}
 
 							&:focus {
-								border-color: var(--ee-color-blue-low-contrast);
+								&:nth-child(n + 32) {
+									border-color: var(--ee-color-blue-low-contrast);
+								}
 
-								&:nth-child(-n+16),
-								&:nth-child(n+33) {
+								&:nth-child(-n + 32),
+								&:nth-child(n + 65) {
 									border-color: var(--ee-color-blue);
 								}
 
-								&:nth-child(-n+12),
-								&:nth-child(n+37) {
+								&:nth-child(-n + 24),
+								&:nth-child(n + 73) {
 									border-color: var(--ee-color-blue-high-contrast);
 								}
 
-								&:nth-child(-n+8),
-								&:nth-child(n+41) {
+								&:nth-child(-n + 16),
+								&:nth-child(n + 81) {
 									border-color: var(--ee-color-blue-super-high-contrast);
 								}
 
-								&:nth-child(-n+4),
-								&:nth-child(n+45) {
+								&:nth-child(-n + 8),
+								&:nth-child(n + 89) {
 									border-color: var(--ee-color-dark-blue-high-contrast);
 								}
+							}
+
+							&:focus-visible {
+								outline: none;
 							}
 
 							&--disabled {
@@ -424,53 +436,58 @@
 							// use graduated coloring for time blocks
 							// so that nighttime blocks are darker than daytime blocks
 							&:hover {
-								&:nth-child(n+32) {
+								&:nth-child(n + 32) {
 									background-color: var(--ee-color-blue-low-contrast);
+									color: var(--ee-text-on-blue);
 								}
 
-								&:nth-child(-n+32),
-								&:nth-child(n+65) {
+								&:nth-child(-n + 32),
+								&:nth-child(n + 65) {
 									background-color: var(--ee-color-blue);
+									color: var(--ee-text-on-blue);
 								}
 
-								&:nth-child(-n+24),
-								&:nth-child(n+73) {
+								&:nth-child(-n + 24),
+								&:nth-child(n + 73) {
 									background-color: var(--ee-color-blue-high-contrast);
+									color: var(--ee-text-on-blue-high-contrast);
 								}
 
-								&:nth-child(-n+16),
-								&:nth-child(n+81) {
+								&:nth-child(-n + 16),
+								&:nth-child(n + 81) {
 									background-color: var(--ee-color-blue-super-high-contrast);
+									color: var(--ee-text-on-blue-super-high-contrast);
 								}
 
-								&:nth-child(-n+8),
-								&:nth-child(n+89) {
+								&:nth-child(-n + 8),
+								&:nth-child(n + 89) {
 									background-color: var(--ee-color-dark-blue-high-contrast);
+									color: var(--ee-text-on-dark-blue-high-contrast);
 								}
 							}
 
 							&:focus {
-								&:nth-child(n+32) {
+								&:nth-child(n + 32) {
 									border-color: var(--ee-color-blue-low-contrast);
 								}
 
-								&:nth-child(-n+32),
-								&:nth-child(n+65) {
+								&:nth-child(-n + 32),
+								&:nth-child(n + 65) {
 									border-color: var(--ee-color-blue);
 								}
 
-								&:nth-child(-n+24),
-								&:nth-child(n+73) {
+								&:nth-child(-n + 24),
+								&:nth-child(n + 73) {
 									border-color: var(--ee-color-blue-high-contrast);
 								}
 
-								&:nth-child(-n+16),
-								&:nth-child(n+81) {
+								&:nth-child(-n + 16),
+								&:nth-child(n + 81) {
 									border-color: var(--ee-color-blue-super-high-contrast);
 								}
 
-								&:nth-child(-n+8),
-								&:nth-child(n+89) {
+								&:nth-child(-n + 8),
+								&:nth-child(n + 89) {
 									border-color: var(--ee-color-dark-blue-high-contrast);
 								}
 							}
@@ -490,7 +507,6 @@
 			}
 		}
 	}
-
 
 	&__triangle::after {
 		.react-datepicker-popper[data-placement^='bottom'] & {
@@ -548,7 +564,7 @@
 			height: unset;
 			width: unset;
 		}
-		&__month-text  {
+		&__month-text {
 			align-items: center;
 			border-radius: 0 !important;
 			color: var(--ee-default-text-color);
@@ -564,10 +580,10 @@
 				background-color: var(--ee-color-grey-14);
 			}
 
-			&--keyboard-selected  {
-					background-color: var(--ee-color-primary-low-contrast);
-					color: var(--ee-text-on-primary);
-					font-weight: 700;
+			&--keyboard-selected {
+				background-color: var(--ee-color-primary-low-contrast);
+				color: var(--ee-text-on-primary);
+				font-weight: 700;
 
 				&:hover {
 					background-color: var(--ee-date-picker-date-in-range-bg-color-hover);
