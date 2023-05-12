@@ -34,7 +34,6 @@ export const EVENT_DEFAULTS: Event = {
 	status: '',
 	timezoneString: '',
 	venue: '',
-	visibleOn: '',
 };
 
 type OptimisticResCb = (mutationType: MutationType, input: MutationInput) => any;

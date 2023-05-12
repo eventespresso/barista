@@ -35,7 +35,6 @@ export interface Event extends Entity {
 	status: string;
 	timezoneString: string;
 	venue: string;
-	visibleOn: string;
 }
 
 export type EventManager = Pick<User, 'id' | 'name'>;

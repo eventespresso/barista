@@ -31,7 +31,7 @@
 		svg.ee-svg {
 			display: inline-block;
 			height: calc(var(--ee-icon-button-size) - (1.5 * var(--ee-padding-micro)));
-			margin: 0;
+			margin: 0 !important;
 			width: calc(var(--ee-icon-button-size) - (1.5 * var(--ee-padding-micro)));
 
 			path {

@@ -46,14 +46,8 @@
 		appearance: none;
 		max-width: none; // .wp-core-ui select override
 		min-width: auto; // .wp-core-ui select override
-		line-height: 1.5;
-		padding: var(--ee-padding-micro) var(--ee-padding-bigger) var(--ee-padding-micro) var(--ee-padding-smaller);
-
-		[dir='rtl'] & {
-			margin-left: 0;
-			margin-right: 0;
-			padding: var(--ee-padding-micro) var(--ee-padding-smaller) var(--ee-padding-micro) var(--ee-padding-bigger);
-		}
+		padding: var(--ee-padding-nano) var(--ee-padding-smaller);
+		padding-inline-end: var(--ee-padding-bigger);
 
 		&--inline {
 			min-width: 3rem; // might be replaced with a sizing variable

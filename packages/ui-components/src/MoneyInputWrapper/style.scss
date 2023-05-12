@@ -1,12 +1,11 @@
 .ee-money-field {
-
-	$percentSignWidth: 38px;
-	 // this is the largest value for letter like M or W,
+	$percentSignWidth: 24px;
+	// this is the largest value for letter like M or W,
 	$signCharSize: 15px;
 	// sign label has only one border applied, the other border is adjoined with input
 	$signBorderWidth: var(--ee-border-width);
 	// sign have paddings from both horizontal sides
-	$signPaddings: calc(var(--ee-padding-micro) * 2);
+	$signPaddings: calc(var(--ee-padding-pico) * 2);
 
 	&__label {
 		min-width: $percentSignWidth;
@@ -15,15 +14,14 @@
 
 	&--with-currency-sign {
 		.ee-input-with-label__left-label {
-			margin-inline-end: calc( #{$percentSignWidth} + #{$signBorderWidth} );
+			margin-inline-end: #{$percentSignWidth} + #{$signBorderWidth};
 		}
 
 		.ee-currency-sign {
-			box-sizing: content-box; // added this because I needed to have separate control over width and paddings
+			box-sizing: content-box; //  need separate control over width and paddings
 
 			@mixin width($charLength) {
-
-				width: calc(#{$signCharSize * $charLength});
+				width: #{$signCharSize * $charLength};
 			}
 
 			&.ee-cur-sign-2 {
@@ -49,9 +47,14 @@
 	}
 
 	&--with-percent-sign {
+		.ee-percent-sign {
+			box-sizing: content-box; //  need separate control over width and paddings
+			width: #{$percentSignWidth};
+		}
+
 		&.ee-money-field-sign {
 			&--before {
-				margin-inline-start: calc( #{$percentSignWidth} + #{$signBorderWidth} );
+				margin-inline-start: calc(#{$percentSignWidth} + #{$signBorderWidth});
 
 				@mixin marginLeft($charLength) {
 					margin-inline-start: calc(#{$signCharSize * $charLength} + #{$signBorderWidth} + #{$signPaddings});
@@ -79,7 +82,7 @@
 			}
 
 			&--after {
-				margin-inline-end: calc( #{$percentSignWidth} + #{$signBorderWidth} );
+				margin-inline-end: calc(#{$percentSignWidth} + #{$signBorderWidth});
 
 				@mixin marginRight($charLength) {
 					margin-inline-end: calc(

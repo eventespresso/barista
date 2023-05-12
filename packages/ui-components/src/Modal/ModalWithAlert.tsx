@@ -20,8 +20,9 @@ export const ModalWithAlert: React.FC<ModalWithAlertProps> = ({
 }) => {
 	const { confirmationDialog, onOpen: showAlert } = useConfirmationDialog({
 		message: alertText,
-		title: __('Are you sure you want to close this?'),
 		onConfirm: onClose as VoidFunction,
+		title: __('Are you sure you want to close this?'),
+		yesButtonText: __('Yes, discard changes'),
 	});
 
 	/**

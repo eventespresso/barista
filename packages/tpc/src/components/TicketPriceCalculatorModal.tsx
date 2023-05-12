@@ -19,6 +19,7 @@ const TicketPriceCalculatorModal: React.FC<TPCModalProps> = ({ onSubmit }) => {
 
 	return (
 		<ModalWithAlert
+			alertText={__('Changes will be lost if you proceed.')}
 			bodyClassName='ee-tpc__body'
 			cancelButtonProps={resetButtonProps}
 			className='ee-tpc'
