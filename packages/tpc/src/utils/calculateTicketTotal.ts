@@ -16,11 +16,6 @@ const calculateTicketTotal = (prices: DataState['prices']): number => {
 	const basePrice = getBasePrice(prices);
 	const basePriceAmount = parsedAmount(basePrice.amount);
 
-	// if the king has no value, it's not good for the "story"
-	if (!basePriceAmount) {
-		return 0;
-	}
-
 	// if the battle lasts this far, pawns also matter
 	const priceModifiers = getPriceModifiers(prices);
 
