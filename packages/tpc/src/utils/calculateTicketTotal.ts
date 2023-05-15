@@ -4,7 +4,7 @@ import { getBasePrice, getPriceModifiers } from '@eventespresso/predicates';
 import { parsedAmount, groupByProp } from '@eventespresso/utils';
 
 import { DataState } from '../data';
-import applyParallelModifiers from './applyParallelModifiers';
+import applyPriceModifiers from './applyPriceModifiers';
 
 const calculateTicketTotal = (prices: DataState['prices']): number => {
 	// if there is no wealth or a king, you know what happens
@@ -31,7 +31,7 @@ const calculateTicketTotal = (prices: DataState['prices']): number => {
 	// final nail in the coffin
 	const newTicketTotal = reduce(
 		(currentTotal, pricesWithSameOrder) => {
-			return applyParallelModifiers(currentTotal, pricesWithSameOrder);
+			return applyPriceModifiers(currentTotal, pricesWithSameOrder);
 		},
 		basePriceAmount,
 		Object.values(orderToPriceMap)
