@@ -1,7 +1,7 @@
 import { parsedAmount } from '@eventespresso/utils';
 import { TpcPriceModifier } from '../types';
 
-const applyParallelModifiers = (baseAmount: number, modifiers: Array<TpcPriceModifier>): number => {
+const applyPriceModifiers = (baseAmount: number, modifiers: Array<TpcPriceModifier>): number => {
 	const modifications = modifiers.reduce((prevValue, { amount, isDiscount, isPercent }) => {
 		const priceAmount = parsedAmount(amount) || 0;
 
@@ -20,4 +20,4 @@ const applyParallelModifiers = (baseAmount: number, modifiers: Array<TpcPriceMod
 	return baseAmount + modifications;
 };
 
-export default applyParallelModifiers;
+export default applyPriceModifiers;

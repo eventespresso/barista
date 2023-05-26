@@ -3,7 +3,7 @@ import { reduceRight } from 'ramda';
 import { getPriceModifiers } from '@eventespresso/predicates';
 import { parsedAmount, groupByProp } from '@eventespresso/utils';
 import { DataState } from '../data';
-import undoParallelModifiers from './undoParallelModifiers';
+import undoPriceModifiers from './undoPriceModifiers';
 import { TPC_PRICE_DECIMAL_PLACES } from './constants';
 
 const calculateBasePrice = (ticketTotal: number, prices: DataState['prices']): number => {
@@ -25,7 +25,7 @@ const calculateBasePrice = (ticketTotal: number, prices: DataState['prices']): n
 
 	const newBasePriceAmount = reduceRight(
 		(pricesWithSameOrder, currentTotal) => {
-			return undoParallelModifiers(currentTotal, pricesWithSameOrder);
+			return undoPriceModifiers(currentTotal, pricesWithSameOrder);
 		},
 		ticketTotal,
 		Object.values(orderToPriceMap)

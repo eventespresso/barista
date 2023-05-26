@@ -4,7 +4,7 @@ import { getBasePrice, getPriceModifiers } from '@eventespresso/predicates';
 import { parsedAmount, groupByProp } from '@eventespresso/utils';
 
 import { DataState } from '../data';
-import applyParallelModifiers from './applyParallelModifiers';
+import applyPriceModifiers from './applyPriceModifiers';
 
 const calculateTicketTotal = (prices: DataState['prices']): number => {
 	// if there is no wealth or a king, you know what happens
@@ -15,11 +15,6 @@ const calculateTicketTotal = (prices: DataState['prices']): number => {
 	// lets honour the king of prices
 	const basePrice = getBasePrice(prices);
 	const basePriceAmount = parsedAmount(basePrice.amount);
-
-	// if the king has no value, it's not good for the "story"
-	if (!basePriceAmount) {
-		return 0;
-	}
 
 	// if the battle lasts this far, pawns also matter
 	const priceModifiers = getPriceModifiers(prices);
@@ -36,7 +31,7 @@ const calculateTicketTotal = (prices: DataState['prices']): number => {
 	// final nail in the coffin
 	const newTicketTotal = reduce(
 		(currentTotal, pricesWithSameOrder) => {
-			return applyParallelModifiers(currentTotal, pricesWithSameOrder);
+			return applyPriceModifiers(currentTotal, pricesWithSameOrder);
 		},
 		basePriceAmount,
 		Object.values(orderToPriceMap)
