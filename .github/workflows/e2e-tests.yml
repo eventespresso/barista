@@ -19,7 +19,7 @@ jobs:
             # if input path is provided, it will be preferred over the directory structure.
             specs: ${{ (github.event.inputs.path && steps.input.outputs.path) || steps.list.outputs.files }}
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
             # This step outputs a JSON object of e2e test paths - {"path": []}, which is passed to the e2e matrix
             - id: list
               run: echo "::set-output name=files::{\"path\":$(ls -d packages/e2e-tests/specs/* | jq -R -s -c 'split("\n")[:-1]')}"

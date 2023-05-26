@@ -1,0 +1,86 @@
+name: Deploy Leading Edge (master)
+
+on:
+    pull_request:
+        types:
+            - closed
+        branches:
+            - master
+env:
+    API_TOKEN_GITHUB: ${{ secrets.GH_ACTIONS_ACCESS_TOKEN }}
+    GIT_USER_EMAIL: ${{ secrets.GH_ACTIONS_GIT_USER_EMAIL }}
+    GIT_USER_NAME: ${{ secrets.GH_ACTIONS_GIT_USER_NAME }}
+    FORCE_COLOR: true
+    PLAYWRIGHT_BROWSERS_PATH: 0 # See https://playwright.dev/docs/ci/#caching-browsers
+
+jobs:
+    deploy-domains-and-packages:
+        runs-on: ubuntu-latest
+        if: github.event.pull_request.merged == true
+        name: Deploy domains and packages
+        steps:
+            - name: Setup SSH
+              uses: MrSquaare/ssh-setup-action@v2
+              with:
+                  host: github.com
+                  private-key: ${{ secrets.GH_ACTIONS_SSH_PRIVATE_KEY }}
+
+            - name: Checkout and yarn
+              uses: eventespresso/actions/packages/checkout-and-yarn@main
+              with:
+                  cache-version: ${{ secrets.GH_ACTIONS_CACHE_VERSION }}
+
+            - name: configure git
+              run: source tools/configure-git.sh
+
+            - name: Get PR
+              id: pr
+              uses: actions-ecosystem/action-get-merged-pull-request@main
+              with:
+                  github_token: ${{ secrets.GH_ACTIONS_ACCESS_TOKEN }}
+
+            - name: Generate Date
+              id: date
+              shell: bash
+              run: echo "date=$(date +'%b-%d-%H.%M')" >> $GITHUB_OUTPUT
+
+            - name: Clone Repo
+              run: source tools/clone-repo.sh DEV eventespresso cafe
+
+            - name: Create Branch
+              run: source tools/create-branch.sh "updates-from-barista-${{ steps.date.outputs.date }}"
+
+            - name: Copy EE Core Changes to Cafe Repo
+              run: source tools/copy-changes.sh "plugins/event-espresso-core/assets" "plugins/event-espresso-core/languages"
+
+            - name: Copy REM Changes to Cafe Repo
+              run: source tools/copy-changes.sh "plugins/eea-recurring-events-manager/assets" "plugins/eea-recurring-events-manager/languages"
+
+            - name: Copy WP User Changes to Cafe Repo
+              run: source tools/copy-changes.sh "plugins/eea-wp-user-integration/assets" "plugins/eea-wp-user-integration/languages"
+
+            - name: Copy Upsell Editor to Cafe Repo
+              run: source tools/copy-changes.sh "plugins/saas-notification/assets" "plugins/saas-notification/languages"
+
+            # Deploy the built assets to ES tester plugin assets
+            # - name: Copy EdtrSlots to Cafe Repo
+            #   run: source tools/copy-changes.sh "eventsmart.com-website" "QUEUE" "plugins/es-barista-tester/assets"
+            #   env:
+            #       DEPLOY_I18N: 'no'
+
+            - name: Commit Changes
+              run: source tools/commit-changes.sh "updates-from-barista-${{ steps.date.outputs.date }}" DEV cafe
+
+            - name: Create PR for Core
+              id: create-pr-for-core
+              uses: repo-sync/pull-request@v2
+              with:
+                  source_branch: 'updates-from-barista-${{ steps.date.outputs.date }}'
+                  destination_branch: 'DEV'
+                  pr_title: ${{ steps.pr.outputs.title }} (#${{ steps.pr.outputs.number }})
+                  pr_body: 'This PR was automatically generated for the purpose of merging the work done in Barista PR [${{ steps.pr.outputs.title }}](https://github.com/eventespresso/cafe/pull/${{ steps.pr.outputs.number }}) into Café '
+                  pr_reviewer: 'tn3rb'
+                  pr_assignee: 'tn3rb'
+                  pr_label: 'C: assets 💎,P3: med priority 😐,S5: code review 🔎,T: chore🧹'
+                  pr_allow_empty: true # Creates pull request even if there are no changes
+                  github_token: ${{ secrets.GH_ACTIONS_ACCESS_TOKEN }}

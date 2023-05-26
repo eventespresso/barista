@@ -31,23 +31,22 @@ remoteRepoHasRcBranch() {
 	fi
 }
 
-
 ## declare an array of target repos
 declare -a arr=(
 	"event-espresso-core"
 	"eea-recurring-events-manager"
-	)
+)
+
 checkForRcBranches() {
 	## now loop through the array
-	for repo in "${arr[@]}"
-		do
-			# If there is a remote branch for the repo
-			if remoteRepoHasRcBranch "${repo}"; then
-				echo "${BRANCH} branch found in ${repo}"
-				# return success
-				return 0
-			fi
-		done
+	for repo in "${arr[@]}"; do
+		# If there is a remote branch for the repo
+		if remoteRepoHasRcBranch "${repo}"; then
+			echo "${BRANCH} branch found in ${repo}"
+			# return success
+			return 0
+		fi
+	done
 	echo "No target RC branch found!"
 	exit 1
 }
