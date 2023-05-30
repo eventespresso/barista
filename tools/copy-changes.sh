@@ -44,8 +44,9 @@ if [[ -z "$BUILD_PATH" ]]; then
 	exit 1
 fi
 
-printf "\n%bchanging directory: %s%b\n" "$CYAN" "$REPO" "$RESET"
-cd "$REPO"
+printf "\n%bcurrent directory: %s%b" "$CYAN" "$CURRENT_DIR" "$RESET"
+# printf "\n%bchanging directory: %s%b" "$CYAN" "$REPO" "$RESET"
+# cd "$REPO"
 
 ## DEPLOY I18N ##
 # paths of the translation files
@@ -59,7 +60,6 @@ if [ "$DEPLOY_I18N" != "no" ]; then
 	# make sure the file exists
 	touch "$PHP_I18N_FILE"
 	# Convert POT file to PHP
-	echo "converting pot to PHP..."
 	printf "\n%bconverting pot to PHP...%b\n" "$CYAN" "$RESET"
 	npx pot-to-php "$JS_I18N_FILE" "$PHP_I18N_FILE" event_espresso
 fi
@@ -71,8 +71,8 @@ if [ "$REMOVE_JS_I18N_FILE" != "no" ]; then
 	rm -f "$JS_I18N_FILE"
 fi
 
-# goto the repo directory
-cd "$REPO"
+# # goto the repo directory
+# cd "$REPO"
 
 # If DEPLOY_ASSETS is not set to "no"
 if [ "$DEPLOY_ASSETS" != "no" ]; then
