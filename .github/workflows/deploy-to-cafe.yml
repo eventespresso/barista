@@ -51,7 +51,7 @@ jobs:
               run: source tools/create-branch.sh "updates-from-barista-${{ steps.date.outputs.date }}"
 
             - name: Copy EE Core Changes to Cafe Repo
-              run: source tools/copy-changes.sh "plugins/event-espresso-core/assets" "plugins/event-espresso-core/languages"
+              run: source tools/copy-changes.sh "plugins/event-espresso-core/assets" "plugins/event-espresso-core/languages" "build"
 
             - name: Copy REM Changes to Cafe Repo
               run: source tools/copy-changes.sh "plugins/eea-recurring-events-manager/assets" "plugins/eea-recurring-events-manager/languages"
