@@ -1,9 +1,9 @@
-import { parsedAmount } from '@eventespresso/utils';
+import { sanitizeAmount } from '@eventespresso/utils';
 import { TpcPriceModifier } from '../types';
 
 const applyPriceModifiers = (baseAmount: number, modifiers: Array<TpcPriceModifier>): number => {
 	const modifications = modifiers.reduce((prevValue, { amount, isDiscount, isPercent }) => {
-		const priceAmount = parsedAmount(amount);
+		const priceAmount = parseFloat(sanitizeAmount(amount)) || 0;
 
 		// calculate the modification value
 		const modification = isPercent ? (priceAmount / 100) * baseAmount : priceAmount;

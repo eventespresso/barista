@@ -187,14 +187,14 @@ type ExtraSelectProps = Omit<
 	| 'width'
 >;
 
-export interface BaseFieldProps<V = FieldValue> extends InputProps, ExtraNumberProps, ExtraSelectProps {
+export interface BaseFieldProps<V> extends InputProps, ExtraNumberProps, ExtraSelectProps {
 	'aria-label': string;
 	children?: ((props: Record<string, any>) => React.ReactNode) | React.ReactNode;
 	component?: React.ComponentType | SupportedInputs;
 	disabled?: boolean;
 	format?: (value: V, name: string) => any;
 	formatOnBlur?: boolean;
-	getValue: () => V;
+	getValue: () => string;
 	name: string;
 	parse?: (value: any, name: string) => V;
 	setValue: (value: V) => void;
@@ -204,15 +204,15 @@ export interface BaseFieldProps<V = FieldValue> extends InputProps, ExtraNumberP
 export interface UseBaseField extends Omit<BaseFieldProps<FieldValue>, 'aria-label' | 'type'> {}
 
 export interface UsePrice {
-	getValue: () => FieldValue;
-	setValue: (value: FieldValue) => void;
+	getValue: () => string;
+	setValue: (value: string) => void;
 }
 
 export interface UsePriceAmount extends Pick<PriceFieldProps, 'field' | 'price'> {}
 
 export interface PriceFieldProps
 	extends PriceModifierProps,
-		Omit<BaseFieldProps<number | string>, 'getValue' | 'setValue' | 'name'> {
+		Omit<BaseFieldProps<string>, 'getValue' | 'setValue' | 'name'> {
 	field: keyof TpcPriceModifier;
 }
 

@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 
 import classNames from 'classnames';
 
-import { formatAmount as defaultFormatAmount, parsedAmount } from '@eventespresso/utils';
+import { formatAmount as defaultFormatAmount, sanitizeAmount } from '@eventespresso/utils';
 import { InlineEditText } from '../InlineEditInput';
 
 import type { InlineEditCurrencyProps } from './types';
@@ -32,7 +32,7 @@ export const InlineEditCurrency: React.FC<InlineEditCurrencyProps> = ({
 
 	const onChangeHandler = useCallback(
 		(value: string) => {
-			const newAmount = parsedAmount(value);
+			const newAmount = sanitizeAmount(value);
 			if (newAmount !== amount) {
 				onChange({ amount: newAmount, id });
 			}

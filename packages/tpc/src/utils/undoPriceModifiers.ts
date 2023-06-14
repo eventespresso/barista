@@ -1,10 +1,10 @@
-import { parsedAmount } from '@eventespresso/utils';
+import { sanitizeAmount } from '@eventespresso/utils';
 import { TpcPriceModifier } from '../types';
 
 const undoPriceModifiers = (subTotal: number, modifiers: Array<TpcPriceModifier>): number => {
 	const modifications = modifiers.reduce(
 		({ percents, fixedPrices }, { amount, isDiscount, isPercent }) => {
-			const priceAmount = parsedAmount(amount) || 0;
+			const priceAmount = parseFloat(sanitizeAmount(amount)) || 0;
 
 			const newAmount = isDiscount ? -priceAmount : priceAmount;
 

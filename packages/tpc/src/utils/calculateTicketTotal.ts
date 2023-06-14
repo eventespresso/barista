@@ -1,7 +1,7 @@
 import { reduce } from 'ramda';
 
 import { getBasePrice, getPriceModifiers } from '@eventespresso/predicates';
-import { parsedAmount, groupByProp } from '@eventespresso/utils';
+import { sanitizeAmount, groupByProp } from '@eventespresso/utils';
 
 import { DataState } from '../data';
 import applyPriceModifiers from './applyPriceModifiers';
@@ -14,7 +14,7 @@ const calculateTicketTotal = (prices: DataState['prices']): number => {
 
 	// lets honour the king of prices
 	const basePrice = getBasePrice(prices);
-	const basePriceAmount = parsedAmount(basePrice.amount);
+	const basePriceAmount = parseFloat(sanitizeAmount(basePrice.amount));
 
 	// if the battle lasts this far, pawns also matter
 	const priceModifiers = getPriceModifiers(prices);

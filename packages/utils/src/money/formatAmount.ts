@@ -1,4 +1,4 @@
-import { parsedAmount } from './';
+import { sanitizeAmount } from './';
 
 import type { Amount } from './types';
 
@@ -14,7 +14,6 @@ export type FormatAmountFunction = (amount: Amount) => string;
 export const formatAmount =
 	(decimalPlaces: number): FormatAmountFunction =>
 	(amount: Amount): string => {
-		const newParsedAmount = parsedAmount(amount);
-		// newParsedAmount may be NaN
-		return isNaN(newParsedAmount) ? '' : newParsedAmount.toFixed(decimalPlaces);
+		const sanitizedAmount = parseFloat(sanitizeAmount(amount));
+		return sanitizedAmount.toFixed(decimalPlaces);
 	};

@@ -1,7 +1,9 @@
+import { useCallback, useEffect, useMemo } from 'react';
 import classNames from 'classnames';
 import { __ } from '@eventespresso/i18n';
 
-import { parsedAmount } from '@eventespresso/utils';
+import { formatAmount, sanitizeAmount } from '@eventespresso/utils';
+import { useConfig } from '@eventespresso/services';
 import { BaseField, MoneyInputWithConfig, usePriceAmount } from '../fields';
 import { useDataState } from '../data';
 import type { PriceModifierProps } from '../types';
@@ -9,24 +11,50 @@ import type { PriceModifierProps } from '../types';
 import './styles.scss';
 
 const PriceAmountInput: React.FC<PriceModifierProps> = ({ price }) => {
+	const { currency } = useConfig();
+	const inputFieldProps = useMemo(() => {
+		const decimals = currency?.decimalPlaces ?? 2;
+		const subunits = currency?.subunits ?? 100;
+		return {
+			min: 0,
+			precision: decimals,
+			step: 1 / subunits,
+		};
+	}, [currency]);
+
 	const { reverseCalculate, isDisabled } = useDataState();
 	const { getValue, setValue } = usePriceAmount({ field: 'amount', price });
 
-	const hasError = Number(price?.amount ?? 0) === 0;
+	const hasError = Number(price?.amount ?? 0) <= 0;
+
 	const className = classNames(
 		'ee-input__price-field',
 		hasError && 'ee-input__price-field--has-error',
 		price.isPercent
 	);
 
+	// because it can affect other tickets that have this price,
+	// default price amount should not be editable
 	const disabled = isDisabled || (reverseCalculate && price.isBasePrice) || price.isDefault;
 
-	const formatParse =
-		(defaultValue = null) =>
-		(amount: any) => {
-			const parsedValue = parsedAmount(amount);
-			return isNaN(parsedValue) ? defaultValue : parsedValue;
-		};
+	// const formatParse =
+	// 	(defaultValue = null) =>
+	// 	(amount: number | string) => {
+	// 		const moneyValue = amount ?? defaultValue;
+	// 		console.log('%c PriceAmountInput::formatParse()', 'color: DodgerBlue; font-size: 12px;');
+	// 		console.log('%c amount', 'color: DodgerBlue;', amount);
+	// 		console.log('%c moneyValue', 'color: DodgerBlue;', moneyValue);
+	// 		return sanitizeAmount(moneyValue);
+	// 	};
+
+	const format = useCallback((amount) => formatAmount(currency?.decimalPlaces)(amount), [currency]);
+
+	useEffect(() => {
+		setTimeout(() => {
+			setValue(format(getValue()));
+		}, 500);
+		// return () => window.clearTimeout(delayedFormat);
+	}, [format, getValue, setValue]);
 
 	return (
 		<MoneyInputWithConfig disabled={disabled} isPercent={price.isPercent}>
@@ -34,18 +62,16 @@ const PriceAmountInput: React.FC<PriceModifierProps> = ({ price }) => {
 				aria-label={__('amount')}
 				className={className}
 				component='input'
-				// because it can affect other tickets that have this price
-				// default price amount should not be changeable
 				disabled={disabled}
-				format={formatParse('')}
-				formatOnBlur
+				format={format}
+				formatOnBlur={false}
 				getValue={getValue}
-				min={0}
+				inputFieldProps={inputFieldProps}
 				name='amount'
-				parse={formatParse()}
+				parse={sanitizeAmount}
 				placeholder={__('amount…')}
 				setValue={setValue}
-				type='number'
+				type='text'
 			/>
 		</MoneyInputWithConfig>
 	);

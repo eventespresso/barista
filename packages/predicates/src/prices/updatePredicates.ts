@@ -1,7 +1,7 @@
 import { assoc, map, pickBy, when } from 'ramda';
 
 import type { Price } from '@eventespresso/edtr-services';
-import { parsedAmount } from '@eventespresso/utils';
+import { sanitizeAmount } from '@eventespresso/utils';
 import { isPriceField } from './selectionPredicates';
 import { entityHasGuid } from '../common';
 
@@ -27,7 +27,7 @@ export const copyPriceFields = <T>(price: T, predicate = isPriceField): T => pic
 export const updatePriceAmount =
 	<T extends Price>(amount: number) =>
 	(price: T): T =>
-		assoc<number, T, string>('amount', parsedAmount(amount || 0), price);
+		assoc<number, T, string>('amount', parseFloat(sanitizeAmount(amount || 0)), price);
 
 /**
  * updates the price type

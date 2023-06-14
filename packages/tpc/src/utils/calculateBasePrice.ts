@@ -1,13 +1,13 @@
 import { reduceRight } from 'ramda';
 
 import { getPriceModifiers } from '@eventespresso/predicates';
-import { parsedAmount, groupByProp } from '@eventespresso/utils';
+import { formatAmount, sanitizeAmount, groupByProp } from '@eventespresso/utils';
 import { DataState } from '../data';
 import undoPriceModifiers from './undoPriceModifiers';
 import { TPC_PRICE_DECIMAL_PLACES } from './constants';
 
 const calculateBasePrice = (ticketTotal: number, prices: DataState['prices']): number => {
-	const parsedTicketTotal = parsedAmount(ticketTotal);
+	const parsedTicketTotal = parseFloat(sanitizeAmount(ticketTotal));
 
 	if (!parsedTicketTotal) {
 		return 0;
@@ -32,9 +32,7 @@ const calculateBasePrice = (ticketTotal: number, prices: DataState['prices']): n
 	);
 
 	// Save the price up to 6 decimals places
-	const amount = parsedAmount(newBasePriceAmount).toFixed(TPC_PRICE_DECIMAL_PLACES);
-
-	return parsedAmount(amount);
+	return parseFloat(formatAmount(TPC_PRICE_DECIMAL_PLACES)(newBasePriceAmount));
 };
 
 export default calculateBasePrice;
