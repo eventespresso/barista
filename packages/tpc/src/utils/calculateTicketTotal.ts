@@ -1,7 +1,7 @@
 import { reduce } from 'ramda';
 
 import { getBasePrice, getPriceModifiers } from '@eventespresso/predicates';
-import { parsedAmount, groupByProp } from '@eventespresso/utils';
+import { sanitizeAmount, groupByProp } from '@eventespresso/utils';
 
 import { DataState } from '../data';
 import applyParallelModifiers from './applyParallelModifiers';
@@ -14,7 +14,7 @@ const calculateTicketTotal = (prices: DataState['prices']): number => {
 
 	// lets honour the king of prices
 	const basePrice = getBasePrice(prices);
-	const basePriceAmount = parsedAmount(basePrice.amount);
+	const basePriceAmount = parseFloat(sanitizeAmount(basePrice.amount));
 
 	// if the king has no value, it's not good for the "story"
 	if (!basePriceAmount) {

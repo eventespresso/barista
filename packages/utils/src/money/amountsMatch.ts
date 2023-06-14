@@ -1,4 +1,4 @@
-import { parsedAmount } from './';
+import { sanitizeAmount } from './';
 
 /**
  * returns true if the two supplied values are equal after being parsed as floats
@@ -8,5 +8,5 @@ import { parsedAmount } from './';
  * @return {boolean}
  */
 export const amountsMatch = (amount1: number | string, amount2: number | string): boolean => {
-	return parsedAmount(amount1) === parsedAmount(amount2);
+	return parseFloat(sanitizeAmount(amount1)) === parseFloat(sanitizeAmount(amount2));
 };

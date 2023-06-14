@@ -20,9 +20,9 @@ $money-input-margin: calc(#{$percentSignWidth} + var(--ee-border-width) + (2 * v
 
 		.ee-input {
 			&__price-field {
-				input {
-					min-width: 6rem;
-				}
+				min-width: 6rem;
+				text-align: end;
+
 				&--has-error {
 					// this was used to increase specificity,
 					// more info: https://sass-lang.com/documentation/at-rules/at-root

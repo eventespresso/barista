@@ -17,6 +17,8 @@ const inputStepperProps = { className: 'ee-number-field-stepper' };
 
 export const NumberInput = forwardRef<HTMLInputElement, NumberProps>(
 	({ className, inputClass, showStepper, visibleDigits, wrapperClass, ...props }, ref) => {
+		console.log('%c NumberInput', 'color: Pink; font-size: 12px;');
+		console.log('%c props', 'color: Pink;', props);
 		const visibleDigitsClassName =
 			showStepper === false &&
 			visibleDigits &&

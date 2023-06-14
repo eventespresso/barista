@@ -5,7 +5,7 @@ import { NumberInput, Select, TextInput } from '@eventespresso/ui-components';
 import useBaseField from './useBaseField';
 import type { BaseFieldProps } from './types';
 
-const BaseField: React.FC<BaseFieldProps> = ({
+const BaseField: React.FC<BaseFieldProps<string | number>> = ({
 	children,
 	component,
 	name,

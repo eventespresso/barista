@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import type { FieldValue, InputProps, UseBaseField } from './types';
 
-const defaultFormat: UseBaseField['format'] = (value) => (value === undefined ? '' : value);
-const defaultParse: UseBaseField['parse'] = (value) => (value === '' ? undefined : value);
+const defaultFormat: UseBaseField['format'] = (value) => value ?? '';
+const defaultParse: UseBaseField['parse'] = (value) => value ?? '';
 
 type BaseField = {
 	handlers: InputProps;
@@ -23,10 +23,10 @@ const useBaseField = ({
 
 	if (formatOnBlur) {
 		if (component === 'input') {
-			fieldValue = defaultFormat(fieldValue, name);
+			fieldValue = format(fieldValue, name);
 		}
 	} else {
-		fieldValue = format(fieldValue, name);
+		// fieldValue = format(fieldValue, name);
 	}
 
 	if (fieldValue === null) {
@@ -36,15 +36,21 @@ const useBaseField = ({
 	return useMemo<BaseField>(() => {
 		const handlers: InputProps = {
 			onBlur: () => {
+				let value = parse(getValue(), name);
 				if (formatOnBlur) {
-					setValue(format(getValue(), name));
+					value = format(value, name);
 				}
+				setValue(value);
 			},
 			onChange: (event) => {
 				const value = event?.target?.value;
+				console.log('%c useBaseField::onChange()', 'color: Orange; font-size: 12px;');
+				console.log('%c value, name, parse', 'color: Orange;', value, name, parse);
 				setValue(parse(value, name));
 			},
 			onChangeValue: (value) => {
+				console.log('%c useBaseField::onChangeValue()', 'color: Orange; font-size: 12px;');
+				console.log('%c value, name, parse', 'color: Orange;', value, name, parse);
 				setValue(parse(value, name));
 			},
 		};

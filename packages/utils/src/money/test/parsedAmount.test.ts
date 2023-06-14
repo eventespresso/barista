@@ -1,4 +1,4 @@
-import { parsedAmount } from '../';
+import { sanitizeAmount } from '../';
 
 const testCases = [
 	{
@@ -46,7 +46,7 @@ const testCases = [
 describe('formatAmount', () => {
 	for (const testCase of testCases) {
 		it(testCase.desc, () => {
-			const result = parsedAmount(testCase.amount);
+			const result = sanitizeAmount(testCase.amount);
 			const expectedResult = testCase.testFn ? testCase.testFn(result) : result;
 
 			expect(testCase.result).toBe(expectedResult);

@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
 
-import { parsedAmount } from '@eventespresso/utils';
 import { useMoneyDisplay } from '@eventespresso/services';
 import { getBasePrice } from '@eventespresso/predicates';
 
@@ -27,7 +26,7 @@ const useStateListeners = (): void => {
 
 	const updateTicketTotal = useCallback(() => {
 		let ticketTotal = calculateTicketTotal(prices);
-		ticketTotal = parsedAmount(formatAmount(ticketTotal));
+		ticketTotal = parseFloat(formatAmount(ticketTotal));
 		ticketTotal = isNaN(ticketTotal) ? 0 : ticketTotal;
 		// avoid unnecessary update
 		if (ticket.price !== ticketTotal) {
