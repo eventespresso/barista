@@ -7,8 +7,9 @@ import type { OptionsType } from '@eventespresso/adapters';
 import { NOW } from '@eventespresso/constants';
 import { arrayOfN } from '@eventespresso/utils';
 
-import { add, sub } from './addSub';
+import { add } from './addSub';
 import diff from './diff';
+import { modifyDate } from './modifyDate';
 import type { Intervals, PrepDatesComparisonFunc, ShiftDateArgs } from './types';
 
 export const DATE_INTERVALS: Intervals = {
@@ -35,11 +36,7 @@ export const shiftDate =
 	(args: ShiftDateArgs) =>
 	(date: Date | string): Date => {
 		const parsedDate = date instanceof Date ? date : parseISO(date);
-		if (args?.unit && args?.value && args?.type) {
-			const fn = args.type === 'earlier' ? sub : add;
-			return fn(args.unit, parsedDate, args.value);
-		}
-		return parsedDate;
+		return modifyDate({ date: parsedDate, ...args });
 	};
 
 /**
