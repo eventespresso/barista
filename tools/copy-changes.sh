@@ -3,10 +3,10 @@
 # | - | ----------- | ------------------------------------------- | ------------------------- |
 # | # | VAR NAME    | DESCRIPTION                                 | DEFAULT                   |
 # | - | ----------- | ------------------------------------------- | ------------------------- |
-# | 2 | ASSETS_PATH | path to assets folder on the target repo    | assets                    |
-# | 3 | I18N_PATH   | path to languages folder on the target repo | languages                 |
-# | 4 | BUILD_PATH  | build path on the current/this repo         | build                     |
-# | 1 | REPO_DIR    | path to target repository                   | cafe                      |
+# | 1 | ASSETS_PATH | path to assets folder on the target repo    | assets                    |
+# | 2 | I18N_PATH   | path to languages folder on the target repo | languages                 |
+# | 3 | BUILD_PATH  | build path on the current/this repo         | build                     |
+# | 4 | REPO_DIR    | path to target repository                   | cafe                      |
 # | - | ----------- | ------------------------------------------- | ------------------------- |
 
 set -e
