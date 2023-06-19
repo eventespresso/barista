@@ -50,14 +50,32 @@ jobs:
             - name: Create Branch
               run: source tools/create-branch.sh "updates-from-barista-${{ steps.date.outputs.date }}"
 
+            # Build the core domains along with all the packages
+            # because all packages will goto core
+            - name: Build core domains and all their packages
+              run: yarn build:core
+
             - name: Copy EE Core Changes to Cafe Repo
               run: source tools/copy-changes.sh "plugins/event-espresso-core/assets" "plugins/event-espresso-core/languages" "build"
+
+            # Build REM domain without packages
+            # because core will load/register the packages
+            - name: Build REM with its packages
+              run: yarn build:rem
 
             - name: Copy REM Changes to Cafe Repo
               run: source tools/copy-changes.sh "plugins/eea-recurring-events-manager/assets" "plugins/eea-recurring-events-manager/languages"
 
+            # Build WP User domain without packages
+            - name: Build wpUser
+              run: yarn build:wpUser
+
             - name: Copy WP User Changes to Cafe Repo
               run: source tools/copy-changes.sh "plugins/eea-wp-user-integration/assets" "plugins/eea-wp-user-integration/languages"
+
+            # Build upsellAds domain without packages
+            - name: Build Upsell Ads
+              run: yarn build:es:upsellEditor
 
             - name: Copy Upsell Editor to Cafe Repo
               run: source tools/copy-changes.sh "plugins/saas-notification/assets" "plugins/saas-notification/languages"
