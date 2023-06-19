@@ -1,7 +1,7 @@
-import { pipe } from 'ramda';
 import { __ } from '@eventespresso/i18n';
 import { getHours, getMinutes, getSeconds, parseISO, toDate } from 'date-fns';
-import { setHours, setMinutes, setSeconds, setYear, setMonth, setDate } from 'date-fns/fp';
+import { setDate, setHours, setMinutes, setMonth, setSeconds, setYear } from 'date-fns/fp';
+import { pipe } from 'ramda';
 
 import type { OptionsType } from '@eventespresso/adapters';
 import { NOW } from '@eventespresso/constants';
@@ -9,8 +9,7 @@ import { arrayOfN } from '@eventespresso/utils';
 
 import { add, sub } from './addSub';
 import diff from './diff';
-import type { Intervals, ShiftDateArgs } from './types';
-import type { PrepDatesComparisonFunc } from './types';
+import type { Intervals, PrepDatesComparisonFunc, ShiftDateArgs } from './types';
 
 export const DATE_INTERVALS: Intervals = {
 	months: __('month(s)'),
