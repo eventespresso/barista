@@ -28,6 +28,14 @@ ORG="${2:-eventespresso}"
 REPO_NAME=${3:-cafe}
 REPO_DIR="${BASE_DIR:?}/$REPO_NAME"
 
+printf "\n\n%bclone-repo variables:" "$CYAN"
+printf "\n BASE_DIR: %s" "$BASE_DIR"
+printf "\n REPO_DIR: %s" "$REPO_DIR"
+printf "\n BRANCH: %s" "$BRANCH"
+printf "\n ORG: %s" "$ORG"
+printf "\n REPO_NAME: %s" "$REPO_NAME"
+printf "\n%b" "$RESET"
+
 if [[ -z "$BRANCH" ]]; then
 	printf "\n%b BRANCH is undefined%b\n" "$RED" "$RESET"
 	exit 1
@@ -42,6 +50,9 @@ if [[ -z "$REPO_NAME" ]]; then
 	printf "\n%b REPO_NAME is undefined%b\n" "$RED" "$RESET"
 	exit 1
 fi
+
+printf "\n%bchanging directory: %s%b\n" "$CYAN" "$BASE_DIR" "$RESET"
+cd "$BASE_DIR"
 
 printf "\n%bcloning repo: %s%b\n" "$CYAN" "$REPO_NAME" "$RESET"
 # make sure the directory is empty
