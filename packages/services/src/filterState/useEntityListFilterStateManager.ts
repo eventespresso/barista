@@ -7,37 +7,45 @@ import useStateReducer from './useStateReducer';
 // create a shorter generic to use at multiple places.
 type ELFSM<SortBy = BasicSortBy> = EntityListFilterStateManager<SortBy>;
 
-const useEntityListFilterStateManager = <SortBy = BasicSortBy>(defaultSortBy: SortBy, listId = ''): ELFSM<SortBy> => {
+const useEntityListFilterStateManager = <SortBy = BasicSortBy>(
+	defaultSortBy: SortBy,
+	listId = '',
+	defaultPerPage: number = 6
+): ELFSM<SortBy> => {
 	type FSM = ELFSM<SortBy>;
 
-	const [view, setView] = useSessionStorageState<FSM['view']>(`${listId}-view`, 'card');
-	const [sortBy, setLocalSortBy] = useSessionStorageState<FSM['sortBy']>(`${listId}-sortBy`, defaultSortBy);
+	const [view, setSessionView] = useSessionStorageState<FSM['view']>(`${listId}-view`, 'card');
+	const [sortBy, setSessionSortBy] = useSessionStorageState<FSM['sortBy']>(`${listId}-sortBy`, defaultSortBy);
+	const [perPage, setSessionPerPage] = useSessionStorageState<FSM['perPage']>(`${listId}-perPage`, defaultPerPage);
 
 	const initialState = useMemo<EntityListFilterState<SortBy>>(
 		() => ({
 			pageNumber: 1,
-			perPage: 6,
+			perPage,
 			searchText: '',
 			showBulkActions: false,
 			sortBy,
 			total: null,
 			view,
 		}),
-		[sortBy, view]
+		[perPage, sortBy, view]
 	);
 	const [state, dispatch] = useReducer(useStateReducer<SortBy>(), initialState);
 
-	// Update `view` in local storage when it changes
+	// Update `view` in session storage when it changes
 	useEffect(() => {
-		setView(state.view);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [state.view]);
+		setSessionView(state.view);
+	}, [state.view, setSessionView]);
 
-	// Update `sortBy` in local storage when it changes
+	// Update `sortBy` in session storage when it changes
 	useEffect(() => {
-		setLocalSortBy(state.sortBy);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [state.sortBy]);
+		setSessionSortBy(state.sortBy);
+	}, [state.sortBy, setSessionSortBy]);
+
+	// Update `perPage` in session storage when it changes
+	useEffect(() => {
+		setSessionPerPage(state.perPage);
+	}, [state.perPage, setSessionPerPage]);
 
 	const getState: FSM['getState'] = useCallback(() => state, [state]);
 
