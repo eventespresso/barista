@@ -1,3 +1,4 @@
+import BigNumber from 'bignumber.js';
 import {
 	addDays,
 	addHours,
@@ -59,53 +60,68 @@ type modifyDateProps = { date: Date; unit: DateFnKey; value: number; type: 'earl
 const modifyDate = ({ date, unit, value, type }: modifyDateProps): Date => {
 	const wholeValue = Math.floor(value);
 
-	const modulo = value % 1;
+	let remainder = new BigNumber(value).modulo(1);
 
 	const wholeFn = getDateFn(type, unit);
 
 	const wholeDate = wholeFn(date, wholeValue);
 
 	// there are no decimal points, just return integer
-	if (modulo === 0) return wholeDate;
+	if (remainder.eq(0)) return wholeDate;
 
 	// there are decimal points, continue here
 
-	const multiplier = getMultiplerForFraction(unit);
+	let frDate = wholeDate;
 
-	const frUnit = getPreviousUnit(unit);
+	let frUnit = unit;
 
-	const frValue = Math.round(modulo * multiplier);
+	do {
+		const multiplier = getMultiplierForFraction(frUnit);
 
-	const frFn = getDateFn(type, frUnit);
+		const product = remainder.times(multiplier);
 
-	return frFn(wholeDate, frValue);
+		const integer =
+			frUnit !== 'milliseconds'
+				? product.integerValue(BigNumber.ROUND_FLOOR).toNumber()
+				: product.integerValue(BigNumber.ROUND_CEIL).toNumber();
+
+		remainder = frUnit !== 'milliseconds' ? product.modulo(1) : new BigNumber(0);
+
+		frUnit = getPreviousUnit(frUnit);
+
+		const frFn = getDateFn(type, frUnit);
+
+		frDate = frFn(frDate, integer);
+	} while (!remainder.eq(0));
+
+	return frDate;
 };
 
-const getMultiplerForFraction = (unit: IntervalType): number => {
-	// milliseconds are smallest unit hence base is 1
+const getMultiplierForFraction = (unit: DateFnKey): number => {
+	// there is nothing smaller than milliseconds in JS
 	if (unit === 'milliseconds') return 1;
 
-	// second fractions are milliseconds which have base of 1000
+	// there is 1,000 milliseconds in one second
 	if (unit === 'seconds') return 1000;
 
-	// day is made of 24 hours hence base 24
+	// there is 24 hours in 1 day
 	if (unit === 'days') return 24;
 
 	// all other time units are sexagesimal or base 60
 	return 60;
 };
 
-const getPreviousUnit = (unit: IntervalType): IntervalType => {
+const getPreviousUnit = (unit: DateFnKey): DateFnKey => {
 	// modifiers.add and modifiers.sub are symmetrical
 	// https://stackoverflow.com/questions/52856496/typescript-object-keys-return-string
-	const keys = Array.from(Object.keys(modifiers.add)) as IntervalType[];
+	const keys = Array.from(Object.keys(modifiers.add)) as DateFnKey[];
 	const i = keys.findIndex((v) => v === unit);
 	if (i === -1) return unit; // unit not found, keep unit as is
 	if (i === 0) return unit; // smallest possible unit
 	return keys[i - 1];
 };
 
-const getDateFn = (type: ShiftDateArgs['type'], unit: IntervalType): DateFn => {
+const getDateFn = (type: ShiftDateArgs['type'], unit: DateFnKey): DateFn => {
 	const oKey: keyof modifiers = type === 'earlier' ? 'sub' : 'add';
 
 	if (!(unit in modifiers[oKey])) throw new Error('Unexpected condition');
