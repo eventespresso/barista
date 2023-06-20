@@ -1,14 +1,14 @@
-import { useMemo, useCallback } from 'react';
 import { __ } from '@eventespresso/i18n';
 import * as R from 'ramda';
+import { useCallback, useMemo } from 'react';
 
-import { CalendarOutlined, ControlOutlined, ProfileOutlined } from '@eventespresso/icons';
-import { intervalsToOptions, Intervals, DATE_INTERVALS } from '@eventespresso/dates';
+import { DATE_INTERVALS, Intervals, intervalsToOptions } from '@eventespresso/dates';
 import type { EspressoFormProps } from '@eventespresso/form';
+import { CalendarOutlined, ControlOutlined, ProfileOutlined } from '@eventespresso/icons';
 
+import { useMemoStringify } from '@eventespresso/hooks';
 import { validate } from './formValidation';
 import type { BulkEditFormShape } from './types';
-import { useMemoStringify } from '@eventespresso/hooks';
 
 type DateFormConfig = EspressoFormProps<BulkEditFormShape>;
 
