@@ -70,13 +70,29 @@ const modifyDate = ({ date, unit, value, type }: modifyDateProps): Date => {
 
 	// there are decimal points, continue here
 
-	const frValue = Math.round(modulo * 60);
+	const multiplier = getMultiplerForFraction(unit);
 
 	const frUnit = getPreviousUnit(unit);
+
+	const frValue = Math.round(modulo * multiplier);
 
 	const frFn = getDateFn(type, frUnit);
 
 	return frFn(wholeDate, frValue);
+};
+
+const getMultiplerForFraction = (unit: IntervalType): number => {
+	// milliseconds are smallest unit hence base is 1
+	if (unit === 'milliseconds') return 1;
+
+	// second fractions are milliseconds which have base of 1000
+	if (unit === 'seconds') return 1000;
+
+	// day is made of 24 hours hence base 24
+	if (unit === 'days') return 24;
+
+	// all other time units are sexagesimal or base 60
+	return 60;
 };
 
 const getPreviousUnit = (unit: IntervalType): IntervalType => {
