@@ -13,7 +13,7 @@ import { fixture } from './fixture';
 // https://jestjs.io/docs/api#testeachtablename-fn-timeout
 // https://stackoverflow.com/a/69872896
 
-describe('Pure function', () => {
+test('Pure function', () => {
 	const date = new Date(2023, 0, 1, 0, 0, 0, 0);
 	const args: modifyDateProps = {
 		date: date,
