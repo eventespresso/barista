@@ -36,7 +36,10 @@ export const shiftDate =
 	(args: ShiftDateArgs) =>
 	(date: Date | string): Date => {
 		const parsedDate = date instanceof Date ? date : parseISO(date);
-		return modifyDate({ date: parsedDate, ...args });
+		// as per my understanding of wiki, ISO week date is a specialized format for weeks and nothing more
+		// https://en.wikipedia.org/wiki/ISO_week_date
+		const unit: ShiftDateArgs['unit'] = args.unit !== 'ISOWeekYears' ? args.unit : 'weeks';
+		return modifyDate({ ...args, date: parsedDate, unit });
 	};
 
 /**
