@@ -201,7 +201,72 @@ const addFraction: Table[] = [
 	},
 ];
 
-const subFraction = {};
+const subFraction: Table[] = [
+	{
+		date: new Date(2023, 0, 1, 0, 0, 0, 100),
+		unit: 'milliseconds',
+		value: 1.5,
+		type: 'earlier',
+		expected: new Date(2023, 0, 1, 0, 0, 0, 98),
+	},
+	{
+		date: new Date(2023, 0, 1, 0, 0, 30, 0),
+		unit: 'seconds',
+		value: 27.3,
+		type: 'earlier',
+		expected: new Date(2023, 0, 1, 0, 0, 2, 700),
+	},
+	{
+		date: new Date(2023, 0, 1, 0, 10, 0, 0),
+		unit: 'minutes',
+		value: 7.5,
+		type: 'earlier',
+		expected: new Date(2023, 0, 1, 0, 2, 30, 0),
+	},
+	{
+		date: new Date(2023, 0, 1, 10, 0, 0, 0),
+		unit: 'hours',
+		value: 5.57,
+		type: 'earlier',
+		expected: new Date(2023, 0, 1, 4, 25, 48, 0),
+	},
+	{
+		date: new Date(2023, 0, 15, 13, 24, 0, 0),
+		unit: 'days',
+		value: 5.23,
+		type: 'earlier',
+		expected: new Date(2023, 0, 10, 7, 52, 48, 0),
+	},
+	{
+		date: new Date(2023, 1, 2, 10, 22, 24, 0),
+		unit: 'weeks',
+		value: 3.23,
+		type: 'earlier',
+		expected: new Date(2023, 0, 10, 19, 44, 0, 0),
+	},
+	{
+		date: new Date(2023, 2, 5, 15, 37, 12, 0),
+		unit: 'months',
+		value: 1.385,
+		type: 'earlier',
+		expected: new Date(2023, 0, 25, 20, 54, 0, 0),
+	},
+	{
+		date: new Date(2023, 11, 31, 12, 35, 0, 0),
+		unit: 'quarters',
+		value: 3.99,
+		type: 'earlier',
+		// expected: new Date(2023, 3, 3, 8, 44, 36),
+		expected: new Date(2023, 0, 4, 8, 44, 36, 0),
+	},
+	{
+		date: new Date(2023, 5, 21, 10, 23, 57, 0),
+		unit: 'years',
+		value: 0.57,
+		type: 'earlier',
+		expected: new Date(2022, 10, 27, 21, 55, 9, 0),
+	},
+];
 
 const fixture = {
 	add: {

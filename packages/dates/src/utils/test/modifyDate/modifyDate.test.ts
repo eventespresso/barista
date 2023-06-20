@@ -32,4 +32,7 @@ test.each(fixture.add.fraction)('add fractional units: %p', ({ expected, ...args
 	expect(date).toEqual(expected);
 });
 
-describe('subtract fractional units', () => {});
+test.each(fixture.sub.fraction)('subtract fractional units: %p', ({ expected, ...args }) => {
+	const date = modifyDate(args);
+	expect(date).toEqual(expected);
+});
