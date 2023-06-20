@@ -171,38 +171,34 @@ const addFraction: Table[] = [
 		type: 'later',
 		expected: new Date(2023, 0, 6, 5, 31, 12, 0),
 	},
-	// TODO:
-	// {
-	// 	date: new Date(2023, 0, 1, 0, 0, 0, 0),
-	// 	unit: 'weeks',
-	// 	value: 3,
-	// 	type: 'later',
-	// 	expected: new Date(2023, 0, 22, 0, 0, 0, 0),
-	// },
-	// TODO:
-	// {
-	// 	date: new Date(2023, 0, 1, 0, 0, 0, 0),
-	// 	unit: 'months',
-	// 	value: 2,
-	// 	type: 'later',
-	// 	expected: new Date(2023, 2, 1, 0, 0, 0, 0),
-	// },
-	// TODO:
-	// {
-	// 	date: new Date(2023, 0, 1, 0, 0, 0, 0),
-	// 	unit: 'quarters',
-	// 	value: 3,
-	// 	type: 'later',
-	// 	expected: new Date(2023, 9, 1, 0, 0, 0, 0),
-	// },
-	// TODO:
-	// {
-	// 	date: new Date(2023, 0, 1, 0, 0, 0, 0),
-	// 	unit: 'years',
-	// 	value: 1,
-	// 	type: 'later',
-	// 	expected: new Date(2024, 0, 1, 0, 0, 0, 0),
-	// },
+	{
+		date: new Date(2023, 0, 1, 0, 0, 0, 0),
+		unit: 'weeks',
+		value: 3.76,
+		type: 'later',
+		expected: new Date(2023, 0, 27, 7, 40, 48, 0),
+	},
+	{
+		date: new Date(2023, 0, 1, 0, 0, 0, 0),
+		unit: 'months',
+		value: 2.5,
+		type: 'later',
+		expected: new Date(2023, 2, 15, 0, 0, 0, 0),
+	},
+	{
+		date: new Date(2023, 0, 1, 0, 0, 0, 0),
+		unit: 'quarters',
+		value: 3.15,
+		type: 'later',
+		expected: new Date(2023, 9, 13, 14, 24, 0, 0),
+	},
+	{
+		date: new Date(2023, 0, 1, 0, 0, 0, 0),
+		unit: 'years',
+		value: 1.17,
+		type: 'later',
+		expected: new Date(2024, 2, 2, 2, 52, 48, 0),
+	},
 ];
 
 const subFraction = {};
