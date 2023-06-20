@@ -107,6 +107,18 @@ const getMultiplierForFraction = (unit: DateFnKey): number => {
 	// there is 24 hours in 1 day
 	if (unit === 'days') return 24;
 
+	// there are 7 days in a week
+	if (unit === 'weeks') return 7;
+
+	// there 4 week in a month
+	if (unit === 'months') return 4;
+
+	// there are 3 months in a quarter
+	if (unit === 'quarters') return 3;
+
+	// there are 12 months in a year
+	if (unit === 'years') return 12;
+
 	// all other time units are sexagesimal or base 60
 	return 60;
 };
