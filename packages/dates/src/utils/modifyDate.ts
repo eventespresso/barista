@@ -116,8 +116,8 @@ const getMultiplierForFraction = (unit: DateFnKey): number => {
 	// there are 3 months in a quarter
 	if (unit === 'quarters') return 3;
 
-	// there are 12 months in a year
-	if (unit === 'years') return 12;
+	// there are 4 quarters in a year
+	if (unit === 'years') return 4;
 
 	// all other time units are sexagesimal or base 60
 	return 60;
