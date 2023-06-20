@@ -54,9 +54,9 @@ const modifiers: modifiers = {
 	},
 };
 
-type modifyDate = { date: Date } & ShiftDateArgs;
+type modifyDateProps = { date: Date; unit: DateFnKey; value: number; type: 'earlier' | 'later' };
 
-const modifyDate = ({ date, unit, value, type }: modifyDate): Date => {
+const modifyDate = ({ date, unit, value, type }: modifyDateProps): Date => {
 	const wholeValue = Math.floor(value);
 
 	const modulo = value % 1;
@@ -98,5 +98,7 @@ const getDateFn = (type: ShiftDateArgs['type'], unit: IntervalType): DateFn => {
 
 	return modifiers[oKey][iKey];
 };
+
+export type { DateFn, DateFnKey, modifyDateProps };
 
 export { modifyDate };
