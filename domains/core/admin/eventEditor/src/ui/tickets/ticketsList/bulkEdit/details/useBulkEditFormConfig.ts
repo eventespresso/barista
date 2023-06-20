@@ -73,7 +73,6 @@ const useBulkEditFormConfig = (config?: EspressoFormProps<BulkEditFormShape>): D
 								{
 									name: 'value',
 									fieldType: 'number',
-									min: 1,
 								},
 								{
 									name: 'unit',
