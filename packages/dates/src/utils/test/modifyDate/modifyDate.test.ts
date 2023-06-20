@@ -1,4 +1,4 @@
-import { modifyDate } from '../../modifyDate';
+import { modifyDate, modifyDateProps } from '../../modifyDate';
 import { fixture } from './fixture';
 
 // https://github.com/date-fns/date-fns/issues/571
@@ -14,7 +14,15 @@ import { fixture } from './fixture';
 // https://stackoverflow.com/a/69872896
 
 describe('Pure function', () => {
-	test.todo('input is not mutated');
+	const date = new Date(2023, 0, 1, 0, 0, 0, 0);
+	const args: modifyDateProps = {
+		date: date,
+		unit: 'hours',
+		value: 1,
+		type: 'later',
+	};
+	const modified = modifyDate(args);
+	expect(date === modified).toBe(false);
 });
 
 test.each(fixture.add.integer)('add whole units: %p', ({ expected, ...args }) => {
