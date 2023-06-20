@@ -79,3 +79,6 @@ storybook-static
 # Misc
 .wp-env.override.json
 .env
+
+# SSL certificates
+*.pem
