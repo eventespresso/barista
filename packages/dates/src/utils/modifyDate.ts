@@ -25,10 +25,10 @@ type DateFnKey = Exclude<IntervalType, 'ISOWeekYears'>;
 
 type DateFn = (date: Date | number, amount: number) => Date;
 
-type modifiers = {
+interface modifiers {
 	add: Record<DateFnKey, DateFn>;
 	sub: Record<DateFnKey, DateFn>;
-};
+}
 
 const modifiers: modifiers = {
 	add: {
