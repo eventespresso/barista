@@ -1,15 +1,19 @@
-import * as R from 'ramda';
 import { __ } from '@eventespresso/i18n';
+import * as R from 'ramda';
+import { useMemo } from 'react';
 
-import { intervalsToOptions, DATE_INTERVALS, setTimeToNoon } from '@eventespresso/dates';
 import { Calendar, ControlOutlined, ProfileOutlined } from '@eventespresso/icons';
+import { DATE_FIELDS_TO_USE } from '../../constants';
+import { DATE_INTERVALS, intervalsToOptions, setTimeToNoon } from '@eventespresso/dates';
+import { DateFormShape } from './types';
+import { entityListToSelectOptions } from '@eventespresso/utils';
 import { NOW } from '@eventespresso/constants';
+import { useVenues } from '@eventespresso/edtr-services';
+import { validate } from './formValidation';
+
 import type { EspressoFormProps } from '@eventespresso/form';
 import type { Datetime } from '@eventespresso/edtr-services';
-import { validate } from './formValidation';
-import { DateFormShape } from './types';
-import { DATE_FIELDS_TO_USE } from '../../constants';
-import { useMemo } from 'react';
+import type { OptionsType } from '@eventespresso/adapters';
 
 type DateFormConfig = EspressoFormProps<DateFormShape>;
 
@@ -36,7 +40,20 @@ const useDateFormConfig = (datetime: Partial<Datetime>, config?: Partial<Espress
 		[config?.initialValues, datetime]
 	);
 
+	const venues = useVenues();
+
+	const defaultVenue: OptionsType[0] = {
+		label: 'assign venue…',
+		value: null,
+	};
+	const venuesAsOptions = entityListToSelectOptions(venues, defaultVenue);
+
 	return useMemo(
+		// for field props see
+		//   - packages/form/src/types.ts
+		// for form props see
+		//   - packages/form/src/types.ts
+		//   - react-final-form/typescript/index.d.ts
 		() => ({
 			...config,
 			onSubmit,
@@ -103,6 +120,12 @@ const useDateFormConfig = (datetime: Partial<Datetime>, config?: Partial<Espress
 					title: __('Details'),
 					fields: [
 						{
+							name: 'venue',
+							label: __('Venue'),
+							fieldType: 'select',
+							options: venuesAsOptions,
+						},
+						{
 							name: 'capacity',
 							label: __('Capacity'),
 							fieldType: 'number',
@@ -114,7 +137,7 @@ const useDateFormConfig = (datetime: Partial<Datetime>, config?: Partial<Espress
 				},
 			],
 		}),
-		[config, initialValues]
+		[config, initialValues, venuesAsOptions]
 	);
 };
 
