@@ -20,12 +20,10 @@ const RecurrenceTag: React.FC<RecurrenceTagProps> = ({ datetimeId, isTableView }
 		return null;
 	}
 
-	const color = isTableView ? null : 'blue-green';
-	const colorContrast = isTableView ? null : 'high';
-	const icon = isTableView ? null : <Repeat />;
-
-	return (
-		<Tag color={color} colorContrast={colorContrast} icon={icon} tooltip={ruleText}>
+	return isTableView ? (
+		<>{recurrenceId}</>
+	) : (
+		<Tag color={'blue-green'} colorContrast={'high'} icon={<Repeat />} tooltip={ruleText}>
 			{isTableView
 				? recurrenceId
 				: sprintf(
