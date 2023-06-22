@@ -4,7 +4,14 @@
 	&.ee-col__inline-edit {
 		align-items: center;
 		display: flex;
+		justify-content: flex-start;
 		min-height: 44px;
+	}
+	&.ee-table-cell--text-align-center {
+		justify-content: center;
+	}
+	&.ee-table-cell--text-align-end {
+		justify-content: flex-end;
 	}
 	.ee-currency-display {
 		padding: 0;
