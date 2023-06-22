@@ -19,18 +19,18 @@ import {
 	subWeeks,
 	subYears,
 } from 'date-fns';
-import { IntervalType, ShiftDateArgs } from './types';
+import type { IntervalType, ShiftDateArgs } from './types';
 
 type DateFnKey = Exclude<IntervalType, 'ISOWeekYears'>;
 
 type DateFn = (date: Date | number, amount: number) => Date;
 
-interface modifiers {
+interface IModifiers {
 	add: Record<DateFnKey, DateFn>;
 	sub: Record<DateFnKey, DateFn>;
 }
 
-const modifiers: modifiers = {
+const modifiers: IModifiers = {
 	add: {
 		milliseconds: addMilliseconds,
 		seconds: addSeconds,
@@ -55,9 +55,9 @@ const modifiers: modifiers = {
 	},
 };
 
-type modifyDateProps = { date: Date; unit: DateFnKey; value: number; type: 'earlier' | 'later' };
+type ModifyDateProps = { date: Date; unit: DateFnKey; value: number; type: 'earlier' | 'later' };
 
-const modifyDate = ({ date, unit, value, type }: modifyDateProps): Date => {
+const modifyDate = ({ date, unit, value, type }: ModifyDateProps): Date => {
 	const wholeValue = Math.floor(value);
 
 	let remainder = new BigNumber(value).modulo(1);
@@ -134,15 +134,15 @@ const getPreviousUnit = (unit: DateFnKey): DateFnKey => {
 };
 
 const getDateFn = (type: ShiftDateArgs['type'], unit: DateFnKey): DateFn => {
-	const oKey: keyof modifiers = type === 'earlier' ? 'sub' : 'add';
+	const oKey: keyof IModifiers = type === 'earlier' ? 'sub' : 'add';
 
 	if (!(unit in modifiers[oKey])) throw new Error('Unexpected condition');
 
-	const iKey = unit as keyof modifiers[keyof modifiers]; // inner key
+	const iKey = unit as keyof IModifiers[keyof IModifiers]; // inner key
 
 	return modifiers[oKey][iKey];
 };
 
-export type { DateFn, DateFnKey, modifyDateProps };
+export type { DateFn, DateFnKey, ModifyDateProps as modifyDateProps };
 
 export { modifyDate };

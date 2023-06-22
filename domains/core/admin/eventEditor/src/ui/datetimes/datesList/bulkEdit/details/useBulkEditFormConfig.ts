@@ -72,6 +72,7 @@ const useBulkEditFormConfig = (config?: EspressoFormProps<BulkEditFormShape>): D
 							subFields: [
 								{
 									name: 'value',
+									min: 0,
 									fieldType: 'number',
 								},
 								{
