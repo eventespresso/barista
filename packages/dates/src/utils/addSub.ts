@@ -11,18 +11,7 @@ import {
 	addYears,
 	toDate,
 } from 'date-fns';
-
-export type IntervalType =
-	| 'days'
-	| 'hours'
-	| 'ISOWeekYears'
-	| 'milliseconds'
-	| 'minutes'
-	| 'months'
-	| 'quarters'
-	| 'seconds'
-	| 'weeks'
-	| 'years';
+import { IntervalType } from './types';
 
 const addMapping = {
 	days: addDays,

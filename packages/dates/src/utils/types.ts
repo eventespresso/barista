@@ -1,4 +1,14 @@
-import type { IntervalType } from './addSub';
+export type IntervalType =
+	| 'days'
+	| 'hours'
+	| 'ISOWeekYears'
+	| 'milliseconds'
+	| 'minutes'
+	| 'months'
+	| 'quarters'
+	| 'seconds'
+	| 'weeks'
+	| 'years';
 
 export type TzDateFn = (date: Date | string | number, timezone: string) => Date;
 

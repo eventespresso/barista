@@ -1,16 +1,16 @@
-import { pipe } from 'ramda';
 import { __ } from '@eventespresso/i18n';
 import { getHours, getMinutes, getSeconds, parseISO, toDate } from 'date-fns';
-import { setHours, setMinutes, setSeconds, setYear, setMonth, setDate } from 'date-fns/fp';
+import { setDate, setHours, setMinutes, setMonth, setSeconds, setYear } from 'date-fns/fp';
+import { pipe } from 'ramda';
 
 import type { OptionsType } from '@eventespresso/adapters';
 import { NOW } from '@eventespresso/constants';
 import { arrayOfN } from '@eventespresso/utils';
 
-import { add, sub } from './addSub';
+import { add } from './addSub';
 import diff from './diff';
-import type { Intervals, ShiftDateArgs } from './types';
-import type { PrepDatesComparisonFunc } from './types';
+import { modifyDate } from './modifyDate';
+import type { Intervals, PrepDatesComparisonFunc, ShiftDateArgs } from './types';
 
 export const DATE_INTERVALS: Intervals = {
 	months: __('month(s)'),
@@ -36,11 +36,10 @@ export const shiftDate =
 	(args: ShiftDateArgs) =>
 	(date: Date | string): Date => {
 		const parsedDate = date instanceof Date ? date : parseISO(date);
-		if (args?.unit && args?.value && args?.type) {
-			const fn = args.type === 'earlier' ? sub : add;
-			return fn(args.unit, parsedDate, args.value);
-		}
-		return parsedDate;
+		// as per my understanding of wiki, ISO week date is a specialized format for weeks and nothing more
+		// https://en.wikipedia.org/wiki/ISO_week_date
+		const unit: ShiftDateArgs['unit'] = args.unit !== 'ISOWeekYears' ? args.unit : 'weeks';
+		return modifyDate({ ...args, date: parsedDate, unit });
 	};
 
 /**
