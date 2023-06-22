@@ -2,6 +2,8 @@ import type { EntityId } from '@eventespresso/data';
 import type { Datetime } from '../../types';
 import { BulkUpdateInput } from '../types';
 
+import type { MutationFunction } from '@eventespresso/data';
+
 export interface DatetimeBaseInput {
 	capacity?: number;
 	description?: string;
@@ -50,3 +52,9 @@ export type DeleteDatetimeResult = {
 };
 
 export type BulkUpdateDatetimeInput = BulkUpdateInput<UpdateDatetimeInput>;
+
+export interface DatetimeMutator {
+	createEntity: MutationFunction<CreateDatetimeResult, CreateDatetimeInput>;
+	updateEntity: MutationFunction<UpdateDatetimeResult, UpdateDatetimeInput>;
+	deleteEntity: MutationFunction<DeleteDatetimeResult, DeleteDatetimeInput>;
+}

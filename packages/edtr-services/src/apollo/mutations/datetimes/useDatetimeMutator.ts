@@ -1,20 +1,13 @@
 import { useCallback, useMemo } from 'react';
 
-import { MutationType, MutationFunction, useMutationWithFeedback } from '@eventespresso/data';
+import { MutationType, useMutationWithFeedback } from '@eventespresso/data';
 
-import type { CreateDatetimeInput, UpdateDatetimeInput, DeleteDatetimeInput } from './types';
+import type { DatetimeMutator } from './types';
 import { CREATE_DATETIME, UPDATE_DATETIME, DELETE_DATETIME } from './';
 import useMutationHandler from './useMutationHandler';
 import useUpdateCallback from '../useUpdateCallback';
 import { TypeName } from '../types';
-import type { CreateDatetimeResult, UpdateDatetimeResult, DeleteDatetimeResult } from './types';
 import { SINGULAR_ENTITY_NAME } from '../../../constants';
-
-interface DatetimeMutator {
-	createEntity: MutationFunction<CreateDatetimeResult, CreateDatetimeInput>;
-	updateEntity: MutationFunction<UpdateDatetimeResult, UpdateDatetimeInput>;
-	deleteEntity: MutationFunction<DeleteDatetimeResult, DeleteDatetimeInput>;
-}
 
 type DM = DatetimeMutator;
 
