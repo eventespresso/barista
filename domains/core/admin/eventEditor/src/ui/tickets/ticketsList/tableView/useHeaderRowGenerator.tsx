@@ -85,7 +85,7 @@ const useHeaderRowGenerator = (): TicketsTableHeaderRowGen => {
 			key: 'quantity',
 			size: 'tiny',
 			textAlign: 'end',
-			value: __('Quantity'),
+			value: __('Qty'),
 		}),
 		[]
 	);
@@ -105,12 +105,7 @@ const useHeaderRowGenerator = (): TicketsTableHeaderRowGen => {
 			key: 'registrations',
 			size: 'smaller',
 			textAlign: 'center',
-			value: (
-				<>
-					<span className={'ee-rspnsv-table-long-label'}>{__('Registrations')}</span>
-					<span className={'ee-rspnsv-table-short-label'}>{__('Regs')}</span>
-				</>
-			),
+			value: __('Reg List'),
 		}),
 		[]
 	);
