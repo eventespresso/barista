@@ -4,7 +4,7 @@
 	&.ee-btn {
 		box-sizing: border-box;
 
-		svg.ee-svg.ee-svg {
+		svg.ee-svg {
 			bottom: 1px;
 			height: var(--ee-font-size-2xl);
 			margin-inline-end: var(--ee-margin-nano);
@@ -25,7 +25,7 @@
 				letter-spacing: 1px;
 			}
 
-			svg.ee-svg.ee-svg {
+			svg.ee-svg {
 				height: var(--ee-font-size-default);
 				width: var(--ee-font-size-default);
 			}
@@ -46,7 +46,7 @@
 				font-size: var(--ee-font-size-tiny);
 			}
 
-			svg.ee-svg.ee-svg {
+			svg.ee-svg {
 				height: var(--ee-font-size-big);
 				width: var(--ee-font-size-big);
 			}
@@ -64,14 +64,14 @@
 			letter-spacing: 1px;
 			padding: calc(var(--ee-padding-nano) + 1px) var(--ee-padding-smaller) var(--ee-padding-micro);
 
-			svg.ee-svg.ee-svg {
+			svg.ee-svg {
 				margin-top: 2px;
 			}
 
 			> div {
 				margin-top: 2px;
 
-				svg.ee-svg.ee-svg {
+				svg.ee-svg {
 					margin-top: 0;
 				}
 			}
@@ -96,7 +96,7 @@
 				font-size: var(--ee-font-size-small);
 			}
 
-			svg.ee-svg.ee-svg {
+			svg.ee-svg {
 				height: var(--ee-font-size-xl);
 				width: var(--ee-font-size-xl);
 			}
@@ -107,7 +107,7 @@
 				font-size: var(--ee-font-size-smaller);
 			}
 
-			svg.ee-svg.ee-svg {
+			svg.ee-svg {
 				height: var(--ee-font-size-bigger);
 				width: var(--ee-font-size-bigger);
 			}
@@ -126,7 +126,7 @@
 				font-weight: 800;
 			}
 
-			svg.ee-svg.ee-svg {
+			svg.ee-svg {
 				margin-inline-end: var(--ee-margin-micro);
 				[dir='rtl'] & {
 					margin-inline-end: 0;
@@ -140,14 +140,14 @@
 		}
 
 		&.ee-btn--big {
-			svg.ee-svg.ee-svg {
+			svg.ee-svg {
 				height: var(--ee-font-size-4xl);
 				width: var(--ee-font-size-4xl);
 			}
 		}
 
 		&.ee-btn--bigger {
-			svg.ee-svg.ee-svg {
+			svg.ee-svg {
 				height: var(--ee-font-size-5xl);
 				width: var(--ee-font-size-5xl);
 			}
@@ -165,7 +165,7 @@
 				font-weight: 800;
 			}
 
-			svg.ee-svg.ee-svg {
+			svg.ee-svg {
 				height: var(--ee-font-size-6xl);
 				width: var(--ee-font-size-6xl);
 			}

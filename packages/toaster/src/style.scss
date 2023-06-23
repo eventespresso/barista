@@ -51,7 +51,7 @@
 		width: auto;
 		// top: 2px;
 
-		svg.ee-svg.ee-svg {
+		svg.ee-svg {
 			font-size: 1rem;
 			height: var(--ee-toast-icon-size);
 			margin: 0;
@@ -78,28 +78,28 @@
 			&.Toastify__toast {
 				&--info,
 				&--default {
-					svg.ee-svg.ee-svg {
+					svg.ee-svg {
 						color: var(--ee-color-primary);
 						fill: var(--ee-color-primary);
 					}
 				}
 
 				&--success {
-					svg.ee-svg.ee-svg {
+					svg.ee-svg {
 						color: var(--toastify-color-success);
 						fill: var(--toastify-color-success);
 					}
 				}
 
 				&--warning {
-					svg.ee-svg.ee-svg {
+					svg.ee-svg {
 						color: var(--toastify-color-warning-alt);
 						fill: var(--toastify-color-warning-alt);
 					}
 				}
 
 				&--error {
-					svg.ee-svg.ee-svg {
+					svg.ee-svg {
 						color: var(--toastify-color-error);
 						fill: var(--toastify-color-error);
 					}
@@ -119,28 +119,28 @@
 			&.Toastify__toast {
 				&--info,
 				&--default {
-					svg.ee-svg.ee-svg {
+					svg.ee-svg {
 						color: var(--ee-color-blue-low-contrast);
 						fill: var(--ee-color-blue-low-contrast);
 					}
 				}
 
 				&--success {
-					svg.ee-svg.ee-svg {
+					svg.ee-svg {
 						color: var(--toastify-color-success);
 						fill: var(--toastify-color-success);
 					}
 				}
 
 				&--warning {
-					svg.ee-svg.ee-svg {
+					svg.ee-svg {
 						color: var(--toastify-color-warning-alt);
 						fill: var(--toastify-color-warning-alt);
 					}
 				}
 
 				&--error {
-					svg.ee-svg.ee-svg {
+					svg.ee-svg {
 						color: var(--toastify-color-error);
 						fill: var(--toastify-color-error);
 					}
@@ -153,7 +153,7 @@
 				background-color: var(--ee-background-color);
 				color: var(--ee-default-text-color-high-contrast);
 
-				svg.ee-svg.ee-svg,
+				svg.ee-svg,
 				.Toastify__close-button svg {
 					color: var(--ee-color-primary);
 					fill: var(--ee-color-primary);
@@ -164,7 +164,7 @@
 				background-color: var(--toastify-color-info);
 				color: var(--toastify-text-color-info);
 
-				svg.ee-svg.ee-svg,
+				svg.ee-svg,
 				.Toastify__close-button svg {
 					color: var(--toastify-text-color-info);
 					fill: var(--toastify-text-color-info);
@@ -175,7 +175,7 @@
 				background-color: var(--toastify-color-success);
 				color: var(--toastify-text-color-success);
 
-				svg.ee-svg.ee-svg,
+				svg.ee-svg,
 				.Toastify__close-button svg {
 					color: var(--toastify-text-color-success);
 					fill: var(--toastify-text-color-success);
@@ -187,7 +187,7 @@
 				color: var(--toastify-text-color-warning);
 				font-weight: 500;
 
-				svg.ee-svg.ee-svg,
+				svg.ee-svg,
 				.Toastify__close-button svg {
 					color: var(--toastify-text-color-warning);
 					fill: var(--toastify-text-color-warning);
@@ -198,7 +198,7 @@
 				background-color: var(--toastify-color-error);
 				color: var(--toastify-text-color-error);
 
-				svg.ee-svg.ee-svg,
+				svg.ee-svg,
 				.Toastify__close-button svg {
 					color: var(--toastify-text-color-error);
 					fill: var(--toastify-text-color-error);

@@ -8,7 +8,7 @@
 	margin: var(--ee-margin-tiny) 0;
 	padding: var(--ee-padding-micro) var(--ee-padding-smaller) var(--ee-padding-micro) var(--ee-padding-micro);
 
-	svg.ee-svg.ee-svg {
+	svg.ee-svg {
 		color: currentColor;
 		margin-right: var(--ee-margin-smaller);
 	}
@@ -58,7 +58,7 @@
 				&-warning {
 					color: var(--ee-text-on-yellow);
 
-					svg.ee-svg.ee-svg {
+					svg.ee-svg {
 						color: var(--ee-color-yellow);
 					}
 				}
