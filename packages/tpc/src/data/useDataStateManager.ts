@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useReducer } from 'react';
 
-import { useTicketPrices, useLazyTicket } from '@eventespresso/edtr-services';
+import { usePriceTypes, useTicketPrices, useLazyTicket } from '@eventespresso/edtr-services';
 
 import { DataStateManager, DataStateManagerHook } from './types';
 import useDataReducer, { initialState } from './useDataReducer';
@@ -11,6 +11,8 @@ type DSM = DataStateManager;
 const useDataStateManager: DataStateManagerHook = (props) => {
 	const getTicket = useLazyTicket();
 	const getTicketPrices = useTicketPrices();
+	const priceTypes = usePriceTypes();
+
 	// pass the appolo cache access as default
 	const initializer = useInitialState({ getTicketPrices, getTicket, ...props });
 	const dataReducer = useDataReducer(initializer);
@@ -81,6 +83,7 @@ const useDataStateManager: DataStateManagerHook = (props) => {
 			addPrice,
 			deletePrice,
 			getData,
+			priceTypes,
 			reset,
 			reverseCalculate,
 			setPrices,
