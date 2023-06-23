@@ -29,7 +29,7 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({ asAlert = true, dataState }
 	}
 
 	if (asAlert) {
-		return <Banner description={message} status={'info'} title={__('Please Update Assignments')} />;
+		return <Banner status={'info'} title={__('Please Update Assignments')} message={message} />;
 	}
 
 	return <span>{message}</span>;

@@ -46,5 +46,5 @@ export const ErrorMessage: FormBuilderProps['topBanner'] = ({ elements, sections
 		return null;
 	}
 
-	return <Banner description={message} status='error' title={__('Please add the required fields')} />;
+	return <Banner status='error' title={__('Please add the required fields')} message={message} />;
 };
