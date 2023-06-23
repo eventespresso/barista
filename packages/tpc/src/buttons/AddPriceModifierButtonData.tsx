@@ -19,22 +19,22 @@ const AddPriceModifierButtonData: React.FC<Partial<PriceModifierProps>> = ({ ind
 		const newPrice: TpcPriceModifier = {
 			...defaultPriceModifier,
 			id: uuid(),
-			isBasePrice: baseType.isBasePrice,
-			isDiscount: baseType.isDiscount,
-			isPercent: baseType.isPercent,
-			isTax: baseType.isTax,
-			order: baseType.order,
+			isBasePrice: baseType?.isBasePrice,
+			isDiscount: baseType?.isDiscount,
+			isPercent: baseType?.isPercent,
+			isTax: baseType?.isTax,
+			order: baseType?.order,
 			isNew: true,
 		};
 
 		addPrice(newPrice, index + 1);
 	}, [
 		addPrice,
-		baseType.isBasePrice,
-		baseType.isDiscount,
-		baseType.isPercent,
-		baseType.isTax,
-		baseType.order,
+		baseType?.isBasePrice,
+		baseType?.isDiscount,
+		baseType?.isPercent,
+		baseType?.isTax,
+		baseType?.order,
 		defaultPriceModifier,
 		index,
 	]);
