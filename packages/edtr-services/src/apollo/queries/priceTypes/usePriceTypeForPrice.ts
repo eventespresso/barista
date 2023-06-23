@@ -1,12 +1,15 @@
 import isEmpty from 'ramda/src/isEmpty';
-import { useRelations } from '@eventespresso/services';
-import useDefaultPriceType from './useDefaultPriceType';
-import type { EntityId } from '@eventespresso/data';
-import { entitiesWithGuIdInArray } from '@eventespresso/predicates';
-import { useMemoStringify } from '@eventespresso/hooks';
 
-import type { PriceType } from '../../types';
+import { useMemoStringify } from '@eventespresso/hooks';
+import { entitiesWithGuIdInArray } from '@eventespresso/predicates';
+import { useRelations } from '@eventespresso/services';
+
+import useDefaultPriceType from './useDefaultPriceType';
 import usePriceTypes from './usePriceTypes';
+
+import type { EntityId } from '@eventespresso/data';
+import type { PriceType } from '../../types';
+
 /**
  * A custom react hook for retrieving the related priceType from cache for the given Price entity
  *
