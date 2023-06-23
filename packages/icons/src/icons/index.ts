@@ -38,6 +38,7 @@ export { default as EditorOl } from './EditorOl';
 export { default as EditorQuote } from './EditorQuote';
 export { default as EditorUl } from './EditorUl';
 export { default as ExclamationCircle } from './ExclamationCircle';
+export { default as ExclamationCircleFilled } from './ExclamationCircleFilled';
 export { default as External } from './External';
 export { default as Filter } from './Filter';
 export { default as FormatBold } from './FormatBold';
