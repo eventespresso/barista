@@ -19,7 +19,7 @@ import useOnUpdateRecurrence from '../services/apollo/mutations/recurrences/useO
 const initialProgress = { datetimes: 0, tickets: 0 };
 
 const useSubmitForm = (formState: FormState, generatedDates: Array<GeneratedDate>): (() => Promise<void>) => {
-	const { dateDetails, tickets } = formState;
+	const { dateDetails, tickets, venue } = formState;
 	const { createEntity: createDatetime } = useDatetimeMutator();
 	const toUtcISO = useSiteDateToUtcISO();
 	const dates = useDatetimes();
@@ -111,7 +111,15 @@ const useSubmitForm = (formState: FormState, generatedDates: Array<GeneratedDate
 				// order will be the highest order among dates plus its position (index +1) in the list
 				const order = highestDateOrder + index + 1;
 
-				const input = { ...normalizedDateInput, order, startDate, endDate, tickets, recurrence: recurrence.id };
+				const input = {
+					...normalizedDateInput,
+					order,
+					startDate,
+					endDate,
+					tickets,
+					recurrence: recurrence.id,
+					venue,
+				};
 
 				const result = await createDatetime(input);
 				const datetimeId = result?.data?.createEspressoDatetime?.espressoDatetime?.id;
@@ -134,6 +142,7 @@ const useSubmitForm = (formState: FormState, generatedDates: Array<GeneratedDate
 	}, [
 		createDatetime,
 		dateDetails,
+		venue,
 		dates,
 		formState,
 		generatedDates,

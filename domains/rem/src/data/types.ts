@@ -30,6 +30,7 @@ export interface FormState {
 	salesStartOffset?: string;
 	tickets: AnyObject<RemTicket>;
 	isDirty: boolean;
+	venue: EntityId;
 }
 
 export type DataActionType =
@@ -40,6 +41,7 @@ export type DataActionType =
 	| 'REMOVE_R_DATE'
 	| 'REMOVE_EX_DATE'
 	| 'SET_DATE_DETAILS'
+	| 'SET_VENUE'
 	| 'ADD_TICKET'
 	| 'UPDATE_TICKET'
 	| 'DELETE_TICKET'
@@ -59,6 +61,7 @@ export interface FormStateManager extends FormState {
 	deleteTicket: (id: string) => void;
 	getData: () => FormState;
 	setDateDetails: (details: FormState['dateDetails']) => void;
+	setVenue: (venue: EntityId) => void;
 	setExRule: (exRule: FormState['exRule']) => void;
 	setRRule: (rRule: FormState['rRule']) => void;
 	addRDate: (date: string) => void;

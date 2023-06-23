@@ -4,13 +4,15 @@ import type { FormRenderProps } from 'react-final-form';
 import { useFormState } from '../../data';
 
 const FormWrapper: React.FC<FormRenderProps> = ({ children, form }) => {
-	const { setDateDetails } = useFormState();
+	const { setDateDetails, setVenue } = useFormState();
 
 	useEffect(() => {
 		// subscribe to RFF state.
 		const unsubscribe = form.subscribe(
 			(state) => {
 				setDateDetails(state?.values);
+				const venue = state?.values?.venue ?? '';
+				setVenue(venue);
 			},
 			{ values: true }
 		);

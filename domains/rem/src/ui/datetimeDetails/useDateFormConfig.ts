@@ -44,7 +44,7 @@ const useDateFormConfig = (datetime: Partial<Datetime>, config?: Partial<Espress
 
 	const defaultVenue: OptionsType[0] = {
 		label: 'assign venue…',
-		value: null,
+		value: '',
 	};
 	const venuesAsOptions = entityListToSelectOptions(venues, defaultVenue);
 

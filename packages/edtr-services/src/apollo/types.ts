@@ -34,7 +34,7 @@ export interface Event extends Entity {
 	shortDescription: string;
 	status: string;
 	timezoneString: string;
-	venue: string; // UUID
+	venue: EntityId; // UUID
 }
 
 export type EventManager = Pick<User, 'id' | 'name'>;
@@ -69,7 +69,7 @@ export interface Datetime extends Entity, Trashable {
 	sold: number;
 	startDate: string;
 	status: DateStatus;
-	venue: string; // UUID
+	venue: EntityId; // UUID
 }
 
 export interface DatetimeItem {
