@@ -30,8 +30,8 @@ const EntityList = <ELFS extends EntityListFilterStateManager<any>>({
 
 	if (filterState.total === 0) {
 		const title = noResultsTitle ? noResultsTitle : __('no results found');
-		const description = noResultsDesc ? noResultsDesc : __('try changing filter settings');
-		entityList = <EmptyState description={description} title={title} />;
+		const message = noResultsDesc ? noResultsDesc : __('try changing filter settings');
+		entityList = <EmptyState title={title} message={message} />;
 	} else {
 		entityList = renderList();
 	}

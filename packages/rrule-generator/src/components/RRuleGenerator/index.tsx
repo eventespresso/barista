@@ -21,13 +21,14 @@ const RRuleGenerator: React.FC<RRuleGeneratorProps> = ({ showReadable = true, ..
 	return (
 		<Stack className='rrule-generator'>
 			{!hideError && error && (
-				<ErrorIndicator>
-					{sprintf(
+				<ErrorIndicator
+					title={__('Invalid RRule')}
+					message={sprintf(
 						/* translators: %s rrule string */
 						__('You provided an invalid RRule value to component. %s is not a correct RRule string.'),
 						error.name
 					)}
-				</ErrorIndicator>
+				/>
 			)}
 
 			{showReadable && <RRuleText rRuleString={props.value} />}

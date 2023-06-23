@@ -1,3 +1,4 @@
+import { __ } from '@eventespresso/i18n';
 import { ButtonRow, ErrorIndicator, Heading, LoadingNotice } from '../..';
 import type { EntityListProps } from './types';
 
@@ -19,7 +20,7 @@ export const EntityList: React.FC<EntityListProps> = ({
 }) => {
 	if (loading) return <LoadingNotice />;
 
-	if (error) return <ErrorIndicator />;
+	if (error) return <ErrorIndicator title={__('OOPS!')} message={__('Error Loading Entites List')} />;
 
 	return (
 		<div className='ee-entity-list ee-edtr-section' id={id}>
