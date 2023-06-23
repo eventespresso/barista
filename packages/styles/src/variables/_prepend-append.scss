@@ -7,6 +7,7 @@
 
 	@each $property, $value in $declarations {
 		$text-on-string-exists: string.index($property, 'text-on') != null;
+		$pale-string-exists: string.index($property, 'pale') != null;
 		$contrast-string-exists: string.index($property, 'contrast') != null;
 		$on-index-plus-3: string.index($property, 'on') + 3;
 
@@ -18,9 +19,11 @@
 			}
 		} @else {
 			@if ($contrast-string-exists) {
-				$key: #{'color' + '-' + $color + '-' + $property}; // output: color-blue-high-contrast
+				$key: #{'color-' + $color + '-' + $property}; // output: color-blue-high-contrast
+			} @else if ($pale-string-exists) {
+				$key: #{'color-pale-' + $color}; // output: color-pale-blue
 			} @else {
-				$key: #{'color' + '-' + $color}; // output: color-blue
+				$key: #{'color-' + $color}; // output: color-blue
 			}
 		}
 
