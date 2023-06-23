@@ -1,8 +1,7 @@
-import type { AlertProps, AlertIconProps } from '@chakra-ui/react';
+import type { AlertProps } from '@chakra-ui/react';
 
 export interface BannerProps extends Pick<AlertProps, 'className' | 'status' | 'variant'> {
-	description?: string;
 	icon?: React.ReactNode;
-	iconProps?: AlertIconProps;
+	message?: string | React.ReactNode;
 	title: string;
 }
