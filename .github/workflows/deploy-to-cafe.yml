@@ -1,4 +1,4 @@
-name: Deploy Leading Edge (master)
+name: Deploy Production Assets To Cafe
 
 on:
     pull_request:
