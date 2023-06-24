@@ -42,4 +42,5 @@ git checkout "$BASE_BRANCH"
 
 printf "\n%b creating branch %s%b\n" "$CYAN" "$BRANCH" "$RESET"
 git branch "$BRANCH"
+git checkout "$BRANCH"
 git status
