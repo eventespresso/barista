@@ -54,6 +54,7 @@ SOURCE_COMMIT="${GITHUB_REPOSITORY}@${GITHUB_SHA}"
 
 printf "\n%bchanging directory: %s%b\n" "$CYAN" "$REPO_DIR" "$RESET"
 cd "$REPO_DIR"
+git checkout "$BASE_BRANCH"
 
 # Commit if there is anything to
 if [ -n "$(git status --porcelain)" ]; then
