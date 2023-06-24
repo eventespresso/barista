@@ -64,7 +64,7 @@ if [ -n "$(git status --porcelain)" ]; then
 	# add source commit to track the deployment source
 	git commit --message "Deployed from $SOURCE_COMMIT"
 
-	printf "\n%pushing %s branch to %s repo%b\n" "$CYAN" "$BRANCH" "$REPO_NAME" "$RESET"
+	printf "\n%bpushing %s branch to %s repo%b\n" "$CYAN" "$BRANCH" "$REPO_NAME" "$RESET"
 	git push --set-upstream origin "$BRANCH"
 else
 	printf "\n%bNo changes%b\n" "$CYAN" "$RESET"
