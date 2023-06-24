@@ -21,7 +21,7 @@ const { registerFilter } = new EntityTableFilters<Domain, typeof datesList, DFSM
 const cell: CellData = {
 	key: 'recurrence-series',
 	size: 'tiny',
-	textAlign: 'center',
+	textAlign: 'end',
 	value: null,
 };
 
@@ -32,10 +32,10 @@ registerFilter(({ row, type, entityId }) => {
 		value = <RecurrenceTag datetimeId={entityId} isTableView />;
 	} else if (type === 'header') {
 		value = (
-			<div className='text-center'>
-				<span className={'ee-rspnsv-table-long-label'}>{__('Recurring series')}</span>
+			<>
+				<span className={'ee-rspnsv-table-long-label'}>{__('REM Series')}</span>
 				<span className={'ee-rspnsv-table-short-label'}>{__('Series')}</span>
-			</div>
+			</>
 		);
 	}
 	// insert the cell at index 6
