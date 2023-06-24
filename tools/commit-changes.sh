@@ -4,8 +4,8 @@
 # | # | VAR NAME    | DESCRIPTION                                 | DEFAULT                   |
 # | - | ----------- | ------------------------------------------- | ------------------------- |
 # | 1 | BRANCH      | new branch to commit changes to             |                           |
-# | 3 | BASE_BRANCH | branch to deploy at, in the target repo     | DEV                       |
-# | 2 | REPO_NAME   | target repository name                      | cafe                      |
+# | 2 | BASE_BRANCH | branch to deploy at, in the target repo     | DEV                       |
+# | 3 | REPO_NAME   | target repository name                      | cafe                      |
 # | - | ----------- | ------------------------------------------- | ------------------------- |
 
 # DEFAULT ENV VARIABLES SET BY GITHUB
