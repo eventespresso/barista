@@ -40,7 +40,7 @@ printf "\n%bchanging directory: %s%b\n" "$CYAN" "$REPO_DIR" "$RESET"
 cd "$REPO_DIR"
 git checkout "$BASE_BRANCH"
 
-printf "\n%b creating branch %s%b\n" "$CYAN" "$BRANCH" "$RESET"
+printf "\n%bcreating branch %s%b\n" "$CYAN" "$BRANCH" "$RESET"
 git branch "$BRANCH"
 git checkout "$BRANCH"
 git status

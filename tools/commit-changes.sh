@@ -39,13 +39,13 @@ if [[ -z "$BRANCH" ]]; then
 	exit 1
 fi
 
-if [[ -z "$REPO_NAME" ]]; then
-	printf "\n%b REPO_NAME is undefined%b\n" "$RED" "$RESET"
+if [[ -z "$BASE_BRANCH" ]]; then
+	printf "\n%b BASE_BRANCH is undefined%b\n" "$RED" "$RESET"
 	exit 1
 fi
 
-if [[ -z "$BASE_BRANCH" ]]; then
-	printf "\n%b BASE_BRANCH is undefined%b\n" "$RED" "$RESET"
+if [[ -z "$REPO_NAME" ]]; then
+	printf "\n%b REPO_NAME is undefined%b\n" "$RED" "$RESET"
 	exit 1
 fi
 
@@ -54,7 +54,9 @@ SOURCE_COMMIT="${GITHUB_REPOSITORY}@${GITHUB_SHA}"
 
 printf "\n%bchanging directory: %s%b\n" "$CYAN" "$REPO_DIR" "$RESET"
 cd "$REPO_DIR"
-git checkout "$BASE_BRANCH"
+
+printf "\n%bchecking out branch: %s%b\n" "$CYAN" "$BRANCH" "$RESET"
+git checkout "$BRANCH"
 
 # Commit if there is anything to
 if [ -n "$(git status --porcelain)" ]; then

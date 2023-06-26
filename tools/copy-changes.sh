@@ -7,8 +7,9 @@
 # | 2 | I18N_PATH           | path to languages folder on the target repo | languages                 |
 # | 3 | BUILD_PATH          | build path on the current/this repo         | build                     |
 # | 4 | REPO_DIR            | path to target repository                   | cafe                      |
-# | 5 | REMOVE_JS_I18N_FILE | delete JS pot file?              			  | yes                       |
+# | 5 | REMOVE_JS_I18N_FILE | delete JS pot file from source?  			  | yes                       |
 # | 6 | DEPLOY_ASSETS       | copy build files to target assets folder    | yes                       |
+# | 6 | DEPLOY_I18N         | copy i18n files to target translation files | yes                       |
 # | - | ------------------- | ------------------------------------------- | ------------------------- |
 
 set -e
@@ -28,14 +29,13 @@ I18N_PATH="${2:-languages}"
 
 # Default path to build folder
 BUILD_PATH="${3:-build}"
-BUILD_PATH="${GITHUB_WORKSPACE:?}/$BUILD_PATH"
 
 # path to the repo ex: "/home/runner/work/barista/cafe"
 REPO_DIR=${4:-cafe}
-REPO_DIR="${BASE_DIR:?}/$REPO_DIR"
 
 REMOVE_JS_I18N_FILE=${5:-yes}
 DEPLOY_ASSETS=${6:-yes}
+DEPLOY_I18N=${7:-yes}
 
 if [[ -z "$REPO_DIR" ]]; then
 	printf "\n%b REPO_DIR is undefined%b\n" "$RED" "$RESET"
@@ -54,20 +54,31 @@ if [[ -z "$BUILD_PATH" ]]; then
 	exit 1
 fi
 
-printf "\n%bBUILD_PATH: %s%b" "$CYAN" "$BUILD_PATH" "$RESET"
-printf "\n%bREPO_DIR: %s%b" "$CYAN" "$REPO_DIR" "$RESET"
+# now modify paths relative to the base and/or repo directory
+BUILD_PATH="${GITHUB_WORKSPACE:?}/$BUILD_PATH"
+REPO_DIR="${BASE_DIR:?}/$REPO_DIR"
+ASSETS_PATH="$REPO_DIR/$ASSETS_PATH"
+I18N_PATH="$REPO_DIR/$I18N_PATH"
+
+printf "\n%b" "$CYAN"
+printf "\nBUILD_PATH : %s" "$BUILD_PATH"
+printf "\nREPO_DIR   : %s" "$REPO_DIR"
+printf "\nASSETS_PATH: %s" "$ASSETS_PATH"
+printf "\nI18N_PATH: %s" "$I18N_PATH"
+printf "%b" "$RESET"
+
 # printf "\n%bchanging directory: %s%b" "$CYAN" "$REPO_DIR" "$RESET"
 # cd "$REPO_DIR"
 
 ## DEPLOY I18N ##
 # paths of the translation files
-PHP_I18N_FILE="$REPO_DIR/$I18N_PATH/event_espresso-translations-js.php"
+PHP_I18N_FILE="$I18N_PATH/event_espresso-translations-js.php"
 JS_I18N_FILE="$BUILD_PATH/js-translations.pot"
 
 # If DEPLOY_I18N is not set to "no"
 if [ "$DEPLOY_I18N" != "no" ]; then
 	## make sure languages directory exists
-	mkdir -p "$REPO_DIR/$I18N_PATH"
+	mkdir -p "$I18N_PATH"
 	# make sure the file exists
 	touch "$PHP_I18N_FILE"
 	# Convert POT file to PHP
@@ -89,15 +100,15 @@ fi
 if [ "$DEPLOY_ASSETS" != "no" ]; then
 	# clean the assets path.
 	printf "\n%bcleaning up assets path...%b\n" "$CYAN" "$RESET"
-	rm -rf "$REPO_DIR/$ASSETS_PATH"/static/*
-	rm -f "$REPO_DIR/$ASSETS_PATH"/asset-manifest.json
+	rm -rf "$ASSETS_PATH"/static/*
+	rm -f "$ASSETS_PATH"/asset-manifest.json
 
 	# Make sure the directory exists
-	mkdir -p "$REPO_DIR/$ASSETS_PATH"
+	mkdir -p "$ASSETS_PATH"
 
 	# copy files from build folder to target assets folder
 	# ex: cp -r /home/runner/work/barista/cafe/wp-content/plugins/barista/build/*
 	# 			/home/runner/work/barista/cafe/wp-content/plugins/event-espresso-core/assets/
 	printf "\n%bcopy build files to assets path...%b\n" "$CYAN" "$RESET"
-	cp -r "$BUILD_PATH"/* "$REPO_DIR/$ASSETS_PATH/"
+	cp -r "$BUILD_PATH"/* "$ASSETS_PATH/"
 fi
