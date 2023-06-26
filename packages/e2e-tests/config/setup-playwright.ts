@@ -6,7 +6,7 @@ import { Goto, DefaultSettingsManager } from '../utils/admin';
 import { loginUser } from '../utils/wp';
 
 // The Jest timeout is increased because these tests are a bit slow
-jest.setTimeout(300000);
+jest.setTimeout(300_000); // value is in milliseconds which is 5 minutes
 
 const defaultSettingsManager = new DefaultSettingsManager();
 
