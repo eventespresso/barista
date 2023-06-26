@@ -11,7 +11,7 @@ import {
 } from '@e2eUtils/admin';
 import { eventData } from '../../../../shared/data';
 import { activateTheme } from '@e2eUtils/admin/wp-themes-page';
-import { IS_WP_MULTISITE_NETWORK, DO_NOT_USE_BARISTA_STRUCTURE } from '../../utils/dev/config';
+import { DO_NOT_USE_BARISTA_STRUCTURE, IS_WP_MULTISITE_NETWORK } from '@e2eUtils/dev/config';
 
 const templatesManager = new TemplatesManager();
 const eventsListSurfer = new EventsListSurfer();
