@@ -46,7 +46,7 @@ afterAll(async () => {
 	await capture?.stop();
 });
 
-describe('One Max Attendees and more tickets - ticket selector test', () => {
+describe('Ten Max Attendees and more tickets - ticket selector test', () => {
 	let getFirstEventId: string;
 	let getSetMaxValue: string;
 	let getSetValueSecondRow: string;
