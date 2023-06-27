@@ -1,4 +1,6 @@
 .ee-switch {
+	margin: var(--ee-margin-micro);
+
 	.chakra-switch__thumb {
 		&[aria-checked='true'],
 		&[data-checked] {
