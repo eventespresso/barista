@@ -23,7 +23,8 @@
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"strict": false,
-		"target": "es2015"
+		"target": "es2015",
+		"sourceMap": true
 	},
 	"files": ["node_modules/jest-playwright-preset/types/global.d.ts", "node_modules/expect-playwright/global.d.ts"],
 	"include": ["packages", "domains"],
