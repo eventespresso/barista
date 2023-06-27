@@ -1,5 +1,3 @@
-import { isNil } from 'ramda';
-
 import { getBasePrice } from '@eventespresso/predicates';
 
 import { calculateBasePrice } from '../';
@@ -13,10 +11,6 @@ describe('calculateBasePrice', () => {
 		const testPrices = createPrices(prices.map(convertToModifier));
 
 		const basePrice = getBasePrice(testPrices)?.amount;
-
-		if (isNil(basePrice)) {
-			return;
-		}
 
 		const calculatedPrice = calculateBasePrice(total, testPrices);
 
