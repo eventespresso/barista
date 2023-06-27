@@ -240,6 +240,7 @@
 
 					input {
 						display: block;
+						max-width: calc(100% - (var(--ee-size-micro) * 2)) !important;
 						width: 100%;
 					}
 
