@@ -1,34 +1,31 @@
 {
 	"compilerOptions": {
-	  "allowJs": true,
-	  "allowSyntheticDefaultImports": true,
-	  "baseUrl": "./",
-	  "esModuleInterop": true,
-	  "forceConsistentCasingInFileNames": true,
-	  "isolatedModules": true,
-	  "jsx": "react-jsx",
-	  "lib": ["dom", "dom.iterable", "esnext"],
-	  "module": "esnext",
-	  "moduleResolution": "node",
-	  "noEmit": true,
-	  "paths": {
-		"@blocksServices/*": ["domains/core/admin/blocks/src/services/*"],
-		"@blocksComponents/*": ["domains/core/admin/blocks/src/components/*"],
-		"@edtrHooks/*": ["domains/core/admin/eventEditor/src/hooks/*"],
-		"@edtrServices/*": ["domains/core/admin/eventEditor/src/services/*"],
-		"@edtrUI/*": ["domains/core/admin/eventEditor/src/ui/*"],
-		"@e2eUtils/*": ["packages/e2e-tests/utils/*"],
-		"@eventespresso/*":["packages/*"]
-	  },
-	  "resolveJsonModule": true,
-	  "skipLibCheck": true,
-	  "strict": false,
-	  "target": "es2015"
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
+		"baseUrl": "./",
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"isolatedModules": true,
+		"jsx": "react-jsx",
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"module": "esnext",
+		"moduleResolution": "node",
+		"noEmit": true,
+		"paths": {
+			"@blocksServices/*": ["domains/core/admin/blocks/src/services/*"],
+			"@blocksComponents/*": ["domains/core/admin/blocks/src/components/*"],
+			"@edtrHooks/*": ["domains/core/admin/eventEditor/src/hooks/*"],
+			"@edtrServices/*": ["domains/core/admin/eventEditor/src/services/*"],
+			"@edtrUI/*": ["domains/core/admin/eventEditor/src/ui/*"],
+			"@e2eUtils/*": ["packages/e2e-tests/utils/*"],
+			"@eventespresso/*": ["packages/*"]
+		},
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"strict": false,
+		"target": "es2015"
 	},
-	"files": [
-	  "node_modules/jest-playwright-preset/types/global.d.ts",
-	  "node_modules/expect-playwright/global.d.ts"
-	],
+	"files": ["node_modules/jest-playwright-preset/types/global.d.ts", "node_modules/expect-playwright/global.d.ts"],
 	"include": ["packages", "domains"],
 	"exclude": ["node_modules", "vendor"]
-  }
+}
