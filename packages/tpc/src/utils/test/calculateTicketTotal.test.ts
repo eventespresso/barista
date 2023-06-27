@@ -1,4 +1,4 @@
-import { compose, isNil } from 'ramda';
+import { compose } from 'ramda';
 
 import { ticketTotalTestCases } from './ticketTotalData';
 import { basePriceTestCases } from './basePriceData';
@@ -8,10 +8,6 @@ import { convertToModifier, createPrices, basePrice, defaultModifer, setOrder, c
 describe('calculateTicketTotal', () => {
 	// lets reverse calculate ticket total from the base price test data
 	basePriceTestCases.forEach(({ basePrice: basePriceAmount, name, prices, total }) => {
-		if (isNil(total)) {
-			return;
-		}
-
 		const testPrices = createPrices(prices.map(convertToModifier));
 
 		// to calculate the ticket total, we must have a base price
