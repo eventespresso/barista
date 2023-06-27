@@ -41,7 +41,6 @@ export const InputType: React.FC<FormElementProps> = ({ element }) => {
 				options={options}
 				value={currentType}
 				onChangeValue={onChangeValue}
-				size='small'
 			/>
 			{confirmationDialog}
 		</>
