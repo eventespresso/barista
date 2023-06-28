@@ -11,7 +11,7 @@ const PriceModifierActions: React.FC<PriceModifierButtonProps> = ({ index, price
 
 			<Divider orientation='vertical' size='micro' borderColor='transparent' />
 
-			{!price.isBasePrice && <DeletePriceModifierButton index={index} key='delete' price={price} />}
+			{!price.isBasePrice && <DeletePriceModifierButton key='delete' price={price} />}
 		</Box>
 	);
 };
