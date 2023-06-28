@@ -3,7 +3,7 @@ import { TpcPriceModifier } from '../types';
 
 const applyPriceModifiers = (baseAmount: number, modifiers: Array<TpcPriceModifier>): number => {
 	const modifications = modifiers.reduce((prevValue, { amount, isDiscount, isPercent }) => {
-		const priceAmount = parsedAmount(amount) || 0;
+		const priceAmount = parsedAmount(amount);
 
 		// calculate the modification value
 		const modification = isPercent ? (priceAmount / 100) * baseAmount : priceAmount;
