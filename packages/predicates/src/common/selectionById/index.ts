@@ -8,8 +8,8 @@ export const entityGuId = <T extends Entity>(entity: T): EntityId => prop('id', 
 
 // the following return a function that:
 // receives an entity and returns`true` if entity matches property supplied to predicate
-export const entityHasDbId = <T extends Entity>(dbId: EntityDbId): ((entity: T) => boolean) => {
-	return propEq('dbId', dbId);
+export const entityHasDbId = <T extends Entity>(dbid: EntityDbId): ((entity: T) => boolean) => {
+	return propEq('dbId', dbid);
 };
 export const entityHasGuid = <T extends Entity>(guid: EntityId): ((entity: T) => boolean) => {
 	return propEq('id', guid);
