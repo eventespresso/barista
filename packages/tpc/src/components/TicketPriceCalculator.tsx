@@ -1,3 +1,4 @@
+import { hasPrices, hasPriceModifiers } from '@eventespresso/predicates';
 import { ButtonRow, DebugInfo } from '@eventespresso/ui-components';
 
 import DefaultPricesInfo from './DefaultPricesInfo';
@@ -25,7 +26,7 @@ const TicketPriceCalculator: React.FC<TicketPriceCalculatorProps> = ({ context }
 
 	const dataState = useDataState();
 
-	if (!dataState.prices?.length) {
+	if (!hasPrices(dataState.prices)) {
 		return (
 			<>
 				<NoPricesBanner context={context} />
@@ -34,15 +35,7 @@ const TicketPriceCalculator: React.FC<TicketPriceCalculatorProps> = ({ context }
 		);
 	}
 
-	let missingPriceTypes = false;
-	for (const price of dataState.prices) {
-		if (!missingPriceTypes && !price.isBasePrice) {
-			const hasPriceType = dataState.priceTypes.find((priceType) => {
-				return !priceType.isBasePrice && priceType.dbId === price.dbId;
-			});
-			missingPriceTypes = !hasPriceType;
-		}
-	}
+	const missingPriceTypes = !hasPriceModifiers(dataState.prices);
 
 	return (
 		<>
