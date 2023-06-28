@@ -1,8 +1,8 @@
 #!/bin/bash
 
 TOKEN=$1
-REPO=$2
-BASE="${3:-main}"
+REPO="${2:-cafe}"
+BASE="${3:-DEV}"
 HEAD=$4
 TITLE=$5
 BODY=$6
@@ -12,4 +12,4 @@ LABEL=$9
 
 gh auth login --with-token "$TOKEN"
 
-gh pr create --repo "$REPO" --base "$BASE" --head "$HEAD" --title "$TITLE" --body "$BODY" --assignee "$ASSIGNEE" --reviewer "$REVIEWER" --label "$LABEL"
+gh pr create --repo "eventespresso/$REPO" --base "$BASE" --head "$HEAD" --title "$TITLE" --body "$BODY" --assignee "$ASSIGNEE" --reviewer "$REVIEWER" --label "$LABEL"
