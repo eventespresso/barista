@@ -13,13 +13,22 @@ import type { BodyRow } from '@eventespresso/ui-components';
 type Props = {
 	index: number;
 	isDisabled?: boolean;
-	price?: TpcPriceModifier;
+	price: TpcPriceModifier;
 };
 
 type BodyRowGenerator = (props: Props) => BodyRow;
 
 const useBodyRowGenerator = (): BodyRowGenerator => {
 	return useCallback<BodyRowGenerator>(({ index, isDisabled, price }: Props) => {
+		if (!price) {
+			return {
+				cells: [],
+				rowClassName: `ee-entity-list-item--error`,
+				id: '',
+				key: '',
+				type: 'row',
+			};
+		}
 		const cells = [
 			{
 				key: 'id',
@@ -67,7 +76,7 @@ const useBodyRowGenerator = (): BodyRowGenerator => {
 
 		return {
 			cells,
-			className: `ee-editor-date-list-view-row ee-entity-list-item`,
+			rowClassName: `ee-editor-date-list-view-row ee-entity-list-item`,
 			id: `ee-editor-date-list-view-row-${price.id}`,
 			key: `row-${price.id}`,
 			type: 'row',
