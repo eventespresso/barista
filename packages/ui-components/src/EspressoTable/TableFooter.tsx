@@ -17,32 +17,32 @@ const TableFooter: React.FC<TableFooterProps> = ({ tableId, footerRows, rowCount
 	return !isEmpty(footerRows) ? (
 		<tfoot className={className}>
 			{footerRows.map((footerRow, index) => {
-				const row = index + rowCount;
+				const rowNumber = index + rowCount;
 
 				return (
 					<TableRow
 						rowData={footerRow}
-						key={`row-${row}`}
-						rowNumber={row}
+						key={`row-${rowNumber}`}
+						rowNumber={rowNumber}
 						rowType={RowType.footer}
 						id={footerRow.id || `${tableId}-footer`}
 						rowClassName={footerRow.footerRowClassName}
 						className={props.className}
 					>
-						{footerRow.cells.map(enhanceCell).map((column, col) => {
+						{footerRow.cells.map(enhanceCell).map((column, colNumber) => {
 							invariant(
 								column.hasOwnProperty('value'),
-								`Missing "value" property for footer column ${col}.`
+								`Missing "value" property for footer column ${colNumber}.`
 							);
 
 							const cell =
 								column.as === 'td' ? (
 									<TableDataCell
 										className={props.className}
-										colNumber={col}
+										colNumber={colNumber}
 										id={column.id || `${tableId}-footer-cell`}
-										key={`row-${row}-col-${col}`}
-										rowNumber={row}
+										key={`row-${rowNumber}-col-${colNumber}`}
+										rowNumber={rowNumber}
 										rowType={RowType.footer}
 										tableDataCellClassName={column.className || ''}
 									>
@@ -51,10 +51,10 @@ const TableFooter: React.FC<TableFooterProps> = ({ tableId, footerRows, rowCount
 								) : (
 									<TableHeaderCell
 										className={props.className}
-										colNumber={col}
+										colNumber={colNumber}
 										id={column.id || `${tableId}-footer-cell`}
-										key={`row-${row}-col-${col}`}
-										rowNumber={row}
+										key={`row-${rowNumber}-col-${colNumber}`}
+										rowNumber={rowNumber}
 										rowType={RowType.footer}
 										scope={column.scope}
 										tableHeaderCellClassName={column.className}
@@ -63,7 +63,7 @@ const TableFooter: React.FC<TableFooterProps> = ({ tableId, footerRows, rowCount
 									</TableHeaderCell>
 								);
 
-							return isFunc(column.render) ? column.render({ row, col, column }) : cell;
+							return isFunc(column.render) ? column.render({ rowNumber, colNumber, column }) : cell;
 						})}
 					</TableRow>
 				);

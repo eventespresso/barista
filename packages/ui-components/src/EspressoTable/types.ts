@@ -20,8 +20,8 @@ export interface CellData extends Omit<Cell, 'type'>, Size {
 interface CellRender {
 	rowNumber: number;
 	colNumber: number;
-	column: ResponsiveCellProps;
-	cellData: CellData;
+	column: Cell;
+	cellData?: CellData;
 }
 
 export type CellRenderer = (props: CellRender) => JSX.Element;
