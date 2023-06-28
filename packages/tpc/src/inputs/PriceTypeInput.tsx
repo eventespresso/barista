@@ -11,12 +11,14 @@ const PriceTypeInput: React.FC<PriceModifierProps> = ({ price }) => {
 	const priceTypes = usePriceTypes();
 	const modifierOptions = getPriceModifiers(priceTypes);
 	const options = price.isBasePrice ? priceTypes : modifierOptions;
+	const className = !options.length ? 'ee-select--error' : null;
 	// price type cannot be changed for base/default price
 	const disabled = isDisabled || price.isBasePrice || price.isDefault;
 
 	return (
 		<PriceField
 			aria-label={__('price type')}
+			className={className}
 			component={'select'}
 			disabled={disabled}
 			field='priceType'
