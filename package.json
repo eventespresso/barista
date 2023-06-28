@@ -149,7 +149,7 @@
 		"identity-obj-proxy": "3.0.0",
 		"jest": "27",
 		"jest-circus": "26.6.3",
-		"jest-environment-jsdom": "26.6.2",
+		"jest-environment-jsdom": "^29.5.0",
 		"jest-playwright-jsdom": "^0.0.4",
 		"jest-playwright-preset": "^1.7.0",
 		"jest-resolve": "26.6.2",
