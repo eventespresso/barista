@@ -99,14 +99,5 @@ jobs:
 
             - name: Create PR for Core
               id: create-pr-for-core
-              uses: repo-sync/pull-request@v2
-              with:
-                  source_branch: 'updates-from-barista-${{ steps.date.outputs.date }}'
-                  destination_branch: 'DEV'
-                  pr_title: ${{ steps.pr.outputs.title }} (Barista#${{ steps.pr.outputs.number }})
-                  pr_body: 'This PR was automatically generated for the purpose of merging the work done in Barista PR [${{ steps.pr.outputs.title }}](https://github.com/eventespresso/barista/pull/${{ steps.pr.outputs.number }}) into Café '
-                  pr_reviewer: 'tn3rb'
-                  pr_assignee: 'tn3rb'
-                  pr_label: 'C: assets 💎,P3: med priority 😐,S5: code review 🔎,T: chore🧹'
-                  pr_allow_empty: true # Creates pull request even if there are no changes
-                  github_token: ${{ secrets.GH_ACTIONS_ACCESS_TOKEN }}
+              run: |
+                  source tools/create-pull-request.sh ${{ secrets.GH_ACTIONS_ACCESS_TOKEN }} 'eventespresso/cafe' 'DEV' 'updates-from-barista-${{ steps.date.outputs.date }}' "${{ steps.pr.outputs.title }} (Barista#${{ steps.pr.outputs.number }})" "This PR was automatically generated for the purpose of merging the work done in Barista PR [${{ steps.pr.outputs.title }}](https://github.com/eventespresso/barista/pull/${{ steps.pr.outputs.number }}) into Café" 'tn3rb' 'tn3rb' 'C: assets 💎,P3: med priority 😐,S5: code review 🔎,T: chore🧹'
