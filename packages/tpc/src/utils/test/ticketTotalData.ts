@@ -7,24 +7,24 @@ import { TestCase, basePrice, fixedDiscount, fixedSurcharge, percentDiscount, pe
  */
 export const ticketTotalTestCases: Array<TestCase> = [
 	{
-		name: 'returns base price amount if there are no modifiers',
+		name: 'calculate total when there are no modifiers',
 		prices: [basePrice(15.2)],
 		total: 15.2,
 	},
 	{
-		name: 'returns 0 when base price amount is 0',
+		name: 'calculates total when base price amount is 0 (zero)',
 		prices: [basePrice(0), fixedSurcharge(5), tax(8), tax(12)],
-		total: 0,
+		total: 6.048,
 	},
 	{
-		name: 'returns 0 when base price amount is undefined',
+		name: 'calculates total when base price amount is undefined',
 		prices: [basePrice(undefined), fixedSurcharge(5), tax(8), tax(12)],
-		total: 0,
+		total: 6.048,
 	},
 	{
-		name: 'returns 0 when base price amount is null',
+		name: 'calculates total when base price amount is null',
 		prices: [basePrice(null), fixedSurcharge(5), tax(8), tax(12)],
-		total: 0,
+		total: 6.048,
 	},
 	{
 		name: 'calculates the total when taxes have same order',
