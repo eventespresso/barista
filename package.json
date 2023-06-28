@@ -68,15 +68,6 @@
 			"react-app"
 		]
 	},
-	"jest": {
-		"collectCoverageFrom": [
-			"src/**/*.{js,jsx,ts,tsx}",
-			"!src/setupTests.{js,jsx,ts,tsx}",
-			"!src/index.{js,jsx,ts,tsx}",
-			"!src/serviceWorker.{js,jsx,ts,tsx}",
-			"!src/**/*.(spec|test|stories).{js,jsx,ts,tsx}"
-		]
-	},
 	"dependencies": {
 		"bignumber.js": "^9.1.1",
 		"classnames": "^2.3.1",
