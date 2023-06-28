@@ -1,7 +1,7 @@
 .ee-tabbable-text {
 	align-items: center;
 	border-color: var(--ee-background-color); // essentially no border by default
-	border-radius: var(--ee-border-radius-small);
+	border-radius: var(--ee-border-radius-tiny);
 	border-width: var(--ee-border-width);
 	display: inline-flex;
 	justify-content: center;
@@ -32,7 +32,7 @@
 			margin-inline-end: calc(var(--ee-padding-smaller) * -1);
 			opacity: 0;
 			position: absolute;
-			transition: all 250ms ease-in-out ;
+			transition: all 250ms ease-in-out;
 		}
 
 		&:hover {
