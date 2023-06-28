@@ -43,6 +43,8 @@
 
 		@include ee-input-disabled-hover;
 
+		@include ee-input-error;
+
 		appearance: none;
 		max-width: none; // .wp-core-ui select override
 		min-width: auto; // .wp-core-ui select override
