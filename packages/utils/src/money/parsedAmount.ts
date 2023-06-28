@@ -7,5 +7,8 @@ import type { Amount } from './types';
  * @return {number}
  */
 export const parsedAmount = (amount: Amount): number => {
-	return typeof amount === 'number' ? amount : Number.parseFloat(amount);
+	if (typeof amount === 'number') return amount;
+	const float = Number.parseFloat(amount);
+	if (Number.isNaN(float)) return 0;
+	return float;
 };

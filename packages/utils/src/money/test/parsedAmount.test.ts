@@ -4,8 +4,7 @@ const testCases = [
 	{
 		desc: 'checks for parsed amount to be a number',
 		amount: 5,
-		testFn: (val: any): boolean => typeof val === 'number',
-		result: true,
+		result: 5,
 	},
 	{
 		desc: 'returns a numeric float for a numeric float',
@@ -18,28 +17,24 @@ const testCases = [
 		result: 8.256,
 	},
 	{
-		desc: 'returns NaN for a non-numeric string',
+		desc: 'returns 0 for a non-numeric string',
 		amount: 'carrot',
-		testFn: (val: any): boolean => isNaN(val),
-		result: true,
+		result: 0,
 	},
 	{
-		desc: 'returns NaN for an empty string',
+		desc: 'returns 0 for an empty string',
 		amount: '',
-		testFn: (val: any): boolean => isNaN(val),
-		result: true,
+		result: 0,
 	},
 	{
-		desc: 'returns NaN when amount is null',
+		desc: 'returns 0 when amount is null',
 		amount: null,
-		testFn: (val: any): boolean => isNaN(val),
-		result: true,
+		result: 0,
 	},
 	{
-		desc: 'returns NaN when amount is undefined',
+		desc: 'returns 0 when amount is undefined',
 		amount: undefined,
-		testFn: (val: any): boolean => isNaN(val),
-		result: true,
+		result: 0,
 	},
 ];
 
@@ -47,9 +42,7 @@ describe('formatAmount', () => {
 	for (const testCase of testCases) {
 		it(testCase.desc, () => {
 			const result = parsedAmount(testCase.amount);
-			const expectedResult = testCase.testFn ? testCase.testFn(result) : result;
-
-			expect(testCase.result).toBe(expectedResult);
+			expect(testCase.result).toBe(result);
 		});
 	}
 });
