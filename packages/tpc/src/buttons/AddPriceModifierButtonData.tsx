@@ -4,12 +4,12 @@ import { usePriceTypeForPrice } from '@eventespresso/edtr-services';
 import { uuid } from '@eventespresso/utils';
 
 import AddPriceModifierButton from './AddPriceModifierButton';
-import type { PriceModifierProps, TpcPriceModifier } from '../types';
+import type { PriceModifierButtonProps, TpcPriceModifier } from '../types';
 import { usePriceModifier } from '../hooks';
 import defaultPrice from '../defaultPriceModifier';
 import { useDataState } from '../data';
 
-const AddPriceModifierButtonData: React.FC<Partial<PriceModifierProps>> = ({ index }) => {
+const AddPriceModifierButtonData: React.FC<Partial<PriceModifierButtonProps>> = ({ index }) => {
 	const defaultPriceModifier = usePriceModifier(defaultPrice);
 	const baseType = usePriceTypeForPrice(defaultPriceModifier.id);
 

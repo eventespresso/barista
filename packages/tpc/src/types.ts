@@ -20,5 +20,8 @@ export interface TpcPriceModifier extends Price {
 
 export interface PriceModifierProps {
 	price: TpcPriceModifier;
-	index?: number;
+}
+
+export interface PriceModifierButtonProps extends PriceModifierProps {
+	index: number;
 }
