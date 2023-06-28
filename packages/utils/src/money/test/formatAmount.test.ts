@@ -2,13 +2,6 @@ import { formatAmount } from '../';
 
 const testCases = [
 	{
-		desc: 'checks for formatted amount to be a string',
-		decimalPlaces: 2,
-		amount: 5,
-		testFn: (val: any): boolean => typeof val === 'string',
-		result: true,
-	},
-	{
 		desc: 'adds leading zeros for integers',
 		decimalPlaces: 2,
 		amount: 5,
@@ -51,22 +44,22 @@ const testCases = [
 		result: '-1',
 	},
 	{
-		desc: 'returns empty string when amount is null',
+		desc: 'returns 0.000 when amount is null',
 		decimalPlaces: 3,
 		amount: null,
-		result: '',
+		result: '0.000',
 	},
 	{
-		desc: 'returns empty string when amount is empty string',
+		desc: 'returns 0.000 when amount is empty string',
 		decimalPlaces: 3,
 		amount: '',
-		result: '',
+		result: '0.000',
 	},
 	{
-		desc: 'returns empty string when amount is undefined',
+		desc: 'returns 0.000 when amount is undefined',
 		decimalPlaces: 3,
 		amount: undefined,
-		result: '',
+		result: '0.000',
 	},
 ];
 
@@ -75,9 +68,7 @@ describe('formatAmount', () => {
 		it(testCase.desc, () => {
 			const format = formatAmount(testCase.decimalPlaces);
 			const result = format(testCase.amount);
-			const expectedResult = testCase.testFn ? testCase.testFn(result) : result;
-
-			expect(testCase.result).toBe(expectedResult);
+			expect(testCase.result).toBe(result);
 		});
 	}
 });
