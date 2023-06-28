@@ -147,7 +147,7 @@ const useBodyRowGenerator = (): TicketsTableBodyRowGen => {
 
 			return {
 				cells,
-				className: `ee-editor-ticket-list-view-row ${statusClassName}`,
+				className: { bodyRowClassName: `ee-editor-ticket-list-view-row ${statusClassName}` },
 				'data-testid': `ee-ticket-list-view-row-${ticket.dbId}`,
 				id: `ee-editor-ticket-list-view-row-${ticket.id}`,
 				key: `row-${ticket.id}`,
