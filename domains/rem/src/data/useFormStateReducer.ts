@@ -13,12 +13,13 @@ export const initialState: FormState = {
 	dateDetails: {},
 	tickets: {},
 	isDirty: false,
+	venue: '',
 };
 
 const useFormStateReducer = (initializer: StateInitializer): FormStateReducer => {
 	return useCallback<FormStateReducer>(
 		(state, action) => {
-			const { date, rRule, exRule, dateDetails, id, ticket, type } = action;
+			const { date, rRule, exRule, dateDetails, id, ticket, type, venue } = action;
 			let ticketId: string, newState: FormState;
 
 			switch (type) {
@@ -61,6 +62,13 @@ const useFormStateReducer = (initializer: StateInitializer): FormStateReducer =>
 					};
 					break;
 
+				case 'SET_VENUE':
+					newState = {
+						...state,
+						venue,
+					};
+					break;
+
 				case 'ADD_TICKET':
 				case 'UPDATE_TICKET':
 					// use id to update and uuid to add new
@@ -78,6 +86,7 @@ const useFormStateReducer = (initializer: StateInitializer): FormStateReducer =>
 
 				case 'RESET':
 					return initializer(initialState);
+
 				default:
 					throw new Error('Unexpected action');
 			}

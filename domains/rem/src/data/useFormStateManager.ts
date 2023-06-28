@@ -62,6 +62,13 @@ const useFormStateManager: FormStateManagerHook = () => {
 		});
 	}, []);
 
+	const setVenue: FSM['setVenue'] = useCallback((venue) => {
+		dispatch({
+			type: 'SET_VENUE',
+			venue,
+		});
+	}, []);
+
 	const addTicket: FSM['addTicket'] = useCallback((ticket) => {
 		dispatch({
 			type: 'ADD_TICKET',
@@ -106,6 +113,7 @@ const useFormStateManager: FormStateManagerHook = () => {
 			removeExDate,
 			removeRDate,
 			setDateDetails,
+			setVenue,
 			setExRule,
 			setRRule,
 			updateDateField,
