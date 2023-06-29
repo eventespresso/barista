@@ -31,7 +31,7 @@ export const isNotSharedOrDefault: EntityFieldPred<'isShared' | 'isDefault', boo
 
 // returns `true` if supplied object is of type `Price`
 export const isPrice = (object: Price): object is Price => {
-	return 'amount' in object && 'isBasePrice' in object;
+	return object && 'amount' in object && 'isBasePrice' in object;
 };
 
 // the following return `true` if price satisfies predicate
