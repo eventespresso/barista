@@ -5,11 +5,13 @@ import { PlusCircleFilled } from '@eventespresso/icons';
 
 interface AddPriceModifierButtonProps {
 	addPriceModifier: VoidFunction;
+	isDisabled: boolean;
 }
 
-const AddPriceModifierButton: React.FC<AddPriceModifierButtonProps> = ({ addPriceModifier }) => (
+const AddPriceModifierButton: React.FC<AddPriceModifierButtonProps> = ({ addPriceModifier, isDisabled }) => (
 	<IconButton
 		icon={PlusCircleFilled}
+		isDisabled={isDisabled}
 		onClick={addPriceModifier}
 		tooltip={__('add new price modifier after this row')}
 	/>
