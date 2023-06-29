@@ -6,6 +6,17 @@ on:
             - closed
         branches:
             - master
+    workflow_dispatch:
+        inputs:
+            pr_number:
+                description: 'PR number'
+                required: true
+                default: '0'
+            pr_title:
+                description: 'PR title'
+                required: true
+                default: ''
+
 env:
     API_TOKEN_GITHUB: ${{ secrets.GH_ACTIONS_ACCESS_TOKEN }}
     GIT_USER_EMAIL: ${{ secrets.GH_ACTIONS_GIT_USER_EMAIL }}
@@ -97,9 +108,18 @@ jobs:
             - name: Commit Changes
               run: source tools/commit-changes.sh "updates-from-barista-${{ steps.date.outputs.date }}" DEV cafe
 
+            - name: Get PR Variables
+              id: prVars
+              shell: bash
+              run: |
+                  PR_NUMBER=${{ inputs.pr_number }} || ${{ steps.pr.outputs.number }}
+                  echo "prNumber=$PR_NUMBER" >> $GITHUB_OUTPUT
+                  PR_TITLE=${{ inputs.pr_title }} || ${{ steps.pr.outputs.title }}
+                  echo "prTitle=$PR_TITLE" >> $GITHUB_OUTPUT
+
             - name: Create PR for Café
               id: create-pr-for-cafe
               env:
                   GH_TOKEN: ${{ secrets.GH_ACTIONS_ACCESS_TOKEN }}
               run: |
-                  gh pr create --repo "eventespresso/$cafe" --base "$DEV" --head "updates-from-barista-${{ steps.date.outputs.date }}" --title "${{ steps.pr.outputs.title }} (Barista#${{ steps.pr.outputs.number }})" --body "This PR was automatically generated for the purpose of merging the work done in Barista PR [${{ steps.pr.outputs.title }}](https://github.com/eventespresso/barista/pull/${{ steps.pr.outputs.number }}) into Café" --assignee "tn3rb" --reviewer "tn3rb" --label "C: assets 💎,P3: med priority 😐,S5: code review 🔎,T: chore🧹"
+                  gh pr create --repo "eventespresso/cafe" --base "$DEV" --head "updates-from-barista-${{ steps.date.outputs.date }}" --title "${{ steps.prVars.outputs.prTitle }} (Barista#${{ steps.prVars.outputs.prNumber }})" --body "This PR was automatically generated for the purpose of merging the work done in Barista PR [${{ steps.prVars.outputs.prTitle }}](https://github.com/eventespresso/barista/pull/${{ steps.prVars.outputs.prNumber }}) into Café" --assignee "tn3rb" --reviewer "tn3rb" --label "C: assets 💎,P3: med priority 😐,S5: code review 🔎,T: chore🧹"
