@@ -20,15 +20,6 @@ type BodyRowGenerator = (props: Props) => BodyRow;
 
 const useBodyRowGenerator = (): BodyRowGenerator => {
 	return useCallback<BodyRowGenerator>(({ index, isDisabled, price }: Props) => {
-		if (!price) {
-			return {
-				cells: [],
-				rowClassName: `ee-entity-list-item--error`,
-				id: '',
-				key: '',
-				type: 'row',
-			};
-		}
 		const cells = [
 			{
 				key: 'id',
