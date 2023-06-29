@@ -60,7 +60,7 @@ const config: Config.InitialOptions = {
 	setupFiles: ['react-app-polyfill/jsdom'],
 	setupFilesAfterEnv: ['<rootDir>/config/jest/setupTests.ts'],
 	preset: 'ts-jest',
-	testEnvironment: 'jest-environment-jsdom',
+	testEnvironment: 'jsdom',
 	transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$', '^.+\\.module\\.(css|sass|scss)$'],
 	modulePaths: [],
 	moduleNameMapper: resolveTsconfigPathsToModuleNameMapper(),
