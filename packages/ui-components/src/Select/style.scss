@@ -43,6 +43,8 @@
 
 		@include ee-input-disabled-hover;
 
+		@include ee-input-error;
+
 		appearance: none;
 		max-width: none; // .wp-core-ui select override
 		min-width: auto; // .wp-core-ui select override
@@ -76,7 +78,7 @@
 
 	> div {
 		svg,
-		svg.ee-svg.ee-svg {
+		svg.ee-svg {
 			color: var(--ee-border-color);
 			height: 1.25rem !important;
 			width: 1.25rem !important;
@@ -86,7 +88,7 @@
 	&--inline {
 		> div {
 			svg,
-			svg.ee-svg.ee-svg {
+			svg.ee-svg {
 				color: currentColor;
 				fill: currentColor;
 			}

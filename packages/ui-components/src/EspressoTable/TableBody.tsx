@@ -10,7 +10,7 @@ import TableDataCell from './TableDataCell';
 import ResponsiveCell from './ResponsiveCell';
 
 import { RowType } from './types';
-import type { TableBodyProps } from './types';
+import type { CellRenderer, TableBodyProps } from './types';
 
 const TableBody: React.FC<TableBodyProps> = ({
 	bodyRows,
@@ -20,7 +20,7 @@ const TableBody: React.FC<TableBodyProps> = ({
 	tableId,
 	...props
 }) => {
-	const tableCell = (rowNumber, colNumber, column, cellData) => {
+	const tableCell: CellRenderer = ({ rowNumber, colNumber, column, cellData }) => {
 		return hasRowHeaders && colNumber === 0 ? (
 			<TableHeaderCell
 				className={props.className}
@@ -61,20 +61,21 @@ const TableBody: React.FC<TableBodyProps> = ({
 				rowNumber={rowNumber}
 				rowType={RowType.body}
 			>
-				{row.cells.map(enhanceCell).map((cellData, colNumber) => {
-					const column = primaryHeader.cells[colNumber];
-					invariant(column !== undefined, `Missing data for column ${colNumber} in row ${rowNumber}.`);
-					invariant(
-						cellData.hasOwnProperty('value'),
-						`Missing "value" property for table cell at row ${rowNumber} column ${colNumber}.`
-					);
+				{row.cells &&
+					row.cells.map(enhanceCell).map((cellData, colNumber) => {
+						const column = primaryHeader.cells[colNumber];
+						invariant(column !== undefined, `Missing data for column ${colNumber} in row ${rowNumber}.`);
+						invariant(
+							cellData.hasOwnProperty('value'),
+							`Missing "value" property for table cell at row ${rowNumber} column ${colNumber}.`
+						);
 
-					if (cellData.render) {
-						return cellData.render({ row: rowNumber, col: colNumber, column, cellData });
-					}
+						if (cellData.render) {
+							return cellData.render({ rowNumber, colNumber, column, cellData });
+						}
 
-					return tableCell(rowNumber, colNumber, column, cellData);
-				})}
+						return tableCell({ rowNumber, colNumber, column, cellData });
+					})}
 			</TableRow>
 		);
 	});

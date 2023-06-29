@@ -1,6 +1,5 @@
 export interface EmptyStateProps {
-	children?: React.ReactNode;
 	className?: string;
-	description: string;
+	message: string;
 	title?: string;
 }

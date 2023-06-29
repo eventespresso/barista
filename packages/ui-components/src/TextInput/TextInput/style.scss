@@ -2,6 +2,7 @@
 
 .ee-input-base.ee-text-input {
 	@include ee-input-base;
+	@include ee-input-error;
 	@extend .ee-input;
 
 	&[aria-invalid='true'] {

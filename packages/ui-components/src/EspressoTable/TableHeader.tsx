@@ -22,27 +22,30 @@ const TableHeader: React.FC<TableHeaderProps> = ({ headerRows, tableId, ...props
 
 	return (
 		<thead {...theadProps}>
-			{headerRows.map((headerRow, row) => (
+			{headerRows.map((headerRow, rowNumber) => (
 				<TableRow
 					className={props.className}
 					id={headerRow.id || `${tableId}-header`}
 					headerRowClassName={headerRow.className || ''}
-					key={`header-row-${row}`}
+					key={`header-row-${rowNumber}`}
 					rowData={headerRow}
-					rowNumber={row}
+					rowNumber={rowNumber}
 					rowType={RowType.header}
 				>
-					{headerRow?.cells.map(enhanceCell).map((column, col) => {
-						invariant(column.hasOwnProperty('value'), `Missing "value" property for header column ${col}.`);
+					{headerRow?.cells.map(enhanceCell).map((column, colNumber) => {
+						invariant(
+							column.hasOwnProperty('value'),
+							`Missing "value" property for header column ${colNumber}.`
+						);
 
 						return typeof column?.render === 'function' ? (
-							column.render({ row, col, column })
+							column.render({ rowNumber, colNumber, column })
 						) : (
 							<TableHeaderCell
 								className={props.className}
-								colNumber={col}
-								key={`row-${row}-col-${col}`}
-								rowNumber={row}
+								colNumber={colNumber}
+								key={`row-${rowNumber}-col-${colNumber}`}
+								rowNumber={rowNumber}
 								rowType={RowType.header}
 								id={column.id || `${tableId}-header-cell`}
 								tableHeaderCellClassName={column.className}

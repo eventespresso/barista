@@ -45,8 +45,8 @@
 				&:first-child {
 					.ee-weekly-input {
 						~ .ee-weekly-span {
-							border-top-left-radius: var(--ee-border-radius-small);
-							border-bottom-left-radius: var(--ee-border-radius-small);
+							border-top-left-radius: var(--ee-border-radius-tiny);
+							border-bottom-left-radius: var(--ee-border-radius-tiny);
 						}
 					}
 				}
@@ -55,8 +55,8 @@
 					.ee-weekly-input {
 						~ .ee-weekly-span {
 							border-right: var(--ee-border-width) solid var(--ee-border-color);
-							border-top-right-radius: var(--ee-border-radius-small);
-							border-bottom-right-radius: var(--ee-border-radius-small);
+							border-top-right-radius: var(--ee-border-radius-tiny);
+							border-bottom-right-radius: var(--ee-border-radius-tiny);
 						}
 					}
 				}

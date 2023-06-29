@@ -3,7 +3,8 @@
 	box-shadow: none !important;
 	box-sizing: border-box;
 	color: var(--ee-color-blue);
-	padding: 1px var(--ee-padding-tiny) 2px;
+	padding: 1px var(--ee-padding-pico) 2px;
+	margin: 0 2px;
 
 	&:not(:hover):not(:focus) {
 		border-color: transparent;
@@ -14,7 +15,7 @@
 		width: unset;
 	}
 
-	svg.ee-svg.ee-svg--external {
+	svg.ee-svg--external {
 		margin-inline-end: 0;
 	}
 }

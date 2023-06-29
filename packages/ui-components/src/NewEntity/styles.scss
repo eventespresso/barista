@@ -1,6 +1,6 @@
 @import '~@eventespresso/styles/src/mixins/breakpoints.scss';
 
-section.ee-modal[role="alertdialog"].ee-new-entity-modal {
+section.ee-modal[role='alertdialog'].ee-new-entity-modal {
 	background: var(--ee-background-color);
 	border-radius: var(--ee-border-radius-default);
 	height: auto;
@@ -89,7 +89,7 @@ section.ee-modal[role="alertdialog"].ee-new-entity-modal {
 			white-space: pre-wrap;
 		}
 
-		svg.ee-svg.ee-svg {
+		svg.ee-svg {
 			color: var(--ee-color-grey-9);
 			height: 48px;
 			width: 48px;

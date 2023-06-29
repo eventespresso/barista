@@ -1,16 +1,17 @@
+import { hasPrices, hasPriceModifiers } from '@eventespresso/predicates';
 import { ButtonRow, DebugInfo } from '@eventespresso/ui-components';
 
 import DefaultPricesInfo from './DefaultPricesInfo';
 import DefaultTaxesInfo from './DefaultTaxesInfo';
-
-import DeleteAllPricesButton from '../buttons/DeleteAllPricesButton';
+import LockedTicketsBanner from './LockedTicketsBanner';
 import NoPricesBanner from './NoPricesBanner';
+import NoPriceTypesBanner from './NoPriceTypesBanner';
 import Table from './table/Table';
+import DeleteAllPricesButton from '../buttons/DeleteAllPricesButton';
 import TaxesButtons from '../buttons/taxes/TaxesButtons';
 import { useDataState } from '../data';
 import { useInitStateListeners } from '../stateListeners';
 import { usePricesPolling } from '../hooks';
-import LockedTicketsBanner from './LockedTicketsBanner';
 
 import './styles.scss';
 
@@ -21,12 +22,11 @@ export interface TicketPriceCalculatorProps {
 const TicketPriceCalculator: React.FC<TicketPriceCalculatorProps> = ({ context }) => {
 	// initialize state listeners
 	useInitStateListeners();
-
 	usePricesPolling();
 
 	const dataState = useDataState();
 
-	if (!dataState.prices?.length) {
+	if (!hasPrices(dataState.prices)) {
 		return (
 			<>
 				<NoPricesBanner context={context} />
@@ -35,8 +35,11 @@ const TicketPriceCalculator: React.FC<TicketPriceCalculatorProps> = ({ context }
 		);
 	}
 
+	const missingPriceTypes = !hasPriceModifiers(dataState.prices);
+
 	return (
 		<>
+			{missingPriceTypes && <NoPriceTypesBanner />}
 			<LockedTicketsBanner />
 			<Table prices={dataState.prices} />
 			<DefaultTaxesInfo />

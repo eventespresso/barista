@@ -2,7 +2,7 @@ import type { Story, Meta } from '@storybook/react/types-6-0';
 
 import { ErrorIndicator } from './';
 
-import type { BannerProps } from '@eventespresso/adapters';
+import type { BannerProps } from '../types';
 
 export default {
 	argTypes: {},
@@ -12,4 +12,4 @@ export default {
 
 type BannerStory = Story<BannerProps>;
 
-export const Default: BannerStory = (args) => <ErrorIndicator {...args} description='description' title='title' />;
+export const Default: BannerStory = (args) => <ErrorIndicator {...args} message='error message' title='title' />;

@@ -2,7 +2,7 @@
 
 .ee-tag {
 	align-items: center;
-	border-radius: var(--ee-border-radius-small);
+	border-radius: var(--ee-border-radius-tiny);
 	display: inline-flex;
 	flex-flow: row nowrap;
 	margin: var(--ee-margin-tiny) auto var(--ee-margin-small);
@@ -32,7 +32,7 @@
 		}
 	}
 
-	svg.ee-svg.ee-svg {
+	svg.ee-svg {
 		margin: 0;
 		margin-inline-end: var(--ee-margin-micro);
 	}

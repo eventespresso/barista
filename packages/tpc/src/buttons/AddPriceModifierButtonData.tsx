@@ -1,43 +1,49 @@
 import { useCallback } from 'react';
 
 import { usePriceTypeForPrice } from '@eventespresso/edtr-services';
+import { isPriceType } from '@eventespresso/predicates';
 import { uuid } from '@eventespresso/utils';
 
 import AddPriceModifierButton from './AddPriceModifierButton';
-import type { PriceModifierProps, TpcPriceModifier } from '../types';
+import type { PriceModifierButtonProps, TpcPriceModifier } from '../types';
 import { usePriceModifier } from '../hooks';
 import defaultPrice from '../defaultPriceModifier';
 import { useDataState } from '../data';
 
-const AddPriceModifierButtonData: React.FC<Partial<PriceModifierProps>> = ({ index }) => {
+const AddPriceModifierButtonData: React.FC<Partial<PriceModifierButtonProps>> = ({ index }) => {
 	const defaultPriceModifier = usePriceModifier(defaultPrice);
-	const baseType = usePriceTypeForPrice(defaultPriceModifier.id);
+	const priceType = usePriceTypeForPrice(defaultPriceModifier.id);
+	const invalidPriceType = !isPriceType(priceType);
 
 	const { addPrice } = useDataState();
 
 	const addPriceModifier = useCallback(() => {
+		if (invalidPriceType) {
+			return;
+		}
 		const newPrice: TpcPriceModifier = {
 			...defaultPriceModifier,
 			id: uuid(),
-			isBasePrice: baseType.isBasePrice,
-			isDiscount: baseType.isDiscount,
-			isPercent: baseType.isPercent,
-			isTax: baseType.isTax,
-			order: baseType.order,
+			isBasePrice: priceType.isBasePrice,
+			isDiscount: priceType.isDiscount,
+			isPercent: priceType.isPercent,
+			isTax: priceType.isTax,
+			order: priceType.order,
 			isNew: true,
 		};
 
 		addPrice(newPrice, index + 1);
 	}, [
 		addPrice,
-		baseType.isBasePrice,
-		baseType.isDiscount,
-		baseType.isPercent,
-		baseType.isTax,
-		baseType.order,
 		defaultPriceModifier,
 		index,
+		invalidPriceType,
+		priceType?.isBasePrice,
+		priceType?.isDiscount,
+		priceType?.isPercent,
+		priceType?.isTax,
+		priceType?.order,
 	]);
-	return <AddPriceModifierButton addPriceModifier={addPriceModifier} />;
+	return <AddPriceModifierButton addPriceModifier={addPriceModifier} isDisabled={invalidPriceType} />;
 };
 export default AddPriceModifierButtonData;

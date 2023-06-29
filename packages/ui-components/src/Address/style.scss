@@ -14,7 +14,7 @@
 	&--inline {
 		flex-direction: row;
 		.ee-address__line {
-			svg.ee-svg.ee-svg--mapMarker {
+			svg.ee-svg--mapMarker {
 				margin: 0;
 				margin-block-start: var(--ee-margin-micro);
 				margin-inline-end: var(--ee-margin-tiny);

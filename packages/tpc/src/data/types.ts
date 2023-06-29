@@ -1,7 +1,7 @@
 import type { Reducer, ReducerState } from 'react';
 
 import type { Entity, EntityId } from '@eventespresso/data';
-import type { Ticket } from '@eventespresso/edtr-services';
+import type { PriceType, Ticket } from '@eventespresso/edtr-services';
 import type { BaseProps, TpcPriceModifier } from '../types';
 
 export interface TpcTicket
@@ -43,6 +43,7 @@ export interface DataStateManager extends DataState {
 	addPrice: (price: TpcPriceModifier, index?: number) => void;
 	deletePrice: (id: EntityId, isNewOrDefault?: boolean) => void;
 	getData: () => DataState;
+	priceTypes: PriceType[];
 	reset: VoidFunction;
 	reverseCalculate: boolean;
 	setPrices: (prices: DataState['prices']) => void;

@@ -84,7 +84,7 @@
 				margin-inline-end: var(--ee-margin-small);
 			}
 
-			&-icon.ee-svg.ee-svg {
+			&-icon.ee-svg {
 				color: var(--ee-color-grey-14);
 				display: inline-block;
 				font-size: calc(var(--ee-font-size-6xl) * 2.5);
@@ -153,7 +153,7 @@
 			h3 {
 				margin: 0 0 var(--ee-margin-default);
 			}
-			&-icon.ee-svg.ee-svg {
+			&-icon.ee-svg {
 				left: unset;
 				position: absolute;
 				right: 0.25rem;

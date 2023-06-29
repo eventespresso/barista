@@ -21,7 +21,7 @@ const TableRow: React.FC<BodyRow> = ({
 		rowClassName,
 		`ee-rspnsv-table-${rowType}-row`,
 		`ee-row-${rowNumber}`,
-		className[`${rowType}RowClass`]
+		className?.[`${rowType}RowClassName`]
 	);
 
 	return (

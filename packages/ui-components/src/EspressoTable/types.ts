@@ -6,10 +6,10 @@ export interface Cell {
 	className?: string;
 	id?: string;
 	key: string;
-	render?: (props: CellRender) => JSX.Element;
+	render?: CellRenderer;
 	scope?: 'col' | 'row';
 	type: string;
-	value?: React.ReactNode;
+	value?: React.ReactNode | string;
 }
 
 export interface CellData extends Omit<Cell, 'type'>, Size {
@@ -18,11 +18,13 @@ export interface CellData extends Omit<Cell, 'type'>, Size {
 }
 
 interface CellRender {
-	row: any;
-	col: any;
-	column: any;
-	cellData?: any;
+	rowNumber: number;
+	colNumber: number;
+	column: Cell;
+	cellData?: CellData;
 }
+
+export type CellRenderer = (props: CellRender) => JSX.Element;
 
 export interface FooterRow {
 	cells: CellData[];
@@ -42,8 +44,8 @@ export interface HeaderRow {
 }
 
 export interface ResponsiveCellProps {
-	heading: string;
-	value: string;
+	heading: React.ReactNode | string;
+	value: React.ReactNode | string;
 }
 
 export interface ResponsiveTableProps {
@@ -136,7 +138,7 @@ export interface TableHeaderCellProps {
 export interface BodyRow {
 	cells?: CellData[];
 	children?: React.ReactNode;
-	className?: TableClassName | string;
+	className?: TableClassName;
 	'data-testid'?: string;
 	headerRows?: HeaderRow[];
 	headerRowClassName?: string;

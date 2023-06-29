@@ -34,6 +34,13 @@
 	}
 }
 
+@mixin ee-input-error {
+	&--error,
+	.ee-input--error {
+		border-color: var(--ee-color-accent-low-contrast) !important;
+	}
+}
+
 @mixin ee-base-input-sizes {
 	&--micro {
 		font-size: var(--ee-font-size-micro);
@@ -82,7 +89,7 @@
 @mixin ee-base-inputs-styles {
 	background: var(--ee-background-color);
 	border-color: var(--ee-border-color);
-	border-radius: var(--ee-border-radius-small);
+	border-radius: var(--ee-border-radius-tiny);
 	border-style: solid;
 	border-width: var(--ee-border-width);
 	box-shadow: none;
@@ -104,6 +111,8 @@
 	@include ee-input-base-hover;
 
 	@include ee-input-disabled-hover;
+
+	@include ee-input-error;
 }
 
 @mixin ee-input-base {
@@ -131,5 +140,7 @@
 		@include ee-input-base-hover;
 
 		@include ee-input-disabled-hover;
+
+		@include ee-input-error;
 	}
 }
