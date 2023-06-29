@@ -1,7 +1,6 @@
 import type { Config } from '@jest/types';
-
-// const { getDomains } = require('./workspaces');
 import { getDomains, getPackages } from './config/workspaces';
+import type { TsJestTransformerOptions } from 'ts-jest';
 
 export const moduleNameMapper = {
 	'^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
@@ -38,12 +37,16 @@ getPackages().forEach(({ location }) => {
 	testMatch.push(`<rootDir>/${location}/src/**/*.test.{ts,tsx}`);
 });
 
+const TSJestConfig: TsJestTransformerOptions = {
+	babelConfig: false,
+	isolatedModules: false,
+};
+
 const config: Config.InitialOptions = {
 	roots,
 	testMatch,
 	transform: {
-		'^.+\\.(js|jsx)$': '<rootDir>/node_modules/babel-jest',
-		'^.+\\.(ts|tsx)$': '<rootDir>/node_modules/ts-jest',
+		'^.+\\.(ts|tsx)$': ['<rootDir>/node_modules/ts-jest', { ...TSJestConfig }],
 		'^.+\\.css$': '<rootDir>/config/jest/cssTransform.js',
 		'^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '<rootDir>/config/jest/fileTransform.js',
 	},
@@ -56,6 +59,7 @@ const config: Config.InitialOptions = {
 	],
 	setupFiles: ['react-app-polyfill/jsdom'],
 	setupFilesAfterEnv: ['<rootDir>/config/jest/setupTests.ts'],
+	preset: 'ts-jest',
 	testEnvironment: 'jest-environment-jsdom',
 	transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$', '^.+\\.module\\.(css|sass|scss)$'],
 	modulePaths: [],
