@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 
 import { usePriceTypeForPrice } from '@eventespresso/edtr-services';
+import { isPriceType } from '@eventespresso/predicates';
 import { uuid } from '@eventespresso/utils';
 
 import AddPriceModifierButton from './AddPriceModifierButton';
@@ -12,18 +13,22 @@ import { useDataState } from '../data';
 const AddPriceModifierButtonData: React.FC<Partial<PriceModifierButtonProps>> = ({ index }) => {
 	const defaultPriceModifier = usePriceModifier(defaultPrice);
 	const baseType = usePriceTypeForPrice(defaultPriceModifier.id);
+	const invalidBaseType = !isPriceType(baseType);
 
 	const { addPrice } = useDataState();
 
 	const addPriceModifier = useCallback(() => {
+		if (invalidBaseType) {
+			return;
+		}
 		const newPrice: TpcPriceModifier = {
 			...defaultPriceModifier,
 			id: uuid(),
-			isBasePrice: baseType?.isBasePrice,
-			isDiscount: baseType?.isDiscount,
-			isPercent: baseType?.isPercent,
-			isTax: baseType?.isTax,
-			order: baseType?.order,
+			isBasePrice: baseType.isBasePrice,
+			isDiscount: baseType.isDiscount,
+			isPercent: baseType.isPercent,
+			isTax: baseType.isTax,
+			order: baseType.order,
 			isNew: true,
 		};
 
@@ -37,7 +42,8 @@ const AddPriceModifierButtonData: React.FC<Partial<PriceModifierButtonProps>> = 
 		baseType?.order,
 		defaultPriceModifier,
 		index,
+		invalidBaseType,
 	]);
-	return <AddPriceModifierButton addPriceModifier={addPriceModifier} />;
+	return <AddPriceModifierButton addPriceModifier={addPriceModifier} isDisabled={invalidBaseType} />;
 };
 export default AddPriceModifierButtonData;
