@@ -13,12 +13,12 @@ import { useDataState } from '../data';
 const AddPriceModifierButtonData: React.FC<Partial<PriceModifierButtonProps>> = ({ index }) => {
 	const defaultPriceModifier = usePriceModifier(defaultPrice);
 	const priceType = usePriceTypeForPrice(defaultPriceModifier.id);
-	const invalidBaseType = !isPriceType(priceType);
+	const invalidPriceType = !isPriceType(priceType);
 
 	const { addPrice } = useDataState();
 
 	const addPriceModifier = useCallback(() => {
-		if (invalidBaseType) {
+		if (invalidPriceType) {
 			return;
 		}
 		const newPrice: TpcPriceModifier = {
@@ -35,15 +35,15 @@ const AddPriceModifierButtonData: React.FC<Partial<PriceModifierButtonProps>> = 
 		addPrice(newPrice, index + 1);
 	}, [
 		addPrice,
+		defaultPriceModifier,
+		index,
+		invalidPriceType,
 		priceType?.isBasePrice,
 		priceType?.isDiscount,
 		priceType?.isPercent,
 		priceType?.isTax,
 		priceType?.order,
-		defaultPriceModifier,
-		index,
-		invalidBaseType,
 	]);
-	return <AddPriceModifierButton addPriceModifier={addPriceModifier} isDisabled={invalidBaseType} />;
+	return <AddPriceModifierButton addPriceModifier={addPriceModifier} isDisabled={invalidPriceType} />;
 };
 export default AddPriceModifierButtonData;
