@@ -12,6 +12,7 @@ export const isPriceType = (object: PriceType): object is PriceType => {
 // returns true if supplied price type is a flat fee (dollar) surcharge
 export const isFlatFeeSurcharge = allPass([isNotBasePrice, isNotDiscount, isNotPercent]);
 
-export const getDefaultPriceModifierType = (priceTypes: PriceType[]): PriceType => {
-	return find<PriceType>(isFlatFeeSurcharge)(priceTypes);
+export const getDefaultPriceModifierType = (priceTypes: PriceType[]): PriceType | null => {
+	const priceType = find<PriceType>(isFlatFeeSurcharge)(priceTypes);
+	return priceType ? priceType : null;
 };

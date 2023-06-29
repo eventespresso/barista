@@ -6,10 +6,10 @@ import type { PriceType } from '../../types';
 /**
  * A custom react hook for retrieving the default price type object.
  */
-const useDefaultPriceType = (): PriceType => {
+const useDefaultPriceType = (): PriceType | null => {
 	const allPriceTypes = usePriceTypes();
-	const defaultPriceType = getDefaultPriceModifierType(allPriceTypes);
-	return useMemoStringify(defaultPriceType ? defaultPriceType : null);
+	const defaultPriceType: PriceType | null = getDefaultPriceModifierType(allPriceTypes);
+	return useMemoStringify(defaultPriceType);
 };
 
 export default useDefaultPriceType;
