@@ -63,8 +63,8 @@ describe('getDefaultPriceModifierType', () => {
 		expect(defaultPriceType.baseType).toBe(PriceBasetype.SURCHARGE);
 	});
 
-	it('should return undefined if we pass an empty array', () => {
+	it('should return null if we pass an empty array', () => {
 		const defaultPriceType = getDefaultPriceModifierType([]);
-		expect(defaultPriceType).toBeUndefined();
+		expect(defaultPriceType).toBeNull();
 	});
 });
