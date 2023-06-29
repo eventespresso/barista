@@ -97,7 +97,9 @@ jobs:
             - name: Commit Changes
               run: source tools/commit-changes.sh "updates-from-barista-${{ steps.date.outputs.date }}" DEV cafe
 
-            - name: Create PR for Core
-              id: create-pr-for-core
+            - name: Create PR for Café
+              id: create-pr-for-cafe
+              env:
+                  GH_TOKEN: ${{ secrets.GH_ACTIONS_ACCESS_TOKEN }}
               run: |
-                  source tools/create-pull-request.sh ${{ secrets.GH_ACTIONS_ACCESS_TOKEN }} 'cafe' 'DEV' 'updates-from-barista-${{ steps.date.outputs.date }}' "${{ steps.pr.outputs.title }} (Barista#${{ steps.pr.outputs.number }})" "This PR was automatically generated for the purpose of merging the work done in Barista PR [${{ steps.pr.outputs.title }}](https://github.com/eventespresso/barista/pull/${{ steps.pr.outputs.number }}) into Café" 'tn3rb' 'tn3rb' 'C: assets 💎,P3: med priority 😐,S5: code review 🔎,T: chore🧹'
+                  gh pr create --repo "eventespresso/$cafe" --base "$DEV" --head "updates-from-barista-${{ steps.date.outputs.date }}" --title "${{ steps.pr.outputs.title }} (Barista#${{ steps.pr.outputs.number }})" --body "This PR was automatically generated for the purpose of merging the work done in Barista PR [${{ steps.pr.outputs.title }}](https://github.com/eventespresso/barista/pull/${{ steps.pr.outputs.number }}) into Café" --assignee "tn3rb" --reviewer "tn3rb" --label "C: assets 💎,P3: med priority 😐,S5: code review 🔎,T: chore🧹"
