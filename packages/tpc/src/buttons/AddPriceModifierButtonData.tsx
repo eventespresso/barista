@@ -12,8 +12,8 @@ import { useDataState } from '../data';
 
 const AddPriceModifierButtonData: React.FC<Partial<PriceModifierButtonProps>> = ({ index }) => {
 	const defaultPriceModifier = usePriceModifier(defaultPrice);
-	const baseType = usePriceTypeForPrice(defaultPriceModifier.id);
-	const invalidBaseType = !isPriceType(baseType);
+	const priceType = usePriceTypeForPrice(defaultPriceModifier.id);
+	const invalidBaseType = !isPriceType(priceType);
 
 	const { addPrice } = useDataState();
 
@@ -24,22 +24,22 @@ const AddPriceModifierButtonData: React.FC<Partial<PriceModifierButtonProps>> = 
 		const newPrice: TpcPriceModifier = {
 			...defaultPriceModifier,
 			id: uuid(),
-			isBasePrice: baseType.isBasePrice,
-			isDiscount: baseType.isDiscount,
-			isPercent: baseType.isPercent,
-			isTax: baseType.isTax,
-			order: baseType.order,
+			isBasePrice: priceType.isBasePrice,
+			isDiscount: priceType.isDiscount,
+			isPercent: priceType.isPercent,
+			isTax: priceType.isTax,
+			order: priceType.order,
 			isNew: true,
 		};
 
 		addPrice(newPrice, index + 1);
 	}, [
 		addPrice,
-		baseType?.isBasePrice,
-		baseType?.isDiscount,
-		baseType?.isPercent,
-		baseType?.isTax,
-		baseType?.order,
+		priceType?.isBasePrice,
+		priceType?.isDiscount,
+		priceType?.isPercent,
+		priceType?.isTax,
+		priceType?.order,
 		defaultPriceModifier,
 		index,
 		invalidBaseType,
