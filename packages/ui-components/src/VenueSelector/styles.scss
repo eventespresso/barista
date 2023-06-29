@@ -38,7 +38,7 @@
 
 		.ee-heading {
 			align-items: flex-end;
-			color: var(--ee-default-text-color-low-contrast) ! important;
+			color: var(--ee-default-text-color-low-contrast);
 			display: flex;
 			font-weight: 500;
 			line-height: var(--ee-font-size-big);
@@ -54,7 +54,7 @@
 			}
 
 			svg.ee-svg.ee-svg {
-				color: var(--ee-default-text-color-super-low-contrast) ! important;
+				color: var(--ee-default-text-color-super-low-contrast);
 				height: 1.25rem;
 				margin: 0;
 				width: 1.25rem;
