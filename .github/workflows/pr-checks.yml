@@ -56,6 +56,8 @@ jobs:
             - name: Run ${{ matrix.task }}
               # Run the task only if JS is affected.
               if: ${{ needs.what-is-hit.outputs.js == 'true' }}
+              env:
+                  NODE_OPTIONS: '--max-old-space-size=4096'
               run: yarn ${{ matrix.task }}:ci ${{ env.CLI_ARGS }}
 
             - name: Upload build artifact

@@ -24,7 +24,7 @@
 		"skipLibCheck": true,
 		"strict": false,
 		"target": "es2015",
-		"sourceMap": true
+		"sourceMap": false
 	},
 	"files": ["node_modules/jest-playwright-preset/types/global.d.ts", "node_modules/expect-playwright/global.d.ts"],
 	"include": ["packages", "domains"],
