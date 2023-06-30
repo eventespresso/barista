@@ -112,9 +112,15 @@ jobs:
               id: prVars
               shell: bash
               run: |
-                  PR_NUMBER=${{ inputs.pr_number }} || ${{ steps.pr.outputs.number }}
+                  PR_NUMBER=${{ inputs.pr_number }}
+                  if [ "$PR_NUMBER" == "0" ]; then
+                      PR_NUMBER=${{ steps.pr.outputs.number }}
+                  fi
                   echo "prNumber=$PR_NUMBER" >> $GITHUB_OUTPUT
-                  PR_TITLE=${{ inputs.pr_title }} || ${{ steps.pr.outputs.title }}
+                  PR_TITLE=${{ inputs.pr_title }}
+                  if [ "$PR_TITLE" == "" ]; then
+                      PR_TITLE=${{ steps.pr.outputs.title }}
+                  fi
                   echo "prTitle=$PR_TITLE" >> $GITHUB_OUTPUT
 
             - name: Create PR for Café
