@@ -93,3 +93,6 @@ storybook-static
 # @wordpress/env
 .wp-env*
 !.wp-env.example*
+
+# Playwright
+playwright-report/*
