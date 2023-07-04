@@ -4,7 +4,7 @@ import {
 	getBasePrice,
 	getPriceModifiers,
 	getTaxes,
-	hasPriceModifiers,
+	priceHasPriceModifiers,
 	hasPrices,
 	isBasePrice,
 	isDiscount,
@@ -238,13 +238,13 @@ describe('hasPrices', () => {
 
 describe('hasPriceModifiers', () => {
 	it('should return true if prices array contains at least one price modifier', () => {
-		const result = hasPriceModifiers(prices);
+		const result = priceHasPriceModifiers(prices);
 		expect(result).toBe(true);
 	});
 
 	it('should return false if prices array does not contain any price modifiers', () => {
 		const filteredPrices = prices.map((price) => ({ ...price, isBasePrice: true }));
-		const result = hasPriceModifiers(filteredPrices);
+		const result = priceHasPriceModifiers(filteredPrices);
 		expect(result).toBe(false);
 	});
 });

@@ -76,7 +76,7 @@ export const hasPrices = (prices: Price[]) => {
 };
 
 // returns true if array of prices contains at least one non base price
-export const hasPriceModifiers = (prices: Price[]) => {
+export const priceHasPriceModifiers = (prices: Price[]) => {
 	const modifiers = getPriceModifiers(prices);
 	return !isEmpty(modifiers);
 };
