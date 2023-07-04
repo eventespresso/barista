@@ -20,10 +20,15 @@ const mappings = {
 
 const plugins = ['.'];
 
+const lifecycleScripts = {
+	afterStart: makeCmd('wp plugin activate event-espresso-core'),
+};
+
 const wpEnv = {
 	config,
 	mappings,
 	plugins,
+	lifecycleScripts,
 };
 
 const json = JSON.stringify(wpEnv, undefined, 2);
@@ -31,3 +36,16 @@ const json = JSON.stringify(wpEnv, undefined, 2);
 const fileName = '.wp-env.json';
 
 fs.writeFileSync(fileName, json);
+
+/**
+ * Create full command for @wordpress/env
+ * @param {string} cmd
+ * @return {string}
+ */
+function makeCmd(cmd) {
+	const envs = ['cli', 'tests-cli'];
+	const cmds = envs.map((e) => {
+		return `yarn wp-env run ${e} ${cmd}`;
+	});
+	return cmds.join(' && ');
+}
