@@ -36,6 +36,12 @@
 		"test:e2e": "jest --config packages/e2e-tests/jest.playwright.config.ts",
 		"test:e2e:clearCache": "jest --config packages/e2e-tests/jest.playwright.config.ts --clearCache",
 		"test": "node scripts/test.js",
+		"docker:make-config": "node config/wp-env/make-config.js",
+		"docker:start": "yarn docker:make-config && yarn wp-env start",
+		"docker:update": "yarn docker:start --update",
+		"docker:stop": "yarn wp-env stop",
+		"docker:clean": "yarn wp-env clean",
+		"docker:destroy": "yarn wp-env destroy",
 		"update:deps": "npx ncu -u && yarn workspaces run update-deps"
 	},
 	"lint-staged": {
