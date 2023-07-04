@@ -89,3 +89,7 @@ storybook-static
 
 # SSL certificates
 *.pem
+
+# @wordpress/env
+.wp-env*
+!.wp-env.example*
