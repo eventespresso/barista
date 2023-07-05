@@ -42,7 +42,10 @@ const useMutatePrices = (createNewDefault = false): Callback => {
 				// need to ensure there is ALWAYS a base price
 				const newPriceFields = copyPriceFields(defaultBasePrice, isPriceInputField);
 				const newPrice = await createPrice(newPriceFields);
-				relatedPriceIds = [newPrice?.data?.createEspressoPrice?.espressoPrice?.id];
+				const newPriceId = newPrice?.data?.createEspressoPrice?.espressoPrice?.id;
+				if (newPriceId) {
+					relatedPriceIds = [newPriceId];
+				}
 			}
 
 			if (deletedPriceIds?.length) {
