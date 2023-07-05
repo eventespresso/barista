@@ -112,13 +112,17 @@ jobs:
               id: prVars
               shell: bash
               run: |
-                  PR_NUMBER=${{ inputs.pr_number }}
-                  if [ "$PR_NUMBER" == "0" ]; then
+                  # get PR number
+                  if [ -n ${{ inputs.pr_number }} ]; then
+                    PR_NUMBER=${{ inputs.pr_number }}
+                  elif [ -n ${{ steps.pr.outputs.number }} ]; then
                       PR_NUMBER=${{ steps.pr.outputs.number }}
                   fi
                   echo "prNumber=$PR_NUMBER" >> $GITHUB_OUTPUT
-                  PR_TITLE=${{ inputs.pr_title }}
-                  if [ "$PR_TITLE" == "" ]; then
+                  # get PR title
+                  if [ -n ${{ inputs.pr_title }} ]; then
+                      PR_TITLE=${{ inputs.pr_title }}
+                  elif [ -n ${{ steps.pr.outputs.title }} ]; then
                       PR_TITLE=${{ steps.pr.outputs.title }}
                   fi
                   echo "prTitle=$PR_TITLE" >> $GITHUB_OUTPUT
