@@ -28,8 +28,19 @@ export default defineConfig({
 		/* Base URL to use in actions like `await page.goto('/')`. */
 		baseURL: host,
 
-		/* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-		trace: 'on-first-retry',
+		/* Collect trace when the test has failed. See https://playwright.dev/docs/trace-viewer */
+		trace: 'retain-on-failure',
+
+		/** Capture video when the test fails. See https://playwright.dev/docs/videos */
+		video: 'retain-on-failure',
+
+		/** Capture screenshot when the test fails. See https://playwright.dev/docs/screenshots */
+		screenshot: 'only-on-failure',
+
+		viewport: {
+			width: 1920,
+			height: 1080,
+		},
 	},
 
 	/* Configure projects for major browsers */
