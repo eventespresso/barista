@@ -1,11 +1,11 @@
-import { allPass, find } from 'ramda';
+import { allPass, isEmpty, find } from 'ramda';
 
-import { isNotBasePrice, isNotDiscount, isNotPercent } from '../../prices';
+import { getPriceModifiers, isNotBasePrice, isNotDiscount, isNotPercent } from '../../prices';
 
 import type { PriceType } from '@eventespresso/edtr-services';
 
 // returns `true` if supplied object is of type `PriceType`
-export const isPriceType = (object: PriceType): object is PriceType => {
+export const isPriceType = (object: PriceType): boolean => {
 	return object && 'baseType' in object;
 };
 
@@ -15,4 +15,9 @@ export const isFlatFeeSurcharge = allPass([isNotBasePrice, isNotDiscount, isNotP
 export const getDefaultPriceModifierType = (priceTypes: PriceType[]): PriceType | null => {
 	const priceType = find<PriceType>(isFlatFeeSurcharge)(priceTypes);
 	return priceType ? priceType : null;
+};
+
+export const priceTypeHasPriceModifiers = (PriceTypes: PriceType[]): boolean => {
+	const modifiers = getPriceModifiers(PriceTypes);
+	return !isEmpty(modifiers);
 };
