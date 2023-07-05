@@ -12,7 +12,7 @@ const host = process.env.PLAYWRIGHT_HOST ?? 'http://localhost:8889';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-	testDir: './packages/e2e-tests',
+	testDir: './e2e-tests',
 	/* Run tests in files in parallel */
 	fullyParallel: true,
 	/* Fail the build on CI if you accidentally left test.only in the source code. */
