@@ -22,9 +22,9 @@ interface TicketData extends Partial<Entity>, Omit<UpdateTicketInput, 'prices' |
 
 type Callback = (ticket: TicketData) => Promise<EntityId>;
 
-const useMutateTicket = (): Callback => {
+const useMutateTicket = (createNewDefault = false): Callback => {
 	const { createEntity: createTicket, updateEntity: updateTicket } = useTicketMutator();
-	const mutatePrices = useMutatePrices();
+	const mutatePrices = useMutatePrices(createNewDefault);
 	const tickets = useTickets();
 
 	// Async to make sure that prices are handled before updating the ticket.
