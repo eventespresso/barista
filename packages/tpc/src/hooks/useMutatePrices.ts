@@ -3,11 +3,13 @@ import { useCallback } from 'react';
 import { EntityId } from '@eventespresso/data';
 import { copyPriceFields, isPriceInputField } from '@eventespresso/predicates';
 import { usePriceMutator } from '@eventespresso/edtr-services';
-import { TpcPriceModifier } from '../types';
+import useDefaultBasePrice from './useDefaultBasePrice';
+import type { TpcPriceModifier } from '../types';
 
 type Callback = (prices: Array<TpcPriceModifier>, deletedPrices?: Array<EntityId>) => Promise<Array<EntityId>>;
 
-const useMutatePrices = (): Callback => {
+const useMutatePrices = (createNewDefault = false): Callback => {
+	const defaultBasePrice = useDefaultBasePrice(createNewDefault);
 	const { createEntity: createPrice, deleteEntity: deletePrice, updateEntity: updatePrice } = usePriceMutator();
 
 	// Async to make sure that prices are handled before updating the ticket.
@@ -36,6 +38,11 @@ const useMutatePrices = (): Callback => {
 						return result?.data?.updateEspressoPrice?.espressoPrice?.id;
 					})
 				);
+			} else {
+				// need to ensure there is ALWAYS a base price
+				const newPriceFields = copyPriceFields(defaultBasePrice, isPriceInputField);
+				const newPrice = await createPrice(newPriceFields);
+				relatedPriceIds = [newPrice?.data?.createEspressoPrice?.espressoPrice?.id];
 			}
 
 			if (deletedPriceIds?.length) {
@@ -45,7 +52,7 @@ const useMutatePrices = (): Callback => {
 
 			return (relatedPriceIds || []).filter(Boolean);
 		},
-		[createPrice, deletePrice, updatePrice]
+		[createPrice, deletePrice, updatePrice, defaultBasePrice]
 	);
 };
 
