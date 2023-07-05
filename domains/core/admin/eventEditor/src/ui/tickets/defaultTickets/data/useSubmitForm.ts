@@ -8,7 +8,7 @@ import type { DataState } from './types';
 type UseSubmitForm = (dataState: DataState) => () => Promise<void>;
 
 const useSubmitForm: UseSubmitForm = ({ deletedTickets, tickets }) => {
-	const mutateTicket = useMutateTicket();
+	const mutateTicket = useMutateTicket(true);
 	const { deleteEntity: deleteTicket } = useTicketMutator();
 
 	return useCallback(async () => {

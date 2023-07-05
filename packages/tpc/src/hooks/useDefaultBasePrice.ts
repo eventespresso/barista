@@ -8,13 +8,16 @@ import { updatePriceModifier } from '../utils';
 import { usePriceModifier } from '../hooks';
 import { TpcPriceModifier } from '../types';
 
-const useDefaultBasePrice = (): TpcPriceModifier => {
+const useDefaultBasePrice = (createNewDefault = false): TpcPriceModifier => {
 	const allPriceTypes = usePriceTypes();
 
 	const [basePriceType] = useMemo(() => {
 		return allPriceTypes.filter(isBasePrice);
 	}, [allPriceTypes]);
 
+	if (createNewDefault) {
+		defaultPrice.isDefault = true;
+	}
 	const defaultPriceModifier = usePriceModifier(defaultPrice);
 	const basePrice = useMemo(
 		() => updatePriceModifier(defaultPriceModifier, basePriceType),

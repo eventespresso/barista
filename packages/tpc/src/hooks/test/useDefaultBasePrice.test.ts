@@ -34,4 +34,19 @@ describe('useDefaultBasePrice', () => {
 
 		expect(result.current.isBasePrice).toBeUndefined();
 	});
+
+	it('Sets the isDefault flag to true when createNewDefault is true', async () => {
+		const { result } = renderHook(
+			() => {
+				return useDefaultBasePrice(true);
+			},
+			{
+				wrapper: TestWrapper,
+			}
+		);
+		await actWait();
+
+		expect(result.current.isBasePrice).toBe(true);
+		expect(result.current.isDefault).toBe(true);
+	});
 });
