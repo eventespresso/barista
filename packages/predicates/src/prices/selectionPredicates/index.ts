@@ -71,12 +71,12 @@ export const hasEmptyPrices = <P extends Record<'amount', number>>(prices: Array
 };
 
 // returns true if array of prices contains at least one price
-export const hasPrices = (prices: Price[]) => {
+export const hasPrices = (prices: Price[]): boolean => {
 	return !isEmpty(filter(isPrice, prices));
 };
 
 // returns true if array of prices contains at least one non base price
-export const priceHasPriceModifiers = (prices: Price[]) => {
+export const priceHasPriceModifiers = (prices: Price[]): boolean => {
 	const modifiers = getPriceModifiers(prices);
 	return !isEmpty(modifiers);
 };

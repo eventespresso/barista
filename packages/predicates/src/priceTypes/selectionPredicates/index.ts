@@ -5,7 +5,7 @@ import { getPriceModifiers, isNotBasePrice, isNotDiscount, isNotPercent } from '
 import type { PriceType } from '@eventespresso/edtr-services';
 
 // returns `true` if supplied object is of type `PriceType`
-export const isPriceType = (object: PriceType): object is PriceType => {
+export const isPriceType = (object: PriceType): boolean => {
 	return object && 'baseType' in object;
 };
 
@@ -17,7 +17,7 @@ export const getDefaultPriceModifierType = (priceTypes: PriceType[]): PriceType 
 	return priceType ? priceType : null;
 };
 
-export const priceTypeHasPriceModifiers = (PriceTypes: PriceType[]) => {
+export const priceTypeHasPriceModifiers = (PriceTypes: PriceType[]): boolean => {
 	const modifiers = getPriceModifiers(PriceTypes);
 	return !isEmpty(modifiers);
 };
