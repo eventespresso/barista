@@ -18,9 +18,10 @@ class StorageState {
 	}
 
 	private getFilePath(workerInfo: WorkerInfo): string {
-		const id = workerInfo.parallelIndex;
+		const workerId = workerInfo.workerIndex;
+		const parallelId = workerInfo.parallelIndex;
 		const outDir = workerInfo.project.outputDir;
-		const subPath = `../.playwright/auth/${id}.json`;
+		const subPath = `../.playwright/auth/${workerId}-${parallelId}.json`;
 		return path.resolve(outDir, subPath);
 	}
 
