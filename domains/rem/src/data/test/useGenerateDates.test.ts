@@ -183,6 +183,6 @@ describe('useGenerateDates', () => {
 			result.current.formState.setExRule('invalid-exrule');
 		});
 		// invalid rule should throw an error
-		expect(() => result.current.generatedDates).toThrowError();
+		expect(() => result.current.generatedDates).toThrow();
 	});
 });

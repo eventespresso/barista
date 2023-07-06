@@ -13,8 +13,6 @@ const TicketCard: React.FC<SimpleEntityRendererProps<RemTicket>> = ({ entity: ti
 	const { tickets } = useFormState();
 	const { formatForSite } = useTimeZoneTime();
 
-	const { ticketSalesStart, ticketSalesEnd } = tickets?.[ticket.id];
-
 	const renderStartDate = useCallback(
 		(ticket) => {
 			const { isShared, ticketSalesDates, ticketSalesStart } = ticket;
@@ -67,7 +65,11 @@ const TicketCard: React.FC<SimpleEntityRendererProps<RemTicket>> = ({ entity: ti
 		[formatForSite]
 	);
 
-	const showAfterDetails = Boolean(ticketSalesStart && ticketSalesEnd);
+	const getShowAfterDetails = useCallback((): boolean | undefined => {
+		if (!tickets) return undefined;
+		const { ticketSalesStart, ticketSalesEnd } = tickets[ticket.id];
+		return Boolean(ticketSalesStart && ticketSalesEnd);
+	}, [tickets, ticket.id]);
 
 	return (
 		<SimpleTicketCard
@@ -76,7 +78,7 @@ const TicketCard: React.FC<SimpleEntityRendererProps<RemTicket>> = ({ entity: ti
 			onEdit={onEdit}
 			renderEndDate={renderEndDate}
 			renderStartDate={renderStartDate}
-			showAfterDetails={showAfterDetails}
+			showAfterDetails={getShowAfterDetails()}
 		/>
 	);
 };
