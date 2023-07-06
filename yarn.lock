@@ -6526,17 +6526,17 @@
   resolved "https://registry.yarnpkg.com/@tannin/postfix/-/postfix-1.1.0.tgz#6071f4204ae26c2e885cf3a3f1203a9f71e3f291"
   integrity sha512-oocsqY7g0cR+Gur5jRQLSrX2OtpMLMse1I10JQBm8CdGMrDkh1Mg2gjsiquMHRtBs4Qwu5wgEp5GgIYHk4SNPw==
 
-"@testing-library/dom@^7.22.2":
-  version "7.30.3"
-  resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.30.3.tgz#779ea9bbb92d63302461800a388a5a890ac22519"
-  integrity sha512-7JhIg2MW6WPwyikH2iL3o7z+FTVgSOd2jqCwTAHqK7Qal2gRRYiUQyURAxtbK9VXm/UTyG9bRihv8C5Tznr2zw==
+"@testing-library/dom@^7.31.2":
+  version "7.31.2"
+  resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.31.2.tgz#df361db38f5212b88555068ab8119f5d841a8c4a"
+  integrity sha512-3UqjCpey6HiTZT92vODYLPxTBWlM8ZOOjr3LX5F37/VRipW2M1kX6I/Cm4VXzteZqfGfagg8yXywpcOgQBlNsQ==
   dependencies:
     "@babel/code-frame" "^7.10.4"
     "@babel/runtime" "^7.12.5"
     "@types/aria-query" "^4.2.0"
     aria-query "^4.2.2"
     chalk "^4.1.0"
-    dom-accessibility-api "^0.5.4"
+    dom-accessibility-api "^0.5.6"
     lz-string "^1.4.4"
     pretty-format "^26.6.2"
 
@@ -12207,11 +12207,6 @@ document.contains@^1.0.1:
   integrity sha512-YcvYFs15mX8m3AO1QNQy3BlIpSMfNRj3Ujk2BEJxsZG+HZf7/hZ6jr7mDpXrF8q+ff95Vef5yjhiZxm8CGJr6Q==
   dependencies:
     define-properties "^1.1.3"
-
-dom-accessibility-api@^0.5.4:
-  version "0.5.4"
-  resolved "https://registry.yarnpkg.com/dom-accessibility-api/-/dom-accessibility-api-0.5.4.tgz#b06d059cdd4a4ad9a79275f9d414a5c126241166"
-  integrity sha512-TvrjBckDy2c6v6RLxPv5QXOnU+SmF9nBII5621Ve5fu6Z/BDrENurBEvlC1f44lKEUVqOpK4w9E5Idc5/EgkLQ==
 
 dom-accessibility-api@^0.5.6:
   version "0.5.6"
@@ -20405,12 +20400,12 @@ playwright-core@>=1.2.0, playwright-core@^1.4.1:
     stack-utils "^2.0.3"
     ws "^7.3.1"
 
-playwright-testing-library@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/playwright-testing-library/-/playwright-testing-library-3.0.0.tgz#e2e0690ff8dd7500b4ab57fd4f11db944d26d8bd"
-  integrity sha512-D4jR2ccwBcYwELQdO8Qh49haFxxgRRyRrgsGR8PnKE0vhSAf388GUrsGhIHhY4VNaKfuyeuIJnlqxqfHqpe9yA==
+playwright-testing-library@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/playwright-testing-library/-/playwright-testing-library-4.5.0.tgz#abe31799e966b89b61dbf51fb539c853da05c2ab"
+  integrity sha512-jgeb/L9Xs1PI3LMQ0eup5w5AyYhHAvc0WyoIFn4RHxc16eZUqamu7Hkq7BYO24zP+byMAbUfk1G+xob/JlOqTg==
   dependencies:
-    "@testing-library/dom" "^7.22.2"
+    "@testing-library/dom" "^7.31.2"
     wait-for-expect "^3.0.2"
 
 playwright-video@^2.4.0:
