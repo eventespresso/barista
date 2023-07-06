@@ -12,7 +12,7 @@ describe('useAssignmentManager', () => {
 
 		[null, undefined].forEach((data) => {
 			act(() => {
-				expect(() => result.current.initialize({ ...initArgs, data })).toThrowError();
+				expect(() => result.current.initialize({ ...initArgs, data })).toThrow();
 			});
 		});
 	});
