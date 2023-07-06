@@ -2,7 +2,7 @@
 	"extends": "../tsconfig.json",
 	"compilerOptions": {
 		"paths": {
-			"@e2e/*": ["./e2e-tests/fixtures/*", "./e2e-tests/setup/*"]
+			"@eventespresso/e2e/*": ["./e2e-tests/fixtures/*", "./e2e-tests/setup/*"]
 		}
 	}
 }

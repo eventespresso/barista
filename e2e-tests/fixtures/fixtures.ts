@@ -1,6 +1,6 @@
-import { Auth } from '@e2e/Auth';
+import { Auth } from '@eventespresso/e2e/Auth';
 import { test } from '@playwright/test';
-import { StorageState } from '@e2e/StorageState';
+import { StorageState } from '@eventespresso/e2e/StorageState';
 
 type TestFixtures = {};
 

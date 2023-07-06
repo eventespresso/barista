@@ -1,4 +1,4 @@
-import { test } from '@e2e/fixtures';
+import { test } from '@eventespresso/e2e/fixtures';
 import { expect } from '@playwright/test';
 
 test('Try my new fixtures', async ({ context }) => {
