@@ -64,7 +64,7 @@ describe('findEntityByDbId', () => {
 	});
 
 	it('should return undefined if there is no corresponding entity to the specified dbId', () => {
-		const dbId = 101001110011110001110011;
+		const dbId = 1234567890;
 		const entity = findEntityByDbId(datetimes)(dbId);
 
 		expect(entity).toBeUndefined();
@@ -110,7 +110,7 @@ describe('entitiesWithDbIdInArray', () => {
 	});
 
 	it('should return an empty if there is no match', () => {
-		const dbIds = [10101002021, 12345678910, 101010020211010100202110101002021];
+		const dbIds = [10101002021, 12345678910, 101010020211010];
 		const entities = entitiesWithDbIdInArray(datetimes, dbIds);
 
 		expect(entities).toEqual([]);
