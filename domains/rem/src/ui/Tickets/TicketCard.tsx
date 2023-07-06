@@ -65,12 +65,11 @@ const TicketCard: React.FC<SimpleEntityRendererProps<RemTicket>> = ({ entity: ti
 		[formatForSite]
 	);
 
-	const getShowAfterDetails: () => boolean | undefined = () => {
+	const getShowAfterDetails = useCallback((): boolean | undefined => {
 		if (!tickets) return undefined;
 		const { ticketSalesStart, ticketSalesEnd } = tickets[ticket.id];
-		const showAfterDetails = Boolean(ticketSalesStart && ticketSalesEnd);
-		return showAfterDetails;
-	};
+		return Boolean(ticketSalesStart && ticketSalesEnd);
+	}, [tickets, ticket.id]);
 
 	return (
 		<SimpleTicketCard
