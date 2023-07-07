@@ -1,14 +1,19 @@
-import { Auth } from '@eventespresso/e2e/Auth';
 import { test } from '@playwright/test';
-import { StorageState } from '@eventespresso/e2e/StorageState';
+import { StorageState, Navigate, Auth } from '@eventespresso/e2e';
 
-type TestFixtures = {};
+type TestFixtures = {
+	navigate: Navigate;
+};
 
 type WorkerFixtures = {
 	workerStorageState: string;
 };
 
 const fixtures = test.extend<TestFixtures, WorkerFixtures>({
+	navigate: async ({ browser }, use) => {
+		const navigate = new Navigate({ browser });
+		await use(navigate);
+	},
 	workerStorageState: [
 		async ({ browser }, use, workerInfo) => {
 			const auth = new Auth({ browser });
