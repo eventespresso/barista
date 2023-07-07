@@ -1,8 +1,9 @@
 import { test } from '@playwright/test';
-import { StorageState, Navigate, Auth } from '@eventespresso/e2e';
+import { StorageState, Navigate, Auth, Nuke } from '@eventespresso/e2e';
 
 type TestFixtures = {
 	navigate: Navigate;
+	nuke: Nuke;
 };
 
 type WorkerFixtures = {
@@ -13,6 +14,10 @@ const fixtures = test.extend<TestFixtures, WorkerFixtures>({
 	navigate: async ({ browser }, use) => {
 		const navigate = new Navigate({ browser });
 		await use(navigate);
+	},
+	nuke: async ({ browser }, use) => {
+		const nuke = new Nuke({ browser });
+		await use(nuke);
 	},
 	workerStorageState: [
 		async ({ browser }, use, workerInfo) => {
