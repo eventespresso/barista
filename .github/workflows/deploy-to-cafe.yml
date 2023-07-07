@@ -117,14 +117,14 @@ jobs:
                   if [ -z "$PR_NUMBER" ]; then
                       PR_NUMBER=${{ steps.pr.outputs.number }}
                   fi
-                  console.log(PR_NUMBER);
+                  console.log("$PR_NUMBER");
                   echo "prNumber=$PR_NUMBER" >> $GITHUB_OUTPUT
                   # get PR title
                   PR_TITLE=${{ inputs.pr_title }}
                   if [ -n "$PR_TITLE" ]; then
                       PR_TITLE=${{ steps.pr.outputs.title }}
                   fi
-                  console.log(PR_TITLE);
+                  console.log("$PR_TITLE");
                   echo "prTitle=$PR_TITLE" >> $GITHUB_OUTPUT
 
             - name: Create PR for Café
