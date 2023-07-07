@@ -15,5 +15,5 @@ test('has h1 header', async ({ page }) => {
 
 	await h1.waitFor({ state: 'visible' });
 
-	expect(h1).toContainText('Mindblown: a blog about philosophy.');
+	await expect(h1).toContainText('Mindblown: a blog about philosophy.');
 });

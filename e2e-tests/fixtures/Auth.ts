@@ -1,10 +1,8 @@
-import { Browser, BrowserContext, Page } from '@playwright/test';
+import { Browser, Page } from '@playwright/test';
 
 type Params = {
 	browser: Browser;
 };
-
-type StorageState = ReturnType<BrowserContext['storageState']>;
 
 class Auth {
 	private readonly browser: Browser;
