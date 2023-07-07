@@ -25,6 +25,7 @@ const AddPriceModifierButtonData: React.FC<Partial<PriceModifierButtonProps>> = 
 			...defaultPriceModifier,
 			id: uuid(),
 			isBasePrice: priceType.isBasePrice,
+			isDefault: false, // override default price modifier
 			isDiscount: priceType.isDiscount,
 			isPercent: priceType.isPercent,
 			isTax: priceType.isTax,
