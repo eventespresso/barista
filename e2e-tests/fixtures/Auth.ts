@@ -1,14 +1,18 @@
 import { Browser, Page } from '@playwright/test';
+import { Url } from '@eventespresso/e2e/Url';
 
 type Params = {
 	browser: Browser;
+	url?: Url;
 };
 
 class Auth {
 	private readonly browser: Browser;
+	private readonly url: Url;
 
-	constructor({ browser }: Params) {
+	constructor({ browser, url = new Url() }: Params) {
 		this.browser = browser;
+		this.url = url;
 	}
 
 	private async makePage(): Promise<Page> {
@@ -19,20 +23,17 @@ class Auth {
 	public async saveLoginState(path: string): Promise<void> {
 		const page = await this.makePage();
 
-		// TODO: how to make host value flexible?
-		await page.goto('http://localhost:8889/wp-login.php');
+		await page.goto(this.url.get('/wp-login.php'));
 
-		// TODO: how to supply credentials?
 		await page.getByLabel('Username or Email Address').fill('admin');
 
-		// TODO: how to supply credentials?
 		await page.getByRole('textbox', { name: 'Password', exact: true }).fill('password');
 
 		await page.getByRole('button', { name: 'Log In' }).click();
 
-		// TODO: how to make host value flexible?
-		await page.waitForURL('http://localhost:8889/wp-admin/');
+		await page.waitForURL(this.url.get('/wp-admin/'));
 
+		// this will save storage state to file
 		await page.context().storageState({ path });
 
 		await page.close();
