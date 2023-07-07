@@ -171,7 +171,6 @@
 		"mini-css-extract-plugin": "1.6.2",
 		"npm-check": "^5.9.2",
 		"optimize-css-assets-webpack-plugin": "6.0.1",
-		"playwright": "^1.35.1",
 		"playwright-testing-library": "^4.5.0",
 		"playwright-video": "^2.4.0",
 		"pnp-webpack-plugin": "1.7.0",
