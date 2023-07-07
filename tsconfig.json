@@ -27,6 +27,6 @@
 		"sourceMap": false
 	},
 	"files": ["node_modules/jest-playwright-preset/types/global.d.ts", "node_modules/expect-playwright/global.d.ts"],
-	"include": ["packages", "domains"],
+	"include": ["packages", "domains", "e2e-tests"],
 	"exclude": ["node_modules", "vendor"]
 }

@@ -11,7 +11,7 @@ let capture: PageVideoCapture;
 beforeAll(async () => {
 	capture = await saveVideo(page, `artifacts/${namespace}.mp4`);
 
-	await createNewEvent({ title: 'TAM: Toggle Assignments' });
+	await createNewEvent({ title: 'TAM: Toggle Assignments', description: 'TAM: Toggle Assignments Description' });
 
 	await addDatesAndTickets();
 });

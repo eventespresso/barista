@@ -56,6 +56,6 @@ describe('Display status banner - single test', () => {
 		// get status banner text
 		const checkBannerText = await singleEventPageManager.getBannerInnerText();
 		// assert banner text
-		expect(checkBannerText).toBe(eventStatusText);
+		expect(checkBannerText.toLowerCase()).toBe(eventStatusText.toLowerCase());
 	});
 });

@@ -5,3 +5,4 @@ export * from './getInputValue';
 export * from './respondToAlert';
 export * from './screenOptions';
 export * from './selectDateFromNextMonth';
+export * from './itif';

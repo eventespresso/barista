@@ -1,4 +1,5 @@
 import type { ElementHandle } from 'playwright-core';
+import { DO_NOT_USE_BARISTA_STRUCTURE } from '../../../../utils/dev/config';
 
 const ticketsListSelector = '#ee-entity-list-tickets .ee-entity-list__card-view';
 
@@ -37,11 +38,13 @@ export class EDTRGlider {
 	 * Sets the maximum registrations value.
 	 */
 	setMaxRegistrations = async (value: number, updateEvent = true) => {
-		await page.click('div.ee-edtr-option__max-reg span.ee-tabbable-text__inner_wrapper');
-		
-		await page.click('div.ee-edtr-option__max-reg input');
-
-		await page.fill('div.ee-edtr-option__max-reg input', String(value));
+		if(DO_NOT_USE_BARISTA_STRUCTURE){
+			await page.fill('#max-registrants', String(value));
+		}else{
+			await page.click('div.ee-edtr-option__max-reg span.ee-tabbable-text__inner_wrapper');
+			await page.click('div.ee-edtr-option__max-reg input');
+			await page.fill('div.ee-edtr-option__max-reg input', String(value));
+		}
 
 		await this.saveEvent(updateEvent);
 	};
@@ -51,6 +54,13 @@ export class EDTRGlider {
 	 */
 	saveEvent = async (save = true) => {
 		if (save) {
+			let selector = '#sample-permalink a';
+			const checkTagExists = await page.$eval(selector, () => true).catch(() => false)
+			if(!checkTagExists){
+				selector = '#sample-permalink';
+			}
+			await page.waitForSelector(selector);
+			
 			await Promise.all([page.waitForNavigation(), page.click('#publish')]);
 			await this.waitForEdtr2Load();
 		}

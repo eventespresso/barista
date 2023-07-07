@@ -2,6 +2,7 @@ import { saveVideo, PageVideoCapture } from 'playwright-video';
 import { addNewTicket, createNewEvent, EntityListParser } from '@e2eUtils/admin/events';
 import { Goto } from '@e2eUtils/admin';
 import { getInputValue } from '@e2eUtils/common';
+import { DO_NOT_USE_BARISTA_STRUCTURE } from '../../utils/dev/config';
 
 const namespace = 'event.tickets.index';
 
@@ -21,7 +22,15 @@ describe('availableTickets', () => {
 	it('should add new ticket', async () => {
 		//Get the tax Amount
 		await Goto.pricingPage();
-		await page.type('#event-espresso_page_pricing-search-input', 'Sales Tax');
+
+		let serachInputSelector = '';
+		if(DO_NOT_USE_BARISTA_STRUCTURE){
+			serachInputSelector = '#event-smart_page_pricing-search-input';
+		}else{
+			serachInputSelector = '#event-espresso_page_pricing-search-input';
+		}
+
+		await page.type(serachInputSelector, 'Sales Tax');
 		page.click('#search-submit');
 		await Promise.all([
 			page.waitForNavigation(),

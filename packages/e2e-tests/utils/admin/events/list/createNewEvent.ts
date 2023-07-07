@@ -1,4 +1,5 @@
 import { Goto } from '@e2eUtils/admin';
+import { DO_NOT_USE_BARISTA_STRUCTURE } from '../../../../utils/dev/config';
 
 import { EDTRGlider } from '../editor';
 
@@ -17,7 +18,7 @@ export async function fillEventFields({ title, description, wpClassicEditor }: A
 
 	// fill in event description
 	if (description) {
-		if(wpClassicEditor){
+		if(wpClassicEditor || DO_NOT_USE_BARISTA_STRUCTURE){
 			await page.click('#content-html');
 			await page.fill('#wp-content-editor-container textarea.wp-editor-area', description);
 		}else{

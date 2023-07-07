@@ -1,11 +1,12 @@
 import '@testing-library/jest-dom';
 
+import { IS_WP_MULTISITE_NETWORK } from '../utils/dev/config';
 import { activatePlugin, deactivatePlugin } from '../utils/admin/wp-plugins-page';
 import { Goto, DefaultSettingsManager } from '../utils/admin';
 import { loginUser } from '../utils/wp';
 
 // The Jest timeout is increased because these tests are a bit slow
-jest.setTimeout(300000);
+jest.setTimeout(300_000); // value is in milliseconds which is 5 minutes
 
 const defaultSettingsManager = new DefaultSettingsManager();
 
@@ -15,14 +16,18 @@ const defaultSettingsManager = new DefaultSettingsManager();
 beforeAll(async () => {
 	await loginUser();
 
-	await activatePlugin('event-espresso-core/espresso.php');
-	await activatePlugin('barista/ee-barista.php');	
-
+	if(!IS_WP_MULTISITE_NETWORK){
+		await activatePlugin('event-espresso-core/espresso.php');
+		await activatePlugin('barista/ee-barista.php');	
+	}
+	
 	await Goto.eventsListPage();
 	await defaultSettingsManager.gotoDefaultSettings();
 	await defaultSettingsManager.selectDefaultEditor('1');
 });
 
 afterAll(async () => {
-	await deactivatePlugin('barista/ee-barista.php');
+	if(!IS_WP_MULTISITE_NETWORK){
+		await deactivatePlugin('barista/ee-barista.php');
+	}
 });
