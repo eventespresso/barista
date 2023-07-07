@@ -1,8 +1,9 @@
-import { test } from '@eventespresso/e2e/fixtures';
+import { test } from '@eventespresso/e2e';
 import { expect } from '@playwright/test';
 
-test('Try my new fixtures', async ({ context }) => {
-	const page = await context.newPage();
+test('Try my new fixtures', async ({ browser }) => {
+	const page = await browser.newPage();
 	await page.goto('http://localhost:8889/wp-admin/');
-	await expect(page.getByText('Welcome to WordPress!')).toBeVisible();
+	const header = page.getByRole('heading', { name: 'Dashboard' });
+	await expect(header).toBeVisible();
 });
