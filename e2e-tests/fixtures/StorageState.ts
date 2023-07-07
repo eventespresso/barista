@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import { Auth } from './Auth';
+import { Auth } from '@eventespresso/e2e';
 import { WorkerInfo } from '@playwright/test';
 
 type Params = {
