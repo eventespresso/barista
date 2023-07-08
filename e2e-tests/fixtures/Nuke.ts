@@ -1,19 +1,8 @@
 import { Browser } from '@playwright/test';
 import { Url } from 'e2e-tests';
 
-type Params = {
-	browser: Browser;
-	url?: Url;
-};
-
 class Nuke {
-	protected readonly browser: Browser;
-	protected readonly url: Url;
-
-	constructor({ browser, url = new Url() }: Params) {
-		this.browser = browser;
-		this.url = url;
-	}
+	constructor(private readonly browser: Browser, private readonly url: Url) {}
 
 	public async everything(): Promise<void> {
 		const page = await this.browser.newPage();

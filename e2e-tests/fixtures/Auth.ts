@@ -1,19 +1,8 @@
 import { Browser, Page } from '@playwright/test';
 import { Url } from '@eventespresso/e2e/Url';
 
-type Params = {
-	browser: Browser;
-	url?: Url;
-};
-
 class Auth {
-	private readonly browser: Browser;
-	private readonly url: Url;
-
-	constructor({ browser, url = new Url() }: Params) {
-		this.browser = browser;
-		this.url = url;
-	}
+	constructor(private readonly browser: Browser, private readonly url: Url) {}
 
 	private async makePage(): Promise<Page> {
 		// Important: make sure environment is clean to avoid dirty state

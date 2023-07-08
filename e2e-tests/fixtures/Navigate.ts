@@ -1,19 +1,8 @@
 import { Url } from '@eventespresso/e2e';
 import { Browser, Page as PageType } from '@playwright/test';
 
-type Params = {
-	browser: Browser;
-	url?: Url | undefined;
-};
-
 class Navigate {
-	private readonly browser: Browser;
-	private readonly url: Url;
-
-	constructor({ browser, url }: Params) {
-		this.browser = browser;
-		this.url = url ?? new Url();
-	}
+	constructor(private readonly browser: Browser, private readonly url: Url) {}
 
 	public async to(path: keyof typeof Pages): Promise<PageType> {
 		const page = await this.browser.newPage();

@@ -9,11 +9,9 @@ type Params = {
 };
 
 class StorageState {
-	private readonly auth: Auth;
 	private readonly path: string;
 
-	constructor({ auth, workerInfo }: Params) {
-		this.auth = auth;
+	constructor(private readonly auth: Auth, workerInfo: WorkerInfo) {
 		this.path = this.getFilePath(workerInfo);
 	}
 

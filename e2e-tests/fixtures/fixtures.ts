@@ -8,23 +8,25 @@ type TestFixtures = {
 };
 
 type WorkerFixtures = {
+	workerUrl: Url;
 	workerStorageState: string;
 };
 
 const fixtures = test.extend<TestFixtures, WorkerFixtures>({
 	url: async ({}, use) => await use(new Url()),
-	navigate: async ({ browser }, use) => {
-		const navigate = new Navigate({ browser });
+	navigate: async ({ browser, url }, use) => {
+		const navigate = new Navigate(browser, url);
 		await use(navigate);
 	},
-	nuke: async ({ browser }, use) => {
-		const nuke = new Nuke({ browser });
+	nuke: async ({ browser, url }, use) => {
+		const nuke = new Nuke(browser, url);
 		await use(nuke);
 	},
+	workerUrl: [async ({}, use) => await use(new Url()), { scope: 'worker' }],
 	workerStorageState: [
-		async ({ browser }, use, workerInfo) => {
-			const auth = new Auth({ browser });
-			const storage = new StorageState({ auth, workerInfo });
+		async ({ browser, workerUrl }, use, workerInfo) => {
+			const auth = new Auth(browser, workerUrl);
+			const storage = new StorageState(auth, workerInfo);
 			const path = await storage.getStoragePath();
 			await use(path);
 		},
