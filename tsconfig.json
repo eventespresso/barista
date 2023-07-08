@@ -26,6 +26,12 @@
 		"target": "es2015",
 		"sourceMap": false
 	},
+	"ts-node": {
+		"transpileOnly": true,
+		"compilerOptions": {
+			"module": "CommonJS"
+		}
+	},
 	"files": ["node_modules/jest-playwright-preset/types/global.d.ts", "node_modules/expect-playwright/global.d.ts"],
 	"include": ["packages", "domains", "e2e-tests"],
 	"exclude": ["node_modules", "vendor"]
