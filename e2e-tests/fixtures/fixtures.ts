@@ -1,9 +1,10 @@
 import { test } from '@playwright/test';
-import { StorageState, Navigate, Auth, Nuke } from '@eventespresso/e2e';
+import { StorageState, Navigate, Auth, Nuke, Url } from '@eventespresso/e2e';
 
 type TestFixtures = {
 	navigate: Navigate;
 	nuke: Nuke;
+	url: Url;
 };
 
 type WorkerFixtures = {
@@ -11,6 +12,7 @@ type WorkerFixtures = {
 };
 
 const fixtures = test.extend<TestFixtures, WorkerFixtures>({
+	url: async ({}, use) => await use(new Url()),
 	navigate: async ({ browser }, use) => {
 		const navigate = new Navigate({ browser });
 		await use(navigate);
