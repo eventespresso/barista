@@ -1,5 +1,6 @@
 import { rmSync, existsSync } from 'fs';
 import { resolve } from 'path';
+import { execSync } from 'child_process';
 
 async function globalTeardown() {
 	const root = resolve(__dirname, '..', '..', '.playwright');
@@ -9,6 +10,7 @@ async function globalTeardown() {
 			force: true,
 		});
 	}
+	execSync('yarn docker:cli --env tests user nuke');
 }
 
 export default globalTeardown;
