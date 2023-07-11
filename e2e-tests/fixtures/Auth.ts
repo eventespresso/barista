@@ -2,13 +2,13 @@ import { resolve, dirname } from 'path';
 import { execSync } from 'child_process';
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import { faker } from '@faker-js/faker';
-import { Url } from '@eventespresso/e2e';
-import { Browser, WorkerInfo } from '@playwright/test';
+import { WorkerInfo } from '@playwright/test';
+import { Navigate } from '@eventespresso/e2e';
 
 class Auth {
 	private readonly sessionPath: string;
 
-	constructor(private readonly browser: Browser, private readonly url: Url, private readonly workerInfo: WorkerInfo) {
+	constructor(private readonly navigate: Navigate, private readonly workerInfo: WorkerInfo) {
 		this.sessionPath = this.createSessionPath(this.createUniqueUsername());
 	}
 
@@ -22,9 +22,7 @@ class Auth {
 		execSync(`yarn docker:cli --env tests user create ${email} ${pass} --role=admin`, { stdio: 'ignore' });
 
 		// Important: make sure environment is clean to avoid dirty state
-		const page = await this.browser.newPage({ storageState: undefined });
-
-		await page.goto(this.url.get('/wp-login.php'));
+		const page = await this.navigate.to('login', { storageState: undefined });
 
 		await page.getByLabel('Username or Email Address').fill(email);
 
@@ -32,7 +30,7 @@ class Auth {
 
 		await page.getByRole('button', { name: 'Log In' }).click();
 
-		await page.waitForURL(this.url.get('/wp-admin/'));
+		await page.waitForURL(this.navigate.get('admin'));
 
 		const credentials = await page.context().storageState();
 

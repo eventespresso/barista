@@ -1,13 +1,10 @@
-import { Browser } from '@playwright/test';
-import { Url } from 'e2e-tests';
+import { Navigate } from '@eventespresso/e2e';
 
 class Nuke {
-	constructor(private readonly browser: Browser, private readonly url: Url) {}
+	constructor(private readonly navigate: Navigate) {}
 
 	public async everything(): Promise<void> {
-		const page = await this.browser.newPage();
-
-		await page.goto(this.url.get('/wp-admin/admin.php?page=espresso_maintenance_settings'));
+		const page = await this.navigate.to('admin:ee:maintenance');
 
 		await page.getByRole('link', { name: 'Reset/Delete Data' }).click();
 
