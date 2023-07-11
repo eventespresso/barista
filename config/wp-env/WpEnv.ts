@@ -34,18 +34,18 @@ class WpEnv {
 
 		plugin
 			.command('activate')
-			.argument('<name>', 'plugin name')
+			.argument('<name(s)...>', 'plugin name(s)')
 			.description('activate plugin')
 			.action((name, opts, cmd) => {
-				execSync(this.makeCmd(`wp plugin activate ${name}`, cmd.optsWithGlobals<globalOpts>().env));
+				execSync(this.makeCmd(`wp plugin activate ${name.join(' ')}`, cmd.optsWithGlobals<globalOpts>().env));
 			});
 
 		plugin
 			.command('deactivate')
-			.argument('<name>', 'plugin name')
+			.argument('<name(s)...>', 'plugin name(s)')
 			.description('deactivate plugin')
 			.action((name, opts, cmd) => {
-				execSync(this.makeCmd(`wp plugin deactivate ${name}`, cmd.optsWithGlobals<globalOpts>().env));
+				execSync(this.makeCmd(`wp plugin deactivate ${name.join(' ')}`, cmd.optsWithGlobals<globalOpts>().env));
 			});
 
 		const user = run.command('user').description('run user-related operations');
