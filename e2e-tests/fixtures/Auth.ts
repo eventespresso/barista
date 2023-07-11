@@ -30,7 +30,7 @@ class Auth {
 
 		await page.getByRole('button', { name: 'Log In' }).click();
 
-		await page.waitForURL(this.navigate.get('admin'));
+		await page.waitForURL(this.navigate.routes['admin']);
 
 		const credentials = await page.context().storageState();
 
