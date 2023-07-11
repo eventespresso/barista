@@ -1,16 +1,26 @@
-import { Browser, Page } from '@playwright/test';
+import { Browser, WorkerInfo } from '@playwright/test';
 import { Url } from '@eventespresso/e2e/Url';
+import path from 'path';
+import fs from 'fs';
 
 class Auth {
-	constructor(private readonly browser: Browser, private readonly url: Url) {}
+	private readonly path: string;
 
-	private async makePage(): Promise<Page> {
-		// Important: make sure environment is clean to avoid dirty state
-		return this.browser.newPage({ storageState: undefined });
+	constructor(workerInfo: WorkerInfo, private readonly browser: Browser, private readonly url: Url) {
+		this.path = this.getFilePath(workerInfo);
 	}
 
-	public async saveLoginState(path: string): Promise<void> {
-		const page = await this.makePage();
+	private getFilePath(workerInfo: WorkerInfo): string {
+		const workerId = workerInfo.workerIndex;
+		const parallelId = workerInfo.parallelIndex;
+		const outDir = workerInfo.project.outputDir;
+		const subPath = `../.playwright/auth/${workerId}-${parallelId}.json`;
+		return path.resolve(outDir, subPath);
+	}
+
+	private async saveLoginState(): Promise<void> {
+		// Important: make sure environment is clean to avoid dirty state
+		const page = await this.browser.newPage({ storageState: undefined });
 
 		await page.goto(this.url.get('/wp-login.php'));
 
@@ -23,9 +33,17 @@ class Auth {
 		await page.waitForURL(this.url.get('/wp-admin/'));
 
 		// this will save storage state to file
-		await page.context().storageState({ path });
+		await page.context().storageState({ path: this.path });
 
 		await page.close();
+	}
+
+	/**
+	 * @return {string} returns path to storage state file
+	 */
+	public async getStoragePath(): Promise<string> {
+		if (!fs.existsSync(this.path)) await this.saveLoginState();
+		return this.path;
 	}
 }
 

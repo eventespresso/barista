@@ -1,5 +1,5 @@
 import { test } from '@playwright/test';
-import { StorageState, Navigate, Auth, Nuke, Url } from '@eventespresso/e2e';
+import { Navigate, Auth, Nuke, Url } from '@eventespresso/e2e';
 
 type TestFixtures = {
 	navigate: Navigate;
@@ -25,9 +25,8 @@ const fixtures = test.extend<TestFixtures, WorkerFixtures>({
 	workerUrl: [async ({}, use) => await use(new Url()), { scope: 'worker' }],
 	workerStorageState: [
 		async ({ browser, workerUrl }, use, workerInfo) => {
-			const auth = new Auth(browser, workerUrl);
-			const storage = new StorageState(auth, workerInfo);
-			const path = await storage.getStoragePath();
+			const auth = new Auth(workerInfo, browser, workerUrl);
+			const path = await auth.getStoragePath();
 			await use(path);
 		},
 		{ scope: 'worker' },
