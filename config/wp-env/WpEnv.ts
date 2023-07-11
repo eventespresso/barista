@@ -90,7 +90,7 @@ class WpEnv {
 			path: '.wp-env',
 		});
 
-		for (const env of ['WP_CONTENT']) {
+		for (const env of ['CAFE', 'BARISTA']) {
 			if (!process.env[env]) throw new Error(`Missing env var ${env} (either export it or use .wp-env`);
 		}
 
@@ -101,12 +101,11 @@ class WpEnv {
 				WP_DEBUG_LOG: true,
 			},
 			mappings: {
-				'wp-content': process.env.WP_CONTENT,
+				'wp-content': process.env.CAFE,
+				'wp-content/plugins/barista': process.env.BARISTA,
 			},
-			plugins: ['.'],
-			lifecycleScripts: {
-				afterStart: this.makeCmd(['wp plugin activate event-espresso-core'], 'dev'),
-			},
+			plugins: [],
+			lifecycleScripts: {},
 		};
 
 		const json = JSON.stringify(struct, undefined, 2);
