@@ -1,5 +1,6 @@
 import fs from 'fs';
-import { Command } from 'commander';
+import { execSync } from 'child_process';
+import { Command, Option } from '@commander-js/extra-typings';
 
 /**
  * @link https://github.com/WordPress/gutenberg/tree/HEAD/packages/env#readme
@@ -17,6 +18,35 @@ class WpEnv {
 		make.command('config')
 			.description('create .wp-env.json')
 			.action(() => this.makeConfig());
+
+		const run = program
+			.command('run')
+			.description('run cli command against running docker container')
+			.addOption(
+				new Option('-e, --env <type>', 'container type').choices(['dev', 'tests', 'all']).default('all')
+			);
+
+		type globalOpts = {
+			env: 'dev' | 'tests' | 'all';
+		};
+
+		const plugin = run.command('plugin').description('run plugin-related operations');
+
+		plugin
+			.command('activate')
+			.argument('<name>', 'plugin name')
+			.description('activate plugin')
+			.action((name, opts, cmd) => {
+				execSync(this.makeCmd(`wp plugin activate ${name}`, cmd.optsWithGlobals<globalOpts>().env));
+			});
+
+		plugin
+			.command('deactivate')
+			.argument('<name>', 'plugin name')
+			.description('deactivate plugin')
+			.action((name, opts, cmd) => {
+				execSync(this.makeCmd(`wp plugin deactivate ${name}`, cmd.optsWithGlobals<globalOpts>().env));
+			});
 
 		program.parse();
 	}
