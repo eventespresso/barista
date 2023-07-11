@@ -25,8 +25,9 @@ const fixtures = test.extend<TestFixtures, WorkerFixtures>({
 	workerUrl: [async ({}, use) => await use(new Url()), { scope: 'worker' }],
 	workerStorageState: [
 		async ({ browser, workerUrl }, use, workerInfo) => {
-			const auth = new Auth(workerInfo, browser, workerUrl);
+			const auth = new Auth(browser, workerUrl, workerInfo);
 			const path = await auth.getStoragePath();
+
 			await use(path);
 		},
 		{ scope: 'worker' },
