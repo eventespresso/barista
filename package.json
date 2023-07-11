@@ -46,10 +46,9 @@
 		"docker:clear:all": "yarn wp-env clean all",
 		"docker:destroy": "yarn wp-env destroy",
 		"e2e:install": "yarn playwright install --with-deps",
-		"e2e:run": "yarn e2e:clear && yarn playwright test",
+		"e2e:run": "yarn playwright test",
 		"e2e:trace": "yarn playwright show-trace",
 		"e2e:report": "yarn playwright show-report",
-		"e2e:clear": "rm -fr .playwright",
 		"update:deps": "npx ncu -u && yarn workspaces run update-deps"
 	},
 	"lint-staged": {
