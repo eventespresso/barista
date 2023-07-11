@@ -48,6 +48,26 @@ class WpEnv {
 				execSync(this.makeCmd(`wp plugin deactivate ${name}`, cmd.optsWithGlobals<globalOpts>().env));
 			});
 
+		const user = run.command('user').description('run user-related operations');
+
+		user.command('create')
+			.argument('<email>', 'WordPress email')
+			.argument('<password>', 'WordPress password')
+			.description('create new WordPress admin')
+			.addOption(new Option('-r, --role <type>', 'role type').makeOptionMandatory().choices(['user', 'admin']))
+			.action((user, pass, opts, cmd) => {
+				const roleMap = {
+					user: 'subscriber',
+					admin: 'administrator',
+				};
+				execSync(
+					this.makeCmd(
+						`wp user create ${user} ${user} --user_pass=${pass} --role=${roleMap[opts.role]}`,
+						cmd.optsWithGlobals<globalOpts>().env
+					)
+				);
+			});
+
 		program.parse();
 	}
 
