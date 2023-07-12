@@ -1,4 +1,5 @@
 import { Browser, Page as PageType } from '@playwright/test';
+import R, { PipeWithFns } from 'ramda';
 
 type QueryParams = Record<string, string | number>;
 
@@ -46,10 +47,18 @@ class Navigate {
 	private makeUrl({ path, query }: { path: string; query?: QueryParams }): string {
 		const base = `${this.protocol}://${this.hostname}:${this.port}`;
 		const queryStr = query ? '?' + this.convertQueryObjToStr(query) : '';
-		path = this.addFwdSlash(path);
 		// add trailing slash to path only if we *DON'T* have query params
-		if (!queryStr) path = this.addEndSlash(path);
-		return base + path + queryStr;
+		const normPath = this.normalizePath(path, !queryStr);
+		return base + normPath + queryStr;
+	}
+
+	private normalizePath(path: string, trailingSlash: boolean): string {
+		const fnc: PipeWithFns<string, string> = [this.addFwdSlash];
+		if (trailingSlash) {
+			fnc.push(this.addEndSlash);
+		}
+		const pipe = R.pipeWith((f, res) => f(res));
+		return pipe(fnc)(path);
 	}
 
 	private convertQueryObjToStr(query: QueryParams): string {
