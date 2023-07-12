@@ -9,17 +9,17 @@ class Auth {
 	private readonly sessionPath: string;
 
 	constructor(private readonly navigate: Navigate, private readonly workerInfo: WorkerInfo) {
-		this.sessionPath = this.createSessionPath(this.createUniqueUsername());
+		this.sessionPath = this.createSessionPath();
 	}
 
-	private async saveLoginState(): Promise<void> {
+	private async createLoginState(): Promise<void> {
 		const user = this.createUniqueUsername();
 
 		const email = `${user}@e2e.test`;
 
 		const pass = faker.internet.password({ length: 10 });
 
-		execSync(`yarn docker:cli --env tests user create ${email} ${pass} --role=admin`, { stdio: 'ignore' });
+		execSync(`yarn docker:cli --env tests user create ${email} ${pass} --role=admin`);
 
 		// Important: make sure environment is clean to avoid dirty state
 		const page = await this.navigate.to('login', { storageState: undefined });
@@ -46,18 +46,19 @@ class Auth {
 	}
 
 	private createUniqueUsername(): string {
-		let user = faker.person.firstName().toLowerCase();
-		while (existsSync(this.createSessionPath(user))) {
-			user = faker.person.firstName().toLowerCase();
-		}
-		return user;
+		const username = faker.person.firstName().toLowerCase();
+		const workerId = this.workerInfo.workerIndex;
+		const parallelId = this.workerInfo.parallelIndex;
+		return `${username}-${workerId}-${parallelId}`;
 	}
 
-	private createSessionPath(user: string): string {
+	private createSessionPath(): string {
 		const project = this.workerInfo.project.name;
+		// When a worker is restarted, for example after a failure, the new worker process gets a new unique workerIndex
 		const worker = this.workerInfo.workerIndex;
+		// When a worker is restarted, for example after a failure, the new worker process has the same parallelIndex
 		const job = this.workerInfo.parallelIndex;
-		const file = [project, worker, job, user].join('-') + '.json';
+		const file = [project, worker, job].join('-') + '.json';
 		const folder = resolve(__dirname, '../../.playwright/auth') + '/';
 		return folder + file;
 	}
@@ -66,7 +67,9 @@ class Auth {
 	 * @return {string} returns path to storage state file
 	 */
 	public async getStoragePath(): Promise<string> {
-		if (!existsSync(this.sessionPath)) await this.saveLoginState();
+		if (!existsSync(this.sessionPath)) {
+			await this.createLoginState();
+		}
 		return this.sessionPath;
 	}
 }
