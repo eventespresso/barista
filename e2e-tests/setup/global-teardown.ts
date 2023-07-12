@@ -4,7 +4,7 @@ import { execSync } from 'child_process';
 
 async function globalTeardown() {
 	// do not cleanup in CI since it does not have state like local environment
-	if (!process.env.CI) {
+	if (!process.env.CI && !process.env.DEBUG_E2E) {
 		const root = resolve(__dirname, '..', '..', '.playwright');
 		if (existsSync(root)) {
 			rmSync(root, {
