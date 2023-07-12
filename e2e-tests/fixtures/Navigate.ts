@@ -12,8 +12,8 @@ class Navigate {
 		home: this.makeSimpleUrl('/'),
 		login: this.makeSimpleUrl('/wp-login.php'),
 		admin: this.makeSimpleUrl('/wp-admin'),
-		'admin:plugins': this.makeAdminUrl('plugins.php'),
-		'admin:ee': this.makeAdminUrl('admin.php', { page: 'espresso_events' }),
+		'admin:wp:plugins': this.makeAdminUrl('plugins.php'),
+		'admin:ee:events': this.makeAdminUrl('admin.php', { page: 'espresso_events' }),
 		'admin:ee:maintenance': this.makeAdminUrl('admin.php', { page: 'espresso_maintenance_settings' }),
 	};
 
