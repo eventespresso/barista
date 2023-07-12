@@ -5,7 +5,7 @@ import { faker } from '@faker-js/faker';
 // this is a *silly* test just to verify functionality of E2E
 // if perceived to be redundant, there is *no* harm in removing it
 test('open events page', async ({ navigate }) => {
-	const page = await navigate.to('admin:ee');
+	const page = await navigate.to('admin:ee:events');
 
 	const header = page.getByRole('heading', { name: 'Event Espresso - Events' });
 
