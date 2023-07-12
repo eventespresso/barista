@@ -10,8 +10,7 @@ async function globalTeardown() {
 			force: true,
 		});
 	}
-	execSync('yarn docker:cli --env tests user nuke');
-	// by clearing DB, all plugins will be deactivated
+	// clear entire database for tests env to start from tabular rasa
 	execSync('yarn docker:clear:tests');
 }
 
