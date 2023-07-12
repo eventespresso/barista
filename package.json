@@ -41,6 +41,7 @@
 		"docker:start": "yarn docker:make-config && yarn wp-env start",
 		"docker:update": "yarn docker:start --update",
 		"docker:stop": "yarn wp-env stop",
+		"docker:restart": "yarn wp-env start --update",
 		"docker:clear:dev": "yarn wp-env clean development",
 		"docker:clear:tests": "yarn wp-env clean tests",
 		"docker:clear:all": "yarn wp-env clean all",
