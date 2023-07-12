@@ -95,17 +95,14 @@ class WpEnv {
 		}
 
 		const struct = {
-			config: {
-				WP_DEBUG: true,
-				WP_DEBUG_DISPLAY: true,
-				WP_DEBUG_LOG: true,
-			},
+			config: {},
 			mappings: {
 				'wp-content': process.env.CAFE,
 				'wp-content/plugins/barista': process.env.BARISTA,
 			},
 			plugins: [],
 			lifecycleScripts: {},
+			env: {},
 		};
 
 		const json = JSON.stringify(struct, undefined, 2);
