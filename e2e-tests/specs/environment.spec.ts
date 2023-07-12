@@ -8,7 +8,7 @@ test('homepage', async ({ navigate }) => {
 
 	const h1 = page.locator('h1');
 
-	await expect(page).toHaveTitle(/barista/);
+	await expect(page).toHaveTitle('barista');
 
 	await expect(h1).toContainText('Mindblown: a blog about philosophy.');
 });
