@@ -11,6 +11,8 @@ async function globalTeardown() {
 		});
 	}
 	execSync('yarn docker:cli --env tests user nuke');
+	// by clearing DB, all plugins will be deactivated
+	execSync('yarn docker:clear:tests');
 }
 
 export default globalTeardown;
