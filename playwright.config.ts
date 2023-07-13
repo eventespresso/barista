@@ -39,6 +39,9 @@ export default defineConfig({
 	/* Set timeout for each test to be 60 seconds */
 	timeout: 60_000,
 
+	/* Set global timeout to 1 hour */
+	globalTimeout: 3_600_000,
+
 	/* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
 	use: {
 		/* Base URL to use in actions like `await page.goto('/')`. */
