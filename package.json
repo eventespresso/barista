@@ -173,7 +173,6 @@
 		"mini-css-extract-plugin": "1.6.2",
 		"npm-check": "^5.9.2",
 		"optimize-css-assets-webpack-plugin": "6.0.1",
-		"playwright-testing-library": "^4.5.0",
 		"pnp-webpack-plugin": "1.7.0",
 		"postcss-flexbugs-fixes": "4.2.1",
 		"postcss-loader": "3.0.0",
