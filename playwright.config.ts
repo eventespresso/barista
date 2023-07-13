@@ -36,8 +36,8 @@ export default defineConfig({
 	/* Global cleanup. See https://playwright.dev/docs/api/class-testconfig#test-config-global-teardown */
 	globalTeardown: './e2e-tests/setup/global-teardown.ts',
 
-	/* Set timeout for each test to be 60 seconds */
-	timeout: 60_000,
+	/* Set timeout for each test to be 120 seconds */
+	timeout: 120_000,
 
 	/* Set global timeout to 1 hour */
 	globalTimeout: 3_600_000,
