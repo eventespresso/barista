@@ -1,26 +1,46 @@
-import { Auth } from '@eventespresso/e2e/Auth';
 import { test } from '@playwright/test';
-import { StorageState } from '@eventespresso/e2e/StorageState';
+import { Navigate, Auth, Nuke } from '@eventespresso/e2e';
 
-type TestFixtures = {};
+type TestFixtures = {
+	navigate: Navigate;
+	nuke: Nuke;
+};
 
 type WorkerFixtures = {
+	workerNavigate: Navigate;
 	workerStorageState: string;
 };
 
 const fixtures = test.extend<TestFixtures, WorkerFixtures>({
+	// test fixtures
+	navigate: async ({ browser }, use) => {
+		const navigate = new Navigate(browser);
+		await use(navigate);
+	},
+	storageState: ({ workerStorageState }, use) => {
+		use(workerStorageState);
+	},
+	nuke: async ({ navigate }, use) => {
+		const nuke = new Nuke(navigate);
+		await use(nuke);
+	},
+	// worker fixtures
+	workerNavigate: [
+		async ({ browser }, use) => {
+			const navigate = new Navigate(browser);
+			await use(navigate);
+		},
+		{ scope: 'worker' },
+	],
 	workerStorageState: [
-		async ({ browser }, use, workerInfo) => {
-			const auth = new Auth({ browser });
-			const storage = new StorageState({ auth, workerInfo });
-			const path = await storage.getStoragePath();
+		async ({ workerNavigate }, use, workerInfo) => {
+			const auth = new Auth(workerNavigate, workerInfo);
+			const path = await auth.getStoragePath();
+
 			await use(path);
 		},
 		{ scope: 'worker' },
 	],
-	storageState: ({ workerStorageState }, use) => {
-		use(workerStorageState);
-	},
 });
 
 export { fixtures as test };
