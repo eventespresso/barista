@@ -1,15 +1,18 @@
 name: E2E tests
 
-on:
-    push:
-        branches: [master]
-    # Allow to run E2E on demand
-    workflow_dispatch:
-        inputs:
-            path:
-                description: 'Run E2E tests in path, e.g. packages/e2e-tests/specs/admin'
-                required: false
-                default: ''
+# TODO: https://github.com/eventespresso/barista/issues/1222
+# until GH issue above is resolved, this workflow is disabled from running automatically as relevant dev deps were removed to resolve TS conflicts
+
+# on:
+#     push:
+#         branches: [master]
+#     # Allow to run E2E on demand
+#     workflow_dispatch:
+#         inputs:
+#             path:
+#                 description: 'Run E2E tests in path, e.g. packages/e2e-tests/specs/admin'
+#                 required: false
+#                 default: ''
 env:
     PLAYWRIGHT_BROWSERS_PATH: 0 # See https://playwright.dev/docs/ci/#caching-browsers
 jobs:
