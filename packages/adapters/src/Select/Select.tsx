@@ -14,21 +14,31 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
 		const childNodes =
 			children ||
-			options.map(({ label, options: optionGroups, value, ...optionProps }, index) => {
+			options.map(({ label, options: optionGroups, value, ...optionProps }, index: number) => {
 				if (optionGroups?.length && label) {
 					return (
 						<optgroup label={label as string} key={`${label}${index}`} {...optionProps}>
-							{optionGroups.map(({ label: optLabel, value, ...optProps }, i) => (
-								<option {...optProps} value={value} key={`${value}${i}`}>
-									{optLabel}
-								</option>
-							))}
+							{optionGroups.map(({ label: optLabel, value, ...optProps }, i: number) => {
+								const oProps = { ...optProps };
+								if (props.value === value) {
+									oProps['data-selected'] = true;
+								}
+								return (
+									<option {...oProps} value={value} key={`${value}${i}`}>
+										{optLabel}
+									</option>
+								);
+							})}
 						</optgroup>
 					);
 				}
 
+				const oProps = { ...optionProps };
+				if (props.value === value) {
+					oProps['data-selected'] = true;
+				}
 				return (
-					<option {...optionProps} value={value} key={`${value}${index}`}>
+					<option {...oProps} value={value} key={`${value}${index}`}>
 						{label}
 					</option>
 				);
