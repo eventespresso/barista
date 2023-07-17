@@ -24,6 +24,8 @@ class Auth {
 		// Important: make sure environment is clean to avoid dirty state
 		const page = await this.navigate.to('login', { storageState: undefined });
 
+		await page.waitForLoadState();
+
 		await page.getByLabel('Username or Email Address').fill(email);
 
 		await page.getByRole('textbox', { name: 'Password', exact: true }).fill(pass);
