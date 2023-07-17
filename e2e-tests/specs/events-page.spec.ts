@@ -75,3 +75,58 @@ test('categories', async ({ navigate }) => {
 
 	await expect(page.getByText(newCatName)).not.toBeVisible();
 });
+
+test.describe('default settings', () => {
+	test('registration status', async ({ navigate }) => {
+		const eventPage = await navigate.to('admin:ee:events:new');
+		const settingsPage = await navigate.to('admin:ee:events:settings');
+
+		const settingsDropdown = settingsPage.getByRole('combobox', { name: 'Default Registration Status' });
+		const eventDropdown = await eventPage.getByRole('combobox', { name: 'Default Registration Status' });
+
+		type Parameter = { code: string; value: string; label: string };
+
+		const parameters: Parameter[] = [
+			{ code: 'RAP', value: 'APPROVED', label: 'Approved' },
+			{ code: 'RCN', value: 'CANCELLED', label: 'Cancelled' },
+			{ code: 'RDC', value: 'DECLINED', label: 'Declined' },
+			{ code: 'RIC', value: 'INCOMPLETE', label: 'Incomplete' },
+			{ code: 'RNA', value: 'UNAPPROVED', label: 'Not Approved' },
+			{ code: 'RPP', value: 'PENDING_PAYMENT', label: 'Pending Payment' },
+			{ code: 'RWL', value: 'WAIT_LIST', label: 'Wait List' },
+		];
+
+		for (const { code, value, label } of parameters) {
+			await settingsDropdown.selectOption(code);
+
+			await settingsPage.getByRole('button', { name: 'Save', exact: true }).click();
+
+			// !! DISCLAIMER !! attribute "select" is broken
+			// https://github.com/eventespresso/barista/issues/1232
+
+			// reload page and read values again to make sure they were saved to db
+			await settingsPage.reload();
+
+			await expect(settingsDropdown).toHaveValue(code);
+
+			const settingsDropdownOption = await settingsDropdown.locator(
+				`option[value=${await settingsDropdown.inputValue()}]`
+			);
+
+			await expect(settingsDropdownOption).toHaveText(label);
+
+			// reload page to check if default settings have applied
+			await eventPage.reload();
+
+			await expect(eventDropdown).toHaveValue(value);
+
+			const eventDropdownOption = await eventDropdown.locator(
+				`option[value=${await eventDropdown.inputValue()}]`
+			);
+
+			await expect(eventDropdownOption).toHaveText(label);
+
+			await expect(eventDropdownOption).toHaveAttribute('code', code);
+		}
+	});
+});
