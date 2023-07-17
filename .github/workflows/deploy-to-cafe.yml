@@ -113,16 +113,16 @@ jobs:
               shell: bash
               run: |
                   # get PR number
-                  PR_NUMBER=${{ inputs.pr_number }}
-                  if [ -z "$PR_NUMBER" ]; then
-                      PR_NUMBER=${{ steps.pr.outputs.number }}
+                  PR_NUMBER=${{ steps.pr.outputs.number }}
+                  if [ -n ${{ inputs.pr_number }} ]; then
+                    PR_NUMBER=${{ inputs.pr_number }}
                   fi
                   console.log("$PR_NUMBER");
                   echo "prNumber=$PR_NUMBER" >> $GITHUB_OUTPUT
                   # get PR title
-                  PR_TITLE=${{ inputs.pr_title }}
-                  if [ -n "$PR_TITLE" ]; then
-                      PR_TITLE=${{ steps.pr.outputs.title }}
+                  PR_TITLE=${{ steps.pr.outputs.title }}
+                  if [ -n ${{ inputs.pr_title }} ]; then
+                      PR_TITLE=${{ inputs.pr_title }}
                   fi
                   console.log("$PR_TITLE");
                   echo "prTitle=$PR_TITLE" >> $GITHUB_OUTPUT
