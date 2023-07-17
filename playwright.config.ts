@@ -58,11 +58,6 @@ export default defineConfig({
 
 		/** Capture screenshot when the test fails. See https://playwright.dev/docs/screenshots */
 		screenshot: 'only-on-failure',
-
-		viewport: {
-			width: 1920,
-			height: 1080,
-		},
 	},
 
 	/* Configure projects for major browsers */
@@ -76,6 +71,11 @@ export default defineConfig({
 			name: 'chromium',
 			use: {
 				...devices['Desktop Chrome'],
+				// https://github.com/microsoft/playwright/issues/13815#issuecomment-1112312543
+				viewport: {
+					width: 1920,
+					height: 1080,
+				},
 			},
 			dependencies: ['setup'],
 		},
@@ -84,6 +84,11 @@ export default defineConfig({
 			name: 'firefox',
 			use: {
 				...devices['Desktop Firefox'],
+				// https://github.com/microsoft/playwright/issues/13815#issuecomment-1112312543
+				viewport: {
+					width: 1920,
+					height: 1080,
+				},
 			},
 			dependencies: ['setup'],
 		},
@@ -92,6 +97,11 @@ export default defineConfig({
 			name: 'webkit',
 			use: {
 				...devices['Desktop Safari'],
+				// https://github.com/microsoft/playwright/issues/13815#issuecomment-1112312543
+				viewport: {
+					width: 1920,
+					height: 1080,
+				},
 			},
 			dependencies: ['setup'],
 		},
