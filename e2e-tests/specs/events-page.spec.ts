@@ -129,4 +129,27 @@ test.describe('default settings', () => {
 			await expect(eventDropdownOption).toHaveAttribute('code', code);
 		}
 	});
+
+	test('max tickets per order', async ({ navigate }) => {
+		const events = await navigate.to('admin:ee:events:new');
+		const settings = await navigate.to('admin:ee:events:settings');
+
+		const input = settings.getByLabel('Default Maximum Tickets Allowed Per Order');
+
+		const parameters = ['2', '5', '12'];
+
+		for (const param of parameters) {
+			await input.fill(param);
+
+			await settings.getByRole('button', { name: 'Save', exact: true }).click();
+
+			// reload page to fetch new values
+			await events.reload();
+
+			// unfortunately, the inline edit field is not implemented properly i.e. missing aria fields, wrong IDs, etc. so programmatic targeting is broken
+			const locator = events.getByText(`Max Registrations per Transaction${param}`);
+
+			await expect(locator.getByRole('button')).toBeVisible();
+		}
+	});
 });
