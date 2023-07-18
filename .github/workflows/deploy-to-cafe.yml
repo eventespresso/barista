@@ -103,10 +103,10 @@ jobs:
               shell: bash
               run: |
                   # get PR number
-                  PR_NUMBER=${{ steps.pr.outputs.number }}
+                  PR_NUMBER="${{ steps.pr.outputs.number }}"
                   echo "prNumber=$PR_NUMBER" >> $GITHUB_OUTPUT
                   # get PR title
-                  PR_TITLE=${{ steps.pr.outputs.title }}
+                  PR_TITLE="${{ steps.pr.outputs.title }}"
                   echo "prTitle=$PR_TITLE" >> $GITHUB_OUTPUT
 
             - name: Create PR for Café
