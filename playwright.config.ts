@@ -25,7 +25,10 @@ export default defineConfig({
 	retries: process.env.CI ? 2 : 0,
 
 	/* Opt out of parallel tests on CI. */
-	workers: process.env.CI ? 1 : undefined,
+	// workers: process.env.CI ? 1 : undefined,
+	// cannot use parallel workers until we have separate databases per worker
+	// https://github.com/eventespresso/barista/issues/1234
+	workers: 1,
 
 	/* Reporter to use. See https://playwright.dev/docs/test-reporters */
 	reporter: 'html',
@@ -35,6 +38,12 @@ export default defineConfig({
 
 	/* Global cleanup. See https://playwright.dev/docs/api/class-testconfig#test-config-global-teardown */
 	globalTeardown: './e2e-tests/setup/global-teardown.ts',
+
+	/* Set timeout for each test to be 120 seconds */
+	timeout: 120_000,
+
+	/* Set global timeout to 1 hour */
+	globalTimeout: 3_600_000,
 
 	/* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
 	use: {
@@ -49,11 +58,6 @@ export default defineConfig({
 
 		/** Capture screenshot when the test fails. See https://playwright.dev/docs/screenshots */
 		screenshot: 'only-on-failure',
-
-		viewport: {
-			width: 1920,
-			height: 1080,
-		},
 	},
 
 	/* Configure projects for major browsers */
@@ -67,6 +71,11 @@ export default defineConfig({
 			name: 'chromium',
 			use: {
 				...devices['Desktop Chrome'],
+				// https://github.com/microsoft/playwright/issues/13815#issuecomment-1112312543
+				viewport: {
+					width: 1920,
+					height: 1080,
+				},
 			},
 			dependencies: ['setup'],
 		},
@@ -75,6 +84,11 @@ export default defineConfig({
 			name: 'firefox',
 			use: {
 				...devices['Desktop Firefox'],
+				// https://github.com/microsoft/playwright/issues/13815#issuecomment-1112312543
+				viewport: {
+					width: 1920,
+					height: 1080,
+				},
 			},
 			dependencies: ['setup'],
 		},
@@ -83,6 +97,11 @@ export default defineConfig({
 			name: 'webkit',
 			use: {
 				...devices['Desktop Safari'],
+				// https://github.com/microsoft/playwright/issues/13815#issuecomment-1112312543
+				viewport: {
+					width: 1920,
+					height: 1080,
+				},
 			},
 			dependencies: ['setup'],
 		},

@@ -13,7 +13,9 @@ class Navigate {
 		login: this.makeSimpleUrl('/wp-login.php'),
 		admin: this.makeSimpleUrl('/wp-admin'),
 		'admin:wp:plugins': this.makeAdminUrl('plugins.php'),
-		'admin:ee:events': this.makeAdminUrl('admin.php', { page: 'espresso_events' }),
+		'admin:ee:events': this.makeEventsUrl(),
+		'admin:ee:events:new': this.makeEventsUrl({ action: 'create_new' }),
+		'admin:ee:events:settings': this.makeEventsUrl({ action: 'default_event_settings' }),
 		'admin:ee:maintenance': this.makeAdminUrl('admin.php', { page: 'espresso_maintenance_settings' }),
 	};
 
@@ -73,6 +75,10 @@ class Navigate {
 
 	private makeAdminUrl(page: 'admin.php' | 'plugins.php', query?: QueryParams): string {
 		return this.makeUrl({ path: '/wp-admin/' + page, query });
+	}
+
+	private makeEventsUrl(query?: QueryParams): string {
+		return this.makeAdminUrl('admin.php', { page: 'espresso_events', ...query });
 	}
 }
 
