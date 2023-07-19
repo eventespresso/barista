@@ -1,4 +1,4 @@
-import { test } from '@eventespresso/e2e';
+import { test, DateFactory } from '@eventespresso/e2e';
 import { expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
 
@@ -151,5 +151,83 @@ test.describe('default settings', () => {
 
 			await expect(locator.getByRole('button')).toBeVisible();
 		}
+	});
+
+	test('quick links (subsubsub menu)', async ({ navigate, events }) => {
+		const page = await navigate.to('admin:ee:events');
+
+		// to avoid "funny" issues with relative time, e.g. +1 hour, +1 day, etc., I am assigning time to a fixed point to be certain that at any *real* time, this test will work as expected
+		const date = new DateFactory('December 15 2042 13:37:00');
+
+		await events.name('drafted event').draft();
+
+		await events
+			.name('published today')
+			.setStart(date.minutes(-5).make())
+			.setEnd(date.minutes(+5).make())
+			.publish();
+
+		await events
+			.name('published last month')
+			.setStart(date.months(-1).make())
+			.setEnd(date.months(-1).make())
+			.publish();
+
+		await events
+			.name('published this month')
+			.setStart(date.days(+1).make())
+			.setEnd(date.days(+2).make())
+			.publish();
+
+		await events.name('trashed event').trash();
+
+		// "View All Events" is selected by default
+		// the key emphasis here is ".current" selector
+		await expect(page.locator('.subsubsub .current', { hasText: 'View All Events' })).toHaveCount(1);
+
+		// view all events
+		await page.getByRole('link', { name: 'View All Events' }).click();
+
+		await expect(page.getByRole('table').locator('tbody').getByRole('row')).toHaveCount(4); // check against "extra" rows
+
+		await expect(page.getByRole('row').filter({ hasText: 'drafted event' })).toHaveCount(1);
+
+		await expect(page.getByRole('row').filter({ hasText: 'published today' })).toHaveCount(1);
+
+		await expect(page.getByRole('row').filter({ hasText: 'published last month' })).toHaveCount(1);
+
+		await expect(page.getByRole('row').filter({ hasText: 'published this month' })).toHaveCount(1);
+
+		// draft
+		await page.getByRole('link', { name: 'Draft' }).click();
+
+		await expect(page.getByRole('table').locator('tbody').getByRole('row')).toHaveCount(1); // check against "extra" rows
+
+		await expect(page.getByRole('table').filter({ hasText: 'drafted event' })).toHaveCount(1);
+
+		// today
+		await page.getByRole('link', { name: 'Today' }).click();
+
+		await expect(page.getByRole('table').locator('tbody').getByRole('row')).toHaveCount(1); // check against "extra" rows
+
+		await expect(page.getByRole('row').filter({ hasText: 'published today' })).toHaveCount(1);
+
+		// this month
+		await page.getByRole('link', { name: 'This Month' }).click();
+
+		await expect(page.getByRole('table').locator('tbody').getByRole('row')).toHaveCount(2); // check against "extra" rows
+
+		await expect(page.getByRole('row').filter({ hasText: 'published today' })).toHaveCount(1);
+
+		await expect(page.getByRole('row').filter({ hasText: 'published this month' })).toHaveCount(1);
+
+		// trash
+		await page.getByRole('link', { name: 'Trash', exact: true }).click();
+
+		await expect(page.getByRole('table').locator('tbody').getByRole('row')).toHaveCount(1); // check against "extra" rows
+
+		await expect(page.getByRole('table').filter({ hasText: 'trashed event' })).toHaveCount(1);
+
+		await expect(page.getByRole('table').locator('tbody')).toHaveCount(1);
 	});
 });
