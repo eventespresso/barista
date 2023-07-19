@@ -157,7 +157,7 @@ test.describe('default settings', () => {
 		const page = await navigate.to('admin:ee:events');
 
 		// to avoid "funny" issues with relative time, e.g. +1 hour, +1 day, etc., I am assigning time to a fixed point to be certain that at any *real* time, this test will work as expected
-		const date = new DateFactory('December 15 2042 13:37:00');
+		const date = new DateFactory();
 
 		await events.name('drafted event').draft();
 

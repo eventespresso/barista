@@ -1,13 +1,14 @@
 class DateFactory {
-	private base?: string;
+	private base: string;
 
 	private _minutes?: number;
 	private _hours?: number;
 	private _days?: number;
 	private _months?: number;
 
-	constructor(base?: string) {
-		this.base = base;
+	constructor() {
+		// if you decide to change base, keep in mind that there is code that is rendered by PHP (see WpEnv for implementation details)
+		this.base = 'December 15 2042 13:37:00';
 	}
 
 	public minutes(minutes: number): DateFactory {

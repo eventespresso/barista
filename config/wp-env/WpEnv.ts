@@ -106,7 +106,17 @@ class WpEnv {
 				'wp-content/plugins/barista': process.env.BARISTA,
 			},
 			plugins: [],
-			lifecycleScripts: {},
+			lifecycleScripts: {
+				afterStart:
+					this.makeCmd(
+						[
+							"/bin/sh -c 'sudo apt-get install --yes faketime'",
+							"/bin/sh -c 'echo export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/faketime/libfaketime.so.1 | sudo tee -a /etc/apache2/envvars'",
+							"/bin/sh -c 'echo @2042-12-15 13:37:00 | sudo tee /etc/faketimerc'",
+						],
+						'tests'
+					) + ' && docker ps --filter name=tests-wordpress -q | xargs docker restart', // hacky way to reload apache2... (apache2 does NOT support config reload)
+			},
 			env: {},
 		};
 
