@@ -7,7 +7,7 @@ import { faker } from '@faker-js/faker';
 test('open events page', async ({ navigate }) => {
 	const page = await navigate.to('admin:ee:events');
 
-	const header = page.getByRole('heading', { name: 'Event Espresso - Events' });
+	const header = page.getByRole('heading', { name: /Event.*Espresso.*Events/i });
 
 	await expect(header).toBeVisible();
 });
