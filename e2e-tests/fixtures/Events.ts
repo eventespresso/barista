@@ -51,7 +51,7 @@ class Events {
 		await page.getByRole('button', { name: 'Edit Event Date' }).click();
 		await page
 			.locator('div')
-			.filter({ hasText: /^start date$/ })
+			.filter({ hasText: new RegExp(`^${label}$`) })
 			.getByRole('textbox')
 			.fill(value);
 		await page.getByRole('dialog', { name: 'Edit Event Date' }).click({ position: { x: 1, y: 1 } });
