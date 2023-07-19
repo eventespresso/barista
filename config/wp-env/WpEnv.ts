@@ -2,6 +2,9 @@ import fs from 'fs';
 import { execSync } from 'child_process';
 import { Command, Option } from '@commander-js/extra-typings';
 
+// from https://github.com/WordPress/gutenberg/tree/HEAD/packages/env#wp-env-run-container-command
+type Env = 'mysql' | 'tests-mysql' | 'wordpress' | 'tests-wordpress' | 'cli' | 'tests-cli' | 'composer' | 'phpunit';
+
 /**
  * @link https://github.com/WordPress/gutenberg/tree/HEAD/packages/env#readme
  */
@@ -23,7 +26,9 @@ class WpEnv {
 			.command('run')
 			.description('run cli command against running docker container')
 			.addOption(
-				new Option('-e, --env <type>', 'container type').choices(['dev', 'tests', 'all']).default('all')
+				new Option('-e, --env <type>', 'container type')
+					.choices<(keyof ReturnType<WpEnv['getEnvs']>)[]>(Object.keys(this.getEnvs()))
+					.default<keyof ReturnType<WpEnv['getEnvs']>>('all')
 			);
 
 		type globalOpts = {
@@ -125,7 +130,7 @@ class WpEnv {
 		return output.join(' && ');
 	}
 
-	private getEnvs() {
+	private getEnvs(): Record<string, Env[]> {
 		return {
 			all: ['cli', 'tests-cli'],
 			dev: ['cli'],
