@@ -54,15 +54,23 @@ class Events {
 		}
 	}
 
-	private async setDate(page: Page, label: 'start date' | 'end date', value: string): Promise<void> {
-		await page.getByRole('button', { name: 'Edit Event Date' }).click();
-		await page
-			.locator('div')
-			.filter({ hasText: new RegExp(`^${label}$`) })
-			.getByRole('textbox')
-			.fill(value);
-		await page.getByRole('dialog', { name: 'Edit Event Date' }).click({ position: { x: 1, y: 1 } });
-		await page.getByRole('button', { name: 'save', exact: true }).click();
+	private async setDates(): Promise<void> {
+		await this.page.getByRole('button', { name: 'Edit Event Date' }).click();
+		const setDate = async (label: string, value: string): Promise<void> => {
+			await this.page
+				.locator('div')
+				.filter({ hasText: new RegExp(`^${label}$`) })
+				.getByRole('textbox')
+				.fill(value);
+			await this.page.getByRole('dialog', { name: 'Edit Event Date' }).click({ position: { x: 1, y: 1 } });
+		};
+		if (this.startDate) {
+			await setDate('start date', this.startDate);
+		}
+		if (this.endDate) {
+			await setDate('end date', this.endDate);
+		}
+		await this.page.getByRole('button', { name: 'save', exact: true }).click();
 	}
 
 	private convertDateToStr(date: Date): string {
@@ -84,11 +92,8 @@ class Events {
 			await this.page.goto(this.navigate.routes['admin:ee:events:new']);
 		}
 		await this.page.getByLabel('Edit Event', { exact: true }).fill(this.title);
-		if (this.startDate) {
-			await this.setDate(this.page, 'start date', this.startDate);
-		}
-		if (this.endDate) {
-			await this.setDate(this.page, 'end date', this.endDate);
+		if (this.startDate || this.endDate) {
+			await this.setDates();
 		}
 		if (button === 'Move to Trash') {
 			// if we do not save draft, for some reason input information like title is getting lost
