@@ -7,6 +7,7 @@ class Events {
 	private title: string;
 	private startDate?: string;
 	private endDate?: string;
+	private page?: Page;
 
 	constructor(private readonly navigate: Navigate) {}
 
@@ -47,6 +48,12 @@ class Events {
 		await this.save('Move to Trash');
 	}
 
+	public async close(): Promise<void> {
+		if (this.page) {
+			await this.page.close();
+		}
+	}
+
 	private async setDate(page: Page, label: 'start date' | 'end date', value: string): Promise<void> {
 		await page.getByRole('button', { name: 'Edit Event Date' }).click();
 		await page
@@ -70,23 +77,27 @@ class Events {
 	}
 
 	private async save(button: Button): Promise<void> {
-		const page = await this.navigate.to('admin:ee:events:new');
-		await page.getByLabel('Edit Event', { exact: true }).fill(this.title);
+		if (!this.page) {
+			this.page = await this.navigate.to('admin:ee:events:new');
+		}
+		if (this.page) {
+			await this.page.goto(this.navigate.routes['admin:ee:events:new']);
+		}
+		await this.page.getByLabel('Edit Event', { exact: true }).fill(this.title);
 		if (this.startDate) {
-			await this.setDate(page, 'start date', this.startDate);
+			await this.setDate(this.page, 'start date', this.startDate);
 		}
 		if (this.endDate) {
-			await this.setDate(page, 'end date', this.endDate);
+			await this.setDate(this.page, 'end date', this.endDate);
 		}
 		if (button === 'Move to Trash') {
 			// if we do not save draft, for some reason input information like title is getting lost
-			await page.getByRole('button', { name: 'Save Draft' }).click();
-			await page.getByRole('link', { name: button }).click();
+			await this.page.getByRole('button', { name: 'Save Draft' }).click();
+			await this.page.getByRole('link', { name: button }).click();
 		}
 		if (button !== 'Move to Trash') {
-			await page.getByRole('button', { name: button }).click();
+			await this.page.getByRole('button', { name: button }).click();
 		}
-		await page.close();
 	}
 }
 

@@ -241,5 +241,7 @@ test.describe('default settings', () => {
 		await expect(page.getByRole('table').locator('tbody')).toHaveCount(1);
 
 		await page.close();
+
+		await events.close();
 	});
 });
