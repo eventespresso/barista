@@ -164,8 +164,6 @@ test.describe('default settings', () => {
 	});
 
 	test('quick links (subsubsub menu)', async ({ navigate, events }) => {
-		const page = await navigate.to('admin:ee:events');
-
 		// to avoid "funny" issues with relative time, e.g. +1 hour, +1 day, etc., I am assigning time to a fixed point to be certain that at any *real* time, this test will work as expected
 		const date = new DateFactory();
 
@@ -190,6 +188,10 @@ test.describe('default settings', () => {
 			.publish();
 
 		await events.name('trashed event').trash();
+
+		await events.close();
+
+		const page = await navigate.to('admin:ee:events');
 
 		// "View All Events" is selected by default
 		// the key emphasis here is ".current" selector
@@ -241,7 +243,5 @@ test.describe('default settings', () => {
 		await expect(page.getByRole('table').locator('tbody')).toHaveCount(1);
 
 		await page.close();
-
-		await events.close();
 	});
 });
