@@ -2,6 +2,9 @@ import fs from 'fs';
 import { execSync } from 'child_process';
 import { Command, Option } from '@commander-js/extra-typings';
 
+// from https://github.com/WordPress/gutenberg/tree/HEAD/packages/env#wp-env-run-container-command
+type Env = 'mysql' | 'tests-mysql' | 'wordpress' | 'tests-wordpress' | 'cli' | 'tests-cli' | 'composer' | 'phpunit';
+
 /**
  * @link https://github.com/WordPress/gutenberg/tree/HEAD/packages/env#readme
  */
@@ -23,11 +26,13 @@ class WpEnv {
 			.command('run')
 			.description('run cli command against running docker container')
 			.addOption(
-				new Option('-e, --env <type>', 'container type').choices(['dev', 'tests', 'all']).default('all')
+				new Option('-e, --env <type>', 'container type')
+					.choices<Env[]>(this.getEnvs())
+					.default<Env>('tests-cli')
 			);
 
-		type globalOpts = {
-			env: 'dev' | 'tests' | 'all';
+		type GlobalOpts = {
+			env: Env;
 		};
 
 		const plugin = run.command('plugin').description('run plugin-related operations');
@@ -37,7 +42,7 @@ class WpEnv {
 			.argument('<name(s)...>', 'plugin name(s)')
 			.description('activate plugin')
 			.action((name, opts, cmd) => {
-				execSync(this.makeCmd(`wp plugin activate ${name.join(' ')}`, cmd.optsWithGlobals<globalOpts>().env));
+				execSync(this.makeCmd(`wp plugin activate ${name.join(' ')}`, cmd.optsWithGlobals<GlobalOpts>().env));
 			});
 
 		plugin
@@ -45,7 +50,7 @@ class WpEnv {
 			.argument('<name(s)...>', 'plugin name(s)')
 			.description('deactivate plugin')
 			.action((name, opts, cmd) => {
-				execSync(this.makeCmd(`wp plugin deactivate ${name.join(' ')}`, cmd.optsWithGlobals<globalOpts>().env));
+				execSync(this.makeCmd(`wp plugin deactivate ${name.join(' ')}`, cmd.optsWithGlobals<GlobalOpts>().env));
 			});
 
 		const user = run.command('user').description('run user-related operations');
@@ -63,7 +68,7 @@ class WpEnv {
 				execSync(
 					this.makeCmd(
 						`wp user create ${user} ${user} --user_pass=${pass} --role=${roleMap[opts.role]}`,
-						cmd.optsWithGlobals<globalOpts>().env
+						cmd.optsWithGlobals<GlobalOpts>().env
 					)
 				);
 			});
@@ -76,7 +81,7 @@ class WpEnv {
 					// https://serverfault.com/a/784225
 					this.makeCmd(
 						"/bin/sh -c 'wp user delete --yes $(wp user list --field=ID --exclude=1)'",
-						cmd.optsWithGlobals<globalOpts>().env
+						cmd.optsWithGlobals<GlobalOpts>().env
 					),
 					{ stdio: 'ignore' }
 				);
@@ -101,8 +106,25 @@ class WpEnv {
 				'wp-content/plugins/barista': process.env.BARISTA,
 			},
 			plugins: [],
-			lifecycleScripts: {},
-			env: {},
+			lifecycleScripts: {
+				afterStart:
+					this.makeCmd(
+						[
+							"/bin/sh -c 'sudo apt-get install --yes faketime'",
+							"/bin/sh -c 'echo export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/faketime/libfaketime.so.1 | sudo tee -a /etc/apache2/envvars'",
+							"/bin/sh -c 'echo @2042-12-15 13:37:00 | sudo tee /etc/faketimerc'",
+						],
+						'tests-wordpress'
+					) + ' && docker ps --filter name=tests-wordpress -q | xargs docker restart', // hacky way to reload apache2... (apache2 does NOT support config reload)
+			},
+			env: {
+				tests: {
+					config: {
+						AUTOSAVE_INTERVAL: 3600 * 24 * 365, // rough 1 yearly
+						WP_POST_REVISIONS: false,
+					},
+				},
+			},
 		};
 
 		const json = JSON.stringify(struct, undefined, 2);
@@ -113,9 +135,9 @@ class WpEnv {
 		fs.writeFileSync(fileName, json);
 	}
 
-	private makeCmd(cmds: string | string[], type: keyof ReturnType<WpEnv['getEnvs']>): string {
+	private makeCmd(cmds: string | string[], type: Env | Env[]): string {
 		if (typeof cmds === 'string') cmds = [cmds];
-		const envs = this.getEnvs()[type];
+		const envs = typeof type === 'string' ? [type] : type;
 		const output: string[] = [];
 		cmds.forEach((cmd) => {
 			envs.forEach((env) => {
@@ -125,12 +147,8 @@ class WpEnv {
 		return output.join(' && ');
 	}
 
-	private getEnvs() {
-		return {
-			all: ['cli', 'tests-cli'],
-			dev: ['cli'],
-			tests: ['tests-cli'],
-		};
+	private getEnvs(): Env[] {
+		return ['mysql', 'tests-mysql', 'wordpress', 'tests-wordpress', 'cli', 'tests-cli', 'composer', 'phpunit'];
 	}
 }
 

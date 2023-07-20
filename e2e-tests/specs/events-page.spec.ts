@@ -1,15 +1,18 @@
-import { test } from '@eventespresso/e2e';
+import { test, DateFactory } from '@eventespresso/e2e';
 import { expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
+import { Button } from '@eventespresso/e2e/Events';
 
 // this is a *silly* test just to verify functionality of E2E
 // if perceived to be redundant, there is *no* harm in removing it
 test('open events page', async ({ navigate }) => {
 	const page = await navigate.to('admin:ee:events');
 
-	const header = page.getByRole('heading', { name: 'Event Espresso - Events' });
+	const header = page.getByRole('heading', { name: /Event.*Espresso.*Events/i });
 
 	await expect(header).toBeVisible();
+
+	await page.close();
 });
 
 test('categories', async ({ navigate }) => {
@@ -74,6 +77,8 @@ test('categories', async ({ navigate }) => {
 	await page.reload();
 
 	await expect(page.getByText(newCatName)).not.toBeVisible();
+
+	await page.close();
 });
 
 test.describe('default settings', () => {
@@ -128,6 +133,9 @@ test.describe('default settings', () => {
 
 			await expect(eventDropdownOption).toHaveAttribute('code', code);
 		}
+
+		await eventPage.close();
+		await settingsPage.close();
 	});
 
 	test('max tickets per order', async ({ navigate }) => {
@@ -151,5 +159,133 @@ test.describe('default settings', () => {
 
 			await expect(locator.getByRole('button')).toBeVisible();
 		}
+
+		await events.close();
+		await settings.close();
+	});
+
+	test('quick links (subsubsub menu)', async ({ navigate, events }) => {
+		const date = new DateFactory();
+
+		type EventParameter = {
+			start: Date;
+			end: Date;
+			type: Button;
+		};
+
+		type EventName =
+			| 'drafted today'
+			| 'published today'
+			| 'published last month'
+			| 'published this month'
+			| 'trashed today';
+
+		// object key is used for event name
+		type EventParameters = Record<EventName, EventParameter>;
+
+		const eventParams: EventParameters = {
+			'drafted today': {
+				start: date.make(),
+				end: date.make(),
+				type: 'Save Draft',
+			},
+			'published today': {
+				start: date.minutes(-5).make(),
+				end: date.minutes(+5).make(),
+				type: 'Publish',
+			},
+			'published last month': {
+				start: date.months(-1).make(),
+				end: date.months(-1).make(),
+				type: 'Publish',
+			},
+			'published this month': {
+				start: date.days(+1).make(),
+				end: date.days(+2).make(),
+				type: 'Publish',
+			},
+			'trashed today': {
+				start: date.make(),
+				end: date.make(),
+				type: 'Move to Trash',
+			},
+		};
+
+		for (const key in eventParams) {
+			const name = key;
+			const { start, end, type } = eventParams[key];
+			await events.name(name).setStart(start).setEnd(end).make(type);
+		}
+
+		// clean up
+		await events.close();
+
+		type QuickLink = 'View All Events' | 'Draft' | 'Trash' | 'Today' | 'This Month';
+
+		const page = await navigate.to('admin:ee:events');
+
+		const openQuickLink = async (link: QuickLink): Promise<void> => {
+			await page.locator('.subsubsub').getByRole('link', { name: link, exact: true }).click();
+		};
+
+		const expectToSee = async (event: EventName): Promise<void> => {
+			await expect(page.getByRole('row').filter({ hasText: event })).toHaveCount(1);
+		};
+
+		const expectNotToSee = async (event: EventName): Promise<void> => {
+			await expect(page.getByRole('row').filter({ hasText: event })).toHaveCount(0);
+		};
+
+		// "View All Events" is selected by default
+		// the key emphasis here is ".current" selector
+		await expect(page.locator('.subsubsub .current', { hasText: 'View All Events' })).toHaveCount(1);
+
+		// view all events
+		await openQuickLink('View All Events');
+
+		await expectToSee('drafted today');
+		await expectToSee('published today');
+		await expectToSee('published last month');
+		await expectToSee('published this month');
+		await expectNotToSee('trashed today');
+
+		// draft
+		await openQuickLink('Draft');
+
+		await expectToSee('drafted today');
+		await expectNotToSee('published today');
+		await expectNotToSee('published last month');
+		await expectNotToSee('published this month');
+		await expectNotToSee('trashed today');
+
+		// today
+		await openQuickLink('Today');
+
+		await expectToSee('drafted today');
+		await expectToSee('published today');
+		await expectNotToSee('published last month');
+		await expectNotToSee('published this month');
+		await expectNotToSee('trashed today');
+
+		// this month
+		await openQuickLink('This Month');
+
+		await expectToSee('drafted today');
+		await expectToSee('published today');
+		await expectNotToSee('published last month');
+		await expectToSee('published this month');
+		await expectNotToSee('trashed today');
+
+		// trash
+		await openQuickLink('Trash');
+
+		await expectNotToSee('drafted today');
+		await expectNotToSee('published today');
+		await expectNotToSee('published last month');
+		await expectNotToSee('published this month');
+		await expectToSee('trashed today');
+
+		// clean up
+		await page.close();
 	});
 });

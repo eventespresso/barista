@@ -1,4 +1,4 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig, devices, ViewportSize } from '@playwright/test';
 
 /**
  * Read environment variables from file.
@@ -7,6 +7,12 @@ import { defineConfig, devices } from '@playwright/test';
 // require('dotenv').config();
 
 const host = process.env.PLAYWRIGHT_HOST ?? 'http://localhost:8889';
+
+// https://github.com/microsoft/playwright/issues/13815#issuecomment-1112312543
+const viewport: ViewportSize = {
+	width: 1920,
+	height: 1080,
+};
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -31,7 +37,7 @@ export default defineConfig({
 	workers: 1,
 
 	/* Reporter to use. See https://playwright.dev/docs/test-reporters */
-	reporter: 'html',
+	reporter: process.env.CI ? 'dot' : 'html',
 
 	/* Global setup. See https://playwright.dev/docs/api/class-testconfig#test-config-global-setup */
 	globalSetup: './e2e-tests/setup/global-setup.ts',
@@ -71,11 +77,7 @@ export default defineConfig({
 			name: 'chromium',
 			use: {
 				...devices['Desktop Chrome'],
-				// https://github.com/microsoft/playwright/issues/13815#issuecomment-1112312543
-				viewport: {
-					width: 1920,
-					height: 1080,
-				},
+				viewport, // see comment next to variable declaration
 			},
 			dependencies: ['setup'],
 		},
@@ -84,11 +86,7 @@ export default defineConfig({
 			name: 'firefox',
 			use: {
 				...devices['Desktop Firefox'],
-				// https://github.com/microsoft/playwright/issues/13815#issuecomment-1112312543
-				viewport: {
-					width: 1920,
-					height: 1080,
-				},
+				viewport, // see comment next to variable declaration
 			},
 			dependencies: ['setup'],
 		},
@@ -97,11 +95,7 @@ export default defineConfig({
 			name: 'webkit',
 			use: {
 				...devices['Desktop Safari'],
-				// https://github.com/microsoft/playwright/issues/13815#issuecomment-1112312543
-				viewport: {
-					width: 1920,
-					height: 1080,
-				},
+				viewport, // see comment next to variable declaration
 			},
 			dependencies: ['setup'],
 		},

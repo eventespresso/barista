@@ -11,6 +11,8 @@ test('homepage', async ({ navigate }) => {
 	await expect(page).toHaveTitle('barista');
 
 	await expect(h1).toContainText('Mindblown: a blog about philosophy.');
+
+	await page.close();
 });
 
 test('authentication', async ({ navigate }) => {
@@ -19,4 +21,6 @@ test('authentication', async ({ navigate }) => {
 	const header = page.getByRole('heading', { name: 'Dashboard' });
 
 	await expect(header).toBeVisible();
+
+	await page.close();
 });
