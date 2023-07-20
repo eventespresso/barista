@@ -27,12 +27,12 @@ class WpEnv {
 			.description('run cli command against running docker container')
 			.addOption(
 				new Option('-e, --env <type>', 'container type')
-					.choices<(keyof ReturnType<WpEnv['getEnvs']>)[]>(Object.keys(this.getEnvs()))
-					.default<keyof ReturnType<WpEnv['getEnvs']>>('all')
+					.choices<Env[]>(this.getEnvs())
+					.default<Env>('tests-cli')
 			);
 
 		type globalOpts = {
-			env: 'dev' | 'tests' | 'all';
+			env: Env;
 		};
 
 		const plugin = run.command('plugin').description('run plugin-related operations');
@@ -114,7 +114,7 @@ class WpEnv {
 							"/bin/sh -c 'echo export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/faketime/libfaketime.so.1 | sudo tee -a /etc/apache2/envvars'",
 							"/bin/sh -c 'echo @2042-12-15 13:37:00 | sudo tee /etc/faketimerc'",
 						],
-						'tests'
+						'tests-wordpress'
 					) + ' && docker ps --filter name=tests-wordpress -q | xargs docker restart', // hacky way to reload apache2... (apache2 does NOT support config reload)
 			},
 			env: {},
@@ -128,9 +128,9 @@ class WpEnv {
 		fs.writeFileSync(fileName, json);
 	}
 
-	private makeCmd(cmds: string | string[], type: keyof ReturnType<WpEnv['getEnvs']>): string {
+	private makeCmd(cmds: string | string[], type: Env | Env[]): string {
 		if (typeof cmds === 'string') cmds = [cmds];
-		const envs = this.getEnvs()[type];
+		const envs = typeof type === 'string' ? [type] : type;
 		const output: string[] = [];
 		cmds.forEach((cmd) => {
 			envs.forEach((env) => {
@@ -140,12 +140,8 @@ class WpEnv {
 		return output.join(' && ');
 	}
 
-	private getEnvs(): Record<string, Env[]> {
-		return {
-			all: ['cli', 'tests-cli'],
-			dev: ['cli'],
-			tests: ['tests-cli'],
-		};
+	private getEnvs(): Env[] {
+		return ['mysql', 'tests-mysql', 'wordpress', 'tests-wordpress', 'cli', 'tests-cli', 'composer', 'phpunit'];
 	}
 }
 

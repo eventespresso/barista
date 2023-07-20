@@ -19,7 +19,7 @@ class Auth {
 
 		const pass = faker.internet.password({ length: 10 });
 
-		execSync(`yarn docker:cli --env tests user create ${email} ${pass} --role=admin`);
+		execSync(`yarn docker:cli user create ${email} ${pass} --role=admin`);
 
 		// Important: make sure environment is clean to avoid dirty state
 		const page = await this.navigate.to('login', { storageState: undefined });
