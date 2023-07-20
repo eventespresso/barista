@@ -10,6 +10,8 @@ test('open events page', async ({ navigate }) => {
 	const header = page.getByRole('heading', { name: /Event.*Espresso.*Events/i });
 
 	await expect(header).toBeVisible();
+
+	await page.close();
 });
 
 test('categories', async ({ navigate }) => {
@@ -74,6 +76,8 @@ test('categories', async ({ navigate }) => {
 	await page.reload();
 
 	await expect(page.getByText(newCatName)).not.toBeVisible();
+
+	await page.close();
 });
 
 test.describe('default settings', () => {
@@ -128,6 +132,9 @@ test.describe('default settings', () => {
 
 			await expect(eventDropdownOption).toHaveAttribute('code', code);
 		}
+
+		await eventPage.close();
+		await settingsPage.close();
 	});
 
 	test('max tickets per order', async ({ navigate }) => {
@@ -151,6 +158,9 @@ test.describe('default settings', () => {
 
 			await expect(locator.getByRole('button')).toBeVisible();
 		}
+
+		await events.close();
+		await settings.close();
 	});
 
 	test('quick links (subsubsub menu)', async ({ navigate, events }) => {
@@ -229,5 +239,7 @@ test.describe('default settings', () => {
 		await expect(page.getByRole('table').filter({ hasText: 'trashed event' })).toHaveCount(1);
 
 		await expect(page.getByRole('table').locator('tbody')).toHaveCount(1);
+
+		await page.close();
 	});
 });
