@@ -85,11 +85,11 @@ class Events {
 	}
 
 	private async save(button: Button): Promise<void> {
-		if (!this.page) {
-			this.page = await this.navigate.to('admin:ee:events:new');
-		}
 		if (this.page) {
 			await this.page.goto(this.navigate.routes['admin:ee:events:new']);
+		}
+		if (!this.page) {
+			this.page = await this.navigate.to('admin:ee:events:new');
 		}
 		await this.page.getByLabel('Edit Event', { exact: true }).fill(this.title);
 		if (this.startDate || this.endDate) {
