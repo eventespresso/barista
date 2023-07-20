@@ -117,7 +117,14 @@ class WpEnv {
 						'tests-wordpress'
 					) + ' && docker ps --filter name=tests-wordpress -q | xargs docker restart', // hacky way to reload apache2... (apache2 does NOT support config reload)
 			},
-			env: {},
+			env: {
+				tests: {
+					config: {
+						AUTOSAVE_INTERVAL: 3600 * 24 * 365, // rough 1 yearly
+						WP_POST_REVISIONS: false,
+					},
+				},
+			},
 		};
 
 		const json = JSON.stringify(struct, undefined, 2);
