@@ -1,6 +1,7 @@
 import { test, DateFactory } from '@eventespresso/e2e';
 import { expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
+import { Button } from '@eventespresso/e2e/Events';
 
 // this is a *silly* test just to verify functionality of E2E
 // if perceived to be redundant, there is *no* harm in removing it
@@ -164,84 +165,127 @@ test.describe('default settings', () => {
 	});
 
 	test('quick links (subsubsub menu)', async ({ navigate, events }) => {
-		// to avoid "funny" issues with relative time, e.g. +1 hour, +1 day, etc., I am assigning time to a fixed point to be certain that at any *real* time, this test will work as expected
 		const date = new DateFactory();
 
-		await events.name('drafted event').draft();
+		type EventParameter = {
+			start: Date;
+			end: Date;
+			type: Button;
+		};
 
-		await events
-			.name('published today')
-			.setStart(date.minutes(-5).make())
-			.setEnd(date.minutes(+5).make())
-			.publish();
+		type EventName =
+			| 'drafted today'
+			| 'published today'
+			| 'published last month'
+			| 'published this month'
+			| 'trashed today';
 
-		await events
-			.name('published last month')
-			.setStart(date.months(-1).make())
-			.setEnd(date.months(-1).make())
-			.publish();
+		// object key is used for event name
+		type EventParameters = Record<EventName, EventParameter>;
 
-		await events
-			.name('published this month')
-			.setStart(date.days(+1).make())
-			.setEnd(date.days(+2).make())
-			.publish();
+		const eventParams: EventParameters = {
+			'drafted today': {
+				start: date.make(),
+				end: date.make(),
+				type: 'Save Draft',
+			},
+			'published today': {
+				start: date.minutes(-5).make(),
+				end: date.minutes(+5).make(),
+				type: 'Publish',
+			},
+			'published last month': {
+				start: date.months(-1).make(),
+				end: date.months(-1).make(),
+				type: 'Publish',
+			},
+			'published this month': {
+				start: date.days(+1).make(),
+				end: date.days(+2).make(),
+				type: 'Publish',
+			},
+			'trashed today': {
+				start: date.make(),
+				end: date.make(),
+				type: 'Move to Trash',
+			},
+		};
 
-		await events.name('trashed event').trash();
+		for (const key in eventParams) {
+			const name = key;
+			const { start, end, type } = eventParams[key];
+			await events.name(name).setStart(start).setEnd(end).make(type);
+		}
 
+		// clean up
 		await events.close();
 
+		type QuickLink = 'View All Events' | 'Draft' | 'Trash' | 'Today' | 'This Month';
+
 		const page = await navigate.to('admin:ee:events');
+
+		const openQuickLink = async (link: QuickLink): Promise<void> => {
+			await page.locator('.subsubsub').getByRole('link', { name: link, exact: true }).click();
+		};
+
+		const expectToSee = async (event: EventName): Promise<void> => {
+			await expect(page.getByRole('row').filter({ hasText: event })).toHaveCount(1);
+		};
+
+		const expectNotToSee = async (event: EventName): Promise<void> => {
+			await expect(page.getByRole('row').filter({ hasText: event })).toHaveCount(0);
+		};
 
 		// "View All Events" is selected by default
 		// the key emphasis here is ".current" selector
 		await expect(page.locator('.subsubsub .current', { hasText: 'View All Events' })).toHaveCount(1);
 
 		// view all events
-		await page.getByRole('link', { name: 'View All Events' }).click();
+		await openQuickLink('View All Events');
 
-		await expect(page.getByRole('table').locator('tbody').getByRole('row')).toHaveCount(4); // check against "extra" rows
-
-		await expect(page.getByRole('row').filter({ hasText: 'drafted event' })).toHaveCount(1);
-
-		await expect(page.getByRole('row').filter({ hasText: 'published today' })).toHaveCount(1);
-
-		await expect(page.getByRole('row').filter({ hasText: 'published last month' })).toHaveCount(1);
-
-		await expect(page.getByRole('row').filter({ hasText: 'published this month' })).toHaveCount(1);
+		await expectToSee('drafted today');
+		await expectToSee('published today');
+		await expectToSee('published last month');
+		await expectToSee('published this month');
+		await expectNotToSee('trashed today');
 
 		// draft
-		await page.getByRole('link', { name: 'Draft' }).click();
+		await openQuickLink('Draft');
 
-		await expect(page.getByRole('table').locator('tbody').getByRole('row')).toHaveCount(1); // check against "extra" rows
-
-		await expect(page.getByRole('table').filter({ hasText: 'drafted event' })).toHaveCount(1);
+		await expectToSee('drafted today');
+		await expectNotToSee('published today');
+		await expectNotToSee('published last month');
+		await expectNotToSee('published this month');
+		await expectNotToSee('trashed today');
 
 		// today
-		await page.getByRole('link', { name: 'Today' }).click();
+		await openQuickLink('Today');
 
-		await expect(page.getByRole('table').locator('tbody').getByRole('row')).toHaveCount(1); // check against "extra" rows
-
-		await expect(page.getByRole('row').filter({ hasText: 'published today' })).toHaveCount(1);
+		await expectToSee('drafted today');
+		await expectToSee('published today');
+		await expectNotToSee('published last month');
+		await expectNotToSee('published this month');
+		await expectNotToSee('trashed today');
 
 		// this month
-		await page.getByRole('link', { name: 'This Month' }).click();
+		await openQuickLink('This Month');
 
-		await expect(page.getByRole('table').locator('tbody').getByRole('row')).toHaveCount(2); // check against "extra" rows
-
-		await expect(page.getByRole('row').filter({ hasText: 'published today' })).toHaveCount(1);
-
-		await expect(page.getByRole('row').filter({ hasText: 'published this month' })).toHaveCount(1);
+		await expectToSee('drafted today');
+		await expectToSee('published today');
+		await expectNotToSee('published last month');
+		await expectToSee('published this month');
+		await expectNotToSee('trashed today');
 
 		// trash
-		await page.getByRole('link', { name: 'Trash', exact: true }).click();
+		await openQuickLink('Trash');
 
-		await expect(page.getByRole('table').locator('tbody').getByRole('row')).toHaveCount(1); // check against "extra" rows
+		await expectNotToSee('drafted today');
+		await expectNotToSee('published today');
+		await expectNotToSee('published last month');
+		await expectNotToSee('published this month');
+		await expectToSee('trashed today');
 
-		await expect(page.getByRole('table').filter({ hasText: 'trashed event' })).toHaveCount(1);
-
-		await expect(page.getByRole('table').locator('tbody')).toHaveCount(1);
-
+		// clean up
 		await page.close();
 	});
 });

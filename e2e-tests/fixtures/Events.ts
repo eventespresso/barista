@@ -36,16 +36,8 @@ class Events {
 		return this;
 	}
 
-	public async publish(): Promise<void> {
-		await this.save('Publish');
-	}
-
-	public async draft(): Promise<void> {
-		await this.save('Save Draft');
-	}
-
-	public async trash(): Promise<void> {
-		await this.save('Move to Trash');
+	public async make(button: Button): Promise<void> {
+		await this.save(button);
 	}
 
 	public async close(): Promise<void> {
@@ -107,3 +99,5 @@ class Events {
 }
 
 export { Events };
+
+export type { Button };
