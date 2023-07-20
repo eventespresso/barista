@@ -37,7 +37,7 @@ export default defineConfig({
 	workers: 1,
 
 	/* Reporter to use. See https://playwright.dev/docs/test-reporters */
-	reporter: 'html',
+	reporter: process.env.CI ? 'dot' : 'html',
 
 	/* Global setup. See https://playwright.dev/docs/api/class-testconfig#test-config-global-setup */
 	globalSetup: './e2e-tests/setup/global-setup.ts',
