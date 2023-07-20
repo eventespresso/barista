@@ -1,7 +1,7 @@
 import { test, DateFactory } from '@eventespresso/e2e';
 import { expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
-import { Button } from '@eventespresso/e2e/Events';
+import { Button } from '@eventespresso/e2e/EventFactory';
 
 // this is a *silly* test just to verify functionality of E2E
 // if perceived to be redundant, there is *no* harm in removing it
@@ -164,7 +164,7 @@ test.describe('default settings', () => {
 		await settings.close();
 	});
 
-	test('quick links (subsubsub menu)', async ({ navigate, events }) => {
+	test('quick links (subsubsub menu)', async ({ navigate, eventFactory }) => {
 		const date = new DateFactory();
 
 		type EventParameter = {
@@ -214,11 +214,11 @@ test.describe('default settings', () => {
 		for (const key in eventParams) {
 			const name = key;
 			const { start, end, type } = eventParams[key];
-			await events.name(name).setStart(start).setEnd(end).make(type);
+			await eventFactory.name(name).setStart(start).setEnd(end).make(type);
 		}
 
 		// clean up
-		await events.close();
+		await eventFactory.close();
 
 		type QuickLink = 'View All Events' | 'Draft' | 'Trash' | 'Today' | 'This Month';
 

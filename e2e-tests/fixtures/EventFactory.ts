@@ -3,7 +3,7 @@ import { Page } from '@playwright/test';
 
 type Button = 'Publish' | 'Save Draft' | 'Move to Trash';
 
-class Events {
+class EventFactory {
 	private title: string;
 	private startDate?: string;
 	private endDate?: string;
@@ -11,12 +11,12 @@ class Events {
 
 	constructor(private readonly navigate: Navigate) {}
 
-	public name(title: string): Events {
+	public name(title: string): EventFactory {
 		this.title = title;
 		return this;
 	}
 
-	public setStart(date: string | Date): Events {
+	public setStart(date: string | Date): EventFactory {
 		if (typeof date === 'string') {
 			this.startDate = date;
 		}
@@ -26,7 +26,7 @@ class Events {
 		return this;
 	}
 
-	public setEnd(date: string | Date): Events {
+	public setEnd(date: string | Date): EventFactory {
 		if (typeof date === 'string') {
 			this.endDate = date;
 		}
@@ -98,6 +98,6 @@ class Events {
 	}
 }
 
-export { Events };
+export { EventFactory };
 
 export type { Button };
