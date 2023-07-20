@@ -31,7 +31,7 @@ class WpEnv {
 					.default<Env>('tests-cli')
 			);
 
-		type globalOpts = {
+		type GlobalOpts = {
 			env: Env;
 		};
 
@@ -42,7 +42,7 @@ class WpEnv {
 			.argument('<name(s)...>', 'plugin name(s)')
 			.description('activate plugin')
 			.action((name, opts, cmd) => {
-				execSync(this.makeCmd(`wp plugin activate ${name.join(' ')}`, cmd.optsWithGlobals<globalOpts>().env));
+				execSync(this.makeCmd(`wp plugin activate ${name.join(' ')}`, cmd.optsWithGlobals<GlobalOpts>().env));
 			});
 
 		plugin
@@ -50,7 +50,7 @@ class WpEnv {
 			.argument('<name(s)...>', 'plugin name(s)')
 			.description('deactivate plugin')
 			.action((name, opts, cmd) => {
-				execSync(this.makeCmd(`wp plugin deactivate ${name.join(' ')}`, cmd.optsWithGlobals<globalOpts>().env));
+				execSync(this.makeCmd(`wp plugin deactivate ${name.join(' ')}`, cmd.optsWithGlobals<GlobalOpts>().env));
 			});
 
 		const user = run.command('user').description('run user-related operations');
@@ -68,7 +68,7 @@ class WpEnv {
 				execSync(
 					this.makeCmd(
 						`wp user create ${user} ${user} --user_pass=${pass} --role=${roleMap[opts.role]}`,
-						cmd.optsWithGlobals<globalOpts>().env
+						cmd.optsWithGlobals<GlobalOpts>().env
 					)
 				);
 			});
@@ -81,7 +81,7 @@ class WpEnv {
 					// https://serverfault.com/a/784225
 					this.makeCmd(
 						"/bin/sh -c 'wp user delete --yes $(wp user list --field=ID --exclude=1)'",
-						cmd.optsWithGlobals<globalOpts>().env
+						cmd.optsWithGlobals<GlobalOpts>().env
 					),
 					{ stdio: 'ignore' }
 				);
