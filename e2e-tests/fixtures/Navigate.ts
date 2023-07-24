@@ -1,13 +1,10 @@
 import { Browser, Page as PageType } from '@playwright/test';
+import { Url } from '@eventespresso/e2e/';
 import R, { PipeWithFns } from 'ramda';
 
 type QueryParams = Record<string, string | number>;
 
 class Navigate {
-	private readonly protocol: string = 'http';
-	private readonly hostname: string = 'localhost';
-	private readonly port: number = 8889;
-
 	public readonly routes = {
 		home: this.makeSimpleUrl('/'),
 		login: this.makeSimpleUrl('/wp-login.php'),
@@ -19,17 +16,7 @@ class Navigate {
 		'admin:ee:maintenance': this.makeAdminUrl('admin.php', { page: 'espresso_maintenance_settings' }),
 	};
 
-	constructor(private readonly browser: Browser) {
-		require('dotenv').config({
-			path: '.wp-env',
-		});
-
-		// these defaults are taken from https://github.com/WordPress/gutenberg/tree/HEAD/packages/env#readme (tests environment)
-
-		this.protocol = process.env.PROTOCOL ?? 'http';
-		this.hostname = process.env.HOSTNAME ?? 'localhost';
-		this.port = parseInt(process.env.PORT) ?? 8889;
-	}
+	constructor(private readonly browser: Browser, private readonly url: Url) {}
 
 	public async to(key: keyof Navigate['routes'], opts: Parameters<Browser['newPage']>[0] = {}): Promise<PageType> {
 		const page = await this.browser.newPage(opts);
@@ -47,7 +34,8 @@ class Navigate {
 	}
 
 	private makeUrl({ path, query }: { path: string; query?: QueryParams }): string {
-		const base = `${this.protocol}://${this.hostname}:${this.port}`;
+		const { protocol, hostname, port } = this.url.getAll();
+		const base = `${protocol}://${hostname}:${port}`;
 		const queryStr = query ? '?' + this.convertQueryObjToStr(query) : '';
 		// add trailing slash to path only if we *DON'T* have query params
 		const normPath = this.normalizePath(path, !queryStr);

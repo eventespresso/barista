@@ -1,21 +1,23 @@
 import { test } from '@playwright/test';
-import { Navigate, Auth, Nuke, Events } from '@eventespresso/e2e';
+import { Navigate, Auth, Nuke, Events, Url } from '@eventespresso/e2e';
 
 type TestFixtures = {
 	navigate: Navigate;
 	events: Events;
 	nuke: Nuke;
+	url: Url;
 };
 
 type WorkerFixtures = {
 	workerNavigate: Navigate;
 	workerStorageState: string;
+	workerUrl: Url;
 };
 
 const fixtures = test.extend<TestFixtures, WorkerFixtures>({
 	// test fixtures
-	navigate: async ({ browser }, use) => {
-		const navigate = new Navigate(browser);
+	navigate: async ({ browser, url }, use) => {
+		const navigate = new Navigate(browser, url);
 		await use(navigate);
 	},
 	storageState: ({ workerStorageState }, use) => {
@@ -29,10 +31,14 @@ const fixtures = test.extend<TestFixtures, WorkerFixtures>({
 		const nuke = new Nuke(navigate);
 		await use(nuke);
 	},
+	url: async ({}, use) => {
+		const url = new Url();
+		await use(url);
+	},
 	// worker fixtures
 	workerNavigate: [
-		async ({ browser }, use) => {
-			const navigate = new Navigate(browser);
+		async ({ browser, workerUrl }, use) => {
+			const navigate = new Navigate(browser, workerUrl);
 			await use(navigate);
 		},
 		{ scope: 'worker' },
@@ -43,6 +49,13 @@ const fixtures = test.extend<TestFixtures, WorkerFixtures>({
 			const path = await auth.getStoragePath();
 
 			await use(path);
+		},
+		{ scope: 'worker' },
+	],
+	workerUrl: [
+		async ({}, use) => {
+			const url = new Url();
+			await use(url);
 		},
 		{ scope: 'worker' },
 	],
