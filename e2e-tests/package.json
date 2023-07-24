@@ -13,6 +13,7 @@
     "update-deps": "npx ncu -u"
   },
   "dependencies": {
+    "@faker-js/faker": "^8.0.2",
     "@playwright/test": "^1.36.1",
     "commander": "^11.0.0",
     "ts-node": "^10.9.1"
