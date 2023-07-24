@@ -118,6 +118,11 @@ class WpEnv {
 					) + ' && docker ps --filter name=tests-wordpress -q | xargs docker restart', // hacky way to reload apache2... (apache2 does NOT support config reload)
 			},
 			env: {
+				development: {
+					config: {
+						EE_REST_API_DEBUG_MODE: true,
+					},
+				},
 				tests: {
 					config: {
 						AUTOSAVE_INTERVAL: 3600 * 24 * 365, // rough 1 yearly
