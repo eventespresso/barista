@@ -61,7 +61,7 @@ class Auth {
 		// When a worker is restarted, for example after a failure, the new worker process has the same parallelIndex
 		const job = this.workerInfo.parallelIndex;
 		const file = [project, worker, job].join('-') + '.json';
-		const folder = resolve(__dirname, '../../.playwright/auth') + '/';
+		const folder = resolve(__dirname, '../.playwright/auth') + '/';
 		return folder + file;
 	}
 

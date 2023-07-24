@@ -26,12 +26,6 @@
 		"target": "es2015",
 		"sourceMap": false
 	},
-	"ts-node": {
-		"transpileOnly": true,
-		"compilerOptions": {
-			"module": "CommonJS"
-		}
-	},
 	"include": ["packages", "domains", "e2e-tests"],
 	"exclude": ["node_modules", "vendor"]
 }

@@ -19,7 +19,7 @@ const viewport: ViewportSize = {
  */
 export default defineConfig({
 	/* Directory with test files. See https://playwright.dev/docs/api/class-testproject#test-project-test-dir */
-	testDir: './e2e-tests',
+	testDir: './',
 
 	/* Run tests in files in parallel */
 	fullyParallel: true,
@@ -40,10 +40,10 @@ export default defineConfig({
 	reporter: process.env.CI ? 'dot' : 'html',
 
 	/* Global setup. See https://playwright.dev/docs/api/class-testconfig#test-config-global-setup */
-	globalSetup: './e2e-tests/setup/global-setup.ts',
+	globalSetup: './setup/global-setup.ts',
 
 	/* Global cleanup. See https://playwright.dev/docs/api/class-testconfig#test-config-global-teardown */
-	globalTeardown: './e2e-tests/setup/global-teardown.ts',
+	globalTeardown: './setup/global-teardown.ts',
 
 	/* Set timeout for each test to be 120 seconds */
 	timeout: 120_000,
