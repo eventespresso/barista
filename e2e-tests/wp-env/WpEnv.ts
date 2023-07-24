@@ -76,7 +76,7 @@ class WpEnv {
 		user.command('nuke')
 			.description("delete *ALL* users except 'admin'")
 			.action((opts, cmd) => {
-				const users = execSync(
+				execSync(
 					// to run nested docker commands, we need to use special tricks
 					// https://serverfault.com/a/784225
 					this.makeCmd(
@@ -136,10 +136,10 @@ class WpEnv {
 	}
 
 	private makeCmd(cmds: string | string[], type: Env | Env[]): string {
-		if (typeof cmds === 'string') cmds = [cmds];
+		const cmdsArr = typeof cmds === 'string' ? [cmds] : cmds;
 		const envs = typeof type === 'string' ? [type] : type;
 		const output: string[] = [];
-		cmds.forEach((cmd) => {
+		cmdsArr.forEach((cmd) => {
 			envs.forEach((env) => {
 				output.push(`yarn wp-env run ${env} ${cmd}`);
 			});
