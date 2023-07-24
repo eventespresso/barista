@@ -87,6 +87,18 @@ class WpEnv {
 				);
 			});
 
+		const rewrite = run.command('permalinks').description('rewrite commands');
+
+		rewrite
+			.command('enable')
+			.argument('<structure>', 'rewrite structure')
+			.action((structure, opts, cmd) => {
+				const env = cmd.optsWithGlobals<GlobalOpts>().env;
+				execSync(this.makeCmd(`wp rewrite structure '${structure}'`, env));
+				execSync(this.makeCmd('wp rewrite flush', env));
+			})
+			.description('enable permalinks');
+
 		program.parse();
 	}
 
