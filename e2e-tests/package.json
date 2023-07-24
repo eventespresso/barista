@@ -12,7 +12,9 @@
     "lint-fix": "eslint ./**/*.{js,jsx,ts,tsx} --format=codeframe --fix",
     "update-deps": "npx ncu -u"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@playwright/test": "^1.36.1"
+  },
   "devDependencies": {},
   "license": "GPL-3.0"
 }

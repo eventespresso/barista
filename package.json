@@ -96,7 +96,6 @@
 		"@commander-js/extra-typings": "^11.0.0",
 		"@faker-js/faker": "^8.0.2",
 		"@ffmpeg-installer/ffmpeg": "^1.1.0",
-		"@playwright/test": "^1.35.1",
 		"@pmmmwh/react-refresh-webpack-plugin": "0.5.1",
 		"@storybook/addon-a11y": "^6.3.8",
 		"@storybook/addon-actions": "^6.3.8",
