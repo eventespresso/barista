@@ -13,7 +13,8 @@
     "update-deps": "npx ncu -u"
   },
   "dependencies": {
-    "@playwright/test": "^1.36.1"
+    "@playwright/test": "^1.36.1",
+    "ts-node": "^10.9.1"
   },
   "devDependencies": {},
   "license": "GPL-3.0"
