@@ -1,8 +1,14 @@
 {
 	"extends": "../tsconfig.json",
+	"ts-node": {
+		"transpileOnly": true,
+		"compilerOptions": {
+			"module": "CommonJS"
+		}
+	},
 	"compilerOptions": {
 		"paths": {
-			"@eventespresso/e2e/*": ["./e2e-tests/fixtures/*", "./e2e-tests/setup/*"]
+			"@eventespresso/e2e/*": ["./fixtures/*", "./setup/*"]
 		}
 	}
 }

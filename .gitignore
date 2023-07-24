@@ -83,18 +83,5 @@ typings/
 # SB-related
 storybook-static
 
-# Misc
-.wp-env.override.json
-.env
-
 # SSL certificates
 *.pem
-
-# @wordpress/env
-.wp-env*
-!.wp-env.example*
-
-# Playwright
-playwright-report/*
-test-results/*
-.playwright
