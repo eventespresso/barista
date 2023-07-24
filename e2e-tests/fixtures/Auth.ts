@@ -1,9 +1,8 @@
 import { resolve, dirname } from 'path';
 import { execSync } from 'child_process';
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
-import { faker } from '@faker-js/faker';
 import { WorkerInfo } from '@playwright/test';
-import { Navigate } from '@eventespresso/e2e';
+import { Navigate, utilities } from '@eventespresso/e2e';
 
 class Auth {
 	private readonly sessionPath: string;
@@ -13,11 +12,9 @@ class Auth {
 	}
 
 	private async createLoginState(): Promise<void> {
-		const user = this.createUniqueUsername();
+		const email = utilities.makeEmail(this.workerInfo);
 
-		const email = `${user}@e2e.test`;
-
-		const pass = faker.internet.password({ length: 10 });
+		const pass = utilities.makePassword();
 
 		execSync(`yarn docker:cli user create ${email} ${pass} --role=admin`);
 
@@ -45,13 +42,6 @@ class Auth {
 		writeFileSync(this.sessionPath, json);
 
 		await page.close();
-	}
-
-	private createUniqueUsername(): string {
-		const username = faker.person.firstName().toLowerCase();
-		const workerId = this.workerInfo.workerIndex;
-		const parallelId = this.workerInfo.parallelIndex;
-		return `${username}-${workerId}-${parallelId}`;
 	}
 
 	private createSessionPath(): string {
