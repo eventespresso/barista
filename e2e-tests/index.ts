@@ -7,3 +7,4 @@ export { DateFactory } from './fixtures/DateFactory';
 export { Url } from './fixtures/Url';
 export { Schemas } from './fixtures/Schemas';
 export type { SchemasType } from './fixtures/Schemas';
+export { utilities } from './fixtures/utilities';
