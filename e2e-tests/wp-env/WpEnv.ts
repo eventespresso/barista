@@ -117,7 +117,7 @@ class WpEnv {
 				'wp-content': process.env.CAFE,
 				'wp-content/plugins/barista': process.env.BARISTA,
 			},
-			plugins: [],
+			plugins: ['WP-API/Basic-Auth'],
 			lifecycleScripts: {
 				afterStart:
 					this.makeCmd(
