@@ -1,7 +1,8 @@
 import { test } from '@playwright/test';
-import { Navigate, Auth, Nuke, Events, Url } from '@eventespresso/e2e';
+import { Navigate, Auth, Nuke, Events, Url, Client, utilities } from '@eventespresso/e2e';
 
 type TestFixtures = {
+	client: Client;
 	navigate: Navigate;
 	events: Events;
 	nuke: Nuke;
@@ -16,6 +17,18 @@ type WorkerFixtures = {
 
 const fixtures = test.extend<TestFixtures, WorkerFixtures>({
 	// test fixtures
+	client: async ({ url }, use, testInfo) => {
+		const {
+			project: { name },
+			workerIndex,
+			parallelIndex,
+		} = testInfo;
+		const username = utilities.makeUsername(name, workerIndex, parallelIndex);
+		const email = utilities.makeEmail(username);
+		const password = utilities.makePassword();
+		const client = new Client(email, password, url);
+		await use(client);
+	},
 	navigate: async ({ browser, url }, use) => {
 		const navigate = new Navigate(browser, url);
 		await use(navigate);

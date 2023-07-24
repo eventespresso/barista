@@ -8,3 +8,4 @@ export { Url } from './fixtures/Url';
 export { Schemas } from './fixtures/Schemas';
 export type { SchemasType } from './fixtures/Schemas';
 export { utilities } from './fixtures/utilities';
+export { Client } from './fixtures/Client';
