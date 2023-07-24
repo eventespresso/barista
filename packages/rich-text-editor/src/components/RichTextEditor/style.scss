@@ -26,7 +26,7 @@
 		border: none;
 		border-radius: 0;
 		margin: 0;
-		padding:  var(--ee-padding-tiny) 0 var(--ee-padding-small);
+		padding: var(--ee-padding-tiny) 0 var(--ee-padding-small);
 		display: flex;
 		flex-wrap: wrap;
 
@@ -88,6 +88,13 @@
 			color: var(--ee-default-text-color-high-contrast);
 			font-weight: 100;
 		}
+		.public-DraftStyleDefault-block:first-child {
+			margin-block-start: 0;
+		}
+		pre .public-DraftStyleDefault-block,
+		pre .public-DraftStyleDefault-block:first-child {
+			margin: var(--ee-margin-pico);
+		}
 	}
 
 	.public-DraftEditor-content,
@@ -101,7 +108,7 @@
 	}
 
 	&-root {
-		.ee-tabs  {
+		.ee-tabs {
 			.ee-tabs__tab {
 				&-list {
 					// margin-inline-end: 1rem;
