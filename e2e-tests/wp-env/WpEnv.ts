@@ -95,7 +95,7 @@ class WpEnv {
 			.action((structure, opts, cmd) => {
 				const env = cmd.optsWithGlobals<GlobalOpts>().env;
 				execSync(this.makeCmd(`wp rewrite structure '${structure}'`, env));
-				execSync(this.makeCmd('wp rewrite flush', env));
+				execSync(this.makeCmd('wp rewrite flush --hard', env));
 			})
 			.description('enable permalinks');
 
@@ -127,7 +127,21 @@ class WpEnv {
 							"/bin/sh -c 'echo @2042-12-15 13:37:00 | sudo tee /etc/faketimerc'",
 						],
 						'tests-wordpress'
-					) + ' && docker ps --filter name=tests-wordpress -q | xargs docker restart', // hacky way to reload apache2... (apache2 does NOT support config reload)
+					) +
+					' && ' +
+					// hacky way to reload apache2... (apache2 does NOT support config reload)
+					'docker ps --filter name=tests-wordpress -q | xargs docker restart' +
+					' && ' +
+					// make sure .htaccess gets regenerated on Apache
+					// https://github.com/wp-cli/wp-cli/issues/1098#issuecomment-41231085
+					this.makeCmd(
+						[
+							`/bin/sh -c 'touch wp-cli.yml'`,
+							`/bin/sh -c 'echo "apache_modules:" >> wp-cli.yml'`,
+							`/bin/sh -c 'echo "  - mod_rewrite" >> wp-cli.yml'`,
+						],
+						'tests-cli'
+					),
 			},
 			env: {
 				tests: {
