@@ -14,9 +14,12 @@ class Client {
 		this.base = '/wp-json/ee/v4.8.36';
 	}
 
-	public async makeEvent(params: SchemasType['Event']['Parameters']): Promise<SchemasType['Event']['Return']> {
-		const url = this.makeUrl('/events');
-		const body = this.makeJson(params, 'Event');
+	public async make<S extends keyof SchemasType>(
+		subpath: string,
+		params: SchemasType[S]['Parameters']
+	): Promise<SchemasType[S]['Return']> {
+		const url = this.makeUrl(subpath);
+		const body = this.makeJson(params);
 		const authorization = this.makeBasicAuth();
 		const headers = {
 			'Content-Type': 'application/json',
@@ -28,7 +31,24 @@ class Client {
 			body: body,
 		};
 		const request = new Request(url, options);
-		return await this.makeRequest(request, 'Event');
+		return await this.makeRequest<S>(request);
+	}
+
+	public async makeEvent(params: SchemasType['Event']['Parameters']): Promise<SchemasType['Event']['Return']> {
+		const url = this.makeUrl('/events');
+		const body = this.makeJson(params);
+		const authorization = this.makeBasicAuth();
+		const headers = {
+			'Content-Type': 'application/json',
+			Authorization: authorization,
+		} as const;
+		const options: RequestInit = {
+			method: 'POST',
+			headers: headers,
+			body: body,
+		};
+		const request = new Request(url, options);
+		return await this.makeRequest<'Event'>(request);
 	}
 
 	private makeBasicAuth(): string {
@@ -37,9 +57,16 @@ class Client {
 		return `Basic ${base64}`;
 	}
 
-	private makeJson<S extends keyof SchemasType>(params: SchemasType[S]['Parameters'], schema: S): string {
-		const data = Schemas[schema].parse(params);
+	private makeJson<S extends keyof SchemasType>(params: SchemasType[S]['Parameters']): string {
+		const key = this.getSchemaKey(params);
+		const data = Schemas[key].parse(params);
 		return JSON.stringify(data);
+	}
+
+	private getSchemaKey<S extends keyof SchemasType>(params: SchemasType[S]['Parameters']): keyof SchemasType {
+		if (Schemas.Event.safeParse(params)) {
+			return 'Event';
+		}
 	}
 
 	private makeUrl(path: string): string {
@@ -59,10 +86,7 @@ class Client {
 		return pipe(fnc)(path);
 	}
 
-	private async makeRequest<S extends keyof SchemasType>(
-		request: Request,
-		schema: S
-	): Promise<SchemasType[S]['Return']> {
+	private async makeRequest<S extends keyof SchemasType>(request: Request): Promise<SchemasType[S]['Return']> {
 		const response = await fetch(request);
 		if (!response.ok) {
 			const body = await response.textConverted();
@@ -76,7 +100,8 @@ class Client {
 			throw new Error('Network failure, see details above!');
 		}
 		const json = await response.json();
-		return Schemas[schema].parse(json);
+		const key = this.getSchemaKey(json);
+		return Schemas[key].parse(json);
 	}
 
 	private bodyToPrettyJson(body: string): string {
