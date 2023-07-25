@@ -1,6 +1,6 @@
-import { Url } from '@eventespresso/e2e';
+import { Url, Schemas } from '@eventespresso/e2e';
 import R from 'ramda';
-import { Schemas, SchemasType } from './Schemas';
+import type { SchemasType } from '@eventespresso/e2e';
 import fetch, { Request, RequestInit } from 'node-fetch';
 
 /**
