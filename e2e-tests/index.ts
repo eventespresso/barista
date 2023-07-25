@@ -7,4 +7,5 @@ export { DateFactory } from './fixtures/DateFactory';
 export { Url } from './fixtures/Url';
 export { Schema } from './database/Schema';
 export { utilities } from './fixtures/utilities';
-export { Client } from './fixtures/Client';
+export { Client } from './database/Client';
+export { Factory } from './database/Factory';
