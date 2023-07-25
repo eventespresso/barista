@@ -5,7 +5,6 @@ export { Nuke } from './fixtures/Nuke';
 export { Events } from './fixtures/Events';
 export { DateFactory } from './fixtures/DateFactory';
 export { Url } from './fixtures/Url';
-export { Schemas } from './fixtures/Schemas';
-export type { SchemasType } from './fixtures/Schemas';
+export { Schema } from './database/Schema';
 export { utilities } from './fixtures/utilities';
 export { Client } from './fixtures/Client';
