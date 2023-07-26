@@ -1,7 +1,7 @@
 import { test, DateFactory } from '@eventespresso/e2e';
 import { expect } from '@playwright/test';
 import { faker } from '@faker-js/faker';
-import { Button } from '@eventespresso/e2e/Events';
+import { Button } from '../fixtures/Events';
 
 // this is a *silly* test just to verify functionality of E2E
 // if perceived to be redundant, there is *no* harm in removing it
@@ -213,7 +213,9 @@ test.describe('default settings', () => {
 
 		for (const key in eventParams) {
 			const name = key;
-			const { start, end, type } = eventParams[key];
+			// workaround until TS is updated
+			// https://github.com/microsoft/TypeScript/issues/21732
+			const { start, end, type } = eventParams[key as keyof typeof eventParams];
 			await events.name(name).setStart(start).setEnd(end).make(type);
 		}
 

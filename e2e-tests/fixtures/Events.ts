@@ -4,7 +4,7 @@ import { Page } from '@playwright/test';
 type Button = 'Publish' | 'Save Draft' | 'Move to Trash';
 
 class Events {
-	private title: string;
+	private title?: string;
 	private startDate?: string;
 	private endDate?: string;
 	private page?: Page;
@@ -47,14 +47,18 @@ class Events {
 	}
 
 	private async setDates(): Promise<void> {
+		if (!this.page) {
+			throw new Error('Unexpected condition!');
+		}
+		const page = this.page;
 		await this.page.getByRole('button', { name: 'Edit Event Date' }).click();
 		const setDate = async (label: string, value: string): Promise<void> => {
-			await this.page
+			await page
 				.locator('div')
 				.filter({ hasText: new RegExp(`^${label}$`) })
 				.getByRole('textbox')
 				.fill(value);
-			await this.page.getByRole('dialog', { name: 'Edit Event Date' }).click({ position: { x: 1, y: 1 } });
+			await page.getByRole('dialog', { name: 'Edit Event Date' }).click({ position: { x: 1, y: 1 } });
 		};
 		if (this.startDate) {
 			await setDate('start date', this.startDate);
@@ -83,7 +87,7 @@ class Events {
 		if (!this.page) {
 			this.page = await this.navigate.to('admin:ee:events:new');
 		}
-		await this.page.getByLabel('Edit Event', { exact: true }).fill(this.title);
+		await this.page.getByLabel('Edit Event', { exact: true }).fill(this.title ?? '');
 		if (this.startDate || this.endDate) {
 			await this.setDates();
 		}

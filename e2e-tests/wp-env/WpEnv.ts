@@ -65,9 +65,15 @@ class WpEnv {
 					user: 'subscriber',
 					admin: 'administrator',
 				};
+				if (!(opts.role in roleMap)) {
+					throw new Error('Unexpected condition!');
+				}
+				// workaround until TS is updated
+				// https://github.com/microsoft/TypeScript/issues/21732
+				const role = roleMap[opts.role as keyof typeof roleMap];
 				execSync(
 					this.makeCmd(
-						`wp user create ${user} ${user} --user_pass=${pass} --role=${roleMap[opts.role]}`,
+						`wp user create ${user} ${user} --user_pass=${pass} --role=${role}`,
 						cmd.optsWithGlobals<GlobalOpts>().env
 					)
 				);

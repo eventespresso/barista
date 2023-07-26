@@ -20,6 +20,7 @@ function makeEmail(param: WorkerInfo | string): string {
 	if (typeof param === 'object') {
 		return `${makeUsername(param)}${postfix}`;
 	}
+	throw new Error('Unexpected parameter!');
 }
 
 // pin password to static string for Basic Auth

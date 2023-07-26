@@ -18,13 +18,16 @@ class Event {
 	}
 
 	public addDatetime(...params: Input<'POST', 'Datetime'>[]): Event {
-		params.forEach(async (param) => {
+		params.forEach((param) => {
 			this.parameters.datetimes.push(param);
 		});
 		return this;
 	}
 
 	public async make(): Promise<void> {
+		if (!this.parameters.event) {
+			throw new Error('You forgot to .make() method!');
+		}
 		const event = await this.client.makeEntity('Event', this.parameters.event);
 		this.event = event;
 		if (this.parameters.datetimes.length > 0) {
