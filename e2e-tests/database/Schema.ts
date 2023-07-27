@@ -11,6 +11,10 @@ const EVT_name = () => z.string().describe('event name');
 const DTT_ID = () => z.number().describe('datetime ID');
 const DTT_name = () => z.string().describe('datetime name');
 
+// ticket schemas
+const TKT_ID = () => z.number().describe('ticket id');
+const TKT_name = () => z.string().describe('ticket name');
+// TKT_price is different format for GET and POST requests
 
 const EventPost = z.object({
 	EVT_name: EVT_name().optional().default(''),
@@ -34,14 +38,30 @@ const DatetimeGet = z.object({
 	DTT_name: DTT_name(),
 });
 
+const TicketPost = z.object({
+	TKT_name: TKT_name().optional().default(''),
+	TKT_price: z.number().describe('ticket price').optional().default(0),
+});
+
+const TicketGet = z.object({
+	TKT_ID: TKT_ID(),
+	TKT_name: TKT_name(),
+	TKT_price: z.object({
+		raw: z.number(),
+		pretty: z.string(),
+	}),
+});
+
 const POST = {
 	Event: EventPost,
 	Datetime: DatetimePost,
+	Ticket: TicketPost,
 };
 
 const GET = {
 	Event: EventGet,
 	Datetime: DatetimeGet,
+	Ticket: TicketGet,
 };
 
 const Schema = {
