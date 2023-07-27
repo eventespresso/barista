@@ -1,7 +1,7 @@
 import { resolve, dirname } from 'path';
 import { execSync } from 'child_process';
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
-import { WorkerInfo } from '@playwright/test';
+import { Browser, WorkerInfo } from '@playwright/test';
 import { Navigate, utilities } from '@eventespresso/e2e';
 
 class Auth {
@@ -18,8 +18,10 @@ class Auth {
 
 		execSync(`yarn docker:cli user create ${email} ${pass} --role=admin`);
 
-		// Important: make sure environment is clean to avoid dirty state
-		const page = await this.navigate.to('login', { storageState: undefined });
+		const page = await this.navigate.to('login');
+
+		// ensure state is clean
+		page.context().clearCookies();
 
 		await page.waitForLoadState();
 
