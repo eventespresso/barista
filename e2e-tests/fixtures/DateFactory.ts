@@ -35,19 +35,19 @@ class DateFactory {
 		const date = new Date(this.base);
 		if (this._minutes) {
 			date.setMinutes(date.getMinutes() + this._minutes);
-			this._minutes = undefined;
+			delete this._minutes;
 		}
 		if (this._hours) {
 			date.setHours(date.getHours() + this._hours);
-			this._hours = undefined;
+			delete this._hours;
 		}
 		if (this._days) {
 			date.setDate(date.getDate() + this._days);
-			this._days = undefined;
+			delete this._days;
 		}
 		if (this._months) {
 			date.setMonth(date.getMonth() + this._months);
-			this._months = undefined;
+			delete this._months;
 		}
 		return date;
 	}
