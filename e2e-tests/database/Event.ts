@@ -2,43 +2,55 @@ import { Client } from '@eventespresso/e2e';
 import { Input, Output } from './helper';
 
 class Event {
-	private event?: Output<'GET', 'Event'>;
-	private datetimes: Output<'GET', 'Datetime'>[] = [];
+	private _event?: Output<'GET', 'Event'>;
+	private _datetimes: Output<'GET', 'Datetime'>[] = [];
+	private _tickets: Output<'GET', 'Ticket'>[] = [];
 
-	private parameters: {
-		event?: Input<'POST', 'Event'>;
-		datetimes: Input<'POST', 'Datetime'>[];
-	} = { datetimes: [] };
+	public get event(): Output<'GET', 'Event'> | undefined {
+		return this._event;
+	}
+
+	public get datetimes(): Output<'GET', 'Datetime'>[] {
+		return this._datetimes;
+	}
+
+	public get tickets(): Output<'GET', 'Ticket'>[] {
+		return this._tickets;
+	}
 
 	constructor(private readonly client: Client) {}
 
-	public start(params: Input<'POST', 'Event'>): Event {
-		this.parameters.event = params;
+	public async make(event: Input<'POST', 'Event'>): Promise<Event> {
+		this._event = await this.client.makeEntity('Event', event);
 		return this;
 	}
 
-	public addDatetime(...params: Input<'POST', 'Datetime'>[]): Event {
-		params.forEach((param) => {
-			this.parameters.datetimes.push(param);
-		});
-		return this;
-	}
-
-	public async make(): Promise<void> {
-		if (!this.parameters.event) {
-			throw new Error('You forgot to .make() method!');
+	public async addDatetimes(...datetimes: Input<'POST', 'Datetime'>[]): Promise<Event> {
+		if (!this._event) {
+			throw new Error('You forgot call .start() method!');
 		}
-		const event = await this.client.makeEntity('Event', this.parameters.event);
-		this.event = event;
-		if (this.parameters.datetimes.length > 0) {
-			for (const param of this.parameters.datetimes) {
-				if (!param.EVT_ID) {
-					param.EVT_ID = this.event.EVT_ID;
-				}
-				const dt = await this.client.makeEntity('Datetime', param);
-				this.datetimes.push(dt);
+		for (const params of datetimes) {
+			if (!params.EVT_ID) {
+				params.EVT_ID = this._event.EVT_ID;
+			}
+			const datetime = await this.client.makeEntity('Datetime', params);
+			this._datetimes.push(datetime);
+		}
+		return this;
+	}
+
+	public async addTickets(
+		datetime?: Input<'GET', 'Datetime'>,
+		...tickets: Input<'POST', 'Ticket'>[]
+	): Promise<Event> {
+		for (const params of tickets) {
+			const ticket = await this.client.makeEntity('Ticket', params);
+			this._tickets.push(ticket);
+			if (datetime) {
+				await this.client.linkEntity('Ticket', ticket, 'Datetime', datetime);
 			}
 		}
+		return this;
 	}
 }
 
