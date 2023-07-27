@@ -1,5 +1,5 @@
 import { Browser, Page as PageType } from '@playwright/test';
-import { Url } from '@eventespresso/e2e/';
+import { Url } from '@eventespresso/e2e';
 import R, { PipeWithFns } from 'ramda';
 
 type QueryParams = Record<string, string | number>;
@@ -62,7 +62,12 @@ class Navigate {
 	}
 
 	private makeAdminUrl(page: 'admin.php' | 'plugins.php', query?: QueryParams): string {
-		return this.makeUrl({ path: '/wp-admin/' + page, query });
+		const path = '/wp-admin/' + page;
+		const args: Parameters<Navigate['makeUrl']>[0] = { path };
+		if (query) {
+			args.query = query;
+		}
+		return this.makeUrl(args);
 	}
 
 	private makeEventsUrl(query?: QueryParams): string {
