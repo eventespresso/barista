@@ -1,7 +1,7 @@
 import { resolve, dirname } from 'path';
 import { execSync } from 'child_process';
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
-import { Browser, WorkerInfo } from '@playwright/test';
+import { WorkerInfo } from '@playwright/test';
 import { Navigate, utilities } from '@eventespresso/e2e';
 
 class Auth {
