@@ -27,7 +27,7 @@ class Event {
 
 	public async addDatetimes(...datetimes: Input<'POST', 'Datetime'>[]): Promise<Event> {
 		if (!this._event) {
-			throw new Error('You forgot call .start() method!');
+			throw new Error('You forgot call .make() method!');
 		}
 		for (const params of datetimes) {
 			if (!params.EVT_ID) {
