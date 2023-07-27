@@ -128,8 +128,7 @@ class Client {
 			return path.startsWith(this.base) ? path : this.base + path;
 		};
 		const addOrigin = (path: string): string => {
-			const { hostname, protocol, port } = this.url.getAll();
-			const origin = `${protocol}://${hostname}:${port}`;
+			const origin = this.url.getOrigin();
 			return path.startsWith(origin) ? origin : origin + path;
 		};
 		const fnc: R.PipeWithFns<string, string> = [addFwdSlash, addBase, addOrigin];

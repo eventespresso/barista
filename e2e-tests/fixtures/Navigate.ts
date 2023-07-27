@@ -34,12 +34,11 @@ class Navigate {
 	}
 
 	private makeUrl({ path, query }: { path: string; query?: QueryParams }): string {
-		const { protocol, hostname, port } = this.url.getAll();
-		const base = `${protocol}://${hostname}:${port}`;
+		const origin = this.url.getOrigin();
 		const queryStr = query ? '?' + this.convertQueryObjToStr(query) : '';
 		// add trailing slash to path only if we *DON'T* have query params
 		const normPath = this.normalizePath(path, !queryStr);
-		return base + normPath + queryStr;
+		return origin + normPath + queryStr;
 	}
 
 	private normalizePath(path: string, trailingSlash: boolean): string {

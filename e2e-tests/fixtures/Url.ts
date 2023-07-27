@@ -15,12 +15,9 @@ class Url {
 		this.port = process.env.PORT ? parseInt(process.env.PORT) : 8889;
 	}
 
-	public getAll() {
-		return {
-			protocol: this.protocol,
-			hostname: this.hostname,
-			port: this.port,
-		} as const;
+	// https://developer.mozilla.org/en-US/docs/Web/API/Location
+	public getOrigin(): string {
+		return `${this.protocol}://${this.hostname}:${this.port}`;
 	}
 }
 
