@@ -1,6 +1,6 @@
 import { Url, Schema } from '@eventespresso/e2e';
 import R from 'ramda';
-import fetch, { Request, Response, RequestInit } from 'node-fetch';
+import fetch, { Request, Response, RequestInit, BodyInit } from 'node-fetch';
 import { Method, Key, Input, Output } from './helper';
 
 /**
@@ -14,14 +14,16 @@ class Client {
 		this.base = '/wp-json/ee/v4.8.36';
 	}
 
-	private createRequest<M extends Method, S extends Key>(
-		schema: S,
-		method: M,
-		subpath: string,
-		params: Input<'POST', S>
-	): Request {
-		const url = this.makeUrl(subpath);
-		const body = this.makeJson(schema, method, params);
+	private makeRequest({
+		path,
+		method,
+		body,
+	}: {
+		path: string;
+		method: 'GET' | 'POST' | 'UPDATE' | 'DELETE';
+		body?: BodyInit;
+	}): Request {
+		const url = this.makeUrl(path);
 		const authorization = this.makeBasicAuth();
 		const headers = {
 			'Content-Type': 'application/json',
@@ -30,17 +32,63 @@ class Client {
 		const options: RequestInit = {
 			method: method,
 			headers: headers,
-			body: body,
 		};
+		if (body) {
+			options.body = body;
+		}
 		return new Request(url, options);
 	}
 
 	public async makeEntity<S extends Key>(schema: S, params: Input<'POST', S>): Promise<Output<'GET', S>> {
+		const method = 'POST';
 		const path = this.getRoute(schema);
-		const request = this.createRequest(schema, 'POST', path, params);
+		const body = this.makeJson(schema, method, params);
+		const request = this.makeRequest({
+			path,
+			method,
+			body,
+		});
 		const response = await this.runRequest(request);
 		const json = await this.parseJson(response);
-		return Schema['GET'][schema].parse(json);
+		const data = Schema['GET'][schema].safeParse(json);
+		if (data.success) {
+			return data.data;
+		}
+		console.error('Original data:');
+		console.error(json);
+		throw new Error(data.error.toString());
+	}
+
+	public async linkEntity<F extends Key, T extends Key>(
+		fromKey: F,
+		fromSchema: Output<'GET', F>,
+		toKey: T,
+		toSchema: Output<'GET', T>
+	): Promise<void> {
+		const method = 'POST';
+		const fromPath = this.getRoute(fromKey);
+		const fromId = this.getId(fromKey, fromSchema);
+		const toPath = this.getRoute(toKey);
+		const toId = this.getId(toKey, toSchema);
+		const path = `${fromPath}/${fromId}${toPath}/${toId}`;
+		const request = this.makeRequest({
+			path,
+			method,
+		});
+		await this.runRequest(request);
+	}
+
+	private getId<S extends Key>(key: S, schema: Output<'GET', S>): number {
+		if (key === 'Event') {
+			return (schema as Output<'GET', 'Event'>)['EVT_ID'];
+		}
+		if (key === 'Datetime') {
+			return (schema as Output<'GET', 'Datetime'>)['DTT_ID'];
+		}
+		if (key === 'Ticket') {
+			return (schema as Output<'GET', 'Ticket'>)['TKT_ID'];
+		}
+		throw new Error(`Unexpected schema key: ${key}`);
 	}
 
 	private getRoute(key: Key): string {
@@ -49,6 +97,8 @@ class Client {
 				return '/events';
 			case 'Datetime':
 				return '/datetimes';
+			case 'Ticket':
+				return '/tickets';
 			default:
 				throw new Error(`Unknown schema key: ${key}`);
 		}
