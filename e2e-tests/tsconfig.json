@@ -9,6 +9,8 @@
 	"compilerOptions": {
 		"paths": {
 			"@eventespresso/e2e/*": ["./fixtures/*", "./setup/*"]
-		}
+		},
+		"strict": true,
+		"exactOptionalPropertyTypes": true
 	}
 }
