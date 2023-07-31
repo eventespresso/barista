@@ -26,7 +26,8 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@commander-js/extra-typings": "^11.0.0"
+    "@commander-js/extra-typings": "^11.0.0",
+    "@types/fs-extra": "^11.0.1"
   },
   "license": "GPL-3.0"
 }
