@@ -120,7 +120,6 @@
 		"chromatic": "^5.10.2",
 		"css-loader": "5.2.7",
 		"csstype": "^3.0.9",
-		"docker-compose": "^0.23.17",
 		"dotenv": "^16.3.1",
 		"dotenv-expand": "^10.0.0",
 		"eslint": "^8.44.0",
