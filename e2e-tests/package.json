@@ -12,6 +12,7 @@
     "trace": "yarn playwright show-trace",
     "report": "yarn playwright show-report",
     "install-deps": "yarn playwright install --with-deps",
+    "ddev:make-config": "yarn ts-node ./ddev/run.ts",
     "lint": "eslint ./**/*.{ts,tsx} --format=codeframe",
     "lint-fix": "eslint ./**/*.{js,jsx,ts,tsx} --format=codeframe --fix",
     "update-deps": "npx ncu -u"
