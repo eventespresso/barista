@@ -68,7 +68,11 @@ class MakeConfig {
 				for (const o of overrides) {
 					const configPath = resolve(source, o.file);
 					const configYaml = this.loadYamlConfig(configPath);
-					const newConfig = { ...configYaml, ...o.override };
+					const mergeFn = (l: any, r: any): any => {
+						if (typeof l === 'object') return R.concat(l, r);
+						return r;
+					};
+					const newConfig = R.mergeDeepWith(mergeFn, configYaml, o.override);
 					const newPath = resolve(target, o.file);
 					const newYaml = yaml.stringify(newConfig);
 					writeFileSync(newPath, newYaml);
