@@ -43,7 +43,7 @@ class MakeEnv {
 		cmd.command('make-env', { isDefault: true })
 			.argument('<project>', 'DDEV project name')
 			.argument('<path>', 'Path where manifest will be saved to')
-			.action((project, path, opts, cmd) => {
+			.action((project, path) => {
 				this.make(project, path);
 			});
 

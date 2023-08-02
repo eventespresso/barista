@@ -12,7 +12,7 @@ class WpCli {
 	private createUser(credentials: UserCredentials, optionalArgs?: UserOptions): void {
 		const user = userCredentials.parse(credentials);
 		const options = userOptions.parse(optionalArgs ?? {});
-		let cmd = `ddev wp user create ${user.email} ${user.email} --user_pass=${user.password} ${options}`;
+		const cmd = `ddev wp user create ${user.email} ${user.email} --user_pass=${user.password} ${options}`;
 		this.exec(cmd);
 	}
 

@@ -87,7 +87,7 @@ class MakeConfig {
 			.addOption(new Option('-p, --path <path>', 'Path where config will be saved to').default(undefined))
 			.addOption(new Option('-h, --http-port <port>', 'HTTP port for Traefik router'))
 			.addOption(new Option('-s, --https-port <port>', 'HTTPS port for Traefik router'))
-			.action(async (project, cafe, barista, opts, cmd) => {
+			.action(async (project, cafe, barista, opts) => {
 				const options: Options = {};
 				if (opts.path) {
 					options['path'] = opts.path;
