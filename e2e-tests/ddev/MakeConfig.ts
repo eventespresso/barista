@@ -1,12 +1,11 @@
 import { Command, Option } from '@commander-js/extra-typings';
 import portfinder from 'portfinder';
 import { resolve } from 'path';
-import { tmpdir } from 'os';
 import R from 'ramda';
 import { copySync, existsSync, writeFileSync, readFileSync } from 'fs-extra';
 import yaml from 'yaml';
 import process from 'process';
-import { sanitizeStr } from './common';
+import { Manifest } from '@eventespresso/e2e';
 
 type Override = {
 	file: string;
@@ -25,19 +24,16 @@ type Repositories = {
 };
 
 class MakeConfig {
-	public async make(project: string, repositories: Repositories, options?: Options): Promise<void> {
+	public async make(manifest: Manifest, repositories: Repositories, options?: Options): Promise<void> {
 		const { cafe, barista } = repositories;
 
-		const name = sanitizeStr(project);
-
 		const opts = {
-			path: options?.path ?? resolve(tmpdir(), name),
 			httpPort: options?.httpPort ?? (await this.getAvailablePort()),
 			httpsPort: options?.httpsPort ?? (await this.getAvailablePort()),
 		} as const;
 
-		if (existsSync(opts.path)) {
-			throw new Error(`Project already exists: \n${opts.path}!`);
+		if (existsSync(manifest.path)) {
+			throw new Error(`Project already exists: \n${manifest.path}!`);
 		}
 
 		const paths = [cafe, barista];
@@ -49,7 +45,7 @@ class MakeConfig {
 		}
 
 		const source = resolve(__dirname, '.ddev');
-		const target = resolve(opts.path, '.ddev');
+		const target = resolve(manifest.path, '.ddev');
 
 		// copies *recursively*
 		// https://github.com/jprichardson/node-fs-extra/blob/HEAD/docs/copy-sync.md
@@ -102,7 +98,8 @@ class MakeConfig {
 				if (opts.httpsPort) {
 					options['httpsPort'] = parseInt(opts.httpsPort);
 				}
-				await this.make(project, { cafe, barista });
+				const manifest = new Manifest(project);
+				await this.make(manifest, { cafe, barista });
 			});
 
 		cmd.parse();
@@ -141,11 +138,6 @@ class MakeConfig {
 			throw new Error(`Expected object YAML schema for ${path}!`);
 		}
 		return obj;
-	}
-
-	private toInt(input: string | number): number {
-		if (typeof input === 'number') return input;
-		return parseInt(input);
 	}
 
 	private async getAvailablePort(): Promise<number> {

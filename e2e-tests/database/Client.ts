@@ -1,4 +1,4 @@
-import { Url, Schema } from '@eventespresso/e2e';
+import { Manifest, Schema } from '@eventespresso/e2e';
 import R from 'ramda';
 import fetch, { Request, Response, RequestInit, BodyInit } from 'node-fetch';
 import { Method, Key, Input, Output } from './helper';
@@ -10,7 +10,11 @@ import { Method, Key, Input, Output } from './helper';
 class Client {
 	private readonly base: string;
 
-	constructor(private readonly username: string, private readonly password: string, private readonly url: Url) {
+	constructor(
+		private readonly username: string,
+		private readonly password: string,
+		private readonly manifest: Manifest
+	) {
 		this.base = '/wp-json/ee/v4.8.36';
 	}
 
@@ -128,7 +132,7 @@ class Client {
 			return path.startsWith(this.base) ? path : this.base + path;
 		};
 		const addOrigin = (path: string): string => {
-			const origin = this.url.getOrigin();
+			const origin = this.manifest.url;
 			return path.startsWith(origin) ? origin : origin + path;
 		};
 		const fnc: R.PipeWithFns<string, string> = [addFwdSlash, addBase, addOrigin];

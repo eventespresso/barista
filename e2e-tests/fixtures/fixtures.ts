@@ -1,5 +1,5 @@
 import { test } from '@playwright/test';
-import { Navigate, Auth, Nuke, Events, Url, utilities, Client, Factory, WpCli } from '@eventespresso/e2e';
+import { Navigate, Auth, Nuke, Events, Url, utilities, Client, Factory, WpCli, Manifest } from '@eventespresso/e2e';
 
 type TestFixtures = {
 	factory: Factory;
@@ -8,6 +8,7 @@ type TestFixtures = {
 	nuke: Nuke;
 	url: Url;
 	wp: WpCli;
+	manifest: Manifest;
 };
 
 type WorkerFixtures = {
@@ -15,6 +16,7 @@ type WorkerFixtures = {
 	workerStorageState: string;
 	workerUrl: Url;
 	workerWp: WpCli;
+	workerManifest: Manifest;
 };
 
 const fixtures = test.extend<TestFixtures, WorkerFixtures>({
@@ -51,10 +53,14 @@ const fixtures = test.extend<TestFixtures, WorkerFixtures>({
 		const url = new Url();
 		await use(url);
 	},
-	wp: async ({}, use, testInfo) => {
-		const project = testInfo.project.name;
-		const wp = new WpCli(project);
+	wp: async ({ manifest }, use) => {
+		const wp = new WpCli(manifest);
 		await use(wp);
+	},
+	manifest: async ({}, use, testInfo) => {
+		const project = testInfo.project.name;
+		const manifest = new Manifest(project);
+		await use(manifest);
 	},
 	// worker fixtures
 	workerNavigate: [
@@ -81,10 +87,17 @@ const fixtures = test.extend<TestFixtures, WorkerFixtures>({
 		{ scope: 'worker' },
 	],
 	workerWp: [
+		async ({ workerManifest }, use) => {
+			const wp = new WpCli(workerManifest);
+			await use(wp);
+		},
+		{ scope: 'worker' },
+	],
+	workerManifest: [
 		async ({}, use, testInfo) => {
 			const project = testInfo.project.name;
-			const wp = new WpCli(project);
-			await use(wp);
+			const manifest = new Manifest(project);
+			await use(manifest);
 		},
 		{ scope: 'worker' },
 	],

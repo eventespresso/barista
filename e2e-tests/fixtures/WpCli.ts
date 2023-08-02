@@ -1,38 +1,13 @@
 import { z } from 'zod';
-import { constants } from '@eventespresso/e2e';
+import { constants, Manifest } from '@eventespresso/e2e';
 import { execSync } from 'child_process';
-import { readFileSync, existsSync } from 'fs';
 import { resolve } from 'path';
 
 class WpCli {
-	private readonly cwd: string;
-
-	constructor(project: string) {
-		this.cwd = this.getCwd(project);
-	}
-
-	private getCwd(project: string): string {
-		const path = this.getPath(project);
-		const raw = readFileSync(path).toString();
-		const data = JSON.parse(raw);
-		const cwd = data['path'];
-		if (!cwd) {
-			throw new Error(`Broken DDEV manifest: \n${path}`);
-		}
-		if (!existsSync(cwd)) {
-			throw new Error(`DDEV manifest not found at: \n${path}`);
-		}
-		return cwd;
-	}
-
-	private getPath(project: string): string {
-		const base = constants.locations.manifests;
-		const file = `${project}.json`;
-		return resolve(base, file);
-	}
+	constructor(private readonly manifest: Manifest) {}
 
 	private exec(cmd: string): void {
-		execSync(cmd, { cwd: this.cwd });
+		execSync(cmd, { cwd: this.manifest.path });
 	}
 
 	private createUser(credentials: UserCredentials, optionalArgs?: UserOptions): void {
