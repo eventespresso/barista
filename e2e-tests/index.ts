@@ -4,7 +4,6 @@ export { test } from './fixtures/fixtures';
 export { Nuke } from './fixtures/Nuke';
 export { Events } from './fixtures/Events';
 export { DateFactory } from './fixtures/DateFactory';
-export { Url } from './fixtures/Url';
 export { Schema } from './database/Schema';
 export { utilities } from './fixtures/utilities';
 export { Client } from './database/Client';
