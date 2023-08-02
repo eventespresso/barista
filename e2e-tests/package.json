@@ -23,6 +23,7 @@
     "@playwright/test": "^1.36.1",
     "commander": "^11.0.0",
     "fs-extra": "^11.1.1",
+    "minimist": "^1.2.8",
     "portfinder": "^1.0.32",
     "ts-node": "^10.9.1",
     "yaml": "^2.3.1",
@@ -30,7 +31,8 @@
   },
   "devDependencies": {
     "@commander-js/extra-typings": "^11.0.0",
-    "@types/fs-extra": "^11.0.1"
+    "@types/fs-extra": "^11.0.1",
+    "@types/minimist": "^1.2.2"
   },
   "license": "GPL-3.0"
 }
