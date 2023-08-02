@@ -11,3 +11,5 @@ export { Factory } from './database/Factory';
 export { WpCli } from './fixtures/WpCli';
 export { constants } from './constants';
 export { Manifest } from './fixtures/Manifest';
+export { MakeConfig } from './ddev/MakeConfig';
+export { MakeEnv } from './ddev/MakeEnv';
