@@ -1,6 +1,5 @@
 import R from 'ramda';
-import process from 'process';
-import { dirname } from 'path';
+import { resolve } from 'path';
 import { existsSync, mkdirSync } from 'fs';
 
 /**
@@ -26,8 +25,9 @@ export function sanitizeStr(raw: string): string {
  * Recursively create directories if they do not exist
  * in the given path
  */
-export function createDirs(path: string): void {
-	if (!existsSync(dirname(path))) {
-		mkdirSync(dirname(path), { recursive: true });
+export function ensurePathExists(path: string): void {
+	const target = resolve(path);
+	if (!existsSync(target)) {
+		mkdirSync(target, { recursive: true });
 	}
 }

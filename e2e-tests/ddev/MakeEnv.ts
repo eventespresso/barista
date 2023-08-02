@@ -3,7 +3,7 @@ import { env } from 'process';
 import { execSync } from 'child_process';
 import { resolve } from 'path';
 import { MakeConfig } from './MakeConfig';
-import { createDirs, sanitizeStr } from './common';
+import { ensurePathExists, sanitizeStr } from './common';
 import { existsSync, lstatSync, writeFileSync } from 'fs';
 import { Command } from '@commander-js/extra-typings';
 
@@ -16,7 +16,7 @@ class MakeEnv {
 	 */
 	public async make(project: string, path: string): Promise<void> {
 		if (!existsSync(path)) {
-			throw new Error(`Non-existing path supplied: \n${path}!`);
+			ensurePathExists(path);
 		}
 		const manifestPath = this.makeManifestPath(project, path);
 		if (existsSync(manifestPath)) {
@@ -27,7 +27,6 @@ class MakeEnv {
 			path: projectPath,
 			url: 'to-be-obtained',
 		};
-		createDirs(manifestPath);
 		this.loadEnvVars();
 		// the previous function as a type guard to ensure the env var bellow actually exist
 		const repositories = { cafe: env['CAFE'] as string, barista: env['BARISTA'] as string };
