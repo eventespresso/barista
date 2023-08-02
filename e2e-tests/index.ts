@@ -11,3 +11,4 @@ export { Client } from './database/Client';
 export { Factory } from './database/Factory';
 export { WpCli } from './fixtures/WpCli';
 export { constants } from './constants';
+export { Manifest } from './fixtures/Manifest';
