@@ -18,3 +18,6 @@ hooks:
         - exec: 'wp core download'
         - exec: 'wp config create --dbname=db --dbuser=db --dbpass=db --dbhost=db'
         - exec: 'wp core install --url="$DDEV_PRIMARY_URL" --title="$DDEV_PROJECT" --admin_user=admin --admin_email=admin@fake.test --admin_password=password'
+        - exec: 'wp plugin activate event-espresso-core barista'
+        - exec: 'wp rewrite structure "/%postname%/"'
+        - exec: 'wp rewrite flush --hard' # in case we ever use apache
