@@ -34,7 +34,7 @@ class MakeEnv {
 		await this.config.make(project, repositories);
 		execSync('ddev start', { cwd: projectPath });
 		const url = execSync('ddev get-url', { cwd: projectPath });
-		manifestData['url'] = url.toString();
+		manifestData['url'] = url.toString().replace(/\r?\n|\r/g, '');
 		writeFileSync(manifestPath, this.makeJson(manifestData));
 	}
 
