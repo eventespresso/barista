@@ -1,12 +1,11 @@
 import { test } from '@playwright/test';
-import { Navigate, Auth, Nuke, Events, Url, utilities, Client, Factory, WpCli, Manifest } from '@eventespresso/e2e';
+import { Navigate, Auth, Nuke, Events, utilities, Client, Factory, WpCli, Manifest } from '@eventespresso/e2e';
 
 type TestFixtures = {
 	factory: Factory;
 	navigate: Navigate;
 	events: Events;
 	nuke: Nuke;
-	url: Url;
 	wp: WpCli;
 	manifest: Manifest;
 };
@@ -14,14 +13,13 @@ type TestFixtures = {
 type WorkerFixtures = {
 	workerNavigate: Navigate;
 	workerStorageState: string;
-	workerUrl: Url;
 	workerWp: WpCli;
 	workerManifest: Manifest;
 };
 
 const fixtures = test.extend<TestFixtures, WorkerFixtures>({
 	// test fixtures
-	factory: async ({ url }, use, testInfo) => {
+	factory: async ({ manifest }, use, testInfo) => {
 		const {
 			project: { name },
 			workerIndex,
@@ -30,12 +28,12 @@ const fixtures = test.extend<TestFixtures, WorkerFixtures>({
 		const username = utilities.makeUsername(name, workerIndex, parallelIndex);
 		const email = utilities.makeEmail(username);
 		const password = utilities.makePassword();
-		const client = new Client(email, password, url);
+		const client = new Client(email, password, manifest);
 		const factory = new Factory(client);
 		await use(factory);
 	},
-	navigate: async ({ browser, url }, use) => {
-		const navigate = new Navigate(browser, url);
+	navigate: async ({ browser, manifest }, use) => {
+		const navigate = new Navigate(browser, manifest);
 		await use(navigate);
 	},
 	storageState: ({ workerStorageState }, use) => {
@@ -49,10 +47,6 @@ const fixtures = test.extend<TestFixtures, WorkerFixtures>({
 		const nuke = new Nuke(navigate);
 		await use(nuke);
 	},
-	url: async ({}, use) => {
-		const url = new Url();
-		await use(url);
-	},
 	wp: async ({ manifest }, use) => {
 		const wp = new WpCli(manifest);
 		await use(wp);
@@ -64,8 +58,8 @@ const fixtures = test.extend<TestFixtures, WorkerFixtures>({
 	},
 	// worker fixtures
 	workerNavigate: [
-		async ({ browser, workerUrl }, use) => {
-			const navigate = new Navigate(browser, workerUrl);
+		async ({ browser, workerManifest }, use) => {
+			const navigate = new Navigate(browser, workerManifest);
 			await use(navigate);
 		},
 		{ scope: 'worker' },
@@ -76,13 +70,6 @@ const fixtures = test.extend<TestFixtures, WorkerFixtures>({
 			const path = await auth.getStoragePath();
 
 			await use(path);
-		},
-		{ scope: 'worker' },
-	],
-	workerUrl: [
-		async ({}, use) => {
-			const url = new Url();
-			await use(url);
 		},
 		{ scope: 'worker' },
 	],
