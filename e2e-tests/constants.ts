@@ -1,8 +1,11 @@
 import { resolve } from 'path';
 import { tmpdir } from 'os';
 
+const base = resolve(__dirname, '.playwright');
+
 const locations = {
-	manifests: resolve(__dirname, '.playwright', 'ddev'),
+	playwright: base,
+	manifests: resolve(base, 'ddev'),
 	containers: resolve(tmpdir(), 'ddev'),
 };
 
