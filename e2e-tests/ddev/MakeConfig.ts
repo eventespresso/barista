@@ -5,78 +5,104 @@ import { tmpdir } from 'os';
 import R from 'ramda';
 import { copySync, existsSync, writeFileSync, readFileSync } from 'fs-extra';
 import yaml from 'yaml';
+import process from 'process';
+import { sanitizeStr } from './common';
 
 type Override = {
 	file: string;
 	override: object;
 };
 
+type Options = {
+	path?: string;
+	httpPort?: number;
+	httpsPort?: number;
+};
+
+type Repositories = {
+	cafe: string;
+	barista: string;
+};
+
 class MakeConfig {
-	constructor() {
-		this.init();
+	public async make(project: string, repositories: Repositories, options?: Options): Promise<void> {
+		const { cafe, barista } = repositories;
+
+		const name = sanitizeStr(project);
+
+		const opts = {
+			path: options?.path ?? resolve(tmpdir(), name),
+			httpPort: options?.httpPort ?? (await this.getAvailablePort()),
+			httpsPort: options?.httpsPort ?? (await this.getAvailablePort()),
+		} as const;
+
+		if (existsSync(opts.path)) {
+			throw new Error(`Project already exists: \n${opts.path}!`);
+		}
+
+		const paths = [cafe, barista];
+
+		for (const p of paths) {
+			if (!existsSync(p)) {
+				throw new Error(`Invalid path: \n${p}!`);
+			}
+		}
+
+		const source = resolve(__dirname, '.ddev');
+		const target = resolve(opts.path, '.ddev');
+
+		// copies *recursively*
+		// https://github.com/jprichardson/node-fs-extra/blob/HEAD/docs/copy-sync.md
+		copySync(source, target);
+
+		const configOverride: Override = {
+			file: 'config.yaml',
+			override: {
+				name: name,
+				router_http_port: opts.httpPort,
+				router_https_port: opts.httpsPort,
+			},
+		};
+
+		const overrides: Override[] = [configOverride, this.getDockerOverride()];
+
+		for (const o of overrides) {
+			const configPath = resolve(source, o.file);
+			const configYaml = this.loadYamlConfig(configPath);
+			const mergeFn = (l: any, r: any): any => {
+				if (typeof l === 'object') return R.concat(l, r);
+				return r;
+			};
+			const newConfig = R.mergeDeepWith(mergeFn, configYaml, o.override);
+			const newPath = resolve(target, o.file);
+			const newYaml = yaml.stringify(newConfig);
+			writeFileSync(newPath, newYaml);
+		}
 	}
 
-	private init(): void {
+	public parseCliArgs(): void {
 		const cmd = new Command();
 
-		cmd.command('ddev', { isDefault: true })
+		cmd.command('make-config', { isDefault: true })
+			.description('make DDEV config')
 			.argument('<project>', 'DDEV project name')
 			.argument('<cafe>', 'path to cafe repository')
 			.argument('<barista>', 'path to barista repository')
-			.description('make DDEV config')
-			.addOption(
-				new Option('-h, --http-port <port>', 'HTTP port for Traefik router').default(this.getAvailablePort())
-			)
-			.addOption(
-				new Option('-s, --https-port <port>', 'HTTPS port for Traefik router').default(this.getAvailablePort())
-			)
+			.addOption(new Option('-p, --path <path>', 'Path where config will be saved to').default(undefined))
+			.addOption(new Option('-h, --http-port <port>', 'HTTP port for Traefik router'))
+			.addOption(new Option('-s, --https-port <port>', 'HTTPS port for Traefik router'))
 			.action(async (project, cafe, barista, opts, cmd) => {
-				const paths = [cafe, barista];
-
-				for (const p of paths) {
-					if (!existsSync(p)) {
-						throw new Error(`Invalid path: ${p}!`);
-					}
+				const options: Options = {};
+				if (opts.path) {
+					options['path'] = opts.path;
 				}
-
-				const name = this.sanitizeName(project);
-				const source = resolve(__dirname, '.ddev');
-				const target = resolve(tmpdir(), name, '.ddev');
-
-				if (existsSync(target)) {
-					throw new Error('Project already exists!');
+				if (opts.httpPort) {
+					options['httpPort'] = parseInt(opts.httpPort);
 				}
-
-				// copies *recursively*
-				// https://github.com/jprichardson/node-fs-extra/blob/HEAD/docs/copy-sync.md
-				copySync(source, target);
-
-				const httpPort = this.toInt(await opts.httpPort);
-				const httpsPort = this.toInt(await opts.httpsPort);
-
-				const configOverride: Override = {
-					file: 'config.yaml',
-					override: {
-						name: name,
-						router_http_port: httpPort,
-						router_https_port: httpsPort,
-					},
-				};
-
-				const overrides: Override[] = [configOverride, this.getDockerOverride()];
-
-				for (const o of overrides) {
-					const configPath = resolve(source, o.file);
-					const configYaml = this.loadYamlConfig(configPath);
-					const mergeFn = (l: any, r: any): any => {
-						if (typeof l === 'object') return R.concat(l, r);
-						return r;
-					};
-					const newConfig = R.mergeDeepWith(mergeFn, configYaml, o.override);
-					const newPath = resolve(target, o.file);
-					const newYaml = yaml.stringify(newConfig);
-					writeFileSync(newPath, newYaml);
+				if (opts.httpsPort) {
+					options['httpsPort'] = parseInt(opts.httpsPort);
 				}
+				await this.make(project, { cafe, barista });
 			});
 
 		cmd.parse();
@@ -120,21 +146,6 @@ class MakeConfig {
 	private toInt(input: string | number): number {
 		if (typeof input === 'number') return input;
 		return parseInt(input);
-	}
-
-	private sanitizeName(raw: string): string {
-		const lowerCase = (input: string): string => {
-			return input.toLowerCase();
-		};
-		const spacesToDashes = (input: string): string => {
-			return input.replaceAll(' ', '-');
-		};
-		const stripIllegalChars = (input: string): string => {
-			return input.replaceAll(/[^\w\-\d]/g, '');
-		};
-		const fnc: R.PipeWithFns<string, string> = [lowerCase, spacesToDashes, stripIllegalChars];
-		const pipe = R.pipeWith((f, res) => f(res));
-		return pipe(fnc)(raw);
 	}
 
 	private async getAvailablePort(): Promise<number> {
