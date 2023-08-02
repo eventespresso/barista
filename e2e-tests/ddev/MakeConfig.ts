@@ -54,7 +54,7 @@ class MakeConfig {
 		const configOverride: Override = {
 			file: 'config.yaml',
 			override: {
-				name: name,
+				name: manifest.project,
 				router_http_port: opts.httpPort,
 				router_https_port: opts.httpsPort,
 			},
