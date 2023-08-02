@@ -11,11 +11,8 @@ class WpCli {
 
 	private createUser(credentials: UserCredentials, optionalArgs?: UserOptions): void {
 		const user = userCredentials.parse(credentials);
-		const options = userOptions.parse(optionalArgs);
-		let cmd = `ddev wp user create ${user.email} ${user.email} --user_pass=${user.password}`;
-		if (options) {
-			cmd += ` ${options}`;
-		}
+		const options = userOptions.parse(optionalArgs ?? {});
+		let cmd = `ddev wp user create ${user.email} ${user.email} --user_pass=${user.password} ${options}`;
 		this.exec(cmd);
 	}
 
@@ -37,15 +34,14 @@ type UserCredentials = z.infer<typeof userCredentials>;
 
 const userOptions = z
 	.object({
-		role: z.enum(['admin', 'user']).default('admin'),
+		role: z.enum(['administrator', 'subscriber']).default('administrator'),
 	})
 	.transform((args) => {
 		return Object.entries(args)
 			.map(([k, v]) => `--${k}=${v}`)
 			.join(' ');
-	})
-	.optional();
+	});
 
-type UserOptions = z.infer<typeof userOptions>;
+type UserOptions = z.input<typeof userOptions>;
 
 export { WpCli };
