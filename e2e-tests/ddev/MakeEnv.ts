@@ -6,6 +6,7 @@ import { MakeConfig } from './MakeConfig';
 import { ensurePathExists, sanitizeStr } from './common';
 import { existsSync, lstatSync, writeFileSync } from 'fs';
 import { Command } from '@commander-js/extra-typings';
+import dotenv from 'dotenv';
 
 class MakeEnv {
 	constructor(private readonly config: MakeConfig) {}
@@ -55,11 +56,11 @@ class MakeEnv {
 	}
 
 	private loadEnvVars(): void {
-		require('dotenv').config({
-			path: '.ddev-env',
+		dotenv.config({
+			path: resolve(__dirname, '.ddev-env'),
 		});
 		for (const e of ['CAFE', 'BARISTA']) {
-			if (!env[e]) throw new Error(`Missing env var ${e} (either export it or use .ddev-env`);
+			if (!env[e]) throw new Error(`Missing env var ${e} (either export it or use .ddev-env)`);
 		}
 	}
 
