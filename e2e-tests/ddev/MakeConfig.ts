@@ -32,8 +32,8 @@ class MakeConfig {
 			httpsPort: options?.httpsPort ?? (await this.getAvailablePort()),
 		} as const;
 
-		if (existsSync(manifest.path)) {
-			throw new Error(`Project already exists: \n${manifest.path}!`);
+		if (existsSync(manifest.cwd)) {
+			throw new Error(`Project already exists: \n${manifest.cwd}!`);
 		}
 
 		const paths = [cafe, barista];
@@ -45,7 +45,7 @@ class MakeConfig {
 		}
 
 		const source = resolve(__dirname, '.ddev');
-		const target = resolve(manifest.path, '.ddev');
+		const target = resolve(manifest.cwd, '.ddev');
 
 		// copies *recursively*
 		// https://github.com/jprichardson/node-fs-extra/blob/HEAD/docs/copy-sync.md

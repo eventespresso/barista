@@ -6,6 +6,7 @@ import R from 'ramda';
 
 class Manifest {
 	private data: Schema;
+	/** path to manifest file itself */
 	public readonly path: string;
 
 	constructor(project: string) {
@@ -20,6 +21,11 @@ class Manifest {
 			project: this.sanitizeName(project),
 			path: this.makeContainerPath(project),
 		};
+	}
+
+	/** path to container files */
+	public get cwd(): string {
+		return this.data.path;
 	}
 
 	public get project(): string {

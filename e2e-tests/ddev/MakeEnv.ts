@@ -24,13 +24,13 @@ class MakeEnv {
 		const repositories = { cafe: env['CAFE'] as string, barista: env['BARISTA'] as string };
 		const manifest = new Manifest(project);
 		await this.config.make(manifest, repositories);
-		const start = spawn('ddev start', [], { cwd: manifest.path, shell: true, stdio: 'inherit' });
+		const start = spawn('ddev start', [], { cwd: manifest.cwd, shell: true, stdio: 'inherit' });
 		start.on('message', (msg) => console.log(msg.toString));
 		start.on('error', (err) => console.error(err.message));
 		// block further execution and wait until spawn finishes
 		// https://stackoverflow.com/a/69025854/4343719
 		await new Promise((resolve) => start.on('close', resolve));
-		const url = execSync('ddev get-url', { cwd: manifest.path })
+		const url = execSync('ddev get-url', { cwd: manifest.cwd })
 			.toString()
 			.replace(/\r?\n|\r/g, '');
 		manifest.url = url;
