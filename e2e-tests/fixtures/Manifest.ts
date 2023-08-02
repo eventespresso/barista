@@ -22,6 +22,10 @@ class Manifest {
 		};
 	}
 
+	public get project(): string {
+		return this.data.project;
+	}
+
 	public set url(url: string) {
 		this.data = this.schema.parse({ ...this.data, url });
 	}
