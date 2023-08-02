@@ -1,6 +1,6 @@
 import { tmpdir } from 'os';
 import { env } from 'process';
-import { execSync } from 'child_process';
+import { execSync, spawn } from 'child_process';
 import { resolve } from 'path';
 import { MakeConfig } from './MakeConfig';
 import { ensurePathExists, sanitizeStr } from './common';
@@ -31,7 +31,11 @@ class MakeEnv {
 		// the previous function as a type guard to ensure the env var bellow actually exist
 		const repositories = { cafe: env['CAFE'] as string, barista: env['BARISTA'] as string };
 		await this.config.make(project, repositories);
-		execSync('ddev start', { cwd: projectPath });
+		const start = spawn('ddev start', [], { cwd: projectPath, shell: true, stdio: 'inherit' });
+		start.on('message', (msg) => console.log(msg.toString));
+		start.on('error', (err) => console.error(err.message));
+		// https://stackoverflow.com/a/69025854/4343719
+		await new Promise((resolve) => start.on('close', resolve));
 		const url = execSync('ddev get-url', { cwd: projectPath });
 		manifestData['url'] = url.toString().replace(/\r?\n|\r/g, '');
 		writeFileSync(manifestPath, this.makeJson(manifestData));
