@@ -122,9 +122,12 @@ export default defineConfig({
 	],
 
 	/* Run your local dev server before starting the tests */
+	// In order to support parallelism, for each project, we spin up
+	// a separate environment, see MakeEnv.ts and global-setup.ts
+	/*
 	webServer: {
-		command: 'yarn docker:start',
+		command: '',
 		url: host,
 		reuseExistingServer: !process.env.CI,
-	},
+	},*/
 });
