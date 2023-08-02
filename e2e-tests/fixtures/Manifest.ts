@@ -33,6 +33,14 @@ class Manifest {
 		return this.data.project;
 	}
 
+	public get url(): string {
+		const url = this.data.url;
+		if (typeof url === 'undefined') {
+			throw new Error(`Manifest file is missing url: \n${this.path}`);
+		}
+		return url;
+	}
+
 	public set url(url: string) {
 		this.data = this.schema.parse({ ...this.data, url });
 	}
