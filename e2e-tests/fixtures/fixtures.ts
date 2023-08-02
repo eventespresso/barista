@@ -1,5 +1,5 @@
 import { test } from '@playwright/test';
-import { Navigate, Auth, Nuke, Events, Url, utilities, Client, Factory } from '@eventespresso/e2e';
+import { Navigate, Auth, Nuke, Events, Url, utilities, Client, Factory, WpCli } from '@eventespresso/e2e';
 
 type TestFixtures = {
 	factory: Factory;
@@ -7,12 +7,14 @@ type TestFixtures = {
 	events: Events;
 	nuke: Nuke;
 	url: Url;
+	wp: WpCli;
 };
 
 type WorkerFixtures = {
 	workerNavigate: Navigate;
 	workerStorageState: string;
 	workerUrl: Url;
+	workerWp: WpCli;
 };
 
 const fixtures = test.extend<TestFixtures, WorkerFixtures>({
@@ -49,6 +51,11 @@ const fixtures = test.extend<TestFixtures, WorkerFixtures>({
 		const url = new Url();
 		await use(url);
 	},
+	wp: async ({}, use, testInfo) => {
+		const project = testInfo.project.name;
+		const wp = new WpCli(project);
+		await use(wp);
+	},
 	// worker fixtures
 	workerNavigate: [
 		async ({ browser, workerUrl }, use) => {
@@ -58,8 +65,8 @@ const fixtures = test.extend<TestFixtures, WorkerFixtures>({
 		{ scope: 'worker' },
 	],
 	workerStorageState: [
-		async ({ workerNavigate }, use, workerInfo) => {
-			const auth = new Auth(workerNavigate, workerInfo);
+		async ({ workerNavigate, workerWp }, use, workerInfo) => {
+			const auth = new Auth(workerNavigate, workerInfo, workerWp);
 			const path = await auth.getStoragePath();
 
 			await use(path);
@@ -70,6 +77,14 @@ const fixtures = test.extend<TestFixtures, WorkerFixtures>({
 		async ({}, use) => {
 			const url = new Url();
 			await use(url);
+		},
+		{ scope: 'worker' },
+	],
+	workerWp: [
+		async ({}, use, testInfo) => {
+			const project = testInfo.project.name;
+			const wp = new WpCli(project);
+			await use(wp);
 		},
 		{ scope: 'worker' },
 	],

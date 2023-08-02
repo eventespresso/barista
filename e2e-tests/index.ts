@@ -9,3 +9,5 @@ export { Schema } from './database/Schema';
 export { utilities } from './fixtures/utilities';
 export { Client } from './database/Client';
 export { Factory } from './database/Factory';
+export { WpCli } from './fixtures/WpCli';
+export { constants } from './constants';

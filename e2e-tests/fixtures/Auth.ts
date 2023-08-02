@@ -1,22 +1,25 @@
 import { resolve, dirname } from 'path';
-import { execSync } from 'child_process';
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import { WorkerInfo } from '@playwright/test';
-import { Navigate, utilities } from '@eventespresso/e2e';
+import { Navigate, utilities, WpCli } from '@eventespresso/e2e';
 
 class Auth {
 	private readonly sessionPath: string;
 
-	constructor(private readonly navigate: Navigate, private readonly workerInfo: WorkerInfo) {
+	constructor(
+		private readonly navigate: Navigate,
+		private readonly workerInfo: WorkerInfo,
+		private readonly wp: WpCli
+	) {
 		this.sessionPath = this.createSessionPath();
 	}
 
 	private async createLoginState(): Promise<void> {
 		const email = utilities.makeEmail(this.workerInfo);
 
-		const pass = utilities.makePassword();
+		const password = utilities.makePassword();
 
-		execSync(`yarn docker:cli user create ${email} ${pass} --role=admin`);
+		this.wp.user.create({ email, password });
 
 		const page = await this.navigate.to('login');
 
@@ -27,7 +30,7 @@ class Auth {
 
 		await page.getByLabel('Username or Email Address').fill(email);
 
-		await page.getByRole('textbox', { name: 'Password', exact: true }).fill(pass);
+		await page.getByRole('textbox', { name: 'Password', exact: true }).fill(password);
 
 		await page.getByRole('button', { name: 'Log In' }).click();
 
