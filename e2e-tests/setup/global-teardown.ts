@@ -1,6 +1,6 @@
 import { rmSync, existsSync } from 'fs';
 import { resolve } from 'path';
-import { execSync } from 'child_process';
+import { spawn } from 'child_process';
 
 async function globalTeardown() {
 	// do not cleanup in CI since it does not have state like local environment
@@ -13,7 +13,12 @@ async function globalTeardown() {
 			});
 		}
 		// clear entire database for tests env to start from tabular rasa
-		execSync('yarn docker:clear:tests');
+		const clear = spawn('ddev stop --omit-snapshot --remove-data');
+		clear.on('message', (msg) => console.log(msg.toString));
+		clear.on('error', (err) => console.error(err.message));
+		// block further execution and wait until spawn finishes
+		// https://stackoverflow.com/a/69025854/4343719
+		await new Promise((resolve) => clear.on('close', resolve));
 	}
 }
 
