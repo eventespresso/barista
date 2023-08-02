@@ -1,24 +1,29 @@
 import { z } from 'zod';
-import { constants, Manifest } from '@eventespresso/e2e';
+import { Manifest } from '@eventespresso/e2e';
 import { execSync } from 'child_process';
-import { resolve } from 'path';
 
 class WpCli {
 	constructor(private readonly manifest: Manifest) {}
 
 	private exec(cmd: string): void {
-		execSync(cmd, { cwd: this.manifest.path });
+		execSync(cmd, { cwd: this.manifest.cwd });
 	}
 
 	private createUser(credentials: UserCredentials, optionalArgs?: UserOptions): void {
 		const user = userCredentials.parse(credentials);
 		const options = userOptions.parse(optionalArgs);
-		this.exec(`ddev wp user create ${user.email} ${user.email} --user_pass=${user.password} ${options}`);
+		let cmd = `ddev wp user create ${user.email} ${user.email} --user_pass=${user.password}`;
+		if (options) {
+			cmd += ` ${options}`;
+		}
+		this.exec(cmd);
 	}
 
 	public get user() {
 		return {
-			create: this.createUser,
+			create: (credentials: UserCredentials, optionalArgs?: UserOptions): void => {
+				this.createUser(credentials, optionalArgs);
+			},
 		};
 	}
 }
@@ -38,7 +43,8 @@ const userOptions = z
 		return Object.entries(args)
 			.map(([k, v]) => `--${k}=${v}`)
 			.join(' ');
-	});
+	})
+	.optional();
 
 type UserOptions = z.infer<typeof userOptions>;
 
