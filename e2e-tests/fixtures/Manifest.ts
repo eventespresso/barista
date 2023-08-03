@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { constants } from '@eventespresso/e2e';
-import { readFileSync, existsSync, writeFileSync } from 'fs';
+import { readFileSync, existsSync, writeFileSync } from 'fs-extra';
 import { resolve, dirname } from 'path';
 import R from 'ramda';
 import { ensurePathExists } from 'e2e-tests/ddev/common';

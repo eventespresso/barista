@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'fs-extra';
 import { execSync } from 'child_process';
 import { Command, Option } from '@commander-js/extra-typings';
 

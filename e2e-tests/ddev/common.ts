@@ -1,5 +1,5 @@
 import { resolve } from 'path';
-import { existsSync, mkdirSync } from 'fs';
+import { existsSync, mkdirSync } from 'fs-extra';
 
 /**
  * Recursively create directories if they do not exist

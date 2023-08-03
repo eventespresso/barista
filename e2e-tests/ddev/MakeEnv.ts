@@ -3,7 +3,7 @@ import { execSync, spawn } from 'child_process';
 import { resolve } from 'path';
 import { MakeConfig } from './MakeConfig';
 import { ensurePathExists } from './common';
-import { existsSync } from 'fs';
+import { existsSync } from 'fs-extra';
 import { Command } from '@commander-js/extra-typings';
 import dotenv from 'dotenv';
 import { Manifest } from '@eventespresso/e2e';

@@ -1,5 +1,5 @@
 import { resolve, dirname } from 'path';
-import { existsSync, mkdirSync, writeFileSync } from 'fs';
+import { existsSync, mkdirSync, writeFileSync } from 'fs-extra';
 import { WorkerInfo } from '@playwright/test';
 import { Navigate, utilities, WpCli } from '@eventespresso/e2e';
 
