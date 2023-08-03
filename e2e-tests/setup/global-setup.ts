@@ -22,7 +22,7 @@ async function globalSetup() {
 	for (const project of projects) {
 		// see filter about where we make sure name *and* user-agent is included
 		if (whitelist.includes(project.name!)) {
-			await factory.make(project.name!, constants.locations.manifests);
+			await factory.make(project.name!);
 		}
 	}
 }

@@ -2,7 +2,6 @@ import { env } from 'process';
 import { execSync, spawn } from 'child_process';
 import { resolve } from 'path';
 import { MakeConfig } from './MakeConfig';
-import { existsSync, ensureDirSync } from 'fs-extra';
 import { Command } from '@commander-js/extra-typings';
 import dotenv from 'dotenv';
 import { Manifest } from '@eventespresso/e2e';
@@ -12,12 +11,8 @@ class MakeEnv {
 
 	/**
 	 * @param project project name as specified in Playwright config
-	 * @param path path where to save manifest file
 	 */
-	public async make(project: string, path: string): Promise<void> {
-		if (!existsSync(path)) {
-			ensureDirSync(path);
-		}
+	public async make(project: string): Promise<void> {
 		this.loadEnvVars();
 		// the previous function as a type guard to ensure the env var bellow actually exist
 		const repositories = { cafe: env['CAFE'] as string, barista: env['BARISTA'] as string };
@@ -41,9 +36,8 @@ class MakeEnv {
 
 		cmd.command('make-env', { isDefault: true })
 			.argument('<project>', 'DDEV project name')
-			.argument('<path>', 'Path where manifest will be saved to')
-			.action((project, path) => {
-				this.make(project, path);
+			.action((project) => {
+				this.make(project);
 			});
 
 		cmd.parse();
