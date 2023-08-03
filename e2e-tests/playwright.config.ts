@@ -81,14 +81,20 @@ export default defineConfig({
 			dependencies: ['setup'],
 		},
 
-		{
-			name: 'firefox',
-			use: {
-				...devices['Desktop Firefox'],
-				viewport, // see comment next to variable declaration
-			},
-			dependencies: ['setup'],
-		},
+		// blocked by https://github.com/FiloSottile/mkcert/pull/520
+		// mkcert does not support firefox-nightly cert store which is what Playwright uses for Firefox browser (Nightly as opposed to stable)
+		// workaround would be problematic because ddev detects presence
+		// of mkcert and automatically sets up WP with https instead of http
+		// https://stackoverflow.com/a/65111281/4343719
+		// it seems easier for now to block FireFox testing and wait for PR#520
+		// {
+		// 	name: 'firefox',
+		// 	use: {
+		// 		...devices['Desktop Firefox'],
+		// 		viewport, // see comment next to variable declaration
+		// 	},
+		// 	dependencies: ['setup'],
+		// },
 
 		{
 			name: 'webkit',
