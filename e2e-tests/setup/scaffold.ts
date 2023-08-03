@@ -1,5 +1,5 @@
 import minimist from 'minimist';
-import { argv, env } from 'process';
+import { argv } from 'process';
 import playwright from '../playwright.config';
 import { MakeConfig, MakeEnv } from '@eventespresso/e2e';
 
