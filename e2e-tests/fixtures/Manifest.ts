@@ -1,9 +1,8 @@
 import { z } from 'zod';
 import { constants } from '@eventespresso/e2e';
-import { readFileSync, existsSync, writeFileSync } from 'fs-extra';
+import { readFileSync, existsSync, writeFileSync, ensureDirSync } from 'fs-extra';
 import { resolve, dirname } from 'path';
 import R from 'ramda';
-import { ensurePathExists } from 'e2e-tests/ddev/common';
 
 class Manifest {
 	private data: Schema;
@@ -76,7 +75,7 @@ class Manifest {
 	}
 
 	public save(): void {
-		ensurePathExists(dirname(this.path));
+		ensureDirSync(dirname(this.path));
 		writeFileSync(this.path, this.makeJson(this.data));
 	}
 

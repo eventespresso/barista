@@ -2,8 +2,7 @@ import { env } from 'process';
 import { execSync, spawn } from 'child_process';
 import { resolve } from 'path';
 import { MakeConfig } from './MakeConfig';
-import { ensurePathExists } from './common';
-import { existsSync } from 'fs-extra';
+import { existsSync, ensureDirSync } from 'fs-extra';
 import { Command } from '@commander-js/extra-typings';
 import dotenv from 'dotenv';
 import { Manifest } from '@eventespresso/e2e';
@@ -17,7 +16,7 @@ class MakeEnv {
 	 */
 	public async make(project: string, path: string): Promise<void> {
 		if (!existsSync(path)) {
-			ensurePathExists(path);
+			ensureDirSync(path);
 		}
 		this.loadEnvVars();
 		// the previous function as a type guard to ensure the env var bellow actually exist
