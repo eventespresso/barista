@@ -18,17 +18,24 @@ class MakeEnv {
 		const repositories = { cafe: env['CAFE'] as string, barista: env['BARISTA'] as string };
 		const manifest = new Manifest(project);
 		await this.config.make(manifest, repositories);
-		const start = spawn('ddev start', [], { cwd: manifest.cwd, shell: true, stdio: 'inherit' });
-		start.on('message', (msg) => console.log(msg.toString));
-		start.on('error', (err) => console.error(err.message));
+		await this.startContainer(manifest);
+		manifest.url = this.getUrl(manifest);
+		manifest.save();
+	}
+
+	private async startContainer(manifest: Manifest): Promise<void> {
+		const ddev = spawn('ddev start', [], { cwd: manifest.cwd, shell: true, stdio: 'inherit' });
+		ddev.on('message', (msg) => console.log(msg.toString));
+		ddev.on('error', (err) => console.error(err.message));
 		// block further execution and wait until spawn finishes
 		// https://stackoverflow.com/a/69025854/4343719
-		await new Promise((resolve) => start.on('close', resolve));
-		const url = execSync('ddev get-url', { cwd: manifest.cwd })
+		await new Promise((resolve) => ddev.on('close', resolve));
+	}
+
+	private getUrl(manifest: Manifest): string {
+		return execSync('ddev get-url', { cwd: manifest.cwd })
 			.toString()
 			.replace(/\r?\n|\r/g, '');
-		manifest.url = url;
-		manifest.save();
 	}
 
 	public parseCliArgs(): void {
