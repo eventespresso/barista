@@ -4,8 +4,9 @@ import { resolve } from 'path';
 import R from 'ramda';
 import { copySync, existsSync, writeFileSync, readFileSync } from 'fs-extra';
 import yaml from 'yaml';
-import process from 'process';
+import { env } from 'process';
 import { Manifest } from '@eventespresso/e2e';
+import dotenv from 'dotenv';
 
 type Override = {
 	file: string;
@@ -77,16 +78,23 @@ class MakeConfig {
 	}
 
 	public parseCliArgs(): void {
+		dotenv.config({
+			path: resolve(__dirname, '.ddev-env'),
+		});
+
 		const cmd = new Command();
 
 		cmd.command('make-config', { isDefault: true })
 			.description('make DDEV config')
 			.argument('<project>', 'DDEV project name')
-			.argument('<cafe>', 'path to cafe repository')
-			.argument('<barista>', 'path to barista repository')
+			.argument('[cafe]', 'path to cafe repository', env['CAFE'])
+			.argument('[barista]', 'path to barista repository', env['CAFE'])
 			.addOption(new Option('-h, --http-port <port>', 'HTTP port for Traefik router'))
 			.addOption(new Option('-s, --https-port <port>', 'HTTPS port for Traefik router'))
 			.action(async (project, cafe, barista, opts) => {
+				if (!cafe || !barista) {
+					throw new Error('Unexpected runtime condition!');
+				}
 				const options: Options = {};
 				if (opts.httpPort) {
 					options['httpPort'] = parseInt(opts.httpPort);
@@ -109,13 +117,13 @@ class MakeConfig {
 					web: {
 						volumes: [
 							{
-								source: process.env.CAFE,
+								source: env.CAFE,
 								target: '/var/www/html/wp-content',
 								type: 'bind',
 								consistency: 'cached',
 							},
 							{
-								source: process.env.BARISTA,
+								source: env.BARISTA,
 								target: '/var/www/html/wp-content/plugins/barista',
 								type: 'bind',
 								consistency: 'cached',
