@@ -1,5 +1,5 @@
 import { Browser, Page as PageType } from '@playwright/test';
-import { Url } from '@eventespresso/e2e';
+import { Manifest } from '@eventespresso/e2e';
 import R, { PipeWithFns } from 'ramda';
 
 type QueryParams = Record<string, string | number>;
@@ -16,7 +16,7 @@ class Navigate {
 		'admin:ee:maintenance': this.makeAdminUrl('admin.php', { page: 'espresso_maintenance_settings' }),
 	};
 
-	constructor(private readonly browser: Browser, private readonly url: Url) {}
+	constructor(private readonly browser: Browser, private readonly manifest: Manifest) {}
 
 	public async to(key: keyof Navigate['routes'], opts: Parameters<Browser['newPage']>[0] = {}): Promise<PageType> {
 		const page = await this.browser.newPage(opts);
@@ -34,7 +34,7 @@ class Navigate {
 	}
 
 	private makeUrl({ path, query }: { path: string; query?: QueryParams }): string {
-		const origin = this.url.getOrigin();
+		const origin = this.manifest.url;
 		const queryStr = query ? '?' + this.convertQueryObjToStr(query) : '';
 		// add trailing slash to path only if we *DON'T* have query params
 		const normPath = this.normalizePath(path, !queryStr);

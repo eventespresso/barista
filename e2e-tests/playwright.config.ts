@@ -31,10 +31,9 @@ export default defineConfig({
 	retries: process.env.CI ? 2 : 0,
 
 	/* Opt out of parallel tests on CI. */
-	// workers: process.env.CI ? 1 : undefined,
-	// cannot use parallel workers until we have separate databases per worker
-	// https://github.com/eventespresso/barista/issues/1234
-	workers: 1,
+	// @ts-ignore this is a valid value, see
+	// https://playwright.dev/docs/test-parallel#limit-workers
+	workers: process.env.CI ? 1 : undefined,
 
 	/* Reporter to use. See https://playwright.dev/docs/test-reporters */
 	reporter: process.env.CI ? 'dot' : 'html',
@@ -82,14 +81,20 @@ export default defineConfig({
 			dependencies: ['setup'],
 		},
 
-		{
-			name: 'firefox',
-			use: {
-				...devices['Desktop Firefox'],
-				viewport, // see comment next to variable declaration
-			},
-			dependencies: ['setup'],
-		},
+		// blocked by https://github.com/FiloSottile/mkcert/pull/520
+		// mkcert does not support firefox-nightly cert store which is what Playwright uses for Firefox browser (Nightly as opposed to stable)
+		// workaround would be problematic because ddev detects presence
+		// of mkcert and automatically sets up WP with https instead of http
+		// https://stackoverflow.com/a/65111281/4343719
+		// it seems easier for now to block FireFox testing and wait for PR#520
+		// {
+		// 	name: 'firefox',
+		// 	use: {
+		// 		...devices['Desktop Firefox'],
+		// 		viewport, // see comment next to variable declaration
+		// 	},
+		// 	dependencies: ['setup'],
+		// },
 
 		{
 			name: 'webkit',
@@ -122,9 +127,12 @@ export default defineConfig({
 	],
 
 	/* Run your local dev server before starting the tests */
+	// In order to support parallelism, for each project, we spin up
+	// a separate environment, see MakeEnv.ts and global-setup.ts
+	/*
 	webServer: {
-		command: 'yarn docker:start',
+		command: '',
 		url: host,
 		reuseExistingServer: !process.env.CI,
-	},
+	},*/
 });

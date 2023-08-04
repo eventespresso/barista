@@ -1,8 +1,7 @@
-import { execSync } from 'child_process';
+import { scaffold } from './scaffold';
 
 async function globalSetup() {
-	execSync('yarn docker:cli plugin activate event-espresso-core barista');
-	execSync(`yarn docker:cli permalinks enable '/%postname%/'`);
+	await scaffold.makeWordPress();
 }
 
 export default globalSetup;
