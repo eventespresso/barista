@@ -1,0 +1,9 @@
+services:
+  web:
+    volumes:
+    # for must-use plugins, we cannot override subdirectory
+    #  b/c cafe repository has its own must-use plugins
+      - source: mu-plugins/freeze-time.php
+        target: /var/www/html/wp-content/mu-plugins/freeze-time.php
+        type: bind
+        consistency: cached
