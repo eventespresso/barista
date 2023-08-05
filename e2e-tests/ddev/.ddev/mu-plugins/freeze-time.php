@@ -7,23 +7,11 @@
 
 function freeze_time(): void
 {
-  echo '<script>';
-  echo <<<'JS'
-const fakeNow = new Date('August 05 2023 00:00:00').valueOf();
-Date = class extends Date {
-  constructor(...args) {
-    if (args.length === 0) {
-      super(fakeNow);
-    } else {
-      super(...args);
-    }
-  }
-};
-const __DateNowOffset = fakeNow - Date.now();
-const __DateNow = Date.now;
-Date.now = () => __DateNow() + __DateNowOffset;
+  $template = file_get_contents(__DIR__ . '/freeze-time.js');
+  $script = sprintf($template, 'August 05 2023 00:00:00');
 
-JS;
+  echo '<script>';
+  echo $script . PHP_EOL;
   echo '</script>' . PHP_EOL;
 }
 

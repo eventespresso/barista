@@ -7,3 +7,7 @@ services:
         target: /var/www/html/wp-content/mu-plugins/freeze-time.php
         type: bind
         consistency: cached
+      - source: mu-plugins/freeze-time.js
+        target: /var/www/html/wp-content/mu-plugins/freeze-time.js
+        type: bind
+        consistency: cached
