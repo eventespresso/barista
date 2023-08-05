@@ -5,7 +5,7 @@ import R from 'ramda';
 import { copySync, existsSync, writeFileSync, readFileSync } from 'fs-extra';
 import yaml from 'yaml';
 import { env } from 'process';
-import { Manifest } from '@eventespresso/e2e';
+import { Manifest, DateFactory } from '@eventespresso/e2e';
 import dotenv from 'dotenv';
 
 type Override = {
@@ -52,13 +52,15 @@ class MakeConfig {
 		// https://github.com/jprichardson/node-fs-extra/blob/HEAD/docs/copy-sync.md
 		copySync(source, target);
 
+		const date = new DateFactory().make().toISOString();
+
 		const configOverride: Override = {
 			file: 'config.yaml',
 			override: {
 				name: manifest.project,
 				router_http_port: opts.httpPort,
 				router_https_port: opts.httpsPort,
-				web_environment: [`FREEZE_TIME=${this.getFreezeTime()}`],
+				web_environment: [`FREEZE_TIME=${date}`],
 			},
 		};
 
@@ -81,21 +83,6 @@ class MakeConfig {
 			const newYaml = yaml.stringify(newConfig);
 			writeFileSync(newPath, newYaml);
 		}
-	}
-
-	/**
-	 * Always return 15th of the current month to avoid dealing with unexpected issues like today become yesterday when running E2E test on the last day of the months on the last hour
-	 */
-	private getFreezeTime(): string {
-		const today = new Date();
-		// we want *local* time to 15th 00:00:00 hence we are using UTC
-		// https://stackoverflow.com/a/32648115/4343719
-		// if timezone will become an issue, it can be addressed by
-		//   - adjusting PlayWright config (client-side)
-		//   - adjusting Docker container timezone (server-side)
-		today.setUTCDate(15);
-		today.setUTCHours(0, 0, 0, 0);
-		return today.toISOString(); // ISO 8601 format
 	}
 
 	public parseCliArgs(): void {
