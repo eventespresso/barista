@@ -67,7 +67,12 @@ class MakeConfig {
 			const configPath = resolve(source, o.file);
 			const configYaml = this.loadYamlConfig(configPath);
 			const mergeFn = (l: any, r: any): any => {
-				if (typeof l === 'object') return R.concat(l, r);
+				if (Array.isArray(l)) {
+					return R.concat(l, r);
+				}
+				if (R.is(Object, l)) {
+					return R.mergeAll([l, r]);
+				}
 				return r;
 			};
 			const newConfig = R.mergeDeepWith(mergeFn, configYaml, o.override);
