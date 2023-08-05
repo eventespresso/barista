@@ -12,7 +12,7 @@ if grep -q ClockMock $file; then
 fi
 
 if [[ "$1" == '' ]]; then
-  echo 'Error: missing timestamp value (taken as a literal string)!'
+  echo 'Error: missing timestamp value (taken as a literal string or number)!'
   echo '  for example, ddev freeze-time 1986-06-05'
   echo '  for more details, see PHP docs on new DateTime() constructor'
   exit 1
