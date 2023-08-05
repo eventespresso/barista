@@ -8,7 +8,7 @@
 function freeze_time(): void
 {
   $template = file_get_contents(__DIR__ . '/freeze-time.js');
-  $script = sprintf($template, 'August 05 2023 00:00:00');
+  $script = sprintf($template, $_ENV['FREEZE_TIME']);
 
   echo '<script>';
   echo $script . PHP_EOL;
