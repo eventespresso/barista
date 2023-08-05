@@ -100,8 +100,11 @@ class MakeConfig {
 			.addOption(new Option('-h, --http-port <port>', 'HTTP port for Traefik router'))
 			.addOption(new Option('-s, --https-port <port>', 'HTTPS port for Traefik router'))
 			.action(async (project, cafe, barista, opts) => {
-				if (!cafe || !barista) {
-					throw new Error('Unexpected runtime condition!');
+				if (!cafe) {
+					throw new Error('Missing environment variable: CAFE');
+				}
+				if (!barista) {
+					throw new Error('Missing environment variable: BARISTA');
 				}
 				const options: Options = {};
 				if (opts.httpPort) {
