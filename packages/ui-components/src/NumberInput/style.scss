@@ -42,8 +42,8 @@
 
 	.ee-number-field-stepper {
 		height: calc(var(--ee-button-height) - var(--ee-border-width));
-		right: calc(-1 * var(--ee-size-micro));
-		top: var(--ee-size-micro);
+		inset-inline-end: calc(-1 * var(--ee-size-micro));
+		margin-block-start: var(--ee-size-micro);
 		z-index: 0;
 
 		> div {
@@ -51,7 +51,7 @@
 			border-inline-start-width: var(--ee-border-width);
 
 			+ div {
-				border-top-width: var(--ee-border-width);
+				border-block-start-width: var(--ee-border-width);
 			}
 		}
 	}
