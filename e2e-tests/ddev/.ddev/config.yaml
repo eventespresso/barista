@@ -17,7 +17,7 @@ nodejs_version: '18'
 hooks:
     post-start:
         - exec: wp core download
-        - exec: wp config create --dbname=db --dbuser=db --dbpass=db --dbhost=db
+        - exec: wp config create --dbname=db --dbuser=db --dbpass=db --dbhost=db # see config.yml for --extra-php under homeadditions
         - exec: /mnt/ddev_config/commands/web/freeze-time "$FREEZE_TIME"
         - exec: wp core install --url="$DDEV_PRIMARY_URL" --title="$DDEV_PROJECT" --admin_user=admin --admin_email=admin@fake.test --admin_password=password
         - exec: wp plugin activate event-espresso-core barista
