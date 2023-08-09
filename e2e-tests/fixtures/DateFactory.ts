@@ -8,7 +8,22 @@ class DateFactory {
 
 	constructor() {
 		// if you decide to change base, keep in mind that there is code that is rendered by PHP (see WpEnv for implementation details)
-		this.base = 'December 15 2042 13:37:00';
+		this.base = this.getBase();
+	}
+
+	/**
+	 * Always return 15th of the current month to avoid dealing with unexpected issues like today become yesterday when running E2E test on the last day of the months on the last hour
+	 */
+	private getBase(): string {
+		const today = new Date();
+		// we want *local* time to 15th 00:00:00 hence we are using UTC
+		// https://stackoverflow.com/a/32648115/4343719
+		// if timezone will become an issue, it can be addressed by
+		//   - adjusting PlayWright config (client-side)
+		//   - adjusting Docker container timezone (server-side)
+		today.setUTCDate(15);
+		today.setUTCHours(0, 0, 0, 0);
+		return today.toISOString(); // ISO 8601 format
 	}
 
 	public minutes(minutes: number): DateFactory {
