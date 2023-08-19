@@ -1,7 +1,5 @@
 name: E2E Runner
 
-# Target submitted Pull Request Reviews
-# See below job "Check" for more granular targetting
 on:
     issue_comment:
         types: [created]
