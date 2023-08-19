@@ -7,6 +7,7 @@ import yaml from 'yaml';
 import { env } from 'process';
 import { Manifest, DateFactory } from '@eventespresso/e2e';
 import dotenv from 'dotenv';
+import template from 'string-template';
 
 type Override = {
 	file: string;
@@ -21,13 +22,11 @@ type Options = {
 
 type Repositories = {
 	cafe: string;
-	barista: string;
+	barista?: string;
 };
 
 class MakeConfig {
 	public async make(manifest: Manifest, repositories: Repositories, options?: Options): Promise<void> {
-		const { cafe, barista } = repositories;
-
 		const opts = {
 			httpPort: options?.httpPort ?? (await this.getAvailablePort()),
 			httpsPort: options?.httpsPort ?? (await this.getAvailablePort()),
@@ -37,9 +36,7 @@ class MakeConfig {
 			throw new Error(`Project already exists: \n${manifest.cwd}!`);
 		}
 
-		const paths = [cafe, barista];
-
-		for (const p of paths) {
+		for (const p of Object.values(repositories)) {
 			if (!existsSync(p)) {
 				throw new Error(`Invalid path: \n${p}!`);
 			}
@@ -81,8 +78,17 @@ class MakeConfig {
 			const newConfig = R.mergeDeepWith(mergeFn, configYaml, o.override);
 			const newPath = resolve(target, o.file);
 			const newYaml = yaml.stringify(newConfig);
-			writeFileSync(newPath, newYaml);
+			const expVars = template(newYaml, { WP_PLUGINS: this.getPlugins() });
+			writeFileSync(newPath, expVars);
 		}
+	}
+
+	private getPlugins(): string {
+		const plugins = ['event-espresso-core'];
+		if (env.BARISTA) {
+			plugins.push('barista');
+		}
+		return plugins.join(' ');
 	}
 
 	public parseCliArgs(): void {
@@ -96,15 +102,18 @@ class MakeConfig {
 			.description('make DDEV config')
 			.argument('<project>', 'DDEV project name')
 			.argument('[cafe]', 'path to cafe repository', env['CAFE'])
-			.argument('[barista]', 'path to barista repository', env['CAFE'])
+			.argument('[barista]', 'path to barista repository', env['BARISTA'])
 			.addOption(new Option('-h, --http-port <port>', 'HTTP port for Traefik router'))
 			.addOption(new Option('-s, --https-port <port>', 'HTTPS port for Traefik router'))
 			.action(async (project, cafe, barista, opts) => {
 				if (!cafe) {
 					throw new Error('Missing environment variable: CAFE');
 				}
-				if (!barista) {
-					throw new Error('Missing environment variable: BARISTA');
+				const repositories: Repositories = {
+					cafe,
+				};
+				if (barista) {
+					repositories.barista = barista;
 				}
 				const options: Options = {};
 				if (opts.httpPort) {
@@ -114,32 +123,41 @@ class MakeConfig {
 					options['httpsPort'] = parseInt(opts.httpsPort);
 				}
 				const manifest = new Manifest(project);
-				await this.make(manifest, { cafe, barista });
+				await this.make(manifest, repositories);
 			});
 
 		cmd.parse();
 	}
 
 	private getDockerOverride(): Override {
+		const volumes = [
+			{
+				source: env.CAFE as string,
+				target: '/var/www/html/wp-content',
+				type: 'bind',
+				consistency: 'cached',
+				// MAYBE: for local development, mount repositories as read-only
+				// to prevent accidental data loss due to overwrite
+				// read_only: env['CI'] ? false : true,
+			},
+		];
+		if (env.BARISTA) {
+			volumes.push({
+				source: env.BARISTA,
+				target: '/var/www/html/wp-content/plugins/barista',
+				type: 'bind',
+				consistency: 'cached',
+				// MAYBE: for local development, mount repositories as read-only
+				// to prevent accidental data loss due to overwrite
+				// read_only: env['CI'] ? false : true,
+			});
+		}
 		return {
 			file: 'docker-compose.override.yaml',
 			override: {
 				services: {
 					web: {
-						volumes: [
-							{
-								source: env.CAFE,
-								target: '/var/www/html/wp-content',
-								type: 'bind',
-								consistency: 'cached',
-							},
-							{
-								source: env.BARISTA,
-								target: '/var/www/html/wp-content/plugins/barista',
-								type: 'bind',
-								consistency: 'cached',
-							},
-						],
+						volumes,
 					},
 				},
 			},
@@ -161,3 +179,5 @@ class MakeConfig {
 }
 
 export { MakeConfig };
+
+export type { Repositories };

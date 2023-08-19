@@ -2,6 +2,7 @@ import { env } from 'process';
 import { execSync, spawn } from 'child_process';
 import { resolve } from 'path';
 import { MakeConfig } from './MakeConfig';
+import type { Repositories } from './MakeConfig';
 import { Command } from '@commander-js/extra-typings';
 import dotenv from 'dotenv';
 import { Manifest } from '@eventespresso/e2e';
@@ -14,9 +15,14 @@ class MakeEnv {
 	 * @param project project name as specified in Playwright config
 	 */
 	public async make(project: string): Promise<void> {
+		// loadEnvVars() makes sure required env vars are present
+		// otherwise it throws an error
 		this.loadEnvVars();
 		// the previous function as a type guard to ensure the env var bellow actually exist
-		const repositories = { cafe: env['CAFE'] as string, barista: env['BARISTA'] as string };
+		const repositories: Repositories = { cafe: env['CAFE'] as string };
+		if (env['BARISTA']) {
+			repositories.barista = env['BARISTA'];
+		}
 		const manifest = new Manifest(project);
 		await this.config.make(manifest, repositories);
 		await this.makeCertificate(manifest);
@@ -76,7 +82,8 @@ class MakeEnv {
 		dotenv.config({
 			path: resolve(__dirname, '.ddev-env'),
 		});
-		for (const e of ['CAFE', 'BARISTA']) {
+		// do NOT check for BARISTA env var as it is optional
+		for (const e of ['CAFE']) {
 			if (!env[e]) throw new Error(`Missing env var ${e} (either export it or use .ddev-env)`);
 		}
 	}
