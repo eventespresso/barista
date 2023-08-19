@@ -2,20 +2,19 @@ name: E2E Runner
 
 # Target submitted Pull Request Reviews
 # See below job "Check" for more granular targetting
-on: pull_request
+on:
+    issue_comment:
+        types: [created]
+    pull_request_review:
+        types: [submitted]
 
 jobs:
-    check-target:
-        name: Pull Request Was Approved
-        runs-on: ubuntu-latest
-        if: github.event.review.state == 'approved'
-        steps:
-            - run: echo 'This PR was approved'
-
     run-tests:
         name: Run E2E Tests
-        needs: check-target
         runs-on: ubuntu-22.04
+        if: |
+            github.event.review.state == 'approved' ||
+            contains(github.event.comment.body, '/run-e2e')
         timeout-minutes: 60
         steps:
             - name: Setup SSH
