@@ -51,7 +51,7 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - id: run-e2e
               name: Run tests
-              uses: eventespresso/actions/packages/e2e-tests@CHORE/create-e2e-tests-package
+              uses: eventespresso/actions/packages/e2e-tests@main
               with:
                   # TODO: once e2e-tests package is extracted, update this
                   cafe_repo_branch: DEV
