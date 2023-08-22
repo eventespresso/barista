@@ -36,6 +36,7 @@ export default defineConfig({
 	workers: process.env.CI ? 1 : undefined,
 
 	/* Reporter to use. See https://playwright.dev/docs/test-reporters */
+	// dot reporter does not generate HTML report so we never use it
 	reporter: 'html',
 
 	/* Global setup. See https://playwright.dev/docs/api/class-testconfig#test-config-global-setup */

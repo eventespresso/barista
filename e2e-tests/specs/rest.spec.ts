@@ -1,6 +1,8 @@
 import { test } from '@eventespresso/e2e';
 import { expect } from '@playwright/test';
 
+// TODO: Flaky E2E test. Will address it once critical tests are done:
+// https://github.com/eventespresso/barista/issues/1249
 // BUG:   Error: Timed out 5000ms waiting for expect(received).toBeVisible()
 // BUG:   Call log:
 // BUG:    - expect.toBeVisible with timeout 5000ms

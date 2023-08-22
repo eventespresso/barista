@@ -1,8 +1,14 @@
 name: E2E Cache Warmup
 
 # run once a week to warm-up as per GitHub's policy,
+
+# github uses scope-based cache where branches *cannot* share cache
+# with exception of cache from the main branch and child (descendant) branches
+# https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#restrictions-for-accessing-a-cache
+
 # any untouched cached is removed after 7 days
 # https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#usage-limits-and-eviction-policy
+
 on:
     schedule:
         # every Sunday at 00:00
