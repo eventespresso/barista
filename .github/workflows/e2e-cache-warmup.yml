@@ -1,0 +1,35 @@
+name: E2E Cache Warmup
+
+# run once a week to warm-up as per GitHub's policy,
+
+# github uses scope-based cache where branches *cannot* share cache
+# with exception of cache from the main branch and child (descendant) branches
+# https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#restrictions-for-accessing-a-cache
+
+# any untouched cached is removed after 7 days
+# https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#usage-limits-and-eviction-policy
+
+on:
+    schedule:
+        # every Sunday at 00:00
+        - cron: 0 0 * * 0
+
+jobs:
+    warmup-cache:
+        name: Warmup E2E Cache
+        runs-on: ubuntu-22.04
+        timeout-minutes: 20
+        steps:
+            - name: Setup SSH
+              uses: MrSquaare/ssh-setup-action@v2
+              with:
+                  host: github.com
+                  private-key: ${{ secrets.GH_ACTIONS_SSH_PRIVATE_KEY }}
+
+            - name: Run E2E Tests
+              uses: eventespresso/actions/packages/e2e-tests@CHORE/create-e2e-tests-package
+              with:
+                  cafe_repo_branch: DEV
+                  barista_repo_branch: master
+                  e2e_tests_repo_branch: master
+                  skip_tests: true

@@ -1,7 +1,14 @@
 import { test } from '@eventespresso/e2e';
 import { expect } from '@playwright/test';
 
-test('make event', async ({ page, navigate, factory }, { title }) => {
+// TODO: Flaky E2E test. Will address it once critical tests are done:
+// https://github.com/eventespresso/barista/issues/1249
+// BUG:   Error: Timed out 5000ms waiting for expect(received).toBeVisible()
+// BUG:   Call log:
+// BUG:    - expect.toBeVisible with timeout 5000ms
+// BUG:    - waiting for getByRole('heading', { name: 'Event Dates', exact: true }).locator('xpath=..').filter({ hasText: 'datetime 0' })
+
+test.fixme('make event', async ({ page, navigate, factory }, { title }) => {
 	for (let i = 0; i < 5; i++) {
 		const event = factory.event();
 		await event.make({ EVT_name: `${title} ${i}` });

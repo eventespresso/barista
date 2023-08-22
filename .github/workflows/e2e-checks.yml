@@ -1,0 +1,59 @@
+name: E2E Runner
+
+on:
+    pull_request_review:
+        types: [submitted]
+    issue_comment:
+        types: [created]
+
+jobs:
+    run-tests:
+        name: Run E2E Tests
+        runs-on: ubuntu-22.04
+        # two conditions which trigger E2E checks
+        #   - PR is approved
+        #   - PR contains comment "/run-e2e" (manual trigger)
+        if: |
+            github.event.review.state == 'approved' ||
+            (
+                github.event.issue.pull_request &&
+                contains(github.event.comment.body, '/run-e2e')
+            )
+        # avoid excessively high timeout values to avoid burning minutes
+        timeout-minutes: 60
+        steps:
+            - id: ssh
+              name: Setup SSH
+              uses: MrSquaare/ssh-setup-action@v2
+              with:
+                  host: github.com
+                  private-key: ${{ secrets.GH_ACTIONS_SSH_PRIVATE_KEY }}
+            # In case of pull_request_review, we have access to HEAD REF of pull request. However, in case of issue_comment, we do not since event issue_comment always runs against default branch:
+            # Note: This event will only trigger a workflow run if the workflow file is on the default branch.
+            # https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#pull_request_review
+            # https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#issue_comment
+            - id: get-branch
+              name: Get Branch Ref of the Pull Request
+              run: |
+                  if [ ! -z "${HEAD_REF}" ]
+                  then
+                    echo "Found branch name in github.event.pull_request.head.ref"
+                    echo branch="$HEAD_REF" >> $GITHUB_OUTPUT
+                  else
+                    echo "Using gh cli to get branch name"
+                    echo branch=$(gh pr view $PR --repo $REPO --json headRefName --jq '.
+                  headRefName') >> $GITHUB_OUTPUT
+                  fi
+              env:
+                  HEAD_REF: ${{ github.event.pull_request.head.ref }}
+                  PR: ${{ github.event.issue.number }}
+                  REPO: ${{ github.repository }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - id: run-e2e
+              name: Run tests
+              uses: eventespresso/actions/packages/e2e-tests@main
+              with:
+                  # TODO: once e2e-tests package is extracted, update this
+                  cafe_repo_branch: DEV
+                  barista_repo_branch: ${{ steps.get-branch.outputs.branch }}
+                  e2e_tests_repo_branch: master

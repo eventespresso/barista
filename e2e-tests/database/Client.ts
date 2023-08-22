@@ -3,6 +3,9 @@ import R from 'ramda';
 import fetch, { Request, Response, RequestInit, BodyInit } from 'node-fetch';
 import { Method, Key, Input, Output } from './helper';
 
+// MAYBE: consider using request fixture for PlayWright
+// https://playwright.dev/docs/api-testing
+
 /**
  * HTTP Client for utilizing REST API for Event Espresso
  * It conforms to facade pattern where it abstract REST API complexity by providing a higher level API

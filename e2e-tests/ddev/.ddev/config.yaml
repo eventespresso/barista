@@ -16,10 +16,10 @@ webimage_extra_packages: [php8.1-uopz]
 nodejs_version: '18'
 hooks:
     post-start:
-        - exec: wp core download
+        - exec: wp core download --skip-content # since cafe repository already acts as wp-content, no need to for default wp-content
         - exec: wp config create --dbname=db --dbuser=db --dbpass=db --dbhost=db # see config.yml for --extra-php under homeadditions
         - exec: /mnt/ddev_config/commands/web/freeze-time "$FREEZE_TIME"
         - exec: wp core install --url="$DDEV_PRIMARY_URL" --title="$DDEV_PROJECT" --admin_user=admin --admin_email=admin@fake.test --admin_password=password
-        - exec: wp plugin activate event-espresso-core barista
+        - exec: wp plugin activate {WP_PLUGINS} # this gets interpolated by MakeConfig.ts since barista is optional plugin and can be skipped
         - exec: wp rewrite structure "/%postname%/"
         - exec: wp rewrite flush --hard # in case we ever use apache
