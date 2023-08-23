@@ -71,4 +71,3 @@ We use the same Relations Manager to manage the state for Ticket Assignment Mana
 
 -   [Addons integration](../../../../docs/addons.md)
 -   [Data layer](../../../../docs/data.md)
--   [EDTR E2E tests](../../../../packages/e2e-tests/utils/admin/event-editor/README.md)
