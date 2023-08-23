@@ -31,5 +31,5 @@ jobs:
               with:
                   cafe_repo_branch: DEV
                   barista_repo_branch: master
-                  e2e_tests_repo_branch: master
+                  e2e_tests_repo_branch: MAIN
                   skip_tests: true
