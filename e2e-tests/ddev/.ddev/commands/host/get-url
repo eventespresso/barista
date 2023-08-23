@@ -1,7 +1,0 @@
-#!/bin/bash
-
-## Description: Get website url
-## Usage: get-url
-## Example: "ddev get-url"
-
-echo "${DDEV_PRIMARY_URL}"
