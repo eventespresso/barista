@@ -12,7 +12,7 @@ function resolveTsconfigPathsToModuleNameMapper() {
 	const tsconfigPath = './tsconfig.json';
 	const { paths } = require(tsconfigPath).compilerOptions;
 
-	Object.entries(paths).forEach(([alias, path]) => {
+	Object.entries(paths as Record<string, string>).forEach(([alias, path]) => {
 		// "@edtrServices/*" becomes "@edtrServices/(.*)"
 		const key = alias.replace('/*', '/(.*)');
 		// "domains/eventEditor/src/services/*" becomes "<rootDir>/domains/eventEditor/src/services/$1"
@@ -24,8 +24,8 @@ function resolveTsconfigPathsToModuleNameMapper() {
 	return moduleNameMapper;
 }
 
-const roots = [],
-	testMatch = [];
+const roots: string[] = [],
+	testMatch: string[] = [];
 
 getDomains().forEach(({ location }) => {
 	roots.push(`<rootDir>/${location}/src`);
