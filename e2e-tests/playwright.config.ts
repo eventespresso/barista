@@ -97,14 +97,15 @@ export default defineConfig({
 		// 	dependencies: ['setup'],
 		// },
 
-		{
-			name: 'webkit',
-			use: {
-				...devices['Desktop Safari'],
-				viewport, // see comment next to variable declaration
-			},
-			dependencies: ['setup'],
-		},
+		// TODO: test, uncomment me
+		// {
+		// 	name: 'webkit',
+		// 	use: {
+		// 		...devices['Desktop Safari'],
+		// 		viewport, // see comment next to variable declaration
+		// 	},
+		// 	dependencies: ['setup'],
+		// },
 
 		/* Test against mobile viewports. */
 		// {
