@@ -37,12 +37,12 @@ jobs:
               run: |
                   if [ ! -z "${HEAD_REF}" ]
                   then
-                    echo "Found branch name in github.event.pull_request.head.ref"
+                    echo "Found branch name in github.event.pull_request.head.ref: $HEAD_RED"
                     echo branch="$HEAD_REF" >> $GITHUB_OUTPUT
                   else
-                    echo "Using gh cli to get branch name"
-                    echo branch=$(gh pr view $PR --repo $REPO --json headRefName --jq '.
-                  headRefName') >> $GITHUB_OUTPUT
+                    branch=$(gh pr view $PR --repo $REPO --json headRefName --jq '.headRefName')
+                    echo "Found branch using gh cli: $branch"
+                    echo branch="$branch" >> $GITHUB_OUTPUT
                   fi
               env:
                   HEAD_REF: ${{ github.event.pull_request.head.ref }}
