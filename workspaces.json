@@ -134,9 +134,5 @@
     {
         "name": "@eventespresso/utils",
         "location": "packages/utils"
-    },
-    {
-        "name": "@eventespresso/e2e",
-        "location": "e2e-tests"
     }
 ]

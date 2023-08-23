@@ -41,8 +41,7 @@
 	"workspaces": {
 		"packages": [
 			"domains/**",
-			"packages/**",
-			"e2e-tests"
+			"packages/**"
 		],
 		"nohoist": [
 			"**/babel-loader",
