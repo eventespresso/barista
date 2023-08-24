@@ -1,8 +1,0 @@
-# @wordpress/env
-.wp-env*
-!.wp-env.example*
-
-# Playwright
-playwright-report/*
-test-results/*
-.playwright

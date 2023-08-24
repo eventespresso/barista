@@ -85,8 +85,6 @@
 "C: tests 🧪":
 - .storybook/*
 - storybook-static/*
-- packages/e2e-tests/*
-- packages/e2e-tests/**/*
 - packages/storybook/*
 - packages/storybook/**/*
 - jest.config.ts
