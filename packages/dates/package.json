@@ -20,7 +20,7 @@
 		"react-datepicker": "^4.18.0"
 	},
 	"devDependencies": {
-		"@types/react-datepicker": "^4.1.7"
+		"@types/react-datepicker": "^4.15.0"
 	},
 	"license": "GPL-3.0",
 	"gitHead": "66fae0230a22c100153cb05f5a624305efc5a8d9"
