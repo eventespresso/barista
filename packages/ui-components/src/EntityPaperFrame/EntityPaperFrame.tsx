@@ -1,9 +1,11 @@
+import './style.css';
+import { useMemo } from 'react';
 import classNames from 'classnames';
-
+import { __ } from '@eventespresso/i18n';
 import { EntityIDs } from '../EntityIDs';
 import type { Entity } from '@eventespresso/data';
-
-import './style.css';
+import { isDatetime } from '@eventespresso/edtr-services';
+import { useUtcISOToSiteDate } from '@eventespresso/services';
 
 interface EntityPaperFrameProps {
 	children: React.ReactNode;
@@ -19,8 +21,17 @@ interface EntityPaperFrameProps {
 const EntityPaperFrame: React.FC<EntityPaperFrameProps> = ({ children, entity, ...props }) => {
 	const className = classNames(props.className, 'ee-entity-paper-frame-wrapper');
 
+	const ariaLabel: string = useMemo(() => getAriaLabel(entity), [entity]);
+
+	const ariaDescription: string = useMemo(() => getAriaDescription(entity), [entity]);
+
 	return (
-		<div id={`ee-entity-paper-frame-${entity.id}`} className={className}>
+		<div
+			aria-label={ariaLabel}
+			aria-description={ariaDescription}
+			id={`ee-entity-paper-frame-${entity.id}`}
+			className={className}
+		>
 			<EntityIDs dbid={entity.dbId} guid={entity.id} />
 
 			<div className='ee-entity-paper-frame'>
@@ -28,6 +39,40 @@ const EntityPaperFrame: React.FC<EntityPaperFrameProps> = ({ children, entity, .
 			</div>
 		</div>
 	);
+};
+
+const getAriaLabel = (entity: Entity): string => {
+	if (!entity.__typename) {
+		console.error(`Cannot determine aria label for entity ${entity.dbId} due to missing __typename`);
+		return '';
+	}
+
+	if (isDatetime(entity)) {
+		const toSiteDate = useUtcISOToSiteDate();
+		const name = entity.name.length > 0 ? entity.name : 'datetime';
+		const start = toSiteDate(entity.startDate);
+		const end = toSiteDate(entity.endDate);
+		return `${name} between ${start} and ${end}`;
+	}
+
+	return entity.__typename;
+};
+
+const getAriaDescription = (entity: Entity): string => {
+	if (!entity.__typename) {
+		console.error(`Cannot determine aria description for entity ${entity.dbId} due to missing __typename`);
+		return '';
+	}
+
+	if (isDatetime(entity)) {
+		const description = entity.description;
+		if (description.length === 0) {
+			return 'missing datetime description';
+		}
+		return description.trim();
+	}
+
+	return entity.__typename;
 };
 
 export default EntityPaperFrame;
