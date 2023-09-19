@@ -7,6 +7,7 @@ import type { Datetime } from '../../types';
 import { useLazyDatetime } from '../../queries';
 
 export const DATETIME_DEFAULTS: Datetime = {
+	__typename: 'EspressoDatetime',
 	id: '',
 	dbId: 0,
 	cacheId: '',
