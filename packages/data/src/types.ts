@@ -9,7 +9,7 @@ export interface Cacheable {
 export interface Entity extends Cacheable {
 	id: EntityId;
 	dbId: EntityDbId;
-	// unless otherwise state, the entity/type comes from EE core i.e.
+	// unless otherwise stated, the entity/type comes from EE core i.e.
 	// plugins/event-espresso-core/core/domain/services/graphql/types/*.php
 	__typename?:
 		| 'EspressoAttendee'
