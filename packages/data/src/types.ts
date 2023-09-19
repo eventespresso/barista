@@ -9,7 +9,22 @@ export interface Cacheable {
 export interface Entity extends Cacheable {
 	id: EntityId;
 	dbId: EntityDbId;
-	__typename?: string;
+	// unless otherwise stated, the entity/type comes from EE core i.e.
+	// plugins/event-espresso-core/core/domain/services/graphql/types/*.php
+	__typename?:
+		| 'EspressoAttendee'
+		| 'EspressoCountry'
+		| 'EspressoDatetime'
+		| 'EspressoEvent'
+		| 'EspressoFormElement'
+		| 'EspressoFormSection'
+		| 'EspressoPrice'
+		| 'EspressoPriceType'
+		| 'EspressoRootQuery'
+		| 'EspressoState'
+		| 'EspressoTicket'
+		| 'EspressoVenue'
+		| 'EspressoRecurrence'; // Recuring Events Manager (REM)
 }
 
 export interface Trashable {
