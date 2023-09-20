@@ -19,7 +19,10 @@ const DateCard: React.FC<DateItemProps> = ({ id }) => {
 	const toSiteDate = useUtcISOToSiteDate();
 
 	const ariaLabel: string = useMemo(() => {
+		// since title is optional property in datetime, we need to consider that and provide a sane default value if title is missing
 		const name = date.name.length > 0 ? date.name : 'datetime';
+		// date formatting function was taken from useDateFormConfig() to match the UI behaviour of the form itself, for more details see
+		// domains/core/admin/eventEditor/src/ui/datetimes/dateForm/useDateFormConfig.ts
 		const start = toSiteDate(date.startDate);
 		const end = toSiteDate(date.endDate);
 		return `${name} between ${start} and ${end}`;
@@ -27,9 +30,11 @@ const DateCard: React.FC<DateItemProps> = ({ id }) => {
 
 	const ariaDescription: string = useMemo(() => {
 		const description = date.description;
+		// since description is optional for datetime, we need to consider that and provide a sane default value if the description is missing
 		if (description.length === 0) {
 			return __('missing datetime description');
 		}
+		// since description is WYSIWYG, we need to trim newline chars and similar around the edges to avoid breaking HTML markup
 		return description.trim();
 	}, [date]);
 
