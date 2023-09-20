@@ -4,7 +4,9 @@ const AriaLabelContext = createContext('');
 
 const AriaDescriptionContext = createContext('');
 
-export default {
+const Contexts = {
 	AriaLabel: AriaLabelContext,
 	AriaDescription: AriaDescriptionContext,
 };
+
+export default Contexts;
