@@ -1,11 +1,9 @@
 import './style.css';
-import { useMemo } from 'react';
 import classNames from 'classnames';
-import { __ } from '@eventespresso/i18n';
 import { EntityIDs } from '../EntityIDs';
 import type { Entity } from '@eventespresso/data';
-import { isDatetime } from '@eventespresso/edtr-services';
-import { useUtcISOToSiteDate } from '@eventespresso/services';
+import { useContext } from 'react';
+import Contexts from './Contexts';
 
 interface EntityPaperFrameProps {
 	children: React.ReactNode;
@@ -14,16 +12,25 @@ interface EntityPaperFrameProps {
 }
 
 /**
+ * Composition of JSX and Contexts thanks to dot-notation
+ * @link https://legacy.reactjs.org/docs/jsx-in-depth.html#using-dot-notation-for-jsx-type
+ * @link https://stackoverflow.com/a/60883463/4343719
+ * @link https://dev.to/alexandprivate/react-dot-notation-component-with-ts-49k8
+ */
+type Element = React.FC<EntityPaperFrameProps>;
+type ElementWithCtx = Element & { Contexts: typeof Contexts };
+
+/**
  * EntityPaperFrame
  * adds a styled frame that gives the appearance
  * of a piece of paper on a surface
  */
-const EntityPaperFrame: React.FC<EntityPaperFrameProps> = ({ children, entity, ...props }) => {
+const EntityPaperFrame: ElementWithCtx = ({ children, entity, ...props }) => {
 	const className = classNames(props.className, 'ee-entity-paper-frame-wrapper');
 
-	const ariaLabel: string = useMemo(() => getAriaLabel(entity), [entity]);
+	const ariaLabel = useContext(Contexts.AriaLabel);
 
-	const ariaDescription: string = useMemo(() => getAriaDescription(entity), [entity]);
+	const ariaDescription = useContext(Contexts.AriaDescription);
 
 	return (
 		<div
@@ -41,38 +48,6 @@ const EntityPaperFrame: React.FC<EntityPaperFrameProps> = ({ children, entity, .
 	);
 };
 
-const getAriaLabel = (entity: Entity): string => {
-	if (!entity.__typename) {
-		console.error(`Cannot determine aria label for entity ${entity.dbId} due to missing __typename`);
-		return '';
-	}
-
-	if (isDatetime(entity)) {
-		const toSiteDate = useUtcISOToSiteDate();
-		const name = entity.name.length > 0 ? entity.name : 'datetime';
-		const start = toSiteDate(entity.startDate);
-		const end = toSiteDate(entity.endDate);
-		return `${name} between ${start} and ${end}`;
-	}
-
-	return entity.__typename;
-};
-
-const getAriaDescription = (entity: Entity): string => {
-	if (!entity.__typename) {
-		console.error(`Cannot determine aria description for entity ${entity.dbId} due to missing __typename`);
-		return '';
-	}
-
-	if (isDatetime(entity)) {
-		const description = entity.description;
-		if (description.length === 0) {
-			return 'missing datetime description';
-		}
-		return description.trim();
-	}
-
-	return entity.__typename;
-};
+EntityPaperFrame.Contexts = Contexts;
 
 export default EntityPaperFrame;
