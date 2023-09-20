@@ -1,32 +1,48 @@
-import { useMemo } from 'react';
+import { useMemo, useCallback } from 'react';
 import { EntityActionsMenuLayout } from '@eventespresso/ui-components';
 import { datetimeStatusBgColorClassName } from '@eventespresso/helpers';
 import { EntityCard, EntityPaperFrame } from '@eventespresso/ui-components';
 import { useDatetimeItem } from '@eventespresso/edtr-services';
 import { __ } from '@eventespresso/i18n';
+import * as R from 'ramda';
+import { useUtcISOToSiteDate, useSiteDateToUtcISO } from '@eventespresso/services';
 
 import DateActionsMenu from '../actionsMenu/DateActionsMenu';
 import DateCardSidebar from './DateCardSidebar';
 import Details from './Details';
 import type { DateItemProps } from '../types';
 
-import { useUtcISOToSiteDate } from '@eventespresso/services';
-
 const DateCard: React.FC<DateItemProps> = ({ id }) => {
 	const date = useDatetimeItem({ id });
 	const bgClassName = datetimeStatusBgColorClassName(date);
 
 	const toSiteDate = useUtcISOToSiteDate();
+	const toUtcISO = useSiteDateToUtcISO();
+
+	const dateToStr = useCallback(
+		(timestamp: string): string => {
+			// the order of functions is taken from
+			// domains/core/admin/eventEditor/src/ui/datetimes/dateForm/useDateFormConfig.ts
+			return R.pipe(toSiteDate, toUtcISO)(timestamp);
+		},
+		[toSiteDate, toUtcISO]
+	);
+
+	const startDate: string = useMemo(() => {
+		return dateToStr(date.startDate);
+	}, [date, dateToStr]);
+
+	const endDate: string = useMemo(() => {
+		return dateToStr(date.endDate);
+	}, [date, dateToStr]);
 
 	const ariaLabel: string = useMemo(() => {
 		// since title is optional property in datetime, we need to consider that and provide a sane default value if title is missing
 		const name = date.name.length > 0 ? date.name : 'datetime';
 		// date formatting function was taken from useDateFormConfig() to match the UI behaviour of the form itself, for more details see
 		// domains/core/admin/eventEditor/src/ui/datetimes/dateForm/useDateFormConfig.ts
-		const start = toSiteDate(date.startDate);
-		const end = toSiteDate(date.endDate);
-		return `${name} between ${start} and ${end}`;
-	}, [date, toSiteDate]);
+		return `${name} between ${startDate} and ${endDate}`;
+	}, [date, startDate, endDate]);
 
 	const ariaDescription: string = useMemo(() => {
 		const description = date.description;
