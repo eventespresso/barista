@@ -2,6 +2,7 @@ import { Datetime, DateStatus as DatetimeStatus } from '@eventespresso/edtr-serv
 
 const dates: Datetime[] = [
 	{
+		__typename: 'EspressoDatetime',
 		id: 'RGF0ZXRpbWU6ODM=',
 		cacheId: '',
 		capacity: -1,
@@ -24,6 +25,7 @@ const dates: Datetime[] = [
 		venue: '',
 	},
 	{
+		__typename: 'EspressoDatetime',
 		id: 'RGF0ZXRpbWU6ODM=',
 		cacheId: '',
 		capacity: 10,
@@ -46,6 +48,7 @@ const dates: Datetime[] = [
 		venue: '',
 	},
 	{
+		__typename: 'EspressoDatetime',
 		id: 'RGF0ZXRpbWU6ODM=',
 		cacheId: '',
 		capacity: 10,
@@ -68,6 +71,7 @@ const dates: Datetime[] = [
 		venue: '',
 	},
 	{
+		__typename: 'EspressoDatetime',
 		id: 'RGF0ZXRpbWU6ODM=',
 		cacheId: '',
 		capacity: 10,
@@ -90,6 +94,7 @@ const dates: Datetime[] = [
 		venue: '',
 	},
 	{
+		__typename: 'EspressoDatetime',
 		id: 'RGF0ZXRpbWU6ODM=',
 		cacheId: '',
 		capacity: 10,
@@ -112,6 +117,7 @@ const dates: Datetime[] = [
 		venue: '',
 	},
 	{
+		__typename: 'EspressoDatetime',
 		id: 'RGF0ZXRpbWU6ODM=',
 		cacheId: '',
 		capacity: 10,
@@ -134,6 +140,7 @@ const dates: Datetime[] = [
 		venue: '',
 	},
 	{
+		__typename: 'EspressoDatetime',
 		id: 'RGF0ZXRpbWU6ODM=',
 		cacheId: '',
 		capacity: 10,
