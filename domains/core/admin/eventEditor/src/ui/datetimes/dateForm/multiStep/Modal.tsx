@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { EntityEditModal } from '@eventespresso/ee-components';
 import { EdtrGlobalModals, useEvent, useDatetimeItem } from '@eventespresso/edtr-services';
 import { useGlobalModal } from '@eventespresso/registry';
@@ -21,16 +22,17 @@ const Modal: React.FC<ContentWrapperProps> = ({ onClose, ...props }) => {
 
 	const datetime = useDatetimeItem({ id: values?.id });
 
-	let title = datetime?.dbId
-		? sprintf(
-				/* translators: %s datetime id */
-				__('Edit datetime %s'),
-				`#${datetime.dbId}`
-		  )
-		: __('New Datetime');
-
-	// add event name to the title
-	title = event?.name ? `${event.name}: ${title}` : title;
+	const title: string = useMemo(() => {
+		const str = datetime?.dbId
+			? sprintf(
+					/* translators: %s datetime id */
+					__('Edit datetime %s'),
+					`#${datetime.dbId}`
+			  )
+			: __('New Datetime');
+		// add event name to the title
+		return event?.name ? `${event.name}: ${str}` : str;
+	}, [datetime, event]);
 
 	const footerButtons = <FooterButtons steps={steps} />;
 
