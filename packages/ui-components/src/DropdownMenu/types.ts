@@ -1,4 +1,5 @@
 import type { MenuProps, MenuItemProps, MenuToggleProps, MenuListProps } from '@eventespresso/adapters';
+import type { AriaAttributes } from 'react';
 import type { Size } from '../../';
 import type { IconButton, IconButtonProps } from '../Button';
 import type { WithTooltipProps } from '../withTooltip';
@@ -11,7 +12,7 @@ export interface DropdownMenuProps extends Omit<MenuProps, 'isOpen'> {
 	toggleProps?: DropdownToggleProps;
 }
 
-export interface DropdownMenuItemProps extends Omit<MenuItemProps, 'icon'> {
+export interface DropdownMenuItemProps extends Omit<MenuItemProps, 'icon'>, AriaAttributes {
 	icon?: React.ComponentType<any>;
 	title?: string;
 }
