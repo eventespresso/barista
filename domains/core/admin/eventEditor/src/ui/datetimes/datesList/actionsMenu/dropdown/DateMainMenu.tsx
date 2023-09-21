@@ -18,7 +18,7 @@ const DateMainMenu: React.FC<DateMainMenuProps> = ({ datetime }) => {
 		() => ({
 			className: 'ee-date-main-menu',
 			'data-testid': `ee-datetime-main-menu-${datetime.dbId}`,
-			tooltip: __('event date main menu'),
+			tooltip: __('event datetime main menu'),
 		}),
 		[datetime.dbId]
 	);
