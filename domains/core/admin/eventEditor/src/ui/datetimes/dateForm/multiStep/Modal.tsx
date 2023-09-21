@@ -5,6 +5,7 @@ import { useGlobalModal } from '@eventespresso/registry';
 import { __, sprintf } from '@eventespresso/i18n';
 import { usePrevNext } from '@eventespresso/hooks';
 import { useIsPristine } from '@eventespresso/form';
+import { EntityEditModalProps } from '@eventespresso/ui-components';
 
 import ModalBody from './ModalBody';
 import FooterButtons from './FooterButtons';
@@ -36,6 +37,15 @@ const Modal: React.FC<ContentWrapperProps> = ({ onClose, ...props }) => {
 
 	const footerButtons = <FooterButtons steps={steps} />;
 
+	const ariaAttributes: EntityEditModalProps['ariaAttributes'] = useMemo(
+		() => ({
+			modalContent: {
+				'aria-label': `modal for datetime ${datetime.name}`,
+			},
+		}),
+		[datetime]
+	);
+
 	return (
 		<EntityEditModal
 			entityType='date'
@@ -44,6 +54,7 @@ const Modal: React.FC<ContentWrapperProps> = ({ onClose, ...props }) => {
 			onClose={onClose}
 			showAlertOnClose={!isPristine}
 			title={title}
+			ariaAttributes={ariaAttributes}
 		>
 			<ModalBody {...props} steps={steps} />
 		</EntityEditModal>
