@@ -1,3 +1,4 @@
+import type { AriaAttributes } from 'react';
 import { ModalProps as ModalAdapterProps } from '@chakra-ui/react';
 
 export interface ModalProps
@@ -13,4 +14,10 @@ export interface ModalProps
 	isClosable?: boolean;
 	headerClassName?: string;
 	title?: React.ReactNode;
+	ariaAttributes?: {
+		modalContent?: AriaAttributes;
+		modalHeader?: AriaAttributes;
+		modalBody?: AriaAttributes;
+		modalFooter?: AriaAttributes;
+	};
 }

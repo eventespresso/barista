@@ -21,6 +21,7 @@ export const Modal: React.FC<ModalProps> = ({
 	isOpen,
 	scrollBehavior = 'inside',
 	title,
+	ariaAttributes,
 	...props
 }) => {
 	return (
@@ -32,15 +33,21 @@ export const Modal: React.FC<ModalProps> = ({
 			scrollBehavior={scrollBehavior}
 		>
 			<ModalOverlay />
-			<ModalContent role='alertdialog' className={className}>
-				<ModalHeader className={headerClassName}>
+			<ModalContent role='alertdialog' className={className} {...ariaAttributes?.modalContent}>
+				<ModalHeader className={headerClassName} {...ariaAttributes?.modalHeader}>
 					{title}
 					{closeButton}
 				</ModalHeader>
 
-				<ModalBody className={bodyClassName}>{children}</ModalBody>
+				<ModalBody className={bodyClassName} {...ariaAttributes?.modalBody}>
+					{children}
+				</ModalBody>
 
-				{footer && <ModalFooter className={footerClassName}>{footer}</ModalFooter>}
+				{footer && (
+					<ModalFooter className={footerClassName} {...ariaAttributes?.modalFooter}>
+						{footer}
+					</ModalFooter>
+				)}
 			</ModalContent>
 		</ChakraModal>
 	);
