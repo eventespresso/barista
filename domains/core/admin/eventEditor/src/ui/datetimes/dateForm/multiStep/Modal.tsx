@@ -37,14 +37,18 @@ const Modal: React.FC<ContentWrapperProps> = ({ onClose, ...props }) => {
 
 	const footerButtons = <FooterButtons steps={steps} />;
 
-	const ariaAttributes: EntityEditModalProps['ariaAttributes'] = useMemo(
-		() => ({
-			modalContent: {
-				'aria-label': `modal for datetime ${datetime.name}`,
-			},
-		}),
-		[datetime]
-	);
+	const ariaAttributes: EntityEditModalProps['ariaAttributes'] = useMemo(() => {
+		const getAriaLabel = (): string => {
+			if (!datetime || !datetime.name) {
+				return __('modal for datetime');
+			}
+			/* translators: modal for datetime %s */
+			return sprintf('modal for datetime %s', datetime.name);
+		};
+		return {
+			modalContent: { 'aria-label': getAriaLabel() },
+		};
+	}, [datetime]);
 
 	return (
 		<EntityEditModal
