@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
 
 import { Button } from '@eventespresso/adapters';
-import { __, sprintf } from '@eventespresso/i18n';
+import { sprintf } from '@eventespresso/i18n';
 import { useDataState } from '../../data';
 import getRelationIcon from './getRelationIcon';
 import type { RenderCellProps } from '../../types';
@@ -18,28 +18,29 @@ const BodyCell: React.FC<RenderCellProps> = ({ datetime, ticket }) => {
 
 	const icon = useMemo(() => getRelationIcon(status), [status]);
 
+	const ticketName: string = useMemo(() => {
+		if (!ticket.name) {
+			return ticket.dbId.toString();
+		}
+		return ticket.name;
+	}, [ticket]);
+
 	const ariaLabel: string = useMemo(() => {
 		// since clicking on button invokes opposite action, we show the label describing what will happen when the button is clicked, e.g. when ticket is already assigned, clicking button will unassign ticket
 		switch (status) {
 			case 'NEW':
 			case 'OLD':
-				return __('unassign ticket');
+				return sprintf('unassign ticket %s', ticketName);
 			case 'REMOVED':
-				return __('keep ticket');
+				return sprintf('keep ticket %s', ticketName);
 			default:
-				return __('assign ticket');
+				return sprintf('assign ticket %s', ticketName);
 		}
-	}, [status]);
-
-	const ariaDescription: string = useMemo(() => {
-		/* translators: ticket ID %d */
-		return sprintf(__('ticket ID %d'), ticket.dbId);
-	}, [ticket]);
+	}, [status, ticketName]);
 
 	return (
 		<Button
 			aria-label={ariaLabel}
-			aria-description={ariaDescription}
 			className='ee-tam-relation-btn'
 			icon={icon}
 			margin='auto'
