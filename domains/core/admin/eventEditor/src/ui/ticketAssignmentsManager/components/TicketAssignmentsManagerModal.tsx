@@ -24,7 +24,7 @@ const TicketAssignmentsManagerModal: React.FC<Partial<TAMModalProps>> = ({ onClo
 		if (!data.entity) {
 			return '<loading aria label>';
 		}
-		return `ticket assignment modal for ticket ${data.entity.name}`;
+		return `ticket assignment modal for datetime ${data.entity.name}`;
 	}, [data]);
 
 	const ariaAttributes: ModalWithAlertProps['ariaAttributes'] = useMemo(
