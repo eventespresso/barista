@@ -18,7 +18,7 @@ export const Label: React.FC<LabelProps> = ({ ariaLabel, className, hidden = fal
 	const labelID = labelIDGenerator(id);
 	const labelClassName = classNames('ee-input-label', hidden && 'screen-reader-text', className);
 	return (
-		<label aria-label={ariaLabel || label} className={labelClassName} id={labelID} htmlFor={id}>
+		<label className={labelClassName} id={labelID} htmlFor={id}>
 			{label}
 			<RequiredIndicator isRequired={isRequired} />
 		</label>
