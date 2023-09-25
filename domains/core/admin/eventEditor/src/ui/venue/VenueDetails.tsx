@@ -48,7 +48,7 @@ export const VenueDetails: React.FC = () => {
 	const thumbnail = selectedVenue?.thumbnail;
 
 	return (
-		<Container classes={classes} header={header}>
+		<Container aria-label={__('Venue Details card')} classes={classes} header={header}>
 			{selectedVenue && (
 				<div className='ee-event-venue__card'>
 					{thumbnail ? (
