@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import classNames from 'classnames';
 
-import { Label, labelIDGenerator } from '../Label';
+import { Label } from '../Label';
 
 import type { AnyObject } from '@eventespresso/utils';
 import type { WithLabelProps } from './types';
