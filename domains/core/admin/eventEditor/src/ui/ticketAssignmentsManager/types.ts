@@ -14,7 +14,12 @@ export type TAMRelationalData = Pick<RelationalData, TAMRelationEntity>;
 
 export type AssignmentType = 'forDate' | 'forTicket' | 'forAll';
 
-export type AssignmentStatus = 'OLD' | 'NEW' | 'REMOVED';
+// OLD = assignment relationship exists and continues to exist
+// NEW = assignment relationship did not exist previously
+// REMOVED = assignment relationship will be removed
+// null = assignment relationship did not exist and will not exist
+// domains/core/admin/eventEditor/src/ui/ticketAssignmentsManager/data/useDataStateManager.ts
+export type AssignmentStatus = 'OLD' | 'NEW' | 'REMOVED' | null;
 
 export interface BaseProps<E extends Entity = Datetime | Ticket> {
 	assignmentType: AssignmentType;
