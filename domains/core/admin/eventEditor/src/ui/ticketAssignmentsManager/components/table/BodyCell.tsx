@@ -25,18 +25,26 @@ const BodyCell: React.FC<RenderCellProps> = ({ datetime, ticket }) => {
 		return ticket.name;
 	}, [ticket]);
 
+	const datetimeName: string = useMemo(() => {
+		if (!datetime.name) {
+			return datetime.dbId.toString();
+		}
+		return datetime.name;
+	}, [datetime]);
+
 	const ariaLabel: string = useMemo(() => {
 		// since clicking on button invokes opposite action, we show the label describing what will happen when the button is clicked, e.g. when ticket is already assigned, clicking button will unassign ticket
 		switch (status) {
 			case 'NEW':
 			case 'OLD':
-				return sprintf('unassign ticket %s', ticketName);
+				return sprintf('unassign ticket %1$s to datetime %2$s', ticketName, datetimeName);
 			case 'REMOVED':
-				return sprintf('keep ticket %s', ticketName);
+				return sprintf('keep ticket %1$s to datetime %2$s', ticketName, datetimeName);
+			case null:
 			default:
-				return sprintf('assign ticket %s', ticketName);
+				return sprintf('assign ticket %1$s to datetime %2$s', ticketName, datetimeName);
 		}
-	}, [status, ticketName]);
+	}, [status, ticketName, datetimeName]);
 
 	return (
 		<Button
