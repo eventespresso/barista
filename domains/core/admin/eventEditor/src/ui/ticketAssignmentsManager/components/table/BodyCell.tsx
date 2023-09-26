@@ -40,6 +40,9 @@ const BodyCell: React.FC<RenderCellProps> = ({ datetime, ticket }) => {
 				return sprintf('unassign ticket %1$s to datetime %2$s', ticketName, datetimeName);
 			case 'REMOVED':
 				return sprintf('keep ticket %1$s to datetime %2$s', ticketName, datetimeName);
+			// special case where ticket is yet to be created which does not have a name
+			case null && ticketName === '0':
+				return sprintf('assign this ticket to datetime %1$s', datetimeName);
 			case null:
 			default:
 				return sprintf('assign ticket %1$s to datetime %2$s', ticketName, datetimeName);
