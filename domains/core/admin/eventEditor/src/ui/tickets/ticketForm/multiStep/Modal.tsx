@@ -1,9 +1,12 @@
+import { useMemo } from 'react';
+
 import { EntityEditModal } from '@eventespresso/ee-components';
 import { EdtrGlobalModals, useEvent, useTicketItem } from '@eventespresso/edtr-services';
 import { useGlobalModal } from '@eventespresso/registry';
 import { __, sprintf } from '@eventespresso/i18n';
 import { usePrevNext } from '@eventespresso/hooks';
 import { useIsPristine } from '@eventespresso/form';
+import type { ModalProps } from '@eventespresso/adapters';
 
 import ModalBody from './ModalBody';
 import type { ContentWrapperProps } from './types';
@@ -34,6 +37,15 @@ const Modal: React.FC<ContentWrapperProps> = ({ onClose, ...props }) => {
 
 	const footerButtons = <FooterButtons steps={steps} />;
 
+	const ariaAttributes: ModalProps['ariaAttributes'] = useMemo(
+		() => ({
+			modalContent: {
+				'aria-label': __('Modal for creating new ticket'),
+			},
+		}),
+		[]
+	);
+
 	return (
 		<EntityEditModal
 			entityType='ticket'
@@ -42,6 +54,7 @@ const Modal: React.FC<ContentWrapperProps> = ({ onClose, ...props }) => {
 			onClose={onClose}
 			showAlertOnClose={!isPristine}
 			title={title}
+			ariaAttributes={ariaAttributes}
 		>
 			<ModalBody {...props} steps={steps} />
 		</EntityEditModal>
