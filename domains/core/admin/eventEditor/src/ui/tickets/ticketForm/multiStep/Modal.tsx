@@ -37,14 +37,18 @@ const Modal: React.FC<ContentWrapperProps> = ({ onClose, ...props }) => {
 
 	const footerButtons = <FooterButtons steps={steps} />;
 
-	const ariaAttributes: ModalProps['ariaAttributes'] = useMemo(
-		() => ({
-			modalContent: {
-				'aria-label': __('Modal for creating new ticket'),
-			},
-		}),
-		[]
-	);
+	const ariaAttributes: ModalProps['ariaAttributes'] = useMemo(() => {
+		const getAriaLabel = (): string => {
+			if (!ticket || !ticket.name) {
+				return __('modal for ticket');
+			}
+			/* translators: modal for ticket %s */
+			return sprintf('modal for ticket %s', ticket.name);
+		};
+		return {
+			modalContent: { 'aria-label': getAriaLabel() },
+		};
+	}, [ticket]);
 
 	return (
 		<EntityEditModal
