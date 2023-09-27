@@ -4,7 +4,7 @@ import { Button } from '@eventespresso/adapters';
 import { sprintf } from '@eventespresso/i18n';
 import { useDataState } from '../../data';
 import getRelationIcon from './getRelationIcon';
-import type { RenderCellProps } from '../../types';
+import type { RenderCellProps, AssignmentStatus } from '../../types';
 import type { Datetime, Ticket } from '@eventespresso/edtr-services';
 
 const BodyCell: React.FC<RenderCellProps> = ({ datetime, ticket }) => {
@@ -37,20 +37,35 @@ const BodyCell: React.FC<RenderCellProps> = ({ datetime, ticket }) => {
 		return sprintf('existing %1$s %2$s', type, token);
 	}, []);
 
+	// button label should show *opposite* of what current status is
+	// e.g. if current status is "OLD", pressing (toggling) button in
+	// TAM would change the status to "REMOVED" so aria-label should
+	// be indicative button's actions, not current status per say
+	const inverseStatus = (status: AssignmentStatus): AssignmentStatus => {
+		switch (status) {
+			case null:
+				return 'NEW';
+			case 'NEW':
+				return null;
+			case 'OLD':
+				return 'REMOVED';
+			case 'REMOVED':
+				return 'OLD';
+		}
+	};
+
 	const ariaLabel: string = useMemo(() => {
 		const ticketLabel = makeLabel(ticket, 'ticket');
 		const datetimeLabel = makeLabel(datetime, 'datetime');
-		if (status === null) {
-			return sprintf('keep %1$s unassigned to %2$s', ticketLabel, datetimeLabel);
-		}
-		if (status === 'NEW') {
-			return sprintf('assign %1$s to %2$s', ticketLabel, datetimeLabel);
-		}
-		if (status === 'OLD') {
-			return sprintf('keep %1$s assigned to %2$s', ticketLabel, datetimeLabel);
-		}
-		if (status === 'REMOVED') {
-			return sprintf('unassigned %1$s from %2$s', ticketLabel, datetimeLabel);
+		switch (inverseStatus(status)) {
+			case null:
+				return sprintf('keep %1$s unassigned to %2$s', ticketLabel, datetimeLabel);
+			case 'NEW':
+				return sprintf('assign %1$s to %2$s', ticketLabel, datetimeLabel);
+			case 'OLD':
+				return sprintf('keep %1$s assigned to %2$s', ticketLabel, datetimeLabel);
+			case 'REMOVED':
+				return sprintf('unassign %1$s from %2$s', ticketLabel, datetimeLabel);
 		}
 	}, [ticket, datetime, status, makeLabel]);
 
