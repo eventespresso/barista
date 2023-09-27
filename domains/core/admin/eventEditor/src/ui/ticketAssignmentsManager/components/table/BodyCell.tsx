@@ -5,6 +5,7 @@ import { sprintf } from '@eventespresso/i18n';
 import { useDataState } from '../../data';
 import getRelationIcon from './getRelationIcon';
 import type { RenderCellProps } from '../../types';
+import type { Datetime, Ticket } from '@eventespresso/edtr-services';
 
 const BodyCell: React.FC<RenderCellProps> = ({ datetime, ticket }) => {
 	const { getAssignmentStatus, toggleAssignment } = useDataState();
@@ -18,36 +19,40 @@ const BodyCell: React.FC<RenderCellProps> = ({ datetime, ticket }) => {
 
 	const icon = useMemo(() => getRelationIcon(status), [status]);
 
-	const ticketName: string = useMemo(() => {
-		if (!ticket.name) {
-			return ticket.dbId.toString();
+	const nameOrId = (entity: Datetime | Ticket): string => {
+		if (entity.name && entity.name.length > 0) {
+			return entity.name;
 		}
-		return ticket.name;
-	}, [ticket]);
+		if (entity.dbId === 0) {
+			return '';
+		}
+		return entity.dbId.toString();
+	};
 
-	const datetimeName: string = useMemo(() => {
-		if (!datetime.name) {
-			return datetime.dbId.toString();
+	const makeLabel = useCallback((entity: Datetime | Ticket, type: string): string => {
+		const token = nameOrId(entity);
+		if (entity.dbId === 0) {
+			return sprintf('new %1$s %2$s', type, token).trim();
 		}
-		return datetime.name;
-	}, [datetime]);
+		return sprintf('existing %1$s %2$s', type, token);
+	}, []);
 
 	const ariaLabel: string = useMemo(() => {
-		// since clicking on button invokes opposite action, we show the label describing what will happen when the button is clicked, e.g. when ticket is already assigned, clicking button will unassign ticket
-		switch (status) {
-			case 'NEW':
-			case 'OLD':
-				return sprintf('unassign ticket %1$s to datetime %2$s', ticketName, datetimeName);
-			case 'REMOVED':
-				return sprintf('keep ticket %1$s to datetime %2$s', ticketName, datetimeName);
-			// special case where ticket is yet to be created which does not have a name
-			case null && ticketName === '0':
-				return sprintf('assign this ticket to datetime %1$s', datetimeName);
-			case null:
-			default:
-				return sprintf('assign ticket %1$s to datetime %2$s', ticketName, datetimeName);
+		const ticketLabel = makeLabel(ticket, 'ticket');
+		const datetimeLabel = makeLabel(datetime, 'datetime');
+		if (status === null) {
+			return sprintf('keep %1$s unassigned to %2$s', ticketLabel, datetimeLabel);
 		}
-	}, [status, ticketName, datetimeName]);
+		if (status === 'NEW') {
+			return sprintf('assign %1$s to %2$s', ticketLabel, datetimeLabel);
+		}
+		if (status === 'OLD') {
+			return sprintf('keep %1$s assigned to %2$s', ticketLabel, datetimeLabel);
+		}
+		if (status === 'REMOVED') {
+			return sprintf('unassigned %1$s from %2$s', ticketLabel, datetimeLabel);
+		}
+	}, [ticket, datetime, status, makeLabel]);
 
 	return (
 		<Button
