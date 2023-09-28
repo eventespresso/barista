@@ -40,7 +40,7 @@ const BodyCell: React.FC<RenderCellProps> = ({ datetime, ticket }) => {
 	// button label should show *opposite* of what current status is
 	// e.g. if current status is "OLD", pressing (toggling) button in
 	// TAM would change the status to "REMOVED" so aria-label should
-	// be indicative button's actions, not current status per say
+	// be indicative of button's actions, not current status per say
 	const inverseStatus = (status: AssignmentStatus): AssignmentStatus => {
 		switch (status) {
 			case null:
