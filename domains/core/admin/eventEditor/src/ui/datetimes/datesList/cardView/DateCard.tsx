@@ -1,7 +1,6 @@
 import { useMemo } from 'react';
-import { EntityActionsMenuLayout } from '@eventespresso/ui-components';
+import { EntityActionsMenuLayout, EntityCard, EntityPaperFrame } from '@eventespresso/ui-components';
 import { datetimeStatusBgColorClassName } from '@eventespresso/helpers';
-import { EntityCard, EntityPaperFrame } from '@eventespresso/ui-components';
 import { useDatetimeItem } from '@eventespresso/edtr-services';
 
 import DateActionsMenu from '../actionsMenu/DateActionsMenu';
