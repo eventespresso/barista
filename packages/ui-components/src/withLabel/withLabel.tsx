@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import classNames from 'classnames';
 
-import { Label } from '../Label';
+import { Label, labelIDGenerator } from '../Label';
 
 import type { AnyObject } from '@eventespresso/utils';
 import type { WithLabelProps } from './types';
@@ -42,6 +42,7 @@ const withLabel = <P extends AnyObject>(
 					{...(props as P)}
 					ariaLabel={props['aria-label'] || label}
 					id={id}
+					aria-labelledby={labelIDGenerator(id)}
 					ref={forwardedRef}
 				/>
 			</div>
