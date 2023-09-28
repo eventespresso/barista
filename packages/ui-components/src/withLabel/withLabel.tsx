@@ -40,7 +40,7 @@ const withLabel = <P extends AnyObject>(
 				<Label className={labelClassName} id={id} label={label} isRequired={isRequired} />
 				<WrappedComponent
 					{...(props as P)}
-					ariaLabel={props['aria-label'] || label}
+					aria-label={props['aria-label'] || label}
 					id={id}
 					aria-labelledby={labelIDGenerator(id)}
 					ref={forwardedRef}
