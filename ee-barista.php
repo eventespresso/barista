@@ -21,6 +21,8 @@
  * GitHub Plugin URI: https://github.com/eventespresso/packages
  */
 
+use EventEspresso\core\domain\services\capabilities\FeatureFlagsConfig;
+
 defined('ABSPATH') || die();
 
 define('EE_BARISTA_BASENAME', plugin_basename(__FILE__));
@@ -36,14 +38,14 @@ add_action(
         add_filter(
             'FHEE__EventEspresso_core_domain_services_capabilities_FeatureFlags',
             function ($capabilities) {
-                return array_merge($capabilities, [
-                    'ee_advanced_event_editor'  => true,
-                    'use_default_ticket_manager' => true,
-                    'use_event_description_rte'  => true,
-                    'use_experimental_rte'       => true,
-                    'use_reg_form_builder'       => true,
-                    'use_reg_options_meta_box'   => true,
-                ]);
+				$capabilities->{FeatureFlagsConfig::USE_ADVANCED_EVENT_EDITOR} = true;
+				$capabilities->{FeatureFlagsConfig::USE_EVENT_EDITOR_BULK_EDIT} = true;
+				$capabilities->{FeatureFlagsConfig::USE_DEFAULT_TICKET_MANAGER} = true;
+				$capabilities->{FeatureFlagsConfig::USE_EVENT_DESCRIPTION_RTE} = true;
+				$capabilities->{FeatureFlagsConfig::USE_EXPERIMENTAL_RTE} = true;
+				$capabilities->{FeatureFlagsConfig::USE_REG_FORM_BUILDER} = true;
+				$capabilities->{FeatureFlagsConfig::USE_REG_OPTIONS_META_BOX} = true;
+				return $capabilities;
             }
         );
     }
