@@ -1,15 +1,16 @@
-import { useIsRehydrated } from '@eventespresso/data';
 import { PluginArea } from '@eventespresso/plugins';
 
+import { useEditorInitialization } from '../hooks';
+import { Spinner } from '@eventespresso/adapters';
 import { getRegisteredContainers } from '@edtrServices/utils';
+
 import { DatesList } from './datetimes/datesList';
 import EventRegistrationOptions from './EventRegistrationOptions';
 import { TicketsList } from './tickets/ticketsList';
 import EventDescription from './EventDescription';
 import { VenueDetails } from './venue';
-
 import { RegistrationForm } from './registrationForm';
-import Init from './Init';
+
 // fire up the service and UI element registry
 import './registryInit';
 import './styles.scss';
@@ -17,9 +18,13 @@ import './styles.scss';
 const containers = getRegisteredContainers();
 
 const EventEditor: React.FC = () => {
-	const [isRehydrated] = useIsRehydrated();
+	const isRehydrated = useEditorInitialization();
 
-	return isRehydrated ? (
+	if (!isRehydrated) {
+		return <Spinner />;
+	}
+
+	return (
 		<>
 			<EventDescription />
 			<EventRegistrationOptions />
@@ -30,8 +35,6 @@ const EventEditor: React.FC = () => {
 			<PluginArea />
 			{containers}
 		</>
-	) : (
-		<Init />
 	);
 };
 
