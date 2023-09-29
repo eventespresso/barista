@@ -15,7 +15,8 @@ const Notifications = (): JSX.Element => {
 
 	useEffect(() => {
 		toasts.dev.readyTypes.forEach((type) => {
-			toaster.success({ message: sprintf('%s initialized', type) });
+			const message = sprintf('%s initialized', type);
+			toaster.success({ message, toastId: message });
 		});
 	}, [toaster, toasts]);
 

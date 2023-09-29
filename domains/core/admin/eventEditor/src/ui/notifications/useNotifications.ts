@@ -20,11 +20,14 @@ const useNotifications = () => {
 		return types;
 	}, [isLoaded, isRehydrated]);
 
-	return {
-		dev: {
-			readyTypes,
-		},
-	};
+	return useMemo(
+		() => ({
+			dev: {
+				readyTypes,
+			},
+		}),
+		[readyTypes]
+	);
 };
 
 export default useNotifications;
