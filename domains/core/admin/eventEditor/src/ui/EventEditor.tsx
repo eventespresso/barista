@@ -10,6 +10,7 @@ import { TicketsList } from './tickets/ticketsList';
 import EventDescription from './EventDescription';
 import { VenueDetails } from './venue';
 import { RegistrationForm } from './registrationForm';
+import Notifications from './notifications/Notifications';
 
 // fire up the service and UI element registry
 import './registryInit';
@@ -34,6 +35,7 @@ const EventEditor: React.FC = () => {
 			<RegistrationForm />
 			<PluginArea />
 			{containers}
+			<Notifications />
 		</>
 	);
 };
