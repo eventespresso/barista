@@ -22,7 +22,6 @@
  * GitHub Plugin URI: https://github.com/eventespresso/packages
  */
 
-use EventEspresso\core\domain\services\capabilities\FeatureFlagsConfig;
 
 defined('ABSPATH') || die();
 
@@ -33,8 +32,8 @@ define('EE_BARISTA_URL', trailingslashit(plugins_url('', __FILE__)));
 add_action(
     'AHEE__EE_System__load_espresso_addons',
     function () {
-        require_once __DIR__ . '/lib/Barista.php';
-        $barista = new Barista();
+		EE_Psr4AutoloaderInit::psr4_loader()->addNamespace('EventEspresso\Barista', __DIR__. '/lib');
+        $barista = new EventEspresso\Barista\Barista();
         $barista->initialize();
     }
 );
