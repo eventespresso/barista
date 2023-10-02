@@ -1,10 +1,10 @@
 import { useCallback, useMemo } from 'react';
 
-import { Button } from '@eventespresso/adapters';
+import { Button } from '@eventespresso/ui-components';
 import { sprintf } from '@eventespresso/i18n';
 import { useDataState } from '../../data';
 import getRelationIcon from './getRelationIcon';
-import type { RenderCellProps, AssignmentStatus } from '../../types';
+import type { RenderCellProps } from '../../types';
 import type { Datetime, Ticket } from '@eventespresso/edtr-services';
 
 const BodyCell: React.FC<RenderCellProps> = ({ datetime, ticket }) => {
@@ -29,53 +29,37 @@ const BodyCell: React.FC<RenderCellProps> = ({ datetime, ticket }) => {
 		return entity.dbId.toString();
 	};
 
-	const makeLabel = useCallback((entity: Datetime | Ticket, type: string): string => {
+	const entityLabel = useCallback((entity: Datetime | Ticket, type: string): string => {
 		const token = nameOrId(entity);
-		if (entity.dbId === 0) {
-			return sprintf('new %1$s %2$s', type, token).trim();
-		}
-		return sprintf('existing %1$s %2$s', type, token);
+		return sprintf('%1$s %2$s', type, token);
 	}, []);
 
-	// button label should show *opposite* of what current status is
-	// e.g. if current status is "OLD", pressing (toggling) button in
-	// TAM would change the status to "REMOVED" so aria-label should
-	// be indicative of button's actions, not current status per say
-	const inverseStatus = (status: AssignmentStatus): AssignmentStatus => {
+	const ariaLabel: string = useMemo(() => {
+		const ticketLabel = entityLabel(ticket, 'ticket');
+		const datetimeLabel = entityLabel(datetime, 'datetime');
 		switch (status) {
 			case null:
-				return 'NEW';
+				// no current status so assign new relation
+				return sprintf('click to assign %1$s to %2$s', ticketLabel, datetimeLabel);
 			case 'NEW':
-				return null;
+				// remove newly assigned relation
+				return sprintf('click to remove new assignment for %1$s from %2$s', ticketLabel, datetimeLabel);
 			case 'OLD':
-				return 'REMOVED';
+				// remove existing relation
+				return sprintf('click to remove %1$s from %2$s', ticketLabel, datetimeLabel);
 			case 'REMOVED':
-				return 'OLD';
+				// reassign newly removed relation
+				return sprintf('click to reassign %1$s to %2$s', ticketLabel, datetimeLabel);
 		}
-	};
-
-	const ariaLabel: string = useMemo(() => {
-		const ticketLabel = makeLabel(ticket, 'ticket');
-		const datetimeLabel = makeLabel(datetime, 'datetime');
-		switch (inverseStatus(status)) {
-			case null:
-				return sprintf('keep %1$s unassigned to %2$s', ticketLabel, datetimeLabel);
-			case 'NEW':
-				return sprintf('assign %1$s to %2$s', ticketLabel, datetimeLabel);
-			case 'OLD':
-				return sprintf('keep %1$s assigned to %2$s', ticketLabel, datetimeLabel);
-			case 'REMOVED':
-				return sprintf('unassign %1$s from %2$s', ticketLabel, datetimeLabel);
-		}
-	}, [ticket, datetime, status, makeLabel]);
+	}, [ticket, datetime, status, entityLabel]);
 
 	return (
 		<Button
-			aria-label={ariaLabel}
 			className='ee-tam-relation-btn'
 			icon={icon}
 			margin='auto'
 			onClick={onClick}
+			tooltip={ariaLabel}
 			variant='link'
 		/>
 	);
