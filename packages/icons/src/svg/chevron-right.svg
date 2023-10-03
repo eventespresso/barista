@@ -2,9 +2,9 @@
 	aria-hidden="true"
 	fill="currentColor"
 	focusable="false"
-	height="1.5em"
-	width="1.5em"
-	viewBox="0 0 512.001 512.001"
+	height='1em'
+	width='1em'
+	viewBox='-200 -160 800 800'
 >
 	<path
 		d="M388.819,239.537L156.092,6.816c-9.087-9.089-23.824-9.089-32.912,0.002

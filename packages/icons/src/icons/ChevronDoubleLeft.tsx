@@ -6,9 +6,9 @@ const ChevronDoubleLeft = (props: IconProps): JSX.Element => {
 		<svg
 			aria-hidden='true'
 			fill='currentColor'
-			height='1.5em'
-			width='1.5em'
-			viewBox='0 0 330 330'
+			height='1em'
+			width='1em'
+			viewBox='-100 -100 500 500'
 			className='ee-svg--chevron-double-left'
 			{...props}
 		>
