@@ -19,7 +19,7 @@
 					width: 22%;
 				}
 
-				> div {
+				> div:not(.ee-number-input__wrap) {
 					display: flex;
 				}
 			}
