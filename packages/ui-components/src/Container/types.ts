@@ -1,3 +1,4 @@
+import type { AriaAttributes } from 'react';
 import type { AnyObject } from '@eventespresso/utils';
 
 /* alignments correspond to CSS flexbox justify-content values */
@@ -11,13 +12,13 @@ export type Alignments =
 	| 'space' // space-around: items are evenly distributed in the line with equal space around them.
 	| 'wide'; // space-between: items are evenly distributed with no space on either end
 
-export interface ConditionalElementProps {
+export interface ConditionalElementProps extends AriaAttributes {
 	align?: Alignments;
 	className: string;
 	tag: 'aside' | 'div' | 'footer' | 'header' | 'p' | 'section';
 }
 
-export interface ContainerProps extends AnyObject {
+export interface ContainerProps extends AnyObject, AriaAttributes {
 	classes?: ContainerClasses;
 	content?: React.ReactNode;
 	footer?: React.ReactNode;
@@ -60,7 +61,7 @@ export interface SidebarProps {
 	className?: string;
 }
 
-export interface StackProps {
+export interface StackProps extends AriaAttributes {
 	align?: Alignments;
 	as?: 'div' | 'section';
 	className?: string;

@@ -23,6 +23,7 @@ export const Modal: React.FC<ModalProps> = ({
 	submitButtonProps,
 	title,
 	withBorder,
+	ariaAttributes,
 	...props
 }) => {
 	if (destroyOnClose && !isOpen) {
@@ -77,6 +78,7 @@ export const Modal: React.FC<ModalProps> = ({
 			onClose={onClose}
 			scrollBehavior={scrollBehavior}
 			title={title}
+			ariaAttributes={ariaAttributes}
 		>
 			{children}
 		</ModalAdapter>

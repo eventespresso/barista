@@ -8,6 +8,13 @@ import type {
 	TicketsList as TicketList,
 } from '@eventespresso/data';
 
+/**
+ * Properties of GraphQL types i.e. entities which extend Entity type are taken from EE Core
+ * There are simply too many types (including nested ones) so at any given point in time these types are *not* comprehensive
+ * So if properties for certain GraphQL types are missing, it is necessary to update the types here
+ * @see plugins/event-espresso-core/core/domain/services/graphql/types
+ */
+
 export interface Attendee extends Entity, Address {
 	avatar?: string;
 	bio?: string;

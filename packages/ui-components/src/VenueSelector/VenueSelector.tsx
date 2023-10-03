@@ -125,6 +125,7 @@ export const VenueSelector: React.FC<VenueSelectorProps> = ({
 	return (
 		<div className={wrapperClass}>
 			<SelectWithLabel
+				id='select-venue'
 				flow={inline ? 'inline' : null}
 				size='small'
 				{...props}

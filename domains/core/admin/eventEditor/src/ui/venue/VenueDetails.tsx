@@ -47,8 +47,15 @@ export const VenueDetails: React.FC = () => {
 	const onChangeValue = useCallback((venue) => updateEntity({ venue }), [updateEntity]);
 	const thumbnail = selectedVenue?.thumbnail;
 
+	const addressLabels = useMemo(
+		() => ({
+			inline: __('Venue address'),
+		}),
+		[]
+	);
+
 	return (
-		<Container classes={classes} header={header}>
+		<Container aria-label={__('Venue Details card')} classes={classes} header={header}>
 			{selectedVenue && (
 				<div className='ee-event-venue__card'>
 					{thumbnail ? (
@@ -61,7 +68,7 @@ export const VenueDetails: React.FC = () => {
 						</div>
 					)}
 					<div className='ee-event-venue__properties'>
-						<Heading as='h4' className='ee-event-venue__venue-name'>
+						<Heading as='h4' className='ee-event-venue__venue-name' aria-label={__('Venue name')}>
 							{selectedVenue?.name}
 						</Heading>
 						<div className='ee-event-venue__desc'>
@@ -73,20 +80,27 @@ export const VenueDetails: React.FC = () => {
 									<MapMarker />
 								</span>
 								<span className='ee-event-venue__detail-value'>
-									<Address className='ee-event-venue__address' inline {...selectedVenue} />
+									<Address
+										className='ee-event-venue__address'
+										inline
+										labels={addressLabels}
+										{...selectedVenue}
+									/>
 								</span>
 							</div>
 							<div className='ee-event-venue__detail'>
 								<span className='ee-event-venue__detail-label'>
 									<VenueSeat />
 								</span>
-								<span className='ee-event-venue__detail-value'>{venueCapacity}</span>
+								<span className='ee-event-venue__detail-value' aria-label={__('Venue capacity')}>
+									{venueCapacity}
+								</span>
 							</div>
 							<div className='ee-event-venue__detail'>
 								<span className='ee-event-venue__detail-label'>
 									<Phone />
 								</span>
-								<span className='ee-event-venue__detail-value'>
+								<span className='ee-event-venue__detail-value' aria-label={__('Venue telephone')}>
 									{selectedVenue?.phone || '(###) ###-####'}
 								</span>
 							</div>

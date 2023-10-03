@@ -1,10 +1,11 @@
 import { useCallback, useMemo } from 'react';
 
-import { Button } from '@eventespresso/adapters';
-import { __, sprintf } from '@eventespresso/i18n';
+import { Button } from '@eventespresso/ui-components';
+import { sprintf } from '@eventespresso/i18n';
 import { useDataState } from '../../data';
 import getRelationIcon from './getRelationIcon';
 import type { RenderCellProps } from '../../types';
+import type { Datetime, Ticket } from '@eventespresso/edtr-services';
 
 const BodyCell: React.FC<RenderCellProps> = ({ datetime, ticket }) => {
 	const { getAssignmentStatus, toggleAssignment } = useDataState();
@@ -18,32 +19,52 @@ const BodyCell: React.FC<RenderCellProps> = ({ datetime, ticket }) => {
 
 	const icon = useMemo(() => getRelationIcon(status), [status]);
 
-	const ariaLabel: string = useMemo(() => {
-		// since clicking on button invokes opposite action, we show the label describing what will happen when the button is clicked, e.g. when ticket is already assigned, clicking button will unassign ticket
-		switch (status) {
-			case 'NEW':
-			case 'OLD':
-				return __('unassign ticket');
-			case 'REMOVED':
-				return __('keep ticket');
-			default:
-				return __('assign ticket');
+	const nameOrId = (entity: Datetime | Ticket): string => {
+		if (entity.name && entity.name.length > 0) {
+			return entity.name;
 		}
-	}, [status]);
+		if (entity.dbId === 0) {
+			return '';
+		}
+		return entity.dbId.toString();
+	};
 
-	const ariaDescription: string = useMemo(() => {
-		/* translators: ticket ID %d */
-		return sprintf(__('ticket ID %d'), ticket.dbId);
-	}, [ticket]);
+	const entityLabel = useCallback((entity: Datetime | Ticket, type: string): string => {
+		const token = nameOrId(entity);
+		/* translators: %1$s entity type, %2$s entity name or id */
+		return sprintf('%1$s %2$s', type, token);
+	}, []);
+
+	const ariaLabel: string = useMemo(() => {
+		const ticketLabel = entityLabel(ticket, 'ticket');
+		const datetimeLabel = entityLabel(datetime, 'datetime');
+		switch (status) {
+			case null:
+				// no current status so assign new relation
+				/* translators: %1$s ticket label, %2$s datetime label */
+				return sprintf('click to assign %1$s to %2$s', ticketLabel, datetimeLabel);
+			case 'NEW':
+				// remove newly assigned relation
+				/* translators: %1$s ticket label, %2$s datetime label */
+				return sprintf('click to remove new assignment for %1$s from %2$s', ticketLabel, datetimeLabel);
+			case 'OLD':
+				// remove existing relation
+				/* translators: %1$s ticket label, %2$s datetime label */
+				return sprintf('click to remove %1$s from %2$s', ticketLabel, datetimeLabel);
+			case 'REMOVED':
+				// reassign newly removed relation
+				/* translators: %1$s ticket label, %2$s datetime label */
+				return sprintf('click to reassign %1$s to %2$s', ticketLabel, datetimeLabel);
+		}
+	}, [ticket, datetime, status, entityLabel]);
 
 	return (
 		<Button
-			aria-label={ariaLabel}
-			aria-description={ariaDescription}
 			className='ee-tam-relation-btn'
 			icon={icon}
 			margin='auto'
 			onClick={onClick}
+			tooltip={ariaLabel}
 			variant='link'
 		/>
 	);

@@ -1,9 +1,12 @@
+import { useMemo } from 'react';
+
 import { EntityEditModal } from '@eventespresso/ee-components';
 import { EdtrGlobalModals, useEvent, useTicketItem } from '@eventespresso/edtr-services';
 import { useGlobalModal } from '@eventespresso/registry';
 import { __, sprintf } from '@eventespresso/i18n';
 import { usePrevNext } from '@eventespresso/hooks';
 import { useIsPristine } from '@eventespresso/form';
+import type { ModalProps } from '@eventespresso/adapters';
 
 import ModalBody from './ModalBody';
 import type { ContentWrapperProps } from './types';
@@ -22,7 +25,7 @@ const Modal: React.FC<ContentWrapperProps> = ({ onClose, ...props }) => {
 
 	let title = ticket?.dbId
 		? sprintf(
-				/* translators: 1 ticket name, 2 ticket id */
+				/* translators: %1$s ticket name, %2$s ticket id */
 				__('Edit ticket "%1$s" - %2$s'),
 				ticket.name,
 				`#${ticket.dbId}`
@@ -34,6 +37,19 @@ const Modal: React.FC<ContentWrapperProps> = ({ onClose, ...props }) => {
 
 	const footerButtons = <FooterButtons steps={steps} />;
 
+	const ariaAttributes: ModalProps['ariaAttributes'] = useMemo(() => {
+		const getAriaLabel = (): string => {
+			if (!ticket || !ticket.name) {
+				return __('modal for ticket');
+			}
+			/* translators: %s ticket name */
+			return sprintf('modal for ticket %s', ticket.name);
+		};
+		return {
+			modalContent: { 'aria-label': getAriaLabel() },
+		};
+	}, [ticket]);
+
 	return (
 		<EntityEditModal
 			entityType='ticket'
@@ -42,6 +58,7 @@ const Modal: React.FC<ContentWrapperProps> = ({ onClose, ...props }) => {
 			onClose={onClose}
 			showAlertOnClose={!isPristine}
 			title={title}
+			ariaAttributes={ariaAttributes}
 		>
 			<ModalBody {...props} steps={steps} />
 		</EntityEditModal>

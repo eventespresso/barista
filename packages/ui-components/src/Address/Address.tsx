@@ -22,6 +22,14 @@ export type AddressProps = {
 	showHeader?: boolean;
 	stateName?: string;
 	zip?: string;
+	labels?: {
+		inline?: string;
+		address?: string;
+		city?: string;
+		stateName?: string;
+		countryName?: string;
+		zip?: string;
+	};
 };
 
 export const Address: React.FC<AddressProps> = ({
@@ -39,6 +47,7 @@ export const Address: React.FC<AddressProps> = ({
 	showHeader,
 	stateName,
 	zip,
+	labels = {},
 }) => {
 	const addressClass = classNames('ee-address', inline && 'ee-address--inline', className);
 	if (inline) {
@@ -56,7 +65,7 @@ export const Address: React.FC<AddressProps> = ({
 		return (
 			<div className={addressClass}>
 				{showHeader && <h5 className='ee-address__header'>{__('Address:')}</h5>}
-				<div className='ee-address__line'>
+				<div className='ee-address__line' aria-label={labels.inline ?? ''}>
 					{showIcon && <MapMarker />}
 					{fullAddress}
 				</div>
@@ -70,7 +79,7 @@ export const Address: React.FC<AddressProps> = ({
 			{(address || address2) && (
 				<div className='ee-address__line'>
 					{showLabels && <span className='ee-address__label'>{__('Address:')}</span>}
-					<span className='ee-address__value'>
+					<span className='ee-address__value' aria-label={labels.address ?? ''}>
 						{address}&nbsp;{address2}
 					</span>
 				</div>
@@ -78,25 +87,33 @@ export const Address: React.FC<AddressProps> = ({
 			{city && (
 				<div className='ee-address__line'>
 					{showLabels && <span className='ee-address__label'>{__('City:')}</span>}
-					<span className='ee-address__value'>{city}</span>
+					<span className='ee-address__value' aria-label={labels.city ?? ''}>
+						{city}
+					</span>
 				</div>
 			)}
 			{stateName && (
 				<div className='ee-address__line'>
 					{showLabels && <span className='ee-address__label'>{__('State:')}</span>}
-					<span className='ee-address__value'>{stateName}</span>
+					<span className='ee-address__value' aria-label={labels.stateName ?? ''}>
+						{stateName}
+					</span>
 				</div>
 			)}
 			{countryName && (
 				<div className='ee-address__line'>
 					{showLabels && <span className='ee-address__label'>{__('Country:')}</span>}
-					<span className='ee-address__value'>{countryName}</span>
+					<span className='ee-address__value' aria-label={labels.countryName ?? ''}>
+						{countryName}
+					</span>
 				</div>
 			)}
 			{zip && (
 				<div className='ee-address__line'>
 					{showLabels && <span className='ee-address__label'>{__('Zip:')}</span>}
-					<span className='ee-address__value'>{zip}</span>
+					<span className='ee-address__value' aria-label={labels.zip ?? ''}>
+						{zip}
+					</span>
 				</div>
 			)}
 		</div>

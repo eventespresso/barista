@@ -2,6 +2,9 @@
 	"name": "root",
 	"private": true,
 	"license": "GPL-3.0",
+	"engines": {
+		"node": "^16"
+	},
 	"scripts": {
 		"build:ci": "FORCE_COLOR=true yarn build",
 		"build:core": "yarn build:cra --domains \"core\" --skip-packages \"rrule-generator\"",

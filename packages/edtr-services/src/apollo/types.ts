@@ -54,6 +54,7 @@ export enum DateStatus {
 }
 
 export interface Datetime extends Entity, Trashable {
+	__typename: 'EspressoDatetime';
 	capacity: number;
 	description: string;
 	endDate: string;
@@ -71,6 +72,12 @@ export interface Datetime extends Entity, Trashable {
 	status: DateStatus;
 	venue: EntityId; // UUID
 }
+
+// type guard
+// https://www.typescriptlang.org/docs/handbook/2/narrowing.html
+export const isDatetime = (entity: Entity): entity is Datetime => {
+	return entity.__typename === 'EspressoDatetime';
+};
 
 export interface DatetimeItem {
 	espressoDatetime: Datetime;

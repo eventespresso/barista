@@ -1,8 +1,9 @@
-import { forwardRef } from 'react';
+import { useMemo, forwardRef } from 'react';
 import classNames from 'classnames';
 
 import { MenuToggle } from '@eventespresso/adapters';
 import { Menu } from '@eventespresso/icons';
+import { sprintf } from '@eventespresso/i18n';
 
 import { IconButton } from '../../';
 import type { DropdownToggleProps } from '../types';
@@ -18,8 +19,13 @@ export const DropdownToggle = forwardRef<HTMLButtonElement, DropdownToggleProps>
 			props.className
 		);
 
+		const ariaLabel: string = useMemo(() => {
+			/* translators: %s tooltip text */
+			return sprintf('open %s', tooltip);
+		}, [tooltip]);
+
 		return (
-			<MenuToggle aria-label={tooltip} as='div' className={className} ref={ref}>
+			<MenuToggle aria-label={ariaLabel} as='div' className={className} ref={ref}>
 				<IconButton
 					borderless
 					data-testid={props['data-testid']}

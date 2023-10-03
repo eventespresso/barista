@@ -1,9 +1,9 @@
+import './style.css';
 import classNames from 'classnames';
-
 import { EntityIDs } from '../EntityIDs';
 import type { Entity } from '@eventespresso/data';
-
-import './style.css';
+import { useContext } from 'react';
+import Contexts from './Contexts';
 
 interface EntityPaperFrameProps {
 	children: React.ReactNode;
@@ -12,15 +12,33 @@ interface EntityPaperFrameProps {
 }
 
 /**
+ * Composition of JSX and Contexts thanks to dot-notation
+ * @link https://legacy.reactjs.org/docs/jsx-in-depth.html#using-dot-notation-for-jsx-type
+ * @link https://stackoverflow.com/a/60883463/4343719
+ * @link https://dev.to/alexandprivate/react-dot-notation-component-with-ts-49k8
+ */
+type Element = React.FC<EntityPaperFrameProps>;
+type ElementWithCtx = Element & { Contexts: typeof Contexts };
+
+/**
  * EntityPaperFrame
  * adds a styled frame that gives the appearance
  * of a piece of paper on a surface
  */
-const EntityPaperFrame: React.FC<EntityPaperFrameProps> = ({ children, entity, ...props }) => {
+const EntityPaperFrame: ElementWithCtx = ({ children, entity, ...props }) => {
 	const className = classNames(props.className, 'ee-entity-paper-frame-wrapper');
 
+	const ariaLabel = useContext(Contexts.AriaLabel);
+
+	const ariaDescription = useContext(Contexts.AriaDescription);
+
 	return (
-		<div id={`ee-entity-paper-frame-${entity.id}`} className={className}>
+		<div
+			aria-label={ariaLabel}
+			aria-description={ariaDescription}
+			id={`ee-entity-paper-frame-${entity.id}`}
+			className={className}
+		>
 			<EntityIDs dbid={entity.dbId} guid={entity.id} />
 
 			<div className='ee-entity-paper-frame'>
@@ -29,5 +47,7 @@ const EntityPaperFrame: React.FC<EntityPaperFrameProps> = ({ children, entity, .
 		</div>
 	);
 };
+
+EntityPaperFrame.Contexts = Contexts;
 
 export default EntityPaperFrame;

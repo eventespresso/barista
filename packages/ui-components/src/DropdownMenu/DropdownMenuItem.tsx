@@ -15,6 +15,7 @@ export const DropdownMenuItem: React.FC<DropdownMenuItemProps> = ({
 
 	return (
 		<MenuItem
+			aria-label={title}
 			{...props}
 			isDisabled={isDisabled}
 			onClick={isDisabled ? null : onClick}

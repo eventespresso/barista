@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The plugin main file.
  *
@@ -35,19 +36,6 @@ add_action(
         require_once __DIR__ . '/lib/Barista.php';
         $barista = new Barista();
         $barista->initialize();
-        add_filter(
-            'FHEE__EventEspresso_core_domain_services_capabilities_FeatureFlags',
-            function ($capabilities) {
-				$capabilities->{FeatureFlagsConfig::USE_ADVANCED_EVENT_EDITOR} = true;
-				$capabilities->{FeatureFlagsConfig::USE_EVENT_EDITOR_BULK_EDIT} = true;
-				$capabilities->{FeatureFlagsConfig::USE_DEFAULT_TICKET_MANAGER} = true;
-				$capabilities->{FeatureFlagsConfig::USE_EVENT_DESCRIPTION_RTE} = true;
-				$capabilities->{FeatureFlagsConfig::USE_EXPERIMENTAL_RTE} = true;
-				$capabilities->{FeatureFlagsConfig::USE_REG_FORM_BUILDER} = true;
-				$capabilities->{FeatureFlagsConfig::USE_REG_OPTIONS_META_BOX} = true;
-				return $capabilities;
-            }
-        );
     }
 );
 
