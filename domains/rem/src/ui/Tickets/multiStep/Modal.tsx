@@ -16,7 +16,7 @@ const Modal: React.FC<ContextProviderProps> = ({ onClose, ...props }) => {
 
 	const title = values?.dbId
 		? sprintf(
-				/* translators: %d ticket id */
+				/* translators: %d database id */
 				__('Edit ticket %d'),
 				`#${values.dbId}`
 		  )

@@ -20,7 +20,7 @@ export const DropdownToggle = forwardRef<HTMLButtonElement, DropdownToggleProps>
 		);
 
 		const ariaLabel: string = useMemo(() => {
-			/* translators: open <tooltip> */
+			/* translators: %s tooltip text */
 			return sprintf('open %s', tooltip);
 		}, [tooltip]);
 

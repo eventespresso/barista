@@ -31,6 +31,7 @@ const BodyCell: React.FC<RenderCellProps> = ({ datetime, ticket }) => {
 
 	const entityLabel = useCallback((entity: Datetime | Ticket, type: string): string => {
 		const token = nameOrId(entity);
+		/* translators: %1$s entity type, %2$s entity name or id */
 		return sprintf('%1$s %2$s', type, token);
 	}, []);
 
@@ -40,15 +41,19 @@ const BodyCell: React.FC<RenderCellProps> = ({ datetime, ticket }) => {
 		switch (status) {
 			case null:
 				// no current status so assign new relation
+				/* translators: %1$s ticket label, %2$s datetime label */
 				return sprintf('click to assign %1$s to %2$s', ticketLabel, datetimeLabel);
 			case 'NEW':
 				// remove newly assigned relation
+				/* translators: %1$s ticket label, %2$s datetime label */
 				return sprintf('click to remove new assignment for %1$s from %2$s', ticketLabel, datetimeLabel);
 			case 'OLD':
 				// remove existing relation
+				/* translators: %1$s ticket label, %2$s datetime label */
 				return sprintf('click to remove %1$s from %2$s', ticketLabel, datetimeLabel);
 			case 'REMOVED':
 				// reassign newly removed relation
+				/* translators: %1$s ticket label, %2$s datetime label */
 				return sprintf('click to reassign %1$s to %2$s', ticketLabel, datetimeLabel);
 		}
 	}, [ticket, datetime, status, entityLabel]);

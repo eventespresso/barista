@@ -26,7 +26,7 @@ const Modal: React.FC<ContentWrapperProps> = ({ onClose, ...props }) => {
 	const title: string = useMemo(() => {
 		const str = datetime?.dbId
 			? sprintf(
-					/* translators: %s datetime id */
+					/* translators: %d database id */
 					__('Edit datetime %s'),
 					`#${datetime.dbId}`
 			  )
@@ -42,7 +42,7 @@ const Modal: React.FC<ContentWrapperProps> = ({ onClose, ...props }) => {
 			if (!datetime || !datetime.name) {
 				return __('modal for datetime');
 			}
-			/* translators: modal for datetime %s */
+			/* translators: %s datetime name */
 			return sprintf('modal for datetime %s', datetime.name);
 		};
 		return {
