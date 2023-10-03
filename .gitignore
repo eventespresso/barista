@@ -85,3 +85,6 @@ storybook-static
 
 # SSL certificates
 *.pem
+
+# dotenv
+.env.*
