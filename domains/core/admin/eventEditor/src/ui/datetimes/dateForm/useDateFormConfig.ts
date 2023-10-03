@@ -146,7 +146,6 @@ const useDateFormConfig = (id: EntityId, config?: EspressoFormProps): DateFormCo
 			subscription: {},
 			validate,
 			layout: 'horizontal',
-			debugFields: ['values', 'errors'],
 			sections,
 		}),
 		[config, initialValues, onSubmitFrom, sections]

@@ -60,7 +60,6 @@ const useDateFormConfig = (datetime: Partial<Datetime>, config?: Partial<Espress
 			initialValues,
 			subscription: {},
 			validate,
-			debugFields: ['values', 'errors'],
 			sections: [
 				{
 					name: 'basics',
