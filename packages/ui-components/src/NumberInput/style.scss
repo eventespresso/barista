@@ -42,7 +42,7 @@
 
 	.ee-number-field-stepper {
 		height: calc(var(--ee-button-height) - var(--ee-border-width));
-		inset-inline-end: var(--ee-margin-micro);
+		inset-inline-end: calc(var(--ee-margin-micro) * -1);
 		margin-block-start: var(--ee-size-micro);
 		z-index: 0;
 
