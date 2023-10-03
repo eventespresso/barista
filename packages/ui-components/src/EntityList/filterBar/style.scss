@@ -5,8 +5,10 @@ $filter-btn: '.ee-filter-bar__btn';
 .ee-filter-bar {
 	box-sizing: border-box;
 	color: var(--ee-default-text-color);
-	margin: 0 0 var(--ee-margin-tiny);
-	padding: var(--ee-padding-tiny) 0;
+	margin: 0;
+	margin-block-start:  var(--ee-margin-tiny);
+	padding: 0;
+	padding-block-start: var(--ee-padding-smaller);
 
 	&__main {
 		display: flex;
@@ -21,7 +23,7 @@ $filter-btn: '.ee-filter-bar__btn';
 	&__collapsible {
 		display: flex;
 		flex-flow: row wrap;
-		padding: 0 var(--ee-padding-small);
+		padding: 0;
 
 		@include max782px {
 			padding: 0 0 var(--ee-padding-small);
@@ -34,13 +36,13 @@ $filter-btn: '.ee-filter-bar__btn';
 		flex-flow: column nowrap;
 		height: auto;
 		justify-content: flex-end;
-		margin: 0 var(--ee-margin-small) var(--ee-margin-smaller) 0;
+		margin: 0;
 		max-width: 100%;
 		min-width: calc(var(--ee-font-size-default) * 12);
 		white-space: pre;
 		width: auto;
 
-		@include max850px {
+		@include max1024px {
 			min-width: calc(49.5% - var(--ee-margin-small));
 		}
 
@@ -71,31 +73,31 @@ $filter-btn: '.ee-filter-bar__btn';
 		}
 
 		&--micro {
-			min-width: calc(var(--ee-font-size-default) * 3);
-		}
-
-		&--tiny {
 			min-width: calc(var(--ee-font-size-default) * 4);
 		}
 
-		&--smaller {
+		&--tiny {
 			min-width: calc(var(--ee-font-size-default) * 6);
 		}
 
+		&--smaller {
+			min-width: calc(var(--ee-font-size-default) * 8);
+		}
+
 		&--small {
-			min-width: calc(var(--ee-font-size-default) * 9);
+			min-width: calc(var(--ee-font-size-default) * 12);
 		}
 
 		&--big {
-			min-width: calc(var(--ee-font-size-default) * 15);
+			min-width: calc(var(--ee-font-size-default) * 18);
 		}
 
 		&--bigger {
-			min-width: calc(var(--ee-font-size-default) * 21);
+			min-width: calc(var(--ee-font-size-default) * 27);
 		}
 
 		&--huge {
-			min-width: calc(var(--ee-font-size-default) * 32);
+			min-width: calc(var(--ee-font-size-default) * 36);
 		}
 
 		&--extreme {
