@@ -1,13 +1,17 @@
 import classNames from 'classnames';
 
-import type { Size } from '../types';
+import type { Width } from '../types';
 
-interface FilterBarFilterProps extends Size {
+interface FilterBarFilterProps extends Width {
 	className?: string;
 }
 
-const FilterBarFilter: React.FC<FilterBarFilterProps> = ({ children, className, size }) => {
-	const filterClasses = classNames('ee-filter-bar__filter', size && `ee-filter-bar__filter--${size}`, className);
+const FilterBarFilter: React.FC<FilterBarFilterProps> = ({ children, className, width }) => {
+	const filterClasses = classNames(
+		'ee-filter-bar__filter',
+		width && `ee-filter-bar__filter-width--${width}`,
+		className
+	);
 	return <div className={filterClasses}>{children}</div>;
 };
 
