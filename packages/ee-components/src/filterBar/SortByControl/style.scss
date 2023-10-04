@@ -3,7 +3,8 @@
 .ee-sort-by-control {
 	align-items: flex-end;
 	display: flex;
-	padding-bottom: var(--ee-padding-tiny);
+	flex-direction: column;
+	padding-block-end: var(--ee-padding-tiny);
 
 	.ee-input-label__wrapper {
 		padding-bottom: 0;
@@ -11,6 +12,11 @@
 
 	.ee-btn-base.ee-btn {
 		margin-block-end: var(--ee-margin-micro);
+		margin-inline-end: var(--ee-margin-small);
+	}
+
+	@include min480px {
+		flex-direction: row;
 	}
 }
 
