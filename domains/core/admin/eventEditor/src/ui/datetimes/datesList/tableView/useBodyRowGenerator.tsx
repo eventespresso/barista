@@ -6,7 +6,7 @@ import * as R from 'ramda';
 import { addZebraStripesOnMobile, CellData } from '@eventespresso/ui-components';
 import { filterCellByStartOrEndDate, useDatetimes, useLazyDatetime } from '@eventespresso/edtr-services';
 import { ENTITY_LIST_DATE_TIME_FORMAT } from '@eventespresso/constants';
-import { useTimeZoneTime } from '@eventespresso/services';
+import { useFeature, useTimeZoneTime } from '@eventespresso/services';
 import { getDatetimeBackgroundColorClassName, datetimeStatus } from '@eventespresso/helpers';
 import { findEntityByGuid } from '@eventespresso/predicates';
 import type { EntityId } from '@eventespresso/data';
@@ -28,13 +28,14 @@ const useBodyRowGenerator = (): DatesTableBodyRowGen => {
 	const datetimes = useDatetimes();
 	const getDatetime = useCallback((id: EntityId) => findEntityByGuid(datetimes)(id), [datetimes]);
 	const getLazyDatetime = useLazyDatetime();
+	const canUseBulkEdit = useFeature('ee_event_editor_bulk_edit');
 	const { formatForSite: format } = useTimeZoneTime();
 
 	return useCallback<DatesTableBodyRowGen>(
 		({ entityId, filterState }) => {
 			const datetime = getDatetime(entityId) || getLazyDatetime(entityId);
 
-			const { displayStartOrEndDate, showBulkActions } = filterState;
+			const { displayStartOrEndDate } = filterState;
 
 			const bgClassName = getDatetimeBackgroundColorClassName(datetime);
 			const id = datetime.dbId || 0;
@@ -48,7 +49,7 @@ const useBodyRowGenerator = (): DatesTableBodyRowGen => {
 				value: datetime.name,
 			};
 
-			const bulkActionCheckboxCell: CellData = showBulkActions && {
+			const bulkActionCheckboxCell: CellData = canUseBulkEdit && {
 				key: 'cell',
 				size: 'micro',
 				textAlign: 'center',
@@ -147,7 +148,7 @@ const useBodyRowGenerator = (): DatesTableBodyRowGen => {
 				type: 'row',
 			};
 		},
-		[format, getDatetime, getLazyDatetime]
+		[canUseBulkEdit, format, getDatetime, getLazyDatetime]
 	);
 };
 

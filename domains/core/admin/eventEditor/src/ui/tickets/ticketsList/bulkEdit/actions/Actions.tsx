@@ -2,13 +2,13 @@ import { useState, useCallback, useMemo } from 'react';
 
 import { __ } from '@eventespresso/i18n';
 import { BulkActions } from '@eventespresso/ee-components';
-import { Collapsible, ErrorMessage } from '@eventespresso/ui-components';
+import { ErrorMessage } from '@eventespresso/ui-components';
 import { entitiesWithGuIdInArray, TicketsStatus } from '@eventespresso/predicates';
 import { SOLD_TICKET_ERROR_MESSAGE } from '@eventespresso/tpc';
 import { USE_ADVANCED_EDITOR } from '@eventespresso/constants';
 import { useDisclosure, useMemoStringify } from '@eventespresso/hooks';
 import { useTickets, useTicketsListFilterState } from '@eventespresso/edtr-services';
-import { withCurrentUserCan, useBulkEdit } from '@eventespresso/services';
+import { withCurrentUserCan, useBulkEdit, useFeature } from '@eventespresso/services';
 import type { BulkActionsProps } from '@eventespresso/ui-components';
 
 import Checkbox from '../../tableView/Checkbox';
@@ -21,8 +21,10 @@ type Action = 'edit-details' | 'delete' | 'edit-prices' | '';
 const Actions: React.FC = () => {
 	const [action, setAction] = useState<Action>('');
 
+	const canUseBulkEdit = useFeature('ee_event_editor_bulk_edit');
+
 	const { isOpen, onOpen, onClose } = useDisclosure();
-	const { status, showBulkActions } = useTicketsListFilterState();
+	const { status } = useTicketsListFilterState();
 	const { getSelected } = useBulkEdit();
 	const allTickets = useTickets();
 
@@ -63,24 +65,21 @@ const Actions: React.FC = () => {
 	);
 
 	return (
-		<Collapsible show={showBulkActions}>
-			<BulkActions
-				Checkbox={Checkbox}
-				defaultAction=''
-				id={'ee-bulk-edit-tickets-actions'}
-				onApply={isEditPricesDisabled ? null : onApply}
-				options={options}
-			/>
-			{isOpen && (
-				<>
-					{action === 'edit-details' && <EditDetails isOpen={true} onClose={onClose} />}
-					{action === 'delete' && <Delete areTrashedTickets={areTrashedTickets} onClose={onClose} />}
-					{action === 'edit-prices' && <EditPrices isOpen={true} onClose={onClose} />}
-				</>
-			)}
-
-			<ErrorMessage message={isEditPricesDisabled && SOLD_TICKET_ERROR_MESSAGE} variant='subtle' />
-		</Collapsible>
+		canUseBulkEdit && (
+			<>
+				<BulkActions
+					Checkbox={Checkbox}
+					defaultAction=''
+					id={'ee-bulk-edit-tickets-actions'}
+					onApply={isEditPricesDisabled ? null : onApply}
+					options={options}
+				/>
+				{action === 'edit-details' && <EditDetails isOpen={isOpen} onClose={onClose} />}
+				{action === 'delete' && <Delete areTrashedTickets={areTrashedTickets} onClose={onClose} />}
+				{action === 'edit-prices' && <EditPrices isOpen={isOpen} onClose={onClose} />}
+				<ErrorMessage message={isEditPricesDisabled && SOLD_TICKET_ERROR_MESSAGE} variant='subtle' />
+			</>
+		)
 	);
 };
 

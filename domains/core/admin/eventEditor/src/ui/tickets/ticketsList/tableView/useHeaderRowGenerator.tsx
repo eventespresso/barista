@@ -2,6 +2,7 @@ import { useCallback, useMemo } from 'react';
 
 import { __ } from '@eventespresso/i18n';
 import { filterCellByStartOrEndDate } from '@eventespresso/edtr-services';
+import { useFeature } from '@eventespresso/services';
 
 import type { CellData } from '@eventespresso/ui-components';
 import type { HeaderRowGeneratorFn } from '@eventespresso/ee-components';
@@ -12,6 +13,7 @@ import Checkbox from './Checkbox';
 type TicketsTableHeaderRowGen = HeaderRowGeneratorFn<TicketsFilterStateManager>;
 
 const useHeaderRowGenerator = (): TicketsTableHeaderRowGen => {
+	const canUseBulkEdit = useFeature('ee_event_editor_bulk_edit');
 	const stripeCell: CellData = useMemo(
 		() => ({
 			className: 'ee-entity-list-status-stripe',
@@ -127,9 +129,9 @@ const useHeaderRowGenerator = (): TicketsTableHeaderRowGen => {
 
 	return useCallback<TicketsTableHeaderRowGen>(
 		(filterState) => {
-			const { displayStartOrEndDate, showBulkActions } = filterState;
+			const { displayStartOrEndDate } = filterState;
 
-			const checkboxCell: CellData = showBulkActions && {
+			const checkboxCell: CellData = canUseBulkEdit && {
 				key: 'checkbox',
 				size: 'micro',
 				textAlign: 'center',
@@ -172,6 +174,7 @@ const useHeaderRowGenerator = (): TicketsTableHeaderRowGen => {
 		[
 			idCell,
 			actionsCell,
+			canUseBulkEdit,
 			endCell,
 			nameCell,
 			priceCell,
