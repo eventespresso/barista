@@ -1,16 +1,17 @@
 import { __ } from '@eventespresso/i18n';
 import { Filter } from '@eventespresso/icons';
-import { Button } from '../../../Button';
+import { Button, ButtonType } from '../../../Button';
 
 import type { ToggleFiltersButtonProps } from '../types';
 
 export const ToggleFiltersButton: React.FC<ToggleFiltersButtonProps> = ({ id, onClick, value, ...rest }) => {
 	const filterId = `ee-toggle-filters-btn-${id}`;
-	const tooltip = value ? __('hide filters') : __('show filters');
+	const buttonType = value ? ButtonType.PRIMARY : ButtonType.DEFAULT;
 
 	return (
 		<Button
 			active={value}
+			buttonType={buttonType}
 			className='ee-filter-bar__btn'
 			icon={Filter}
 			id={filterId}
@@ -19,7 +20,7 @@ export const ToggleFiltersButton: React.FC<ToggleFiltersButtonProps> = ({ id, on
 			size='small'
 			{...rest}
 		>
-			{tooltip}
+			{__('filters')}
 		</Button>
 	);
 };

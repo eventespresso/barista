@@ -23,9 +23,7 @@ export const SortByControl: React.FC<SortByControlProps> = ({
 	value,
 }) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
-	const text =
-		(entityType === 'datetimes' && __('set custom dates order')) ||
-		(entityType === 'tickets' && __('set custom tickets order'));
+	const text = __('set order');
 	const title =
 		(entityType === 'datetimes' && __('Set Custom Dates Order - this is how dates are ordered on the frontend')) ||
 		(entityType === 'tickets' && __('Set Custom Tickets Order - this is how tickets are ordered on the frontend'));
@@ -44,7 +42,14 @@ export const SortByControl: React.FC<SortByControlProps> = ({
 	return (
 		<>
 			<div className='ee-sort-by-control'>
-				<SelectWithLabel id={id} label={label} options={options} onChangeValue={onChangeValue} value={value} />
+				<SelectWithLabel
+					id={id}
+					label={label}
+					options={options}
+					onChangeValue={onChangeValue}
+					value={value}
+					width='small'
+				/>
 				{reorderButton}
 			</div>
 			<ModalWithAlert
