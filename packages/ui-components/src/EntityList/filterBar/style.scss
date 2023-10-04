@@ -59,48 +59,56 @@ $filter-btn: '.ee-filter-bar__btn';
 			margin: 0 0 var(--ee-margin-smaller);
 		}
 
+		&:first-child > div {
+			padding-inline-start: 0;
+		}
+
+		&:last-child > div {
+			padding-inline-end: 0;
+		}
+
 		> div,
 		&--full-width {
 			width: 100%;
 		}
 
-		&--auto {
+		&-width--auto {
 			width: auto;
 		}
 
-		&--nano {
+		&-width--nano {
 			min-width: calc(var(--ee-font-size-default) * 2);
 		}
 
-		&--micro {
+		&-width--micro {
 			min-width: calc(var(--ee-font-size-default) * 4);
 		}
 
-		&--tiny {
+		&-width--tiny {
 			min-width: calc(var(--ee-font-size-default) * 6);
 		}
 
-		&--smaller {
+		&-width--smaller {
 			min-width: calc(var(--ee-font-size-default) * 8);
 		}
 
-		&--small {
+		&-width--small {
 			min-width: calc(var(--ee-font-size-default) * 12);
 		}
 
-		&--big {
+		&-width--big {
 			min-width: calc(var(--ee-font-size-default) * 18);
 		}
 
-		&--bigger {
+		&-width--bigger {
 			min-width: calc(var(--ee-font-size-default) * 27);
 		}
 
-		&--huge {
+		&-width--huge {
 			min-width: calc(var(--ee-font-size-default) * 36);
 		}
 
-		&--extreme {
+		&-width--extreme {
 			min-width: calc(var(--ee-font-size-default) * 48);
 		}
 	}
@@ -167,6 +175,8 @@ $filter-btn: '.ee-filter-bar__btn';
 
 	&__chain {
 		min-height: 40px;
+		position: relative;
+		inset-inline-start: var(--ee-margin-pico);
 
 		@include max850px {
 			width: calc(49.5% - var(--ee-margin-small));
