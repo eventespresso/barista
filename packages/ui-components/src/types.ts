@@ -33,6 +33,22 @@ export interface EditButtonProps {
 
 export type ForwardRefComponent<P, C> = ForwardRefExoticComponent<PropsWithoutRef<P> & RefAttributes<C>>;
 
+export type Sizes =
+	| 'auto'
+	| 'nano'
+	| 'micro'
+	| 'tiny'
+	| 'smaller'
+	| 'small'
+	| 'default'
+	| 'big'
+	| 'bigger'
+	| 'huge'
+	| 'extreme';
+
 export interface Size {
-	size?: 'nano' | 'micro' | 'tiny' | 'smaller' | 'small' | 'default' | 'big' | 'bigger' | 'huge';
+	size?: Sizes;
+}
+export interface Width {
+	width?: Sizes;
 }
