@@ -83,7 +83,7 @@ const ticketsListFilterBar: TicketsListFilterBarCallback = ({ listId, registry }
 
 	registerFilterBarItem('isChained', () => {
 		return (
-			<FilterBarFilter className='ee-filter-bar__chain ee-filter-bar__filter--micro'>
+			<FilterBarFilter className='ee-filter-bar__chain' width='micro'>
 				<IsChainedButton />
 			</FilterBarFilter>
 		);
@@ -107,7 +107,7 @@ const ticketsListFilterBar: TicketsListFilterBarCallback = ({ listId, registry }
 
 	registerFilterBarItem('sortBy', () => {
 		return (
-			<FilterBarFilter>
+			<FilterBarFilter width='big'>
 				<SortByControl />
 			</FilterBarFilter>
 		);
