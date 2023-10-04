@@ -55,9 +55,13 @@
 	}
 
 	&__pagination {
-		&.ee-pagination {
-			margin: 0 0 0 auto;
-		}
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+
+	> .ee-btn-row {
+		position: relative;
 	}
 
 	+ .ee-entity-list {

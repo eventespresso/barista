@@ -37,8 +37,8 @@ export const EntityList: React.FC<EntityListProps> = ({
 			{entityList}
 
 			<ButtonRow alignItems='start' justifyContent='space-between'>
-				{legend}
 				{pagination}
+				{legend}
 			</ButtonRow>
 
 			<div className={'ee-entity-list__footer'}>{footer}</div>
