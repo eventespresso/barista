@@ -86,10 +86,8 @@ class FeatureFlagsAdminPage
 			$form->receive_form_submission($_REQUEST);
 			if ($form->is_valid()) {
 				$feature_flags_form_options = $form->valid_data();
-
 				$feature_flags = $feature_flags_config->getFeatureFlags();
 				$success       = true;
-
 				foreach ($feature_flags_form_options as $feature_flag => $value) {
 					$result = WordPressOption::UPDATE_NONE;
 					if ($feature_flag && property_exists($feature_flags, $feature_flag)) {
@@ -101,7 +99,7 @@ class FeatureFlagsAdminPage
 					if ($result === WordPressOption::UPDATE_ERROR) {
 						EE_Error::add_error(
 							sprintf(
-							/* translators: %1$s: feature flag name */
+								/* translators: %1$s: feature flag name */
 								esc_html__(
 									'An error occurred while trying to update the %1$s feature flag.',
 									'event_espresso'

@@ -24,9 +24,14 @@ class FeatureFlagsConfigForm extends EE_Form_Section_Proper
 			FeatureFlagsConfig::USE_EVENT_EDITOR_BULK_EDIT => [
 				'name' => esc_html__('Event Editor Bulk Edit','event_espresso'),
 				'html_label_text' => esc_html__('Use Event Editor Bulk Edit','event_espresso'),
-				'help_text' => esc_html__(
-					'Whether to enable the Bulk Edit feature in the Advanced Event Editor (EDTR). default: Enabled for Caffeinated sites, disabled for Decaf or Multisite installs',
-					'event_espresso'
+				'help_text' => sprintf(
+					esc_html__(
+						'Whether to enable the Bulk Edit feature in the Advanced Event Editor (EDTR).%1$s%2$sPLEASE NOTE: Bulk Editing is ALWAYS enabled if the Recurring Events Manager add-on is active.%3$s%1$s default: Enabled for Caffeinated sites, disabled for Decaf or Multisite installs',
+						'event_espresso'
+					),
+					'<br/>',
+					'<strong>',
+					'</strong>'
 				)
 			],
 			FeatureFlagsConfig::USE_DEFAULT_TICKET_MANAGER => [
