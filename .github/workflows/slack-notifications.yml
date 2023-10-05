@@ -1,0 +1,78 @@
+name: "Ready for Testing or Merge Notice"
+on:
+    pull_request:
+        types: [ready_for_review, review_requested, labeled]
+
+concurrency:
+    group: ${{ github.head_ref || github.run_id }}
+    cancel-in-progress: true
+
+jobs:
+    get:
+        runs-on: ubuntu-latest
+        outputs:
+            PR_LINK: ${{ steps.pr.outputs.PR_LINK }}
+        steps:
+            - name: build PR link
+              id: pr
+              shell: bash
+              run: |
+                  PR_NMBR="${{ github.event.number }}"
+                  # remove double quotes from title
+                  PR_TITLE="${{ github.event.pull_request.title }}"
+                  PR_TITLE="${PR_TITLE/\"/}"
+                  # remove backticks from title
+                  PR_TITLE="${PR_TITLE//\`/}"
+                  PR_LINK="<https://github.com/eventespresso/barista/pull/$PR_NMBR|$PR_TITLE #$PR_NMBR>"
+                  echo "PR_LINK=$PR_LINK" >> $GITHUB_OUTPUT
+
+    send-ready-for-review-notice:
+        needs: get
+        if: "${{ github.event.label.name == 'S5: code review 🔎' }}"
+        runs-on: ubuntu-latest
+        steps:
+            - name: post review notice
+              id: slack
+              uses: slackapi/slack-github-action@v1.24.0
+              with:
+                  channel-id: ${{ secrets.SLACK_CHANNEL_ID_DEV }}
+                  payload: |
+                      {
+                        "text": "<!here> RFR :point_right: ${{ needs.get.outputs.PR_LINK }}"
+                      }
+              env:
+                  SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_TOKEN }}
+
+    send-ready-for-testing-notice:
+        needs: get
+        if: "${{ github.event.label.name == 'S9: needs testing 🧪' }}"
+        runs-on: ubuntu-latest
+        steps:
+            - name: send testing notice
+              id: slack
+              uses: slackapi/slack-github-action@v1.24.0
+              with:
+                  channel-id: ${{ secrets.SLACK_CHANNEL_ID_SUPPORT_DESK }}
+                  payload: |
+                      {
+                          "text": "<!here> Ready for Testing :test_tube: ${{ needs.get.outputs.PR_LINK }}"
+                      }
+              env:
+                  SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_TOKEN }}
+
+    send-merge-notice:
+        needs: get
+        if: "${{ github.event.label.name == 'S:10 merge 🖇' }}"
+        runs-on: ubuntu-latest
+        steps:
+            - name: send merge notice
+              id: slack
+              uses: slackapi/slack-github-action@v1.24.0
+              with:
+                  channel-id: ${{ secrets.SLACK_CHANNEL_ID_DEV }}
+                  payload: |
+                      {
+                          "text": "<!here> Ready to Merge :linked_paperclips: ${{ needs.get.outputs.PR_LINK }}"
+                      }
+              env:
+                  SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_TOKEN }}
