@@ -246,7 +246,6 @@ export const useTicketFormConfig = (id: EntityId, config?: EspressoFormProps): T
 			subscription: {},
 			initialValues,
 			validate,
-			debugFields: ['values', 'errors'],
 			sections,
 		}),
 		[config, initialValues, onSubmitFrom, sections]

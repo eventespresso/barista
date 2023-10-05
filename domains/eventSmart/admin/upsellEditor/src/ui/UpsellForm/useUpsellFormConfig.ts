@@ -36,7 +36,6 @@ const useUpsellFormConfig = (config?: Partial<EspressoFormProps>): UpsellFormCon
 			onSubmit,
 			subscription: {},
 			validate: null,
-			debugFields: ['values', 'errors'],
 			sections: [
 				{
 					name: 'basics',

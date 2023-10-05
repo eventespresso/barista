@@ -1,8 +1,8 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 
 import { __ } from '@eventespresso/i18n';
 
-import { Button, ButtonRow, DebugInfo, Divider, ErrorMessage } from '@eventespresso/ui-components';
+import { Button, ButtonRow, Divider, ErrorMessage } from '@eventespresso/ui-components';
 import { useDisclosure } from '@eventespresso/hooks';
 import { CloseCircleOutlined, Repeat } from '@eventespresso/icons';
 
@@ -22,8 +22,6 @@ export const PatternEditor: React.FC = () => {
 	// We need to show rRule even after coming back from next steps
 	// isOpen is reset on each mount (step), exRule still remains in REM state
 	const showExRule = exRule || isOpen;
-
-	const debugData = useMemo(() => ({ rRule, exRule }), [exRule, rRule]);
 
 	const onChangeRRule = useCallback<RRuleEditorProps['onChange']>(
 		(newRRule) => {
@@ -75,7 +73,6 @@ export const PatternEditor: React.FC = () => {
 					type='exclusion'
 				/>
 			)}
-			<DebugInfo data={debugData} />
 		</>
 	);
 };

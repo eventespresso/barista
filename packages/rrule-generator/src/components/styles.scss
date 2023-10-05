@@ -34,6 +34,9 @@
 				flex: 0 1 80%;
 				flex-wrap: wrap;
 			}
+			@include min720px {
+				flex-wrap: nowrap;
+			}
 		}
 
 		> div.ee-container {
@@ -54,7 +57,6 @@
 	}
 
 	&__frequency {
-
 		> div {
 			margin-block-end: var(--ee-margin-small);
 		}

@@ -15,7 +15,7 @@ const style: CSSProperties = {
 	backgroundColor: '#26203d',
 };
 
-const DebugInfo: React.FC<DebugInfoProps> = ({ data, asJson = true, asCollapse = true }) => {
+const DebugInfo: React.FC<DebugInfoProps> = ({ buttonText, data, asJson = true, asCollapse = true }) => {
 	const [show, setShow] = useState(false);
 
 	// define it here to avoid conditional call of hook
@@ -33,11 +33,12 @@ const DebugInfo: React.FC<DebugInfoProps> = ({ data, asJson = true, asCollapse =
 		return output;
 	}
 
-	const buttonText = show ? __('Hide Debug Info') : __('Show Debug Info');
+	let btnText = show ? __('Hide Debug Info') : __('Show Debug Info');
+	btnText = buttonText || btnText;
 
 	return (
 		<>
-			<Button className='ee-debug-info-btn' buttonText={buttonText} onClick={handleToggle} />
+			<Button className='ee-debug-info-btn' buttonText={btnText} onClick={handleToggle} />
 			<Collapse isOpen={show}>{output}</Collapse>
 		</>
 	);

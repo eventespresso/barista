@@ -1,6 +1,7 @@
 import { pick } from 'ramda';
 import { FormSpy } from 'react-final-form';
 
+import { __ } from '@eventespresso/i18n';
 import { DebugInfo } from '@eventespresso/ui-components';
 
 import Submit from '../Submit';
@@ -20,7 +21,6 @@ const FormRenderer: React.FC<FormRendererProps> = (props) => {
 		submitButton,
 		resetButton,
 		formWrapper: FormWrapper,
-		debugFields,
 		hasValidationErrors,
 		hasSubmitErrors,
 	} = props;
@@ -46,10 +46,11 @@ const FormRenderer: React.FC<FormRendererProps> = (props) => {
 					</div>
 					{children}
 				</form>
-
-				{debugFields?.length && (
-					<FormSpy>{({ form }) => <DebugInfo data={pick(debugFields, form.getState())} />}</FormSpy>
-				)}
+				<FormSpy>
+					{({ form }) => (
+						<DebugInfo buttonText={__('Form Errors')} data={pick(['errors'], form.getState())} />
+					)}
+				</FormSpy>
 			</div>
 		</div>
 	);

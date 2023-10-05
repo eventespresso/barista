@@ -37,7 +37,6 @@ const useBulkEditFormConfig = (config?: EspressoFormProps<BulkEditFormShape>): D
 			onSubmit: onSubmitFrom,
 			validate,
 			layout: 'horizontal',
-			debugFields: ['values', 'errors'],
 			sections: [
 				{
 					name: 'basics',

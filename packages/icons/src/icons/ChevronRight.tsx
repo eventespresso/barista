@@ -6,9 +6,9 @@ const ChevronRight = (props: IconProps): JSX.Element => {
 		<svg
 			aria-hidden='true'
 			fill='currentColor'
-			height='1.5em'
-			width='1.5em'
-			viewBox='0 0 512.001 512.001'
+			height='1em'
+			width='1em'
+			viewBox='-200 -160 800 800'
 			className='ee-svg--chevron-right'
 			{...props}
 		>
