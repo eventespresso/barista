@@ -68,7 +68,6 @@ const BaseField: React.FC<BaseFieldProps> = ({
 
 	if (type === 'number') {
 		return (
-			// @ts-ignore
 			<NumberInput
 				{...handlers}
 				{...props}
