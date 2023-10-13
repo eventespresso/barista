@@ -21,7 +21,9 @@ type Picked =
 	| 'step'
 	| 'value';
 
-export interface NumberInputProps extends Pick<ChakraNumberInputProps, Picked>, CommonInputProps<HTMLInputElement> {
+export interface NumberInputProps
+	extends Pick<ChakraNumberInputProps, Picked>,
+		CommonInputProps<HTMLInputElement, 'onChange'> {
 	decrementStepperProps?: ChakraBoxProps;
 	inputFieldProps?: ChakraInputProps;
 	inputStepperProps?: ChakraFlexProps;
