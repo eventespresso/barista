@@ -40,8 +40,9 @@ const useBaseField = ({
 					setValue(format(getValue(), name));
 				}
 			},
-			onChange: (valueAsString, valueAsNumber) => {
-				setValue(parse(valueAsString, name));
+			onChange: (event) => {
+				const value = event?.target?.value ? event.target.value : event;
+				setValue(parse(value, name));
 			},
 			onChangeValue: (value) => {
 				setValue(parse(value, name));
