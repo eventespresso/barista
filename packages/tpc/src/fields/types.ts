@@ -1,6 +1,6 @@
 import { InputHTMLAttributes } from 'react';
 
-import type { CommonInputProps, NumberInputProps } from '@eventespresso/adapters';
+import type { NumberInputProps } from '@eventespresso/adapters';
 import type { SelectProps } from '@eventespresso/ui-components';
 
 import type { PriceModifierProps, TpcPriceModifier } from '../types';
@@ -8,8 +8,10 @@ import type { PriceModifierProps, TpcPriceModifier } from '../types';
 export type InputProps<E = HTMLInputElement> = Omit<
 	InputHTMLAttributes<E>,
 	'css' | 'max' | 'min' | 'step' | 'defaultValue' | 'onChange'
-> &
-	CommonInputProps<E>;
+> & {
+	onChange?: (value: any | EventTarget) => void;
+	onChangeValue?: (value: any) => void;
+};
 
 export type FieldValue = string | number | boolean;
 
