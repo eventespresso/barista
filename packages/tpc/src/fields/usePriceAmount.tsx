@@ -14,8 +14,8 @@ const usePriceAmount = ({ field, price }: UsePriceAmount): UsePrice => {
 
 	const setValue = useCallback<BFP['setValue']>(
 		(value) => {
-			const absValue = parsedAmount(value as number);
-			const positiveValue = absValue > 0 ? absValue : absValue * -1;
+			const parsedValue = parsedAmount(value as number);
+			const positiveValue = parsedValue > 0 ? parsedValue : parsedValue * -1;
 			updatePrice({ id: price.id, fieldValues: { [field]: positiveValue } });
 		},
 		[updatePrice, price.id, field]
