@@ -1,1 +1,1 @@
-export type Amount = number | string | null;
+export type Amount = number | string | null | undefined;
