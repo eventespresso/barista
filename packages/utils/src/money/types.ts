@@ -1,1 +1,1 @@
-export type Amount = number | string;
+export type Amount = number | string | null;
