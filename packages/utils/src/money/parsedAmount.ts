@@ -10,6 +10,9 @@ const NON_NUMERIC_REGEX = /[^\d.-]+/g;
  * @return {number}
  */
 export const parsedAmount = (amount: Amount, fallback: number = 0): number => {
+	if (amount === null) {
+		return fallback;
+	}
 	if (typeof amount === 'number') {
 		return amount;
 	}
