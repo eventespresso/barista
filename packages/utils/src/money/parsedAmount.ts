@@ -17,8 +17,9 @@ export const parsedAmount = (amount: Amount, fallback: number = 0): number => {
 		return amount;
 	}
 	const parsedStr = amount.replace(NON_NUMERIC_REGEX, '');
-	if (Number.isNaN(parsedStr)) {
+	const float = Number.parseFloat(parsedStr);
+	if (Number.isNaN(float)) {
 		return fallback;
 	}
-	return Number.parseFloat(parsedStr);
+	return float;
 };
