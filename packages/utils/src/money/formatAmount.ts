@@ -16,7 +16,7 @@ export const formatAmount =
 	(amount: Amount): string => {
 		const newParsedAmount = parsedAmount(amount);
 		// newParsedAmount may be NaN
-		const stringAmount = Number.isNaN(newParsedAmount) ? '' : newParsedAmount + '';
+		const stringAmount = Number.isNaN(newParsedAmount) ? '0' : newParsedAmount + '';
 		// lame, but we have to convert to string in order to use parseFloat
 		const floatAmount = Number.parseFloat(stringAmount);
 		return floatAmount.toFixed(decimalPlaces);
