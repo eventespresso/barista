@@ -23,7 +23,7 @@ const useBaseField = ({
 
 	if (formatOnBlur) {
 		if (component === 'input') {
-			fieldValue = defaultFormat(fieldValue, name);
+			fieldValue = format(fieldValue, name);
 		}
 	} else {
 		fieldValue = format(fieldValue, name);
