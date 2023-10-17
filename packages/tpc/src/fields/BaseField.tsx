@@ -73,7 +73,6 @@ const BaseField: React.FC<BaseFieldProps> = ({
 				{...props}
 				inputClass={'ee-input'}
 				isDisabled={props.disabled}
-				onChangeValue={handlers?.onChangeValue}
 				showStepper={false}
 				value={fieldValue as string}
 				wrapperClass={props.className}
