@@ -7,7 +7,7 @@ import { addZebraStripesOnMobile, CellData } from '@eventespresso/ui-components'
 import { CurrencyDisplay } from '@eventespresso/ee-components';
 import { filterCellByStartOrEndDate, useTickets, useLazyTicket } from '@eventespresso/edtr-services';
 import { ENTITY_LIST_DATE_TIME_FORMAT } from '@eventespresso/constants';
-import { useTimeZoneTime } from '@eventespresso/services';
+import { useFeature, useTimeZoneTime } from '@eventespresso/services';
 import { getTicketBackgroundColorClassName, ticketStatus } from '@eventespresso/helpers';
 import { findEntityByGuid } from '@eventespresso/predicates';
 import type { EntityId } from '@eventespresso/data';
@@ -26,12 +26,13 @@ const useBodyRowGenerator = (): TicketsTableBodyRowGen => {
 	const tickets = useTickets();
 	const getTicket = useCallback((id: EntityId) => findEntityByGuid(tickets)(id), [tickets]);
 	const getLazyTicket = useLazyTicket();
+	const canUseBulkEdit = useFeature('ee_event_editor_bulk_edit');
 	const { formatForSite: format } = useTimeZoneTime();
 
 	return useCallback<TicketsTableBodyRowGen>(
 		({ entityId, filterState }) => {
 			const ticket = getTicket(entityId) || getLazyTicket(entityId);
-			const { displayStartOrEndDate, showBulkActions } = filterState;
+			const { displayStartOrEndDate } = filterState;
 
 			const bgClassName = getTicketBackgroundColorClassName(ticket);
 			const id = ticket.dbId || 0;
@@ -45,7 +46,7 @@ const useBodyRowGenerator = (): TicketsTableBodyRowGen => {
 				value: ticket.name,
 			};
 
-			const bulkActionCheckboxCell: CellData = showBulkActions && {
+			const bulkActionCheckboxCell: CellData = canUseBulkEdit && {
 				key: 'cell',
 				size: 'micro',
 				textAlign: 'center',
@@ -155,7 +156,7 @@ const useBodyRowGenerator = (): TicketsTableBodyRowGen => {
 				type: 'row',
 			};
 		},
-		[format, getLazyTicket, getTicket]
+		[canUseBulkEdit, format, getLazyTicket, getTicket]
 	);
 };
 

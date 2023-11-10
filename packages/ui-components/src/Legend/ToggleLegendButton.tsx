@@ -1,8 +1,8 @@
 import { useSpring, animated } from 'react-spring';
-import { __ } from '@eventespresso/i18n';
 
+import { __ } from '@eventespresso/i18n';
 import { CompassFilled } from '@eventespresso/icons';
-import { Button } from '../Button';
+import { Button, ButtonType } from '../Button';
 import type { ToggleLegendButtonProps } from './types';
 
 const ToggleLegendButton: React.FC<ToggleLegendButtonProps> = ({
@@ -23,18 +23,19 @@ const ToggleLegendButton: React.FC<ToggleLegendButtonProps> = ({
 		</animated.div>
 	);
 
-	const tooltip = showLegend ? __('hide legend') : __('show legend');
+	const buttonType = showLegend ? ButtonType.PRIMARY : ButtonType.DEFAULT;
 
 	return (
 		<Button
 			active={showLegend}
+			buttonType={buttonType}
 			className={className}
 			icon={icon}
 			noHorizontalMargin={noHorizontalMargin}
 			onClick={toggleLegend}
 			size='tiny'
 		>
-			{tooltip}
+			{__('legend')}
 		</Button>
 	);
 };

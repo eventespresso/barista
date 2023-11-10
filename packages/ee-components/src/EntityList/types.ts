@@ -74,7 +74,6 @@ export interface EntityTableFilters<FS extends ELFSM> {
 export interface EntityListFilterBarProps<FS extends ELFSM> extends Partial<EntityListViewProps<FS>> {
 	domain: string;
 	listId?: string;
-	showBulkActionsToggle?: boolean;
 }
 
 export interface EntityType {

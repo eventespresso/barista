@@ -94,7 +94,7 @@ const datesListFilterBar: DatesListFilterBarCallback = ({ listId, registry }) =>
 
 	registerFilterBarItem('sortBy', () => {
 		return (
-			<FilterBarFilter>
+			<FilterBarFilter width='big'>
 				<SortByControl />
 			</FilterBarFilter>
 		);

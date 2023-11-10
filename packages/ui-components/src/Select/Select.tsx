@@ -11,12 +11,13 @@ import type { SelectProps } from './types';
 import './style.scss';
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps & React.ComponentProps<typeof InlineSelect>>(
-	({ fitContainer, flow, id, noBorderColor, onChangeInstantValue, size, wrapperClassName, ...props }, ref) => {
+	({ fitContainer, flow, id, noBorderColor, onChangeInstantValue, size, width, wrapperClassName, ...props }, ref) => {
 		const className = classNames(
 			'ee-select ee-input-base',
 			noBorderColor && 'ee-select--no-border-color',
 			props.className,
-			size && size !== 'default' && [`ee-select--${size}`]
+			size && size !== 'default' && [`ee-select--${size}`],
+			width && [`ee-select-width--${width}`]
 		);
 		const wrapperClass = classNames(
 			wrapperClassName,

@@ -10,9 +10,9 @@
 	display: flex;
 	flex-flow: row nowrap;
 	font-size: var(--ee-font-size-small);
-	height: var(--ee-icon-button-size-micro);
+	height: var(--ee-icon-button-size-tiny);
 	margin: 0 var(--ee-margin-smaller) var(--ee-margin-tiny) 0;
-	padding: 0 var(--ee-padding-nano) 0 var(--ee-padding-smaller);
+	padding: 0 var(--ee-padding-micro) 0 var(--ee-padding-smaller);
 	position: relative;
 
 	[dir='rtl'] & {

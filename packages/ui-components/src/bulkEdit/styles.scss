@@ -3,43 +3,56 @@
 .ee-bulk-edit-actions {
 	&__wrapper {
 		align-items: flex-end;
+		box-sizing: border-box;
 		display: flex;
-		padding-bottom: var(--ee-padding-smaller);
+		margin-block-start: var(--ee-margin-tiny);
+		margin-block-end: var(--ee-margin-smaller);
+		max-width: 100%;
+		min-width: fit-content;
 		width: 100%;
 
-		@include max782px {
-			align-items: center;
+		@include max767px {
 			flex-direction: column;
 		}
 
 		.ee-input-label__wrapper {
-			display: inline-grid;
+			display: inline-flex;
 			padding-bottom: 0;
 			padding-left: 0;
+			width: auto;
+		}
 
-			label {
-				@include max782px {
-					text-align: center;
-				}
-			}
+		.ee-btn-base.ee-btn {
+			margin-block: var(--ee-margin-micro);
+			margin-inline-start: 0;
 		}
 	}
 
 	&__select {
 		&-wrapper {
 			display: contents;
-			max-width: fit-content;
+			max-width: 32rem;
+			width: fit-content;
 		}
 
 		&.ee-input-base.ee-select {
-			max-width: fit-content;
+			min-width: 16rem !important;
+			width: fit-content !important;
 		}
 	}
 
 	&__mobile-checkbox {
 		display: none;
-		@include max782px {
+		@include max1280px {
 			display: block;
+			padding: 0 1.5rem 0.85rem 0.5rem;
 		}
+	}
+}
+
+th .ee-bulk-edit-actions__checkbox {
+		margin-block-end: var(--ee-margin-micro) !important;
+	@include min1600px {
+		margin-inline-start: var(--ee-margin-small) !important;
 	}
 }

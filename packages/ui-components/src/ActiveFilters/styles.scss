@@ -4,7 +4,9 @@
 	&__wrapper {
 		align-items: center;
 		display: flex;
-		margin: 0 0 var(--ee-margin-default);
+		margin: 0;
+		margin-block: var(--ee-margin-small);
+		margin-inline-start: var(--ee-margin-tiny);
 
 		@include max600px {
 			align-items: flex-start;

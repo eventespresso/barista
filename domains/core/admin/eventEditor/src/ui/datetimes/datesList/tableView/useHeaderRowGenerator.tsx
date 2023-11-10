@@ -6,12 +6,14 @@ import { filterCellByStartOrEndDate } from '@eventespresso/edtr-services';
 import type { CellData } from '@eventespresso/ui-components';
 import type { HeaderRowGeneratorFn } from '@eventespresso/ee-components';
 import type { DatetimesFilterStateManager } from '@eventespresso/edtr-services';
+import { useFeature } from '@eventespresso/services';
 
 import Checkbox from './Checkbox';
 
 type DatesTableHeaderRowGen = HeaderRowGeneratorFn<DatetimesFilterStateManager>;
 
 const useHeaderRowGenerator = (): DatesTableHeaderRowGen => {
+	const canUseBulkEdit = useFeature('ee_event_editor_bulk_edit');
 	const stripeCell: CellData = useMemo(
 		() => ({
 			className: 'ee-entity-list-status-stripe',
@@ -128,9 +130,9 @@ const useHeaderRowGenerator = (): DatesTableHeaderRowGen => {
 
 	return useCallback<DatesTableHeaderRowGen>(
 		(filterState) => {
-			const { displayStartOrEndDate, showBulkActions } = filterState;
+			const { displayStartOrEndDate } = filterState;
 
-			const checkboxCell: CellData = showBulkActions && {
+			const checkboxCell: CellData = canUseBulkEdit && {
 				key: 'checkbox',
 				size: 'micro',
 				textAlign: 'center',
@@ -169,7 +171,18 @@ const useHeaderRowGenerator = (): DatesTableHeaderRowGen => {
 				type: 'row',
 			};
 		},
-		[actionsCell, capacityCell, endCell, idCell, nameCell, registrationsCell, soldCell, startCell, stripeCell]
+		[
+			actionsCell,
+			canUseBulkEdit,
+			capacityCell,
+			endCell,
+			idCell,
+			nameCell,
+			registrationsCell,
+			soldCell,
+			startCell,
+			stripeCell,
+		]
 	);
 };
 

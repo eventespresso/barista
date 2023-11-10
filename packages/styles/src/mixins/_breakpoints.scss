@@ -117,6 +117,12 @@ $breakpointsMapping: (
 }
 
 /* iPad Portrait */
+@mixin max767px {
+	@include breakpoint(767px, max) {
+		@content;
+	}
+}
+
 @mixin min767px {
 	@include breakpoint(767px, min) {
 		@content;

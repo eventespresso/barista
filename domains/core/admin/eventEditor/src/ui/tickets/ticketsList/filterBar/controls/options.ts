@@ -49,7 +49,7 @@ export const sortByOptions = {
 
 export const labels = {
 	displayStartOrEndDate: __('display'),
-	isChained: __('link'),
+	isChained: __('linked'),
 	sales: __('sales'),
 	search: __('search'),
 	sortBy: __('sort by'),

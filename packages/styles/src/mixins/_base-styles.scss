@@ -86,6 +86,53 @@
 	}
 }
 
+@mixin ee-base-input-widths {
+	&-width--auto {
+		min-width: unset;
+		width: auto;
+	}
+	&-width--nano {
+		min-width: calc(var(--ee-font-size-default) * 2);
+	}
+
+	&-width--micro {
+		min-width: calc(var(--ee-font-size-default) * 4);
+	}
+
+	&-width--tiny {
+		min-width: calc(var(--ee-font-size-default) * 6);
+	}
+
+	&-width--smaller {
+		min-width: calc(var(--ee-font-size-default) * 8);
+	}
+
+	&-width--small {
+		min-width: calc(var(--ee-font-size-default) * 12);
+	}
+
+
+	&-width--default {
+		min-width: calc(var(--ee-font-size-default) * 15);
+	}
+
+	&-width--big {
+		min-width: calc(var(--ee-font-size-default) * 18);
+	}
+
+	&-width--bigger {
+		min-width: calc(var(--ee-font-size-default) * 27);
+	}
+
+	&-width--huge {
+		min-width: calc(var(--ee-font-size-default) * 36);
+	}
+
+	&-width--extreme {
+		min-width: calc(var(--ee-font-size-default) * 48);
+	}
+}
+
 @mixin ee-base-inputs-styles {
 	background: var(--ee-background-color);
 	border-color: var(--ee-border-color);
@@ -103,15 +150,11 @@
 	padding: var(--ee-padding-micro) var(--ee-padding-tiny);
 
 	@include ee-base-input-sizes;
-
+	@include ee-base-input-widths;
 	@include transition(all ease 50ms);
-
 	@include ee-input-base-focus;
-
 	@include ee-input-base-hover;
-
 	@include ee-input-disabled-hover;
-
 	@include ee-input-error;
 }
 

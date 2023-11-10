@@ -7,7 +7,6 @@ export interface EntityListFilterState<SortBy = BasicSortBy> extends ListView {
 	pageNumber: number;
 	perPage: number;
 	searchText: string;
-	showBulkActions: boolean;
 	sortBy: SortBy;
 	total: number;
 }
@@ -34,7 +33,6 @@ export interface EntityListFilterStateManager<SortBy = BasicSortBy> extends Enti
 	setSortBy: (sortBy: SortBy) => void;
 	setTableView: VoidFunction;
 	setTotal: (total: number) => void;
-	toggleBulkActions: VoidFunction;
 }
 
 export type EntityListFilterStateReducer<SortBy = BasicSortBy> = (

@@ -2,10 +2,9 @@ import { useState, useCallback } from 'react';
 
 import { __ } from '@eventespresso/i18n';
 import { BulkActions } from '@eventespresso/ee-components';
-import { Collapsible } from '@eventespresso/ui-components';
 import { DatetimeStatus } from '@eventespresso/predicates';
 import { USE_ADVANCED_EDITOR } from '@eventespresso/constants';
-import { useBulkEdit } from '@eventespresso/services';
+import { useBulkEdit, useFeature } from '@eventespresso/services';
 import { useDatesListFilterState, hooks } from '@eventespresso/edtr-services';
 import { useDisclosure, useMemoStringify } from '@eventespresso/hooks';
 import { withCurrentUserCan } from '@eventespresso/services';
@@ -22,10 +21,11 @@ const actions: Array<Action> = ['edit-details', 'delete', ''];
 const Actions: React.FC = () => {
 	const [action, setAction] = useState<Action>('');
 	const bulkEdit = useBulkEdit();
+	const canUseBulkEdit = useFeature('ee_event_editor_bulk_edit');
 
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
-	const { status, showBulkActions } = useDatesListFilterState();
+	const { status } = useDatesListFilterState();
 
 	const areTrashedDates = status === DatetimeStatus.trashedOnly;
 
@@ -59,21 +59,21 @@ const Actions: React.FC = () => {
 	);
 
 	return (
-		<Collapsible show={showBulkActions}>
-			<BulkActions
-				Checkbox={Checkbox}
-				defaultAction=''
-				id={'ee-bulk-edit-dates-actions'}
-				onApply={onApply}
-				options={options}
-			/>
-			{isOpen && (
+		canUseBulkEdit && (
+			<>
+				<BulkActions
+					Checkbox={Checkbox}
+					defaultAction=''
+					id={'ee-bulk-edit-dates-actions'}
+					onApply={onApply}
+					options={options}
+				/>
 				<>
-					{action === 'edit-details' && <EditDetails isOpen={true} onClose={onClose} />}
+					{action === 'edit-details' && <EditDetails isOpen={isOpen} onClose={onClose} />}
 					{action === 'delete' && <Delete areTrashedDates={areTrashedDates} onClose={onClose} />}
 				</>
-			)}
-		</Collapsible>
+			</>
+		)
 	);
 };
 
