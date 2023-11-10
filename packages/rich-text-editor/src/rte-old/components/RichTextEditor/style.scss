@@ -2,7 +2,7 @@
 @import '~@eventespresso/styles/src/mixins/transition';
 
 @mixin ee-rte-option {
-	background: var(--ee-button-background-rte);
+	background: var(--ee-button-background);
 	border: var(--ee-border-width) solid var(--ee-border-color);
 	border-color: transparent;
 	border-radius: var(--ee-border-radius-small);
@@ -61,11 +61,23 @@
 			padding: var(--ee-padding-smaller);
 		}
 
-		.rdw-option-wrapper {
-			@include ee-rte-option;
+		.rdw-option {
+			&-wrapper {
+				@include ee-rte-option;
 
-			&.rdw-option-disabled {
-				cursor: not-allowed;
+				&.rdw-option-disabled {
+					cursor: not-allowed;
+				}
+			}
+
+			&-active {
+				background: var(--ee-color-primary);
+				color: var(--ee-text-on-primary);
+
+				img {
+					filter: invert(1);
+					opacity: 1;
+				}
 			}
 		}
 
@@ -135,20 +147,6 @@
 			// override WP image styles
 			border: 0 !important;
 			opacity: 0.65;
-		}
-	}
-
-	&__controls {
-		&-bold,
-		&-italic,
-		&-underline,
-		&-ordered,
-		&-unordered {
-			@include ee-rte-option;
-		}
-
-		&-block-type {
-			@include ee-rte-block-dropdown;
 		}
 	}
 
