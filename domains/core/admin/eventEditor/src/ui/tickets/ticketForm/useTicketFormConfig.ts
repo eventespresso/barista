@@ -162,7 +162,7 @@ export const useTicketFormConfig = (id: EntityId, config?: EspressoFormProps): T
 				name: 'isRequired',
 				label: __('Required Ticket'),
 				fieldType: 'switch',
-				info: __('If enabled, the ticket must be selected and will appear first in frontend ticket lists.'),
+				info: __('If enabled, the ticket must be selected and will appear first in ticket lists.'),
 				width: 'small',
 				formControlProps: adjacentFormItemProps,
 			},

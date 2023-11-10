@@ -11,18 +11,33 @@ interface SortByProps {
 }
 
 const sorters = ({ tickets, sortBy = 'date' }: SortByProps): Ticket[] => {
+	let sorted;
 	switch (sortBy) {
 		case 'date':
-			return sort(({ startDate: dateLeft }, { startDate: dateRight }) => {
+			sorted = sort(({ startDate: dateLeft }, { startDate: dateRight }) => {
 				return compareAsc(parseISO(dateLeft), parseISO(dateRight));
 			}, tickets);
+			break;
 		case 'name':
-			return sortByFn(compose(toLower, prop('name')), tickets);
+			sorted = sortByFn(compose(toLower, prop('name')), tickets);
+			break;
 		case 'id':
-			return sortByFn(prop('dbId'), tickets);
+			sorted = sortByFn(prop('dbId'), tickets);
+			break;
 		case 'order':
-			return sortByOrder(tickets);
+			sorted = sortByOrder(tickets);
+			break;
 	}
+	// required tickets should always be displayed first
+	return sorted.sort((a: Ticket, b: Ticket) => {
+		if (a.isRequired && !b.isRequired) {
+			return -1;
+		}
+		if (!a.isRequired && b.isRequired) {
+			return 1;
+		}
+		return 0;
+	});
 };
 
 export default sorters;
