@@ -22,6 +22,7 @@ class Barista
 		add_action('wp_default_styles', [$this, 'registerPackagesStyles']);
 		add_action('admin_enqueue_scripts', [$this, 'addAssets']);
 		add_action('admin_enqueue_scripts', [$this, 'enqueueScripts']);
+		add_filter('FHEE__FeatureFlagsConfig__getFeatureFlags__use_default_feature_flags', '__return_false');
 		add_filter(
 			'FHEE__Maintenance_Admin_Page__page_setup__page_config',
 			[FeatureFlagsAdminPage::class, 'loadFeatureFlagsAdminPageConfig']
