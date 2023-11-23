@@ -10,7 +10,7 @@ const useDatetimesQueryOptions = (event?: string): QueryHookOptions<DatetimesLis
 		() => ({
 			query: GET_DATETIMES,
 			variables: {
-				first: 100,
+				first: 250,
 				where: {
 					event,
 				},

@@ -10,7 +10,7 @@ const useEventsQueryOptions = (): QueryHookOptions<EventsList> => {
 		() => ({
 			query: GET_EVENTS,
 			variables: {
-				first: 100,
+				first: 250,
 			},
 			fetchPolicy: 'cache-first',
 		}),

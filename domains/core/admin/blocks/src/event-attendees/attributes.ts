@@ -21,7 +21,7 @@ const attributes: Block<EventAttendeesAttributes>['attributes'] = {
 	},
 	limit: {
 		type: 'number',
-		default: 100,
+		default: 250,
 	},
 	order: {
 		type: 'string',
