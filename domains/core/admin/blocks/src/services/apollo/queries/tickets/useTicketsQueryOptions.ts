@@ -10,7 +10,7 @@ const useTicketsQueryOptions = (datetime?: string): QueryHookOptions<TicketsList
 		() => ({
 			query: GET_TICKETS,
 			variables: {
-				first: 100,
+				first: 250,
 				where: {
 					datetime,
 				},

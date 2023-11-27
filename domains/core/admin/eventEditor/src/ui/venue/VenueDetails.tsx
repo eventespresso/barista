@@ -28,7 +28,16 @@ export const VenueDetails: React.FC = () => {
 	const [selectedVenueId, setSelectedVenueId] = useState(event?.venue || '');
 
 	const venues = useVenues();
-	const selectedVenue = useMemo(() => findEntityByGuid(venues)(selectedVenueId), [selectedVenueId, venues]);
+	// need to make a copy else we can't sort it
+	const sortedVenues = useMemo(() => [...venues], [venues]);
+	// create a collator to sort the venues by name using the current locale and natural sort order
+	const collator = new Intl.Collator(undefined, { numeric: true, sensitivity: 'base' });
+	sortedVenues.sort((a, b) => collator.compare(a.name, b.name));
+
+	const selectedVenue = useMemo(
+		() => findEntityByGuid(sortedVenues)(selectedVenueId),
+		[selectedVenueId, sortedVenues]
+	);
 
 	const createVenueLink = useVenueLink('create_new');
 	const editVenueLink = useVenueLink('edit', selectedVenue?.dbId);
@@ -121,7 +130,7 @@ export const VenueDetails: React.FC = () => {
 				onChangeInstantValue={onChangeInstantValue}
 				value={event?.venue}
 				venueName={selectedVenue?.name}
-				venues={venues}
+				venues={sortedVenues}
 			/>
 		</Container>
 	);
