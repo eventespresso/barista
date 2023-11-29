@@ -10,10 +10,13 @@ export const legendConfig: LegendConfig<string> = {
 		{ icon: Trash, description: __('Move Date to Trash') },
 	],
 	swatches: {
-		DTA: __('Active'),
-		DTT: __('Trashed'),
-		DTE: __('Expired'),
-		DTS: __('Sold Out'),
 		DTU: __('Upcoming'),
+		DTA: __('Active'),
+		DTS: __('Sold Out'),
+		DTE: __('Expired'),
+		DTB: __('To Be Determined'),
+		DTP: __('Postponed'),
+		DTC: __('Cancelled'),
+		DTT: __('Trashed'),
 	},
 };
