@@ -1,0 +1,39 @@
+@import '~@eventespresso/styles/src/mixins/breakpoints';
+
+.ee-edit-entity-selector {
+	&.ee-popover {
+		z-index: auto;
+
+		[data-popper-reference-hidden='false'] {
+			min-width: 23rem;
+			max-width: 32rem;
+		}
+		.ee-popover__content {
+			max-width: 32rem;
+
+			.chakra-popover__body {
+				p {
+					text-align: start;
+				}
+				.ee-layout-row.ee-layout-row--fixed {
+					flex-wrap: nowrap;
+				}
+
+				.ee-edtr-option__footer-list {
+					text-align: start;
+				}
+			}
+		}
+
+		.ee-edit-entity-selector-btn {
+			margin-inline-end: 0;
+		}
+
+		footer {
+			padding-top: var(--ee-padding-default);
+			padding-inline-start: var(--ee-padding-default);
+			text-align: start;
+		}
+
+	}
+}
