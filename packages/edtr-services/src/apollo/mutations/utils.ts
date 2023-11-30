@@ -2,8 +2,10 @@ import {
 	entitiesWithGuIdInArray,
 	entitiesWithGuIdNotInArray,
 	isActive,
+	isCancelled,
 	isExpired,
 	isOnSale,
+	isPostponed,
 	isPending,
 	isUpcoming,
 } from '@eventespresso/predicates';
@@ -114,7 +116,9 @@ export const updateDatetimeFlags = (date: Datetime): Datetime => {
 	return {
 		...date,
 		isActive: isActive(date, true),
+		isCancelled: isCancelled(date),
 		isExpired: isExpired(date, true),
+		isPostponed: isPostponed(date),
 		isUpcoming: isUpcoming(date, true),
 	};
 };

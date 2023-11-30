@@ -44,13 +44,14 @@ export interface EventData {
 }
 
 export enum DateStatus {
-	soldOut = 'DTS',
 	active = 'DTA',
-	upcoming = 'DTU',
-	postponed = 'DTP',
 	cancelled = 'DTC',
 	expired = 'DTE',
 	inactive = 'DTI',
+	postponed = 'DTP',
+	soldOut = 'DTS',
+	toBeDetermined = 'DTB',
+	upcoming = 'DTU',
 }
 
 export interface Datetime extends Entity, Trashable {
@@ -59,7 +60,9 @@ export interface Datetime extends Entity, Trashable {
 	description: string;
 	endDate: string;
 	isActive: boolean;
+	isCancelled: boolean;
 	isExpired: boolean;
+	isPostponed: boolean;
 	isPrimary: boolean;
 	isSoldOut: boolean;
 	isUpcoming: boolean;
@@ -69,7 +72,7 @@ export interface Datetime extends Entity, Trashable {
 	reserved: number;
 	sold: number;
 	startDate: string;
-	status: DateStatus;
+	status: string;
 	venue: EntityId; // UUID
 }
 
@@ -130,6 +133,7 @@ export interface Ticket extends Entity, Trashable {
 	reverseCalculate: boolean;
 	sold: number;
 	startDate: string; // ISO string
+	status: string;
 	userId: EntityId;
 	uses: number;
 	visibility: TicketVisibility;
