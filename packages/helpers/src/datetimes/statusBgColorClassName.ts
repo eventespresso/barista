@@ -1,8 +1,17 @@
 import type { Datetime } from '@eventespresso/edtr-services';
 
 const statusBgColorClassName = (date: Datetime): string => {
+
 	if (date?.isTrashed) {
 		return 'ee-status-bg--DTT';
+	}
+
+	if (date?.isCancelled) {
+		return 'ee-status-bg--DTC';
+	}
+
+	if (date?.isPostponed) {
+		return 'ee-status-bg--DTP';
 	}
 
 	if (date?.isExpired) {
@@ -17,7 +26,12 @@ const statusBgColorClassName = (date: Datetime): string => {
 		return 'ee-status-bg--DTA';
 	}
 
-	return 'ee-status-bg--DTU';
+	if (date?.isUpcoming) {
+		return 'ee-status-bg--DTU';
+	}
+
+	// TO_BE_DETERMINED
+	return 'ee-status-bg--DTB';
 };
 
 export default statusBgColorClassName;
