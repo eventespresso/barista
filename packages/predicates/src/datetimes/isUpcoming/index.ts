@@ -12,7 +12,10 @@ import { NOW as now } from '@eventespresso/constants';
  * @param ignoreFlag Whether to ignore the boolean flag from the object and recalculate the value
  */
 const isUpcoming = (date: Datetime, ignoreFlag = false): boolean => {
-	return (!ignoreFlag && isBooleanTrue(date.isUpcoming)) || diff('seconds', parseISO(date.startDate), now) > 0;
+	return (
+		(!ignoreFlag && isBooleanTrue(date.isUpcoming))
+		|| (ignoreFlag && diff('seconds', parseISO(date.startDate), now) > 0)
+	);
 };
 
 export default isUpcoming;
