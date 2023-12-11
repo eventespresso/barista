@@ -54,7 +54,7 @@ export const DatetimeStatus: React.FC<Props> = ({ date, onStatusChange }) => {
 				<br />
 				<span>
 					{__(
-						'Event Date is postponed until a later date (kind of like cancelled combined with "to be determined.'
+						'Event Date is postponed until a later date (kind of like cancelled combined with "to be determined).'
 					)}
 				</span>
 			</li>
