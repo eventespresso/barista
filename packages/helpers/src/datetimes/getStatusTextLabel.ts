@@ -8,7 +8,7 @@ const getStatusTextLabel = (date: Datetime): string => {
 		return datetimeStatusLabels[date.status];
 	}
 
-	return __('TBD');
+	return datetimeStatusLabels['TO_BE_DETERMINED'];
 };
 
 export default getStatusTextLabel;
