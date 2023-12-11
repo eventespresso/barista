@@ -72,7 +72,7 @@ export interface Datetime extends Entity, Trashable {
 	reserved: number;
 	sold: number;
 	startDate: string;
-	status: string;
+	status: DateStatus;
 	venue: EntityId; // UUID
 }
 
