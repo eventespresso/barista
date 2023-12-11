@@ -30,7 +30,7 @@ const statusBgColorClassName = (date: Datetime): string => {
 		return 'ee-status-bg--DTU';
 	}
 
-	// TO_BE_DETERMINED
+	// default to "TO_BE_DETERMINED" if nothing else matches
 	return 'ee-status-bg--DTB';
 };
 
