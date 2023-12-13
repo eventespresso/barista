@@ -1,7 +1,6 @@
 import type { Datetime } from '@eventespresso/edtr-services';
 
 const statusBgColorClassName = (date: Datetime): string => {
-
 	if (date?.isTrashed) {
 		return 'ee-status-bg--DTT';
 	}
