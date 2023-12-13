@@ -1,5 +1,3 @@
-import { __ } from '@eventespresso/i18n';
-
 import type { Datetime } from '@eventespresso/edtr-services';
 import { datetimeStatusLabels } from '@eventespresso/constants';
 
