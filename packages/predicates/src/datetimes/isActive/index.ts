@@ -13,14 +13,10 @@ import { NOW as now } from '@eventespresso/constants';
  */
 const isActive = (date: Datetime, ignoreFlag = false): boolean => {
 	return (
-		(
-			!ignoreFlag &&
-			isBooleanTrue(date.isActive)
-		) || (
-			ignoreFlag &&
+		(!ignoreFlag && isBooleanTrue(date.isActive)) ||
+		(ignoreFlag &&
 			diff('seconds', parseISO(date.startDate), now) < 0 &&
-			diff('seconds', parseISO(date.endDate), now) > 0
-		)
+			diff('seconds', parseISO(date.endDate), now) > 0)
 	);
 };
 
