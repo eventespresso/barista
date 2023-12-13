@@ -26,6 +26,7 @@ export const TICKET_ATTRIBUTES: any = gql`
 		reverseCalculate
 		sold
 		startDate
+		status
 		userId
 		uses
 		visibility

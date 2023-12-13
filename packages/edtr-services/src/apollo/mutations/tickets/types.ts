@@ -22,6 +22,7 @@ export interface TicketBaseInput {
 	row?: number;
 	sold?: number;
 	startDate?: string | Date;
+	status?: string;
 	uses?: number;
 	visibility?: TicketVisibility;
 	wpUser?: number;
