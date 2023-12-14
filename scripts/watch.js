@@ -1,6 +1,7 @@
 /* eslint-disable */
 const DEVELOPMENT = 'development';
 process.env.NODE_ENV = DEVELOPMENT;
+process.env.WDS_SOCKET_PORT = 0;
 
 const webpack = require('webpack');
 const config = require('../config/webpack.config.js');
