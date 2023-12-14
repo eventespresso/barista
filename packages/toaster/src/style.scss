@@ -30,8 +30,8 @@
 	box-shadow: var(--ee-box-shadow-default);
 	box-sizing: border-box;
 	font-family: var(--ee-admin-font-family);
-	font-size: 1.2rem;
-	line-height: 1rem;
+	font-size: var(--ee-font-size-default);
+	line-height: 1.25;
 	margin: var(--ee-margin-tiny) var(--ee-margin-micro);
 	max-width: min(40rem, calc(100% - var(--ee-margin-smaller)));
 	min-height: var(--ee-icon-button-size-bigger);
