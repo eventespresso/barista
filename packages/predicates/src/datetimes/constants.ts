@@ -7,9 +7,11 @@ export const DATETIME_STATUS_ID = {
 	SOLD_OUT: 'DTS',
 	TRASHED: 'DTT',
 	UPCOMING: 'DTU',
+	TO_BE_DETERMINED: 'DTB',
 };
 
 export const DATETIME_STATUS_IDS = Object.values(DATETIME_STATUS_ID);
+export const DATETIME_STATUSES = Object.fromEntries(Object.entries(DATETIME_STATUS_ID).map(([k, v]) => [v, k]));
 
 export const MINUTE_IN_SECONDS = 60;
 export const HOUR_IN_SECONDS = MINUTE_IN_SECONDS * 60;

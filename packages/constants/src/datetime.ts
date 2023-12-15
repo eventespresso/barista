@@ -8,6 +8,49 @@ export const datetimeStatus = {
 	isExpired: __('Expired'),
 	isInactive: __('Inactive'),
 	isPostponed: __('Postponed'),
-	isSoldOut: __('SoldOut'),
+	isSoldOut: __('Sold Out'),
 	isUpcoming: __('Upcoming'),
+};
+
+export const datetimeStatusLabels = {
+	ACTIVE: __('Active'),
+	CANCELLED: __('Cancelled'),
+	EXPIRED: __('Expired'),
+	INACTIVE: __('Inactive'),
+	POSTPONED: __('Postponed'),
+	SOLD_OUT: __('Sold Out'),
+	UPCOMING: __('Upcoming'),
+	TRASHED: __('Trashed'),
+	TO_BE_DETERMINED: __('TBD'),
+};
+
+export const datetimeStatusCodesMap = {
+	ACTIVE: 'DTA',
+	CANCELLED: 'DTC',
+	EXPIRED: 'DTE',
+	INACTIVE: 'DTI',
+	POSTPONED: 'DTP',
+	SOLD_OUT: 'DTB',
+	TO_BE_DETERMINED: 'DTB',
+	TRASHED: 'DTT',
+	UPCOMING: 'DTU',
+};
+
+export const datetimeStatusOptions = {
+	DTA: __('Active'),
+	DTB: __('To Be Determined'),
+	DTC: __('Cancelled'),
+	DTE: __('Expired'),
+	DTI: __('Inactive'),
+	DTP: __('Postponed'),
+	DTS: __('Sold Out'),
+	DTT: __('Trashed'),
+	DTU: __('Upcoming'),
+};
+
+export const userSelectableDatetimeStatusOptions = {
+	DTC: __('Cancelled'),
+	DTP: __('Postponed'),
+	DTS: __('Sold Out'),
+	DTB: __('To Be Determined'),
 };

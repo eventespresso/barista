@@ -3,7 +3,7 @@
 
 .ee-entity-list {
 	.entity-card {
-		--ee-sidebar-width: calc(10 * var(--ee-base-ui-scale));
+		--ee-sidebar-width: calc(13.5 * var(--ee-base-ui-scale));
 		--ee-menu-width: var(--ee-icon-button-size);
 
 		align-items: stretch;
@@ -26,13 +26,17 @@
 			padding: 0;
 			width: var(--ee-sidebar-width);
 
-			.ee-entity-status-label {
-				font-size: var(--ee-font-size-default);
-				font-weight: bolder;
-				letter-spacing: 1px;
-				padding: 0 0 var(--ee-padding-tiny);
+			.ee-entity-status__label {
 				text-align: center;
-				text-transform: uppercase;
+
+				& > .ee-entity-status__text {
+					color: var(--ee-color-white);
+					font-size: var(--ee-font-size-big);
+					font-weight: bolder;
+					letter-spacing: 1px;
+					padding: 0 0 var(--ee-padding-tiny);
+					text-transform: uppercase;
+				}
 			}
 		}
 
