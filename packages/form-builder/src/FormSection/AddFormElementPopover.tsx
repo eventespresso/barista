@@ -104,6 +104,7 @@ export const AddFormElementPopover: React.FC<SidebarProps> = ({ formSection }) =
 					tabIndex={tabIndex}
 				/>
 			</div>
+			<h3 className={'ee-add-form-element__separator'}>{__('or')}</h3>
 			<div className={'ee-add-form-element__option'}>
 				<SelectWithLabel
 					id={`${formSection.id}-add-new-section-selector`}
