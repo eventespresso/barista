@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { __ } from '@eventespresso/i18n';
+import { sprintf, __ } from '@eventespresso/i18n';
 import { Select, SelectProps } from '@eventespresso/adapters';
 import { PerPageProps } from './types';
 
@@ -32,21 +32,40 @@ const PerPage: React.FC<PerPageProps> = ({ onChangePerPage, pageNumber, perPage,
 		[onChangePerPage, pageNumber, perPage, total]
 	);
 
+	// Calculate the lower and upper limits of the items being displayed
+	// page 10 x 10 items per page
+	const maxLimit = pageNumber * perPage;
+	// cap if total is less than maxLimit
+	const upperLimit = maxLimit > total ? total : maxLimit;
+	const lowerLimit = maxLimit - perPage + 1;
+	const showingAll = perPage === 9999 || perPage >= total;
+
+	const totalItemsText = sprintf(
+		/* translators: %1$d is first item #, %2$d is last item #, %3$d is total items, ex: 20-30 of 100 items */
+		__('%1$d-%2$d of %3$d items'),
+		showingAll ? 1 : lowerLimit,
+		showingAll ? total : upperLimit,
+		total
+	);
+
 	return (
-		<Select
-			aria-label={__('items per page')}
-			className='ee-select ee-pagination__per-page'
-			onChangeValue={onChangeValue}
-			rootProps={selectRootProps}
-			value={perPage}
-			variant='unstyled'
-		>
-			{Object.entries(perPageOptions).map(([value, label]) => (
-				<option key={value} value={value}>
-					{label}
-				</option>
-			))}
-		</Select>
+		<div className='ee-pagination__per-page-wrapper'>
+			<Select
+				aria-label={__('items per page')}
+				className='ee-select ee-pagination__per-page'
+				onChangeValue={onChangeValue}
+				rootProps={selectRootProps}
+				value={perPage}
+				variant='unstyled'
+			>
+				{Object.entries(perPageOptions).map(([value, label]) => (
+					<option key={value} value={value}>
+						{label}
+					</option>
+				))}
+			</Select>
+			<div className='ee-pagination__total-items'>{totalItemsText}</div>
+		</div>
 	);
 };
 
