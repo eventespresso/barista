@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 
 import { Pagination as PaginationAdapter } from '@eventespresso/adapters';
+import { sprintf, __ } from '@eventespresso/i18n';
 import { DEFAULT_LOCALE, DEFAULT_PER_PAGE_OPTIONS } from './constants';
 import ItemRender from './ItemRender';
 import PerPage from './PerPage';
@@ -42,8 +43,18 @@ export const Pagination: React.FC<PaginationProps> = ({
 		/>
 	);
 
+	const totalItemsText =
+		perPage === 9999 || perPage >= total
+			? sprintf(/* translators: %d is total number of items */ __('showing all %d items'), total)
+			: sprintf(
+					/* translators: %1$d is per page value %2$d is total items*/ __('showing %1$d of %2$d items'),
+					perPage,
+					total
+			  );
+
 	return (
 		<div className={className}>
+			<div className='ee-pagination__total-items'>{totalItemsText}</div>
 			<PaginationAdapter
 				pageNumber={pageNumber}
 				defaultCurrent={defaultPageNumber}
