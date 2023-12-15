@@ -68,6 +68,10 @@ $border-radius: var(--ee-border-radius-tiny);
 		}
 	}
 
+	&__total-items {
+		margin-inline: var(--ee-margin-small);
+	}
+
 	ul.rc-pagination {
 		display: flex;
 		margin-right: var(--ee-margin-small);
