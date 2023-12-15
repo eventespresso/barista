@@ -16,6 +16,8 @@
 		flex-flow: column nowrap;
 		height: 100%;
 		justify-content: space-evenly;
+		width: calc( var(--ee-sidebar-width) - var(--ee-padding-micro) * 2);
+
 		&__footer {
 			font-weight: 700;
 			letter-spacing: var(--ee-letter-spacing-font-size-micro);
