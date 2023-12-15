@@ -49,13 +49,14 @@ export interface EventData {
 
 // LATER: consolidate data types
 export enum DateStatus {
-	soldOut = 'DTS',
 	active = 'DTA',
-	upcoming = 'DTU',
-	postponed = 'DTP',
 	cancelled = 'DTC',
 	expired = 'DTE',
 	inactive = 'DTI',
+	postponed = 'DTP',
+	soldOut = 'DTS',
+	toBeDetermined = 'DTB',
+	upcoming = 'DTU',
 }
 
 // LATER: consolidate data types
@@ -64,7 +65,9 @@ export interface Datetime extends Entity, Trashable, StartAndEndDate.Type.String
 	capacity: number;
 	description: string;
 	isActive: boolean;
+	isCancelled: boolean;
 	isExpired: boolean;
+	isPostponed: boolean;
 	isPrimary: boolean;
 	isSoldOut: boolean;
 	isUpcoming: boolean;
@@ -134,6 +137,7 @@ export interface Ticket extends Entity, Trashable, StartAndEndDate.Type.String {
 	reserved: number;
 	reverseCalculate: boolean;
 	sold: number;
+	status: string;
 	userId: EntityId;
 	uses: number;
 	visibility: TicketVisibility;

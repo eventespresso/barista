@@ -28,7 +28,7 @@
 	}
 
 	&__card-view {
-		--ee-min-card-width: calc(32 * var(--ee-base-ui-scale));
+		--ee-min-card-width: calc(35 * var(--ee-base-ui-scale));
 		box-sizing: border-box;
 		display: grid;
 		gap: var(--ee-margin-big);

@@ -33,6 +33,7 @@ export const TICKET_DEFAULTS: Ticket = {
 	reverseCalculate: true,
 	sold: 0,
 	startDate: PLUS_ONE_MONTH.toISOString(),
+	status: 'PENDING',
 	userId: '',
 	uses: -1,
 	visibility: 'PUBLIC',

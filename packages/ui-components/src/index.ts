@@ -31,6 +31,7 @@ export * from './EntityEditModal';
 export * from './EntityIDs';
 export * from './EntityList';
 export * from './EntityPaperFrame';
+export * from './EntityStatusSelector';
 export * from './EspressoTable';
 export * from './FilterBarFilter';
 export * from './Grid';

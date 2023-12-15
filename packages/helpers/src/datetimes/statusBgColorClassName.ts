@@ -5,6 +5,14 @@ const statusBgColorClassName = (date: Datetime): string => {
 		return 'ee-status-bg--DTT';
 	}
 
+	if (date?.isCancelled) {
+		return 'ee-status-bg--DTC';
+	}
+
+	if (date?.isPostponed) {
+		return 'ee-status-bg--DTP';
+	}
+
 	if (date?.isExpired) {
 		return 'ee-status-bg--DTE';
 	}
@@ -17,7 +25,12 @@ const statusBgColorClassName = (date: Datetime): string => {
 		return 'ee-status-bg--DTA';
 	}
 
-	return 'ee-status-bg--DTU';
+	if (date?.isUpcoming) {
+		return 'ee-status-bg--DTU';
+	}
+
+	// default to "TO_BE_DETERMINED" if nothing else matches
+	return 'ee-status-bg--DTB';
 };
 
 export default statusBgColorClassName;
