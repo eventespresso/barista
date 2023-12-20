@@ -14,7 +14,7 @@ const DateCard: React.FC<DateItemProps> = ({ id }) => {
 
 	const ariaLabel: string = useMemo(() => {
 		// since title is optional property in datetime, we need to consider that and provide a sane default value if title is missing
-		return date.name.length > 0 ? date.name : 'datetime';
+		return date?.name.length > 0 ? date.name : 'datetime';
 	}, [date]);
 
 	const {
