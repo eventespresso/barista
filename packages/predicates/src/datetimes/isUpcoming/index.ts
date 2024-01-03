@@ -17,7 +17,7 @@ const isUpcoming = (date: Datetime, ignoreFlag = false): boolean => {
 		return diff('seconds', parseISO(date.startDate), now) > 0;
 	}
 	return (
-		R.propEq('isPostponed', true, date) ||
+		R.propEq('isUpcoming', true, date) ||
 		R.propEq('status', 'UPCOMING', date) ||
 		isPostponed(date) || // date is posptponed to a future date which means it is upcoming
 		isTBD(date) // date is TBD which most likely means it is upcoming
