@@ -38,7 +38,7 @@ const testCases = [
 	},
 ];
 
-describe('formatAmount', () => {
+describe('sanitizeAmount', () => {
 	for (const testCase of testCases) {
 		it(testCase.desc, () => {
 			const result = sanitizeAmount(testCase.amount);
