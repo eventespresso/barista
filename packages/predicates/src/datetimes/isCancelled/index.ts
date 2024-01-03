@@ -10,6 +10,6 @@ import type { EntityFieldPred as EFP } from '@eventespresso/utils';
  */
 export const isCancelled = (date: Datetime): boolean => {
 	return R.propEq('isCancelled', true, date) || R.propEq('status', 'CANCELLED', date);
-}
+};
 
 export const isNotCancelled: EFP<'isCancelled', boolean> = R.complement(isCancelled);
