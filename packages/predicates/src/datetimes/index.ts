@@ -12,6 +12,7 @@ export { default as sortDates } from './sorters';
 export { default as validFiniteCapacityLimit } from './validFiniteCapacityLimit';
 export { default as validSold } from './validSold';
 export { default as validStatus } from './validStatus';
+export { isTBD, isNotTBD } from './isTBD';
 
 export * from './constants';
 export * from './datetimeFields';

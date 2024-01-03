@@ -83,7 +83,7 @@ function getClientEnvironment(publicUrl) {
 				// and `sockPort` options in webpack-dev-server.
 				WDS_SOCKET_HOST: process.env.WDS_SOCKET_HOST,
 				WDS_SOCKET_PATH: process.env.WDS_SOCKET_PATH,
-				WDS_SOCKET_PORT: process.env.WDS_SOCKET_PORT,
+				WDS_SOCKET_PORT: process.env.WDS_SOCKET_PORT || 0,
 				// Whether or not react-refresh is enabled.
 				// react-refresh is not 100% stable at this time,
 				// which is why it's disabled by default.

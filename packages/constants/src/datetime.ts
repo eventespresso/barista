@@ -10,6 +10,7 @@ export const datetimeStatus = {
 	isPostponed: __('Postponed'),
 	isSoldOut: __('Sold Out'),
 	isUpcoming: __('Upcoming'),
+	isTBD: __('TBD'),
 };
 
 export const datetimeStatusLabels = {
