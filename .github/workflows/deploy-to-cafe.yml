@@ -59,7 +59,7 @@ jobs:
                   yarn build:core
 
             - name: Copy EE Core Changes to Cafe Repo
-              run: source tools/copy-changes.sh "plugins/event-espresso-core/assets" "plugins/event-espresso-core/languages" "build"
+              run: source tools/copy-changes.sh "plugins/event-espresso-core/assets" "plugins/event-espresso-core/languages" "build" "$GITHUB_WORKSPACE"
 
             # Build REM domain without packages
             # because core will load/register the packages
@@ -69,7 +69,7 @@ jobs:
                   yarn build:rem
 
             - name: Copy REM Changes to Cafe Repo
-              run: source tools/copy-changes.sh "plugins/eea-recurring-events-manager/assets" "plugins/eea-recurring-events-manager/languages"
+              run: source tools/copy-changes.sh "plugins/eea-recurring-events-manager/assets" "plugins/eea-recurring-events-manager/languages" "build" "$GITHUB_WORKSPACE"
 
             # Build WP User domain without packages
             - name: Build wpUser
@@ -78,7 +78,7 @@ jobs:
                   yarn build:wpUser
 
             - name: Copy WP User Changes to Cafe Repo
-              run: source tools/copy-changes.sh "plugins/eea-wp-user-integration/assets" "plugins/eea-wp-user-integration/languages"
+              run: source tools/copy-changes.sh "plugins/eea-wp-user-integration/assets" "plugins/eea-wp-user-integration/languages" "build" "$GITHUB_WORKSPACE"
 
             # Build upsellAds domain without packages
             - name: Build Upsell Ads
@@ -87,7 +87,7 @@ jobs:
                   yarn build:es:upsellEditor
 
             - name: Copy Upsell Editor to Cafe Repo
-              run: source tools/copy-changes.sh "plugins/saas-notification/assets" "plugins/saas-notification/languages"
+              run: source tools/copy-changes.sh "plugins/saas-notification/assets" "plugins/saas-notification/languages" "build" "$GITHUB_WORKSPACE"
 
             # Deploy the built assets to ES tester plugin assets
             # - name: Copy EdtrSlots to Cafe Repo
