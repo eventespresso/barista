@@ -17,11 +17,12 @@ export const DragAndDrop = <E extends any>({
 	onDragUpdate,
 	renderDraggableItem,
 }: DragAndDropProps<E>) => {
-	const draggableItems = items
-		.map(renderDraggableItem)
-		.map((item, index) => (
-			<Draggable asItem={asItem} content={item.content} id={item.id} index={index} key={item?.id} />
-		));
+	const draggableItems = items.map(renderDraggableItem).map((item, index) => {
+		if (!item.hasOwnProperty('id')) {
+			console.error('Entity is missing the "id" property', item);
+		}
+		return <Draggable asItem={asItem} content={item.content} id={item?.id} index={index} key={item?.id} />;
+	});
 
 	return (
 		<DragDropContext
