@@ -1,5 +1,6 @@
 import * as R from 'ramda';
 
+import type { Datetime } from '@eventespresso/edtr-services';
 import type { EntityFieldPred as EFP } from '@eventespresso/utils';
 
 /**
@@ -7,6 +8,8 @@ import type { EntityFieldPred as EFP } from '@eventespresso/utils';
  * @param {Object} entity object
  * @return {boolean} true if datetime is cancelled
  */
-export const isCancelled: EFP<'isCancelled', boolean> = R.propEq('isCancelled', true);
+export const isCancelled = (date: Datetime): boolean => {
+	return R.propEq('isCancelled', true, date) || R.propEq('status', 'CANCELLED', date);
+}
 
 export const isNotCancelled: EFP<'isCancelled', boolean> = R.complement(isCancelled);
