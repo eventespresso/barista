@@ -16,7 +16,11 @@ const DateCapacity: React.FC<DateItemProps> = ({ entity: datetime }) => {
 		async (cap) => {
 			const capacity = parseInfinity(cap);
 			if (capacity !== datetime.capacity) {
-				await updateEntity({ capacity });
+				const changes = { capacity };
+				if (capacity === 0) {
+					changes['status'] = 'SOLD_OUT';
+				}
+				await updateEntity(changes);
 
 				// pass the new capacity to create input
 				const input = createBulkQtyUpdateInput({ ...datetime, capacity });
