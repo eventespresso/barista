@@ -6,4 +6,12 @@ export const TICKET_STATUS_ID = {
 	TRASHED: 'TKA',
 };
 
+export const TICKET_STATUSES = {
+	EXPIRED: 'EXPIRED',
+	ONSALE: 'ONSALE',
+	PENDING: 'PENDING',
+	SOLD_OUT: 'SOLD_OUT',
+	TRASHED: 'TRASHED',
+};
+
 export const TICKET_STATUS_IDS = Object.values(TICKET_STATUS_ID);
