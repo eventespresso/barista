@@ -1,4 +1,4 @@
-import './style.css';
+import './style.scss';
 import classNames from 'classnames';
 import { EntityIDs } from '../EntityIDs';
 import type { Entity } from '@eventespresso/data';
@@ -9,6 +9,7 @@ interface EntityPaperFrameProps {
 	children: React.ReactNode;
 	className?: string;
 	entity: Entity;
+	notice?: JSX.Element | string;
 }
 
 /**
@@ -25,7 +26,7 @@ type ElementWithCtx = Element & { Contexts: typeof Contexts };
  * adds a styled frame that gives the appearance
  * of a piece of paper on a surface
  */
-const EntityPaperFrame: ElementWithCtx = ({ children, entity, ...props }) => {
+const EntityPaperFrame: ElementWithCtx = ({ children, entity, notice, ...props }) => {
 	const className = classNames(props.className, 'ee-entity-paper-frame-wrapper');
 
 	const ariaLabel = useContext(Contexts.AriaLabel);
@@ -39,7 +40,7 @@ const EntityPaperFrame: ElementWithCtx = ({ children, entity, ...props }) => {
 			id={`ee-entity-paper-frame-${entity.id}`}
 			className={className}
 		>
-			<EntityIDs dbid={entity.dbId} guid={entity.id} />
+			<EntityIDs dbid={entity.dbId} guid={entity.id} notice={notice} />
 
 			<div className='ee-entity-paper-frame'>
 				<div className='ee-entity-inner-wrapper'>{children}</div>
