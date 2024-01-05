@@ -23,10 +23,11 @@
 		}
 
 		&__sidebar {
-			padding: 0;
+			padding: 0 0 var(--ee-padding-micro);
 			width: var(--ee-sidebar-width);
 
 			.ee-entity-status__label {
+				min-height: var(--ee-icon-button-size-small);
 				text-align: center;
 
 				& > .ee-entity-status__text {
@@ -36,6 +37,10 @@
 					letter-spacing: 1px;
 					padding: 0 0 var(--ee-padding-tiny);
 					text-transform: uppercase;
+				}
+
+				.ee-btn-base.ee-icon-button.ee-btn--small {
+					margin-block: 0;
 				}
 			}
 		}

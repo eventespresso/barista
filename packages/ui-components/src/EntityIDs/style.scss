@@ -19,6 +19,10 @@
 	&.ee-align-rgt {
 		text-align: right;
 	}
+
+	.ee-status--error {
+		margin-inline-start: var(--ee-margin-small);
+	}
 }
 
 .ee-entity-id-separator {
