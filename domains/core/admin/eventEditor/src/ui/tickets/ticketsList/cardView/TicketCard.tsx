@@ -1,8 +1,9 @@
 import { useMemo } from 'react';
+import { __, sprintf } from '@eventespresso/i18n';
 import { EntityActionsMenuLayout } from '@eventespresso/ui-components';
 import { EntityCard, EntityPaperFrame } from '@eventespresso/ui-components';
 import { ticketStatusBgColorClassName } from '@eventespresso/helpers';
-import { useTicketItem } from '@eventespresso/edtr-services';
+import { modifyTicketStatusBasedOnDatetimes, useTicketItem } from '@eventespresso/edtr-services';
 
 import Details from './Details';
 import TicketCardSidebar from './TicketCardSidebar';
@@ -10,11 +11,24 @@ import TicketActionsMenu from '../actionsMenu/TicketActionsMenu';
 import type { TicketItemProps } from '../types';
 
 const TicketCard: React.FC<TicketItemProps> = ({ id }) => {
-	const ticket = useTicketItem({ id });
+	const origTicket = useTicketItem({ id });
+	const ticket = modifyTicketStatusBasedOnDatetimes(origTicket);
+
 	const bgClassName = ticketStatusBgColorClassName(ticket);
+	const notice =
+		origTicket.status !== ticket.status ? (
+			<span className='ee-status--error'>
+				{sprintf(
+					/* translators: %s ticket status like: ONSALE, PENDING, TRASHED, SOLD OUT */
+					__(`Ticket status is now %s due to a related datetime status change`),
+					ticket.status
+				)}
+			</span>
+		) : undefined;
 
 	const ariaLabel: string = useMemo(() => {
-		// since title is optional property in datetime, we need to consider that and provide a sane default value if title is missing
+		// since title is optional property in datetime,
+		// we need to consider that and provide a sane default value if title is missing
 		return ticket.name.length > 0 ? ticket.name : 'ticket';
 	}, [ticket]);
 
@@ -28,6 +42,7 @@ const TicketCard: React.FC<TicketItemProps> = ({ id }) => {
 				actionsMenu={<TicketActionsMenu entity={ticket} layout={EntityActionsMenuLayout.Vertical} />}
 				details={<Details entity={ticket} />}
 				entity={ticket}
+				notice={notice}
 				reverse
 				sidebar={<TicketCardSidebar entity={ticket} />}
 				sidebarClass={bgClassName}
