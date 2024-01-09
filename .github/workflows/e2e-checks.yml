@@ -5,6 +5,16 @@ on:
         types: [submitted]
     issue_comment:
         types: [created]
+    workflow_dispatch:
+        inputs:
+            cafe_repo_branch:
+                description: 'Cafe branch to use? (default: DEV)'
+                type: string
+                required: false
+            e2e_repo_branch:
+                description: 'E2E branch to use? (default: MAIN)'
+                type: string
+                required: false
 
 jobs:
     run-tests:
@@ -18,7 +28,8 @@ jobs:
             (
                 github.event.issue.pull_request &&
                 contains(github.event.comment.body, '/run-e2e')
-            )
+            ) ||
+            github.event_name == 'workflow_dispatch'
         # avoid excessively high timeout values to avoid burning minutes
         timeout-minutes: 60
         steps:
@@ -35,27 +46,33 @@ jobs:
             - id: get-branch
               name: Get Branch Ref of the Pull Request
               run: |
-                  if [ ! -z "${HEAD_REF}" ]
-                  then
-                    echo "Found branch name in github.event.pull_request.head.ref"
-                    echo branch="$HEAD_REF" >> $GITHUB_OUTPUT
-                  else
-                    branch=$(gh pr view $PR --repo $REPO --json headRefName --jq '.headRefName')
-                    echo "Found branch using gh cli: $branch"
-                    echo branch="$branch" >> $GITHUB_OUTPUT
+                  if [ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]; then
+                      echo "Found branch name in \$GITHUB_REF_NAME: $GITHUB_REF_NAME"
+                      echo "branch=$GITHUB_REF_NAME" >> "$GITHUB_OUTPUT"
+                      exit 0
                   fi
+                  # if condition earlier takes care of 'approved'-only PR submissions
+                  if [ $GITHUB_EVENT_NAME" == "pull_request_review" ]; then
+                      branch="$(gh pr view $GITHUB_PR --repo $GITHUB_REPO --json headRefName --jq '.headRefName')"
+                      echo "Found branch using gh cli: $branch"
+                      echo "branch=$branch" >> $GITHUB_OUTPUT
+                      exit 0
+                  fi
+                  echo "Could not obtain branch name!"
+                  exit 1
               env:
-                  HEAD_REF: ${{ github.event.pull_request.head.ref }}
-                  PR: ${{ github.event.issue.number }}
-                  REPO: ${{ github.repository }}
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  GITHUB_REF: ${{ env.GITHUB_REF }}
+                  GITHUB_REF_NAME: ${{ env.GITHUB_REF_NAME }}
+                  GITHUB_PR: ${{ github.event.issue.number }}
+                  GITHUB_REPO: ${{ github.repository }}
             - id: run-e2e
               name: Run tests
               uses: eventespresso/actions/packages/e2e-tests@main
               with:
-                  cafe_repo_branch: DEV
+                  cafe_repo_branch: ${{ inputs.cafe_repo_branch || 'DEV' }}
                   barista_repo_branch: ${{ steps.get-branch.outputs.branch }}
-                  e2e_tests_repo_branch: MAIN
+                  e2e_tests_repo_branch: ${{ inputs.e2e_repo_branch || 'MAIN' }}
                   gpg_password: ${{ secrets.E2E_GPG_PASSWORD }}
                   gpg_cipher: AES256
               env:
