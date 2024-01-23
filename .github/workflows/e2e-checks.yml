@@ -12,7 +12,7 @@ on:
                 type: string
                 required: false
             barista_repo_branch:
-                description: Which branch to use for Barista repository? (default 'master')
+                description: Which branch to use for Barista repository? (defaults to workflow branch)
                 type: string
                 required: false
             e2e_tests_repo_branch:
