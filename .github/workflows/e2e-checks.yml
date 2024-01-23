@@ -28,11 +28,11 @@ jobs:
             branch: |-
                 ${{ steps.pull_request_review.outputs.branch || steps.issue_comment.outputs.branch || steps.workflow_dispatch.outputs.branch }}
         steps:
-            - name: "Event: 'pull_request_review' Activity: 'submitted'"
+            - name: "Event: 'pull_request_review' Activity: 'submitted' State: 'Approved'"
               id: pull_request_review
-              if: github.event_name == 'pull_request_review'
+              if: github.event_name == 'pull_request_review' && github.event.review.state == 'approved'
               run: echo branch="${{ github.event.pull_request.head.ref }}" >> "$GITHUB_OUTPUT"
-            - name: "Event: 'issue_comment' Activity: 'created'"
+            - name: "Event: 'issue_comment' Activity: 'created' Type: 'Pull Request' Comment Body: '/run-e2e' (contains)"
               id: issue_comment
               if: |
                   github.event_name == 'issue_comment' &&
@@ -55,6 +55,7 @@ jobs:
         runs-on: ubuntu-22.04
         timeout-minutes: 60
         needs: check
+        if: needs.check.outputs.branch
         steps:
             - name: Setup SSH for git
               uses: MrSquaare/ssh-setup-action@v2
