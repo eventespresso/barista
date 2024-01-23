@@ -16,7 +16,7 @@ on:
 
 jobs:
     warmup-cache:
-        name: Warmup E2E Cache
+        name: Warmup E2E cache
         runs-on: ubuntu-22.04
         timeout-minutes: 60
         steps:
