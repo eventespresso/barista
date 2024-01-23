@@ -26,7 +26,7 @@ jobs:
                   host: github.com
                   private-key: ${{ secrets.GH_ACTIONS_SSH_PRIVATE_KEY }}
 
-            - name: Run E2E Tests
+            - name: Run E2E tests
               uses: eventespresso/actions/packages/e2e-tests@main
               with:
                   cafe_repo_branch: DEV
