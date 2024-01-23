@@ -18,7 +18,7 @@ jobs:
     warmup-cache:
         name: Warmup E2E Cache
         runs-on: ubuntu-22.04
-        timeout-minutes: 20
+        timeout-minutes: 60
         steps:
             - name: Setup SSH
               uses: MrSquaare/ssh-setup-action@v2
