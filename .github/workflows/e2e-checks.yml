@@ -24,8 +24,29 @@ jobs:
     check:
         name: Check conditions
         runs-on: ubuntu-22.04
+        if: |
+            github.event.review.state == 'approved' ||
+            contains(github.event.comment.body, '/run-e2e') ||
+            github.event_name == 'workflow_dispatch'
         outputs:
-            branch: |-
+            approvals: ${{ steps.approvals.outputs.count }}
+        steps:
+            - name: Get PR approvals count (event 'pull_request_review' only!)
+              id: approvals
+              if: github.event_name == 'pull_request_review'
+              run: |
+                  count="$(gh pr view "$PR" --repo "$REPO" --json latestReviews --jq '.latestReviews | map(select(.state == "APPROVED")) | length')"
+                  echo "count=$count" >> "$GITHUB_OUTPUT"
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  REPO: ${{ github.event.pull_request.head.repo.name }}
+                  PR: ${{ github.event.pull_request.number }}
+
+    branch:
+        name: Get branch ref
+        runs-on: ubuntu-22.04
+        outputs:
+            ref: |-
                 ${{ steps.pull_request_review.outputs.branch || steps.issue_comment.outputs.branch || steps.workflow_dispatch.outputs.branch }}
         steps:
             - name: "Event: 'pull_request_review' Activity: 'submitted' State: 'Approved'"
@@ -54,10 +75,10 @@ jobs:
         name: Run E2E tests
         runs-on: ubuntu-22.04
         timeout-minutes: 60
-        needs: check
-        if: needs.check.outputs.branch
+        needs: branch
+        if: needs.branch.outputs.ref
         concurrency:
-            group: ${{ github.workflow }}-${{ needs.check.outputs.branch }}
+            group: ${{ github.workflow }}-${{ needs.branch.outputs.ref }}
             cancel-in-progress: ${{ github.event_name == 'issue_comment' || github.event_name == 'workflow_dispatch' }}
         steps:
             - name: Setup SSH for git
@@ -66,12 +87,12 @@ jobs:
                   host: github.com
                   private-key: ${{ secrets.GH_ACTIONS_SSH_PRIVATE_KEY }}
             - name: Check branch ref
-              run: test "${{ needs.check.outputs.branch }}"
+              run: test "${{ needs.branch.outputs.ref }}"
             - name: Run tests
               uses: eventespresso/actions/packages/e2e-tests@main
               with:
                   cafe_repo_branch: ${{ inputs.cafe_repo_branch || 'DEV' }}
-                  barista_repo_branch: ${{ inputs.barista_repo_branch || needs.check.outputs.branch }}
+                  barista_repo_branch: ${{ inputs.barista_repo_branch || needs.branch.outputs.ref }}
                   e2e_tests_repo_branch: ${{ inputs.e2e_tests_repo_branch || 'MAIN' }}
                   gpg_password: ${{ secrets.E2E_GPG_PASSWORD }}
                   gpg_cipher: AES256
