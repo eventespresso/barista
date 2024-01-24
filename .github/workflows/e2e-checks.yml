@@ -36,7 +36,7 @@ jobs:
               if: github.event_name == 'pull_request_review'
               run: |
                   count="$(gh pr view "$PR" --repo "$REPO" --json latestReviews --jq '.latestReviews | map(select(.state == "APPROVED")) | length')"
-                  echo "count=$count" >> "$GITHUB_OUTPUT"
+                  echo count="$count" >> "$GITHUB_OUTPUT"
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   REPO: ${{ github.event.pull_request.head.repo.full_name }}
@@ -45,6 +45,8 @@ jobs:
     branch:
         name: Get branch ref
         runs-on: ubuntu-22.04
+        needs: check
+        if: github.event_name != 'pull_request_review' || needs.check.outputs.approvals == '1'
         outputs:
             ref: |-
                 ${{ steps.pull_request_review.outputs.branch || steps.issue_comment.outputs.branch || steps.workflow_dispatch.outputs.branch }}
