@@ -56,6 +56,9 @@ jobs:
         timeout-minutes: 60
         needs: check
         if: needs.check.outputs.branch
+        concurrency:
+            group: ${{ github.workflow }}-${{ needs.check.outputs.branch }}
+            cancel-in-progress: ${{ github.event_name == 'issue_comment' || github.event_name == 'workflow_dispatch' }}
         steps:
             - name: Setup SSH for git
               uses: MrSquaare/ssh-setup-action@v2
