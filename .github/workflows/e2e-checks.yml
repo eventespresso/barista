@@ -5,57 +5,97 @@ on:
         types: [submitted]
     issue_comment:
         types: [created]
+    workflow_dispatch:
+        inputs:
+            cafe_repo_branch:
+                description: Which branch to use for Cafe repository? (default 'DEV')
+                type: string
+                required: false
+            barista_repo_branch:
+                description: Which branch to use for Barista repository? (defaults to workflow branch)
+                type: string
+                required: false
+            e2e_tests_repo_branch:
+                description: Which branch to use for E2E Tests repository? (default 'MAIN')
+                type: string
+                required: false
 
 jobs:
-    run-tests:
-        name: Run E2E Tests
+    check:
+        name: Check conditions
         runs-on: ubuntu-22.04
-        # two conditions which trigger E2E checks
-        #   - PR is approved
-        #   - PR contains comment "/run-e2e" (manual trigger)
         if: |
             github.event.review.state == 'approved' ||
-            (
-                github.event.issue.pull_request &&
-                contains(github.event.comment.body, '/run-e2e')
-            )
-        # avoid excessively high timeout values to avoid burning minutes
-        timeout-minutes: 60
+            contains(github.event.comment.body, '/run-e2e') ||
+            github.event_name == 'workflow_dispatch'
+        outputs:
+            approvals: ${{ steps.approvals.outputs.count }}
         steps:
-            - id: ssh
-              name: Setup SSH
+            - name: Get PR approvals count (event 'pull_request_review' only!)
+              id: approvals
+              if: github.event_name == 'pull_request_review'
+              run: |
+                  count="$(gh pr view "$PR" --repo "$REPO" --json latestReviews --jq '.latestReviews | map(select(.state == "APPROVED")) | length')"
+                  echo count="$count" >> "$GITHUB_OUTPUT"
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  REPO: ${{ github.event.pull_request.head.repo.full_name }}
+                  PR: ${{ github.event.pull_request.number }}
+
+    branch:
+        name: Get branch ref
+        runs-on: ubuntu-22.04
+        needs: check
+        if: github.event_name != 'pull_request_review' || needs.check.outputs.approvals == '1'
+        outputs:
+            ref: |-
+                ${{ steps.pull_request_review.outputs.branch || steps.issue_comment.outputs.branch || steps.workflow_dispatch.outputs.branch }}
+        steps:
+            - name: "Event: 'pull_request_review' Activity: 'submitted' State: 'Approved'"
+              id: pull_request_review
+              if: github.event_name == 'pull_request_review' && github.event.review.state == 'approved'
+              run: echo branch="${{ github.event.pull_request.head.ref }}" >> "$GITHUB_OUTPUT"
+            - name: "Event: 'issue_comment' Activity: 'created' Type: 'Pull Request' Comment Body: '/run-e2e' (contains)"
+              id: issue_comment
+              if: |
+                  github.event_name == 'issue_comment' &&
+                  github.event.issue.pull_request &&
+                  contains(github.event.comment.body, '/run-e2e')
+              run: |
+                  branch="$(gh pr view "$PR" --repo "$REPO" --json headRefName --jq '.headRefName')"
+                  echo branch="$branch" >> "$GITHUB_OUTPUT"
+              env:
+                  PR: ${{ github.event.issue.number }}
+                  REPO: ${{ github.repository }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: "Event: 'workflow_dispatch' Activity: 'not applicable'"
+              id: workflow_dispatch
+              if: github.event_name == 'workflow_dispatch'
+              run: echo branch="${{ github.ref_name }}" >> "$GITHUB_OUTPUT"
+
+    e2e:
+        name: Run E2E tests
+        runs-on: ubuntu-22.04
+        timeout-minutes: 60
+        needs: branch
+        if: needs.branch.outputs.ref
+        concurrency:
+            group: ${{ github.workflow }}-${{ needs.branch.outputs.ref }}
+            cancel-in-progress: ${{ github.event_name == 'issue_comment' || github.event_name == 'workflow_dispatch' }}
+        steps:
+            - name: Setup SSH for git
               uses: MrSquaare/ssh-setup-action@v2
               with:
                   host: github.com
                   private-key: ${{ secrets.GH_ACTIONS_SSH_PRIVATE_KEY }}
-            # In case of pull_request_review, we have access to HEAD REF of pull request. However, in case of issue_comment, we do not since event issue_comment always runs against default branch:
-            # Note: This event will only trigger a workflow run if the workflow file is on the default branch.
-            # https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#pull_request_review
-            # https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads#issue_comment
-            - id: get-branch
-              name: Get Branch Ref of the Pull Request
-              run: |
-                  if [ ! -z "${HEAD_REF}" ]
-                  then
-                    echo "Found branch name in github.event.pull_request.head.ref"
-                    echo branch="$HEAD_REF" >> $GITHUB_OUTPUT
-                  else
-                    branch=$(gh pr view $PR --repo $REPO --json headRefName --jq '.headRefName')
-                    echo "Found branch using gh cli: $branch"
-                    echo branch="$branch" >> $GITHUB_OUTPUT
-                  fi
-              env:
-                  HEAD_REF: ${{ github.event.pull_request.head.ref }}
-                  PR: ${{ github.event.issue.number }}
-                  REPO: ${{ github.repository }}
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            - id: run-e2e
-              name: Run tests
+            - name: Check branch ref
+              run: test "${{ needs.branch.outputs.ref }}"
+            - name: Run tests
               uses: eventespresso/actions/packages/e2e-tests@main
               with:
-                  cafe_repo_branch: DEV
-                  barista_repo_branch: ${{ steps.get-branch.outputs.branch }}
-                  e2e_tests_repo_branch: MAIN
+                  cafe_repo_branch: ${{ inputs.cafe_repo_branch || 'DEV' }}
+                  barista_repo_branch: ${{ inputs.barista_repo_branch || needs.branch.outputs.ref }}
+                  e2e_tests_repo_branch: ${{ inputs.e2e_tests_repo_branch || 'MAIN' }}
                   gpg_password: ${{ secrets.E2E_GPG_PASSWORD }}
                   gpg_cipher: AES256
               env:

@@ -16,9 +16,9 @@ on:
 
 jobs:
     warmup-cache:
-        name: Warmup E2E Cache
+        name: Warmup E2E cache
         runs-on: ubuntu-22.04
-        timeout-minutes: 20
+        timeout-minutes: 60
         steps:
             - name: Setup SSH
               uses: MrSquaare/ssh-setup-action@v2
@@ -26,7 +26,7 @@ jobs:
                   host: github.com
                   private-key: ${{ secrets.GH_ACTIONS_SSH_PRIVATE_KEY }}
 
-            - name: Run E2E Tests
+            - name: Run E2E tests
               uses: eventespresso/actions/packages/e2e-tests@main
               with:
                   cafe_repo_branch: DEV
