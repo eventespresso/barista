@@ -39,7 +39,7 @@ jobs:
                   echo "count=$count" >> "$GITHUB_OUTPUT"
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  REPO: ${{ github.event.pull_request.head.repo.name }}
+                  REPO: ${{ github.event.pull_request.head.repo.full_name }}
                   PR: ${{ github.event.pull_request.number }}
 
     branch:
