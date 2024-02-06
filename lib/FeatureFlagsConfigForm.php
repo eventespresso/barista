@@ -74,6 +74,14 @@ class FeatureFlagsConfigForm extends EE_Form_Section_Proper
 					'event_espresso'
 				)
 			],
+			FeatureFlagsConfig::USE_EDD_PLUGIN_LICENSING => [
+				'name' => esc_html__('EDD Plugin Licensing','event_espresso'),
+				'html_label_text' => esc_html__('Use EDD Plugin Licensing','event_espresso'),
+				'help_text' => esc_html__(
+					'Whether to use the EDD Plugin Licensing system to manage licenses for the EE plugins. default: Disabled',
+					'event_espresso'
+				)
+			],
 		];
 
 		$subsections = [
