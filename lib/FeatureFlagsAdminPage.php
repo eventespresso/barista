@@ -86,13 +86,13 @@ class FeatureFlagsAdminPage
 			$form->receive_form_submission($_REQUEST);
 			if ($form->is_valid()) {
 				$feature_flags_form_options = $form->valid_data();
-				$feature_flags = $feature_flags_config->getFeatureFlags();
+				// $feature_flags = $feature_flags_config->getFeatureFlags();
 				$success       = true;
 				foreach ($feature_flags_form_options as $feature_flag => $value) {
 					$result = WordPressOption::UPDATE_NONE;
-					if ($feature_flag && property_exists($feature_flags, $feature_flag)) {
+					if ($feature_flag) {
 						$result = $value === EE_Switch_Input::OPTION_ON
-							? $feature_flags_config->enableFeatureFlag($feature_flag)
+							? $feature_flags_config->enableFeatureFlag($feature_flag, true)
 							: $feature_flags_config->disableFeatureFlag($feature_flag);
 					}
 					$success = $result === WordPressOption::UPDATE_ERROR ? $result : $success;
