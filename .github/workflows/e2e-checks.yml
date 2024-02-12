@@ -19,6 +19,10 @@ on:
                 description: Which branch to use for E2E Tests repository? (default 'MAIN')
                 type: string
                 required: false
+            ddev_version:
+                description: Which version of DDEV to use? (defaults to latest version)
+                type: string
+                required: false
 
 jobs:
     check:
@@ -98,6 +102,7 @@ jobs:
                   e2e_tests_repo_branch: ${{ inputs.e2e_tests_repo_branch || 'MAIN' }}
                   gpg_password: ${{ secrets.E2E_GPG_PASSWORD }}
                   gpg_cipher: AES256
+                  ddev_version: ${{ inputs.ddev_version || '1.22.6' }}
               env:
                   E2E_TEST_CARD_PAYPAL_COMMERCE: ${{ secrets.E2E_TEST_CARD_PAYPAL_COMMERCE }}
                   E2E_TEST_CREDS_PPC_SANDBOX_CONNECT: ${{ secrets.E2E_TEST_CREDS_PPC_SANDBOX_CONNECT }}
