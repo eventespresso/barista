@@ -20,7 +20,7 @@ on:
                 type: string
                 required: false
             ddev_version:
-                description: Which version of DDEV to use? (defaults to latest version)
+                description: Which version of DDEV to use? (defaults to version '1.22.6')
                 type: string
                 required: false
 
