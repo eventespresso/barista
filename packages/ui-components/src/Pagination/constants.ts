@@ -8,6 +8,8 @@ export const DEFAULT_PER_PAGE_OPTIONS: PerPageOptions = {
 	12: sprintf(/* translators: %s is per page value */ __('%s / page'), __('12')),
 	24: sprintf(/* translators: %s is per page value */ __('%s / page'), __('24')),
 	48: sprintf(/* translators: %s is per page value */ __('%s / page'), __('48')),
+	96: sprintf(/* translators: %s is per page value */ __('%s / page'), __('96')),
+	9999: __('show all'),
 };
 export const DEFAULT_LOCALE: Locale = {
 	next_page: __('Next Page'),
