@@ -2,17 +2,17 @@ import type { Ticket } from '@eventespresso/edtr-services';
 
 export interface TicketSalesFilter {
 	tickets: Ticket[];
-	sales: TicketsSales;
+	sales: TicketsSalesFilters;
 }
 
 export interface TicketStatusFilter {
 	tickets: Ticket[];
-	status: TicketsStatus;
+	status: TicketsStatusFilters;
 }
 
 export type TicketFilterFn = (tickets: Array<Ticket>) => Array<Ticket>;
 
-export enum TicketsStatus {
+export enum TicketsStatusFilters {
 	all = 'all',
 	expiredOnly = 'expired-only',
 	nextOnSaleOrPendingOnly = 'next-on-sale-or-pending-only',
@@ -23,7 +23,7 @@ export enum TicketsStatus {
 	trashedOnly = 'trashed-only',
 }
 
-export enum TicketsSales {
+export enum TicketsSalesFilters {
 	above50Sold = 'above-50-sold',
 	above75Sold = 'above-75-sold',
 	above90Sold = 'above-90-sold',

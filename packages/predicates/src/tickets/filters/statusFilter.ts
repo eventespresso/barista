@@ -8,7 +8,7 @@ import soldOutOnly from './soldOutOnly';
 import { notTrashed, trashedOnly } from '../../common';
 
 import type { TicketStatusFilter } from './types';
-import { TicketsStatus } from './types';
+import { TicketsStatusFilters } from './types';
 
 /**
  * reduces tickets array based on value of the "status" filter
@@ -17,26 +17,26 @@ import { TicketsStatus } from './types';
  * @param {string} show    value for the "show" filter
  * @return {Array}         filtered tickets array
  */
-const statusFilter = ({ tickets: entities, status = TicketsStatus.onSaleAndPending }: TicketStatusFilter): Ticket[] => {
+const statusFilter = ({ tickets: entities, status = TicketsStatusFilters.onSaleAndPending }: TicketStatusFilter): Ticket[] => {
 	const tickets = notTrashed(entities);
 	switch (status) {
-		case TicketsStatus.all:
+		case TicketsStatusFilters.all:
 			// we don't normally want to show trashed tickets
 			return entities;
-		case TicketsStatus.trashedOnly:
+		case TicketsStatusFilters.trashedOnly:
 			// unless the user specifically requests it
 			return trashedOnly(entities);
-		case TicketsStatus.expiredOnly:
+		case TicketsStatusFilters.expiredOnly:
 			return expiredOnly(tickets);
-		case TicketsStatus.nextOnSaleOrPendingOnly:
+		case TicketsStatusFilters.nextOnSaleOrPendingOnly:
 			return nextOnSaleOrPendingOnly(tickets);
-		case TicketsStatus.onSaleAndPending:
+		case TicketsStatusFilters.onSaleAndPending:
 			return allOnSaleAndPending(tickets);
-		case TicketsStatus.onSaleOnly:
+		case TicketsStatusFilters.onSaleOnly:
 			return onSaleOnly(tickets);
-		case TicketsStatus.pendingOnly:
+		case TicketsStatusFilters.pendingOnly:
 			return pendingOnly(tickets);
-		case TicketsStatus.soldOutOnly:
+		case TicketsStatusFilters.soldOutOnly:
 			return soldOutOnly(tickets);
 		default:
 			return tickets;

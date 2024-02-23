@@ -1,5 +1,5 @@
 import type { EntityListFilterStateManager } from '@eventespresso/services';
-import type { TicketsSales, TicketsStatus } from '@eventespresso/predicates';
+import type { TicketsSalesFilters, TicketsStatusFilters } from '@eventespresso/predicates';
 
 import type {
 	SortBy,
@@ -12,8 +12,8 @@ import type {
 
 export interface TicketsFilterState extends EntityFilterState {
 	isChained: boolean;
-	sales: TicketsSales;
-	status: TicketsStatus;
+	sales: TicketsSalesFilters;
+	status: TicketsStatusFilters;
 }
 
 export type TicketsFilterActionType = 'SET_SALES' | 'SET_STATUS' | 'TOGGLE_IS_CHAINED' | EntityFilterActionType;
@@ -24,8 +24,8 @@ export interface TicketsFilterStateManager
 	extends EntityListFilterStateManager<SortBy>,
 		EntityFilterStateManager,
 		TicketsFilterState {
-	setSales: (sales: TicketsSales) => void;
-	setStatus: (status: TicketsStatus) => void;
+	setSales: (sales: TicketsSalesFilters) => void;
+	setStatus: (status: TicketsStatusFilters) => void;
 	toggleIsChained: VoidFunction;
 	visibleDatesStr: string;
 }

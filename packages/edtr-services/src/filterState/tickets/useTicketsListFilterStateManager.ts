@@ -5,7 +5,7 @@ import { ticketsList } from '../../constants';
 import { useEntityListFilterStateManager } from '@eventespresso/services';
 import { useVisibleDatetimeIds } from '../../hooks';
 import { useSessionStorageReducer } from '@eventespresso/storage';
-import { TicketsSales, TicketsStatus } from '@eventespresso/predicates';
+import { TicketsSalesFilters, TicketsStatusFilters } from '@eventespresso/predicates';
 
 import reducer from './reducer';
 import type { TicketsFilterState, TicketsFilterStateManager } from './types';
@@ -16,8 +16,8 @@ type TFS = TicketsFilterState;
 const initialState: TicketsFilterState = {
 	displayStartOrEndDate: DisplayStartOrEndDate.start,
 	isChained: true,
-	sales: TicketsSales.all,
-	status: TicketsStatus.onSaleAndPending,
+	sales: TicketsSalesFilters.all,
+	status: TicketsStatusFilters.onSaleAndPending,
 };
 type ResetPageNumber = <K extends keyof TFS>(filter: K, value: TFS[K]) => void;
 
