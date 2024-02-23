@@ -5,7 +5,7 @@ import {
 	useReorderTickets,
 	useTicketsListFilterState,
 } from '@eventespresso/edtr-services';
-import { ticketDroppableId } from '@eventespresso/constants';
+import { TICKETS_DROPPABLE_ID } from '@eventespresso/constants';
 import { objectToSelectOptions } from '@eventespresso/utils';
 import { TypeName } from '@eventespresso/services';
 import type { SortByControlProps } from '@eventespresso/ee-components';
@@ -35,7 +35,7 @@ const SortByControl: React.FC = () => {
 	return (
 		<SortByControlUI
 			draggableItems={draggableItems}
-			droppableId={ticketDroppableId}
+			droppableId={TICKETS_DROPPABLE_ID}
 			entityType={TypeName.tickets}
 			id='ee-tickets-list-sort-by-control'
 			label={labels.sortBy}

@@ -1,6 +1,6 @@
 export const TICKET_STATUS_ID = {
 	EXPIRED: 'TKE',
-	ONSALE: 'TKO',
+	ON_SALE: 'TKO',
 	PENDING: 'TKP',
 	SOLD_OUT: 'TKS',
 	TRASHED: 'TKA',
@@ -8,7 +8,7 @@ export const TICKET_STATUS_ID = {
 
 export const TICKET_STATUSES = {
 	EXPIRED: 'EXPIRED',
-	ONSALE: 'ONSALE',
+	ON_SALE: 'ON_SALE',
 	PENDING: 'PENDING',
 	SOLD_OUT: 'SOLD_OUT',
 	TRASHED: 'TRASHED',

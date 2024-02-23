@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 
-import { ticketDroppableId } from '@eventespresso/constants';
+import { TICKETS_DROPPABLE_ID } from '@eventespresso/constants';
 import type { EntityId } from '@eventespresso/data';
 import type { EntityTableProps } from '@eventespresso/ee-components';
 
@@ -50,7 +50,7 @@ const useReorderTickets = (filteredEntityIds: Array<EntityId>): ReorderTickets =
 		({ destination, source }) => {
 			const noDestination = !destination;
 			const noChange = source?.index === destination?.index && destination?.droppableId === source?.droppableId;
-			const notOurListOfInterest = destination?.droppableId !== ticketDroppableId;
+			const notOurListOfInterest = destination?.droppableId !== TICKETS_DROPPABLE_ID;
 
 			if (noDestination || noChange || notOurListOfInterest) {
 				return;
