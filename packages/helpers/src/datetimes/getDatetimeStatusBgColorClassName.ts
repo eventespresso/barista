@@ -1,6 +1,6 @@
 import type { Datetime } from '@eventespresso/edtr-services';
 
-const statusBgColorClassName = (date: Datetime): string => {
+export const getDatetimeStatusBgColorClassName = (date: Datetime): string => {
 	if (date?.isTrashed) {
 		return 'ee-status-bg--DTT';
 	}
@@ -32,5 +32,3 @@ const statusBgColorClassName = (date: Datetime): string => {
 	// default to "TO_BE_DETERMINED" if nothing else matches
 	return 'ee-status-bg--DTB';
 };
-
-export default statusBgColorClassName;

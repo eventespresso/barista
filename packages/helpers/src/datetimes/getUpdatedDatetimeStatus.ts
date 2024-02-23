@@ -10,7 +10,7 @@ import {
 	isUpcoming,
 } from '@eventespresso/predicates';
 
-const status = (date: Datetime, ignoreFlag = false): string => {
+export const getUpdatedDatetimeStatus = (date: Datetime, ignoreFlag = false): string => {
 	if (isCancelled(date)) {
 		return DATETIME_STATUS_ID.CANCELLED;
 	}
@@ -39,5 +39,3 @@ const status = (date: Datetime, ignoreFlag = false): string => {
 
 	return DATETIME_STATUS_ID.INACTIVE;
 };
-
-export default status;
