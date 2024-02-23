@@ -62,9 +62,11 @@ const useBulkEditTickets = (): BulkEditTickets => {
 				},
 			};
 			// fetch the affected dates.
-			const refetchQueries = unnest(input.uniqueInputs.map((input) => affectedDatesQueries({ input }))).filter(
-				Boolean
-			);
+			const refetchQueries = unnest(
+				input.uniqueInputs.map(
+					(input) => affectedDatesQueries({ input })
+				)
+			).filter( Boolean );
 
 			return updateTickets({ variables, update: updateEntityList(input), refetchQueries });
 		},
