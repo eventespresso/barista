@@ -47,16 +47,17 @@ export interface EventData {
 	espressoEvent: Event;
 }
 
-// LATER: consolidate data types
-export enum DateStatus {
-	active = 'DTA',
-	cancelled = 'DTC',
-	expired = 'DTE',
-	inactive = 'DTI',
-	postponed = 'DTP',
-	soldOut = 'DTS',
-	toBeDetermined = 'DTB',
-	upcoming = 'DTU',
+// TODO: consolidate data types
+export enum DatetimeStatus {
+	ACTIVE = 'ACTIVE',
+	CANCELLED = 'CANCELLED',
+	EXPIRED = 'EXPIRED',
+	INACTIVE = 'INACTIVE',
+	POSTPONED = 'POSTPONED',
+	SOLD_OUT = 'SOLD_OUT',
+	TO_BE_DETERMINED = 'TO_BE_DETERMINED',
+	TRASHED = 'TRASHED',
+	UPCOMING = 'UPCOMING',
 }
 
 // LATER: consolidate data types
@@ -76,7 +77,7 @@ export interface Datetime extends Entity, Trashable, StartAndEndDate.Type.String
 	order: number;
 	reserved: number;
 	sold: number;
-	status: DateStatus;
+	status: DatetimeStatus;
 	venue: EntityId; // UUID
 }
 
@@ -116,7 +117,17 @@ export interface PricesList {
 
 export type TicketVisibility = 'ADMINS_ONLY' | 'ADMIN_UI_ONLY' | 'MEMBERS_ONLY' | 'NONE' | 'PUBLIC';
 
-// LATER: consolidate data types
+
+export enum TicketStatus {
+	CLOSED = 'CLOSED',
+	EXPIRED = 'EXPIRED',
+	ON_SALE = 'ON_SALE',
+	PENDING = 'PENDING',
+	SOLD_OUT = 'SOLD_OUT',
+	TRASHED = 'TRASHED',
+};
+
+// TODO: consolidate data types
 export interface Ticket extends Entity, Trashable, StartAndEndDate.Type.String {
 	description: string;
 	isDefault: boolean;
@@ -126,6 +137,7 @@ export interface Ticket extends Entity, Trashable, StartAndEndDate.Type.String {
 	isPending: boolean;
 	isRequired: boolean;
 	isSoldOut: boolean;
+	isTrashed: boolean;
 	max: number;
 	min: number;
 	name: string;
@@ -137,11 +149,16 @@ export interface Ticket extends Entity, Trashable, StartAndEndDate.Type.String {
 	reserved: number;
 	reverseCalculate: boolean;
 	sold: number;
-	status: string;
+	status: TicketStatus;
 	userId: EntityId;
 	uses: number;
 	visibility: TicketVisibility;
 }
+
+export const isTicket = (entity: Entity): entity is Ticket => {
+	return entity.__typename === 'EspressoTicket';
+};
+
 
 export interface TicketItem {
 	espressoTicket: Ticket;
