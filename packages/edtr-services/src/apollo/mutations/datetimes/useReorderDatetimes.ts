@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 
-import { datetimesDroppableId } from '@eventespresso/constants';
+import { DATETIMES_DROPPABLE_ID } from '@eventespresso/constants';
 
 import type { EntityId } from '@eventespresso/data';
 import type { EntityTableProps } from '@eventespresso/ee-components';
@@ -53,7 +53,7 @@ const useReorderDatetimes = (filteredEntityIds: Array<EntityId>): ReorderDatetim
 		({ destination, source }) => {
 			const noDestination = !destination;
 			const noChange = source?.index === destination?.index && destination?.droppableId === source?.droppableId;
-			const notOurListOfInterest = destination?.droppableId !== datetimesDroppableId;
+			const notOurListOfInterest = destination?.droppableId !== DATETIMES_DROPPABLE_ID;
 
 			if (noDestination || noChange || notOurListOfInterest) {
 				return;

@@ -7,7 +7,7 @@ import {
 	Datetime,
 } from '@eventespresso/edtr-services';
 import { objectToSelectOptions } from '@eventespresso/utils';
-import { datetimesDroppableId } from '@eventespresso/constants';
+import { DATETIMES_DROPPABLE_ID } from '@eventespresso/constants';
 import { TypeName } from '@eventespresso/services';
 
 import { labels, sortByOptions } from '../options';
@@ -32,7 +32,7 @@ const SortByControl: React.FC = () => {
 	return (
 		<SortByControlUI
 			draggableItems={draggableItems}
-			droppableId={datetimesDroppableId}
+			droppableId={DATETIMES_DROPPABLE_ID}
 			entityType={TypeName.datetimes}
 			id='ee-dates-list-sort-by-control'
 			label={labels.sortBy}

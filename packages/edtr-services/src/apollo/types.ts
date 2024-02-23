@@ -43,15 +43,16 @@ export interface EventData {
 	espressoEvent: Event;
 }
 
-export enum DateStatus {
-	active = 'DTA',
-	cancelled = 'DTC',
-	expired = 'DTE',
-	inactive = 'DTI',
-	postponed = 'DTP',
-	soldOut = 'DTS',
-	toBeDetermined = 'DTB',
-	upcoming = 'DTU',
+export enum DatetimeStatus {
+	ACTIVE = 'ACTIVE',
+	CANCELLED = 'CANCELLED',
+	EXPIRED = 'EXPIRED',
+	INACTIVE = 'INACTIVE',
+	POSTPONED = 'POSTPONED',
+	SOLD_OUT = 'SOLD_OUT',
+	TO_BE_DETERMINED = 'TO_BE_DETERMINED',
+	TRASHED = 'TRASHED',
+	UPCOMING = 'UPCOMING',
 }
 
 export interface Datetime extends Entity, Trashable {
@@ -72,7 +73,7 @@ export interface Datetime extends Entity, Trashable {
 	reserved: number;
 	sold: number;
 	startDate: string;
-	status: DateStatus;
+	status: DatetimeStatus;
 	venue: EntityId; // UUID
 }
 
@@ -111,6 +112,16 @@ export interface PricesList {
 
 export type TicketVisibility = 'ADMINS_ONLY' | 'ADMIN_UI_ONLY' | 'MEMBERS_ONLY' | 'NONE' | 'PUBLIC';
 
+
+export enum TicketStatus {
+	CLOSED = 'CLOSED',
+	EXPIRED = 'EXPIRED',
+	ON_SALE = 'ON_SALE',
+	PENDING = 'PENDING',
+	SOLD_OUT = 'SOLD_OUT',
+	TRASHED = 'TRASHED',
+};
+
 export interface Ticket extends Entity, Trashable {
 	description: string;
 	endDate: string; // ISO string
@@ -121,6 +132,7 @@ export interface Ticket extends Entity, Trashable {
 	isPending: boolean;
 	isRequired: boolean;
 	isSoldOut: boolean;
+	isTrashed: boolean;
 	max: number;
 	min: number;
 	name: string;
@@ -133,11 +145,16 @@ export interface Ticket extends Entity, Trashable {
 	reverseCalculate: boolean;
 	sold: number;
 	startDate: string; // ISO string
-	status: string;
+	status: TicketStatus;
 	userId: EntityId;
 	uses: number;
 	visibility: TicketVisibility;
 }
+
+export const isTicket = (entity: Entity): entity is Ticket => {
+	return entity.__typename === 'EspressoTicket';
+};
+
 
 export interface TicketItem {
 	espressoTicket: Ticket;

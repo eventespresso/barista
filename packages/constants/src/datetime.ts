@@ -1,31 +1,20 @@
 import { __ } from '@eventespresso/i18n';
 
-export const datetimesDroppableId = 'date-entities-droppable';
+export const DATETIMES_DROPPABLE_ID = 'date-entities-droppable';
 
-export const datetimeStatus = {
-	isActive: __('Active'),
-	isCancelled: __('Cancelled'),
-	isExpired: __('Expired'),
-	isInactive: __('Inactive'),
-	isPostponed: __('Postponed'),
-	isSoldOut: __('Sold Out'),
-	isUpcoming: __('Upcoming'),
-	isTBD: __('TBD'),
+export const DATETIME_STATUS = {
+	ACTIVE: 'ACTIVE',
+	CANCELLED: 'CANCELLED',
+	EXPIRED: 'EXPIRED',
+	INACTIVE: 'INACTIVE',
+	POSTPONED: 'POSTPONED',
+	SOLD_OUT: 'SOLD_OUT',
+	TO_BE_DETERMINED: 'TO_BE_DETERMINED',
+	TRASHED: 'TRASHED',
+	UPCOMING: 'UPCOMING',
 };
 
-export const datetimeStatusLabels = {
-	ACTIVE: __('Active'),
-	CANCELLED: __('Cancelled'),
-	EXPIRED: __('Expired'),
-	INACTIVE: __('Inactive'),
-	POSTPONED: __('Postponed'),
-	SOLD_OUT: __('Sold Out'),
-	UPCOMING: __('Upcoming'),
-	TRASHED: __('Trashed'),
-	TO_BE_DETERMINED: __('TBD'),
-};
-
-export const datetimeStatusCodesMap = {
+export const DATETIME_STATUS_CODES = {
 	ACTIVE: 'DTA',
 	CANCELLED: 'DTC',
 	EXPIRED: 'DTE',
@@ -37,21 +26,34 @@ export const datetimeStatusCodesMap = {
 	UPCOMING: 'DTU',
 };
 
-export const datetimeStatusOptions = {
-	DTA: __('Active'),
-	DTB: __('To Be Determined'),
-	DTC: __('Cancelled'),
-	DTE: __('Expired'),
-	DTI: __('Inactive'),
-	DTP: __('Postponed'),
-	DTS: __('Sold Out'),
-	DTT: __('Trashed'),
-	DTU: __('Upcoming'),
+export const DATETIME_STATUS_LABELS = {
+	ACTIVE: __('Active'),
+	CANCELLED: __('Cancelled'),
+	EXPIRED: __('Expired'),
+	INACTIVE: __('Inactive'),
+	POSTPONED: __('Postponed'),
+	SOLD_OUT: __('Sold Out'),
+	TO_BE_DETERMINED: __('TBD'),
+	TRASHED: __('Trashed'),
+	UPCOMING: __('Upcoming'),
 };
 
-export const userSelectableDatetimeStatusOptions = {
-	DTC: __('Cancelled'),
-	DTP: __('Postponed'),
-	DTS: __('Sold Out'),
-	DTB: __('To Be Determined'),
+export const DATETIME_STATUS_PREDICATES = {
+	isActive: DATETIME_STATUS_LABELS.ACTIVE,
+	isCancelled: DATETIME_STATUS_LABELS.CANCELLED,
+	isExpired: DATETIME_STATUS_LABELS.EXPIRED,
+	isInactive: DATETIME_STATUS_LABELS.INACTIVE,
+	isPostponed: DATETIME_STATUS_LABELS.POSTPONED,
+	isSoldOut: DATETIME_STATUS_LABELS.SOLD_OUT,
+	isTBD: DATETIME_STATUS_LABELS.TO_BE_DETERMINED,
+	isTrashed: DATETIME_STATUS_LABELS.TRASHED,
+	isUpcoming: DATETIME_STATUS_LABELS.UPCOMING,
+};
+
+export const USER_SELECTABLE_DATETIME_STATUSES = {
+	CALENDAR_CONTROLLED: __('Calendar Controlled'),
+	CANCELLED: DATETIME_STATUS_LABELS.CANCELLED,
+	POSTPONED: DATETIME_STATUS_LABELS.POSTPONED,
+	SOLD_OUT: DATETIME_STATUS_LABELS.SOLD_OUT,
+	TO_BE_DETERMINED: DATETIME_STATUS_LABELS.TO_BE_DETERMINED,
 };
