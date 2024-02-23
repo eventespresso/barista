@@ -7,7 +7,7 @@ import { addZebraStripesOnMobile, CellData } from '@eventespresso/ui-components'
 import { filterCellByStartOrEndDate, useDatetimes, useLazyDatetime } from '@eventespresso/edtr-services';
 import { ENTITY_LIST_DATE_TIME_FORMAT } from '@eventespresso/constants';
 import { useFeature, useTimeZoneTime } from '@eventespresso/services';
-import { getDatetimeBackgroundColorClassName, datetimeStatus } from '@eventespresso/helpers';
+import { getDatetimeBackgroundColorClassName, getUpdatedDatetimeStatus } from '@eventespresso/helpers';
 import { findEntityByGuid } from '@eventespresso/predicates';
 import type { EntityId } from '@eventespresso/data';
 import type { DatetimesFilterStateManager } from '@eventespresso/edtr-services';
@@ -39,7 +39,7 @@ const useBodyRowGenerator = (): DatesTableBodyRowGen => {
 
 			const bgClassName = getDatetimeBackgroundColorClassName(datetime);
 			const id = datetime.dbId || 0;
-			const statusClassName = datetimeStatus(datetime);
+			const statusClassName = getUpdatedDatetimeStatus(datetime);
 
 			const stripeCell: CellData = {
 				className: classNames('ee-entity-list-status-stripe', bgClassName),

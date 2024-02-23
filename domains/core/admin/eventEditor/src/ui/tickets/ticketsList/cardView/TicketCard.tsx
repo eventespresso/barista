@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { __, sprintf } from '@eventespresso/i18n';
 import { EntityActionsMenuLayout } from '@eventespresso/ui-components';
 import { EntityCard, EntityPaperFrame } from '@eventespresso/ui-components';
-import { ticketStatusBgColorClassName } from '@eventespresso/helpers';
+import { getTicketStatusBgColorClassName } from '@eventespresso/helpers';
 import { modifyTicketStatusBasedOnDatetimes, useTicketItem } from '@eventespresso/edtr-services';
 
 import Details from './Details';
@@ -14,12 +14,12 @@ const TicketCard: React.FC<TicketItemProps> = ({ id }) => {
 	const origTicket = useTicketItem({ id });
 	const ticket = modifyTicketStatusBasedOnDatetimes(origTicket);
 
-	const bgClassName = ticketStatusBgColorClassName(ticket);
+	const bgClassName = getTicketStatusBgColorClassName(ticket);
 	const notice =
 		origTicket.status !== ticket.status ? (
 			<span className='ee-status--error'>
 				{sprintf(
-					/* translators: %s ticket status like: ONSALE, PENDING, TRASHED, SOLD OUT */
+					/* translators: %s ticket status like: ON_SALE, PENDING, TRASHED, SOLD OUT */
 					__(`Ticket status is now %s due to a related datetime status change`),
 					ticket.status
 				)}
