@@ -1,3 +1,4 @@
+import { DATETIME_STATUS_CODES, DATETIME_STATUS_LABELS } from '@eventespresso/constants';
 import { IconName, Trash } from '@eventespresso/icons';
 import { LegendConfig } from '@eventespresso/ui-components';
 import { __ } from '@eventespresso/i18n';
@@ -10,13 +11,13 @@ export const legendConfig: LegendConfig<string> = {
 		{ icon: Trash, description: __('Move Date to Trash') },
 	],
 	swatches: {
-		DTU: __('Upcoming'),
-		DTA: __('Active'),
-		DTS: __('Sold Out'),
-		DTE: __('Expired'),
-		DTB: __('To Be Determined'),
-		DTP: __('Postponed'),
-		DTC: __('Cancelled'),
-		DTT: __('Trashed'),
+		[DATETIME_STATUS_CODES.ACTIVE]: DATETIME_STATUS_LABELS.ACTIVE,
+		[DATETIME_STATUS_CODES.CANCELLED]: DATETIME_STATUS_LABELS.CANCELLED,
+		[DATETIME_STATUS_CODES.EXPIRED]: DATETIME_STATUS_LABELS.EXPIRED,
+		[DATETIME_STATUS_CODES.POSTPONED]: DATETIME_STATUS_LABELS.POSTPONED,
+		[DATETIME_STATUS_CODES.SOLD_OUT]: DATETIME_STATUS_LABELS.SOLD_OUT,
+		[DATETIME_STATUS_CODES.TO_BE_DETERMINED]: DATETIME_STATUS_LABELS.TO_BE_DETERMINED,
+		[DATETIME_STATUS_CODES.TRASHED]: DATETIME_STATUS_LABELS.TRASHED,
+		[DATETIME_STATUS_CODES.UPCOMING]: DATETIME_STATUS_LABELS.UPCOMING,
 	},
 };
