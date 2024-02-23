@@ -2,7 +2,7 @@ import { act, renderHook } from '@testing-library/react-hooks';
 
 import { DisplayStartOrEndDate } from '@eventespresso/edtr-services';
 import useTicketsListFilterStateManager from '../useTicketsListFilterStateManager';
-import { TicketsSales, TicketsStatus } from '@eventespresso/predicates';
+import { TicketsSalesFilters, TicketsStatusFilters } from '@eventespresso/predicates';
 import wrapper from './Wrapper';
 import { actWait } from '@eventespresso/utils/src/test';
 
@@ -71,7 +71,7 @@ describe('useTicketsListFilterStateManager', () => {
 		await actWait();
 
 		act(() => {
-			result.current.setSales(TicketsSales.above50Sold);
+			result.current.setSales(TicketsSalesFilters.above50Sold);
 		});
 		expect(result.current.sales).toBe('above-50-sold');
 	});
@@ -81,7 +81,7 @@ describe('useTicketsListFilterStateManager', () => {
 		await actWait();
 
 		act(() => {
-			result.current.setStatus(TicketsStatus.all);
+			result.current.setStatus(TicketsStatusFilters.all);
 		});
 		expect(result.current.status).toBe('all');
 	});

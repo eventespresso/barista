@@ -3,7 +3,7 @@ import percentSoldAtOrAbove from './percentSoldAtOrAbove';
 import percentSoldBelow from './percentSoldBelow';
 
 import type { TicketSalesFilter } from './types';
-import { TicketsSales } from './types';
+import { TicketsSalesFilters } from './types';
 
 /**
  * reduces tickets array based on value of the "sales" filter
@@ -12,15 +12,15 @@ import { TicketsSales } from './types';
  * @param {string} show    value for the "show" filter
  * @return {Array}         filtered tickets array
  */
-export const salesFilter = ({ tickets, sales = TicketsSales.all }: TicketSalesFilter): Ticket[] => {
+export const salesFilter = ({ tickets, sales = TicketsSalesFilters.all }: TicketSalesFilter): Ticket[] => {
 	switch (sales) {
-		case TicketsSales.above50Sold:
+		case TicketsSalesFilters.above50Sold:
 			return percentSoldAtOrAbove({ percentage: 50, tickets });
-		case TicketsSales.above75Sold:
+		case TicketsSalesFilters.above75Sold:
 			return percentSoldAtOrAbove({ percentage: 75, tickets });
-		case TicketsSales.above90Sold:
+		case TicketsSalesFilters.above90Sold:
 			return percentSoldAtOrAbove({ percentage: 90, tickets });
-		case TicketsSales.below50Sold:
+		case TicketsSalesFilters.below50Sold:
 			return percentSoldBelow({ percentage: 50, tickets });
 		default:
 			return tickets;
