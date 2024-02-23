@@ -2,7 +2,7 @@ import { act, renderHook } from '@testing-library/react-hooks';
 
 import { DisplayStartOrEndDate } from '@eventespresso/edtr-services';
 import useDatesListFilterStateManager from '../useDatesListFilterStateManager';
-import { DatetimeSales, DatetimeStatus } from '@eventespresso/predicates';
+import { DatetimeSalesFilters, DatetimeStatusFilters } from '@eventespresso/predicates';
 
 describe('useDatesListFilterStateManager', () => {
 	test('useDatesListFilterStateManager result', () => {
@@ -63,12 +63,12 @@ describe('useDatesListFilterStateManager', () => {
 		const { result } = renderHook(() => useDatesListFilterStateManager());
 
 		act(() => {
-			result.current.setSales(DatetimeSales.all);
+			result.current.setSales(DatetimeSalesFilters.all);
 		});
 		expect(result.current.sales).toBe('all');
 
 		act(() => {
-			result.current.setSales(DatetimeSales.above90Capacity);
+			result.current.setSales(DatetimeSalesFilters.above90Capacity);
 		});
 		expect(result.current.sales).toBe('above90Capacity');
 	});
@@ -77,12 +77,12 @@ describe('useDatesListFilterStateManager', () => {
 		const { result } = renderHook(() => useDatesListFilterStateManager());
 
 		act(() => {
-			result.current.setStatus(DatetimeStatus.all);
+			result.current.setStatus(DatetimeStatusFilters.all);
 		});
 		expect(result.current.status).toBe('all');
 
 		act(() => {
-			result.current.setStatus(DatetimeStatus.upcomingOnly);
+			result.current.setStatus(DatetimeStatusFilters.upcomingOnly);
 		});
 		expect(result.current.status).toBe('upcomingOnly');
 	});

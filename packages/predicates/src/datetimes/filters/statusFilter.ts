@@ -9,32 +9,32 @@ import soldOutOnly from './soldOutOnly';
 import upcomingOnly from './upcomingOnly';
 import { notTrashed, trashedOnly } from '../../common';
 
-import { DatetimeStatus } from '.';
-import type { DatesStatusFilter } from '.';
+import type { DatesStatusFilter } from './types';
+import { DatetimeStatusFilters } from './types';
 
 /**
  * reduces dates array based on value of the "status" filter
  */
-const statusFilter = ({ dates: entities, status = DatetimeStatus.activeUpcoming }: DatesStatusFilter): Datetime[] => {
+const statusFilter = ({ dates: entities, status = DatetimeStatusFilters.activeUpcoming }: DatesStatusFilter): Datetime[] => {
 	const dates = notTrashed(entities);
 	switch (status) {
-		case DatetimeStatus.activeOnly:
+		case DatetimeStatusFilters.activeOnly:
 			return activeOnly(dates);
-		case DatetimeStatus.activeUpcoming:
+		case DatetimeStatusFilters.activeUpcoming:
 			return activeUpcoming(dates);
-		case DatetimeStatus.all:
+		case DatetimeStatusFilters.all:
 			return entities;
-		case DatetimeStatus.expiredOnly:
+		case DatetimeStatusFilters.expiredOnly:
 			return expiredOnly(dates);
-		case DatetimeStatus.nextActiveUpcomingOnly:
+		case DatetimeStatusFilters.nextActiveUpcomingOnly:
 			return nextActiveUpcomingOnly(dates);
-		case DatetimeStatus.recentlyExpiredOnly:
+		case DatetimeStatusFilters.recentlyExpiredOnly:
 			return recentlyExpiredOnly(dates);
-		case DatetimeStatus.soldOutOnly:
+		case DatetimeStatusFilters.soldOutOnly:
 			return soldOutOnly(dates);
-		case DatetimeStatus.trashedOnly:
+		case DatetimeStatusFilters.trashedOnly:
 			return trashedOnly(entities);
-		case DatetimeStatus.upcomingOnly:
+		case DatetimeStatusFilters.upcomingOnly:
 			return upcomingOnly(dates);
 		default:
 			return dates;

@@ -1,5 +1,5 @@
 import type { EntityListFilterStateManager } from '@eventespresso/services';
-import type { DatetimeSales, DatetimeStatus } from '@eventespresso/predicates';
+import type { DatetimeSalesFilters, DatetimeStatusFilters } from '@eventespresso/predicates';
 
 import type {
 	SortBy,
@@ -12,8 +12,8 @@ import type {
 import type { EntityId } from '@eventespresso/data';
 
 export interface DatetimesFilterState extends EntityFilterState {
-	sales: DatetimeSales;
-	status: DatetimeStatus;
+	sales: DatetimeSalesFilters;
+	status: DatetimeStatusFilters;
 	recurrence: EntityId;
 }
 
@@ -27,8 +27,8 @@ export interface DatetimesFilterStateManager
 	extends EntityListFilterStateManager<SortBy>,
 		EntityFilterStateManager,
 		DatetimesFilterState {
-	setSales: (sales: DatetimeSales) => void;
-	setStatus: (status: DatetimeStatus) => void;
+	setSales: (sales: DatetimeSalesFilters) => void;
+	setStatus: (status: DatetimeStatusFilters) => void;
 	setRecurrence: (recurrence: EntityId) => void;
 }
 

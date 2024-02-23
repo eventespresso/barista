@@ -4,12 +4,12 @@ export type DatetimeFilterFn = (dates: Array<Datetime>) => Array<Datetime>;
 
 export interface DatesSalesFilter {
 	dates: Datetime[];
-	sales: DatetimeSales;
+	sales: DatetimeSalesFilters;
 }
 
 export interface DatesStatusFilter {
 	dates: Datetime[];
-	status: DatetimeStatus;
+	status: DatetimeStatusFilters;
 }
 
 export enum DatetimeSales {
