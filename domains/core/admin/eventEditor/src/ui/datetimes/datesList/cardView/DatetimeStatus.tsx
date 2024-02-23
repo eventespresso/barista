@@ -1,36 +1,61 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { __ } from '@eventespresso/i18n';
-import { datetimeStatusCodesMap, userSelectableDatetimeStatusOptions } from '@eventespresso/constants';
+import { DATETIME_STATUS, DATETIME_STATUS_CODES, USER_SELECTABLE_DATETIME_STATUSES } from '@eventespresso/constants';
 import { useDisclosure } from '@eventespresso/hooks';
 import { HelpOutlined } from '@eventespresso/icons';
 import { EntityStatusSelector, IconButton, Popover } from '@eventespresso/ui-components';
 import { objectToSelectOptions } from '@eventespresso/utils';
 import { getDatetimeStatusTextLabel } from '@eventespresso/helpers';
+import { isActive, isExpired, isUpcoming } from '@eventespresso/predicates';
 
-import type { InlineEditProps } from '@eventespresso/adapters';
-import type { Datetime } from '@eventespresso/edtr-services';
+import type { Datetime, DatetimeMutator } from '@eventespresso/edtr-services';
 
 interface Props {
 	date: Datetime;
-	onStatusChange: InlineEditProps['onChange'];
+	updateEntity: DatetimeMutator['updateEntity'];
 }
 
-export const DatetimeStatus: React.FC<Props> = ({ date, onStatusChange }) => {
+export const DatetimeStatus: React.FC<Props> = ({ date, updateEntity }) => {
 	const statusText = getDatetimeStatusTextLabel(date);
 	const { isOpen, onClose, onToggle } = useDisclosure();
 
 	const options = useMemo(() => {
-		const options = objectToSelectOptions(userSelectableDatetimeStatusOptions, true);
-		// replace empty option with CC: "Calendar Controlled" option
-		options[0] = { value: 'CC', label: __('Calendar Controlled') };
-		return options;
+		return objectToSelectOptions(USER_SELECTABLE_DATETIME_STATUSES, true);
 	}, []);
 
-	let currentStatus = datetimeStatusCodesMap[date.status];
-	// for the sake of the status selector, we want to use "CC" (Calendar Controlled) for all upcoming, active, and expired dates
-	if (currentStatus === 'DTU' || currentStatus === 'DTA' || currentStatus === 'DTE') {
-		currentStatus = 'CC';
+	const onStatusChange = useCallback(
+		(status): void => {
+			let newStatus = status;
+
+			// convert 'CALENDAR_CONTROLLED' status to upcoming, active, or expired status codes
+			if (newStatus === 'CALENDAR_CONTROLLED') {
+				if (isUpcoming(date, true)) {
+					newStatus = DATETIME_STATUS.UPCOMING;
+				}
+				if (isActive(date, true)) {
+					newStatus = DATETIME_STATUS.ACTIVE;
+				}
+				if (isExpired(date, true)) {
+					newStatus = DATETIME_STATUS.EXPIRED;
+				}
+			}
+			if (newStatus !== date.status) {
+				updateEntity({ status: newStatus });
+			}
+		},
+		[date, updateEntity]
+	);
+
+	let currentStatus = DATETIME_STATUS_CODES[date.status];
+	// for the sake of the status selector,
+	// we want to use "CC"(Calendar Controlled) for all upcoming, active, and expired dates
+	if (
+		currentStatus === DATETIME_STATUS.UPCOMING ||
+		currentStatus === DATETIME_STATUS.ACTIVE ||
+		currentStatus === DATETIME_STATUS.EXPIRED
+	) {
+		currentStatus = 'CALENDAR_CONTROLLED';
 	}
 
 	const legend = (
