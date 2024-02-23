@@ -6,3 +6,4 @@ export * from './defaultDates';
 export * from './misc';
 export * from './time';
 export * from './ticket';
+export * from './wpPosts';
