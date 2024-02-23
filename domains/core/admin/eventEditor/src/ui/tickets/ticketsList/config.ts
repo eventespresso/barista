@@ -1,3 +1,4 @@
+import { TICKET_STATUS_CODES, TICKET_STATUS_LABELS } from '@eventespresso/constants';
 import { IconName, Trash } from '@eventespresso/icons';
 import { LegendConfig } from '@eventespresso/ui-components';
 import { __ } from '@eventespresso/i18n';
@@ -10,10 +11,10 @@ export const legendConfig: LegendConfig<string> = {
 		{ icon: Trash, description: __('Move Ticket to Trash') },
 	],
 	swatches: {
-		TKA: __('Trashed'),
-		TKE: __('Expired'),
-		TKO: __('On Sale'),
-		TKS: __('Sold Out'),
-		TKP: __('Pending'),
+		[TICKET_STATUS_CODES.EXPIRED]: TICKET_STATUS_LABELS.EXPIRED,
+		[TICKET_STATUS_CODES.ON_SALE]: TICKET_STATUS_LABELS.ON_SALE,
+		[TICKET_STATUS_CODES.PENDING]: TICKET_STATUS_LABELS.PENDING,
+		[TICKET_STATUS_CODES.SOLD_OUT]: TICKET_STATUS_LABELS.SOLD_OUT,
+		[TICKET_STATUS_CODES.TRASHED]: TICKET_STATUS_LABELS.TRASHED,
 	},
 };
