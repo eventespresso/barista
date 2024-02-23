@@ -8,7 +8,7 @@ import { CurrencyDisplay } from '@eventespresso/ee-components';
 import { filterCellByStartOrEndDate, useTickets, useLazyTicket } from '@eventespresso/edtr-services';
 import { ENTITY_LIST_DATE_TIME_FORMAT } from '@eventespresso/constants';
 import { useFeature, useTimeZoneTime } from '@eventespresso/services';
-import { getTicketBackgroundColorClassName, ticketStatus } from '@eventespresso/helpers';
+import { getTicketBackgroundColorClassName, getUpdatedTicketStatus } from '@eventespresso/helpers';
 import { findEntityByGuid } from '@eventespresso/predicates';
 import type { EntityId } from '@eventespresso/data';
 import type { BodyRowGeneratorFn } from '@eventespresso/ee-components';
@@ -36,7 +36,7 @@ const useBodyRowGenerator = (): TicketsTableBodyRowGen => {
 
 			const bgClassName = getTicketBackgroundColorClassName(ticket);
 			const id = ticket.dbId || 0;
-			const statusClassName = ticketStatus(ticket);
+			const statusClassName = getUpdatedTicketStatus(ticket);
 
 			const stripeCell: CellData = {
 				className: classNames('ee-entity-list-status-stripe', bgClassName),
