@@ -1,8 +1,9 @@
+import { TICKET_STATUS_CODES } from '@eventespresso/constants';
 import type { Ticket } from '@eventespresso/edtr-services';
-import { isOnSale, isExpired, isTicketSoldOut, isTrashed, TICKET_STATUS_ID } from '@eventespresso/predicates';
+import { isOnSale, isExpired, isTicketSoldOut, isTrashed } from '@eventespresso/predicates';
 
-const statusBgColorClassName = (ticket: Ticket, reevaluate: boolean = false): string => {
-	const ticketStatusCode = TICKET_STATUS_ID[ticket.status];
+export const getTicketStatusBgColorClassName = (ticket: Ticket, reevaluate: boolean = false): string => {
+	const ticketStatusCode = TICKET_STATUS_CODES[ticket.status];
 	if (ticketStatusCode && !reevaluate) {
 		return `ee-status-bg--${ticketStatusCode}`;
 	}
@@ -25,5 +26,3 @@ const statusBgColorClassName = (ticket: Ticket, reevaluate: boolean = false): st
 
 	return 'ee-status-bg--TKP';
 };
-
-export default statusBgColorClassName;
