@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
 
 import { useEntityListFilterStateManager } from '@eventespresso/services';
-import { DatetimeSales, DatetimeStatus } from '@eventespresso/predicates';
+import { DatetimeSalesFilters, DatetimeStatusFilters } from '@eventespresso/predicates';
 import { useSessionStorageReducer } from '@eventespresso/storage';
 
 import type { DatetimesFilterState, DatetimesFilterStateManager } from './types';
@@ -14,8 +14,8 @@ type DFS = DatetimesFilterState;
 
 const initialState: DFS = {
 	displayStartOrEndDate: DisplayStartOrEndDate.start,
-	sales: DatetimeSales.all,
-	status: DatetimeStatus.activeUpcoming,
+	sales: DatetimeSalesFilters.all,
+	status: DatetimeStatusFilters.activeUpcoming,
 	recurrence: '',
 };
 

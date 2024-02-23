@@ -1,14 +1,14 @@
 import type { Datetime } from '@eventespresso/edtr-services';
-import type { DatetimeSales, DatetimeStatus } from '../types';
+import type { DatetimeSalesFilters, DatetimeStatusFilters } from '../types';
 
 export type DatetimeFilterFn = (dates: Array<Datetime>) => Array<Datetime>;
 
 export interface DatesSalesFilter {
 	dates: Datetime[];
-	sales: DatetimeSales;
+	sales: DatetimeSalesFilters;
 }
 
 export interface DatesStatusFilter {
 	dates: Datetime[];
-	status: DatetimeStatus;
+	status: DatetimeStatusFilters;
 }
