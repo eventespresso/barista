@@ -38,7 +38,7 @@ export const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
 			(valueAsString, valueAsNumber) => {
 				if (!isDisabled) {
 					onChange?.(valueAsString, valueAsNumber);
-					onChangeValue?.(valueAsNumber);
+					onChangeValue?.(valueAsString);
 				}
 			},
 			[isDisabled, onChange, onChangeValue]

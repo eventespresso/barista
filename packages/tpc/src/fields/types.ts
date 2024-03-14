@@ -6,10 +6,14 @@ import type { AnyObject } from '@eventespresso/utils';
 
 import type { PriceModifierProps, TpcPriceModifier } from '../types';
 
-// 'css' prop conflicts with Chakra UI component props
-export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'css' | 'max' | 'min' | 'step'> & {
+export type InputProps<E = HTMLInputElement> = Omit<
+	InputHTMLAttributes<E>,
+	'css' | 'max' | 'min' | 'step' | 'defaultValue' | 'onChange'
+> & {
+	onChange?: (value: any | EventTarget) => void;
 	onChangeValue?: (value: any) => void;
 };
+
 export type FieldValue = string | number | boolean;
 
 type SupportedInputs = 'input' | 'select' | 'textarea';

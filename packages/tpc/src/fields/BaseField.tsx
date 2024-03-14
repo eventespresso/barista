@@ -68,13 +68,11 @@ const BaseField: React.FC<BaseFieldProps> = ({
 
 	if (type === 'number') {
 		return (
-			// @ts-ignore
 			<NumberInput
 				{...handlers}
 				{...props}
 				inputClass={'ee-input'}
 				isDisabled={props.disabled}
-				onChangeValue={handlers?.onChangeValue}
 				showStepper={false}
 				value={fieldValue as string}
 				wrapperClass={props.className}
