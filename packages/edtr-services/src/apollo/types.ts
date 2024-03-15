@@ -56,7 +56,6 @@ export enum DatetimeStatus {
 }
 
 export interface Datetime extends Entity, Trashable {
-	__typename: 'EspressoDatetime';
 	capacity: number;
 	description: string;
 	endDate: string;
@@ -152,7 +151,7 @@ export interface Ticket extends Entity, Trashable {
 }
 
 export const isTicket = (entity: Entity): entity is Ticket => {
-	return entity.__typename === 'EspressoTicket';
+	return entity?.__typename === 'EspressoTicket';
 };
 
 
