@@ -5,7 +5,6 @@ export { default as isTicketSoldOut } from './isSoldOut';
 
 export { default as sortTickets } from './sorters';
 
-export * from './constants';
 export * from './filters';
 export * from './selectionPredicates';
 export * from './types';

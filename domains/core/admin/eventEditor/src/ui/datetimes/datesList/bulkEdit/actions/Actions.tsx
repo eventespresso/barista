@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 
 import { __ } from '@eventespresso/i18n';
 import { BulkActions } from '@eventespresso/ee-components';
-import { DatetimeStatus } from '@eventespresso/predicates';
+import { DatetimeStatusFilters } from '@eventespresso/predicates';
 import { USE_ADVANCED_EDITOR } from '@eventespresso/constants';
 import { useBulkEdit, useFeature } from '@eventespresso/services';
 import { useDatesListFilterState, hooks } from '@eventespresso/edtr-services';
@@ -27,7 +27,7 @@ const Actions: React.FC = () => {
 
 	const { status } = useDatesListFilterState();
 
-	const areTrashedDates = status === DatetimeStatus.trashedOnly;
+	const areTrashedDates = status === DatetimeStatusFilters.trashedOnly;
 
 	const options = useMemoStringify(
 		hooks.applyFilters('eventEditor.datetimes.bulkEdit.actions', [

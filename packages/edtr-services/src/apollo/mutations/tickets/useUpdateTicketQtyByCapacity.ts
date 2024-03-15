@@ -1,10 +1,14 @@
 import { useCallback, useMemo } from 'react';
 
-import { parseInfinity, isInfinite } from '@eventespresso/utils';
-import { entitiesWithGuIdInArray, uniqTicketsByMinQty, ticketQuantityFromCapacity } from '@eventespresso/predicates';
 import { EntityId } from '@eventespresso/data';
-import { useSystemNotifications } from '@eventespresso/toaster';
 import { __ } from '@eventespresso/i18n';
+import {
+	entitiesWithGuIdInArray,
+	uniqTicketsByMinQty,
+	ticketQuantityFromCapacity,
+} from '@eventespresso/predicates';
+import { useSystemNotifications } from '@eventespresso/toaster';
+import { parseInfinity, isInfinite } from '@eventespresso/utils';
 
 import { useTickets, useRelatedTickets } from '../../queries';
 import useBulkEditTickets from './useBulkEditTickets';
@@ -46,7 +50,7 @@ export const useUpdateTicketQtyByCapacity = (): UpdateTicketQtyByCapacity => {
 			const getTicketQuantityFromCapacity = ticketQuantityFromCapacity(capacity);
 
 			const uniqueInputs = ticketsToUpdate
-				.map<UpdateTicketInput>(({ id, quantity }) => {
+				.map<UpdateTicketInput>(({ id, quantity, registrationCount }) => {
 					const nonNegativeTicketQuantity = parseInfinity(quantity, Infinity);
 
 					// if capacity is infinite or it's more than ticket quantity
@@ -54,9 +58,10 @@ export const useUpdateTicketQtyByCapacity = (): UpdateTicketQtyByCapacity => {
 						// no need to update the ticket quantity
 						return null;
 					}
+
 					const newQuantity = getTicketQuantityFromCapacity(quantity);
 
-					return { id, quantity: newQuantity };
+					return { id, quantity: newQuantity }; // ...statusChanges,
 				})
 				.filter(Boolean);
 
@@ -70,7 +75,6 @@ export const useUpdateTicketQtyByCapacity = (): UpdateTicketQtyByCapacity => {
 			if (uniqInputs.length) {
 				// remove duplicate entries, if any
 				const uniqueInputs = uniqTicketsByMinQty(uniqInputs);
-				// perform the bulk update
 				await bulkEditTickets({ uniqueInputs });
 
 				if (showNotice) {
