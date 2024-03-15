@@ -80,7 +80,7 @@ export interface Datetime extends Entity, Trashable {
 // type guard
 // https://www.typescriptlang.org/docs/handbook/2/narrowing.html
 export const isDatetime = (entity: Entity): entity is Datetime => {
-	return entity.__typename === 'EspressoDatetime';
+	return entity?.__typename === 'EspressoDatetime';
 };
 
 export interface DatetimeItem {
