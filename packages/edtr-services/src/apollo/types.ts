@@ -156,7 +156,7 @@ export interface Ticket extends Entity, Trashable, StartAndEndDate.Type.String {
 }
 
 export const isTicket = (entity: Entity): entity is Ticket => {
-	return entity.__typename === 'EspressoTicket';
+	return entity?.__typename === 'EspressoTicket';
 };
 
 
