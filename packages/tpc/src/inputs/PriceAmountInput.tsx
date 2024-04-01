@@ -41,9 +41,7 @@ const PriceAmountInput: React.FC<PriceModifierProps> = ({ price }) => {
 			// fallback to 0 if cannot parse previous amount
 			const prevAmount = parsedAmount(prevValue, 0);
 			// fallback to previous amount if cannot parse value
-			const newAmount = parsedAmount(value, prevAmount);
-			// return actual value
-			return newAmount;
+			return parsedAmount(value, prevAmount);
 		},
 		[getPrevValue]
 	);
