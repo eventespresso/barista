@@ -1,5 +1,5 @@
+import type { Attendee } from '@eventespresso/constants';
 import type {
-	Address,
 	AttendeesList as AttendeeList,
 	DatetimesList as DatetimeList,
 	Entity,
@@ -14,17 +14,6 @@ import type {
  * So if properties for certain GraphQL types are missing, it is necessary to update the types here
  * @see plugins/event-espresso-core/core/domain/services/graphql/types
  */
-
-export interface Attendee extends Entity, Address {
-	avatar?: string;
-	bio?: string;
-	email?: string;
-	firstName?: string;
-	fullName: string;
-	lastName?: string;
-	phone?: string;
-	shortBio?: string;
-}
 
 export type AttendeeEdge<Connection = 'EspressoRootQueryAttendeesConnection'> = EntityEdge<Attendee, Connection>;
 

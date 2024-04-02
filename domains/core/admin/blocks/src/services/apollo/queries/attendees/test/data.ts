@@ -1,7 +1,9 @@
 import { GraphQLError } from 'graphql';
 
 import { CacheQueryOptions } from '@eventespresso/data';
-import { Attendee, AttendeeEdge } from '@blocksServices/apollo/types';
+import { AttendeeEdge } from '@blocksServices/apollo/types';
+
+import type { Attendee } from '@eventespresso/constants';
 
 export const request: CacheQueryOptions = null; // to be set dynamically
 
