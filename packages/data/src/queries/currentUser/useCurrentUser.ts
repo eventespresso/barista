@@ -1,8 +1,10 @@
 import { useMemo } from 'react';
 
-import type { User, Viewer } from './types';
 import useCurrentUserQueryOptions from './useCurrentUserQueryOptions';
 import { useCacheQuery } from '../';
+
+import type { User } from '@eventespresso/constants';
+import type { Viewer } from './types';
 
 /**
  * A custom react hook for retrieving CurrentUser

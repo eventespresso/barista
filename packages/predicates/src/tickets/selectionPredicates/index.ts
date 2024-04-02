@@ -1,10 +1,9 @@
 import { assoc, includes, map, ObjPred, when } from 'ramda';
 
+import { parseInfinity, AnyObject } from '@eventespresso/utils';
 import { TICKET_FIELDS, TICKET_INPUT_FIELDS } from '../ticketFields';
 import { entityHasGuid } from '.././../common';
-import { EntityId } from '@eventespresso/data';
-import { parseInfinity, AnyObject } from '@eventespresso/utils';
-import type { Ticket } from '@eventespresso/edtr-services';
+import type { EntityId, Ticket } from '@eventespresso/constants';
 
 interface UpdateTicketPriceForTicketProps {
 	amount: number;

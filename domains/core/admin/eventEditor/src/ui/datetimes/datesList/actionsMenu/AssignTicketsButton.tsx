@@ -8,7 +8,7 @@ import { TypeName, withIsLoaded } from '@eventespresso/services';
 import { useGlobalModal } from '@eventespresso/registry';
 import type { BaseProps } from '@edtrUI/ticketAssignmentsManager';
 
-import type { Datetime } from '@eventespresso/edtr-services';
+import type { Datetime } from '@eventespresso/constants';
 import type { EntityListItemProps } from '@eventespresso/ui-components';
 
 const AssignTicketsButton: React.FC<EntityListItemProps<Datetime>> = ({ entity }) => {

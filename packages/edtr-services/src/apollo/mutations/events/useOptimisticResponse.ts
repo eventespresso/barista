@@ -34,6 +34,7 @@ export const EVENT_DEFAULTS: Event = {
 	status: '',
 	timezoneString: '',
 	venue: '',
+	__typename: 'EspressoEvent',
 };
 
 type OptimisticResCb = (mutationType: MutationType, input: MutationInput) => any;

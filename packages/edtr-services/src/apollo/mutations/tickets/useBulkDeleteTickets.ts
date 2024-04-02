@@ -2,16 +2,17 @@ import { useCallback } from 'react';
 import { assocPath, pathOr } from 'ramda';
 import type { ExecutionResult } from 'graphql';
 
-import { EntityId, useApolloClient } from '@eventespresso/data';
+import { useApolloClient } from '@eventespresso/data';
 import { entitiesWithGuIdNotInArray, findEntityByGuid } from '@eventespresso/predicates';
-
-import type { Ticket, TicketsList } from '../../types';
 import { useTickets, useTicketQueryOptions, DEFAULT_TICKET_LIST_DATA as DEFAULT_LIST_DATA } from '../../queries';
 import { useUpdateTicketList } from '../../../hooks';
-import useBulkDeleteEntities from '../useBulkDeleteEntities';
 import { cacheNodesFromBulkDelete } from '../';
 import { SINGULAR_ENTITY_NAME } from '../../../constants';
+import useBulkDeleteEntities from '../useBulkDeleteEntities';
 import useOnDeleteTicket from './useOnDeleteTicket';
+
+import type { EntityId, Ticket } from '@eventespresso/constants';
+import type { TicketsList } from '../../types';
 
 type Callback<R = void> = (args: {
 	entityIds: Array<EntityId>;

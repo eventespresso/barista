@@ -7,7 +7,7 @@ import {
 } from '@eventespresso/registry';
 import type { SubscriptionCallback } from '@eventespresso/registry';
 import type { EntityListFilterStateManager } from '@eventespresso/services';
-import type { EntityId } from '@eventespresso/data';
+import type { EntityId } from '@eventespresso/constants'
 import { TableRow, RowType } from '@eventespresso/ui-components';
 
 import type { EntityTableFilters } from './types';

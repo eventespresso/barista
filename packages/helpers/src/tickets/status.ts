@@ -1,4 +1,4 @@
-import type { Ticket } from '@eventespresso/edtr-services';
+import type { Ticket } from '@eventespresso/constants';
 import { TICKET_STATUS_ID, isOnSale, isExpired, isTicketSoldOut, isTrashed } from '@eventespresso/predicates';
 
 const status = (ticket: Ticket): string => {

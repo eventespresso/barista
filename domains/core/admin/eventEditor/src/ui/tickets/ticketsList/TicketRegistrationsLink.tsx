@@ -1,7 +1,7 @@
 import { __ } from '@eventespresso/i18n';
 import { RegistrationsLink, ItemCount } from '@eventespresso/ui-components';
 import { useRegistrationsLink } from '@eventespresso/edtr-services';
-import type { Ticket } from '@eventespresso/edtr-services';
+import type { Ticket } from '@eventespresso/constants';
 
 interface Props {
 	ticket: Ticket;

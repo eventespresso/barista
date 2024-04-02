@@ -1,10 +1,11 @@
 import { useMemo } from 'react';
 
 import { useCacheQuery, CacheQueryOptions } from '@eventespresso/data';
-import { useMemoStringify } from '@eventespresso/hooks';
-
+import { useMemoStringify } from '@eventespresso/utils';
 import { GET_TICKET } from './queries';
-import type { Ticket, TicketItem } from '../../types';
+
+import type { Ticket } from '@eventespresso/constants';
+import type { TicketItem } from '../../types';
 import type { EntityItemProps } from '../types';
 
 const useTicketItem = ({ id }: EntityItemProps): Ticket => {

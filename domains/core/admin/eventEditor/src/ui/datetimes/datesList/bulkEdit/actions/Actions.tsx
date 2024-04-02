@@ -6,7 +6,8 @@ import { DatetimeStatus } from '@eventespresso/predicates';
 import { USE_ADVANCED_EDITOR } from '@eventespresso/constants';
 import { useBulkEdit, useFeature } from '@eventespresso/services';
 import { useDatesListFilterState, hooks } from '@eventespresso/edtr-services';
-import { useDisclosure, useMemoStringify } from '@eventespresso/hooks';
+import { useDisclosure } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 import { withCurrentUserCan } from '@eventespresso/services';
 import type { BulkActionsProps } from '@eventespresso/ui-components';
 

@@ -1,8 +1,10 @@
 import { GraphQLError } from 'graphql';
 import { formatISO } from 'date-fns';
 
-import type { Ticket, TicketEdge } from '../../../types';
 import { CacheQueryOptions } from '@eventespresso/data';
+
+import type { Ticket } from '@eventespresso/constants';
+import type { TicketEdge } from '../../../types';
 
 export const request: CacheQueryOptions = null; // to be generated via Query Options hook
 

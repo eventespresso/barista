@@ -1,6 +1,6 @@
-export type EntityId = string;
+import type { EntityId, EntityDbId } from '@eventespresso/constants';
 
-export type EntityDbId = number;
+export type { EntityId, EntityDbId }; // re-export
 
 export interface Cacheable {
 	cacheId: string;
@@ -34,17 +34,4 @@ export interface Trashable {
 export interface EntityEdge<E = Entity, ConnectionTypeName = string> {
 	nodes: E[];
 	__typename: ConnectionTypeName;
-}
-
-export interface Address {
-	address?: string;
-	address2?: string;
-	city?: string;
-	country?: string;
-	countryISO?: string;
-	countryName?: string;
-	state?: string;
-	stateAbbrev?: string;
-	stateName?: string;
-	zip?: string;
 }

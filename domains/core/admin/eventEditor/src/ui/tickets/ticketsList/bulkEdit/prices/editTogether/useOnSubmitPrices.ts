@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 
-import { Price, useTicketPrices, useBulkDeletePrices } from '@eventespresso/edtr-services';
+import { Price } from '@eventespresso/constants';
+import { useTicketPrices, useBulkDeletePrices } from '@eventespresso/edtr-services';
 import { useDataState, useMutateTicket } from '@eventespresso/tpc';
 import { isNotDefault, getGuids } from '@eventespresso/predicates';
 import { useBulkEdit } from '@eventespresso/services';

@@ -7,7 +7,7 @@ import TestWrapper from '../../data/test/TestWrapper';
 import { actWait } from '@eventespresso/utils/src/test';
 import { nodes as prices } from '@eventespresso/edtr-services/src/apollo/queries/prices/test/data';
 import useInitPriceTestCache from '@eventespresso/edtr-services/src/apollo/queries/prices/test/useInitPriceTestCache';
-import { Price } from '@eventespresso/edtr-services';
+import type { Price } from '@eventespresso/constants';
 
 const defaultPrices = getDefaultPrices(prices);
 

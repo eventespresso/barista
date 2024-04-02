@@ -6,7 +6,7 @@ import { DATE_INTERVALS, Intervals, intervalsToOptions } from '@eventespresso/da
 import type { EspressoFormProps } from '@eventespresso/form';
 import { CalendarOutlined, ControlOutlined, ProfileOutlined } from '@eventespresso/icons';
 
-import { useMemoStringify } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 import { validate } from './formValidation';
 import type { BulkEditFormShape } from './types';
 

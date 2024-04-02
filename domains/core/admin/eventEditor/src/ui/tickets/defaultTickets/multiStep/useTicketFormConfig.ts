@@ -2,7 +2,8 @@ import { useMemo } from 'react';
 import * as R from 'ramda';
 
 import type { EspressoFormProps } from '@eventespresso/form';
-import { Ticket, TicketFormConfig } from '@eventespresso/edtr-services';
+import type { Ticket } from '@eventespresso/constants';
+import { TicketFormConfig } from '@eventespresso/edtr-services';
 import useMainTicketFormConfig, { FIELD_NAMES } from '../../ticketForm/useTicketFormConfig';
 import { DefaultTicket } from '../data';
 

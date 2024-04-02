@@ -1,6 +1,6 @@
 import { useForm } from '@eventespresso/form';
 import { useSiteDateToUtcISO } from '@eventespresso/services';
-import { useMemoStringify } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 import type { Entity } from '@eventespresso/data';
 
 import type { EntityEditBaseProps } from './types';

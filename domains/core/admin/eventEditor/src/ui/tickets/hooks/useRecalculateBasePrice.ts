@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { EntityId } from '@eventespresso/data';
+import type { EntityId } from '@eventespresso/constants';
 import { calculateBasePrice, useInitialState } from '@eventespresso/tpc';
 import { getBasePrice, getPriceModifiers } from '@eventespresso/predicates';
 import { useDefaultBasePrice, useMutatePrices } from '@eventespresso/tpc';

@@ -1,7 +1,7 @@
 import { getDefaultPriceModifierType } from '@eventespresso/predicates';
-import { useMemoStringify } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 import usePriceTypes from './usePriceTypes';
-import type { PriceType } from '../../types';
+import type { PriceType } from '@eventespresso/constants';
 
 /**
  * A custom react hook for retrieving the default price type object.

@@ -2,8 +2,8 @@ import { createContext, useEffect } from 'react';
 
 import { getGuids } from '@eventespresso/predicates';
 import { useFilteredEntities } from '@eventespresso/services';
-import type { EntityId } from '@eventespresso/data';
-import { useMemoStringify } from '@eventespresso/hooks';
+import type { EntityId } from '@eventespresso/constants'
+import { useMemoStringify } from '@eventespresso/utils';
 
 import { useTicketsListFilterState } from '../../../filterState';
 import { domain, ticketsList } from '../../../constants';

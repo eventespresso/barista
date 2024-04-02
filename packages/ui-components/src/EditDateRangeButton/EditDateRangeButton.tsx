@@ -2,7 +2,8 @@ import { useCallback } from 'react';
 
 import { __ } from '@eventespresso/i18n';
 import { CalendarOutlined } from '@eventespresso/icons';
-import { useDisclosure, useMemoStringify, useViewportWidthGreaterThan } from '@eventespresso/hooks';
+import { useDisclosure, useViewportWidthGreaterThan } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 import { RESPONSIVE_CARD_SWITCH_BREAKPOINT } from '@eventespresso/constants';
 
 import { ButtonType, DateTimeRangePicker, IconButton, Popover } from '../../';

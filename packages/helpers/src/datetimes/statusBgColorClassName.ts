@@ -1,4 +1,4 @@
-import type { Datetime } from '@eventespresso/edtr-services';
+import type { Datetime } from '@eventespresso/constants';
 
 const statusBgColorClassName = (date: Datetime): string => {
 	if (date?.isTrashed) {

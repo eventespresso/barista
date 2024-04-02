@@ -1,9 +1,10 @@
 import { useCallback } from 'react';
 
-import { useLazyCacheQuery, EntityId } from '@eventespresso/data';
-
+import { useLazyCacheQuery } from '@eventespresso/data';
 import { GET_TICKET } from './queries';
-import type { Ticket, TicketItem } from '../../types';
+
+import type { EntityId, Ticket } from '@eventespresso/constants';
+import type { TicketItem } from '../../types';
 
 type GetTicket = (id: EntityId) => Ticket;
 

@@ -1,5 +1,4 @@
-import type { EntityId } from '@eventespresso/data';
-import type { Datetime } from '../../types';
+import type { Datetime, EntityId } from '@eventespresso/constants';
 import { BulkUpdateInput } from '../types';
 
 import type { MutationFunction } from '@eventespresso/data';

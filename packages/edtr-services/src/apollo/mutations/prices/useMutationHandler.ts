@@ -7,11 +7,13 @@ import useMutationVariables from './useMutationVariables';
 import useOnCreatePrice from './useOnCreatePrice';
 import useOnDeletePrice from './useOnDeletePrice';
 import useOnUpdatePrice from './useOnUpdatePrice';
-import type { MutationHandler, MutationUpdater } from '../types';
-import { PricesList, Price } from '../../';
-import { DEFAULT_PRICE_LIST_DATA as DEFAULT_LIST_DATA, usePriceQueryOptions } from '../../queries';
-import type { PriceCommonInput } from './types';
 import { BOOLEAN_FIELDS, NUMERIC_FIELDS } from './constants';
+import { DEFAULT_PRICE_LIST_DATA as DEFAULT_LIST_DATA, usePriceQueryOptions } from '../../queries';
+
+import type { Price } from '@eventespresso/constants';
+import type { PricesList } from '../../';
+import type { PriceCommonInput } from './types';
+import type { MutationHandler, MutationUpdater } from '../types';
 
 type MH = MutationHandler<Price, PriceCommonInput>;
 

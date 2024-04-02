@@ -1,16 +1,15 @@
 import { useCallback } from 'react';
 
 import { __ } from '@eventespresso/i18n';
-
 import { Calendar } from '@eventespresso/icons';
 import { IconButton, EntityListItemProps, ItemCount } from '@eventespresso/ui-components';
 import { useRelatedDatetimes, EdtrGlobalModals } from '@eventespresso/edtr-services';
 import { TypeName } from '@eventespresso/services';
 import { withIsLoaded } from '@eventespresso/services';
-import type { Ticket } from '@eventespresso/edtr-services';
 import { useGlobalModal } from '@eventespresso/registry';
-
 import { BaseProps } from '@edtrUI/ticketAssignmentsManager';
+
+import type { Ticket } from '@eventespresso/constants';
 
 const AssignDatesButton: React.FC<EntityListItemProps<Ticket>> = ({ entity }) => {
 	const { openWithData } = useGlobalModal<BaseProps>(EdtrGlobalModals.TAM);

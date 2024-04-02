@@ -1,6 +1,6 @@
-import type { Entity, EntityId } from '@eventespresso/data';
+import type { Datetime, EntityId, Ticket } from '@eventespresso/constants';
+import type { Entity } from '@eventespresso/data';
 import type { RelationsManager, RelationalData, PossibleRelation } from '@eventespresso/services';
-import type { Datetime, Ticket } from '@eventespresso/edtr-services';
 
 export type TAMRelationEntity = 'datetimes' | 'tickets';
 

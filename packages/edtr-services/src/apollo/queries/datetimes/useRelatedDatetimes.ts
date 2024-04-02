@@ -4,7 +4,7 @@ import { entitiesWithGuIdInArray } from '@eventespresso/predicates';
 import { entityListCacheIdString } from '@eventespresso/utils';
 import { useRelations } from '@eventespresso/services';
 import useDatetimes from './useDatetimes';
-import type { Datetime } from '../../types';
+import type { Datetime } from '@eventespresso/constants';
 import type { RelatedEntitiesHook } from '../types';
 
 const useRelatedDatetimes: RelatedEntitiesHook<Datetime, 'datetimes'> = ({ entity, entityId }) => {

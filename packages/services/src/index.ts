@@ -1,5 +1,4 @@
 export * from './bulkEdit';
-export * from './config';
 export * from './context';
 export * from './features';
 export * from './filterState';
@@ -9,5 +8,4 @@ export * from './permissions';
 export * from './relations';
 export * from './slots';
 export * from './status';
-export * from './types';
 export * from './utils';

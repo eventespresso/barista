@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import invariant from 'invariant';
 
-import type { EntityId } from '@eventespresso/data';
+import type { EntityId } from '@eventespresso/constants'
 
 import { FilteredTicketsContext } from '../../context';
 

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { useMemoStringify } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 import { EntityTable as EntityTableUI, RowType, BodyRow, HeaderRow } from '@eventespresso/ui-components';
 import type { EntityListFilterStateManager } from '@eventespresso/services';
 

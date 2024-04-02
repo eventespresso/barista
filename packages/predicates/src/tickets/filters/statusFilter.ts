@@ -1,4 +1,4 @@
-import type { Ticket } from '@eventespresso/edtr-services';
+import type { Ticket } from '@eventespresso/constants';
 import allOnSaleAndPending from './allOnSaleAndPending';
 import expiredOnly from './expiredOnly';
 import nextOnSaleOrPendingOnly from './nextOnSaleOrPendingOnly';

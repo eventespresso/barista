@@ -1,4 +1,4 @@
-import type { Datetime } from '@eventespresso/edtr-services';
+import type { Datetime } from '@eventespresso/constants';
 import type { IntervalType } from '@eventespresso/dates';
 
 import { RemTicket } from '../../data';

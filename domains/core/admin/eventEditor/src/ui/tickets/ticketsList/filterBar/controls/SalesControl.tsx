@@ -1,7 +1,6 @@
 import { SelectWithLabel } from '@eventespresso/ui-components';
 import { useTicketsListFilterState } from '@eventespresso/edtr-services';
-import { useMemoStringify } from '@eventespresso/hooks';
-import { objectToSelectOptions } from '@eventespresso/utils';
+import { objectToSelectOptions, useMemoStringify } from '@eventespresso/utils';
 
 import { labels, salesOptions, salesIsChainedOptions } from './options';
 

@@ -1,5 +1,5 @@
 import { isBooleanTrue, isInfinite } from '@eventespresso/utils';
-import type { Ticket } from '@eventespresso/edtr-services';
+import type { Ticket } from '@eventespresso/constants';
 
 const isSoldOut = (ticket: Ticket): boolean =>
 	isBooleanTrue(ticket.isSoldOut) ||

@@ -2,7 +2,7 @@ import { parseISO, format } from 'date-fns';
 import { __ } from '@eventespresso/i18n';
 
 import { switchTenseForDate } from '@eventespresso/dates';
-import { useMemoStringify } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 import { BiggieCalendarDate, CalendarDateRange } from '../../';
 import { DisplayStartOrEndDate } from './types';
 import type { CalendarDateSwitcherProps } from './types';

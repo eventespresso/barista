@@ -1,4 +1,4 @@
-import type { Ticket } from '@eventespresso/edtr-services';
+import type { Ticket } from '@eventespresso/constants';
 
 export const tickets: Ticket[] = [
 	{
@@ -29,6 +29,7 @@ export const tickets: Ticket[] = [
 		isTrashed: false,
 		reverseCalculate: true,
 		visibility: 'PUBLIC',
+		__typename: 'EspressoTicket',
 	},
 	{
 		id: '2',
@@ -58,6 +59,7 @@ export const tickets: Ticket[] = [
 		isTrashed: false,
 		reverseCalculate: true,
 		visibility: 'PUBLIC',
+		__typename: 'EspressoTicket',
 	},
 	{
 		id: '3',
@@ -87,6 +89,7 @@ export const tickets: Ticket[] = [
 		isTrashed: false,
 		reverseCalculate: true,
 		visibility: 'PUBLIC',
+		__typename: 'EspressoTicket',
 	},
 	{
 		id: '4',
@@ -116,6 +119,7 @@ export const tickets: Ticket[] = [
 		isTrashed: false,
 		reverseCalculate: true,
 		visibility: 'PUBLIC',
+		__typename: 'EspressoTicket',
 	},
 	{
 		id: '5',
@@ -145,5 +149,6 @@ export const tickets: Ticket[] = [
 		isTrashed: false,
 		reverseCalculate: true,
 		visibility: 'PUBLIC',
+		__typename: 'EspressoTicket',
 	},
 ];

@@ -1,6 +1,6 @@
 import { EspressoForm, EspressoFormProps, FormConfig } from '@eventespresso/form';
 import { useConfig } from '@eventespresso/services';
-import { useMemoStringify } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 import type { AnyObject } from '@eventespresso/utils';
 
 const FormWithConfig = <FormValues extends AnyObject>({

@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import * as R from 'ramda';
 
-import type { EntityId } from '@eventespresso/data';
+import type { EntityId } from '@eventespresso/constants'
 
 import { EventSmartDomData } from '../types';
 import { useDismissUpsellAd } from '../services';

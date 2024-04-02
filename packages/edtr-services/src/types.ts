@@ -1,8 +1,9 @@
 import type { OptionsType } from '@eventespresso/adapters';
-import type { User } from '@eventespresso/data';
-import type { GeneralSettings, RelationalData } from '@eventespresso/services';
+import type { Event, EventManager, User } from '@eventespresso/constants';
+import type { GeneralSettings } from '@eventespresso/config';
+import type { RelationalData } from '@eventespresso/services';
 import type { FormSectionRaw, FormElementRaw } from '@eventespresso/form-builder';
-import type { DatetimeEdge, TicketEdge, PriceEdge, PriceTypeEdge, Event, EventManager, VenueEdge } from './apollo';
+import type { DatetimeEdge, TicketEdge, PriceEdge, PriceTypeEdge, VenueEdge } from './apollo';
 
 export type TicketMeta = {
 	visibilityOptions: OptionsType;

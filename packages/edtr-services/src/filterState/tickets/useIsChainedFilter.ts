@@ -3,9 +3,9 @@ import { keys, pathOr, pickBy, hasPath } from 'ramda';
 
 import { useRelations } from '@eventespresso/services';
 import { entitiesWithGuIdInArray } from '@eventespresso/predicates';
-
-import type { Ticket } from '../../apollo';
 import { useVisibleDatetimeIds } from '../../hooks';
+
+import type { Ticket } from '@eventespresso/constants';
 
 type IsChainedFilterCallback = (args: { isChained: boolean; tickets: Array<Ticket> }) => Array<Ticket>;
 type IsChainedFilterDeps = any;

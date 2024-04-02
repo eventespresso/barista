@@ -1,5 +1,5 @@
 import { WriteQueryOptions, useApolloClient } from '../../../';
-import type { GeneralSettingsData } from '@eventespresso/services';
+import type { GeneralSettingsData } from '@eventespresso/config';
 
 import useGeneralSettingsQueryOptions from '../useGeneralSettingsQueryOptions';
 import { generalSettings as mockedGeneralSettings } from './data';

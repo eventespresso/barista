@@ -1,5 +1,4 @@
-import type { EntityId } from '@eventespresso/data';
-import type { Event } from '../../';
+import type { EntityId, Event } from '@eventespresso/constants';
 
 type PickedProps =
 	| 'allowDonations'

@@ -5,7 +5,8 @@ import { FilterBarService } from '@eventespresso/registry';
 import { ticketSalesFilter, ticketStatusFilter, sortTickets } from '@eventespresso/predicates';
 import { domain, ticketsList } from '@eventespresso/edtr-services';
 import { entityListSearch } from '@eventespresso/utils';
-import type { Ticket, TicketsFilterStateManager } from '@eventespresso/edtr-services';
+import type { Ticket } from '@eventespresso/constants';
+import type { TicketsFilterStateManager } from '@eventespresso/edtr-services';
 
 type Domain = typeof domain;
 type TFSM = TicketsFilterStateManager;

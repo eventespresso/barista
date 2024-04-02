@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-import { useMemoStringify } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 import { DataStateManager, BaseProps } from '../types';
 import { useDataStateManager } from '../data';
 

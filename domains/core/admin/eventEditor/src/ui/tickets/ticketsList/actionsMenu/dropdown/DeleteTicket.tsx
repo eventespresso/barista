@@ -1,13 +1,14 @@
 import { useCallback } from 'react';
 
 import { __ } from '@eventespresso/i18n';
-import { Ticket, useTicketsListFilterState } from '@eventespresso/edtr-services';
+import { useTicketsListFilterState } from '@eventespresso/edtr-services';
 import { Trash as TrashIcon } from '@eventespresso/icons';
 import { AlertType, TrashEntity, useConfirmationDialog } from '@eventespresso/ui-components';
 import { isTrashed as isTicketTrashed, isLocked } from '@eventespresso/predicates';
 import { useLockedTicketAction } from '@eventespresso/tpc';
-
 import useDeleteTicketHandler from '@edtrUI/tickets/hooks/useDeleteTicketHandler';
+
+import type { Ticket } from '@eventespresso/constants';
 
 export interface DeleteTicketProps {
 	ticket: Ticket;

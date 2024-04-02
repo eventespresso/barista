@@ -4,18 +4,18 @@ import * as R from 'ramda';
 import { __ } from '@eventespresso/i18n';
 import { CalendarOutlined, ControlOutlined, ProfileOutlined } from '@eventespresso/icons';
 import { EndDateFieldWrapper } from '@eventespresso/ee-components';
-import { EntityId } from '@eventespresso/data';
 import { NOW, PLUS_ONE_MONTH, USE_ADVANCED_EDITOR } from '@eventespresso/constants';
 import { preparePricesForTpc, usePriceToTpcModifier } from '@eventespresso/tpc';
 import { setDefaultTime } from '@eventespresso/dates';
 import { startAndEndDateFixer, useTicketItem, hooks, useTicketPrices } from '@eventespresso/edtr-services';
 import { useCurrentUserCan } from '@eventespresso/services';
-import { useMemoStringify } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 import { useUtcISOToSiteDate, useSiteDateToUtcISO } from '@eventespresso/services';
 import { VISIBILITY_OPTIONS, VISIBILITY_OPTIONS_INFO } from '@eventespresso/helpers';
 
+import type { EntityId, Ticket } from '@eventespresso/constants';
 import type { EspressoFormProps, FieldProps } from '@eventespresso/form';
-import type { Ticket, TicketFormConfig } from '@eventespresso/edtr-services';
+import type { TicketFormConfig } from '@eventespresso/edtr-services';
 
 import { validate } from './formValidation';
 

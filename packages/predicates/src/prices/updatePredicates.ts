@@ -1,9 +1,10 @@
 import { assoc, map, pickBy, when } from 'ramda';
 
-import type { Price } from '@eventespresso/edtr-services';
 import { parsedAmount } from '@eventespresso/utils';
 import { isPriceField } from './selectionPredicates';
 import { entityHasGuid } from '../common';
+
+import type { Price } from '@eventespresso/constants';
 
 type updatePriceArrayProps<T extends Price> = {
 	amount: number;

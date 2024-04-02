@@ -12,7 +12,7 @@ import { useVenues } from '@eventespresso/edtr-services';
 import { validate } from './formValidation';
 
 import type { EspressoFormProps } from '@eventespresso/form';
-import type { Datetime } from '@eventespresso/edtr-services';
+import type { Datetime } from '@eventespresso/constants';
 import type { OptionsType } from '@eventespresso/adapters';
 
 type DateFormConfig = EspressoFormProps<DateFormShape>;

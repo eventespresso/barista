@@ -1,5 +1,4 @@
-import type { Datetime } from '@eventespresso/edtr-services';
-
+import type { Datetime } from '@eventespresso/constants';
 import type { PrevNext } from '@eventespresso/hooks';
 
 export interface ExtraContextProps {

@@ -1,6 +1,7 @@
 import { GraphQLError } from 'graphql';
 
-import type { Price, PriceEdge } from '../../../types';
+import type { Price } from '@eventespresso/constants';
+import type { PriceEdge } from '../../../types';
 import { CacheQueryOptions } from '@eventespresso/data';
 
 export const request: CacheQueryOptions = null; // to be generated via Query Options hook

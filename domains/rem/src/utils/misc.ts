@@ -2,11 +2,12 @@ import { Frequency } from 'rrule';
 import * as R from 'ramda';
 
 import { __ } from '@eventespresso/i18n';
-import { Ticket, TICKET_FIELDS_FOR_TPC } from '@eventespresso/edtr-services';
-import type { TimeZoneTime } from '@eventespresso/services';
+import { TICKET_FIELDS_FOR_TPC } from '@eventespresso/edtr-services';
 import { PLUS_ONE_MONTH } from '@eventespresso/constants';
 import { setDefaultTime } from '@eventespresso/dates';
 
+import type { Ticket } from '@eventespresso/constants';
+import type { TimeZoneTime } from '@eventespresso/services';
 import type { RemTicket } from '../data';
 
 // "freq" is the named capturing group

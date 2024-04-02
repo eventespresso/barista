@@ -2,14 +2,14 @@ import { useCallback, useMemo, useState } from 'react';
 
 import { datetimesDroppableId } from '@eventespresso/constants';
 
-import type { EntityId } from '@eventespresso/data';
+import type { Datetime, EntityId } from '@eventespresso/constants';
 import type { EntityTableProps } from '@eventespresso/ee-components';
 
 import { ReorderEntities, useReorderEntities } from '../useReorderEntities';
 import { useDatetimes, useDatetimeQueryOptions, useLazyDatetime } from '../../queries';
 import { useUpdateDatetimeList } from '../../../hooks';
 import { DatetimesFilterStateManager as DFSM } from '../../../filterState';
-import type { Datetime, DatetimeEdge } from '../../types';
+import type { DatetimeEdge } from '../../types';
 
 type SortResponder = EntityTableProps<DFSM>['onSort'];
 

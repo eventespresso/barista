@@ -1,5 +1,5 @@
 import { is } from 'ramda';
-import type { Datetime } from '@eventespresso/edtr-services';
+import type { Datetime } from '@eventespresso/constants';
 
 import type { DatetimeFilterFn } from '../types';
 

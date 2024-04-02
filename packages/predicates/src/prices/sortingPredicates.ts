@@ -1,6 +1,6 @@
 import { ascend, descend, prop, sort, sortWith } from 'ramda';
 
-import type { Price, Ticket } from '@eventespresso/edtr-services';
+import type { Price, Ticket } from '@eventespresso/constants';
 
 type comparator = <T extends Price>(a: T, b: T) => number;
 type sortPricesFn = <T extends Price>(c: T[]) => T[];

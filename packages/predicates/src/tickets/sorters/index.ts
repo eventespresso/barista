@@ -1,9 +1,9 @@
 import { compareAsc, parseISO } from 'date-fns';
 import { compose, prop, sort, sortBy as sortByFn, toLower } from 'ramda';
-
-import type { Ticket, SortBy } from '@eventespresso/edtr-services';
-
 import { sortByOrder } from '../../common';
+
+import type { Ticket } from '@eventespresso/constants';
+import type { SortBy } from '@eventespresso/edtr-services';
 
 interface SortByProps {
 	tickets: Ticket[];

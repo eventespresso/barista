@@ -9,7 +9,8 @@ import type {
 } from '@eventespresso/data';
 import type { Merge, AnyObject } from '@eventespresso/utils';
 import type { ShiftDateArgs } from '@eventespresso/dates';
-import type { Datetime, DatetimeEdge, Ticket, TicketEdge, Price, PriceEdge } from '../types';
+import type { Datetime, Ticket, Price } from '@eventespresso/constants';
+import type { DatetimeEdge, TicketEdge, PriceEdge } from '../types';
 
 export interface MutationCallbackFnArgs {
 	cache?: ApolloCache<any>;

@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { MutationType, MutationInput } from '@eventespresso/data';
 import { PLUS_ONE_MONTH, PLUS_TWO_MONTHS } from '@eventespresso/constants';
 import { ucFirst, uuid } from '@eventespresso/utils';
-import type { Datetime } from '../../types';
+import type { Datetime } from '@eventespresso/constants';
 import { useLazyDatetime } from '../../queries';
 
 export const DATETIME_DEFAULTS: Datetime = {

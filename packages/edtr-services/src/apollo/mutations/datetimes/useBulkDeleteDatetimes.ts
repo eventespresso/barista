@@ -1,10 +1,11 @@
 import { useCallback } from 'react';
 import type { ExecutionResult } from 'graphql';
 
-import { EntityId, useApolloClient } from '@eventespresso/data';
+import { EntityId, Datetime } from '@eventespresso/constants';
+import { useApolloClient } from '@eventespresso/data';
 import { entitiesWithGuIdNotInArray, findEntityByGuid } from '@eventespresso/predicates';
 
-import type { Datetime, DatetimeEdge, DatetimesList } from '../../types';
+import type { DatetimeEdge, DatetimesList } from '../../types';
 import { useDatetimes, useDatetimeQueryOptions, DEFAULT_DATETIME_LIST_DATA as DEFAULT_LIST_DATA } from '../../queries';
 import { useUpdateDatetimeList } from '../../../hooks';
 import useBulkDeleteEntities from '../useBulkDeleteEntities';

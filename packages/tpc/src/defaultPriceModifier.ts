@@ -1,4 +1,4 @@
-import { Price } from '@eventespresso/edtr-services';
+import type { Price } from '@eventespresso/constants';
 
 const defaultPriceModifier: Price = {
 	id: '',
@@ -15,6 +15,7 @@ const defaultPriceModifier: Price = {
 	name: '',
 	order: 999,
 	overrides: null,
+	__typename: 'EspressoPrice',
 };
 
 export default defaultPriceModifier;

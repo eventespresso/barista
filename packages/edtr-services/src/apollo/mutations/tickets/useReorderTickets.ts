@@ -1,14 +1,14 @@
 import { useCallback, useMemo, useState } from 'react';
 
 import { ticketDroppableId } from '@eventespresso/constants';
-import type { EntityId } from '@eventespresso/data';
-import type { EntityTableProps } from '@eventespresso/ee-components';
-
 import { ReorderEntities, useReorderEntities } from '../useReorderEntities';
 import { TicketsFilterStateManager as TFSM } from '../../../filterState';
 import { useTickets, useTicketQueryOptions, useLazyTicket } from '../../queries';
 import { useUpdateTicketList } from '../../../hooks';
-import type { Ticket, TicketEdge } from '../../types';
+
+import type { EntityId, Ticket } from '@eventespresso/constants';
+import type { EntityTableProps } from '@eventespresso/ee-components';
+import type { TicketEdge } from '../../types';
 
 type SortResponder = EntityTableProps<TFSM>['onSort'];
 

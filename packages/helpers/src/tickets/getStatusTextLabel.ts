@@ -1,7 +1,7 @@
 import { __ } from '@eventespresso/i18n';
 
 import status from './status';
-import type { Ticket } from '@eventespresso/edtr-services';
+import type { Ticket } from '@eventespresso/constants';
 import { TICKET_STATUS_ID } from '@eventespresso/predicates';
 
 const getStatusTextLabel = (ticket: Ticket): string => {

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 import { useCacheQuery, CacheQueryOptions } from '@eventespresso/data';
-import { useMemoStringify } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 import type { EntityItemProps } from '@eventespresso/edtr-services';
 
 import { GET_RECURRENCE } from './queries';

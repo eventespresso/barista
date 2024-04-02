@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import type { GeneralSettings, GeneralSettingsData } from '@eventespresso/services';
+import type { GeneralSettings, GeneralSettingsData } from '@eventespresso/config';
 
 import useGeneralSettingsQueryOptions from './useGeneralSettingsQueryOptions';
 import { useCacheQuery } from '../';

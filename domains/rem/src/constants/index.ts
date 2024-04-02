@@ -1,5 +1,5 @@
 import { __ } from '@eventespresso/i18n';
-import type { Datetime, Ticket } from '@eventespresso/edtr-services';
+import type { Datetime, Ticket } from '@eventespresso/constants';
 
 export const DATE_FORMAT = 'YYYY-MM-DD';
 export const TIME_FORMAT = 'hh:mm a';

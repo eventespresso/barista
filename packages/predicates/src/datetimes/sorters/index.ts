@@ -1,7 +1,8 @@
 import { prop, sort, sortBy as sortByFn, compose, toLower } from 'ramda';
 import { compareAsc, parseISO } from 'date-fns';
 
-import type { Datetime, SortBy } from '@eventespresso/edtr-services';
+import type { Datetime } from '@eventespresso/constants';
+import type { SortBy } from '@eventespresso/edtr-services';
 
 import { sortByOrder } from '../../common';
 

@@ -6,8 +6,10 @@ import { BulkUpdateDatetimeInput, BULK_UPDATE_DATETIMES } from './';
 import useOnUpdateDatetime from './useOnUpdateDatetime';
 import { useUpdateDatetimeList } from '../../../hooks';
 import { cacheNodesFromBulkInput, updateDatetimeFlags } from '../utils';
-import type { DatetimeEdge, Datetime } from '../../types';
 import { SINGULAR_ENTITY_NAME } from '../../../constants';
+
+import type { Datetime } from '@eventespresso/constants';
+import type { DatetimeEdge } from '../../types';
 
 interface BulkEditDatetimes {
 	updateEntities: (input: BulkUpdateDatetimeInput) => ReturnType<ReturnType<typeof useMutationWithFeedback>>;

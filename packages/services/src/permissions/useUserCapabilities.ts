@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
-import { useCurrentUser, User } from '@eventespresso/data';
+import { useCurrentUser } from '@eventespresso/data';
+import type { User } from '@eventespresso/constants';
 
 const useUserCapabilities = (): User['capabilities'] => {
 	const currentUser = useCurrentUser();

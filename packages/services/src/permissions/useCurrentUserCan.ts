@@ -3,8 +3,8 @@ import { useCallback } from 'react';
 import { useCurrentUser } from '@eventespresso/data';
 
 import usePermissions from './usePermissions';
-import type { CurrentUserCan } from './types';
 import { entityPlurals } from './constants';
+import type { CurrentUserCan } from './types';
 
 /**
  * Returns a callback to check whether current user has a capability.

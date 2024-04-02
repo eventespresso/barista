@@ -1,5 +1,6 @@
-import { Datetime, Ticket, useDatetimes, useTickets } from '@eventespresso/edtr-services';
-import { useMemoStringify } from '@eventespresso/hooks';
+import { Datetime, Ticket } from '@eventespresso/constants';
+import { useDatetimes, useTickets } from '@eventespresso/edtr-services';
+import { useMemoStringify } from '@eventespresso/utils';
 
 import { DatesAndTickets } from '../types';
 import { useTAMContext } from '../context';

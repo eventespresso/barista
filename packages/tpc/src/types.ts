@@ -1,5 +1,5 @@
-import type { EntityId } from '@eventespresso/data';
-import type { Price, useTicketPrices } from '@eventespresso/edtr-services';
+import type { EntityId, Price } from '@eventespresso/constants';
+import type { useTicketPrices } from '@eventespresso/edtr-services';
 import { DataState, TpcTicket } from './data';
 
 export interface BaseProps {

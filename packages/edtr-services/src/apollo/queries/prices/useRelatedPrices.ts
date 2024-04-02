@@ -4,7 +4,7 @@ import { entitiesWithGuIdInArray } from '@eventespresso/predicates';
 import { entityListCacheIdString } from '@eventespresso/utils';
 import { useRelations } from '@eventespresso/services';
 import usePrices from './usePrices';
-import type { Price } from '../../types';
+import type { Price } from '@eventespresso/constants';
 import type { RelatedEntitiesHook } from '../types';
 
 const useRelatedPrices: RelatedEntitiesHook<Price, 'prices'> = ({ entity, entityId }) => {

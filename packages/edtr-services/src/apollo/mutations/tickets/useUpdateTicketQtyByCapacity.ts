@@ -2,7 +2,7 @@ import { useCallback, useMemo } from 'react';
 
 import { parseInfinity, isInfinite } from '@eventespresso/utils';
 import { entitiesWithGuIdInArray, uniqTicketsByMinQty, ticketQuantityFromCapacity } from '@eventespresso/predicates';
-import { EntityId } from '@eventespresso/data';
+import type { EntityId } from '@eventespresso/constants';
 import { useSystemNotifications } from '@eventespresso/toaster';
 import { __ } from '@eventespresso/i18n';
 

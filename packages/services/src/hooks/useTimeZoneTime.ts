@@ -3,7 +3,7 @@ import { path } from 'ramda';
 import { parseISO, isValid } from 'date-fns';
 import { format as formatTz, utcToZonedTime, zonedTimeToUtc } from 'date-fns-tz';
 
-import { useConfig } from '../config';
+import { useConfig } from '../context';
 
 type DateFn = (date: Date | string | number) => Date;
 type FormatDateFn = (date: Date, options?: Intl.DateTimeFormatOptions) => string;

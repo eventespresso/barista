@@ -2,7 +2,7 @@ import { createContext, useMemo, useCallback, useState } from 'react';
 
 import { without } from 'ramda';
 
-import { EntityId } from '@eventespresso/data';
+import type { EntityId } from '@eventespresso/constants';
 
 interface BulkEdit {
 	addToSelected: (id: EntityId) => void;

@@ -1,4 +1,4 @@
-import { EntityId } from '@eventespresso/data';
+import type { EntityId } from '@eventespresso/constants';
 
 export interface EntityEditModalData {
 	entityId?: EntityId;

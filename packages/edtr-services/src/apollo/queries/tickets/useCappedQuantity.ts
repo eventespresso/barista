@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import * as R from 'ramda';
 
-import { EntityId } from '@eventespresso/data';
+import type { EntityId } from '@eventespresso/constants';
 import { useRelations } from '@eventespresso/services';
 import { minDateCapacity, ticketQuantityFromCapacity } from '@eventespresso/predicates';
 

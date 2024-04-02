@@ -9,7 +9,7 @@ import { ENTITY_LIST_DATE_TIME_FORMAT } from '@eventespresso/constants';
 import { useFeature, useTimeZoneTime } from '@eventespresso/services';
 import { getDatetimeBackgroundColorClassName, datetimeStatus } from '@eventespresso/helpers';
 import { findEntityByGuid } from '@eventespresso/predicates';
-import type { EntityId } from '@eventespresso/data';
+import type { EntityId } from '@eventespresso/constants'
 import type { DatetimesFilterStateManager } from '@eventespresso/edtr-services';
 import type { BodyRowGeneratorFn } from '@eventespresso/ee-components';
 

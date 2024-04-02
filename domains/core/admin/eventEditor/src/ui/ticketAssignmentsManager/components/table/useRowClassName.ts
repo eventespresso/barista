@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import type { Datetime } from '@eventespresso/edtr-services';
+import type { Datetime } from '@eventespresso/constants';
 import { useDataState } from '../../data';
 
 type Callback = (datetime: Datetime) => string;

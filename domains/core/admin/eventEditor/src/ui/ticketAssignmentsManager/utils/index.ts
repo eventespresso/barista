@@ -1,11 +1,10 @@
 import * as R from 'ramda';
 import { parseISO } from 'date-fns';
 
-import type { EntityId } from '@eventespresso/data';
 import type { AnyObject } from '@eventespresso/utils';
-import type { TAMPossibleRelation, TAMRelationEntity, TAMRelationalData, TAMRelationalEntity } from '../types';
-import type { Datetime, Ticket } from '@eventespresso/edtr-services';
 import type { OptionsType } from '@eventespresso/adapters';
+import type { Datetime, EntityId, Ticket } from '@eventespresso/constants';
+import type { TAMPossibleRelation, TAMRelationEntity, TAMRelationalData, TAMRelationalEntity } from '../types';
 import { sortDates, minDateCapacity } from '@eventespresso/predicates';
 import { parseInfinity, isInfinite, idToPropMap } from '@eventespresso/utils';
 import { getMonthName } from '@eventespresso/dates';

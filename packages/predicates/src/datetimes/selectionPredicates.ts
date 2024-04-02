@@ -1,8 +1,7 @@
 import { includes, ObjPred } from 'ramda';
 
 import { idToPropMap, parseInfinity, isInfinite } from '@eventespresso/utils';
-import type { EntityId } from '@eventespresso/data';
-import type { Datetime } from '@eventespresso/edtr-services';
+import type { Datetime, EntityId } from '@eventespresso/constants';
 
 import { DATETIME_FIELDS, DATETIME_INPUT_FIELDS } from './datetimeFields';
 import { getGuids } from '../common';

@@ -1,9 +1,10 @@
 import { useCallback } from 'react';
 
-import { EntityId, useLazyCacheQuery } from '@eventespresso/data';
+import { Datetime, EntityId } from '@eventespresso/constants';
+import { useLazyCacheQuery } from '@eventespresso/data';
 
 import { GET_DATETIME } from './queries';
-import type { Datetime, DatetimeItem } from '../../types';
+import type { DatetimeItem } from '../../types';
 
 type Callback = (id: EntityId) => Datetime;
 

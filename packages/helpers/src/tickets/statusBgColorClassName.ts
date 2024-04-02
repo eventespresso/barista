@@ -1,4 +1,4 @@
-import type { Ticket } from '@eventespresso/edtr-services';
+import type { Ticket } from '@eventespresso/constants';
 import { isOnSale, isExpired, isTicketSoldOut } from '@eventespresso/predicates';
 
 const statusBgColorClassName = (ticket: Ticket): string => {

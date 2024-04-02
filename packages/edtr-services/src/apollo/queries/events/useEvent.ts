@@ -1,6 +1,6 @@
 import { useCacheQuery } from '@eventespresso/data';
 import useEventQueryOptions from './useEventQueryOptions';
-import { useMemoStringify } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 
 import type { Event, EventData } from '../../types';
 

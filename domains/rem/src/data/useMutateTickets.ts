@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import { useSiteDateToUtcISO } from '@eventespresso/services';
-import type { EntityId } from '@eventespresso/data';
+import type { EntityId } from '@eventespresso/constants'
 import { useMutateTicket } from '@eventespresso/tpc';
 
 import type { RemTicket, StartAndEndDate } from './types';

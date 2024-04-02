@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { EntityId } from '@eventespresso/data';
+import type { EntityId } from '@eventespresso/constants';
 import { copyPriceFields, isPriceInputField } from '@eventespresso/predicates';
 import { usePriceMutator } from '@eventespresso/edtr-services';
 import useDefaultBasePrice from './useDefaultBasePrice';

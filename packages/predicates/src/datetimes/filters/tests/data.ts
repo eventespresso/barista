@@ -1,4 +1,4 @@
-import { Datetime, DateStatus as DatetimeStatus } from '@eventespresso/edtr-services';
+import { Datetime, DateStatus } from '@eventespresso/constants';
 
 const dates: Datetime[] = [
 	{
@@ -17,7 +17,7 @@ const dates: Datetime[] = [
 		isSoldOut: false,
 		isTrashed: false,
 		isUpcoming: false,
-		status: DatetimeStatus.active,
+		status: DateStatus.active,
 		length: null,
 		order: 0,
 		reserved: 0,
@@ -31,7 +31,7 @@ const dates: Datetime[] = [
 		capacity: 10,
 		isActive: true,
 		sold: 5,
-		status: DatetimeStatus.active,
+		status: DateStatus.active,
 		dbId: 3,
 		name: 'Hello',
 		description: 'Test',
@@ -54,7 +54,7 @@ const dates: Datetime[] = [
 		capacity: 10,
 		isActive: true,
 		sold: 6,
-		status: DatetimeStatus.active,
+		status: DateStatus.active,
 		dbId: 4,
 		name: 'Hello',
 		description: 'Test',
@@ -77,7 +77,7 @@ const dates: Datetime[] = [
 		capacity: 10,
 		isActive: true,
 		sold: 7,
-		status: DatetimeStatus.active,
+		status: DateStatus.active,
 		dbId: 5,
 		name: 'Hello',
 		description: 'Test',
@@ -100,7 +100,7 @@ const dates: Datetime[] = [
 		capacity: 10,
 		isActive: true,
 		sold: 8,
-		status: DatetimeStatus.active,
+		status: DateStatus.active,
 		dbId: 6,
 		name: 'Hello',
 		description: 'Test',
@@ -124,7 +124,7 @@ const dates: Datetime[] = [
 		isActive: false,
 		isUpcoming: true,
 		sold: 9,
-		status: DatetimeStatus.active,
+		status: DateStatus.active,
 		dbId: 7,
 		name: 'Hello',
 		description: 'Test',
@@ -147,7 +147,7 @@ const dates: Datetime[] = [
 		isActive: false,
 		isUpcoming: true,
 		sold: 10,
-		status: DatetimeStatus.active,
+		status: DateStatus.active,
 		dbId: 8,
 		name: 'Hello',
 		description: 'Test',

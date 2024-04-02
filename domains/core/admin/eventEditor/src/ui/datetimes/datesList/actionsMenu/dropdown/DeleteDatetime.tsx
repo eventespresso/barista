@@ -3,7 +3,7 @@ import { AlertType, TrashEntity, useConfirmationDialog } from '@eventespresso/ui
 import { Trash as TrashIcon } from '@eventespresso/icons';
 import { useDatesListFilterState } from '@eventespresso/edtr-services';
 import useActions from './useActions';
-import type { Datetime } from '@eventespresso/edtr-services';
+import type { Datetime } from '@eventespresso/constants';
 
 export interface DeleteDatetimeProps {
 	datetime: Datetime;

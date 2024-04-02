@@ -1,7 +1,6 @@
 import type { InlineEditProps } from '@eventespresso/adapters';
 import type { SelectProps, SwitchProps } from '@eventespresso/ui-components';
-import type { Event, EventManager } from '@eventespresso/edtr-services';
-
+import type { Event, EventManager } from '@eventespresso/constants';
 type PickedProps =
 	| 'allowDonations'
 	| 'altRegPage'

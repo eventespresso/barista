@@ -2,10 +2,9 @@ import { useCallback } from 'react';
 
 import { entitiesWithGuIdInArray } from '@eventespresso/predicates';
 import { useRelations } from '@eventespresso/services';
-import { EntityId } from '@eventespresso/data';
 
 import { usePrices } from '../prices';
-import type { Price } from '../../types';
+import type { EntityId, Price } from '@eventespresso/constants';
 
 type GetTicketPrices = (ticketId: EntityId) => Array<Price>;
 /**

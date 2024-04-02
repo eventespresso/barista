@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { pick } from 'ramda';
 
-import { useMemoStringify } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 import { isLocked } from '@eventespresso/predicates';
 
 import type { StateInitializer } from './types';

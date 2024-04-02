@@ -2,11 +2,12 @@ import { useCallback, useMemo } from 'react';
 
 import { __ } from '@eventespresso/i18n';
 import { useConfirmationDialog } from '@eventespresso/ui-components';
-import { EdtrGlobalModals, Ticket, useTicketMutator } from '@eventespresso/edtr-services';
+import { EdtrGlobalModals, useTicketMutator } from '@eventespresso/edtr-services';
 import { useGlobalModal } from '@eventespresso/registry';
-
 import { SOLD_TICKET_ERROR_MESSAGE } from '../utils';
 import useCopyTicket from './useCopyTicket';
+
+import type { Ticket } from '@eventespresso/constants';
 import type { BaseProps } from '../types';
 
 type LockedTicketAction = {

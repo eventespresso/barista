@@ -1,4 +1,4 @@
-import { useMemoStringify } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 import type { AnyObject } from '@eventespresso/utils';
 import { useFormValues } from '@eventespresso/form';
 import { DateFormShape, useDatetimeItem } from '@eventespresso/edtr-services';

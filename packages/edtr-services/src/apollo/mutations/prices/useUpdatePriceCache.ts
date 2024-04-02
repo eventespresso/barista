@@ -1,11 +1,13 @@
 import { useCallback } from 'react';
 import { findIndex, update } from 'ramda';
 
-import type { CacheUpdaterFn, CacheUpdaterFnArgs } from '../types';
-import { Price, PricesList } from '../../';
 import { WriteQueryOptions } from '@eventespresso/data';
 import { entityHasGuid } from '@eventespresso/predicates';
 import { usePriceQueryOptions } from '../../queries';
+
+import type { CacheUpdaterFn, CacheUpdaterFnArgs } from '../types';
+import type { Price } from '@eventespresso/constants';
+import type { PricesList } from '../../';
 
 const useUpdatePriceCache = (): CacheUpdaterFn => {
 	const queryOptions = usePriceQueryOptions();

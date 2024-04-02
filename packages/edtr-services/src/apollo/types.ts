@@ -1,15 +1,5 @@
 import type { Datetime, Price, PriceType, Ticket, Venue } from '@eventespresso/constants';
-import type {
-	Entity,
-	EntityEdge,
-	DatetimesList as DatetimeList,
-	TicketsList as TicketList,
-	EntityId,
-	EntityDbId,
-} from '@eventespresso/data';
-
-// re-export these types
-export type { EntityId, EntityDbId };
+import type { Entity, EntityEdge, DatetimesList as DatetimeList, TicketsList as TicketList } from '@eventespresso/data';
 
 // re-export these types
 export type {
@@ -22,6 +12,8 @@ export type {
 	Ticket,
 	Venue,
 	Attendee,
+	EntityId,
+	EntityDbId,
 } from '@eventespresso/constants';
 
 // re-export these values

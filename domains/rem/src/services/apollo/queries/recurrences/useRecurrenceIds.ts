@@ -1,6 +1,6 @@
-import { EntityId } from '@eventespresso/data';
+import type { EntityId } from '@eventespresso/constants';
 import { getGuids } from '@eventespresso/predicates';
-import { useMemoStringify } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 
 import useRecurrences from './useRecurrences';
 

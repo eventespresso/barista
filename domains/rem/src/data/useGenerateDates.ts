@@ -1,7 +1,7 @@
 import * as R from 'ramda';
 import { formatISO, parseISO } from 'date-fns';
 
-import { useMemoStringify } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 
 import useFormState from './useFormState';
 import { getDatesLimit } from '../utils';

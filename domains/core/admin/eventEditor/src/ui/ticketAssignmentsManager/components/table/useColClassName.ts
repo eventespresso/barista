@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import type { Ticket } from '@eventespresso/edtr-services';
+import type { Ticket } from '@eventespresso/constants';
 import { useDataState } from '../../data';
 
 type Callback = (ticket: Ticket) => string;

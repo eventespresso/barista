@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import { __ } from '@eventespresso/i18n';
 import { CalendarOutlined, ControlOutlined, ProfileOutlined } from '@eventespresso/icons';
-import { Ticket } from '@eventespresso/edtr-services';
+import type { Ticket } from '@eventespresso/constants';
 import { useTimeZoneTime } from '@eventespresso/services';
 import { VISIBILITY_OPTIONS, VISIBILITY_OPTIONS_INFO } from '@eventespresso/helpers';
 

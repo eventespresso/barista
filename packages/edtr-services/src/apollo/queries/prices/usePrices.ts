@@ -1,8 +1,9 @@
 import { usePricesQuery } from '@eventespresso/data';
-import { useMemoStringify } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 import { getCacheIds } from '@eventespresso/predicates';
 
-import type { Price, PriceEdge } from '../../types';
+import type { Price } from '@eventespresso/constants';
+import type { PriceEdge } from '../../types';
 import usePriceQueryOptions from './usePriceQueryOptions';
 
 /**

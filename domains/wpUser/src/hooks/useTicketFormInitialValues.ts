@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
 
 import { hooks, useTicketsMeta, Filters } from '@eventespresso/edtr-services';
-import { getOptionValues } from '@eventespresso/utils';
-import { useMemoStringify } from '@eventespresso/hooks';
+import { getOptionValues, useMemoStringify } from '@eventespresso/utils';
 
 import { NAMESPACE } from '../constants';
 import useCapabilityOptions from './useCapabilityOptions';

@@ -9,7 +9,7 @@ import type {
 	EntityFilterStateManager,
 	EntityFilterStateReducer,
 } from '../';
-import type { EntityId } from '@eventespresso/data';
+import type { EntityId } from '@eventespresso/constants'
 
 export interface DatetimesFilterState extends EntityFilterState {
 	sales: DatetimeSales;

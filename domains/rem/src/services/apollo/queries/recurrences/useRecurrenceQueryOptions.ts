@@ -1,6 +1,6 @@
 import type { RecurrencesList, RecurrencesQueryArgs, CacheQueryOptions } from '@eventespresso/data';
 import { useEventId } from '@eventespresso/edtr-services';
-import { useMemoStringify } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 
 import type { RecurrenceEdge } from '../../types';
 import { GET_RECURRENCES } from '../recurrences';

@@ -1,4 +1,4 @@
-import type { Ticket } from '@eventespresso/edtr-services';
+import type { Ticket } from '@eventespresso/constants';
 import percentSoldAtOrAbove from './percentSoldAtOrAbove';
 import percentSoldBelow from './percentSoldBelow';
 

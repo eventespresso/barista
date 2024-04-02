@@ -2,7 +2,7 @@ import { allPass, isEmpty, find } from 'ramda';
 
 import { getPriceModifiers, isNotBasePrice, isNotDiscount, isNotPercent } from '../../prices';
 
-import type { PriceType } from '@eventespresso/edtr-services';
+import type { PriceType } from '@eventespresso/constants';
 
 // returns `true` if supplied object is of type `PriceType`
 export const isPriceType = (object: PriceType): boolean => {

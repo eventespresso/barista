@@ -2,8 +2,7 @@ import { useCallback } from 'react';
 
 import { useTicketPrices } from '@eventespresso/edtr-services';
 import { useRelations } from '@eventespresso/services';
-import { Ticket } from '@eventespresso/edtr-services';
-import type { EntityId } from '@eventespresso/data';
+import type { EntityId, Ticket } from '@eventespresso/constants';
 
 import useMutateTicket from './useMutateTicket';
 import usePrepTemplatePrices from './usePrepTemplatePrices';

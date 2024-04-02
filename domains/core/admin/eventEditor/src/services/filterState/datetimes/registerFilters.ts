@@ -5,7 +5,7 @@ import { FilterBarService } from '@eventespresso/registry';
 import { dateSalesFilter, dateStatusFilter, sortDates } from '@eventespresso/predicates';
 import { datesList, domain } from '@eventespresso/edtr-services';
 import { entityListSearch } from '@eventespresso/utils';
-import type { Datetime } from '@eventespresso/edtr-services';
+import type { Datetime } from '@eventespresso/constants';
 import type { DatetimesFilterStateManager } from '@eventespresso/edtr-services';
 
 type Domain = typeof domain;

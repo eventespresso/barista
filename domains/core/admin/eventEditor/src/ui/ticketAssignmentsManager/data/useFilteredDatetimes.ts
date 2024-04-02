@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import type { Datetime } from '@eventespresso/edtr-services';
+import type { Datetime } from '@eventespresso/constants';
 import { notTrashed, inYearAndMonth } from '@eventespresso/predicates';
 import { useFilterState } from '../filters';
 

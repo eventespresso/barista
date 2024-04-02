@@ -2,9 +2,7 @@ import { useCallback } from 'react';
 
 import { useRelations } from '@eventespresso/services';
 import { entitiesWithGuIdInArray } from '@eventespresso/predicates';
-import type { EntityId } from '@eventespresso/data';
-
-import type { Datetime } from '@eventespresso/edtr-services';
+import type { Datetime, EntityId } from '@eventespresso/constants';
 
 type RecurrenceFilterCallback = (args: { recurrence: EntityId; datetimes: Array<Datetime> }) => Array<Datetime>;
 

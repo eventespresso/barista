@@ -1,10 +1,11 @@
 import { useMemo } from 'react';
 
 import { useCacheQuery, CacheQueryOptions } from '@eventespresso/data';
-import { useMemoStringify } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 
 import { GET_DATETIME } from './queries';
-import type { Datetime, DatetimeItem } from '../../types';
+import type { Datetime } from '@eventespresso/constants';
+import type { DatetimeItem } from '../../types';
 import type { EntityItemProps } from '../types';
 
 const useDatetimeItem = ({ id }: EntityItemProps): Datetime => {

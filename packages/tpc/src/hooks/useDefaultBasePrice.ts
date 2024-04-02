@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { useMemoStringify } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 import { usePriceTypes } from '@eventespresso/edtr-services';
 import { isBasePrice } from '@eventespresso/predicates';
 import defaultPrice from '../defaultPriceModifier';

@@ -1,7 +1,7 @@
 import { __ } from '@eventespresso/i18n';
 import { RegistrationsLink } from '@eventespresso/ui-components';
 import { useRegistrationsLink } from '@eventespresso/edtr-services';
-import type { Datetime } from '@eventespresso/edtr-services';
+import type { Datetime } from '@eventespresso/constants';
 
 interface Props {
 	datetime: Datetime;

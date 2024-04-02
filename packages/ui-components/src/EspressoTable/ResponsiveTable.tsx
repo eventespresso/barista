@@ -2,8 +2,7 @@ import { useRef } from 'react';
 
 import classNames from 'classnames';
 
-import { useMemoStringify } from '@eventespresso/hooks';
-import { isEmpty, uuid } from '@eventespresso/utils';
+import { isEmpty, useMemoStringify, uuid } from '@eventespresso/utils';
 import Table from './Table';
 import TableHeader from './TableHeader';
 import TableBody from './TableBody';

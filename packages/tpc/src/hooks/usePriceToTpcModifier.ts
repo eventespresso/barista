@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import { useRelations } from '@eventespresso/services';
-import { Price } from '@eventespresso/edtr-services';
+import type { Price } from '@eventespresso/constants';
 import { TpcPriceModifier } from '../types';
 
 export type PriceToTpcModifier = (price: Price) => TpcPriceModifier;

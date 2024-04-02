@@ -1,5 +1,5 @@
 import type { TableRow } from '@eventespresso/ui-components';
-import type { EntityId } from '@eventespresso/data';
+import type { EntityId } from '@eventespresso/constants'
 import type { EntityListFilterStateManager } from '@eventespresso/services';
 import type { SubscribeFn, SubscriptionCallback, Subscriptions } from '../subscription';
 

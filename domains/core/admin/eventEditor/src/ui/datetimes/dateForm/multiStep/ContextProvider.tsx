@@ -1,6 +1,7 @@
-import { useMemoStringify } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 import { useFormValues } from '@eventespresso/form';
-import { Datetime, DateFormShape, useDatetimeItem } from '@eventespresso/edtr-services';
+import { Datetime } from '@eventespresso/constants';
+import { DateFormShape, useDatetimeItem } from '@eventespresso/edtr-services';
 
 import { ContextProvider as TAMContextProvider } from '@edtrUI/ticketAssignmentsManager/context';
 import Modal from './Modal';

@@ -1,3 +1,3 @@
-import type { Price } from '@eventespresso/edtr-services';
+import type { Price } from '@eventespresso/constants';
 
 export type PricePred = (price: Price) => boolean;

@@ -5,7 +5,7 @@ import { sprintf } from '@eventespresso/i18n';
 import { useDataState } from '../../data';
 import getRelationIcon from './getRelationIcon';
 import type { RenderCellProps } from '../../types';
-import type { Datetime, Ticket } from '@eventespresso/edtr-services';
+import type { Datetime, Ticket } from '@eventespresso/constants';
 
 const BodyCell: React.FC<RenderCellProps> = ({ datetime, ticket }) => {
 	const { getAssignmentStatus, toggleAssignment } = useDataState();

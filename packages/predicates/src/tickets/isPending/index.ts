@@ -2,8 +2,8 @@ import { parseISO } from 'date-fns';
 
 import { isBooleanTrue } from '@eventespresso/utils';
 import { diff } from '@eventespresso/dates';
-import { NOW as now } from '@eventespresso/constants';
-import type { Ticket } from '@eventespresso/edtr-services';
+import { NOW } from '@eventespresso/constants';
+import type { Ticket } from '@eventespresso/constants';
 
 /**
  * Whether a ticket is not yet available for purchase,
@@ -13,7 +13,7 @@ import type { Ticket } from '@eventespresso/edtr-services';
  * @param ignoreFlag Whether to ignore the boolean flag from the object and recalculate the value
  */
 const isPending = (ticket: Ticket, ignoreFlag = false): boolean => {
-	return (!ignoreFlag && isBooleanTrue(ticket.isPending)) || diff('seconds', parseISO(ticket.startDate), now) > 0;
+	return (!ignoreFlag && isBooleanTrue(ticket.isPending)) || diff('seconds', parseISO(ticket.startDate), NOW) > 0;
 };
 
 export default isPending;

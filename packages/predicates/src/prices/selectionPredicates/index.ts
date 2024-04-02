@@ -3,7 +3,7 @@ import { allPass, anyPass, complement, filter, find, includes, isNil, isEmpty, O
 import { PRICE_FIELDS, PRICE_INPUT_FIELDS } from '../priceFields';
 import { isDefault } from '../../common';
 
-import type { Price } from '@eventespresso/edtr-services';
+import type { Price } from '@eventespresso/constants';
 import type { BoolField, EntityFieldPred } from '@eventespresso/utils';
 
 // is a base price ?

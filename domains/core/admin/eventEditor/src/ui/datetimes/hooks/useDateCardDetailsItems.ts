@@ -1,4 +1,4 @@
-import type { EntityId } from '@eventespresso/data';
+import type { EntityId } from '@eventespresso/constants'
 import { useEntityCardDetailsItems } from '@edtrHooks/index';
 
 const useDateCardDetailsItems = (datetimeId: EntityId): Array<React.ReactNode> => {

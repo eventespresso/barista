@@ -1,7 +1,7 @@
 import { is } from 'ramda';
 
 import { isInfinite } from '@eventespresso/utils';
-import type { Ticket } from '@eventespresso/edtr-services';
+import type { Ticket } from '@eventespresso/constants';
 
 /**
  * @param {Object} ticket    event ticket object

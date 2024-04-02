@@ -2,7 +2,8 @@ import { useCallback } from 'react';
 import { findIndex, update } from 'ramda';
 
 import type { CacheUpdaterFn, CacheUpdaterFnArgs } from '../types';
-import type { Datetime, DatetimesList } from '../../types';
+import type { DatetimesList } from '../../types';
+import type { Datetime } from '@eventespresso/constants';
 import { WriteQueryOptions } from '@eventespresso/data';
 import { entityHasGuid } from '@eventespresso/predicates';
 import { useDatetimeQueryOptions } from '../../queries';

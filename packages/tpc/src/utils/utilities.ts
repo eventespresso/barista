@@ -1,7 +1,5 @@
 import * as R from 'ramda';
 
-import type { Price, PriceType } from '@eventespresso/edtr-services';
-import type { EntityId } from '@eventespresso/data';
 import {
 	findEntityByGuid,
 	sortByPriceOrderIdAsc,
@@ -10,6 +8,7 @@ import {
 	isBasePrice,
 } from '@eventespresso/predicates';
 
+import type { EntityId, Price, PriceType } from '@eventespresso/constants';
 import type { TpcPriceModifier } from '../types';
 import type { PriceToTpcModifier } from '../hooks/usePriceToTpcModifier';
 

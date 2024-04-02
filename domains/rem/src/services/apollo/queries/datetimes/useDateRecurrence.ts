@@ -1,5 +1,5 @@
 import { useRelations } from '@eventespresso/services';
-import { EntityId } from '@eventespresso/data';
+import type { EntityId } from '@eventespresso/constants';
 
 import { useRecurrenceItem } from '../recurrences';
 import type { Recurrence } from '../../types';

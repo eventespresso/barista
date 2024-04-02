@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 
 import { MutationType, MutationInput, OperationVariables } from '@eventespresso/data';
+import type { Event } from '@eventespresso/constants';
 
 import useOptimisticResponse from './useOptimisticResponse';
 import type { MutationHandler } from '../types';
-import type { Event } from '../../';
 import type { EventBaseInput } from './types';
 
 type MH = MutationHandler<Event, EventBaseInput>;

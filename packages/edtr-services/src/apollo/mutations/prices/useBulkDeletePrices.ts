@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import type { ExecutionResult } from 'graphql';
 
-import type { EntityId } from '@eventespresso/data';
+import type { EntityId } from '@eventespresso/constants'
 import type { PriceEdge } from '../../types';
 import { usePrices, usePriceQueryOptions } from '../../queries';
 import { useUpdatePriceList } from '../../../hooks';

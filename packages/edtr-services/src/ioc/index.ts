@@ -4,8 +4,8 @@ import type { OptionsType } from '@eventespresso/adapters';
 import type { BulkEdit } from '@eventespresso/services';
 import type { ButtonProps } from '@eventespresso/ui-components';
 import type { SimpleTextEditorModalProps } from '@eventespresso/ee-components';
+import type { Datetime, Ticket } from '@eventespresso/constants';
 
-import { Datetime, Ticket } from '../apollo';
 import { DateFormShape, DateFormConfig, TicketFormShape, TicketFormConfig } from '../forms';
 
 type MutationActionArgs<E extends Entity> = [

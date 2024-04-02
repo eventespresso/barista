@@ -1,8 +1,9 @@
 import { GraphQLError } from 'graphql';
 import { formatISO } from 'date-fns';
 
-import { Datetime, DatetimeEdge, DateStatus as DatetimeStatus } from '../../../types';
+import { Datetime, DateStatus } from '@eventespresso/constants';
 import { CacheQueryOptions } from '@eventespresso/data';
+import { DatetimeEdge } from '../../../types';
 
 export const request: CacheQueryOptions = null; // to be generated via Query Options hook
 
@@ -21,7 +22,7 @@ export const nodes: Datetime[] = [
 		isSoldOut: false,
 		isTrashed: false,
 		isUpcoming: false,
-		status: DatetimeStatus.active,
+		status: DateStatus.active,
 		length: 0,
 		order: 0,
 		reserved: 0,
@@ -44,7 +45,7 @@ export const nodes: Datetime[] = [
 		isSoldOut: false,
 		isTrashed: false,
 		isUpcoming: false,
-		status: DatetimeStatus.expired,
+		status: DateStatus.expired,
 		length: 0,
 		order: 10,
 		reserved: 0,
@@ -67,7 +68,7 @@ export const nodes: Datetime[] = [
 		isSoldOut: false,
 		isTrashed: false,
 		isUpcoming: false,
-		status: DatetimeStatus.expired,
+		status: DateStatus.expired,
 		length: 0,
 		order: 5,
 		reserved: 0,

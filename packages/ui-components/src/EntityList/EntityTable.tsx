@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-import { useMemoStringify } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 
 import { ResponsiveTable } from '../EspressoTable';
 import type { EntityTableProps } from './types';

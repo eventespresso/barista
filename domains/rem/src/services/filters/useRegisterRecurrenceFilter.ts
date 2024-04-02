@@ -4,7 +4,8 @@ import { FilterBarService } from '@eventespresso/registry';
 
 import { domain, datesList } from '@eventespresso/edtr-services';
 import useRecurrenceFilter from './useRecurrenceFilter';
-import type { Datetime, DatetimesFilterStateManager } from '@eventespresso/edtr-services';
+import type { Datetime } from '@eventespresso/constants';
+import type { DatetimesFilterStateManager } from '@eventespresso/edtr-services';
 
 type Domain = typeof domain;
 type DFSM = DatetimesFilterStateManager;

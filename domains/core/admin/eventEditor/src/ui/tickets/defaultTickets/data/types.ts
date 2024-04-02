@@ -1,9 +1,10 @@
 import type { Reducer, ReducerState } from 'react';
 
 import type { AnyObject } from '@eventespresso/utils';
-import type { Entity, EntityId } from '@eventespresso/data';
+import type { Entity } from '@eventespresso/data';
+import type { EntityId, Ticket } from '@eventespresso/constants';
 import type { TpcPriceModifier } from '@eventespresso/tpc';
-import type { Ticket, UpdateTicketInput } from '@eventespresso/edtr-services';
+import type { UpdateTicketInput } from '@eventespresso/edtr-services';
 
 export interface DefaultTicket extends Entity, Omit<UpdateTicketInput, 'prices' | 'id'>, Pick<Ticket, 'userId'> {
 	deletedPrices?: Array<EntityId>;

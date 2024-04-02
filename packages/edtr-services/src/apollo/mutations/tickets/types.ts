@@ -1,5 +1,4 @@
-import type { EntityId } from '@eventespresso/data';
-import type { Ticket, TicketVisibility } from '../../';
+import type { EntityId, Ticket, TicketVisibility } from '@eventespresso/constants';
 import { BulkUpdateInput } from '../types';
 
 export interface TicketBaseInput {

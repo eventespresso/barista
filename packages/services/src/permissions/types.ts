@@ -1,4 +1,4 @@
-import type { EntityId } from '@eventespresso/data';
+import type { EntityId } from '@eventespresso/constants'
 import type { AnyObject } from '@eventespresso/utils';
 
 export type Capability = string;

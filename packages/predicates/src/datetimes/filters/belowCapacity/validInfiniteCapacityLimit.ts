@@ -1,7 +1,7 @@
 import { is } from 'ramda';
 
 import { isInfinite } from '@eventespresso/utils';
-import type { Datetime } from '@eventespresso/edtr-services';
+import type { Datetime } from '@eventespresso/constants';
 
 /**
  * @param {Object} date event object

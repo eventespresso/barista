@@ -11,11 +11,13 @@ import useOnUpdateTicket from './useOnUpdateTicket';
 import useOptimisticResponse from './useOptimisticResponse';
 import { hooks } from '../../../ioc';
 import { DEFAULT_TICKET_LIST_DATA as DEFAULT_LIST_DATA, useTicketQueryOptions } from '../../queries';
-import type { MutationHandler, MutationUpdater } from '../types';
-import { TicketsList, Ticket } from '../../';
-import type { TicketCommonInput } from './types';
+import { TicketsList } from '../../';
 import { BOOLEAN_FIELDS, NUMERIC_FIELDS } from './constants';
 import useAffectedDatesQueries from './useAffectedDatesQueries';
+
+import type { Ticket } from '@eventespresso/constants';
+import type { TicketCommonInput } from './types';
+import type { MutationHandler, MutationUpdater } from '../types';
 
 type MH = MutationHandler<Ticket, TicketCommonInput>;
 

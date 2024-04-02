@@ -1,7 +1,7 @@
 import type { Reducer, ReducerState } from 'react';
 
-import type { Entity, EntityId } from '@eventespresso/data';
-import type { PriceType, Ticket } from '@eventespresso/edtr-services';
+import type { Entity } from '@eventespresso/data';
+import type { EntityId, PriceType, Ticket } from '@eventespresso/constants';
 import type { BaseProps, TpcPriceModifier } from '../types';
 
 export interface TpcTicket

@@ -1,12 +1,9 @@
 import type {
-	Address,
 	Entity,
-	EntityId,
 	EntityEdge,
 	Trashable,
 	DatetimesList as DatetimeList,
 	TicketsList as TicketList,
-	User,
 } from '@eventespresso/data';
 
 export interface Event extends Entity {
@@ -192,4 +189,38 @@ export interface Attendee extends Entity, Address {
 	lastName?: string;
 	phone?: string;
 	shortBio?: string;
+}
+
+export type EntityId = string;
+
+export type EntityDbId = number;
+
+export interface User {
+	capabilities: Array<string>;
+	description: string;
+	email: string;
+	firstName: string;
+	id: string;
+	isa?: boolean;
+	lastName: string;
+	locale: string;
+	name: string;
+	nicename: string;
+	nickname: string;
+	roles?: Array<string>;
+	username: string;
+	__typename?: string;
+}
+
+export interface Address {
+	address?: string;
+	address2?: string;
+	city?: string;
+	country?: string;
+	countryISO?: string;
+	countryName?: string;
+	state?: string;
+	stateAbbrev?: string;
+	stateName?: string;
+	zip?: string;
 }

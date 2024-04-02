@@ -2,9 +2,6 @@ import { useCallback, useMemo } from 'react';
 import { identity, unnest } from 'ramda';
 
 import { useMutationWithFeedback, MutationType } from '@eventespresso/data';
-import type { TicketPred } from '@eventespresso/predicates';
-
-import type { TicketEdge, Ticket } from '../../types';
 import { useTicketQueryOptions, useTickets } from '../../queries';
 import { useUpdateTicketList } from '../../../hooks';
 import { BulkUpdateTicketInput, BULK_UPDATE_TICKETS } from './';
@@ -12,6 +9,10 @@ import { SINGULAR_ENTITY_NAME } from '../../../constants';
 import { cacheNodesFromBulkInput, updateTicketFlags } from '../utils';
 import useOnUpdateTicket from './useOnUpdateTicket';
 import useAffectedDatesQueries from './useAffectedDatesQueries';
+
+import type { Ticket } from '@eventespresso/constants';
+import type { TicketPred } from '@eventespresso/predicates';
+import type { TicketEdge } from '../../types';
 
 interface BulkEditTickets {
 	updateEntities: (input: BulkUpdateTicketInput) => ReturnType<ReturnType<typeof useMutationWithFeedback>>;

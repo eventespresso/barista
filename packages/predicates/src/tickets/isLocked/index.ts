@@ -1,4 +1,4 @@
-import type { Ticket } from '@eventespresso/edtr-services';
+import type { Ticket } from '@eventespresso/constants';
 
 const isLocked = (ticket: Partial<Ticket>): boolean => ticket.registrationCount > 0;
 

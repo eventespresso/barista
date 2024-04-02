@@ -1,4 +1,5 @@
-import type { UpdateDatetimeInput, Datetime } from '@eventespresso/edtr-services';
+import type { Datetime } from '@eventespresso/constants';
+import type { UpdateDatetimeInput } from '@eventespresso/edtr-services';
 
 export const DATETIME_INPUT_FIELDS: Array<keyof UpdateDatetimeInput> = [
 	'capacity',

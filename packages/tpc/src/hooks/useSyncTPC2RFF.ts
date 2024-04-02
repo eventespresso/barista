@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { pick } from 'ramda';
 
 import { useForm } from '@eventespresso/form';
-import { Ticket } from '@eventespresso/edtr-services';
+import type { Ticket } from '@eventespresso/constants';
 
 import { useDataState } from '../data';
 import { TpcPriceModifier } from '../types';

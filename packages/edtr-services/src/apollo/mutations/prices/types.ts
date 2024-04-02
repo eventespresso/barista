@@ -1,5 +1,4 @@
-import type { EntityId } from '@eventespresso/data';
-import type { Price } from '../../';
+import type { EntityId, Price } from '@eventespresso/constants';
 
 export interface PriceBaseInput {
 	amount?: number;

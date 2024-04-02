@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 import type { CellData, HeaderRow } from '@eventespresso/ui-components';
-import type { Ticket } from '@eventespresso/edtr-services';
+import type { Ticket } from '@eventespresso/constants';
 import { __ } from '@eventespresso/i18n';
 
 import HeaderCell from './HeaderCell';

@@ -1,9 +1,10 @@
 import { useVenuesQuery } from '@eventespresso/data';
-import { useMemoStringify } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 import { getCacheIds } from '@eventespresso/predicates';
-
-import type { Venue, VenueEdge } from '../../types';
 import { useVenueQueryOptions } from './useVenueQueryOptions';
+
+import type { Venue } from '@eventespresso/constants';
+import type { VenueEdge } from '../../types';
 
 /**
  * A custom react hook to retrieve all the venues from cache

@@ -3,9 +3,10 @@ import { filter } from 'ramda';
 
 import { useTicketsQuery } from '@eventespresso/data';
 import { getCacheIds, TicketPred, isNotDefault } from '@eventespresso/predicates';
-
 import useTicketQueryOptions from './useTicketQueryOptions';
-import type { Ticket, TicketEdge } from '../../types';
+
+import type { Ticket } from '@eventespresso/constants';
+import type { TicketEdge } from '../../types';
 
 const useTickets = (filterBy: TicketPred = isNotDefault): Array<Ticket> => {
 	const options = useTicketQueryOptions();

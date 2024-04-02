@@ -1,6 +1,6 @@
 import { parseISO } from 'date-fns';
 
-import type { Datetime } from '@eventespresso/edtr-services';
+import type { Datetime } from '@eventespresso/constants';
 
 /**
  * Whether the date is in the given year

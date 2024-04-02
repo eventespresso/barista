@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import { useRelations } from '@eventespresso/services';
-import type { EntityId } from '@eventespresso/data';
+import type { EntityId } from '@eventespresso/constants'
 
 import { useBulkDeleteTickets } from '../tickets';
 

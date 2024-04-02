@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import * as R from 'ramda';
 
 import { useTicketPrices } from '@eventespresso/edtr-services';
-import type { EntityId } from '@eventespresso/data';
+import type { EntityId } from '@eventespresso/constants'
 import { useTicketMutator } from '@eventespresso/edtr-services';
 import { getGuids, entitiesWithGuIdNotInArray } from '@eventespresso/predicates';
 import { usePriceQueryOptions } from '@eventespresso/edtr-services';

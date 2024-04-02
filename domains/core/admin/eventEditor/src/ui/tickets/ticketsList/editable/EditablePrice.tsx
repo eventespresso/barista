@@ -4,7 +4,7 @@ import { __ } from '@eventespresso/i18n';
 import { Clickable } from '@eventespresso/adapters';
 import { InlineEditCurrency } from '@eventespresso/ui-components';
 import { CurrencyDisplay } from '@eventespresso/ee-components';
-import { useMemoStringify } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 import { useMoneyDisplay } from '@eventespresso/services';
 import { isLocked } from '@eventespresso/predicates';
 import { useLockedTicketAction } from '@eventespresso/tpc';

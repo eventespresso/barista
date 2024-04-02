@@ -1,5 +1,5 @@
 import soldOutOnly from './index';
-import { DateStatus as DatetimeStatus } from '@eventespresso/edtr-services';
+import { DateStatus } from '@eventespresso/constants';
 import { nodes as datetimes } from '@eventespresso/edtr-services/src/apollo/queries/datetimes/test/data';
 
 const datetime = datetimes[0];
@@ -9,7 +9,7 @@ describe('soldOutOnly', () => {
 		const filteredDates = soldOutOnly([
 			{ ...datetime, id: 'abc', isTrashed: true },
 			{ ...datetime, id: 'def', isSoldOut: false },
-			{ ...datetime, id: 'def', status: DatetimeStatus.active },
+			{ ...datetime, id: 'def', status: DateStatus.active },
 		]);
 
 		expect(filteredDates).toEqual([]);
@@ -18,8 +18,8 @@ describe('soldOutOnly', () => {
 	it('Should return an array of soldOutOnly dates when isSoldOut is true and have a valid status', () => {
 		const filteredDates = soldOutOnly([
 			{ ...datetime, id: 'abc', isActive: false },
-			{ ...datetime, id: 'def', isSoldOut: true, status: DatetimeStatus.soldOut },
-			{ ...datetime, id: 'xyz', isSoldOut: true, status: DatetimeStatus.soldOut },
+			{ ...datetime, id: 'def', isSoldOut: true, status: DateStatus.soldOut },
+			{ ...datetime, id: 'xyz', isSoldOut: true, status: DateStatus.soldOut },
 		]);
 
 		expect(filteredDates.length).toBe(2);

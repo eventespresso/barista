@@ -1,5 +1,5 @@
 import { useCacheQuery } from '@eventespresso/data';
-import { useMemoStringify } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 
 import { useUpsellAdQueryOptions } from './useUpsellAdQueryOptions';
 import type { UpsellAd, UpsellAdData } from '../types';
