@@ -1,4 +1,4 @@
-import { useMemoStringify } from '@eventespresso/hooks';
+import { useMemoStringify } from '@eventespresso/utils';
 import { useMemo } from 'react';
 import { Currency, DateTimeFormats, Locale, LocaleProps, SiteUrl, Timezone, ConfigDataProps } from './';
 

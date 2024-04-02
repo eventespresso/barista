@@ -1,4 +1,4 @@
-import type { EventEspressoDomData } from '../../types';
+import type { EventEspressoDomData } from '../types';
 
 export const mockEspressoDomData: EventEspressoDomData = {
 	api: {

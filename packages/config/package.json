@@ -1,0 +1,18 @@
+{
+	"author": "Event Espresso",
+	"name": "@eventespresso/config",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/eventespresso/barista.git"
+	},
+	"private": true,
+	"version": "1.0.0",
+	"main": "src/index.ts",
+	"scripts": {
+		"lint": "eslint ./src/**/*.{ts,tsx} --format=codeframe",
+		"lint-fix": "eslint ./src/**/*.{js,jsx,ts,tsx} --format=codeframe --fix",
+		"update-deps": "npx ncu -u"
+	},
+	"sideEffects": false,
+	"license": "GPL-3.0"
+}
