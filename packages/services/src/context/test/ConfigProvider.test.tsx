@@ -2,7 +2,7 @@ import { act, render } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 import '@testing-library/jest-dom/extend-expect';
 
-import { ConfigDataProps } from '@eventespresso/config';
+import type { ConfigDataProps } from '@eventespresso/config';
 import { mockEspressoDomData } from '@eventespresso/config/src/test/data';
 import { ConfigConsumer, ConfigProvider } from '../ConfigProvider';
 import { configMocks } from './data';
