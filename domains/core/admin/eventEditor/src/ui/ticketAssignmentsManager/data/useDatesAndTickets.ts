@@ -1,4 +1,4 @@
-import { Datetime, Ticket } from '@eventespresso/constants';
+import type { Datetime, Ticket } from '@eventespresso/constants';
 import { useDatetimes, useTickets } from '@eventespresso/edtr-services';
 import { useMemoStringify } from '@eventespresso/utils';
 
