@@ -1,5 +1,5 @@
 import { TpcPriceModifier } from '../types';
-import { Price } from '@eventespresso/constants';
+import type { Price } from '@eventespresso/constants';
 import { usePriceTypeForPrice } from '@eventespresso/edtr-services';
 import { useMemo } from 'react';
 
