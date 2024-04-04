@@ -1,4 +1,5 @@
-import { Datetime, DateStatus } from '@eventespresso/constants';
+import { DateStatus } from '@eventespresso/constants';
+import type { Datetime } from '@eventespresso/constants';
 
 const dates: Datetime[] = [
 	{
