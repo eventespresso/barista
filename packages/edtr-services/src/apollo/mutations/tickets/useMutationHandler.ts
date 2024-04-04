@@ -11,7 +11,7 @@ import useOnUpdateTicket from './useOnUpdateTicket';
 import useOptimisticResponse from './useOptimisticResponse';
 import { hooks } from '../../../ioc';
 import { DEFAULT_TICKET_LIST_DATA as DEFAULT_LIST_DATA, useTicketQueryOptions } from '../../queries';
-import { TicketsList } from '../../';
+import type { TicketsList } from '../../';
 import { BOOLEAN_FIELDS, NUMERIC_FIELDS } from './constants';
 import useAffectedDatesQueries from './useAffectedDatesQueries';
 
