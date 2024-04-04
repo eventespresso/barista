@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import { isBasePrice, sortByPriceOrderIdAsc, isDefaultTax } from '@eventespresso/predicates';
-import { Price } from '@eventespresso/constants';
+import type { Price } from '@eventespresso/constants';
 import { uuid } from '@eventespresso/utils';
 
 import { TpcPriceModifier } from '../types';
