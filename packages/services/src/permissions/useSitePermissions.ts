@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { ConfigDataProps } from '@eventespresso/config';
+import type { ConfigDataProps } from '@eventespresso/config';
 
 import { useConfig } from '../context';
 
