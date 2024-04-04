@@ -29,7 +29,7 @@ jobs:
             - name: Run E2E tests
               uses: eventespresso/actions/packages/e2e-tests@main
               with:
-                  cafe_repo_branch: DEV
+                  cafe_repo_branch: NEW/CORE/datetime-status
                   barista_repo_branch: master
                   e2e_tests_repo_branch: MAIN
                   skip_tests: true
