@@ -8,7 +8,7 @@ import { PLUS_ONE_MONTH } from '@eventespresso/constants';
 import { useMemoStringify } from '@eventespresso/utils';
 import { setDefaultTime } from '@eventespresso/dates';
 import { EndDateFieldWrapper } from '@eventespresso/ee-components';
-import { EntityId } from '@eventespresso/constants';
+import type { EntityId } from '@eventespresso/constants';
 import { __ } from '@eventespresso/i18n';
 import type { Datetime } from '@eventespresso/constants';
 import type { DateFormConfig } from '@eventespresso/edtr-services';
