@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { Datetime, EntityId } from '@eventespresso/constants';
+import type { Datetime, EntityId } from '@eventespresso/constants';
 import { useLazyCacheQuery } from '@eventespresso/data';
 
 import { GET_DATETIME } from './queries';
