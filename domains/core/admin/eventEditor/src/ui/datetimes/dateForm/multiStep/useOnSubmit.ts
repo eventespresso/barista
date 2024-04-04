@@ -7,7 +7,7 @@ import {
 	useDatetimes,
 } from '@eventespresso/edtr-services';
 import { getHighestOrder } from '@eventespresso/predicates';
-import type { EntityId } from '@eventespresso/constants'
+import type { EntityId } from '@eventespresso/constants';
 import { isInfinite, wait } from '@eventespresso/utils';
 
 import { OnSubmit } from './types';

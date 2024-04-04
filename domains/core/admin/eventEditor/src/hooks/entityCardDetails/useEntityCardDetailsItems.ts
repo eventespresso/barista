@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import type { EntityId } from '@eventespresso/constants'
+import type { EntityId } from '@eventespresso/constants';
 import { EntityCardDetailsSubscription, EntityCardDetailsRegistry } from '@eventespresso/registry';
 import { domain } from '@eventespresso/edtr-services';
 import { useMemoStringify } from '@eventespresso/utils';

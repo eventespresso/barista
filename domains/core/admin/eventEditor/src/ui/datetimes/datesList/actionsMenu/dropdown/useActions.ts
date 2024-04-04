@@ -4,7 +4,7 @@ import * as R from 'ramda';
 import { isTrashed } from '@eventespresso/predicates';
 import { useDatetimeItem, useDatetimeMutator, useDeleteRelatedTickets, useEventId } from '@eventespresso/edtr-services';
 import { useRelations } from '@eventespresso/services';
-import type { EntityId } from '@eventespresso/constants'
+import type { EntityId } from '@eventespresso/constants';
 
 type Actions = {
 	copyDate: VoidFunction;

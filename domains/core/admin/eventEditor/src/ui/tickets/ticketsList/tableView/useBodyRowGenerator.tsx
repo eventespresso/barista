@@ -10,14 +10,15 @@ import { ENTITY_LIST_DATE_TIME_FORMAT } from '@eventespresso/constants';
 import { useFeature, useTimeZoneTime } from '@eventespresso/services';
 import { getTicketBackgroundColorClassName, ticketStatus } from '@eventespresso/helpers';
 import { findEntityByGuid } from '@eventespresso/predicates';
-import type { EntityId } from '@eventespresso/constants'
+import TicketActionsMenu from '@edtrUI/tickets/ticketsList/actionsMenu/TicketActionsMenu';
+
+import type { EntityId } from '@eventespresso/constants';
 import type { BodyRowGeneratorFn } from '@eventespresso/ee-components';
 import type { TicketsFilterStateManager } from '@eventespresso/edtr-services';
 
-import TicketActionsMenu from '@edtrUI/tickets/ticketsList/actionsMenu/TicketActionsMenu';
-import TicketQuantity from '../cardView/TicketQuantity';
 import { EditableName } from '../editable';
 import { TicketRegistrationsLink } from '../TicketRegistrationsLink';
+import TicketQuantity from '../cardView/TicketQuantity';
 import Checkbox from './Checkbox';
 
 type TicketsTableBodyRowGen = BodyRowGeneratorFn<TicketsFilterStateManager>;

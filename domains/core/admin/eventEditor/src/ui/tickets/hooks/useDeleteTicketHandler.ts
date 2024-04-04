@@ -1,13 +1,12 @@
 import { useCallback } from 'react';
 import * as R from 'ramda';
 
-import { useTicketPrices } from '@eventespresso/edtr-services';
-import type { EntityId } from '@eventespresso/constants'
-import { useTicketMutator } from '@eventespresso/edtr-services';
+import { usePriceQueryOptions, useTicketPrices, useTicketMutator } from '@eventespresso/edtr-services';
 import { getGuids, entitiesWithGuIdNotInArray } from '@eventespresso/predicates';
-import { usePriceQueryOptions } from '@eventespresso/edtr-services';
-import type { PricesList } from '@eventespresso/edtr-services';
 import { useApolloClient } from '@eventespresso/data';
+
+import type { EntityId } from '@eventespresso/constants';
+import type { PricesList } from '@eventespresso/edtr-services';
 
 type Callback = (deletePermanently?: boolean) => Promise<void>;
 
