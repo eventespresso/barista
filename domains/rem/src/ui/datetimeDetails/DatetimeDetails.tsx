@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Datetime } from '@eventespresso/constants';
+import type { Datetime } from '@eventespresso/constants';
 import { useDatetimes } from '@eventespresso/edtr-services';
 import { FormWithConfig } from '@eventespresso/ee-components';
 import { EntityTemplate } from '@eventespresso/ui-components';
