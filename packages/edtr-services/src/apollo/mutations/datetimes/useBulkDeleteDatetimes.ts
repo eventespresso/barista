@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import type { ExecutionResult } from 'graphql';
 
-import { EntityId, Datetime } from '@eventespresso/constants';
+import type { EntityId, Datetime } from '@eventespresso/constants';
 import { useApolloClient } from '@eventespresso/data';
 import { entitiesWithGuIdNotInArray, findEntityByGuid } from '@eventespresso/predicates';
 
