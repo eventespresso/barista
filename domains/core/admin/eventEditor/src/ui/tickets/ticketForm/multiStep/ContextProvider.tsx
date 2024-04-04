@@ -1,14 +1,14 @@
 import { useCallback } from 'react';
 
 import { useFormValues } from '@eventespresso/form';
-import { TicketFormShape, useTicketItem, useTicketPrices } from '@eventespresso/edtr-services';
+import { useTicketItem, useTicketPrices } from '@eventespresso/edtr-services';
 import { useMemoStringify } from '@eventespresso/utils';
 import { ContextProvider as TPCContextProvider, usePriceToTpcModifier, preparePricesForTpc } from '@eventespresso/tpc';
 import { ContextProvider as TAMContextProvider } from '@edtrUI/ticketAssignmentsManager/context';
-
 import Modal from './Modal';
 
 import type { Ticket } from '@eventespresso/constants';
+import type { TicketFormShape } from '@eventespresso/edtr-services';
 import type { ContentWrapperProps } from './types';
 
 const ContextProvider: React.FC<ContentWrapperProps> = (props) => {
