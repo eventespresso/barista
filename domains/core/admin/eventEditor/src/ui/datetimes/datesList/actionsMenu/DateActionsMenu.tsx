@@ -1,5 +1,5 @@
 import { EntityActionsMenu } from '@eventespresso/ui-components';
-import { Datetime } from '@eventespresso/constants';
+import type { Datetime } from '@eventespresso/constants';
 import type { ActionsMenuComponentProps } from '@eventespresso/registry';
 
 import useDatesActionMenuItems from '../../hooks/useDatesActionMenuItems';
