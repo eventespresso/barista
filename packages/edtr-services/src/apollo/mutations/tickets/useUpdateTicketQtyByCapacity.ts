@@ -2,7 +2,7 @@ import { useCallback, useMemo } from 'react';
 
 import { parseInfinity, isInfinite } from '@eventespresso/utils';
 import { entitiesWithGuIdInArray, uniqTicketsByMinQty, ticketQuantityFromCapacity } from '@eventespresso/predicates';
-import type { EntityId } from '@eventespresso/constants';
+import type { Datetime, EntityId } from '@eventespresso/constants';
 import { useSystemNotifications } from '@eventespresso/toaster';
 import { __ } from '@eventespresso/i18n';
 
@@ -10,7 +10,6 @@ import { useTickets, useRelatedTickets } from '../../queries';
 import useBulkEditTickets from './useBulkEditTickets';
 
 import type { UpdateTicketInput } from './types';
-import type { Datetime } from '../../types';
 
 type UpdateTicketQtyByCapacity = {
 	/**

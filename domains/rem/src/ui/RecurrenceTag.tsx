@@ -3,7 +3,7 @@ import { Tag } from '@eventespresso/ui-components';
 import { Repeat } from '@eventespresso/icons';
 import { getRuleTextWithStartingDate } from '@eventespresso/rrule-generator';
 
-import type { EntityId } from '@eventespresso/constants'
+import type { EntityId } from '@eventespresso/constants';
 import { useDateRecurrence } from '../services/apollo';
 
 type RecurrenceTagProps = {

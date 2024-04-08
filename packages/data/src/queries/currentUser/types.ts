@@ -1,6 +1,10 @@
-import type { User } from '@eventespresso/constants';
+import type { User as _User } from '@eventespresso/constants';
 import type { EntityQueryArgs } from '../types';
 import type { EntityEdge } from '../../types';
+
+export interface User extends _User {
+	__typename?: 'User';
+}
 
 export interface Viewer {
 	viewer: User;

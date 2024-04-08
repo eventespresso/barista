@@ -3,8 +3,8 @@ import { useCallback } from 'react';
 import { MutationType, MutationInput } from '@eventespresso/data';
 import { ucFirst, removeNullAndUndefined, uuid } from '@eventespresso/utils';
 
-import type { Event } from '../../types';
 import { useEvent } from '../../queries';
+import type { Event } from '@eventespresso/constants';
 
 export const EVENT_DEFAULTS: Event = {
 	id: '',

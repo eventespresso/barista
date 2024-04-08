@@ -1,4 +1,5 @@
-import type { UpdateTicketInput, Ticket } from '@eventespresso/edtr-services';
+import type { Ticket } from '@eventespresso/constants';
+import type { UpdateTicketInput } from '@eventespresso/edtr-services';
 
 export const TICKET_INPUT_FIELDS: Array<keyof UpdateTicketInput> = [
 	'datetimes',

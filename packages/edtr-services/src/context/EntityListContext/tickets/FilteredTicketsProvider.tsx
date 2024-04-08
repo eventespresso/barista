@@ -2,7 +2,7 @@ import { createContext, useEffect } from 'react';
 
 import { getGuids } from '@eventespresso/predicates';
 import { useFilteredEntities } from '@eventespresso/services';
-import type { EntityId } from '@eventespresso/constants'
+import type { EntityId } from '@eventespresso/constants';
 import { useMemoStringify } from '@eventespresso/utils';
 
 import { useTicketsListFilterState } from '../../../filterState';

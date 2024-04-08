@@ -37,7 +37,6 @@ export const TICKET_DEFAULTS: Ticket = {
 	uses: -1,
 	visibility: 'PUBLIC',
 	__typename: 'EspressoTicket',
-
 };
 
 type OptimisticResCb = (mutationType: MutationType, input: MutationInput) => any;

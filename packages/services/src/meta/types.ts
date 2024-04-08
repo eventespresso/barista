@@ -1,4 +1,4 @@
-import type { EntityId } from '@eventespresso/constants'
+import type { EntityId } from '@eventespresso/constants';
 
 /**
  * It's an object with key as entity GUID

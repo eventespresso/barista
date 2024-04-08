@@ -1,4 +1,4 @@
-import type { EntityId } from '@eventespresso/constants'
+import type { EntityId } from '@eventespresso/constants';
 import type { Recurrence } from '../../types';
 
 export interface RecurrenceBaseInput {

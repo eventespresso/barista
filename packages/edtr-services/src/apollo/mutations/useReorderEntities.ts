@@ -6,7 +6,8 @@ import { __ } from '@eventespresso/i18n';
 import { gql, useMutation } from '@eventespresso/data';
 import { useSystemNotifications } from '@eventespresso/toaster';
 import { getGuids } from '@eventespresso/predicates';
-import type { Datetime, EntityId, Ticket } from '@eventespresso/constants';
+
+import type { EntityId, Datetime, Ticket } from '@eventespresso/constants';
 
 type Entity = Datetime | Ticket;
 

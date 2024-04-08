@@ -1,7 +1,6 @@
 import type { Datetime, EntityId } from '@eventespresso/constants';
-import { BulkUpdateInput } from '../types';
-
 import type { MutationFunction } from '@eventespresso/data';
+import type { BulkUpdateInput } from '../types';
 
 export interface DatetimeBaseInput {
 	capacity?: number;

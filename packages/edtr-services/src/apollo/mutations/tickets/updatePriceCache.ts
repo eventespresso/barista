@@ -2,9 +2,10 @@ import { assocPath, pathOr, uniqBy, sortBy, identity } from 'ramda';
 
 import type { CacheUpdaterFnArgs } from '../types';
 import { DEFAULT_PRICE_LIST_DATA, GET_PRICES } from '../../queries';
-import type { Price, PricesList } from '../../types';
+import type { PricesList } from '../../types';
 import type { CacheQueryOptions, WriteQueryOptions } from '@eventespresso/data';
 import { entityDbId } from '@eventespresso/predicates';
+import type { Price } from '@eventespresso/constants';
 
 const updatePriceCache = ({ cache, prices = null, ticketIn, ticketId, action }: CacheUpdaterFnArgs): void => {
 	const queryOptions: CacheQueryOptions = {

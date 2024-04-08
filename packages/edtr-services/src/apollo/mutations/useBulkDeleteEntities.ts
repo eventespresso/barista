@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useMutationWithFeedback, gql, MutationType } from '@eventespresso/data';
 import type { ExecutionResult } from 'graphql';
 
-import type { EntityId } from '@eventespresso/constants'
+import type { EntityId } from '@eventespresso/constants';
 
 interface BulkDeleteEntitiesProps {
 	entityType: 'DATETIME' | 'TICKET' | 'PRICE';

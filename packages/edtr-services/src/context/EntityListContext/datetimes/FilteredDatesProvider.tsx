@@ -3,7 +3,7 @@ import { createContext, useEffect } from 'react';
 import { useFilteredEntities } from '@eventespresso/services';
 import { getGuids } from '@eventespresso/predicates';
 import { useMemoStringify } from '@eventespresso/utils';
-import type { EntityId } from '@eventespresso/constants'
+import type { EntityId } from '@eventespresso/constants';
 
 import { useDatesListFilterState } from '../../../filterState';
 import { domain, datesList } from '../../../constants';

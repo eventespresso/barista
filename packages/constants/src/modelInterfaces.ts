@@ -7,6 +7,7 @@ import type {
 } from '@eventespresso/data';
 
 export interface Event extends Entity {
+	__typename: 'EspressoEvent';
 	allowDonations: boolean;
 	allowOverflow: boolean;
 	altRegPage: string;
@@ -85,6 +86,7 @@ export type DatetimeEdge<Connection = 'EspressoRootQueryDatetimesConnection'> = 
 export type DatetimesList = DatetimeList<DatetimeEdge>;
 
 export interface Price extends Entity, Trashable {
+	__typename: 'EspressoPrice';
 	amount: number;
 	description: string;
 	isBasePrice: boolean;
@@ -106,6 +108,7 @@ export interface PricesList {
 export type TicketVisibility = 'ADMINS_ONLY' | 'ADMIN_UI_ONLY' | 'MEMBERS_ONLY' | 'NONE' | 'PUBLIC';
 
 export interface Ticket extends Entity, Trashable {
+	__typename: 'EspressoTicket';
 	description: string;
 	endDate: string; // ISO string
 	isDefault: boolean;
@@ -148,6 +151,7 @@ export enum PriceBasetype {
 }
 
 export interface PriceType extends Entity, Trashable {
+	__typename: 'EspressoPriceType';
 	baseType: PriceBasetype;
 	isBasePrice: boolean;
 	isDiscount: boolean;
@@ -164,6 +168,7 @@ export interface PriceTypesList {
 }
 
 export interface Venue extends Entity, Address {
+	__typename: 'EspressoVenue';
 	capacity: number;
 	description: string;
 	googleMapLink: string;
@@ -209,7 +214,7 @@ export interface User {
 	nickname: string;
 	roles?: Array<string>;
 	username: string;
-	__typename?: string;
+	__typename?: 'User';
 }
 
 export interface Address {

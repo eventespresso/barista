@@ -14,7 +14,7 @@ import { UpdateDatetimeInput } from '../..';
 import { UpdateTicketInput } from './tickets';
 
 import type { AnyObject } from '@eventespresso/utils';
-import type { Datetime, EntityId, Ticket, Price } from '@eventespresso/constants';
+import type { Datetime, EntityId, Price, Ticket } from '@eventespresso/constants';
 
 export const formToBulkUpdateInput = <
 	T extends BulkEditFormBaseShape,

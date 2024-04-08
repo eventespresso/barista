@@ -65,7 +65,6 @@ export interface LocaleTimezoneDomData {
 	offset: number;
 }
 
-
 export type JsDataProps = {
 	brandName: string;
 	currency_config: CurrencyProps;

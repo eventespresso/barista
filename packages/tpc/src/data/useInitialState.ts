@@ -18,6 +18,7 @@ const useInitialState = ({ getTicket, getTicketPrices, ticketId }: BaseProps): S
 	// get the full ticket object
 	const wholeTicket = getTicket(ticketId);
 
+	// @ts-ignore LATER: seems like a BIG type mismatch... :/
 	const isDisabled = hooks.applyFilters('tpc.ticket.isDisabled', isLocked(wholeTicket || {}), wholeTicket);
 
 	const ticket = useMemoStringify(wholeTicket ? pick(TICKET_FIELDS_TO_USE, wholeTicket) : {});

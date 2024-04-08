@@ -2,8 +2,7 @@ import { GraphQLError } from 'graphql';
 
 import { GET_CURRENT_USER } from '..';
 
-import type { User } from '@eventespresso/constants';
-import type { Viewer } from '../types';
+import type { User, Viewer } from '../types';
 import type { CacheQueryOptions } from '../../types';
 
 export const request: CacheQueryOptions = {

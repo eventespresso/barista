@@ -3,7 +3,7 @@ import { parseISO } from 'date-fns';
 
 import { useProgress } from '@eventespresso/hooks';
 import { useLazyDatetime, useDatetimes, useCappedQuantity } from '@eventespresso/edtr-services';
-import type { EntityId } from '@eventespresso/constants'
+import type { EntityId } from '@eventespresso/constants';
 import { minDateCapacity } from '@eventespresso/predicates';
 import { isInfinite, parseInfinity } from '@eventespresso/utils';
 import { useSystemNotifications } from '@eventespresso/toaster';

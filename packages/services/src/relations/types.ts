@@ -1,4 +1,4 @@
-import type { EntityId } from '@eventespresso/constants'
+import type { EntityId } from '@eventespresso/constants';
 
 export type RelationEntity = 'datetimes' | 'tickets' | 'prices' | 'priceTypes' | 'recurrences';
 

@@ -1,4 +1,4 @@
-import type { EntityId } from '@eventespresso/constants'
+import type { EntityId } from '@eventespresso/constants';
 
 /**
  * converts a GUID like "RGF0ZXRpbWU6NQ==" into "U6NQ=="

@@ -6,7 +6,8 @@ import { entityHasGuid } from '@eventespresso/predicates';
 
 import { useTicketQueryOptions } from '../../queries';
 import type { CacheUpdaterFn, CacheUpdaterFnArgs } from '../types';
-import { Ticket, TicketsList } from '../../';
+import { TicketsList } from '../..';
+import type { Ticket } from '@eventespresso/constants';
 
 const useUpdateTicketCache = (): CacheUpdaterFn => {
 	const queryOptions = useTicketQueryOptions();

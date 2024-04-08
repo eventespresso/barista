@@ -1,7 +1,8 @@
 import { GraphQLError } from 'graphql';
 
-import type { Event } from '../../../types';
 import { CacheQueryOptions } from '@eventespresso/data';
+
+import type { Event } from '@eventespresso/constants';
 
 export const request: CacheQueryOptions = null; // to be generated via Query Options hook
 

@@ -1,4 +1,4 @@
-import type { EntityId } from '@eventespresso/constants'
+import type { EntityId } from '@eventespresso/constants';
 import type { FormSection, FormElement } from '../types';
 
 export interface FormSectionBaseInput extends Omit<FormSection, 'id'> {
