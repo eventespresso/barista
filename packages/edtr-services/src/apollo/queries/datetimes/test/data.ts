@@ -4,7 +4,7 @@ import { formatISO } from 'date-fns';
 import type { Datetime } from '@eventespresso/constants';
 import { DateStatus } from '@eventespresso/constants';
 import { CacheQueryOptions } from '@eventespresso/data';
-import { DatetimeEdge } from '../../../types';
+import type { DatetimeEdge } from '../../../types';
 
 export const request: CacheQueryOptions = null; // to be generated via Query Options hook
 
