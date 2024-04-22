@@ -59,7 +59,7 @@ jobs:
                   yarn build:core
 
             - name: Copy EE Core Changes to Cafe Repo
-              run: source tools/copy-changes.sh "plugins/event-espresso-core/assets" "plugins/event-espresso-core/languages" "build"
+              run: source tools/copy-changes.sh "plugins/event-espresso-core/assets" "plugins/event-espresso-core/languages"
 
             # Build REM domain without packages
             # because core will load/register the packages

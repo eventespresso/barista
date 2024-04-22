@@ -9,7 +9,8 @@
 # | 4 | REPO_DIR            | path to target repository                   | cafe                      |
 # | 5 | REMOVE_JS_I18N_FILE | delete JS pot file from source?  			  | yes                       |
 # | 6 | DEPLOY_ASSETS       | copy build files to target assets folder    | yes                       |
-# | 6 | DEPLOY_I18N         | copy i18n files to target translation files | yes                       |
+# | 7 | DEPLOY_I18N         | copy i18n files to target translation files | yes                       |
+# | 8 | BASE_DIR            | path to target repo root folder             |                           |
 # | - | ------------------- | ------------------------------------------- | ------------------------- |
 
 set -e
@@ -19,7 +20,6 @@ CYAN='\033[0;36m'
 RED='\033[0;31m'
 RESET='\033[0m'
 
-BASE_DIR=$(dirname "$GITHUB_WORKSPACE")
 
 # Default path to assets folder (on target repo)
 ASSETS_PATH="${1:-assets}"
@@ -36,6 +36,11 @@ REPO_DIR=${4:-cafe}
 REMOVE_JS_I18N_FILE=${5:-yes}
 DEPLOY_ASSETS=${6:-yes}
 DEPLOY_I18N=${7:-yes}
+BASE_DIR=$8
+
+if [[ -z "$BASE_DIR" ]]; then
+	BASE_DIR=$(dirname "$GITHUB_WORKSPACE")
+fi
 
 if [[ -z "$REPO_DIR" ]]; then
 	printf "\n%b REPO_DIR is undefined%b\n" "$RED" "$RESET"
@@ -55,16 +60,17 @@ if [[ -z "$BUILD_PATH" ]]; then
 fi
 
 # now modify paths relative to the base and/or repo directory
-BUILD_PATH="${GITHUB_WORKSPACE:?}/$BUILD_PATH"
+BUILD_PATH="${BASE_DIR:?}/$BUILD_PATH"
 REPO_DIR="${BASE_DIR:?}/$REPO_DIR"
 ASSETS_PATH="$REPO_DIR/$ASSETS_PATH"
 I18N_PATH="$REPO_DIR/$I18N_PATH"
 
 printf "\n%b" "$CYAN"
+printf "\BASE_DIR    : %s" "$BASE_DIR"
 printf "\nBUILD_PATH : %s" "$BUILD_PATH"
 printf "\nREPO_DIR   : %s" "$REPO_DIR"
 printf "\nASSETS_PATH: %s" "$ASSETS_PATH"
-printf "\nI18N_PATH: %s" "$I18N_PATH"
+printf "\nI18N_PATH  : %s" "$I18N_PATH"
 printf "%b" "$RESET"
 
 # printf "\n%bchanging directory: %s%b" "$CYAN" "$REPO_DIR" "$RESET"
