@@ -1,15 +1,28 @@
 import type { DateTimeFormatsProps } from './types';
 import { defaultDateFormat, defaultTimeFormat } from './defaultDateTimeFormats';
 
-export const DateTimeFormats = (formats: DateTimeFormatsProps): DateTimeFormatsProps => {
-	const maybeDefault = {
-		dateFormat: formats?.dateFormat || defaultDateFormat,
-		timeFormat: formats?.timeFormat || defaultTimeFormat,
-		dateTimeFormat: '',
+export const DateTimeFormats = (formats?: Partial<Data.Part>): Data.Type => {
+	const props: Data.Part = {
+		...defaultFormat,
+		...formats,
 	};
 
+	const dateTimeFormat = props.dateFormat + ' ' + props.timeFormat;
+
 	return {
-		...maybeDefault,
-		dateTimeFormat: maybeDefault.dateFormat + ' ' + maybeDefault.timeFormat,
+		...props,
+		dateTimeFormat,
 	};
 };
+
+module Data {
+	export type Type = DateTimeFormatsProps;
+	export type Part = Omit<Type, 'dateTimeFormat'>;
+}
+
+const defaultFormat: Data.Part = {
+	dateFormat: defaultDateFormat,
+	timeFormat: defaultTimeFormat,
+};
+
+DateTimeFormats({ dateFormat: 'string' });
