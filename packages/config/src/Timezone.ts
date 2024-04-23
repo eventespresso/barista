@@ -1,9 +1,14 @@
 import type { TimezoneProps } from './types';
 
-export const Timezone = ({ city, name, offset }: TimezoneProps): TimezoneProps => {
+export const Timezone = (props?: Partial<TimezoneProps>): TimezoneProps => {
 	return {
-		city: city || 'UTC',
-		name: name || 'UTC',
-		offset: offset || 0,
+		...defaultTimezone,
+		...props,
 	};
+};
+
+const defaultTimezone: TimezoneProps = {
+	city: 'UTC',
+	name: 'UTC',
+	offset: 0,
 };
