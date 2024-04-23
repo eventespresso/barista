@@ -120,10 +120,10 @@ export interface CurrencyProps {
 }
 
 export interface GeneralSettingsData {
-	generalSettings: GeneralSettings;
+	generalSettings: GeneralSettingsProps;
 }
 
-export interface GeneralSettings {
+export interface GeneralSettingsProps {
 	dateFormat: string;
 	timeFormat: string;
 	timezone: string;

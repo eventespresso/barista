@@ -1,6 +1,6 @@
 import type { OptionsType } from '@eventespresso/adapters';
 import type { Event, EventManager, User } from '@eventespresso/constants';
-import type { GeneralSettings } from '@eventespresso/config';
+import type { GeneralSettingsProps } from '@eventespresso/config';
 import type { RelationalData } from '@eventespresso/services';
 import type { FormSectionRaw, FormElementRaw } from '@eventespresso/form-builder';
 import type { DatetimeEdge, TicketEdge, PriceEdge, PriceTypeEdge, VenueEdge } from './apollo';
@@ -31,7 +31,7 @@ export interface EventEditorData {
 export interface EditorData {
 	eventEditor: EventEditorData;
 	currentUser?: User;
-	generalSettings?: GeneralSettings;
+	generalSettings?: GeneralSettingsProps;
 }
 
 export interface EventEditorDomData {

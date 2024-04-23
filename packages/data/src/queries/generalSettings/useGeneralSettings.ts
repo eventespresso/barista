@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import type { GeneralSettings, GeneralSettingsData } from '@eventespresso/config';
+import type { GeneralSettingsProps, GeneralSettingsData } from '@eventespresso/config';
 
 import useGeneralSettingsQueryOptions from './useGeneralSettingsQueryOptions';
 import { useCacheQuery } from '../';
@@ -8,7 +8,7 @@ import { useCacheQuery } from '../';
 /**
  * A custom react hook for retrieving GeneralSettings
  */
-const useGeneralSettings = (): GeneralSettings => {
+const useGeneralSettings = (): GeneralSettingsProps => {
 	const options = useGeneralSettingsQueryOptions();
 	const { data } = useCacheQuery<GeneralSettingsData>(options);
 
