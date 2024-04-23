@@ -1,10 +1,22 @@
 import type { LocaleProps } from './types';
 
-export const Locale = ({ user, site }: LocaleProps): LocaleProps => {
-	const userLocale = user?.replace('_', '-') || 'en-US';
-	const siteLocale = site?.replace('_', '-') || 'en-US';
+export const Locale = (props?: Partial<LocaleProps>): LocaleProps => {
 	return {
-		user: userLocale,
-		site: siteLocale,
+		site: siteLocale(props?.site),
+		user: userLocale(props?.user),
 	};
 };
+
+function siteLocale(prop?: LocaleProps['site']): LocaleProps['site'] {
+	if (prop) return replace(prop);
+	return 'en-US'; // default
+}
+
+function userLocale(prop?: LocaleProps['user']): LocaleProps['user'] {
+	if (prop) return replace(prop);
+	return 'en-US'; // default
+}
+
+function replace(input: string): string {
+	return input.replace('_', '-');
+}
