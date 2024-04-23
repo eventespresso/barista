@@ -1,8 +1,13 @@
 import type { SiteUrlProps } from './types';
 
-export const SiteUrl = ({ admin, home }: SiteUrlProps): SiteUrlProps => {
+export const SiteUrl = (props?: Partial<SiteUrlProps>): SiteUrlProps => {
 	return {
-		admin: admin || '',
-		home: home || '',
+		...defaultUrl,
+		...props,
 	};
+};
+
+const defaultUrl: SiteUrlProps = {
+	admin: '',
+	home: '',
 };
