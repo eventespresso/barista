@@ -21,7 +21,7 @@ export type ApiDomData = {
 export type ConfigDomData = {
 	coreDomain: CoreDomainDomData;
 	currentUser: User;
-	generalSettings: GeneralSettings;
+	generalSettings: GeneralSettingsProps;
 	locale: LocaleDomData;
 	siteCurrency: CurrencyProps;
 	sitePermissions: Array<Capability>;
@@ -55,8 +55,8 @@ export type I18nData = {
 
 export interface LocaleDomData {
 	user: string;
-	siteTimezone: LocaleTimezoneDomData;
 	site: string;
+	siteTimezone: LocaleTimezoneDomData | {};
 }
 
 export interface LocaleTimezoneDomData {
@@ -95,15 +95,15 @@ type Capability = string;
 export type ConfigDataProps = {
 	brandName: string;
 	currency: CurrencyProps;
-	currentUser: User;
+	currentUser: User | undefined;
 	dateTimeFormats: DateTimeFormatsProps;
-	generalSettings: GeneralSettings;
-	locale: LocaleProps;
+	generalSettings: GeneralSettingsProps;
+	locale: LocaleDomData;
 	nonce: string;
 	/* Permission for the whole site */
 	sitePermissions?: Array<Capability>;
 	siteUrl: SiteUrlProps;
-	timezone: TimezoneProps;
+	timezone: TimezoneProps | {};
 	wp_debug: boolean;
 };
 
@@ -132,7 +132,7 @@ export interface GeneralSettingsProps {
 export interface DateTimeFormatsProps {
 	dateFormat: string;
 	timeFormat: string;
-	dateTimeFormat?: string;
+	dateTimeFormat: string;
 }
 
 export interface LocaleProps {
