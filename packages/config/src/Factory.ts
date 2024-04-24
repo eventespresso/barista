@@ -3,7 +3,10 @@ import type { EventEspressoData } from 'types';
 import { ConfigDataProps as Data, Currency, DateTimeFormats, Locale, SiteUrls, Timezone, GeneralSettings } from '.';
 
 export class Factory {
-	public static make(): Factory {
+	/**
+	 * Initialize the factory
+	 */
+	public static init(): Factory {
 		const config = window.eventEspressoData?.config ?? undefined;
 		const api = window.eventEspressoData?.api ?? undefined;
 		return new Factory(config, api);
@@ -11,6 +14,9 @@ export class Factory {
 
 	constructor(private readonly config: Config, private readonly api: API) {}
 
+	/**
+	 * Create EventEspresso config merging default values with properties of `window.eventEspressoData.config` and `window.eventEspressoData.api`
+	 */
 	public make(): Data {
 		const data: Data = {
 			brandName: this.brandName,
