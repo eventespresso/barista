@@ -1,4 +1,9 @@
 {
 	"extends": "../../tsconfig.json",
-	"include": ["src"]
+	"include": ["src"],
+	"compilerOptions": {
+		"strict": true,
+		"exactOptionalPropertyTypes": true,
+		"forceConsistentCasingInFileNames": true
+	}
 }
