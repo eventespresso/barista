@@ -1,5 +1,4 @@
 import type { DateTimeFormatsProps } from './types';
-import { defaultDateFormat, defaultTimeFormat } from './defaultDateTimeFormats';
 
 export const DateTimeFormats = (formats?: Partial<Data.Part>): Data.Type => {
 	const props: Data.Part = {
@@ -21,8 +20,8 @@ module Data {
 }
 
 const defaultFormat: Data.Part = {
-	dateFormat: defaultDateFormat,
-	timeFormat: defaultTimeFormat,
+	dateFormat: 'YYYY-MM-DD',
+	timeFormat: 'HH:mm:ss',
 };
 
 DateTimeFormats({ dateFormat: 'string' });
