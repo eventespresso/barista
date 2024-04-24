@@ -1,6 +1,6 @@
 import type { SiteUrlProps } from './types';
 
-export const SiteUrl = (props?: Partial<SiteUrlProps>): SiteUrlProps => {
+export const SiteUrls = (props?: Partial<SiteUrlProps>): SiteUrlProps => {
 	return {
 		...defaultUrl,
 		...props,

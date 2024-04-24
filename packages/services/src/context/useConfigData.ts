@@ -5,8 +5,8 @@ import {
 	Currency,
 	DateTimeFormats,
 	Locale,
-	LocaleProps,
-	SiteUrl,
+	JsDataProps,
+	SiteUrls,
 	Timezone,
 } from '@eventespresso/config';
 
@@ -28,10 +28,10 @@ export const useConfigData = () => {
 				site: config?.locale?.site || '',
 				siteTimezone: config?.locale?.siteTimezone || {},
 				user: config?.locale?.user || '',
-			} as LocaleProps),
+			} as JsDataProps['locale']),
 			nonce: api?.restApiNonce || '',
 			sitePermissions: config?.sitePermissions || [],
-			siteUrl: SiteUrl({
+			siteUrl: SiteUrls({
 				admin: config?.siteUrls?.admin || '',
 				home: config?.siteUrls?.home || '',
 			}),

@@ -24,7 +24,7 @@ export type ConfigDomData = {
 	generalSettings: GeneralSettingsProps;
 	locale: LocaleDomData;
 	siteCurrency: CurrencyProps;
-	sitePermissions: Array<Capability>;
+	sitePermissions: Capability[];
 	siteUrls: SiteUrlProps;
 	wp_debug: boolean;
 };
@@ -56,7 +56,7 @@ export type I18nData = {
 export interface LocaleDomData {
 	user: string;
 	site: string;
-	siteTimezone: LocaleTimezoneDomData | {};
+	siteTimezone: LocaleTimezoneDomData;
 }
 
 export interface LocaleTimezoneDomData {
@@ -69,25 +69,19 @@ export type JsDataProps = {
 	brandName: string;
 	currency_config: CurrencyProps;
 	eejs_api_nonce: string;
-	locale: JsDataLocaleProps;
-	paths: JsDataPathsProps;
-	default_timezone: JsDataTimezoneProps;
-};
-
-type JsDataLocaleProps = {
-	user: string;
-	site: string;
-};
-
-type JsDataPathsProps = {
-	admin_url: string;
-	site_url: string;
-};
-
-type JsDataTimezoneProps = {
-	pretty: string;
-	string: string;
-	offset: number;
+	locale: {
+		user: string;
+		site: string;
+	};
+	paths: {
+		admin_url: string;
+		site_url: string;
+	};
+	default_timezone: {
+		pretty: string;
+		string: string;
+		offset: number;
+	};
 };
 
 type Capability = string;
@@ -101,7 +95,7 @@ export type ConfigDataProps = {
 	locale: LocaleDomData;
 	nonce: string;
 	/* Permission for the whole site */
-	sitePermissions?: Array<Capability>;
+	sitePermissions: Capability[];
 	siteUrl: SiteUrlProps;
 	timezone: TimezoneProps | {};
 	wp_debug: boolean;
@@ -123,21 +117,17 @@ export interface GeneralSettingsData {
 	generalSettings: GeneralSettingsProps;
 }
 
-export interface GeneralSettingsProps {
+interface DateTimeFormat {
 	dateFormat: string;
 	timeFormat: string;
+}
+
+export interface GeneralSettingsProps extends DateTimeFormat {
 	timezone: string;
 }
 
-export interface DateTimeFormatsProps {
-	dateFormat: string;
-	timeFormat: string;
+export interface DateTimeFormatsProps extends DateTimeFormat {
 	dateTimeFormat: string;
-}
-
-export interface LocaleProps {
-	user: string;
-	site: string;
 }
 
 export interface SiteUrlProps {

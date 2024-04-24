@@ -1,15 +1,6 @@
 import type { EventEspressoData } from 'types';
 
-import {
-	ConfigDataProps as Data,
-	Currency,
-	DateTimeFormats,
-	Locale,
-	SiteUrl,
-	Timezone,
-	TimezoneProps,
-	GeneralSettings,
-} from '.';
+import { ConfigDataProps as Data, Currency, DateTimeFormats, Locale, SiteUrls, Timezone, GeneralSettings } from '.';
 
 export class Factory {
 	public static make(): Factory {
@@ -29,14 +20,11 @@ export class Factory {
 			dateTimeFormats: this.dateTimeFormats,
 			locale: this.locale,
 			nonce: this.nonce,
+			sitePermissions: this.sitePermissions,
 			siteUrl: this.siteUrl,
 			timezone: this.timezone,
 			wp_debug: this.wp_debug,
 		};
-
-		if (true) {
-			// 'TODO: site permissions'
-		}
 
 		return data;
 	}
@@ -69,7 +57,7 @@ export class Factory {
 	}
 
 	private get locale(): Data['locale'] {
-		throw new Error('TODO:');
+		return Locale(this.config?.locale);
 	}
 
 	private get nonce(): Data['nonce'] {
@@ -77,19 +65,19 @@ export class Factory {
 	}
 
 	private get sitePermissions(): Data['sitePermissions'] {
-		throw new Error('TODO:');
+		return this.config?.sitePermissions ?? [];
 	}
 
 	private get siteUrl(): Data['siteUrl'] {
-		throw new Error('TODO:');
+		return SiteUrls(this.config?.siteUrls);
 	}
 
 	private get timezone(): Data['timezone'] {
-		throw new Error('TODO:');
+		return Timezone(this.config?.locale.siteTimezone);
 	}
 
 	private get wp_debug(): Data['wp_debug'] {
-		throw new Error('TODO:');
+		return this.config?.wp_debug ?? false;
 	}
 }
 

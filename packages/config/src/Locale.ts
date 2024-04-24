@@ -1,18 +1,19 @@
-import type { LocaleProps } from './types';
+import { LocaleDomData, Timezone } from '.';
 
-export const Locale = (props?: Partial<LocaleProps>): LocaleProps => {
+export const Locale = (props?: Partial<LocaleDomData>): LocaleDomData => {
 	return {
 		site: siteLocale(props?.site),
 		user: userLocale(props?.user),
+		siteTimezone: Timezone(props?.siteTimezone),
 	};
 };
 
-function siteLocale(prop?: LocaleProps['site']): LocaleProps['site'] {
+function siteLocale(prop?: LocaleDomData['site']): LocaleDomData['site'] {
 	if (prop) return replace(prop);
 	return 'en-US'; // default
 }
 
-function userLocale(prop?: LocaleProps['user']): LocaleProps['user'] {
+function userLocale(prop?: LocaleDomData['user']): LocaleDomData['user'] {
 	if (prop) return replace(prop);
 	return 'en-US'; // default
 }
