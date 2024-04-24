@@ -1,8 +1,10 @@
 import { createContext, useMemo } from 'react';
 
-import { DateTimeFormats, useConfigData } from '@eventespresso/config';
+import { DateTimeFormats } from '@eventespresso/config';
 import type { ConfigDataProps } from '@eventespresso/config';
 import { useCurrentUser, useGeneralSettings } from '@eventespresso/data';
+
+import { useConfigData } from '.';
 
 const ConfigContext = createContext<ConfigDataProps | null>(null);
 

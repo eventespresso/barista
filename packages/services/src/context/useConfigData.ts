@@ -1,8 +1,16 @@
 import { useMemoStringify } from '@eventespresso/utils';
 import { useMemo } from 'react';
-import { Currency, DateTimeFormats, Locale, LocaleProps, SiteUrl, Timezone, ConfigDataProps } from './';
+import {
+	ConfigDataProps,
+	Currency,
+	DateTimeFormats,
+	Locale,
+	LocaleProps,
+	SiteUrl,
+	Timezone,
+} from '@eventespresso/config';
 
-export const useConfigData = (): ConfigDataProps => {
+export const useConfigData = () => {
 	const api = useMemoStringify(window?.eventEspressoData?.api);
 	const config = useMemoStringify(window?.eventEspressoData?.config);
 
