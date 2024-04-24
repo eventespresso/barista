@@ -1,4 +1,5 @@
-import type { Entity, EntityId } from '@eventespresso/data';
+import type { Entity } from '@eventespresso/data';
+import type { EntityId } from '@eventespresso/constants';
 import type { RelationEntity } from '@eventespresso/services';
 
 export interface EntityItemProps {

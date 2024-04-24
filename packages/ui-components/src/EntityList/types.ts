@@ -1,6 +1,7 @@
 import type React from 'react';
 
-import type { Entity, EntityId } from '@eventespresso/data';
+import type { Entity } from '@eventespresso/data';
+import type { EntityId } from '@eventespresso/constants';
 import type { ResponsiveTableProps } from '../..';
 
 export interface ListView {

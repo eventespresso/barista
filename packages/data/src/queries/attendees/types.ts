@@ -1,6 +1,7 @@
 import type { EntityQueryArgs, EntityQueryOrderBy } from '../types';
-import type { EntityEdge, EntityId, EntityDbId } from '../../types';
+import type { EntityEdge } from '../../types';
 import type { RegistrationStatus } from '../registrations/types';
+import type { EntityDbId, EntityId } from '@eventespresso/constants';
 
 export interface AttendeesQueryWhereArgs {
 	event?: EntityId;

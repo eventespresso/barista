@@ -1,3 +1,4 @@
+import type { GeneralSettingsData } from '@eventespresso/config';
 import type { CacheUpdaterFn, WriteQueryOptions } from '../types';
 import useUpdateCache from '../useUpdateCache';
 import type { GeneralSettingsData } from '@eventespresso/config';

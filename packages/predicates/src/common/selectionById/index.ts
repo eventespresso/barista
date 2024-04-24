@@ -1,6 +1,7 @@
 import { filter, find, includes, prop, propEq } from 'ramda';
 
-import type { Entity, EntityDbId, EntityId } from '@eventespresso/data';
+import type { Entity } from '@eventespresso/data';
+import type { EntityDbId, EntityId } from '@eventespresso/constants';
 
 // the following return specified entity prop
 export const entityDbId = <T extends Entity>(entity: T): EntityDbId => prop('dbId', entity);

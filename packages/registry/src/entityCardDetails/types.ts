@@ -1,6 +1,7 @@
 import type React from 'react';
-import type { Entity, EntityId } from '@eventespresso/data';
+import type { Entity } from '@eventespresso/data';
 import type { BaseSubscriptionOptions, Subscriptions, ElementProps, UIRegistryInterface } from '../subscription';
+import { EntityId } from '@eventespresso/constants';
 
 export interface EntityCardDetailsSubscriptionsOptions<T extends string> {
 	entityType?: T; // to limit the subscription only to specific entityType

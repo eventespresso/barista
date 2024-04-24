@@ -1,7 +1,8 @@
 import { useCallback } from 'react';
 
 import { copyTicketFields, isTicketInputField, getHighestOrder } from '@eventespresso/predicates';
-import type { Entity, EntityId } from '@eventespresso/data';
+import type { EntityId } from '@eventespresso/constants';
+import type { Entity } from '@eventespresso/data';
 import {
 	TicketMutationResult,
 	UpdateTicketInput,

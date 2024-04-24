@@ -1,4 +1,5 @@
-import { EntityId, makeVar, useReactiveVariable, ReactiveVariable } from '@eventespresso/data';
+import { makeVar, useReactiveVariable, ReactiveVariable } from '@eventespresso/data';
+import type { EntityId } from '@eventespresso/constants';
 
 type DatetimeIds = Array<EntityId>;
 
