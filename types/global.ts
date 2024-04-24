@@ -11,7 +11,7 @@ import type { WpUserData } from '@eventespresso/wp-user/src/types';
  */
 declare global {
 	interface Window {
-		eventEspressoData: EventEspressoData;
+		eventEspressoData?: EventEspressoData;
 		wp: any;
 	}
 }
