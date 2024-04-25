@@ -1,6 +1,3 @@
-// import global types.
-import '../../../types';
-
 export * from './apollo';
 
 export * from './constants';
