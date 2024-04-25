@@ -134,5 +134,9 @@
     {
         "name": "@eventespresso/utils",
         "location": "packages/utils"
+    },
+    {
+        "name": "@eventespresso/types",
+        "location": "packages/types"
     }
 ]
