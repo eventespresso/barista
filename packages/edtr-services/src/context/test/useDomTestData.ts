@@ -2,7 +2,8 @@ import { useEffect } from 'react';
 import { eventEditor, currentUser, generalSettings } from './data';
 
 import { mockEspressoDomData } from '@eventespresso/services/src/config/test/data';
-import { EventEspressoData } from '../../../../../types';
+
+import type { EventEspressoData } from '@eventespresso/types';
 
 const useDomTestData = (): void => {
 	// Set the DOM data
