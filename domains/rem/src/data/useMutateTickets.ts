@@ -4,14 +4,16 @@ import { useSiteDateToUtcISO } from '@eventespresso/services';
 import type { EntityId } from '@eventespresso/data';
 import { useMutateTicket } from '@eventespresso/tpc';
 
-import type { RemTicket, StartAndEndDate } from './types';
 import { computeTicketDate } from '../utils';
+
+import type { RemTicket } from './types';
+import type { StartAndEndDate } from '@eventespresso/types';
 
 type Callback = (
 	tickets: Array<RemTicket>,
 	areSharedTickets?: boolean,
 	// these are the start and end dates of the related datetime
-	startAndEndDate?: StartAndEndDate
+	startAndEndDate?: StartAndEndDate.Type.DateObject
 ) => Promise<Array<EntityId>>;
 
 type MutateTicketsArgs = {

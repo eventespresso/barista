@@ -1,5 +1,6 @@
 import type { Datetime } from '@eventespresso/edtr-services';
 import type { IntervalType } from '@eventespresso/dates';
+import type { StartAndEndDate } from '@eventespresso/types';
 
 import { RemTicket } from '../../data';
 
@@ -14,10 +15,7 @@ export type TicketSatesFields = {
 	unitValue?: number;
 };
 
-export type TicketSalesDates = {
-	startDate: string | Date;
-	endDate: string | Date;
-};
+export type TicketSalesDates = StartAndEndDate.Type.DateOrString;
 
 export interface RemTicketFields extends Partial<TicketSatesFields>, Partial<TicketSalesDates> {
 	ticketSalesDates?: TicketSalesDates;

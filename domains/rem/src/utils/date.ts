@@ -1,7 +1,8 @@
 import { add, sub } from '@eventespresso/dates';
-import type { IntervalType } from '@eventespresso/dates';
 import { TicketSatesFields } from '../ui/Tickets/types';
-import { StartAndEndDate } from '../data';
+
+import type { IntervalType } from '@eventespresso/dates';
+import type { StartAndEndDate } from '@eventespresso/types';
 
 export const computeDatetimeEndDate = (startDate: Date, unit: IntervalType, duration: number): Date => {
 	return add(unit, startDate, duration);
@@ -10,7 +11,10 @@ export const computeDatetimeEndDate = (startDate: Date, unit: IntervalType, dura
 /**
  * computes the ticket start or end date based upon the start and end date of datetime
  */
-export const computeTicketDate = (startAndEndDate: StartAndEndDate, ticketSales: TicketSatesFields): Date => {
+export const computeTicketDate = (
+	startAndEndDate: StartAndEndDate.Type.DateObject,
+	ticketSales: TicketSatesFields
+): Date => {
 	const { position, startOrEnd, unit, unitValue } = ticketSales || {};
 	const { startDate, endDate } = startAndEndDate || {};
 	switch (true) {

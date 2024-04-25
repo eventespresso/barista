@@ -14,11 +14,6 @@ export interface RemTicket extends Entity, RemTicketFields, Omit<UpdateTicketInp
 	isShared: boolean;
 }
 
-export type StartAndEndDate = {
-	startDate: Date;
-	endDate: Date;
-};
-
 export interface FormState {
 	dateDetails: DateFormShape;
 	exDates?: Array<string>;

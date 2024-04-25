@@ -13,12 +13,6 @@ export interface DefaultTicket extends Entity, Omit<UpdateTicketInput, 'prices' 
 	isModified?: boolean;
 }
 
-// TODO: re-use this type instead of duplicating the same props
-export type StartAndEndDate = {
-	startDate: Date;
-	endDate: Date;
-};
-
 export interface DataState {
 	deletedTickets: Array<EntityId>;
 	isDirty: boolean;

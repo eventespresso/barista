@@ -9,6 +9,8 @@ import type {
 	User,
 } from '@eventespresso/data';
 
+import type { StartAndEndDate } from '@eventespresso/types';
+
 // TODO: consolidate data types
 export interface Event extends Entity {
 	allowDonations: boolean;
@@ -57,11 +59,10 @@ export enum DateStatus {
 }
 
 // TODO: consolidate data types
-export interface Datetime extends Entity, Trashable {
+export interface Datetime extends Entity, Trashable, StartAndEndDate.Type.String {
 	__typename: 'EspressoDatetime';
 	capacity: number;
 	description: string;
-	endDate: string; // ISO string?
 	isActive: boolean;
 	isExpired: boolean;
 	isPrimary: boolean;
@@ -72,7 +73,6 @@ export interface Datetime extends Entity, Trashable {
 	order: number;
 	reserved: number;
 	sold: number;
-	startDate: string; // ISO string?
 	status: DateStatus;
 	venue: EntityId; // UUID
 }
@@ -114,9 +114,8 @@ export interface PricesList {
 export type TicketVisibility = 'ADMINS_ONLY' | 'ADMIN_UI_ONLY' | 'MEMBERS_ONLY' | 'NONE' | 'PUBLIC';
 
 // TODO: consolidate data types
-export interface Ticket extends Entity, Trashable {
+export interface Ticket extends Entity, Trashable, StartAndEndDate.Type.String {
 	description: string;
-	endDate: string; // ISO string
 	isDefault: boolean;
 	isExpired: boolean;
 	isFree: boolean;
@@ -135,7 +134,6 @@ export interface Ticket extends Entity, Trashable {
 	reserved: number;
 	reverseCalculate: boolean;
 	sold: number;
-	startDate: string; // ISO string
 	userId: EntityId;
 	uses: number;
 	visibility: TicketVisibility;
