@@ -5,6 +5,7 @@ import type { Entity, EntityId } from '@eventespresso/data';
 import type { TpcPriceModifier } from '@eventespresso/tpc';
 import type { Ticket, UpdateTicketInput } from '@eventespresso/edtr-services';
 
+// TODO: consolidate data types
 export interface DefaultTicket extends Entity, Omit<UpdateTicketInput, 'prices' | 'id'>, Pick<Ticket, 'userId'> {
 	deletedPrices?: Array<EntityId>;
 	prices?: Array<TpcPriceModifier>;
@@ -12,6 +13,7 @@ export interface DefaultTicket extends Entity, Omit<UpdateTicketInput, 'prices' 
 	isModified?: boolean;
 }
 
+// TODO: re-use this type instead of duplicating the same props
 export type StartAndEndDate = {
 	startDate: Date;
 	endDate: Date;

@@ -12,6 +12,8 @@ export interface PaginationProps
 	showTotal?: (total: number, range: [number, number]) => React.ReactNode;
 }
 
+// TODO: duplicate
+// packages/ui-components/src/Pagination/types.ts
 export interface Locale {
 	next_page: string;
 	prev_page: string;

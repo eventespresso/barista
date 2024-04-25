@@ -8,6 +8,7 @@ export interface DragAndDropProps<E extends unknown = any> extends Partial<DragD
 	renderDraggableItem: (item: E) => Partial<DraggableProps<E>>;
 }
 
+// LATER: consider replacing 'unknown' with something more narrow
 export interface DraggableProps<E extends unknown = any> extends Pick<DragAndDropProps<E>, 'asItem'> {
 	content: React.ReactNode;
 	id: string;

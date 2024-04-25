@@ -1,5 +1,6 @@
 import type { FormStateManager as FSM } from '../../data';
 
+// LATER: what do these prefixes mean?
 export type DateType = 'gDate' | 'rDate' | 'exDate';
 
 export type GeneratedDate = {

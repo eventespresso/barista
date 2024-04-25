@@ -1,3 +1,5 @@
+// TODO: move to package 'types'
+
 import type { EventEditorData } from '@eventespresso/edtr-services';
 import type { RemDomData } from '@eventespresso/rem/src/types';
 import type { EventSmartDomData } from '@eventespresso/es-edtr-slots/src/types';

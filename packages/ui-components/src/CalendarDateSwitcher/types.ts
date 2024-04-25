@@ -12,10 +12,10 @@ export interface CalendarDateLabels {
 export interface CalendarDateSwitcherProps extends CalendarBaseProps {
 	className?: string;
 	displayDate: DisplayStartOrEndDate;
-	endDate: string;
+	endDate: string; // ISO string?
 	labels?: CalendarDateLabels;
 	showDate?: boolean;
-	startDate: string;
+	startDate: string; // ISO string?
 }
 
 export enum DisplayStartOrEndDate {

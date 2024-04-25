@@ -3,6 +3,8 @@ import type { ListView } from '@eventespresso/ui-components';
 
 export type BasicSortBy = 'name' | 'id';
 
+// TODO: extend interface PaginationState to avoid repeating props
+// packages/hooks/src/usePagination/types.ts
 export interface EntityListFilterState<SortBy = BasicSortBy> extends ListView {
 	pageNumber: number;
 	perPage: number;

@@ -24,6 +24,9 @@ export interface PerPageProps {
 	perPageOptions?: PerPageOptions;
 	total: number;
 }
+
+// TODO: duplicate
+// packages/adapters/src/Pagination/types.ts
 export interface Locale {
 	next_page: string;
 	prev_page: string;

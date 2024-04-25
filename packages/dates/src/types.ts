@@ -25,10 +25,10 @@ export interface DateRangePickerProps extends ShowTime, Omit<ReactDatePickerProp
 }
 
 export interface RangeFormatProps extends ShowTime {
-	endDate: string;
+	endDate: string; // ISO string?
 	formatFn?: (date: Date, formatStr: string) => string;
 	formatTokens: RangeFormatTokens;
-	startDate: string;
+	startDate: string; // ISO string?
 }
 
 export interface RangeFormatTokens {

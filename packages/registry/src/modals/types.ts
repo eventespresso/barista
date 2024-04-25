@@ -2,6 +2,7 @@ import type React from 'react';
 import type { BaseSubscriptionOptions, Subscriptions, ElementProps } from '../subscription';
 import type ModalRegistry from './ModalRegistry';
 
+// LATER: extract specific type constraint for for 'T' (modalType)
 export interface ModalSubscriptionsOptions<T extends string> {
 	modalType?: T; // to limit the subscription only to specific modalType
 }

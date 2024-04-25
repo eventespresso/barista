@@ -1,6 +1,7 @@
 import type { EntityId } from '@eventespresso/data';
 import type { AnyObject } from '@eventespresso/utils';
 
+// TODO: consolidate data types
 export type Capability = string;
 
 type EntityWithoutDefault = 'ticket' | 'price' | 'price_type';

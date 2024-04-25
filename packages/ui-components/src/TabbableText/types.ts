@@ -1,5 +1,5 @@
 export interface TabbableTextProps {
-	'aria-describedby'?: string;
+	'aria-describedby'?: string; // LATER: shouldn't it be ariaDescribeBy?
 	className?: string;
 	icon?: React.ReactNode;
 	isDisabled?: boolean;

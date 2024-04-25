@@ -1,3 +1,6 @@
+// TODO: merge with packages/predicates/src/datetimes/types.ts
+// similar to packages/predicates/src/tickets/filters/types.ts
+
 import type { Datetime } from '@eventespresso/edtr-services';
 import type { DatetimeSales, DatetimeStatus } from '../types';
 

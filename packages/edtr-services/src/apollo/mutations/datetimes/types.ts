@@ -4,6 +4,8 @@ import { BulkUpdateInput } from '../types';
 
 import type { MutationFunction } from '@eventespresso/data';
 
+// TODO: this looks like a near-identical duplicate of type Datetime
+// packages/edtr-services/src/apollo/types.ts
 export interface DatetimeBaseInput {
 	capacity?: number;
 	description?: string;

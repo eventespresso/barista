@@ -1,8 +1,11 @@
+// TODO: this is not used anywhere
 // intersection of two types
 export type Intersection<A, B> = {
 	[P in keyof A & keyof B]: A[P] | B[P];
 };
 
+// TODO: move to package 'edtr-services'
+// packages/edtr-services/src/apollo/mutations/types.ts
 // merges two types
 export type Merge<A, B> = Omit<A, keyof B> & B extends infer O ? { [K in keyof O]: O[K] } : never;
 
@@ -10,6 +13,8 @@ export interface AnyObject<T = any> {
 	[key: string]: T;
 }
 
+// TODO: move to package 'ee-components'
+// packages/ee-components/src/EntityEditForm/types.ts
 export interface Disclosure {
 	isOpen: boolean;
 	onOpen: VoidFunction;
@@ -17,15 +22,20 @@ export interface Disclosure {
 	onToggle?: VoidFunction;
 }
 
+// TODO: move to package 'ioc'
+// packages/ioc/src/hooks.ts
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 export type OmitFirstFromArray<T extends any[]> = T extends [infer A, ...infer R] ? R : never;
 
+// TODO: move to package 'edtr-services'
 export type KeysOfType<Obj, Type> = {
 	[K in keyof Obj]: Obj[K] extends Type ? K : never;
 }[keyof Obj];
 
+// TODO: move to package 'predicates'
 export type BoolField<F extends string> = Record<F, boolean>;
 
+// TODO: move to package 'predicates'
 export type EntityFieldPred<Field extends string, FieldType = any> = (entity: Record<Field, FieldType>) => boolean;
 
 /**
@@ -43,6 +53,7 @@ export type EntityFieldPred<Field extends string, FieldType = any> = (entity: Re
  *
  * type T = DeepKeyOf<Test>; // "bar" | "foo.foo" | "foo.bar.baz"
  */
+// TODO: move to package 'form-builder'
 export type PropsPath<T extends object> = {
 	[P in keyof T]: T[P] extends object ? `${string & P}` | `${string & P}.${PropsPath<T[P]>}` : `${string & P}`;
 }[T extends any[] ? number & keyof T : keyof T];

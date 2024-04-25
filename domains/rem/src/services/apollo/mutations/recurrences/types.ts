@@ -1,6 +1,7 @@
 import type { EntityId } from '@eventespresso/data';
 import type { Recurrence } from '../../types';
 
+// LATER: what do these prefixes mean?
 export interface RecurrenceBaseInput {
 	datetimes?: Array<EntityId>;
 	dateDuration?: string;
