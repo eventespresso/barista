@@ -1,6 +1,8 @@
 import type React from 'react';
 import { PaginationProps as RcPaginationProps } from 'rc-pagination';
 
+// LATER: some overlapping duplicate properties, maybe use common base?
+// packages/ui-components/src/Pagination/types.ts
 export interface PaginationProps
 	extends Pick<RcPaginationProps, 'defaultCurrent' | 'itemRender' | 'onChange' | 'total'> {
 	pageNumber: number;
@@ -12,7 +14,7 @@ export interface PaginationProps
 	showTotal?: (total: number, range: [number, number]) => React.ReactNode;
 }
 
-// TODO: duplicate
+// LATER: duplicate
 // packages/ui-components/src/Pagination/types.ts
 export interface Locale {
 	next_page: string;

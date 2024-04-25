@@ -1,5 +1,7 @@
 import type React from 'react';
 
+// LATER: some overlapping duplicate properties, maybe use common base?
+// packages/adapters/src/Pagination/types.ts
 export interface PaginationProps extends PerPageProps {
 	alignment?: 'left' | 'right';
 	defaultPageNumber?: number;
@@ -25,7 +27,7 @@ export interface PerPageProps {
 	total: number;
 }
 
-// TODO: duplicate
+// LATER: duplicate
 // packages/adapters/src/Pagination/types.ts
 export interface Locale {
 	next_page: string;
