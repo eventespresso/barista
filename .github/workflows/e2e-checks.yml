@@ -97,7 +97,7 @@ jobs:
             - name: Run tests
               uses: eventespresso/actions/packages/e2e-tests@main
               with:
-                  cafe_repo_branch: ${{ inputs.cafe_repo_branch || 'NEW/CORE/datetime-status' }}
+                  cafe_repo_branch: ${{ inputs.cafe_repo_branch || 'DEV' }}
                   barista_repo_branch: ${{ inputs.barista_repo_branch || needs.branch.outputs.ref }}
                   e2e_tests_repo_branch: ${{ inputs.e2e_tests_repo_branch || 'MAIN' }}
                   gpg_password: ${{ secrets.E2E_GPG_PASSWORD }}
