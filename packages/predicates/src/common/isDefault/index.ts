@@ -1,6 +1,5 @@
 import * as R from 'ramda';
-
-import type { EntityFieldPred } from '@eventespresso/utils';
+import type { EntityFieldPred } from '../..';
 
 export type IsDefaultPred = EntityFieldPred<'isDefault', boolean>;
 

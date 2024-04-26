@@ -82,6 +82,6 @@ export const priceHasPriceModifiers = (prices: Price[]): boolean => {
 	return !isEmpty(modifiers);
 };
 
-type BoolField<F extends string> = Record<F, boolean>;
+export type EntityFieldPred<Field extends string, FieldType = any> = (entity: Record<Field, FieldType>) => boolean;
 
-type EntityFieldPred<Field extends string, FieldType = any> = (entity: Record<Field, FieldType>) => boolean;
+type BoolField<F extends string> = Record<F, boolean>;
