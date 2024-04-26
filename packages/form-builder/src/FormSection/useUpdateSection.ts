@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
 import * as R from 'ramda';
 
-import { strToPath, PropsPath } from '@eventespresso/utils';
+import { strToPath } from '@eventespresso/utils';
 
-import type { FormSection } from '../types';
+import type { FormSection, PropsPath } from '..';
 import { useFormState } from '../state';
 
 type OnChangeValue = (field: PropsPath<FormSection>) => (value: any) => void;
