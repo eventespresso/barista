@@ -46,6 +46,8 @@ export const isDefaultTax: EntityFieldPred<'isDefault' | 'isTax', boolean> = all
 // returns price if found in array of prices
 export const getBasePrice = <P extends BoolField<'isBasePrice'>>(prices: Array<P>): P => find<P>(isBasePrice)(prices);
 
+// LATER: these types are wrong
+
 // returns array of prices that satisfy predicate
 export const getTaxes = <P extends BoolField<'isTax'>>(prices: Array<P>): Array<P> => filter<P>(isTax, prices);
 
