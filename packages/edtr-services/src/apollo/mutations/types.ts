@@ -129,5 +129,9 @@ export interface BulkEditFormBaseShape extends Partial<ShiftDateArgs> {
 	shiftDates?: ShiftDateArgs;
 }
 
+export type KeysOfType<Obj, Type> = {
+	[K in keyof Obj]: Obj[K] extends Type ? K : never;
+}[keyof Obj];
+
 // merges two types
 type Merge<A, B> = Omit<A, keyof B> & B extends infer O ? { [K in keyof O]: O[K] } : never;

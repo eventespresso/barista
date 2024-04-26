@@ -2,11 +2,6 @@ export interface AnyObject<T = any> {
 	[key: string]: T;
 }
 
-// TODO: move to package 'edtr-services'
-export type KeysOfType<Obj, Type> = {
-	[K in keyof Obj]: Obj[K] extends Type ? K : never;
-}[keyof Obj];
-
 // TODO: move to package 'predicates'
 export type BoolField<F extends string> = Record<F, boolean>;
 
