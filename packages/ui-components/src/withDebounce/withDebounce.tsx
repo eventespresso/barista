@@ -5,7 +5,7 @@ import { useDebouncedCallback } from 'use-debounce';
 import type { InternalDebounceProps, WithDebounceProps } from './types';
 import type { ForwardRefComponent } from '../types';
 import { useIfMounted, usePrevious } from '@eventespresso/hooks';
-import { AnyObject, noop } from '@eventespresso/utils';
+import { noop } from '@eventespresso/utils';
 
 /**
  * HOC to delay calling of `onChangeValue` passed to the `WrappedComponent`
@@ -13,7 +13,7 @@ import { AnyObject, noop } from '@eventespresso/utils';
  * @param WrappedComponent The component to debounce the onchange handler for
  * @param valueProp The prop to use for passing the value, e.g. 'isChecked' for Switch/checkbox
  */
-const withDebounce = <P extends AnyObject, R extends any>(
+const withDebounce = <P extends Record<string, any>, R extends any>(
 	WrappedComponent: React.ComponentType<P>,
 	valueProp: keyof P = 'value',
 	changeHandler: keyof P = 'onChangeValue'

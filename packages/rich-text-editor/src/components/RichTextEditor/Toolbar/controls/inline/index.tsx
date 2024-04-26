@@ -2,8 +2,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { EditorState, Modifier, RichUtils } from 'draft-js';
 import { getSelectionInlineStyle } from 'draftjs-utils';
 
-import { AnyObject } from '@eventespresso/utils';
-
 import { InlineItems, ToolbarControlProps } from '../../types';
 import { useEditorState } from '../../../../../hooks';
 import { changeStyleKeys } from '../../../../../utils';
@@ -13,7 +11,7 @@ const Inline: React.FC<ToolbarControlProps<'inline'>> = (props) => {
 	const [editorState, setEditorState] = useEditorState();
 
 	// the inline styles applied to the text selection
-	const [currentStyles, setCurrentStyles] = useState<AnyObject>(
+	const [currentStyles, setCurrentStyles] = useState<Record<string, any>>(
 		editorState ? changeStyleKeys(getSelectionInlineStyle(editorState)) : {}
 	);
 

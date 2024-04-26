@@ -1,4 +1,3 @@
-import type { AnyObject } from '@eventespresso/utils';
 import { doAction } from '@eventespresso/ioc';
 
 export type RenderPlugin = (prevRender?: RenderPlugin) => JSX.Element;
@@ -10,7 +9,7 @@ export type Settings = {
 
 export type Plugin = Required<Settings>;
 
-const plugins: AnyObject<Plugin> = {};
+const plugins: Record<string, Plugin> = {};
 
 const NAME_REGEX = /^[a-z][a-z0-9-]*$/;
 

@@ -2,7 +2,6 @@ import * as R from 'ramda';
 import { parseISO } from 'date-fns';
 
 import type { EntityId } from '@eventespresso/data';
-import type { AnyObject } from '@eventespresso/utils';
 import type { TAMPossibleRelation, TAMRelationEntity, TAMRelationalData, TAMRelationalEntity } from '../types';
 import type { Datetime, Ticket } from '@eventespresso/edtr-services';
 import type { OptionsType } from '@eventespresso/adapters';
@@ -52,7 +51,7 @@ export const ticketsWithNewQuantity = ({
 	allTickets,
 	existingData,
 	ticketsToUpdate,
-}: TicketsWithQuantityArgs): AnyObject<number> => {
+}: TicketsWithQuantityArgs): Record<string, number> => {
 	// create a map of ticket ids to quantities
 	const ticketIdToQuantityMap = idToPropMap('quantity', allTickets);
 
@@ -64,7 +63,7 @@ export const ticketsWithNewQuantity = ({
 	 *     [ticket.id]: quantity
 	 * }
 	 */
-	return ticketsToUpdate.reduce<AnyObject<number>>((acc, [ticketId, possibleRelation]) => {
+	return ticketsToUpdate.reduce<Record<string, number>>((acc, [ticketId, possibleRelation]) => {
 		// These are the related date ids before TAM was launched
 		const existingRelatedDateIds = existingData?.tickets?.[ticketId]?.datetimes || [];
 		// These are the related date ids that have been assigned in TAM
@@ -111,7 +110,7 @@ export const ticketsWithNewQuantity = ({
  *     },
  * }
  */
-type YearWiseMonths = AnyObject<AnyObject<string>>;
+type YearWiseMonths = Record<number, Record<string, string>>;
 
 const getYearWiseMonthsFromDates = (dates: Array<Datetime>): YearWiseMonths => {
 	const sortedDates = sortDates({ dates });

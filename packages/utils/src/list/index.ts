@@ -2,7 +2,6 @@ import * as R from 'ramda';
 
 import { __ } from '@eventespresso/i18n';
 import type { OptionsType } from '@eventespresso/adapters';
-import { AnyObject } from '../types';
 
 /**
  * Converts entity list to options for select input
@@ -21,7 +20,7 @@ export const entityListToSelectOptions = (
 /**
  * Converts a key-value object to options for select input
  */
-export const objectToSelectOptions = (object: AnyObject, prependEmpty?: boolean): OptionsType => {
+export const objectToSelectOptions = (object: Record<string, any>, prependEmpty?: boolean): OptionsType => {
 	const options = Object.entries(object).map(([value, label]) => ({ value, label }));
 
 	if (prependEmpty) {
@@ -108,6 +107,6 @@ export const groupByProp = <T extends Record<string, any>, K extends keyof T>(
 export function idToPropMap<I extends Record<'id', string>, P extends keyof I = keyof I>(
 	prop: P,
 	list: Array<I>
-): AnyObject<I[P]> {
+): Record<string, I[P]> {
 	return list.reduce((acc, item) => R.assocPath([item.id], item[prop], acc), {});
 }

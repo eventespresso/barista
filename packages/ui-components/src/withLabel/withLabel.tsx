@@ -3,12 +3,11 @@ import classNames from 'classnames';
 
 import { Label, labelIDGenerator } from '../Label';
 
-import type { AnyObject } from '@eventespresso/utils';
 import type { WithLabelProps } from './types';
 import type { ForwardRefComponent } from '../types';
 import './style.scss';
 
-const withLabel = <P extends AnyObject>(
+const withLabel = <P extends Record<string, any>>(
 	WrappedComponent: React.ComponentType<P>
 ): ForwardRefComponent<P & WithLabelProps, typeof WrappedComponent> => {
 	type Ref = React.Ref<typeof WrappedComponent>;

@@ -7,7 +7,6 @@ import {
 	isPending,
 	isUpcoming,
 } from '@eventespresso/predicates';
-import type { AnyObject } from '@eventespresso/utils';
 import { shiftDate } from '@eventespresso/dates';
 import type { EntityId } from '@eventespresso/data';
 import { uuid } from '@eventespresso/utils';
@@ -20,7 +19,7 @@ import { UpdateTicketInput } from './tickets';
 export const formToBulkUpdateInput = <
 	T extends BulkEditFormBaseShape,
 	E extends Datetime | Ticket,
-	I extends AnyObject
+	I extends Record<string, any>
 >(
 	formData: T,
 	allEntities: E[],

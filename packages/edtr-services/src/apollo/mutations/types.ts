@@ -7,7 +7,6 @@ import type {
 	MutationUpdaterFn,
 	OperationVariables,
 } from '@eventespresso/data';
-import type { AnyObject } from '@eventespresso/utils';
 import type { ShiftDateArgs } from '@eventespresso/dates';
 import type { Datetime, DatetimeEdge, Ticket, TicketEdge, Price, PriceEdge } from '../types';
 
@@ -121,7 +120,7 @@ export type UpdaterCallback = <E extends Entity, MI extends MutationInput = Muta
 	args: UpdaterCallbackArgs<E, MI>
 ) => MutationUpdaterFn;
 
-export interface BulkUpdateInput<T extends AnyObject = AnyObject> {
+export interface BulkUpdateInput<T extends Record<string, any> = Record<string, any>> {
 	sharedInput?: T;
 	uniqueInputs: Array<T>;
 }

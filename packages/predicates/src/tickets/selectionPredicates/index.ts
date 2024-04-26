@@ -3,7 +3,7 @@ import { assoc, includes, map, ObjPred, when } from 'ramda';
 import { TICKET_FIELDS, TICKET_INPUT_FIELDS } from '../ticketFields';
 import { entityHasGuid } from '.././../common';
 import { EntityId } from '@eventespresso/data';
-import { parseInfinity, AnyObject } from '@eventespresso/utils';
+import { parseInfinity } from '@eventespresso/utils';
 import type { Ticket } from '@eventespresso/edtr-services';
 
 interface UpdateTicketPriceForTicketProps {
@@ -48,7 +48,7 @@ export const updateTicketReverseCalculate = ({
  */
 export const uniqTicketsByMinQty = <T extends Pick<Partial<Ticket>, 'id' | 'quantity'>>(list: Array<T>): Array<T> => {
 	// create an object with key as `item.id` and value as `item`
-	const items = list.reduce<AnyObject<T>>((acc, item) => {
+	const items = list.reduce<Record<string, T>>((acc, item) => {
 		if (!(item.id in acc)) {
 			return { ...acc, [item.id]: item };
 		}

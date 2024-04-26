@@ -1,4 +1,3 @@
-import type { AnyObject } from '@eventespresso/utils';
 import type { IconName } from '@eventespresso/icons';
 import { ButtonProps } from '../Button';
 
@@ -22,7 +21,7 @@ interface IconType<ClassName = string> {
 
 export interface LegendConfig<ClassName> {
 	icons: IconType<ClassName>[];
-	swatches?: AnyObject;
+	swatches?: Record<string, any>;
 }
 
 export interface ToggleLegendButtonProps extends ButtonProps {

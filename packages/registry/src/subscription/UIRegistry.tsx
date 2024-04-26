@@ -1,7 +1,6 @@
 import { assocPath, dissocPath, pathOr } from 'ramda';
-import type { AnyObject } from '@eventespresso/utils';
 
-import type { ElementRegistry, UIRegistryInterface as UIRI, UIRegistryOptions, ElementProps } from './types';
+import type { ElementRegistry, UIRegistryInterface as UIRI, UIRegistryOptions, ElementProps } from '.';
 
 /**
  * EP: Element Props: The props of the component that's registerd by the consumer
@@ -17,7 +16,7 @@ class UIRegistry<EP extends ElementProps, D extends string, S extends string> im
 
 	private pathToElementsStr: string;
 
-	private registeredElements: AnyObject<boolean> = {};
+	private registeredElements: Record<string, boolean> = {};
 
 	constructor(options: UIRegistryOptions<D, S>) {
 		this.options = options;

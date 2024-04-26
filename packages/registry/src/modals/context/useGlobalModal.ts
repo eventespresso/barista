@@ -1,10 +1,9 @@
 import { useMemo, useCallback } from 'react';
 
-import type { AnyObject } from '@eventespresso/utils';
 import type { GlobalModal } from './types';
 import useGlobalModalContext from './useGlobalModalContext';
 
-const useGlobalModal = <D = AnyObject>(name: string): GlobalModal<D> => {
+const useGlobalModal = <D = Record<string, any>>(name: string): GlobalModal<D> => {
 	const modalContext = useGlobalModalContext<D>();
 
 	const { closeModal, getModalData, isModalOpen, openModal, openModalWithData, setModalData } = modalContext;

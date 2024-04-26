@@ -2,8 +2,6 @@ import { EditorState, convertToRaw, ContentState } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
 
-import type { AnyObject } from '@eventespresso/utils';
-
 export const htmlToEditorState = (html: string, defaultEmpty = true): EditorState => {
 	let state: EditorState;
 	if (html) {
@@ -35,7 +33,7 @@ export const editorStateToHtml = (editorState: EditorState, defaultEmpty = true)
  * 'ITALIC', => 'italic'
  * 'CODE', => 'monospace'
  */
-export const changeStyleKeys = (style: AnyObject) => {
+export const changeStyleKeys = (style: Record<string, any>) => {
 	const newStyleObj = {};
 	if (style) {
 		for (const key in style) {

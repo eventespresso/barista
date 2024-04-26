@@ -1,6 +1,5 @@
 import type { Reducer, ReducerState } from 'react';
 
-import type { AnyObject } from '@eventespresso/utils';
 import type { Entity, EntityId } from '@eventespresso/data';
 import type { TpcPriceModifier } from '@eventespresso/tpc';
 import type { UpdateTicketInput } from '@eventespresso/edtr-services';
@@ -23,7 +22,7 @@ export interface FormState {
 	rRule: string;
 	salesEndOffset?: string;
 	salesStartOffset?: string;
-	tickets: AnyObject<RemTicket>;
+	tickets: Record<string, RemTicket>;
 	isDirty: boolean;
 	venue: EntityId;
 }

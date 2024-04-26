@@ -1,9 +1,8 @@
 import { Reducer } from 'react';
-import type { AnyObject } from '@eventespresso/utils';
 
 export interface ModalState {
 	isOpen?: boolean;
-	data: AnyObject;
+	data: Record<string, any>;
 }
 
 /**
@@ -11,17 +10,17 @@ export interface ModalState {
  *     [modalId]: ModalState
  * }
  */
-export type GlobalModalState = AnyObject<ModalState>;
+export type GlobalModalState = Record<string, ModalState>;
 
 export type GlobalModalActionType = 'OPEN_MODAL' | 'CLOSE_MODAL' | 'SET_MODAL_DATA';
 
 export interface GlobalModalAction {
-	data?: AnyObject;
+	data?: Record<string, any>;
 	modalName: string;
 	type: GlobalModalActionType;
 }
 
-export interface GlobalModalManager<D = AnyObject> {
+export interface GlobalModalManager<D = Record<string, any>> {
 	closeModal: (modalName: string) => void;
 	getData: () => GlobalModalState;
 	getModalData: (modalName: string) => D;
@@ -33,7 +32,7 @@ export interface GlobalModalManager<D = AnyObject> {
 
 export type GlobalModalStateReducer = Reducer<GlobalModalState, GlobalModalAction>;
 
-export interface GlobalModal<D = AnyObject> {
+export interface GlobalModal<D = Record<string, any>> {
 	close: () => void;
 	getData: () => D;
 	isOpen: boolean;

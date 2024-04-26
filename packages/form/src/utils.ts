@@ -1,5 +1,5 @@
 import type { FieldMetaState, FieldRenderProps, FormRenderProps } from 'react-final-form';
-import { setIn, getIn, AnyObject, Mutator } from 'final-form';
+import { setIn, getIn, Mutator } from 'final-form';
 import { ObjectSchema, ValidationError } from 'yup';
 
 import type { FieldConditions } from './types';
@@ -18,7 +18,11 @@ export const getValidateStatus = ({ touched, error, submitError }: FieldMetaStat
 	return '';
 };
 
-export const evalFieldConditions = (conditions: FieldConditions, formData: AnyObject, fieldName: string): boolean => {
+export const evalFieldConditions = (
+	conditions: FieldConditions,
+	formData: Record<string, any>,
+	fieldName: string
+): boolean => {
 	let conditionsApply = true;
 	/**
 	 * The field can be inside a repeatable field/group.
@@ -120,7 +124,10 @@ export const evalFieldConditions = (conditions: FieldConditions, formData: AnyOb
  * @param validationSchema
  * @param values
  */
-export const yupToFinalFormErrors = async <T>(validationSchema: ObjectSchema<any>, values: T): Promise<AnyObject> => {
+export const yupToFinalFormErrors = async <T>(
+	validationSchema: ObjectSchema<any>,
+	values: T
+): Promise<Record<string, any>> => {
 	try {
 		await validationSchema.validate(values, { abortEarly: false });
 	} catch (err) {

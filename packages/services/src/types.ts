@@ -1,5 +1,4 @@
 import type { User } from '@eventespresso/data';
-import type { AnyObject } from '@eventespresso/utils';
 
 import type { CurrencyProps, GeneralSettings, SiteUrlProps } from './config/types';
 import type { Capability } from './permissions';
@@ -17,9 +16,9 @@ export interface EventEspressoDomData {
 export type ApiDomData = {
 	graphqlEndpoint: string;
 	restApiBaseUrl: string;
-	restApiCollectionEndpoints: AnyObject<string>;
+	restApiCollectionEndpoints: Record<string, string>;
 	restApiNonce: string;
-	restApiPrimaryKeys: AnyObject<string | [string]>;
+	restApiPrimaryKeys: Record<string, string | [string]>;
 	restApiRouteUrl: string;
 };
 

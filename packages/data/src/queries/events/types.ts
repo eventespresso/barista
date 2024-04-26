@@ -1,8 +1,7 @@
 import type { EntityQueryArgs } from '../types';
 import type { EntityEdge } from '../../types';
-import type { AnyObject } from '@eventespresso/utils';
 
-export type EventsQueryArgs = EntityQueryArgs<AnyObject>;
+export type EventsQueryArgs = EntityQueryArgs<Record<string, any>>;
 
 export interface EventsList<Edge extends EntityEdge> {
 	espressoEvents: Edge;

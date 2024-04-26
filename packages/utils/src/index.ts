@@ -12,7 +12,6 @@ export * from './number';
 export * from './pagination';
 export * from './predicates';
 export * from './text';
-export * from './types';
 
 export { cancelClickEvent } from './cancelClickEvent';
 

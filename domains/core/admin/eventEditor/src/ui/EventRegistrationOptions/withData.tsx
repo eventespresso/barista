@@ -2,10 +2,9 @@ import { useCallback } from 'react';
 
 import { useEvent, useEventManagers, useEventMutator } from '@eventespresso/edtr-services';
 import type { InlineEditProps, SwitchProps } from '@eventespresso/adapters';
-import type { AnyObject } from '@eventespresso/utils';
 import type { EventRegistrationOptionsProps } from './types';
 
-const withData = <P extends AnyObject>(
+const withData = <P extends Record<string, any>>(
 	WrappedComponent: React.ComponentType<EventRegistrationOptionsProps>
 ): React.ComponentType<P> => {
 	const WithData: React.FC<P> = () => {

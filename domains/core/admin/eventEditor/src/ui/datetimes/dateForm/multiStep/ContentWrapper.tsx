@@ -1,5 +1,4 @@
 import { useMemoStringify } from '@eventespresso/hooks';
-import type { AnyObject } from '@eventespresso/utils';
 import { useFormValues } from '@eventespresso/form';
 import { DateFormShape, useDatetimeItem } from '@eventespresso/edtr-services';
 
@@ -14,7 +13,7 @@ const ContentWrapper: React.FC<ContentWrapperProps> = (props) => {
 
 	const datetime = useDatetimeItem({ id: values?.id });
 	// provide entity details to TAM from edit form
-	const Component = withTAMContext<AnyObject>(
+	const Component = withTAMContext<Record<string, any>>(
 		Modal,
 		useMemoStringify({
 			assignmentType: 'forDate',

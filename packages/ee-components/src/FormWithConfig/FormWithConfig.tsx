@@ -1,9 +1,8 @@
 import { EspressoForm, EspressoFormProps, FormConfig } from '@eventespresso/form';
 import { useConfig } from '@eventespresso/services';
 import { useMemoStringify } from '@eventespresso/hooks';
-import type { AnyObject } from '@eventespresso/utils';
 
-const FormWithConfig = <FormValues extends AnyObject>({
+const FormWithConfig = <FormValues extends Record<string, any>>({
 	columns,
 	...props
 }: EspressoFormProps<FormValues>): JSX.Element => {

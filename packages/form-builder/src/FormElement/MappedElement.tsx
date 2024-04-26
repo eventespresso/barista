@@ -1,4 +1,3 @@
-import type { AnyObject } from '@eventespresso/utils';
 import { DatePicker, MonthPicker, TimePicker } from '@eventespresso/dates';
 import { Slider } from '@eventespresso/adapters';
 import {
@@ -28,7 +27,7 @@ export interface MappedElementProps {
  * The props to the Component must be passed by the consumer
  */
 const MappedComponent: React.FC<MappedElementProps> = ({ elementType, ...props }) => {
-	let Component: React.ComponentType<AnyObject>;
+	let Component: React.ComponentType<Record<string, any>>;
 
 	switch (elementType) {
 		// DATE & TIME RELATED INPUTS

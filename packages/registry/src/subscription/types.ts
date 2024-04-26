@@ -1,5 +1,3 @@
-import type { AnyObject } from '@eventespresso/utils';
-
 export interface BaseSubscriptionOptions<D extends string> {
 	domain: D;
 }
@@ -11,7 +9,7 @@ export interface SubscriptionServiceOptions<D extends string, S extends string> 
 export interface SubscriptionManagerInterface<SR extends ServiceRegistry = ServiceRegistry> {
 	addToServiceRegistry: <K extends keyof SR>(key: K, value: SR[K]) => void;
 	getServiceRegistryItem: <K extends keyof SR>(key: K, defaultValue?: any) => SR[K];
-	getSubscriptions: <CbArgs = AnyObject, Options = AnyObject, CbReturn = void>() => Subscriptions<
+	getSubscriptions: <CbArgs = Record<string, any>, Options = Record<string, any>, CbReturn = void>() => Subscriptions<
 		CbArgs,
 		Options,
 		CbReturn
@@ -19,18 +17,18 @@ export interface SubscriptionManagerInterface<SR extends ServiceRegistry = Servi
 	subscribe: SubscribeFn;
 }
 
-export type SubscribeFn = <CbArgs = AnyObject, Options = AnyObject, CbReturn = void>(
+export type SubscribeFn = <CbArgs = Record<string, any>, Options = Record<string, any>, CbReturn = void>(
 	cb: SubscriptionCallback<CbArgs, CbReturn>,
 	options?: Options
 ) => VoidFunction;
 
-export type SubscriptionCallback<CbArgs = AnyObject, CbReturn = void> = (args: CbArgs) => CbReturn;
+export type SubscriptionCallback<CbArgs = Record<string, any>, CbReturn = void> = (args: CbArgs) => CbReturn;
 
-export type Subscriptions<CbArgs = AnyObject, Options = AnyObject, CbReturn = void> = {
+export type Subscriptions<CbArgs = Record<string, any>, Options = Record<string, any>, CbReturn = void> = {
 	[key: string]: Subscription<CbArgs, Options, CbReturn>;
 };
 
-export interface Subscription<CbArgs = AnyObject, Options = AnyObject, CbReturn = void> {
+export interface Subscription<CbArgs = Record<string, any>, Options = Record<string, any>, CbReturn = void> {
 	callback: SubscriptionCallback<CbArgs, CbReturn>;
 	options: Options;
 }
@@ -42,7 +40,7 @@ export interface ServiceRegistry {
 export interface UpdateSubscriptionProps {
 	id: string;
 	callback?: SubscriptionCallback;
-	options?: AnyObject;
+	options?: Record<string, any>;
 	action?: 'add' | 'remove';
 }
 
@@ -105,7 +103,7 @@ export type ElementRegistry = {
 		// service id e.g. "entityListFilterBar"
 		[key: string]: {
 			// service type id e.g. "dates-list"
-			[key: string]: AnyObject;
+			[key: number]: Record<string, any>;
 		};
 	};
 };
