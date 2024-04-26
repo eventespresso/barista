@@ -2,12 +2,6 @@ export interface AnyObject<T = any> {
 	[key: string]: T;
 }
 
-// TODO: move to package 'predicates'
-export type BoolField<F extends string> = Record<F, boolean>;
-
-// TODO: move to package 'predicates'
-export type EntityFieldPred<Field extends string, FieldType = any> = (entity: Record<Field, FieldType>) => boolean;
-
 /**
  * Creates a dotted path of a nested object property
  *

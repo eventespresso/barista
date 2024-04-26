@@ -4,7 +4,6 @@ import { PRICE_FIELDS, PRICE_INPUT_FIELDS } from '../priceFields';
 import { isDefault } from '../../common';
 
 import type { Price } from '@eventespresso/edtr-services';
-import type { BoolField, EntityFieldPred } from '@eventespresso/utils';
 
 // is a base price ?
 export const isBasePrice: EntityFieldPred<'isBasePrice', boolean> = propEq('isBasePrice', true);
@@ -82,3 +81,7 @@ export const priceHasPriceModifiers = (prices: Price[]): boolean => {
 	const modifiers = getPriceModifiers(prices);
 	return !isEmpty(modifiers);
 };
+
+type BoolField<F extends string> = Record<F, boolean>;
+
+type EntityFieldPred<Field extends string, FieldType = any> = (entity: Record<Field, FieldType>) => boolean;
