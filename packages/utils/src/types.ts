@@ -2,15 +2,6 @@ export interface AnyObject<T = any> {
 	[key: string]: T;
 }
 
-// TODO: move to package 'ee-components'
-// packages/ee-components/src/EntityEditForm/types.ts
-export interface Disclosure {
-	isOpen: boolean;
-	onOpen: VoidFunction;
-	onClose: VoidFunction;
-	onToggle?: VoidFunction;
-}
-
 // TODO: move to package 'ioc'
 // packages/ioc/src/hooks.ts
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
