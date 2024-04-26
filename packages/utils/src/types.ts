@@ -2,11 +2,6 @@ export interface AnyObject<T = any> {
 	[key: string]: T;
 }
 
-// TODO: move to package 'ioc'
-// packages/ioc/src/hooks.ts
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
-export type OmitFirstFromArray<T extends any[]> = T extends [infer A, ...infer R] ? R : never;
-
 // TODO: move to package 'edtr-services'
 export type KeysOfType<Obj, Type> = {
 	[K in keyof Obj]: Obj[K] extends Type ? K : never;
