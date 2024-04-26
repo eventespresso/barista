@@ -9,8 +9,8 @@ import soldOutOnly from './soldOutOnly';
 import upcomingOnly from './upcomingOnly';
 import { notTrashed, trashedOnly } from '../../common';
 
-import type { DatesStatusFilter } from './types';
-import { DatetimeStatus } from '../types';
+import { DatetimeStatus } from '.';
+import type { DatesStatusFilter } from '.';
 
 /**
  * reduces dates array based on value of the "status" filter
