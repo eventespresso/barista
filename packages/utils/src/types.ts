@@ -1,9 +1,3 @@
-// TODO: this is not used anywhere
-// intersection of two types
-export type Intersection<A, B> = {
-	[P in keyof A & keyof B]: A[P] | B[P];
-};
-
 // TODO: move to package 'edtr-services'
 // packages/edtr-services/src/apollo/mutations/types.ts
 // merges two types
