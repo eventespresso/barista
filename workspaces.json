@@ -128,15 +128,15 @@
         "location": "packages/tpc"
     },
     {
+        "name": "@eventespresso/types",
+        "location": "packages/types"
+    },
+    {
         "name": "@eventespresso/ui-components",
         "location": "packages/ui-components"
     },
     {
         "name": "@eventespresso/utils",
         "location": "packages/utils"
-    },
-    {
-        "name": "@eventespresso/types",
-        "location": "packages/types"
     }
 ]
