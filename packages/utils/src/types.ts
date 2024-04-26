@@ -1,8 +1,3 @@
-// TODO: move to package 'edtr-services'
-// packages/edtr-services/src/apollo/mutations/types.ts
-// merges two types
-export type Merge<A, B> = Omit<A, keyof B> & B extends infer O ? { [K in keyof O]: O[K] } : never;
-
 export interface AnyObject<T = any> {
 	[key: string]: T;
 }
