@@ -1,6 +1,7 @@
 import type { Type } from '.';
 
 export const Currency = (config?: Partial<Type.Currency>): Type.Currency => {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const { subunits: exclude, ...defaults } = defaultCurrency;
 	const subunits = Subunits(config);
 	return { ...defaults, ...config, subunits };

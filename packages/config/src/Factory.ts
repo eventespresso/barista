@@ -15,18 +15,10 @@ import {
 } from '.';
 
 export class Factory {
-	public static make(): Type.Config {
-		const factory = new Factory(window.eventEspressoData);
-		return factory.get();
-	}
-
-	private api;
-	private config;
-
-	constructor(data?: EventEspressoData) {
-		this.api = data?.api;
-		this.config = data?.config;
-	}
+	constructor(
+		private readonly config?: EventEspressoData['config'],
+		private readonly api?: EventEspressoData['api']
+	) {}
 
 	get = (): Type.Config => ({
 		brandName: BrandName(this.config?.coreDomain.brandName),
