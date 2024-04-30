@@ -1,6 +1,6 @@
 import { GraphQLError } from 'graphql';
 
-import type { GeneralSettingsData } from '@eventespresso/services';
+import type { GeneralSettingsData } from '@eventespresso/data';
 import { GET_GENERAL_SETTINGS } from '..';
 import type { CacheQueryOptions } from '../../types';
 

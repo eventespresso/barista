@@ -54,3 +54,13 @@ export interface Address {
 	stateName?: string;
 	zip?: string;
 }
+
+export interface GeneralSettingsData {
+	generalSettings: GeneralSettings;
+}
+
+export interface GeneralSettings {
+	dateFormat: string;
+	timeFormat: string;
+	timezone: string;
+}

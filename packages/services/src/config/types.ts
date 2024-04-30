@@ -1,4 +1,4 @@
-import type { User } from '@eventespresso/data';
+import type { GeneralSettings, User } from '@eventespresso/data';
 
 import type { Capability } from '../permissions';
 
@@ -29,18 +29,6 @@ export interface CurrencyProps {
 	decimalMark: string;
 	thousandsSeparator: string;
 	subunits?: number;
-}
-
-// TODO: move under package 'data'
-export interface GeneralSettingsData {
-	generalSettings: GeneralSettings;
-}
-
-// TODO: move under package 'data'
-export interface GeneralSettings {
-	dateFormat: string;
-	timeFormat: string;
-	timezone: string;
 }
 
 // TODO: consolidate into package 'config'

@@ -1,6 +1,6 @@
-import type { User } from '@eventespresso/data';
+import type { GeneralSettings, User } from '@eventespresso/data';
 
-import type { CurrencyProps, GeneralSettings, SiteUrlProps } from './config/types';
+import type { CurrencyProps, SiteUrlProps } from './config/types';
 import type { Capability } from './permissions';
 
 // LATER: consolidate data types
