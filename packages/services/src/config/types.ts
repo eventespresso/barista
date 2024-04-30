@@ -2,35 +2,6 @@ import type { User } from '@eventespresso/data';
 
 import type { Capability } from '../permissions';
 
-// TODO: this type is unused
-export type JsDataProps = {
-	brandName: string;
-	currency_config: CurrencyProps;
-	eejs_api_nonce: string;
-	locale: JsDataLocaleProps;
-	paths: JsDataPathsProps;
-	default_timezone: JsDataTimezoneProps;
-};
-
-// TODO: this type is unused (implicit)
-type JsDataLocaleProps = {
-	user: string;
-	site: string;
-};
-
-// TODO: this type is unused (implicit)
-type JsDataPathsProps = {
-	admin_url: string;
-	site_url: string;
-};
-
-// TODO: this type is unused (implicit)
-type JsDataTimezoneProps = {
-	pretty: string;
-	string: string;
-	offset: number;
-};
-
 // TODO: consolidate into package 'config'
 export type ConfigDataProps = {
 	brandName: string;
