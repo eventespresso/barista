@@ -1,17 +1,18 @@
-import type { DateTimeFormatsProps } from '.';
+import type { Type } from '.';
 
-export const DateTimeFormats = (formats: DateTimeFormatsProps): DateTimeFormatsProps => {
-	const maybeDefault = {
-		dateFormat: formats?.dateFormat || defaultDateFormat,
-		timeFormat: formats?.timeFormat || defaultTimeFormat,
-		dateTimeFormat: '',
-	};
+export const DateTimeFormats = (config?: Type.DateTimeFormats): Type.DateTimeFormats => {
+	const date = config?.dateFormat ?? defaultsFormats.date;
+	const time = config?.timeFormat ?? defaultsFormats.time;
+	const format = config?.dateTimeFormat ?? date + ' ' + time;
 
 	return {
-		...maybeDefault,
-		dateTimeFormat: maybeDefault.dateFormat + ' ' + maybeDefault.timeFormat,
+		dateFormat: date,
+		timeFormat: time,
+		dateTimeFormat: format,
 	};
 };
 
-const defaultDateFormat = 'YYYY-MM-DD';
-const defaultTimeFormat = 'HH:mm:ss';
+const defaultsFormats = {
+	date: 'YYYY-MM-DD',
+	time: 'HH:mm:ss',
+} as const;

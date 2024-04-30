@@ -1,8 +1,8 @@
-import type { SiteUrlProps } from '.';
+import type { Type } from '.';
 
-export const SiteUrl = ({ admin, home }: SiteUrlProps): SiteUrlProps => {
-	return {
-		admin: admin || '',
-		home: home || '',
-	};
-};
+export const SiteUrl = (config?: Partial<Type.SiteUrls>): Type.SiteUrls => ({
+	admin: config?.admin ?? defaultUrl,
+	home: config?.home ?? defaultUrl,
+});
+
+const defaultUrl = '';

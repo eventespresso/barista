@@ -1,9 +1,7 @@
-import type { TimezoneProps } from '.';
+import type { Type } from '.';
 
-export const Timezone = ({ city, name, offset }: TimezoneProps): TimezoneProps => {
-	return {
-		city: city || 'UTC',
-		name: name || 'UTC',
-		offset: offset || 0,
-	};
-};
+export const Timezone = (config?: Partial<Type.Timezone>): Type.Timezone => ({
+	city: config?.city ?? 'UTC',
+	name: config?.name ?? 'UTC',
+	offset: config?.offset ?? 0,
+});

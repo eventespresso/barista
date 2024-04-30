@@ -1,13 +1,12 @@
-import type { LocaleProps } from '.';
+import type { Type } from '.';
 
-export const Locale = ({ user, site }: LocaleProps): LocaleProps => ({
-	user: createLocale(user),
-	site: createLocale(site),
+export const Locale = (config?: Partial<Type.Locale>): Type.Locale => ({
+	user: createLocale(config?.user ?? defaultLocale),
+	site: createLocale(config?.site ?? defaultLocale),
 });
 
 const defaultLocale = 'en-US';
 
-function createLocale(any?: string): string {
-	if (any) return any.replace('_', '-');
-	return defaultLocale;
+function createLocale(string: string): string {
+	return string.replace('_', '-');
 }
