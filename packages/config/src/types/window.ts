@@ -54,9 +54,9 @@ type Config = {
 	coreDomain: CoreDomain;
 	currentUser: User;
 	generalSettings: Type.GeneralSettings;
-	locale: LocaleDomData;
+	locale: Locale;
 	siteCurrency: Type.Currency;
-	sitePermissions: string[]; // LATER: consolidate data types
+	sitePermissions: Type.SitePermissions;
 	siteUrls: Type.SiteUrls;
 	wp_debug: boolean;
 };
@@ -69,16 +69,10 @@ type I18n = {
 	};
 };
 
-interface LocaleDomData {
+interface Locale {
 	user: string;
-	siteTimezone: LocaleTimezoneDomData;
 	site: string;
-}
-
-interface LocaleTimezoneDomData {
-	city: string;
-	name: string;
-	offset: number;
+	siteTimezone: Type.Timezone;
 }
 
 type Api = {

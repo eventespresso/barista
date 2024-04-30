@@ -1,6 +1,6 @@
 import type { Type } from '.';
 
-export const DateTimeFormats = (config?: Type.DateTimeFormats): Type.DateTimeFormats => {
+export const DateTimeFormats = (config?: Partial<Type.DateTimeFormats>): Type.DateTimeFormats => {
 	const date = config?.dateFormat ?? defaultsFormats.date;
 	const time = config?.timeFormat ?? defaultsFormats.time;
 	const format = config?.dateTimeFormat ?? date + ' ' + time;

@@ -1,7 +1,14 @@
+export * from './types';
+
 export * from './Currency';
 export * from './DateTimeFormats';
 export * from './Locale';
-export * from './SiteUrl';
+export * from './SiteUrls';
 export * from './Timezone';
-
-export * from './types';
+export * from './BrandName';
+export * from './Factory';
+export * from './Nonce';
+export * from './WpDebug';
+export * from './User';
+export * from './GeneralSettings';
+export * from './SitePermissions';

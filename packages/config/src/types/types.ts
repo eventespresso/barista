@@ -1,4 +1,4 @@
-import type { User } from '@eventespresso/data';
+import type { User as _User } from '@eventespresso/data';
 
 export module Type {
 	export interface Currency {
@@ -22,6 +22,7 @@ export module Type {
 	export interface Locale {
 		user: string;
 		site: string;
+		siteTimezone: Timezone;
 	}
 
 	export interface SiteUrls {
@@ -42,16 +43,26 @@ export module Type {
 	}
 
 	export interface Config {
-		brandName: string;
+		brandName: BrandName;
 		currency: Currency;
 		currentUser: User; // LATER: consolidate data types
 		dateTimeFormats: DateTimeFormats;
 		generalSettings: GeneralSettings;
 		locale: Locale;
-		nonce: string;
-		sitePermissions?: string[]; // LATER: consolidate data types
+		nonce: Nonce;
+		sitePermissions?: SitePermissions;
 		siteUrl: SiteUrls;
 		timezone: Timezone;
-		wp_debug: boolean;
+		wp_debug: WpDebug;
 	}
+
+	export type BrandName = string;
+
+	export type Nonce = string;
+
+	export type WpDebug = boolean;
+
+	export type User = _User;
+
+	export type SitePermissions = string[]; // LATER: consolidate data types
 }
