@@ -46,7 +46,7 @@ export enum EdtrGlobalModals {
 	TPC = 'tpc',
 }
 
-// TODO: consolidate data types
+// LATER: consolidate data types
 export enum QueryURLRegStatus {
 	APPROVED = 'RAP',
 	PENDING = 'RPP',

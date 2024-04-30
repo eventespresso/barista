@@ -15,7 +15,7 @@ import type {
  * @see plugins/event-espresso-core/core/domain/services/graphql/types
  */
 
-// TODO: consolidate data types
+// LATER: consolidate data types
 export interface Attendee extends Entity, Address {
 	avatar?: string;
 	bio?: string;
@@ -31,14 +31,14 @@ export type AttendeeEdge<Connection = 'EspressoRootQueryAttendeesConnection'> = 
 
 export type AttendeesList = AttendeeList<AttendeeEdge>;
 
-// TODO: consolidate data types
+// LATER: consolidate data types
 export interface Event extends Entity {
 	description: string;
 	name: string;
 	shortDescription: string;
 }
 
-// TODO: consolidate data types
+// LATER: consolidate data types
 export interface EventData {
 	espressoEvent: Event;
 }
@@ -47,7 +47,7 @@ export type EventEdge<Connection = 'RootQueryToEspressoEventConnection'> = Entit
 
 export type EventsList = EventList<EventEdge>;
 
-// TODO: consolidate data types
+// LATER: consolidate data types
 export interface Datetime extends Entity {
 	name: string;
 }
@@ -56,7 +56,7 @@ export type DatetimeEdge<Connection = 'EspressoRootQueryDatetimesConnection'> = 
 
 export type DatetimesList = DatetimeList<DatetimeEdge>;
 
-// TODO: consolidate data types
+// LATER: consolidate data types
 export interface Ticket extends Entity {
 	name: string;
 }

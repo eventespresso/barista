@@ -11,7 +11,7 @@ import type {
 
 import type { StartAndEndDate } from '@eventespresso/types';
 
-// TODO: consolidate data types
+// LATER: consolidate data types
 export interface Event extends Entity {
 	allowDonations: boolean;
 	allowOverflow: boolean;
@@ -42,12 +42,12 @@ export interface Event extends Entity {
 
 export type EventManager = Pick<User, 'id' | 'name'>;
 
-// TODO: consolidate data types
+// LATER: consolidate data types
 export interface EventData {
 	espressoEvent: Event;
 }
 
-// TODO: consolidate data types
+// LATER: consolidate data types
 export enum DateStatus {
 	soldOut = 'DTS',
 	active = 'DTA',
@@ -58,7 +58,7 @@ export enum DateStatus {
 	inactive = 'DTI',
 }
 
-// TODO: consolidate data types
+// LATER: consolidate data types
 export interface Datetime extends Entity, Trashable, StartAndEndDate.Type.String {
 	__typename: 'EspressoDatetime';
 	capacity: number;
@@ -91,7 +91,7 @@ export type DatetimeEdge<Connection = 'EspressoRootQueryDatetimesConnection'> = 
 
 export type DatetimesList = DatetimeList<DatetimeEdge>;
 
-// TODO: consolidate data types
+// LATER: consolidate data types
 export interface Price extends Entity, Trashable {
 	amount: number;
 	description: string;
@@ -113,7 +113,7 @@ export interface PricesList {
 
 export type TicketVisibility = 'ADMINS_ONLY' | 'ADMIN_UI_ONLY' | 'MEMBERS_ONLY' | 'NONE' | 'PUBLIC';
 
-// TODO: consolidate data types
+// LATER: consolidate data types
 export interface Ticket extends Entity, Trashable, StartAndEndDate.Type.String {
 	description: string;
 	isDefault: boolean;
@@ -154,7 +154,7 @@ export enum PriceBasetype {
 	TAX = 'TAX',
 }
 
-// TODO: consolidate data types
+// LATER: consolidate data types
 export interface PriceType extends Entity, Trashable {
 	baseType: PriceBasetype;
 	isBasePrice: boolean;
@@ -171,7 +171,7 @@ export interface PriceTypesList {
 	espressoPriceTypes: PriceTypeEdge;
 }
 
-// TODO: consolidate data types
+// LATER: consolidate data types
 export interface Venue extends Entity, Address {
 	capacity: number;
 	description: string;

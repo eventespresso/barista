@@ -2,7 +2,8 @@ import type { EntityId } from '@eventespresso/data';
 import type { Ticket, TicketVisibility } from '../../';
 import { BulkUpdateInput } from '../types';
 
-// TODO: this looks like a near-identical duplicate of Ticket
+// LATER: consolidate date types
+// this looks like a near-identical duplicate of Ticket
 // packages/edtr-services/src/apollo/types.ts
 export interface TicketBaseInput {
 	datetimes?: Array<EntityId>;

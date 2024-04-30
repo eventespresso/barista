@@ -1,7 +1,7 @@
 import { BlockEditProps } from '@wordpress/blocks';
 import type { AttendeesOrderByFields, EntityId, Order, RegistrationStatus } from '@eventespresso/data';
 
-// TODO: consolidate data types
+// LATER: consolidate data types
 export interface EventAttendeesAttributes {
 	event: EntityId;
 	datetime: EntityId;
