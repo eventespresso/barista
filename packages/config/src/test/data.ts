@@ -1,6 +1,6 @@
-import type { EventEspressoDomData } from '..';
+import type { EventEspressoData } from '..';
 
-export const mockEspressoDomData: EventEspressoDomData = {
+export const mockEspressoDomData: EventEspressoData = {
 	api: {
 		graphqlEndpoint: 'http://www.dev.test/graphql',
 		restApiBaseUrl: 'http://www.dev.test/wp-json/',
