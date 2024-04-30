@@ -12,3 +12,5 @@ export * from './WpDebug';
 export * from './User';
 export * from './GeneralSettings';
 export * from './SitePermissions';
+
+export * as test from './test';

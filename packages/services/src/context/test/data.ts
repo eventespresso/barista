@@ -1,6 +1,6 @@
 import { GET_CURRENT_USER, GET_GENERAL_SETTINGS } from '@eventespresso/data';
 import type { MockedResponse } from '@eventespresso/edtr-services/src/context/test/types';
-import { mockEspressoDomData } from '../../config/test/data';
+import { test as configTest } from '@eventespresso/config';
 
 export const configMocks: ReadonlyArray<MockedResponse> = [
 	{
@@ -10,7 +10,7 @@ export const configMocks: ReadonlyArray<MockedResponse> = [
 		},
 		result: {
 			data: {
-				viewer: mockEspressoDomData.config.currentUser,
+				viewer: configTest.mockData.config.currentUser,
 			},
 		},
 	},
@@ -21,7 +21,7 @@ export const configMocks: ReadonlyArray<MockedResponse> = [
 		},
 		result: {
 			data: {
-				generalSettings: mockEspressoDomData.config.generalSettings,
+				generalSettings: configTest.mockData.config.generalSettings,
 			},
 		},
 	},

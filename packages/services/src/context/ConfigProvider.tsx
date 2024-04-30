@@ -1,9 +1,10 @@
+import { type Type as ConfigType, DateTimeFormats } from '@eventespresso/config';
 import { createContext, useMemo } from 'react';
 
-import { DateTimeFormats, useConfigData, ConfigDataProps } from '../config';
+import { useConfigData } from '../config';
 import { useCurrentUser, useGeneralSettings } from '@eventespresso/data';
 
-const ConfigContext = createContext<ConfigDataProps | null>(null);
+const ConfigContext = createContext<ConfigType.Config | null>(null);
 
 const { Provider, Consumer: ConfigConsumer } = ConfigContext;
 
@@ -12,7 +13,7 @@ const ConfigProvider: React.FC = ({ children }) => {
 	const currentUser = useCurrentUser();
 	const generalSettings = useGeneralSettings();
 
-	const config: ConfigDataProps = useMemo(
+	const config: ConfigType.Config = useMemo(
 		() => ({
 			...ConfigData,
 			currentUser,
