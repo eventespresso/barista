@@ -1,11 +1,8 @@
 import type { StartAndEndDate } from '..';
-import type { Entity, Venue } from '.';
+import type { Node, Venue } from '.';
 
 export module Datetime {
-	export interface Interface
-		extends Entity.Interface<'EspressoDatetime'>,
-			Entity.Trashable,
-			StartAndEndDate.Type.String {
+	export interface Interface extends Node.Interface<'EspressoDatetime'>, Node.Trashable, StartAndEndDate.Type.String {
 		capacity: number;
 		description: string;
 		isActive: boolean;

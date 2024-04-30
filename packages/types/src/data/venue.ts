@@ -1,7 +1,7 @@
-import type { Entity } from '.';
+import type { Node } from '.';
 
 export module Venue {
-	export interface Interface extends Entity.Interface<'EspressoVenue'> {
+	export interface Interface extends Node.Interface<'EspressoVenue'> {
 		capacity: number;
 		description: string;
 		googleMapLink: string;

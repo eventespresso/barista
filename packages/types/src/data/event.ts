@@ -1,7 +1,7 @@
-import type { Entity, User, Venue } from '.';
+import type { Node, User, Venue } from '.';
 
 export module Event {
-	export interface Interface extends Entity.Interface<'EspressoEvent'> {
+	export interface Interface extends Node.Interface<'EspressoEvent'> {
 		allowDonations: boolean;
 		allowOverflow: boolean;
 		altRegPage: string;
