@@ -1,52 +1,27 @@
-import { useMemoStringify } from '@eventespresso/hooks';
+import { Type as ConfigType, Factory as ConfigFactory } from '@eventespresso/config';
 import { useMemo } from 'react';
-import { Currency, DateTimeFormats, Locale, LocaleProps, SiteUrl, Timezone, ConfigDataProps } from './';
 
-export const useConfigData = (): ConfigDataProps => {
-	const api = useMemoStringify(window?.eventEspressoData?.api);
-	const config = useMemoStringify(window?.eventEspressoData?.config);
+type Config = ConfigType.Config;
 
+export const useConfigData = (): Config => {
 	return useMemo(
 		() => ({
-			brandName: config?.coreDomain?.brandName || 'Event Espresso',
-			currency: Currency(config?.siteCurrency),
-			currentUser: config?.currentUser,
-			generalSettings: config?.generalSettings,
-			dateTimeFormats: DateTimeFormats({
-				dateFormat: config?.generalSettings?.dateFormat,
-				timeFormat: config?.generalSettings?.timeFormat,
-			}),
-			locale: Locale({
-				site: config?.locale?.site || '',
-				siteTimezone: config?.locale?.siteTimezone || {},
-				user: config?.locale?.user || '',
-			} as LocaleProps),
-			nonce: api?.restApiNonce || '',
-			sitePermissions: config?.sitePermissions || [],
-			siteUrl: SiteUrl({
-				admin: config?.siteUrls?.admin || '',
-				home: config?.siteUrls?.home || '',
-			}),
-			timezone: Timezone({
-				city: config?.locale?.siteTimezone?.city || '',
-				name: config?.locale?.siteTimezone?.name || '',
-				offset: config?.locale?.siteTimezone?.offset || 0,
-			}),
-			wp_debug: config?.wp_debug || false,
+			...ConfigFactory.make(),
 		}),
 		[
-			api?.restApiNonce,
-			config?.coreDomain?.brandName,
-			config?.currentUser,
-			config?.generalSettings,
-			config?.locale?.site,
-			config?.locale?.siteTimezone,
-			config?.locale?.user,
-			config?.siteCurrency,
-			config?.sitePermissions,
-			config?.siteUrls?.admin,
-			config?.siteUrls?.home,
-			config?.wp_debug,
+			// this type comes from package '@eventespresso/config'
+			window.eventEspressoData.api?.restApiNonce,
+			window.eventEspressoData.config?.coreDomain?.brandName,
+			window.eventEspressoData.config?.currentUser,
+			window.eventEspressoData.config?.generalSettings,
+			window.eventEspressoData.config?.locale?.site,
+			window.eventEspressoData.config?.locale?.siteTimezone,
+			window.eventEspressoData.config?.locale?.user,
+			window.eventEspressoData.config?.siteCurrency,
+			window.eventEspressoData.config?.sitePermissions,
+			window.eventEspressoData.config?.siteUrls?.admin,
+			window.eventEspressoData.config?.siteUrls?.home,
+			window.eventEspressoData.config?.wp_debug,
 		]
 	);
 };
