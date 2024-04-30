@@ -3,7 +3,7 @@ import type { GeneralSettings, User } from '@eventespresso/data';
 import type { CurrencyProps, SiteUrlProps } from './config/types';
 import type { Capability } from './permissions';
 
-// LATER: consolidate data types
+// TODO: consolidate into package 'config'
 export interface EventEspressoDomData {
 	api: ApiDomData;
 	config: ConfigDomData;
@@ -12,7 +12,7 @@ export interface EventEspressoDomData {
 	i18n: I18nData;
 }
 
-// LATER: consolidate data types
+// TODO: consolidate into package 'config'
 export type ApiDomData = {
 	graphqlEndpoint: string;
 	restApiBaseUrl: string;
@@ -34,7 +34,7 @@ export type ConfigDomData = {
 	wp_debug: boolean;
 };
 
-// LATER: consolidate data types
+// TODO: consolidate into package 'config'
 export type CoreDomainDomData = {
 	assetNamespace: string;
 	brandName: string;
@@ -45,19 +45,19 @@ export type CoreDomainDomData = {
 	pluginUrl: string;
 };
 
-// LATER: consolidate data types
+// TODO: consolidate into package 'config'
 export interface EspressoTranslations {
 	[key: string]: any; // translation strings
 }
 
-// LATER: consolidate data types
+// TODO: consolidate into package 'config'
 export interface I18nInfo {
 	domain: string; // e.g. "event_espresso"
 	lang: string; // e.g. "en_US"
 	plural_forms?: string;
 }
 
-// LATER: consolidate data types
+// TODO: consolidate into package 'config'
 export type I18nData = {
 	'': I18nInfo;
 };
