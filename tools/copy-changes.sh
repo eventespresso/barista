@@ -66,7 +66,7 @@ ASSETS_PATH="$REPO_DIR/$ASSETS_PATH"
 I18N_PATH="$REPO_DIR/$I18N_PATH"
 
 printf "\n%b" "$CYAN"
-printf "\BASE_DIR    : %s" "$BASE_DIR"
+printf "\nBASE_DIR   : %s" "$BASE_DIR"
 printf "\nBUILD_PATH : %s" "$BUILD_PATH"
 printf "\nREPO_DIR   : %s" "$REPO_DIR"
 printf "\nASSETS_PATH: %s" "$ASSETS_PATH"
