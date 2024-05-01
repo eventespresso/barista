@@ -39,7 +39,7 @@ DEPLOY_I18N=${7:-yes}
 BASE_DIR=$8
 
 if [[ -z "$BASE_DIR" ]]; then
-	BASE_DIR=$(dirname "$GITHUB_WORKSPACE")
+	BASE_DIR="$GITHUB_WORKSPACE"
 fi
 
 if [[ -z "$REPO_DIR" ]]; then
