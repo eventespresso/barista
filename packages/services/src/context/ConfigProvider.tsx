@@ -1,4 +1,5 @@
-import { type Type as ConfigType, DateTimeFormats } from '@eventespresso/config';
+import type { Type as ConfigType } from '@eventespresso/config';
+import { DateTimeFormats } from '@eventespresso/config';
 import { createContext, useMemo } from 'react';
 
 import { useConfigData } from '../config';
