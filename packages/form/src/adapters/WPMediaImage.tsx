@@ -4,6 +4,7 @@ import { __ } from '@eventespresso/i18n';
 import { Image } from '@eventespresso/adapters';
 import { CloseOutlined } from '@eventespresso/icons';
 import { Button, IconButton } from '@eventespresso/ui-components';
+import type {} from '@eventespresso/types'; // imports global window type 'wp'
 
 import type { FieldRendererProps } from '../types';
 import Text from './Text';

@@ -22,12 +22,6 @@ declare global {
 		eventEspressoData: EventEspressoData;
 
 		/**
-		 * Global window object exposed by WordPress
-		 * @link https://codex.wordpress.org/Javascript_Reference/wp
-		 */
-		wp: WordPress;
-
-		/**
 		 * A full url to directory `build` of this repository with trailing slash included
 		 *
 		 * Exists *only* when plugin [`Barista for Event Espresso`](https://github.com/eventespresso/barista/blob/master/ee-barista.php) is enabled
@@ -101,5 +95,3 @@ type ESModule = {
 };
 
 type EventEspresso = Record<string, ESModule>;
-
-type WordPress = unknown;
