@@ -29,6 +29,7 @@ export type EntityCardDetailsSubscriptionCb<T extends string, EP extends Element
 ) => void;
 
 /* UI related types */
+// LATER: use more appropriate types (more narrow) instead of generic ones
 export interface EntityCardDetailsOptions<D extends string, ET extends string> extends BaseSubscriptionOptions<D> {
 	entityType: ET;
 	entityId: string;

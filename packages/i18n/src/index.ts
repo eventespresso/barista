@@ -1,8 +1,7 @@
 /* eslint-disable @wordpress/i18n-no-variables */
 /* eslint-disable @wordpress/i18n-text-domain */
-// import global types.
-import '../../../types';
 import * as wpI18n from '@wordpress/i18n';
+import type {} from '@eventespresso/types';
 
 const i18nData = window?.eventEspressoData?.i18n;
 export const TEXT_DOMAIN = 'event_espresso';

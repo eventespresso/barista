@@ -1,5 +1,4 @@
 import type { AriaAttributes } from 'react';
-import type { AnyObject } from '@eventespresso/utils';
 
 /* alignments correspond to CSS flexbox justify-content values */
 export type Alignments =
@@ -18,7 +17,7 @@ export interface ConditionalElementProps extends AriaAttributes {
 	tag: 'aside' | 'div' | 'footer' | 'header' | 'p' | 'section';
 }
 
-export interface ContainerProps extends AnyObject, AriaAttributes {
+export interface ContainerProps extends Record<string, any>, AriaAttributes {
 	classes?: ContainerClasses;
 	content?: React.ReactNode;
 	footer?: React.ReactNode;

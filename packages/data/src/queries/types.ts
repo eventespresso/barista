@@ -1,6 +1,7 @@
 import type { ApolloError, DataProxy, QueryHookOptions, OperationVariables } from '@apollo/client';
 import type { DocumentNode } from 'graphql';
 
+// LATER: what is 'WhereArgs'? 'any'?
 export interface EntityQueryArgs<WhereArgs> {
 	after?: string;
 	before?: string;

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useForm, AnyObject } from 'react-final-form';
+import { useForm } from 'react-final-form';
 
 import { isEqualJson } from '@eventespresso/utils';
 
-const useFormValues = <T extends AnyObject>(initialValue?: T): T => {
+const useFormValues = <T extends Record<string, any>>(initialValue?: T): T => {
 	const [formValues, setFormValues] = useState(initialValue);
 
 	const form = useForm<T>();

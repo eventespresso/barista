@@ -1,4 +1,5 @@
-import { CalendarBaseProps } from '../types';
+import type { CalendarBaseProps } from '../types';
+import type { StartAndEndDate } from '@eventespresso/types';
 
 export interface CalendarDateLabels {
 	header?: string;
@@ -9,13 +10,11 @@ export interface CalendarDateLabels {
 	footerFuture?: string;
 }
 
-export interface CalendarDateSwitcherProps extends CalendarBaseProps {
+export interface CalendarDateSwitcherProps extends CalendarBaseProps, StartAndEndDate.Type.String {
 	className?: string;
 	displayDate: DisplayStartOrEndDate;
-	endDate: string;
 	labels?: CalendarDateLabels;
 	showDate?: boolean;
-	startDate: string;
 }
 
 export enum DisplayStartOrEndDate {

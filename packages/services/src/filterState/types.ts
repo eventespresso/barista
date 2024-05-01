@@ -1,11 +1,10 @@
 import type { Entity } from '@eventespresso/data';
+import type { PaginationState } from '@eventespresso/hooks';
 import type { ListView } from '@eventespresso/ui-components';
 
 export type BasicSortBy = 'name' | 'id';
 
-export interface EntityListFilterState<SortBy = BasicSortBy> extends ListView {
-	pageNumber: number;
-	perPage: number;
+export interface EntityListFilterState<SortBy = BasicSortBy> extends ListView, PaginationState {
 	searchText: string;
 	sortBy: SortBy;
 	total: number;

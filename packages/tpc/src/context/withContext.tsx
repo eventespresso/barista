@@ -1,8 +1,7 @@
-import type { AnyObject } from '@eventespresso/utils';
 import { ContextProvider } from './ContextProvider';
 import type { WithContextProps } from './types';
 
-const withContext = <P extends AnyObject>(
+const withContext = <P extends Record<string, any>>(
 	Component: React.ComponentType<P>,
 	contextProps: WithContextProps
 ): React.FC<P> => {

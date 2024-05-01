@@ -4,7 +4,6 @@ import { PRICE_FIELDS, PRICE_INPUT_FIELDS } from '../priceFields';
 import { isDefault } from '../../common';
 
 import type { Price } from '@eventespresso/edtr-services';
-import type { BoolField, EntityFieldPred } from '@eventespresso/utils';
 
 // is a base price ?
 export const isBasePrice: EntityFieldPred<'isBasePrice', boolean> = propEq('isBasePrice', true);
@@ -46,6 +45,8 @@ export const isDefaultTax: EntityFieldPred<'isDefault' | 'isTax', boolean> = all
 // returns price if found in array of prices
 export const getBasePrice = <P extends BoolField<'isBasePrice'>>(prices: Array<P>): P => find<P>(isBasePrice)(prices);
 
+// LATER: these types are wrong
+
 // returns array of prices that satisfy predicate
 export const getTaxes = <P extends BoolField<'isTax'>>(prices: Array<P>): Array<P> => filter<P>(isTax, prices);
 
@@ -80,3 +81,7 @@ export const priceHasPriceModifiers = (prices: Price[]): boolean => {
 	const modifiers = getPriceModifiers(prices);
 	return !isEmpty(modifiers);
 };
+
+export type EntityFieldPred<Field extends string, FieldType = any> = (entity: Record<Field, FieldType>) => boolean;
+
+type BoolField<F extends string> = Record<F, boolean>;

@@ -1,15 +1,13 @@
 import { useCallback, useState, useEffect, useMemo } from 'react';
 import { sum } from 'ramda';
 
-import type { AnyObject } from '@eventespresso/utils';
-
-export interface Progress<T extends AnyObject> {
+export interface Progress<T extends Record<string, any>> {
 	incrementProgress: (forItem: keyof T) => VoidFunction;
 	totalProgress: number;
 	updateProgress: (forItem: keyof T, value?: number) => any;
 }
 
-export type UseProgress = <T extends AnyObject>(totalItems: number, initialProgress?: T) => Progress<T>;
+export type UseProgress = <T extends Record<string, any>>(totalItems: number, initialProgress?: T) => Progress<T>;
 
 const DEFAULT_INITIAL_PROGRESS = {};
 

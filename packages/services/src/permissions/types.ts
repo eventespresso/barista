@@ -1,6 +1,6 @@
 import type { EntityId } from '@eventespresso/data';
-import type { AnyObject } from '@eventespresso/utils';
 
+// TODO: consolidate data types
 export type Capability = string;
 
 type EntityWithoutDefault = 'ticket' | 'price' | 'price_type';
@@ -22,4 +22,4 @@ export type CurrentUserCanHOC = <E extends Record<'userId', EntityId>>(
 	capability: 'read' | 'edit' | 'delete' | Capability,
 	entityType?: EntityType,
 	entity?: Entity<E>
-) => <P extends AnyObject>(Component: React.FC<P>) => React.FC<P>;
+) => <P extends Record<string, any>>(Component: React.FC<P>) => React.FC<P>;

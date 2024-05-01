@@ -2,7 +2,6 @@ import { InputHTMLAttributes } from 'react';
 
 import type { NumberInputProps } from '@eventespresso/adapters';
 import type { SelectProps } from '@eventespresso/ui-components';
-import type { AnyObject } from '@eventespresso/utils';
 
 import type { PriceModifierProps, TpcPriceModifier } from '../types';
 
@@ -190,7 +189,7 @@ type ExtraSelectProps = Omit<
 
 export interface BaseFieldProps<V = FieldValue> extends InputProps, ExtraNumberProps, ExtraSelectProps {
 	'aria-label': string;
-	children?: ((props: AnyObject) => React.ReactNode) | React.ReactNode;
+	children?: ((props: Record<string, any>) => React.ReactNode) | React.ReactNode;
 	component?: React.ComponentType | SupportedInputs;
 	disabled?: boolean;
 	format?: (value: V, name: string) => any;

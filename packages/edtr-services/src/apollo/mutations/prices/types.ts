@@ -1,6 +1,8 @@
 import type { EntityId } from '@eventespresso/data';
 import type { Price } from '../../';
 
+// TODO: this looks like a near-identical duplicate of Price
+// packages/edtr-services/src/apollo/types.ts
 export interface PriceBaseInput {
 	amount?: number;
 	description?: string;

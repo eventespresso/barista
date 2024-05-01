@@ -1,4 +1,4 @@
-import type { KeysOfType } from '@eventespresso/utils';
+import type { KeysOfType } from '..';
 import type { DatetimeBaseInput } from './types';
 
 export const NUMERIC_FIELDS: Array<KeysOfType<DatetimeBaseInput, number>> = [

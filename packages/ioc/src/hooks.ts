@@ -8,7 +8,6 @@ import {
 	removeAction,
 	removeFilter,
 } from '@wordpress/hooks';
-import type { OmitFirstFromArray } from '@eventespresso/utils';
 
 export { addAction, addFilter, applyFilters, doAction, doingAction, doingFilter, removeAction, removeFilter };
 
@@ -61,3 +60,6 @@ export const getHooks = <A extends ActionObject, F extends ActionObject>(): Hook
 		removeFilter,
 	} as Hooks<A, F>;
 };
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+type OmitFirstFromArray<T extends any[]> = T extends [infer A, ...infer R] ? R : never;

@@ -1,13 +1,12 @@
 import { useCallback, useMemo } from 'react';
 
 import { sprintf, __ } from '@eventespresso/i18n';
-import type { AnyObject } from '@eventespresso/utils';
 import type { EspressoFormProps, FieldProps } from '@eventespresso/form';
 
 import { useUpsellAd, useUpsellAdMutator, useDomData } from '../../services';
 import { containerClassOptions, eventEditorLocationOptions, templates } from './constants';
 
-type UpsellFormConfig = EspressoFormProps<AnyObject>;
+type UpsellFormConfig = EspressoFormProps<Record<string, any>>;
 
 const nonEdtrFieldConditions: FieldProps['conditions'] = [
 	{

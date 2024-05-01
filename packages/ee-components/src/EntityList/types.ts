@@ -26,7 +26,7 @@ export interface EntityListItemProps<E extends Entity = Entity> {
 	id?: EntityId;
 }
 
-export interface EntityListViewProps</* E extends Entity,  */ FS extends ELFSM> /* extends EntityListBaseProps<E>  */ {
+export interface EntityListViewProps<FS extends ELFSM> {
 	className?: string;
 	filterState: FS;
 }
@@ -38,7 +38,7 @@ interface BodyRowGeneratorFnProps<FS extends ELFSM> {
 export type BodyRowGeneratorFn<FS extends ELFSM> = (props: BodyRowGeneratorFnProps<FS>) => BodyRow;
 export type HeaderRowGeneratorFn<FS extends ELFSM> = (filerState: FS) => HeaderRow;
 
-export interface EntityTableProps<FS extends ELFSM> extends EntityListViewProps</* E,  */ FS> {
+export interface EntityTableProps<FS extends ELFSM> extends EntityListViewProps<FS> {
 	bodyRowGenerator: BodyRowGeneratorFn<FS>;
 	domain: string;
 	entityIds: Array<EntityId>;

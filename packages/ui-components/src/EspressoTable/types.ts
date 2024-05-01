@@ -1,4 +1,3 @@
-import type { AnyObject } from 'react-final-form';
 import type { Size } from '../';
 
 export interface Cell {
@@ -36,7 +35,7 @@ export interface HeaderRow {
 	cells: CellData[];
 	children?: React.ReactNode;
 	className?: string;
-	extraProps?: AnyObject;
+	extraProps?: Record<string, any>;
 	id?: string;
 	key: string;
 	primary: boolean;

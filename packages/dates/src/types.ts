@@ -1,4 +1,5 @@
-import { ReactDatePickerProps } from 'react-datepicker';
+import type { ReactDatePickerProps } from 'react-datepicker';
+import type { StartAndEndDate } from '@eventespresso/types';
 
 type OmittedProps = 'value' | 'onChange' | 'locale';
 
@@ -24,11 +25,9 @@ export interface DateRangePickerProps extends ShowTime, Omit<ReactDatePickerProp
 	value?: DateRange;
 }
 
-export interface RangeFormatProps extends ShowTime {
-	endDate: string;
+export interface RangeFormatProps extends ShowTime, StartAndEndDate.Type.String {
 	formatFn?: (date: Date, formatStr: string) => string;
 	formatTokens: RangeFormatTokens;
-	startDate: string;
 }
 
 export interface RangeFormatTokens {

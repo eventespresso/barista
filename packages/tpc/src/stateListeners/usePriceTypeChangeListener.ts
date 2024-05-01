@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { assocPath } from 'ramda';
 
-import type { AnyObject } from '@eventespresso/utils';
 import { useDataState } from '../data';
 import { useUpdatePriceTypeForPrice } from '../utils';
 import { StateChangeListenerHook } from './types';
@@ -17,7 +16,7 @@ const usePriceTypeChangeListener: StateChangeListenerHook = () => {
 	 *     [price.id]: price.priceType
 	 * }
 	 */
-	const priceTypeMapping = useRef<AnyObject<string>>({});
+	const priceTypeMapping = useRef<Record<string, string>>({});
 
 	const [priceTypesStr, setPriceTypesStr] = useState('');
 

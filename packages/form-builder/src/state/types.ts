@@ -1,13 +1,11 @@
 import type { Reducer, ReducerState } from 'react';
 
-import type { AnyObject } from '@eventespresso/utils';
-
 import type { FormSection, FormElement } from '../types';
 import type { FormStateProviderProps } from '../context';
 
 export interface FormState {
-	sections: AnyObject<FormSection>;
-	elements: AnyObject<FormElement>;
+	sections: Record<string, FormSection>;
+	elements: Record<string, FormElement>;
 	deletedSections: Array<string>;
 	deletedElements: Array<string>;
 	topLevelSection: string;

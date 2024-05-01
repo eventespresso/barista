@@ -7,7 +7,6 @@ import type {
 	MutationUpdaterFn,
 	OperationVariables,
 } from '@eventespresso/data';
-import type { Merge, AnyObject } from '@eventespresso/utils';
 import type { ShiftDateArgs } from '@eventespresso/dates';
 import type { Datetime, DatetimeEdge, Ticket, TicketEdge, Price, PriceEdge } from '../types';
 
@@ -121,10 +120,17 @@ export type UpdaterCallback = <E extends Entity, MI extends MutationInput = Muta
 	args: UpdaterCallbackArgs<E, MI>
 ) => MutationUpdaterFn;
 
-export interface BulkUpdateInput<T extends AnyObject = AnyObject> {
+export interface BulkUpdateInput<T extends Record<string, any> = Record<string, any>> {
 	sharedInput?: T;
 	uniqueInputs: Array<T>;
 }
 export interface BulkEditFormBaseShape extends Partial<ShiftDateArgs> {
 	shiftDates?: ShiftDateArgs;
 }
+
+export type KeysOfType<Obj, Type> = {
+	[K in keyof Obj]: Obj[K] extends Type ? K : never;
+}[keyof Obj];
+
+// merges two types
+type Merge<A, B> = Omit<A, keyof B> & B extends infer O ? { [K in keyof O]: O[K] } : never;

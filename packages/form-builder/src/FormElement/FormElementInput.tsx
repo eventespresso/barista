@@ -1,7 +1,7 @@
 import { memo, useMemo } from 'react';
 
 import { FormControl, FormHelperText } from '@eventespresso/adapters';
-import { AnyObject, getPropsAreEqual, safeNumber } from '@eventespresso/utils';
+import { getPropsAreEqual, safeNumber } from '@eventespresso/utils';
 import { getDaysDropdownOptions, getMonthsDropdownOptions, getYearsDropdownOptions } from '@eventespresso/dates';
 
 import { MappedElement } from './MappedElement';
@@ -15,7 +15,7 @@ export const FormElementInput = memo<FormElementProps>(({ element }) => {
 	const label = element.label?.publicLabel || element.label?.adminLabel;
 
 	const props = useMemo(() => {
-		let inputProps: AnyObject = {
+		let inputProps: Record<string, any> = {
 			placeholder: element.attributes?.placeholder,
 			// ensure that the field is not required inside form builder 😄
 			required: false,

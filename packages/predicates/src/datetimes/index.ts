@@ -16,5 +16,4 @@ export * from './datetimeFields';
 export * from './filters';
 export * from './selectionPredicates';
 export * from './stripTimezoneFormat';
-export * from './types';
 export * from './updatePredicates';

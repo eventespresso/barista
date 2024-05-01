@@ -1,10 +1,10 @@
 import type { Reducer, ReducerState } from 'react';
 
-import type { AnyObject } from '@eventespresso/utils';
 import type { Entity, EntityId } from '@eventespresso/data';
 import type { TpcPriceModifier } from '@eventespresso/tpc';
 import type { Ticket, UpdateTicketInput } from '@eventespresso/edtr-services';
 
+// TODO: consolidate data types
 export interface DefaultTicket extends Entity, Omit<UpdateTicketInput, 'prices' | 'id'>, Pick<Ticket, 'userId'> {
 	deletedPrices?: Array<EntityId>;
 	prices?: Array<TpcPriceModifier>;
@@ -12,15 +12,10 @@ export interface DefaultTicket extends Entity, Omit<UpdateTicketInput, 'prices' 
 	isModified?: boolean;
 }
 
-export type StartAndEndDate = {
-	startDate: Date;
-	endDate: Date;
-};
-
 export interface DataState {
 	deletedTickets: Array<EntityId>;
 	isDirty: boolean;
-	tickets: AnyObject<DefaultTicket>;
+	tickets: Record<string, DefaultTicket>;
 }
 
 export type DataActionType = 'ADD_TICKET' | 'ADD_TICKET_TO_DELETED' | 'UPDATE_TICKET' | 'DELETE_TICKET' | 'RESET';

@@ -1,5 +1,5 @@
-import type { KeysOfType } from '@eventespresso/utils';
-import { TicketBaseInput } from './types';
+import type { KeysOfType } from '..';
+import type { TicketBaseInput } from './types';
 
 export const NUMERIC_FIELDS: Array<KeysOfType<TicketBaseInput, number>> = [
 	'max',

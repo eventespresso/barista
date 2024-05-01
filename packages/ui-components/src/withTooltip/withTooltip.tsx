@@ -2,14 +2,13 @@ import { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
-import type { AnyObject } from '@eventespresso/utils';
 import { Tooltip } from '../';
 import type { WithTooltipProps } from './types';
 import type { ForwardRefComponent } from '../types';
 
 import './style.scss';
 
-const withTooltip = <P extends AnyObject>(
+const withTooltip = <P extends Record<string, any>>(
 	WrappedComponent: React.ComponentType<P & WithTooltipProps>
 ): ForwardRefComponent<P & WithTooltipProps, typeof WrappedComponent> => {
 	// Define ref type

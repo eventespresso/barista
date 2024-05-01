@@ -6,7 +6,7 @@
 const { getPackages } = require('../config/workspaces');
 const levelPackages = require('./levels').flat();
 
-getPackages().forEach(({name: package}) => {
+getPackages().forEach(({ name: package }) => {
 	if (!levelPackages.includes(package)) {
 		throw new Error(`${package} is not added to ESLint package rules.`);
 	}

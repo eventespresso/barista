@@ -1,7 +1,7 @@
 import type React from 'react';
 import type { FormRenderProps, FormProps, FieldRenderProps, FieldProps as RFFFieldProps } from 'react-final-form';
 import type { FieldArrayProps } from 'react-final-form-arrays';
-import type { FormState, AnyObject } from 'final-form';
+import type { FormState } from 'final-form';
 
 import type { ButtonProps, FormControlProps, OptionsType } from '@eventespresso/adapters';
 import type { IconComponent } from '@eventespresso/icons';
@@ -18,7 +18,7 @@ export interface FormConfig {
 	dateTimeFormat?: string;
 }
 
-interface AdditionalFormProps<FormValues = AnyObject> extends FormConfigProviderProps {
+interface AdditionalFormProps<FormValues = Record<string, any>> extends FormConfigProviderProps {
 	sections?: SectionList<FormValues>;
 	fields?: FieldList<FormValues>;
 	submitButton?: FormButtonProps;
@@ -48,7 +48,7 @@ export interface FieldWrapperProps extends Omit<FieldRendererProps, 'component'>
 	component: React.ComponentType<Omit<FieldRendererProps, 'fieldType'>>;
 }
 
-export interface AdditionalFieldProps<FormValues = AnyObject> {
+export interface AdditionalFieldProps<FormValues = Record<string, any>> {
 	label?: string | JSX.Element;
 	fieldType: FieldType;
 	htmlType?: string;
@@ -89,13 +89,13 @@ export interface FieldCondition {
 
 export type FieldConditions = Array<FieldCondition>;
 
-export interface EspressoFormProps<FormValues = AnyObject>
+export interface EspressoFormProps<FormValues = Record<string, any>>
 	extends FormProps<FormValues>,
 		AdditionalFormProps<FormValues> {
 	columns?: 1 | 2;
 }
 
-export interface FormRendererProps<FormValues = AnyObject>
+export interface FormRendererProps<FormValues = Record<string, any>>
 	extends FormRenderProps<FormValues>,
 		AdditionalFormProps<FormValues> {
 	columns?: 1 | 2;
@@ -103,13 +103,13 @@ export interface FormRendererProps<FormValues = AnyObject>
 
 export interface FieldRendererProps<FieldValue = any>
 	extends FieldRenderProps<FieldValue>,
-		FieldProps<AnyObject, FieldValue> {}
+		FieldProps<Record<string, any>, FieldValue> {}
 
 export interface RepeatableRendererProps<FieldValue = any>
 	extends FieldArrayProps<FieldValue, any>,
-		AdditionalFieldProps<AnyObject> {}
+		AdditionalFieldProps<Record<string, any>> {}
 
-export interface FieldProps<FormValues = AnyObject, FieldValue = any>
+export interface FieldProps<FormValues = Record<string, any>, FieldValue = any>
 	extends AdditionalFieldProps<FormValues>,
 		RFFFieldProps<FieldValue, FieldRendererProps> {
 	columns?: 2 | 3 | 4;
@@ -135,9 +135,9 @@ export interface RenderSectionsProps {
 	sections: SectionList;
 }
 
-export interface RenderFieldProps extends FieldProps<AnyObject> {}
+export interface RenderFieldProps extends FieldProps<Record<string, any>> {}
 
-export interface FormSectionProps<FormValues = AnyObject> {
+export interface FormSectionProps<FormValues = Record<string, any>> {
 	/**
 	 * If true, each field inside the section
 	 * will be saved as `${section.name}.{field.name}`
@@ -151,6 +151,6 @@ export interface FormSectionProps<FormValues = AnyObject> {
 	title?: React.ReactNode;
 }
 
-export type FieldList<FormValues = AnyObject> = Array<FieldProps<FormValues>>;
+export type FieldList<FormValues = Record<string, any>> = Array<FieldProps<FormValues>>;
 
-export type SectionList<FormValues = AnyObject> = Array<FormSectionProps<FormValues>>;
+export type SectionList<FormValues = Record<string, any>> = Array<FormSectionProps<FormValues>>;
