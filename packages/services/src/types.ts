@@ -1,6 +1,6 @@
 import type { GeneralSettings, User } from '@eventespresso/data';
+import type { Type as ConfigType } from '@eventespresso/config';
 
-import type { CurrencyProps, SiteUrlProps } from './config/types';
 import type { Capability } from './permissions';
 
 // TODO: consolidate into package 'config'
@@ -28,9 +28,9 @@ export type ConfigDomData = {
 	currentUser: User;
 	generalSettings: GeneralSettings;
 	locale: LocaleDomData;
-	siteCurrency: CurrencyProps;
+	siteCurrency: ConfigType.Currency;
 	sitePermissions: Array<Capability>;
-	siteUrls: SiteUrlProps;
+	siteUrls: ConfigType.SiteUrls;
 	wp_debug: boolean;
 };
 

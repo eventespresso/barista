@@ -1,8 +1,9 @@
 import { useMemo } from 'react';
 
-import { useConfig, ConfigDataProps } from '../config';
+import { useConfig } from '../config';
+import type { Type as ConfigType } from '@eventespresso/config';
 
-const useSitePermissions = (): ConfigDataProps['sitePermissions'] => {
+const useSitePermissions = (): ConfigType.Config['sitePermissions'] => {
 	const { sitePermissions } = useConfig();
 
 	return useMemo(() => sitePermissions || [], [sitePermissions]);

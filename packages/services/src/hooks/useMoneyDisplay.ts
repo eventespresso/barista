@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { formatAmount } from '@eventespresso/utils';
 import { useConfig } from '../config';
 import type { FormatAmountFunction } from '@eventespresso/utils';
-import type { CurrencyProps } from '../config';
+import type { Type as ConfigType } from '@eventespresso/config';
 
 export interface MoneyDisplay {
 	// the currency sign if the currency displays it before the amount (or '')
@@ -11,7 +11,7 @@ export interface MoneyDisplay {
 	// the currency sign if the currency displays it before the amount (or '')
 	beforeAmount: string;
 	// the full currency config object
-	currency: CurrencyProps;
+	currency: ConfigType.Currency;
 	// function for formatting the amount using the correct number of decimal places for the currency
 	formatAmount: FormatAmountFunction;
 }
