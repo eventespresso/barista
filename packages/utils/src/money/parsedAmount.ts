@@ -1,6 +1,5 @@
+import { ParsedAmount } from '.';
 import type { Amount } from './types';
-
-const NON_NUMERIC_REGEX = /[^\d.-]+/g;
 
 /**
  * returns amount parsed as a float (if not already a number)
@@ -10,16 +9,5 @@ const NON_NUMERIC_REGEX = /[^\d.-]+/g;
  * @return {number}
  */
 export const parsedAmount = (amount: Amount, fallback: number = 0): number => {
-	if (amount === null || amount === undefined) {
-		return fallback;
-	}
-	if (typeof amount === 'number') {
-		return amount;
-	}
-	const parsedStr = amount.replace(NON_NUMERIC_REGEX, '');
-	const float = Number.parseFloat(parsedStr);
-	if (Number.isNaN(float)) {
-		return fallback;
-	}
-	return float;
+	return new ParsedAmount().parse(amount, fallback);
 };
