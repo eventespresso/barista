@@ -1,3 +1,4 @@
+import { test } from '@eventespresso/config';
 import { amountsMatch } from '../';
 
 const testCases = [
@@ -64,6 +65,9 @@ const testCases = [
 ];
 
 describe('amountsMatch', () => {
+	beforeAll(() => {
+		window.eventEspressoData = test.mockData;
+	});
 	for (const testCase of testCases) {
 		it(testCase.desc, () => {
 			const result = amountsMatch(testCase.amount1, testCase.amount2);
