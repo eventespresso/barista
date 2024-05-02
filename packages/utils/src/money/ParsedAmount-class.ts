@@ -44,7 +44,8 @@ export class ParsedAmount {
 	};
 
 	private removeChars = (amount: string): string => {
-		const regex = new RegExp(String.raw`[^\d${this.dm}]`, 'g');
+		const pattern = '[^\\d\\' + this.dm + ']';
+		const regex = new RegExp(pattern, 'g');
 		return amount.replaceAll(regex, '');
 	};
 
