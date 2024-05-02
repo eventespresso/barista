@@ -3,13 +3,12 @@ import { MockedProvider } from '@apollo/client/testing';
 import '@testing-library/jest-dom/extend-expect';
 
 import { ConfigConsumer, ConfigProvider } from '../ConfigProvider';
-import { mockEspressoDomData } from '../../config/test/data';
-import { ConfigDataProps } from '../../config';
+import { test as configTest, Type as ConfigType } from '@eventespresso/config';
 import { configMocks } from './data';
 
 describe('ConfigProvider', () => {
 	beforeEach(() => {
-		window.eventEspressoData = mockEspressoDomData;
+		window.eventEspressoData = configTest.mockData;
 	});
 
 	afterEach(() => {
@@ -22,7 +21,7 @@ describe('ConfigProvider', () => {
 				<MockedProvider mocks={configMocks}>
 					<ConfigProvider>
 						<ConfigConsumer>
-							{(configData: ConfigDataProps): JSX.Element => {
+							{(configData: ConfigType.Config): JSX.Element => {
 								const brandName = configData?.brandName;
 								const userLocale = configData?.locale?.user;
 								const siteLocale = configData?.locale?.site;
@@ -40,15 +39,15 @@ describe('ConfigProvider', () => {
 			);
 
 			expect(getByText(/^Brand name:/).textContent).toBe(
-				'Brand name: ' + mockEspressoDomData.config.coreDomain.brandName
+				'Brand name: ' + configTest.mockData.config.coreDomain.brandName
 			);
 
 			expect(getByText(/^User locale:/).textContent).toBe(
-				'User locale: ' + mockEspressoDomData.config.locale.user
+				'User locale: ' + configTest.mockData.config.locale.user
 			);
 
 			expect(getByText(/^Site locale:/).textContent).toBe(
-				'Site locale: ' + mockEspressoDomData.config.locale.site
+				'Site locale: ' + configTest.mockData.config.locale.site
 			);
 		});
 	});

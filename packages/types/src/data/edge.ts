@@ -1,0 +1,2 @@
+// LATER:
+export module Edge {}

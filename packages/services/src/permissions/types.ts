@@ -1,6 +1,6 @@
 import type { EntityId } from '@eventespresso/data';
 
-// TODO: consolidate data types
+// LATER: consolidate data types
 export type Capability = string;
 
 type EntityWithoutDefault = 'ticket' | 'price' | 'price_type';

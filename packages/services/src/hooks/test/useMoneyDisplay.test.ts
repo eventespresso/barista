@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
 
 import useMoneyDisplay from '../useMoneyDisplay';
-import { mockEspressoDomData } from '../../config/test/data';
+import { test as configTest } from '@eventespresso/config';
 import { ApolloMockedProvider } from '@eventespresso/edtr-services/src/context/test';
 import { actWait } from '@eventespresso/utils/src/test';
 
@@ -26,6 +26,6 @@ describe('useMoneyDisplay', () => {
 
 		expect(result.current.formatAmount).toBeInstanceOf(Function);
 
-		expect(result.current.currency).toEqual(mockEspressoDomData.config.siteCurrency);
+		expect(result.current.currency).toEqual(configTest.mockData.config.siteCurrency);
 	});
 });

@@ -1,6 +1,8 @@
 import { useContext } from 'react';
+import type { Type as ConfigType } from '@eventespresso/config';
 
-import type { ConfigDataProps } from './types';
 import { ConfigContext } from '../context/ConfigProvider';
 
-export const useConfig = (): ConfigDataProps => useContext<ConfigDataProps>(ConfigContext);
+type Config = ConfigType.Config;
+
+export const useConfig = (): Config => useContext<Config>(ConfigContext);

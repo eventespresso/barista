@@ -1,4 +1,4 @@
-// TODO: consolidate data types
+// LATER: consolidate data types
 export type RegistrationStatus =
 	| 'APPROVED'
 	| 'CANCELLED'

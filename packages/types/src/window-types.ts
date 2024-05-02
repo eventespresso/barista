@@ -1,26 +1,33 @@
-import type { EventEditorData } from '@eventespresso/edtr-services';
-import type { RemDomData } from '@eventespresso/rem/src/types';
-import type { EventSmartDomData } from '@eventespresso/es-edtr-slots/src/types';
-import type { WpPluginsPageData } from '@eventespresso/wp-plugins-page/src/types';
-import type { UpsellAdEditorData } from '@eventespresso/es-upsell-editor/src/services';
-import type { WpUserData } from '@eventespresso/wp-user/src/types';
-import type { EventEspressoDomData } from '@eventespresso/services';
-
-/**
- * This is the global object
- */
-export interface EventEspressoData extends EventEspressoDomData {
-	eventEditor?: EventEditorData;
-	eventSmart?: EventSmartDomData;
-	remEditorData?: RemDomData;
-	wpPluginsPage?: WpPluginsPageData;
-	wpUserData?: WpUserData;
-	upsellAdEditor?: UpsellAdEditorData;
-}
-
 declare global {
 	interface Window {
-		eventEspressoData: EventEspressoData;
-		wp: any;
+		/**
+		 * Global window object exposed by WordPress
+		 * @link https://codex.wordpress.org/Javascript_Reference/wp
+		 */
+		wp: WordPress.Type;
 	}
 }
+
+module WordPress {
+	export type Type = {
+		media?: Media;
+	};
+}
+
+/**
+ * @link https://github.com/WordPress/wordpress-develop/blob/trunk/src/js/_enqueues/wp/media/models.js
+ */
+export type Media = (...any: any[]) => {
+	open: () => void;
+	on: (unknown1: string, unknown2: unknown) => void;
+	off: (unknown1: string, unknown2: unknown) => void;
+	state: () => {
+		get: (unknown: string) => {
+			first: () => {
+				toJSON: () => Record<any, any>;
+			};
+		};
+	};
+};
+
+export {};

@@ -32,6 +32,10 @@
         "location": "packages/adapters"
     },
     {
+        "name": "@eventespresso/config",
+        "location": "packages/config"
+    },
+    {
         "name": "@eventespresso/constants",
         "location": "packages/constants"
     },

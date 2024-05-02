@@ -1,5 +1,6 @@
 module.exports = [
-	/* LEVEL 0 */ ['types'],
+	/* LEVEL -1 */ ['types'],
+	/* LEVEL 0 */ ['config'],
 	/* LEVEL 1 */ ['constants', 'i18n', 'events', 'ioc', 'toaster', 'utils'],
 	/* LEVEL 2 */ ['data', 'dates', 'hooks', 'icons', 'plugins', 'slot-fill', 'registry', 'styles', 'storage'],
 	/* LEVEL 3 */ ['adapters', 'predicates'],
