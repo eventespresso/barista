@@ -18,6 +18,10 @@ class Barista
 
 	public function initialize()
 	{
+		if (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], 'wp-admin/themes.php') !== false) {
+			return;
+		}
+
 		add_action('wp_default_scripts', [$this, 'registerScripts']);
 		add_action('wp_default_styles', [$this, 'registerPackagesStyles']);
 		add_action('admin_enqueue_scripts', [$this, 'addAssets']);
@@ -266,7 +270,7 @@ class Barista
 		foreach ($entry_points as $entry_point) {
 			$handle = 'eventespresso-' . $entry_point;
 
-			$dependencies = []; // May be we need it some day ¯\_(ツ)_/¯
+			$dependencies = []; // Maybe we need it some day ¯\_(ツ)_/¯
 
 			if (! empty($asset_files[ $entry_point . '.css' ])) {
 				$css_relative_path = 'build' . $asset_files[ $entry_point . '.css' ];
