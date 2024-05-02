@@ -1,3 +1,4 @@
+import { test } from '@eventespresso/config';
 import { parsedAmount } from '../';
 
 const testCases = [
@@ -39,6 +40,9 @@ const testCases = [
 ];
 
 describe('formatAmount', () => {
+	beforeAll(() => {
+		window.eventEspressoData = test.mockData;
+	});
 	for (const testCase of testCases) {
 		it(testCase.desc, () => {
 			const result = parsedAmount(testCase.amount);
