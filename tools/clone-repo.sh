@@ -16,7 +16,7 @@ CYAN='\033[0;36m'
 RED='\033[0;31m'
 RESET='\033[0m'
 
-BASE_DIR=$(dirname "$GITHUB_WORKSPACE")
+BASE_DIR="$GITHUB_WORKSPACE"
 
 # The target repo branch to checkout during clone
 BRANCH="${1:-DEV}"
