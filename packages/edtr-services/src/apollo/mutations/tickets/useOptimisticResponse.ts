@@ -4,7 +4,7 @@ import { MutationType, MutationInput } from '@eventespresso/data';
 import { PLUS_ONE_MONTH, PLUS_TWO_MONTHS } from '@eventespresso/constants';
 import { ucFirst, uuid } from '@eventespresso/utils';
 
-import type { Ticket } from '../../';
+import { type Ticket, TicketStatus } from '../../';
 import { useLazyTicket } from '../../queries';
 
 export const TICKET_DEFAULTS: Ticket = {
@@ -33,7 +33,7 @@ export const TICKET_DEFAULTS: Ticket = {
 	reverseCalculate: true,
 	sold: 0,
 	startDate: PLUS_ONE_MONTH.toISOString(),
-	status: 'PENDING',
+	status: TicketStatus.PENDING,
 	userId: '',
 	uses: -1,
 	visibility: 'PUBLIC',

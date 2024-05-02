@@ -1,7 +1,7 @@
 import * as R from 'ramda';
 
 import type { Datetime } from '@eventespresso/edtr-services';
-import type { EntityFieldPred as EFP } from '@eventespresso/utils';
+import type { EntityFieldPred as EFP } from '../../prices/selectionPredicates';
 
 /**
  * @function
