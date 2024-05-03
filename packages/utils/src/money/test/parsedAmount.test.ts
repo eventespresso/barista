@@ -2,7 +2,7 @@ import { parsedAmount } from '../';
 
 const testCases = [
 	{
-		desc: 'checks for parsed amount to be a number',
+		desc: 'returns a number for a number',
 		amount: 5,
 		result: 5,
 	},
