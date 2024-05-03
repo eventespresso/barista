@@ -68,7 +68,7 @@ describe('TPC:data.calculations', () => {
 		// Ticket total must have changed
 		expect(ticketTotalBefore).not.toEqual(ticketTotalAfter);
 
-		// calculate th expected ticket total
+		// calculate the expected ticket total
 		const calculatedTicketTotal = calculateTicketTotal(result.current.dataState.getData().prices);
 
 		expect(calculatedTicketTotal).toEqual(ticketTotalAfter);
