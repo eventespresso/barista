@@ -58,7 +58,7 @@ export const mockData: EventEspressoData = {
 			sign: 'Z',
 			signB4: true,
 			decimalPlaces: 3,
-			decimalMark: '::',
+			decimalMark: '.',
 			thousandsSeparator: ':',
 			subunits: 1000,
 		},
