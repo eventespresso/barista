@@ -15,6 +15,14 @@ import {
 } from '.';
 
 export class Factory {
+	public static make(): Type.Config {
+		if (!window.eventEspressoData) {
+			return new Factory().get();
+		}
+		const { config, api } = window.eventEspressoData;
+		return new Factory(config, api).get();
+	}
+
 	constructor(
 		private readonly config?: EventEspressoData['config'],
 		private readonly api?: EventEspressoData['api']
