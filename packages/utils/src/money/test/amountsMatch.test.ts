@@ -67,7 +67,7 @@ describe('amountsMatch', () => {
 	for (const testCase of testCases) {
 		it(testCase.desc, () => {
 			const result = amountsMatch(testCase.amount1, testCase.amount2);
-			expect(result).toBe(testCase.result);
+			expect(testCase.result).toBe(result);
 		});
 	}
 });
