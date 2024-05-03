@@ -1,3 +1,5 @@
+export * from './types-refactored';
+
 export * from './MoneyInputWithConfig';
 
 export { default as BaseField } from './BaseField';
