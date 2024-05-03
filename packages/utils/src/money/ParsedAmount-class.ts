@@ -11,10 +11,10 @@ export class ParsedAmount {
 
 	constructor() {
 		const {
-			currency: { decimalMark, decimalPlaces },
+			currency: { decimalMark },
 		} = ConfigFactory.make();
 
-		this.dp = decimalPlaces;
+		this.dp = 6;
 		this.dm = decimalMark;
 	}
 
