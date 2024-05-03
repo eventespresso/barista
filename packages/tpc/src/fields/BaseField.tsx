@@ -5,27 +5,6 @@ import { NumberInput, Select, TextInput } from '@eventespresso/ui-components';
 import useBaseField from './useBaseField';
 import type React from 'react';
 import type { BaseFieldProps } from './types';
-import type { Map } from '.';
-
-type C<T extends {}> = React.FunctionComponent<T>;
-type Select = Map['Select'];
-type Input = Map['Input'];
-
-function factory<K extends keyof Map>(key: K): React.FunctionComponent<Map[K]['Props']> {
-	if (key === 'Input') return input;
-
-	if (key === 'Select') return select;
-
-	throw new Error('TODO:');
-}
-
-const input: C<Select['Props']> = (props) => {
-	return <input {...props} />;
-};
-
-const select: C<Input['Props']> = (props) => {
-	return <select {...props} />;
-};
 
 const BaseField: React.FC<BaseFieldProps> = ({
 	children,
