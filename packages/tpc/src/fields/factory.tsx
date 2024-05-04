@@ -1,4 +1,5 @@
 import type React from 'react';
+import { createElement } from 'react';
 import type { Attributes, Map } from '.';
 
 type Props<K extends keyof Map> = Map[K]['Props'] & {
@@ -7,8 +8,13 @@ type Props<K extends keyof Map> = Map[K]['Props'] & {
 
 type C<T extends {}> = React.FunctionComponent<T>;
 
-export function Factory<K extends keyof Map>({ _type, getValue, setValue, ...props }: Props<K>) {
+export function Factory<K extends keyof Map | undefined>(args?: Props<K>) {
+	if (!args) return createElement('input'); // TODO: just example
+
+	const { _type, getValue, setValue, ...props } = args;
+
 	if (isInput(_type, props)) return input(props);
+
 	if (isSelect(_type, props)) return select(props);
 }
 
