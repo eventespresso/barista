@@ -11,7 +11,15 @@ import type { Map } from '.';
 // };
 
 const fries = () => {
-	return <Factory _type='Select' name='' aria-label='' />;
+	<Factory _type='Input' name='' aria-label='' maxLength={5} />;
+
+	return (
+		<Factory _type='Select' name='' aria-label='' multiple>
+			<>1</>
+			<>2</>
+			<>3</>
+		</Factory>
+	);
 };
 
 export default fries;
