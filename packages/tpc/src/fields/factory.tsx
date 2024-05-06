@@ -1,6 +1,6 @@
 import type React from 'react';
 import { createElement } from 'react';
-import type { Attributes, Map } from '.';
+import type { Attributes, Map } from './types-refactored';
 
 type Props<K extends keyof Map> = Map[K]['Props'] & {
 	_type: K;
