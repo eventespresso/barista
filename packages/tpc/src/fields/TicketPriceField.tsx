@@ -9,6 +9,9 @@ import type { BaseFieldProps, TicketPriceFieldProps } from './types';
 
 type BFP = BaseFieldProps<number>;
 
+/**
+ * Used for displaying the total (formatted) price
+ */
 const TicketPriceField: React.FC<TicketPriceFieldProps> = (props) => {
 	const { ticket, updateTicketPrice } = useDataState();
 	const { formatAmount } = useMoneyDisplay();
