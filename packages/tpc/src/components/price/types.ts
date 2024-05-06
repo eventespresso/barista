@@ -1,3 +1,5 @@
+// TODO: after *all* other TODOs are done, review the the types below
+
 import { InputHTMLAttributes } from 'react';
 
 import type { NumberInputProps } from '@eventespresso/adapters';

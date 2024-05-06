@@ -5,6 +5,8 @@ import type { MoneyInputWrapperProps } from '@eventespresso/ui-components';
 
 interface Props extends Omit<MoneyInputWrapperProps, 'sign' | 'signB4'> {}
 
+// TODO: consolidate this
+
 export const MoneyInputWithConfig: React.FC<Props> = (props) => {
 	const { currency } = useConfig();
 

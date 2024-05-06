@@ -7,6 +7,9 @@ import type { BaseFieldProps, PriceFieldProps } from '..';
 
 type BFP = BaseFieldProps;
 
+// TODO: move under 'input' folder
+// TODO: consolidate types
+
 export const PriceField: React.FC<PriceFieldProps> = ({ field, price, ...rest }) => {
 	const { updatePrice } = useDataState();
 

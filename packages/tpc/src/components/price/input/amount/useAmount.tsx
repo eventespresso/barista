@@ -8,6 +8,8 @@ import type { BaseFieldProps, UsePrice, UsePriceAmount } from '../..';
 
 type BFP = BaseFieldProps;
 
+// TODO: consolidate types
+
 export const useAmount = ({ field, price }: UsePriceAmount): UsePrice => {
 	const { updatePrice } = useDataState();
 
