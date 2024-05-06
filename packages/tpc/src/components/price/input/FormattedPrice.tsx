@@ -10,6 +10,8 @@ import type { BaseFieldProps, TicketPriceFieldProps } from '..';
 
 type BFP = BaseFieldProps<number>;
 
+// TODO: consolidate types
+
 /**
  * Used for displaying the total (formatted) price
  */

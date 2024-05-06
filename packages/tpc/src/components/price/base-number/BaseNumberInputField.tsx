@@ -4,6 +4,9 @@ import { useBaseField } from '..';
 
 import type { BaseFieldProps } from '..';
 
+// TODO: rename component
+// TODO: add JSDoc to explain the purpose of the component
+
 // this is not currently in use
 export const BaseNumberInputField: React.FC<BaseFieldProps> = ({
 	className,

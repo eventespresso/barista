@@ -8,6 +8,10 @@ import { useBaseField } from '.';
 import type React from 'react';
 import type { BaseFieldProps } from '..';
 
+// TODO: update using factory pattern from:
+//   - packages/tpc/src/fields/*
+// TODO: after refactoring, *remove* sample files from above
+
 export const BaseField: React.FC<BaseFieldProps> = ({
 	children,
 	component,

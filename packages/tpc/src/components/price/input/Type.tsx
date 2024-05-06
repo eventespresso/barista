@@ -12,6 +12,7 @@ export const Type: React.FC<PriceModifierProps> = ({ price }) => {
 	const priceTypes = usePriceTypes();
 	const modifierOptions = getPriceModifiers(priceTypes);
 	const options = price.isBasePrice ? priceTypes : modifierOptions;
+	// TODO: use package 'classname'
 	const className = !options.length ? 'ee-select--error' : null;
 	// price type cannot be changed for base/default price
 	const disabled = isDisabled || price.isBasePrice || price.isDefault;
