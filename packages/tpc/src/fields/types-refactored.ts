@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import type React from 'react';
 import type { InputHTMLAttributes, SelectHTMLAttributes, AriaAttributes, HTMLAttributes } from 'react';
 

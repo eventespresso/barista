@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react';
 import { Factory } from './factory';
 import type { Map } from './types-refactored';

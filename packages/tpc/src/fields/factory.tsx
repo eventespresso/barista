@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import type React from 'react';
 import { createElement } from 'react';
 import type { Attributes, Map } from './types-refactored';
