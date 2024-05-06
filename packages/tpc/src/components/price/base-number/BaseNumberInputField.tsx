@@ -1,9 +1,11 @@
 import { TextInput } from '@eventespresso/ui-components';
-import useBaseField from './useBaseField';
-import type { BaseFieldProps } from './types';
+
+import { useBaseField } from '..';
+
+import type { BaseFieldProps } from '..';
 
 // this is not currently in use
-const BaseNumberInputField: React.FC<BaseFieldProps> = ({
+export const BaseNumberInputField: React.FC<BaseFieldProps> = ({
 	className,
 	component,
 	disabled,
@@ -42,5 +44,3 @@ const BaseNumberInputField: React.FC<BaseFieldProps> = ({
 		/>
 	);
 };
-
-export default BaseNumberInputField;
