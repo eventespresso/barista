@@ -1,1 +1,0 @@
-export { FormattedPrice } from './FormattedPrice';
