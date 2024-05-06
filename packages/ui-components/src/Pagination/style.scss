@@ -207,6 +207,12 @@ $border-radius: var(--ee-border-radius-tiny);
 	&__per-page {
 		height: var(--ee-icon-button-size); // 42px
 
+		&-wrapper {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+		}
+
 		&-select-wrapper {
 			.ee-pagination & {
 				width: auto;
@@ -232,5 +238,9 @@ $border-radius: var(--ee-border-radius-tiny);
 				z-index: 2;
 			}
 		}
+	}
+
+	&__total-items {
+		margin-inline: var(--ee-margin-tiny);
 	}
 }
