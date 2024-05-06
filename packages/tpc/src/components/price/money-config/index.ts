@@ -1,0 +1,1 @@
+export { MoneyInputWithConfig } from './MoneyInputWithConfig';
