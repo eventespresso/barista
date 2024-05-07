@@ -1,3 +1,5 @@
+export { Input } from './Input';
+export type { Props as InputProps } from './Input';
 export { Amount } from './amount';
 export { Description } from './Description';
 export { ID } from './ID';
