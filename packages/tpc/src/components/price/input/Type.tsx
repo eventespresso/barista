@@ -3,7 +3,7 @@ import { usePriceTypes } from '@eventespresso/edtr-services';
 import { getPriceModifiers } from '@eventespresso/predicates';
 
 import { useDataState } from '../../../data';
-import { PriceField } from '..';
+import { Input } from '.';
 
 import type { PriceModifierProps } from '../../../types';
 
@@ -18,7 +18,7 @@ export const Type: React.FC<PriceModifierProps> = ({ price }) => {
 	const disabled = isDisabled || price.isBasePrice || price.isDefault;
 
 	return (
-		<PriceField
+		<Input
 			aria-label={__('price type')}
 			className={className}
 			component={'select'}
@@ -32,6 +32,6 @@ export const Type: React.FC<PriceModifierProps> = ({ price }) => {
 					{option.name}
 				</option>
 			))}
-		</PriceField>
+		</Input>
 	);
 };

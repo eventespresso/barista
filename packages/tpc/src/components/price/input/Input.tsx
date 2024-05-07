@@ -3,15 +3,22 @@ import { useCallback } from 'react';
 import { useDataState } from '../../../data';
 import { BaseField } from '..';
 
-import type { BaseFieldProps, PriceFieldProps } from '..';
+import type { BaseFieldProps } from '..';
 
-type BFP = BaseFieldProps;
+import type { TpcPriceModifier, PriceModifierProps } from '../../../..';
 
-// TODO: move under 'input' folder
-// TODO: consolidate types
+export interface Props
+	extends PriceModifierProps,
+		Omit<BaseFieldProps<number | string>, 'getValue' | 'setValue' | 'name'> {
+	field: keyof TpcPriceModifier;
+}
 
-export const PriceField: React.FC<PriceFieldProps> = ({ field, price, ...rest }) => {
+/**
+ * Generic input component
+ */
+export const Input: React.FC<Props> = ({ field, price, ...rest }) => {
 	const { updatePrice } = useDataState();
+	type BFP = BaseFieldProps; // alias
 
 	const getValue: BFP['getValue'] = useCallback(() => price[field], [field, price]);
 
