@@ -1,3 +1,5 @@
+import css from 'classnames';
+
 import { __ } from '@eventespresso/i18n';
 import { usePriceTypes } from '@eventespresso/edtr-services';
 import { getPriceModifiers } from '@eventespresso/predicates';
@@ -12,8 +14,7 @@ export const Type: React.FC<PriceModifierProps> = ({ price }) => {
 	const priceTypes = usePriceTypes();
 	const modifierOptions = getPriceModifiers(priceTypes);
 	const options = price.isBasePrice ? priceTypes : modifierOptions;
-	// TODO: use package 'classname'
-	const className = !options.length ? 'ee-select--error' : null;
+	const className = css({ 'ee-select--error': !options.length });
 	// price type cannot be changed for base/default price
 	const disabled = isDisabled || price.isBasePrice || price.isDefault;
 
