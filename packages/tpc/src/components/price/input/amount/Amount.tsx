@@ -1,9 +1,12 @@
 import classNames from 'classnames';
+
 import { __ } from '@eventespresso/i18n';
 import { parsedAmount } from '@eventespresso/utils';
+import { useConfig } from '@eventespresso/services';
+import { MoneyInputWrapper } from '@eventespresso/ui-components';
 
 import { useDataState } from '../../../../data';
-import { BaseField, MoneyInputWithConfig } from '../..';
+import { BaseField } from '../..';
 import { useAmount } from '.';
 
 import type { PriceModifierProps } from '../../../..';
@@ -12,6 +15,7 @@ import './styles.scss';
 export const Amount: React.FC<PriceModifierProps> = ({ price }) => {
 	const { reverseCalculate, isDisabled } = useDataState();
 	const { getValue, setValue } = useAmount({ field: 'amount', price });
+	const { currency } = useConfig();
 
 	const hasError = Number(price?.amount ?? 0) === 0;
 	const className = classNames(
@@ -30,7 +34,12 @@ export const Amount: React.FC<PriceModifierProps> = ({ price }) => {
 		};
 
 	return (
-		<MoneyInputWithConfig disabled={disabled} isPercent={price.isPercent}>
+		<MoneyInputWrapper
+			sign={currency?.sign}
+			signB4={currency?.signB4}
+			disabled={disabled}
+			isPercent={price.isPercent}
+		>
 			<BaseField
 				aria-label={__('amount')}
 				className={className}
@@ -48,6 +57,6 @@ export const Amount: React.FC<PriceModifierProps> = ({ price }) => {
 				setValue={setValue}
 				type='number'
 			/>
-		</MoneyInputWithConfig>
+		</MoneyInputWrapper>
 	);
 };
