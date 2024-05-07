@@ -88,3 +88,6 @@ storybook-static
 
 # dotenv
 .env.*
+
+# Visual Studio Code searches
+*.code-search
