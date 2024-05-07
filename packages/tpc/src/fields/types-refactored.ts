@@ -30,8 +30,8 @@ type Factory<P extends HTMLAttributes<HTMLElement>, T extends Value> = {
 module Component {
 	export type Props<T extends Value> = AriaLabel & {
 		name: string;
-		getValue?: () => T; // TODO: make required!!
-		setValue?: (value: T) => void; // TODO: make required!!
+		getValue: () => T;
+		setValue: (value: T) => void;
 	};
 }
 
