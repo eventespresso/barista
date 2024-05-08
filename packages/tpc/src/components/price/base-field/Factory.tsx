@@ -1,4 +1,6 @@
-import { Select, TextInput } from '@eventespresso/ui-components';
+import css from 'classnames';
+
+import { Select, TextInput, NumberInput } from '@eventespresso/ui-components';
 
 import { useFactory } from '.';
 
@@ -10,42 +12,40 @@ type Props<K extends keyof Map> = Map[K]['Component']['Props'] & {
 };
 
 export function Factory<K extends keyof Map>(props: Props<K>) {
+	const className = css(props.className, 'ee-input');
+
 	if (IsSelectProps(props)) {
-		const {
-			value,
-			handlers: { onBlur, onChange },
-		} = useFactory<'Select'>(props);
-		return <Select onBlur={props.onBlur} />;
+		const { value, handlers } = useFactory<'Select'>(props);
+
+		return (
+			<Select {...props} {...handlers} value={value} className={className} fitContainer>
+				{props.children}
+			</Select>
+		);
 	}
 
 	if (IsInputTextProps(props)) {
-		const {
-			value,
-			handlers: { onBlur, onChange },
-		} = useFactory<'Text'>(props);
-		return <TextInput />;
+		const { value, handlers } = useFactory<'Text'>(props);
+
+		return <TextInput {...props} {...handlers} className={className} isDisabled={props.disabled} value={value} />;
 	}
 
 	if (IsInputNumberProps(props)) {
-		const {
-			value,
-			handlers: { onBlur, onChange },
-		} = useFactory<'Number'>(props);
-		return <TextInput onBlur={onBlur} />;
+		const { value, handlers } = useFactory<'Number'>(props);
+
+		return (
+			<NumberInput
+				{...props}
+				{...handlers}
+				inputClass={'ee-input'}
+				showStepper={false}
+				value={value}
+				wrapperClass={props.className}
+			/>
+		);
 	}
 
-	// TODO: copy default scenario from BaseField.tsx
-	return <></>;
-
-	// TODO: remove
-	// switch (props._type) {
-	// 	case 'Select':
-	// 		return <Select value={value} onBlur={onBlur} />;
-	// 	case 'Text':
-	// 		return <TextInput onChange={(e) => {}} onChangeValue={(v, e) => {}} value={value.toLocaleString()} />;
-	// 	case 'Number':
-	// 		return <TextInput onChange={(e) => {}} onChangeValue={(v, e) => {}} value={value} />;
-	// }
+	throw new Error('Unknown component is expected from the factory! Component type: ' + props._type);
 }
 
 // TODO: refactor to a separate file!

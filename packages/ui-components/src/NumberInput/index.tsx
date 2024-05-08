@@ -7,7 +7,7 @@ import { withLabel } from '../withLabel';
 
 import './style.scss';
 
-interface NumberProps extends NumberInputProps {
+export interface NumberProps extends NumberInputProps {
 	inputClass?: string;
 	visibleDigits?: number;
 	wrapperClass?: string;
