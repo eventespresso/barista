@@ -12,7 +12,7 @@ type Props<K extends Key> = Type.Factory.Component.Props<K>;
 export function Factory<K extends Key>(props: Props<K>) {
 	const className = css(props.className, 'ee-input');
 
-	if (IsPropsType.Select(props)) {
+	if (IsPropsType.Component.Select(props)) {
 		const { value, handlers } = useFactory<'Select'>(props);
 
 		return (
@@ -22,14 +22,15 @@ export function Factory<K extends Key>(props: Props<K>) {
 		);
 	}
 
-	if (IsPropsType.Input.Text(props)) {
+	if (IsPropsType.Component.Input.Text(props)) {
 		const { value, handlers } = useFactory<'Text'>(props);
 
 		return <TextInput {...props} {...handlers} className={className} isDisabled={props.disabled} value={value} />;
 	}
 
-	if (IsPropsType.Input.Number(props)) {
+	if (IsPropsType.Component.Input.Number(props)) {
 		const { value, handlers } = useFactory<'Number'>(props);
+		props.max;
 
 		return (
 			<NumberInput
