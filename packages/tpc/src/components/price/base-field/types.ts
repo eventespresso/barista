@@ -1,3 +1,4 @@
+import type { NumberProps, SelectProps, TextInputWithLabelProps } from '@eventespresso/ui-components';
 import type { InputHTMLAttributes, SelectHTMLAttributes, AriaAttributes, HTMLAttributes } from 'react';
 
 export module Type {
@@ -7,11 +8,11 @@ export module Type {
 		Number: InputNumber;
 	};
 
-	type Select = Make<Attribute.Select, string>;
-	type InputText = Make<Attribute.Input, string>;
-	type InputNumber = Make<Attribute.Input, number>;
+	type Select = Make<SelectProps, string>;
+	type InputText = Make<TextInputWithLabelProps, string>;
+	type InputNumber = Make<NumberProps, number>;
 
-	type Make<A extends Attribute.Html, V extends Value> = {
+	type Make<A extends object, V extends Value> = {
 		Component: {
 			Props: Component.Props<A, V>;
 		};
