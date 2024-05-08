@@ -3,10 +3,10 @@ import type { InputHTMLAttributes, SelectHTMLAttributes, AriaAttributes, HTMLAtt
 
 export module Type {
 	export module Factory {
-		export type Key = Type.Props.Key;
+		export type Key = Type.Inputs.Key; // alias
 
 		export module Component {
-			export type Props<K extends Key> = Type.Props.Type[K]['Component']['Props'] & {
+			export type Props<K extends Key> = Type.Inputs.Map[K]['Component']['Props'] & {
 				_type: K; // underscore to avoid collission with html attribute
 			};
 
@@ -14,17 +14,17 @@ export module Type {
 		}
 
 		export module Hook {
-			export type Props<K extends Key> = Type.Props.Type[K]['Hook']['Type'] & {
+			export type Props<K extends Key> = Type.Inputs.Map[K]['Hook']['Props'] & {
 				_type: K; // internal prop hence underscore
 			};
 
-			export type Type<K extends Key> = Type.Props.Type[K]['Hook']['Type'];
+			export type Type<K extends Key> = Type.Inputs.Map[K]['Hook']['Type'];
 		}
 	}
 
-	export module Props {
-		export type Key = keyof Type;
-		export type Type = {
+	export module Inputs {
+		export type Key = keyof Map;
+		export type Map = {
 			Select: Select;
 			Text: InputText;
 			Number: InputNumber;
@@ -53,10 +53,11 @@ module Component {
 module Hook {
 	export type Props<V extends Value> = Props.Type<V>;
 	export type Type<A extends Attribute.Html, V extends Value> = {
+		name: Name;
 		value: V;
 		handlers: {
-			onBlur: A['onBlur'];
 			onChange: A['onChange'];
+			onBlur?: A['onBlur'];
 		};
 	};
 }
@@ -73,13 +74,15 @@ module Element {
 	export type Select = HTMLSelectElement;
 }
 
-module Props {
+export module Props {
 	export type Type<V extends Value> = {
-		name: string;
+		name: Name;
 		getValue: () => V;
 		setValue: (value: V) => void;
 	};
 }
+
+type Name = string;
 
 type Value = string | number | boolean;
 
