@@ -2,11 +2,34 @@ import type { NumberProps, SelectProps, TextInputWithLabelProps } from '@eventes
 import type { InputHTMLAttributes, SelectHTMLAttributes, AriaAttributes, HTMLAttributes } from 'react';
 
 export module Type {
-	export type Return = {
-		Select: Select;
-		Text: InputText;
-		Number: InputNumber;
-	};
+	export module Factory {
+		export type Key = Type.Props.Key;
+
+		export module Component {
+			export type Props<K extends Key> = Type.Props.Type[K]['Component']['Props'] & {
+				_type: K; // underscore to avoid collission with html attribute
+			};
+
+			// LATER: skip type 'Type' for now
+		}
+
+		export module Hook {
+			export type Props<K extends Key> = Type.Props.Type[K]['Hook']['Type'] & {
+				_type: K; // internal prop hence underscore
+			};
+
+			export type Type<K extends Key> = Type.Props.Type[K]['Hook']['Type'];
+		}
+	}
+
+	export module Props {
+		export type Key = keyof Type;
+		export type Type = {
+			Select: Select;
+			Text: InputText;
+			Number: InputNumber;
+		};
+	}
 
 	type Select = Make<SelectProps, string>;
 	type InputText = Make<TextInputWithLabelProps, string>;
