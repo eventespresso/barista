@@ -204,19 +204,3 @@ export interface BaseFieldProps<V = FieldValue> extends InputProps, ExtraNumberP
 }
 
 export interface UseBaseField extends Omit<BaseFieldProps<FieldValue>, 'aria-label' | 'type'> {}
-
-export interface UsePrice {
-	getValue: () => FieldValue;
-	setValue: (value: FieldValue) => void;
-}
-
-export interface UsePriceAmount extends Pick<PriceFieldProps, 'field' | 'price'> {}
-
-export interface PriceFieldProps
-	extends PriceModifierProps,
-		Omit<BaseFieldProps<number | string>, 'getValue' | 'setValue' | 'name'> {
-	field: keyof TpcPriceModifier;
-}
-
-export interface TicketPriceFieldProps
-	extends Omit<BaseFieldProps<number>, 'getValue' | 'setValue' | 'name' | 'type'> {}
