@@ -1,5 +1,7 @@
 import { Factory } from '.';
 
+// TODO: test code! remove!
+
 export const Fries1 = () => {
 	return (
 		<Factory
