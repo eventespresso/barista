@@ -7,7 +7,11 @@ import { parsedAmount } from '@eventespresso/utils';
 import { useDataState } from '../../../data';
 import { Factory } from '..';
 
-import type { TicketPriceFieldProps as TPP } from '..';
+import type { BaseFieldProps } from '..';
+
+interface TicketPriceFieldProps extends Omit<BaseFieldProps<number>, 'getValue' | 'setValue' | 'name' | 'type'> {}
+
+type TPP = TicketPriceFieldProps; // alias
 
 /**
  * Used for displaying the total (formatted) price

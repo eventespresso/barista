@@ -4,11 +4,23 @@ import { parsedAmount } from '@eventespresso/utils';
 
 import { useDataState } from '../../../../data';
 
-import type { BaseFieldProps, UsePrice, UsePriceAmount } from '../..';
+import type { PriceModifierProps, TpcPriceModifier } from '../../../../types';
+import type { BaseFieldProps, FieldValue } from '../..';
 
 type BFP = BaseFieldProps;
 
-// TODO: consolidate types
+interface PriceFieldProps
+	extends PriceModifierProps,
+		Omit<BaseFieldProps<number | string>, 'getValue' | 'setValue' | 'name'> {
+	field: keyof TpcPriceModifier;
+}
+
+interface UsePriceAmount extends Pick<PriceFieldProps, 'field' | 'price'> {}
+
+interface UsePrice {
+	getValue: () => FieldValue;
+	setValue: (value: FieldValue) => void;
+}
 
 export const useAmount = ({ field, price }: UsePriceAmount): UsePrice => {
 	const { updatePrice } = useDataState();
