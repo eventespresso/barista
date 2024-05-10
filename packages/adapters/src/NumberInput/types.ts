@@ -30,4 +30,10 @@ export interface NumberInputProps extends Pick<ChakraNumberInputProps, Picked>, 
 	placeholder?: string;
 	showStepper?: boolean;
 	wrapperClass?: string;
+	/**
+	 * The pattern used to check the <input> element's value against on form submission.
+	 *
+	 * @default "[0-9]*(.[0-9]+)?"
+	 */
+	pattern?: string;
 }
