@@ -73,9 +73,7 @@ function InputNumber(props: Props<'Number'>): Type<'Number'> {
 	const value = get();
 
 	const handlers: Type<'Number'>['handlers'] = {
-		onChange: (string, number) => {
-			set(number);
-		},
+		onChange: (string, number) => {},
 	};
 
 	return useMemo(() => {
