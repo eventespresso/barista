@@ -29,19 +29,7 @@ export function Factory<K extends Key>(props: Props<K>) {
 	}
 
 	if (IsPropsType.Component.Input.Number(props)) {
-		const { value, handlers } = useFactory<'Number'>(props);
-		props.max;
-
-		return (
-			<NumberInput
-				{...props}
-				{...handlers}
-				inputClass={'ee-input'}
-				showStepper={false}
-				value={value}
-				wrapperClass={props.className}
-			/>
-		);
+		return <NumberInput {...props} inputClass='ee-input' showStepper={false} wrapperClass={props.className} />;
 	}
 
 	throw new Error('Unknown component is expected from the factory! Component type: ' + props._type);

@@ -77,8 +77,8 @@ module Element {
 export module Props {
 	export type Type<V extends Value> = {
 		name: Name;
-		getValue: () => V;
-		setValue: (value: V) => void;
+		getValue?: () => V;
+		setValue?: (value: V) => void;
 	};
 }
 

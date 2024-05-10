@@ -1,48 +1,63 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { MoneyInputWrapper } from '@eventespresso/ui-components';
 import { useMoneyDisplay, useConfig } from '@eventespresso/services';
 import { parsedAmount } from '@eventespresso/utils';
 
 import { useDataState } from '../../../data';
-import { BaseField } from '..';
+import { Factory } from '..';
 
-import type { BaseFieldProps, TicketPriceFieldProps } from '..';
-
-type BFP = BaseFieldProps<number>;
-
-// TODO: consolidate types
+import type { TicketPriceFieldProps as TPP } from '..';
 
 /**
  * Used for displaying the total (formatted) price
  */
-export const FormattedPrice: React.FC<TicketPriceFieldProps> = (props) => {
+export const FormattedPrice: React.FC<TPP> = (props) => {
 	const { ticket, updateTicketPrice } = useDataState();
 	const { formatAmount } = useMoneyDisplay();
 	const { currency } = useConfig();
 
-	const format: BFP['format'] = useCallback((price) => formatAmount(price) ?? '', [formatAmount]);
+	const value: string = useMemo(() => {
+		return formatAmount(ticket?.price) || defaultValue;
+	}, [ticket?.price]);
 
-	const getValue: BFP['getValue'] = useCallback(() => ticket?.price || 0, [ticket?.price]);
+	const defaultValue: string = useMemo(() => {
+		const decimals = '0'.repeat(currency.decimalPlaces);
+		return 0 + currency.decimalMark + decimals;
+	}, [currency]);
 
-	const parse: BFP['parse'] = useCallback((price) => parsedAmount(price), []);
+	type OnChange = (string: string, number: number) => void;
 
-	const setValue: BFP['setValue'] = useCallback(
-		(value) => updateTicketPrice(Math.abs(parsedAmount(value)) || 0),
+	const onChange: OnChange = useCallback(
+		(string, number) => {
+			updateTicketPrice(Math.abs(parsedAmount(number)) || 0);
+		},
 		[updateTicketPrice]
 	);
 
+	const pattern: string = useMemo(() => {
+		const mark = currency.decimalMark;
+		const dp = currency.decimalPlaces;
+
+		const integers = '[0-9]*?'; // lazy but greedy quantifier
+		const separator = '\\' + mark;
+		const decimals = `[0-9]{${dp}}`;
+
+		return integers + separator + decimals;
+	}, [currency]);
+
 	return (
 		<MoneyInputWrapper sign={currency?.sign} signB4={currency?.signB4} disabled={props.disabled}>
-			<BaseField
+			<Factory
 				{...props}
-				format={format}
-				getValue={getValue}
-				name={'ticket.price'}
-				parse={parse}
-				setValue={setValue}
-				type='number'
+				_type='Number'
+				name='ticket.price'
+				aria-label={props['aria-label']}
+				onChange={onChange}
 				min={0}
+				value={value}
+				defaultValue={value}
+				pattern={pattern}
 			/>
 		</MoneyInputWrapper>
 	);
