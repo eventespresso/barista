@@ -59,7 +59,6 @@ const useFooterRowGenerator = (): FooterRowGenerator => {
 						aria-label={__('ticket total')}
 						component='input'
 						disabled={isDisabled || !reverseCalculate}
-						formatOnBlur
 						id='ticket-price-total'
 					/>
 				),
