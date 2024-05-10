@@ -30,7 +30,7 @@ define('EE_BARISTA_DIR', trailingslashit(plugin_dir_path(__FILE__)));
 define('EE_BARISTA_URL', trailingslashit(plugins_url('', __FILE__)));
 
 add_action(
-    'AHEE__EE_System__load_espresso_addons',
+    'AHEE__EventEspresso_core_services_bootstrap_BootstrapCore___construct',
     function () {
 		EE_Psr4AutoloaderInit::psr4_loader()->addNamespace('EventEspresso\Barista', __DIR__. '/lib');
         $barista = new EventEspresso\Barista\Barista();
