@@ -9,10 +9,6 @@ type Props<K extends Key> = Type.Factory.Hook.Props<K>;
 type Type<K extends Key> = Type.Factory.Hook.Type<K>;
 
 export function useFactory<K extends Key>(props: Props<K>): Type<K> {
-	if (props._type === 'Select') {
-		const v = (props as Props<'Select'>).getValue();
-	}
-
 	if (IsPropsType.Hook.Select(props)) {
 		return Select(props);
 	}
@@ -25,7 +21,7 @@ export function useFactory<K extends Key>(props: Props<K>): Type<K> {
 		return InputNumber(props);
 	}
 
-	throw new Error('TODO:');
+	throw new Error('Internal error! Encountered an unknown type of props!');
 }
 
 function Select(props: Props<'Select'>): Type<'Select'> {
@@ -33,8 +29,12 @@ function Select(props: Props<'Select'>): Type<'Select'> {
 	const value = get();
 
 	const handlers: Type<'Select'>['handlers'] = {
-		onBlur: (e) => {},
-		onChange: (e) => {},
+		onBlur: (e) => {
+			set(e.currentTarget.value);
+		},
+		onChange: (e) => {
+			set(e.currentTarget.value);
+		},
 	};
 
 	return useMemo(() => {
@@ -51,8 +51,12 @@ function InputText(props: Props<'Text'>): Type<'Text'> {
 	const value = get();
 
 	const handlers: Type<'Text'>['handlers'] = {
-		onBlur: (e) => {},
-		onChange: (e) => {},
+		onBlur: (e) => {
+			set(e.currentTarget.value);
+		},
+		onChange: (e) => {
+			set(e.currentTarget.value);
+		},
 	};
 
 	return useMemo(() => {
@@ -69,7 +73,9 @@ function InputNumber(props: Props<'Number'>): Type<'Number'> {
 	const value = get();
 
 	const handlers: Type<'Number'>['handlers'] = {
-		onChange: (e) => {},
+		onChange: (string, number) => {
+			set(number);
+		},
 	};
 
 	return useMemo(() => {
