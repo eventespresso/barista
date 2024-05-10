@@ -33,7 +33,8 @@ class FeatureFlagsConfigForm extends EE_Form_Section_Proper
 						: EE_Switch_Input::OPTION_OFF,
 					'html_name'       => $id,
 					'html_label_text' => $feature_flags_form_option['html_label_text'],
-					'html_help_text'  => $feature_flags_form_option['help_text'],
+					'html_help_text'  => $feature_flags_form_option['help_text'] . $feature_flags_form_option['overridden_by'],
+					'disabled'        => $feature_flags_form_option['overridden'],
 				],
 				[
 					EE_Switch_Input::OPTION_OFF => sprintf(
