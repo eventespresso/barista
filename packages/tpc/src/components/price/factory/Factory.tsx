@@ -2,7 +2,7 @@ import css from 'classnames';
 
 import { Select, TextInput, NumberInput } from '@eventespresso/ui-components';
 
-import { IsPropsType, useFactory } from '.';
+import { IsPropsType } from '.';
 
 import type { Type } from '.';
 
@@ -13,23 +13,25 @@ export function Factory<K extends Key>(props: Props<K>) {
 	const className = css(props.className, 'ee-input');
 
 	if (IsPropsType.Component.Select(props)) {
-		const { value, handlers } = useFactory<'Select'>(props);
+		const { _type, children, ...selectProps } = props;
 
 		return (
-			<Select {...props} {...handlers} value={value} className={className} fitContainer>
-				{props.children}
+			<Select {...selectProps} className={className} fitContainer>
+				{children}
 			</Select>
 		);
 	}
 
 	if (IsPropsType.Component.Input.Text(props)) {
-		const { value, handlers } = useFactory<'Text'>(props);
+		const { _type, disabled, ...inputProps } = props;
 
-		return <TextInput {...props} {...handlers} className={className} isDisabled={props.disabled} value={value} />;
+		return <TextInput {...inputProps} className={className} isDisabled={disabled} />;
 	}
 
 	if (IsPropsType.Component.Input.Number(props)) {
-		return <NumberInput {...props} inputClass='ee-input' showStepper={false} wrapperClass={props.className} />;
+		const { _type, className, ...inputProps } = props;
+
+		return <NumberInput {...inputProps} inputClass='ee-input' showStepper={false} wrapperClass={className} />;
 	}
 
 	throw new Error('Unknown component is expected from the factory! Component type: ' + props._type);
