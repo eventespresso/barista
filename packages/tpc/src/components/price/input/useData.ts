@@ -31,8 +31,15 @@ module Args {
 	export type Key = keyof TPM;
 	export type Value<K extends Key> = TPM[K];
 	export type Hook<K extends Key> = {
-		onChange: React.ChangeEventHandler<HTMLInputElement> & React.ChangeEventHandler<HTMLSelectElement>;
+		onChange: OnChange.Type;
 		value: Value<K>;
 		manager: DataStateManager;
 	};
+}
+
+module OnChange {
+	export type Type = Input & Select;
+
+	type Input = React.ChangeEventHandler<HTMLInputElement>;
+	type Select = React.ChangeEventHandler<HTMLSelectElement>;
 }
