@@ -1,25 +1,29 @@
 import { __ } from '@eventespresso/i18n';
 
-import { useDataState } from '../../../data';
-import { Input } from '.';
+import { Factory } from '..';
+import { useData } from '.';
 
-import type { PriceModifierProps } from '../../../types';
+import type { PriceModifierProps as PMP } from '../../..';
+import { useMemo } from 'react';
 
-export const Order: React.FC<PriceModifierProps> = ({ price }) => {
-	const { isDisabled } = useDataState();
+export const Order: React.FC<PMP> = ({ price }) => {
+	const { manager, onChange, value } = useData({ price, field: 'order' });
+
 	// order cannot be changed for base or default prices
-	const disabled = isDisabled || price.isBasePrice || price.isDefault;
+	const disabled = useMemo<boolean>(() => {
+		return manager.isDisabled || price.isBasePrice || price.isDefault;
+	}, [manager, price]);
 
 	return (
-		<Input
+		<Factory
+			_type='Text'
+			name={__('price order')}
 			aria-label={__('price order')}
-			className={'ee-input-width--small'}
-			component={'input'}
+			className='ee-input-width--small'
 			disabled={disabled}
-			field='order'
 			min={1}
-			price={price}
-			type={'text'}
+			value={value}
+			onChange={onChange}
 		/>
 	);
 };
