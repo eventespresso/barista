@@ -5,12 +5,10 @@ import { BaseField } from '..';
 
 import type { BaseFieldProps } from '..';
 
-import type { TpcPriceModifier, PriceModifierProps } from '../../../..';
+import type { TpcPriceModifier as TPM, PriceModifierProps as PMP } from '../../../..';
 
-export interface Props
-	extends PriceModifierProps,
-		Omit<BaseFieldProps<number | string>, 'getValue' | 'setValue' | 'name'> {
-	field: keyof TpcPriceModifier;
+export interface Props extends PMP, Omit<BaseFieldProps<number | string>, 'getValue' | 'setValue' | 'name'> {
+	field: keyof TPM;
 }
 
 /**

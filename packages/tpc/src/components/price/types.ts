@@ -5,8 +5,6 @@ import { InputHTMLAttributes } from 'react';
 import type { NumberInputProps } from '@eventespresso/adapters';
 import type { SelectProps } from '@eventespresso/ui-components';
 
-import type { PriceModifierProps, TpcPriceModifier } from '../../types';
-
 // 'css' prop conflicts with Chakra UI component props
 export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'css' | 'max' | 'min' | 'step'> & {
 	onChangeValue?: (value: any) => void;

@@ -1,20 +1,23 @@
 import { __ } from '@eventespresso/i18n';
 
-import { Input } from '.';
+import { Factory } from '..';
+import { useData } from '.';
 
-import type { PriceModifierProps } from '../../..';
+import type { PriceModifierProps as PMP } from '../../..';
 
-export const Name: React.FC<PriceModifierProps> = ({ price }) => {
+export const Name: React.FC<PMP> = ({ price }) => {
+	const { value, onChange } = useData({ price, field: 'name' });
+
 	return (
-		<Input
+		<Factory
+			_type='Text'
+			name={__('price name')}
 			aria-label={__('price name')}
-			component={'input'}
 			// default prices cannot be changed in TPC
 			disabled={price.isDefault}
-			field='name'
 			placeholder={__('label…')}
-			price={price}
-			type={'text'}
+			value={value}
+			onChange={onChange}
 		/>
 	);
 };

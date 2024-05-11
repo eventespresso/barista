@@ -6,4 +6,5 @@ export interface SelectProps extends Omit<AdapterSelectProps, 'size' | 'width'>,
 	flow?: 'inline';
 	noBorderColor?: boolean;
 	wrapperClassName?: string;
+	disabled?: boolean;
 }
