@@ -4,35 +4,21 @@ import { parsedAmount } from '@eventespresso/utils';
 
 import { useDataState } from '../../../../data';
 
-import type { PriceModifierProps, TpcPriceModifier } from '../../../../types';
-import type { BaseFieldProps, FieldValue } from '../..';
+import type { TpcPriceModifier as TPM } from '../../../../types';
 
-type BFP = BaseFieldProps;
-
-interface PriceFieldProps
-	extends PriceModifierProps,
-		Omit<BaseFieldProps<number | string>, 'getValue' | 'setValue' | 'name'> {
-	field: keyof TpcPriceModifier;
-}
-
-interface UsePriceAmount extends Pick<PriceFieldProps, 'field' | 'price'> {}
-
-interface UsePrice {
-	getValue: () => FieldValue;
-	setValue: (value: FieldValue) => void;
-}
-
-export const useAmount = ({ field, price }: UsePriceAmount): UsePrice => {
+export const useAmount: Hook.Type = ({ field, price }) => {
 	const { updatePrice } = useDataState();
 
-	const getValue = useCallback<BFP['getValue']>(() => price[field], [field, price]);
+	const getValue = useCallback<() => number>(() => {
+		return parsedAmount(valueToNumber(price[field]));
+	}, [field, price]);
 
-	const setValue = useCallback<BFP['setValue']>(
+	const setValue = useCallback<(value: number) => void>(
 		(value) => {
-			const absValue = Math.abs(parsedAmount(value as number)) || 0;
-			updatePrice({ id: price.id, fieldValues: { [field]: absValue } });
+			const newValue = Math.abs(parsedAmount(value)) || 0;
+			updatePrice({ id: price.id, fieldValues: { [field]: newValue } });
 		},
-		[updatePrice, price.id, field]
+		[updatePrice, price, field]
 	);
 
 	return useMemo(
@@ -43,3 +29,26 @@ export const useAmount = ({ field, price }: UsePriceAmount): UsePrice => {
 		[getValue, setValue]
 	);
 };
+
+function valueToNumber(input: TPM[keyof TPM]): number {
+	if (typeof input === 'number') return input;
+	if (typeof input === 'string') return parsedAmount(input);
+	return input ? 1 : 0;
+}
+
+module Hook {
+	export type Type = (props: Props) => Return;
+
+	type Props = {
+		price: TPM;
+		field: Field;
+	};
+
+	type Return = {
+		getValue: () => Value;
+		setValue: (value: Value) => void;
+	};
+
+	type Value = number;
+	type Field = keyof TPM;
+}
