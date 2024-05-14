@@ -1,14 +1,8 @@
-import { useCallback } from 'react';
-
 import { DataStateManager, useDataState } from '../../../..';
 
 import type { TpcPriceModifier as TPM } from '../../..';
 
-export const useData = <K extends Args.Key>(args: Args.Type<K>) => {
-	return useCallback<() => Args.Hook<K>>(() => callback(args), [args])();
-};
-
-const callback = <K extends Args.Key>({ price, field }: Args.Type<K>): Args.Hook<K> => {
+export const useData = <K extends Args.Key>({ price, field }: Args.Type<K>): Args.Hook<K> => {
 	const manager = useDataState();
 
 	const onChange: Args.Hook<K>['onChange'] = (event) => {
