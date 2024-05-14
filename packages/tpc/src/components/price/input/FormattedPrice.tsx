@@ -17,14 +17,14 @@ export const FormattedPrice = (props: NumberProps) => {
 	const { formatAmount } = useMoneyDisplay();
 	const { currency } = useConfig();
 
-	const value: string = useMemo(() => {
-		return formatAmount(ticket?.price) || defaultValue;
-	}, [ticket?.price]);
-
 	const defaultValue: string = useMemo(() => {
 		const decimals = '0'.repeat(currency.decimalPlaces);
 		return 0 + currency.decimalMark + decimals;
 	}, [currency]);
+
+	const value: string = useMemo(() => {
+		return formatAmount(ticket?.price) || defaultValue;
+	}, [ticket, formatAmount, defaultValue]);
 
 	type OnChange = (string: string, number: number) => void;
 
