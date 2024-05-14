@@ -49,7 +49,7 @@ module H {
 	}
 }
 
-function HookSelect(props: H.Props.Any): props is Props.Type<string> & { _type: 'Select' } {
+function HookSelect(props: H.Props.Any): props is Props.Type & { _type: 'Select' } {
 	return props._type === 'Select';
 }
 
