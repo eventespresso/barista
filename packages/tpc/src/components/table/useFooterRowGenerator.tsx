@@ -57,7 +57,6 @@ const useFooterRowGenerator = (): FooterRowGenerator => {
 				value: (
 					<Price.Input.FormattedPrice
 						aria-label={__('ticket total')}
-						component='input'
 						disabled={isDisabled || !reverseCalculate}
 						id='ticket-price-total'
 					/>
