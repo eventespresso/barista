@@ -36,4 +36,5 @@ export interface NumberInputProps extends Pick<ChakraNumberInputProps, Picked>, 
 	 * @default "[0-9]*(.[0-9]+)?"
 	 */
 	pattern?: string;
+	disabled?: boolean;
 }
