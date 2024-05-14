@@ -37,7 +37,8 @@
 			{
 				"vars": "all",
 				"args": "after-used",
-				"ignoreRestSiblings": false
+				"ignoreRestSiblings": false,
+				"varsIgnorePattern": "[iI]gnored?"
 			}
 		],
 		"@typescript-eslint/no-use-before-define": "off",
