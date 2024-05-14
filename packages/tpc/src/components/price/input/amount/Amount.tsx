@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import classNames from 'classnames';
 
 import { __ } from '@eventespresso/i18n';
@@ -35,9 +35,14 @@ export const Amount: React.FC<PriceModifierProps> = ({ price }) => {
 		return isDisabled || (reverseCalculate && price.isBasePrice) || price.isDefault;
 	}, [isDisabled, reverseCalculate, price]);
 
-	const onChange: CommonInputProps['onChange'] = (string, number) => {
-		setValue(number);
-	};
+	type OnChange = CommonInputProps['onChange'];
+
+	const onChange = useCallback<OnChange>(
+		(string, number) => {
+			setValue(number);
+		},
+		[setValue]
+	);
 
 	return (
 		<MoneyInputWrapper
