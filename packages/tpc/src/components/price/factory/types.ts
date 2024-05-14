@@ -37,21 +37,21 @@ export module Type {
 
 	type Make<A extends object, V extends Value> = {
 		Component: {
-			Props: Component.Props<A, V>;
+			Props: Component.Props<A>;
 		};
 		Hook: {
-			Props: Hook.Props<V>;
+			Props: Hook.Props;
 			Type: Hook.Type<A, V>;
 		};
 	};
 }
 
 module Component {
-	export type Props<H extends Attribute.Html, V extends Value> = Props.Type<V> & H & AriaLabel;
+	export type Props<H extends Attribute.Html> = Props.Type & H & AriaLabel;
 }
 
 module Hook {
-	export type Props<V extends Value> = Props.Type<V>;
+	export type Props = Props.Type;
 	export type Type<A extends Attribute.Html, V extends Value> = {
 		name: Name;
 		value: V;
@@ -75,10 +75,8 @@ module Element {
 }
 
 export module Props {
-	export type Type<V extends Value> = {
+	export type Type = {
 		name: Name;
-		getValue?: () => V;
-		setValue?: (value: V) => void;
 	};
 }
 
