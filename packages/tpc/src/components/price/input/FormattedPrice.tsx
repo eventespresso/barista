@@ -7,16 +7,12 @@ import { parsedAmount } from '@eventespresso/utils';
 import { useDataState } from '../../../data';
 import { Factory } from '..';
 
-import type { BaseFieldProps } from '..';
-
-interface TicketPriceFieldProps extends Omit<BaseFieldProps<number>, 'getValue' | 'setValue' | 'name' | 'type'> {}
-
-type TPP = TicketPriceFieldProps; // alias
+import type { NumberProps } from '@eventespresso/ui-components';
 
 /**
  * Used for displaying the total (formatted) price
  */
-export const FormattedPrice: React.FC<TPP> = (props) => {
+export const FormattedPrice = (props: NumberProps) => {
 	const { ticket, updateTicketPrice } = useDataState();
 	const { formatAmount } = useMoneyDisplay();
 	const { currency } = useConfig();
