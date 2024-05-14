@@ -13,7 +13,7 @@ export function Factory<K extends Key>(props: Props<K>) {
 	const className = css(props.className, 'ee-input');
 
 	if (IsPropsType.Component.Select(props)) {
-		const { _type, children, ...selectProps } = props;
+		const { _type: ignore, children, ...selectProps } = props;
 
 		return (
 			<Select {...selectProps} className={className} fitContainer>
@@ -23,13 +23,13 @@ export function Factory<K extends Key>(props: Props<K>) {
 	}
 
 	if (IsPropsType.Component.Input.Text(props)) {
-		const { _type, disabled, ...inputProps } = props;
+		const { _type: ignore, disabled, ...inputProps } = props;
 
 		return <TextInput {...inputProps} className={className} isDisabled={disabled} />;
 	}
 
 	if (IsPropsType.Component.Input.Number(props)) {
-		const { _type, className, ...inputProps } = props;
+		const { _type: ignore, className, ...inputProps } = props;
 
 		return <NumberInput {...inputProps} inputClass='ee-input' showStepper={false} wrapperClass={className} />;
 	}
