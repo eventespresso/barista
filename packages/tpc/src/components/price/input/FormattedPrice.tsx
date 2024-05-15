@@ -37,7 +37,7 @@ export const FormattedPrice = (props: NumberProps) => {
 
 	const onBlur: On.Blur = useCallback(
 		({ currentTarget: { value } }) => {
-			const newValue = Math.abs(parsedAmount(value)) || 0;
+			const newValue = Math.abs(parsedAmount(value));
 
 			updateTicketPrice(newValue);
 			setValue(formatPrice(newValue));
