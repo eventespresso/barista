@@ -21,6 +21,7 @@ export const useMoneyDisplay = (): MoneyDisplay => {
 
 	const afterAmount = currency.signB4 ? '' : currency.sign;
 	const beforeAmount = currency.signB4 ? currency.sign : '';
+
 	const formatMoney = formatAmount(currency.decimalPlaces);
 
 	return useMemo(
