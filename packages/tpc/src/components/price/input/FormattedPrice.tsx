@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 
 import { MoneyInputWrapper } from '@eventespresso/ui-components';
 import { useMoneyDisplay } from '@eventespresso/services';
@@ -6,71 +6,44 @@ import { parsedAmount } from '@eventespresso/utils';
 
 import { useDataState } from '../../../data';
 import { Factory } from '..';
+import { useInputFilter } from '.';
 
 import type { NumberProps } from '@eventespresso/ui-components';
+import type { CommonInputProps } from '@eventespresso/adapters';
 
 /**
  * Used for displaying the total (formatted) price
  */
-export const FormattedPrice = ({ value, ...props }: NumberProps) => {
+export const FormattedPrice = (props: NumberProps) => {
+	const inputFilter = useInputFilter();
 	const { ticket, updateTicketPrice } = useDataState();
-	const { formatAmount, currency } = useMoneyDisplay();
+	const { currency, formatAmount: formatPrice } = useMoneyDisplay();
 
-	const defaultValue: string = useMemo(() => {
-		const decimals = '0'.repeat(currency.decimalPlaces);
-		return 0 + currency.decimalMark + decimals;
-	}, [currency]);
-
-	const [isChanging, setIsChanging] = useState<boolean>(false);
-
-	const [state, setState] = useState<string>(() => {
-		return formatAmount(value) || defaultValue;
+	const [value, setValue] = useState<string>(() => {
+		return formatPrice(ticket.price);
 	});
 
-	useEffect(() => {
-		if (ticket.price && !isChanging) {
-			setState(formatAmount(ticket.price));
-		}
-	}, [setState, formatAmount, ticket.price, isChanging]);
-
-	type OnChange = (string: string, number: number) => void;
-
-	const getValueFromString = useCallback((value: string): string => {
-		if (value.includes('.')) {
-			const [integers, decimals] = value.split('.');
-			if (decimals.length > 6) {
-				return integers + '.' + decimals.substring(0, 6);
-			}
-			return value;
-		}
-		return value;
-	}, []);
-
-	const onChange: OnChange = useCallback(
+	const onChange: On.Change = useCallback(
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		(string, number) => {
-			setState(getValueFromString(string));
-			setIsChanging(true);
+			setValue(inputFilter(string));
 		},
-		[getValueFromString, setState, setIsChanging]
+		[inputFilter]
 	);
 
-	const onBlur = useCallback(() => {
-		updateTicketPrice(Math.abs(parsedAmount(state)));
-		setState(formatAmount(state));
-		setIsChanging(false);
-	}, [updateTicketPrice, setState, formatAmount, state, setIsChanging]);
+	useEffect(() => {
+		setValue(formatPrice(ticket.price));
+	}, [ticket]);
 
-	const pattern: string = useMemo(() => {
-		const mark = currency.decimalMark;
-		const dp = currency.decimalPlaces;
+	const onBlur: On.Blur = useCallback(
+		({ currentTarget: { value } }) => {
+			const newValue = Math.abs(parsedAmount(value)) || 0;
 
-		const integers = '[0-9]*?'; // lazy but greedy quantifier
-		const separator = '\\' + mark;
-		const decimals = `[0-9]{${dp}}`;
-
-		return integers + separator + decimals;
-	}, [currency]);
+			updateTicketPrice(newValue);
+			setValue(formatPrice(newValue));
+		},
+		[updateTicketPrice, currency, formatPrice]
+	);
 
 	return (
 		<MoneyInputWrapper sign={currency?.sign} signB4={currency?.signB4} disabled={props.disabled}>
@@ -82,11 +55,15 @@ export const FormattedPrice = ({ value, ...props }: NumberProps) => {
 				onChange={onChange}
 				onBlur={onBlur}
 				min={0}
-				value={state}
-				pattern={pattern}
+				value={value}
+				defaultValue={value}
 			/>
 		</MoneyInputWrapper>
 	);
 };
 
-type OnChange = (string: string, number: number) => void;
+module On {
+	export type Change = CommonInputProps<HTMLInputElement, React.ReactText>['onChange'];
+
+	export type Blur = React.FocusEventHandler<HTMLInputElement>;
+}
