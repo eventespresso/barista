@@ -36,7 +36,7 @@ const useStrip: PipeFn = (input) => {
 /**
  * Regular expression pattern with 6 decimal places and localized decimal mark
  */
-export const usePattern = (): string => {
+const usePattern = (): string => {
 	const {
 		currency: { decimalMark: mark },
 	} = Factory.make();
