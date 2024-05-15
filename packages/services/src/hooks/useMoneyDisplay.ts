@@ -17,19 +17,20 @@ export interface MoneyDisplay {
 }
 
 export const useMoneyDisplay = (): MoneyDisplay => {
-	const config = useConfig();
-	const afterAmount = config.currency.signB4 ? '' : config.currency.sign;
-	const beforeAmount = config.currency.signB4 ? config.currency.sign : '';
-	const formatMoney = formatAmount(config.currency.decimalPlaces);
+	const { currency } = useConfig();
+
+	const afterAmount = currency.signB4 ? '' : currency.sign;
+	const beforeAmount = currency.signB4 ? currency.sign : '';
+	const formatMoney = formatAmount(currency.decimalPlaces);
 
 	return useMemo(
 		() => ({
 			afterAmount,
 			beforeAmount,
-			currency: config.currency,
+			currency: currency,
 			formatAmount: formatMoney,
 		}),
-		[afterAmount, beforeAmount, config.currency, formatMoney]
+		[afterAmount, beforeAmount, currency, formatMoney]
 	);
 };
 
