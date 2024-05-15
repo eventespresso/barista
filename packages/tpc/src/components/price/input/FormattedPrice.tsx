@@ -33,7 +33,7 @@ export const FormattedPrice = (props: NumberProps) => {
 
 	useEffect(() => {
 		setValue(formatPrice(ticket.price));
-	}, [ticket]);
+	}, [ticket, formatPrice]);
 
 	const onBlur: On.Blur = useCallback(
 		({ currentTarget: { value } }) => {
@@ -42,7 +42,7 @@ export const FormattedPrice = (props: NumberProps) => {
 			updateTicketPrice(newValue);
 			setValue(formatPrice(newValue));
 		},
-		[updateTicketPrice, currency, formatPrice]
+		[updateTicketPrice, formatPrice]
 	);
 
 	return (

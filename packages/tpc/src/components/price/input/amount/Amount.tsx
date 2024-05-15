@@ -42,7 +42,7 @@ export const Amount: React.FC<PriceModifierProps> = ({ price }) => {
 		(string, number) => {
 			setValue(inputFilter(string));
 		},
-		[setValue]
+		[setValue, inputFilter]
 	);
 
 	const onBlur = useCallback<On.Blur>(
