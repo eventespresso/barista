@@ -13,7 +13,7 @@ export const Description: React.FC<PMP> = ({ price }) => {
 			_type='Text'
 			name={__('price description')}
 			aria-label={__('price description')}
-			// // default descriptions cannot be changed in TPC
+			// default descriptions cannot be changed in TPC
 			disabled={price.isDefault}
 			placeholder={__('description…')}
 			onChange={onChange}
