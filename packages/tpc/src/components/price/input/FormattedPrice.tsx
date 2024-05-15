@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { MoneyInputWrapper } from '@eventespresso/ui-components';
-import { useMoneyDisplay, useConfig } from '@eventespresso/services';
+import { useMoneyDisplay } from '@eventespresso/services';
 import { parsedAmount } from '@eventespresso/utils';
 
 import { useDataState } from '../../../data';
@@ -14,8 +14,7 @@ import type { NumberProps } from '@eventespresso/ui-components';
  */
 export const FormattedPrice = ({ value, ...props }: NumberProps) => {
 	const { ticket, updateTicketPrice } = useDataState();
-	const { formatAmount } = useMoneyDisplay();
-	const { currency } = useConfig();
+	const { formatAmount, currency } = useMoneyDisplay();
 
 	const defaultValue: string = useMemo(() => {
 		const decimals = '0'.repeat(currency.decimalPlaces);
@@ -89,3 +88,5 @@ export const FormattedPrice = ({ value, ...props }: NumberProps) => {
 		</MoneyInputWrapper>
 	);
 };
+
+type OnChange = (string: string, number: number) => void;
