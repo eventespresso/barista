@@ -1,3 +1,4 @@
+export { useInputFilter } from './useInputFilter';
 export { useData } from './useData';
 export { Amount } from './amount';
 export { Description } from './Description';
