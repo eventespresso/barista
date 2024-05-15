@@ -10,12 +10,12 @@ export const useAmount: Hook.Type = ({ field, price }) => {
 	const { updatePrice } = useDataState();
 
 	const getValue = useCallback<() => number>(() => {
-		return parsedAmount(valueToNumber(price[field]));
+		return valueToNumber(price[field]);
 	}, [field, price]);
 
-	const setValue = useCallback<(value: number) => void>(
+	const setValue = useCallback<(value: string | number) => void>(
 		(value) => {
-			const newValue = Math.abs(parsedAmount(value)) || 0;
+			const newValue = Math.abs(parsedAmount(value));
 			updatePrice({ id: price.id, fieldValues: { [field]: newValue } });
 		},
 		[updatePrice, price, field]
@@ -45,10 +45,9 @@ module Hook {
 	};
 
 	type Return = {
-		getValue: () => Value;
-		setValue: (value: Value) => void;
+		getValue: () => number;
+		setValue: (value: string | number) => void;
 	};
 
-	type Value = number;
 	type Field = keyof TPM;
 }
