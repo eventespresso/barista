@@ -3,7 +3,7 @@ import * as R from 'ramda';
 import { Factory } from '@eventespresso/config';
 
 export const useInputFilter: HookFn = () => {
-	return R.pipe(useTruncate, useStrip);
+	return R.pipe(useTruncate);
 };
 
 /**
@@ -23,14 +23,6 @@ const useTruncate: PipeFn = (input) => {
 	if (decimals.length <= decimalPlaces) return input;
 
 	return integers + mark + decimals.substring(0, decimalPlaces);
-};
-
-/**
- * Remove illegal input characters
- */
-const useStrip: PipeFn = (input) => {
-	const pattern = usePattern();
-	return input.replaceAll(pattern, '');
 };
 
 /**
