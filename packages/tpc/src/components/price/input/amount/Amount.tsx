@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import classNames from 'classnames';
 
 import { __ } from '@eventespresso/i18n';
@@ -20,7 +20,8 @@ export const Amount: React.FC<PriceModifierProps> = ({ price }) => {
 	const { currency } = useConfig();
 	const inputFilter = useInputFilter();
 
-	const value = useMemo(() => getValue(), [getValue]);
+	const [localState, setState] = useState<string>(getValue().toString());
+	const [focus, setFocus] = useState<boolean>(true);
 
 	const hasError = useMemo<boolean>(() => {
 		return Number(price?.amount ?? 0) === 0;
@@ -40,17 +41,30 @@ export const Amount: React.FC<PriceModifierProps> = ({ price }) => {
 	const onChange = useCallback<On.Change>(
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		(string, number) => {
-			setValue(inputFilter(string));
+			setState(inputFilter(string));
 		},
-		[setValue, inputFilter]
+		[setValue, inputFilter, setState]
 	);
 
 	const onBlur = useCallback<On.Blur>(
-		({ currentTarget: { value } }) => {
-			setValue(value);
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		(event) => {
+			setValue(localState);
+			setFocus(false);
 		},
-		[setValue]
+		[localState, setValue, setFocus]
 	);
+
+	const onFocus = useCallback<On.Focus>(() => {
+		setFocus(true);
+	}, [setFocus]);
+
+	useEffect(() => {
+		// update price from *outside* when *not* focused
+		if (!focus) {
+			setState(price.amount.toString());
+		}
+	}, [price, focus, setState]);
 
 	return (
 		<MoneyInputWrapper
@@ -67,9 +81,10 @@ export const Amount: React.FC<PriceModifierProps> = ({ price }) => {
 				disabled={disabled}
 				min={0}
 				placeholder={__('amount…')}
-				value={value}
+				value={localState}
 				onChange={onChange}
 				onBlur={onBlur}
+				onFocus={onFocus}
 			/>
 		</MoneyInputWrapper>
 	);
@@ -78,4 +93,5 @@ export const Amount: React.FC<PriceModifierProps> = ({ price }) => {
 module On {
 	export type Change = NumberInputProps['onChange'];
 	export type Blur = NumberInputProps['onBlur'];
+	export type Focus = React.FocusEventHandler<HTMLInputElement>;
 }
