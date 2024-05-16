@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { is, toString } from 'ramda';
 
-const useMemoStringify = <T>(data: T, deps?: any[]): T => {
+const useMemoStringify = <Data extends any, Deps extends any[]>(data: Data, deps?: Deps): Data => {
 	let dataStringified: string;
 
 	if (deps && Array.isArray(deps)) {
