@@ -17,6 +17,7 @@ type ChakraProps = Pick<
 	| 'step'
 	| 'value'
 	| 'onBlur'
+	| 'onFocus'
 >;
 
 export interface NumberInputProps extends ChakraProps, CommonInputProps<HTMLInputElement> {

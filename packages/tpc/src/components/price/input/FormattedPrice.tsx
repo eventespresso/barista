@@ -23,6 +23,8 @@ export const FormattedPrice = (props: NumberProps) => {
 		return formatPrice(ticket.price);
 	});
 
+	const [focus, setFocus] = useState<boolean>(false);
+
 	const onChange: On.Change = useCallback(
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		(string, number) => {
@@ -32,8 +34,12 @@ export const FormattedPrice = (props: NumberProps) => {
 	);
 
 	useEffect(() => {
-		setValue(formatPrice(ticket.price));
-	}, [ticket, formatPrice]);
+		// set value from 'ticket.price' only when are *not*
+		// focusing on the input field
+		if (!focus) {
+			setValue(formatPrice(ticket.price));
+		}
+	}, [setValue, formatPrice, ticket]);
 
 	const onBlur: On.Blur = useCallback(
 		({ currentTarget: { value } }) => {
@@ -41,8 +47,16 @@ export const FormattedPrice = (props: NumberProps) => {
 
 			updateTicketPrice(newValue);
 			setValue(formatPrice(newValue));
+			setFocus(false);
 		},
-		[updateTicketPrice, formatPrice]
+		[updateTicketPrice, formatPrice, setFocus]
+	);
+
+	const onFocus: On.Focus = useCallback(
+		(event) => {
+			setFocus(true);
+		},
+		[setFocus]
 	);
 
 	return (
@@ -54,6 +68,7 @@ export const FormattedPrice = (props: NumberProps) => {
 				aria-label={props['aria-label']}
 				onChange={onChange}
 				onBlur={onBlur}
+				onFocus={onFocus}
 				min={0}
 				value={value}
 				defaultValue={value}
@@ -66,4 +81,6 @@ module On {
 	export type Change = CommonInputProps<HTMLInputElement, React.ReactText>['onChange'];
 
 	export type Blur = React.FocusEventHandler<HTMLInputElement>;
+
+	export type Focus = React.FocusEventHandler<HTMLInputElement>;
 }
