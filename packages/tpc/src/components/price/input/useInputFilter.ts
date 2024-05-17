@@ -28,6 +28,7 @@ const useTruncate: PipeFn = (input) => {
 /**
  * Regular expression pattern with 6 decimal places and localized decimal mark
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const usePattern = (): string => {
 	const {
 		currency: { decimalMark: mark },
