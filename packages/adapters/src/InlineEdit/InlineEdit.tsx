@@ -20,7 +20,6 @@ export const InlineEdit: React.FC<InlineEditProps> = ({
 	previewClassName,
 	tooltip,
 	value,
-	...props
 }) => {
 	const [currentValue, setCurrentValue] = useState(defaultValue || value);
 	const [prevSubmitValue, setPrevSubmitValue] = useState(currentValue);
@@ -55,7 +54,6 @@ export const InlineEdit: React.FC<InlineEditProps> = ({
 			onSubmit={onSubmitHandler}
 			placeholder={placeholder}
 			value={currentValue}
-			{...props}
 		>
 			{({ isEditing, onCancel, onEdit }) => {
 				// eslint-disable-next-line react-perf/jsx-no-new-function-as-prop
