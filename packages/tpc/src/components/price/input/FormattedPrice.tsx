@@ -39,20 +39,18 @@ export const FormattedPrice = (props: NumberProps) => {
 		if (!focus) {
 			setValue(formatPrice(ticket.price));
 		}
-	}, [setValue, formatPrice, ticket]);
+	}, [focus, setValue, formatPrice, ticket.price]);
 
 	const onBlur: On.Blur = useCallback(
 		({ currentTarget: { value } }) => {
-			const newValue = Math.abs(parsedAmount(value));
-
-			updateTicketPrice(newValue);
-			setValue(formatPrice(newValue));
 			setFocus(false);
+			updateTicketPrice(Math.abs(parsedAmount(value)));
 		},
-		[updateTicketPrice, formatPrice, setFocus]
+		[setFocus, updateTicketPrice]
 	);
 
 	const onFocus: On.Focus = useCallback(
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		(event) => {
 			setFocus(true);
 		},

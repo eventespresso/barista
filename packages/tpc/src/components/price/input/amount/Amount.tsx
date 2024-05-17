@@ -20,8 +20,8 @@ export const Amount: React.FC<PriceModifierProps> = ({ price }) => {
 	const { currency } = useConfig();
 	const inputFilter = useInputFilter();
 
-	const [localState, setState] = useState<string>(getValue().toString());
-	const [focus, setFocus] = useState<boolean>(true);
+	const [localState, setState] = useState<string>(getValue.asString());
+	const [focus, setFocus] = useState<boolean>(false);
 
 	const hasError = useMemo<boolean>(() => {
 		return Number(price?.amount ?? 0) === 0;
@@ -43,28 +43,34 @@ export const Amount: React.FC<PriceModifierProps> = ({ price }) => {
 		(string, number) => {
 			setState(inputFilter(string));
 		},
-		[setValue, inputFilter, setState]
+		[inputFilter, setState]
 	);
 
 	const onBlur = useCallback<On.Blur>(
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		(event) => {
-			setValue(localState);
 			setFocus(false);
+			// use 'localState' as opposed to 'event' due to filtering by 'useInputFilter' by 'onChange'
+			setValue(localState);
 		},
-		[localState, setValue, setFocus]
+		[setFocus, setValue, localState]
 	);
 
-	const onFocus = useCallback<On.Focus>(() => {
-		setFocus(true);
-	}, [setFocus]);
+	const onFocus = useCallback<On.Focus>(
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		(event) => {
+			setFocus(true);
+		},
+		[setFocus]
+	);
 
 	useEffect(() => {
-		// update price from *outside* when *not* focused
-		if (!focus) {
+		// condition 1: if field is disabled it is VALID to set local state because price is being updated *outsidate*
+		// condition 2: when NOT focusing we know that user has finished changing the value so we can update the local state
+		if (isDisabled || !focus) {
 			setState(price.amount.toString());
 		}
-	}, [price, focus, setState]);
+	}, [isDisabled, price.amount, focus, setState]);
 
 	return (
 		<MoneyInputWrapper

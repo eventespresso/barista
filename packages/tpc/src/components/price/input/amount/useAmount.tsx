@@ -13,6 +13,9 @@ export const useAmount: Hook.Type = ({ field, price }) => {
 		return valueToNumber(price[field]);
 	}, [field, price]);
 
+	const asNumber = getValue;
+	const asString = useCallback(() => asNumber().toString(), [asNumber]);
+
 	const setValue = useCallback<(value: string | number) => void>(
 		(value) => {
 			const newValue = Math.abs(parsedAmount(value));
@@ -23,10 +26,13 @@ export const useAmount: Hook.Type = ({ field, price }) => {
 
 	return useMemo(
 		() => ({
-			getValue,
+			getValue: {
+				asString,
+				asNumber,
+			},
 			setValue,
 		}),
-		[getValue, setValue]
+		[asNumber, asString, setValue]
 	);
 };
 
@@ -45,7 +51,10 @@ module Hook {
 	};
 
 	type Return = {
-		getValue: () => number;
+		getValue: {
+			asString: () => string;
+			asNumber: () => number;
+		};
 		setValue: (value: string | number) => void;
 	};
 
