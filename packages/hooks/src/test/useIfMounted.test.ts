@@ -9,6 +9,7 @@ describe('useIfMounted', () => {
 		const ifMounted = useIfMounted();
 
 		const updateCount = (): void => setCount((x) => x + 1);
+
 		const increment = (): void => {
 			// whether we should use ifMounted()
 			if (updateOnlyIfMounted) {
