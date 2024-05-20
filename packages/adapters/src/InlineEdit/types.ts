@@ -6,7 +6,6 @@ export type InputType = 'heading' | 'number' | 'textarea' | 'text';
 
 export module Props {
 	export interface InlineEdit extends ChakraProps, CommonProps {
-		'data-testid'?: string;
 		editableInputClassName?: string;
 		inputClassName?: string;
 		inputType?: InputType;
@@ -28,10 +27,7 @@ export module Props {
 		setValue: React.Dispatch<React.SetStateAction<string>>;
 	}
 
-	type InlinePreviewBase = Pick<
-		InlineEdit,
-		'data-testid' | 'editableInputClassName' | 'inputType' | 'textAreaClassName'
-	>;
+	type InlinePreviewBase = Pick<InlineEdit, 'editableInputClassName' | 'inputType' | 'textAreaClassName'>;
 
 	type InlineEditBase = Partial<Omit<InlineEdit, 'onCancel' | 'onChange' | 'onChangeValue' | 'onEdit' | 'onSubmit'>>;
 

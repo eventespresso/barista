@@ -15,14 +15,7 @@ const insertStrAt = (str: string, subStr: string, pos: number): string => {
 
 type Component = React.FC<Props.InlineEditInput>;
 
-const InlineEditInput: Component = ({
-	'data-testid': testid,
-	editableInputClassName,
-	inputType,
-	onCancel,
-	setValue,
-	textAreaClassName,
-}) => {
+const InlineEditInput: Component = ({ editableInputClassName, inputType, onCancel, setValue, textAreaClassName }) => {
 	const textareaProps: BoxProps = useMemo(
 		() => ({
 			as: 'textarea',
@@ -45,10 +38,10 @@ const InlineEditInput: Component = ({
 	);
 
 	if (inputType === 'textarea') {
-		return <Chakra.EditableInput {...textareaProps} data-testid={testid} />;
+		return <Chakra.EditableInput {...textareaProps} />;
 	}
 
-	return <Chakra.EditableInput className={editableInputClassName} data-testid={testid} />;
+	return <Chakra.EditableInput className={editableInputClassName} />;
 };
 
 export default InlineEditInput;

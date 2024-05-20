@@ -13,7 +13,6 @@ type Component = React.FC<Props.InlineEdit>;
 export const InlineEdit: Component = ({
 	'aria-describedby': ariaDescribedby,
 	defaultValue,
-	'data-testid': testid,
 	editableInputClassName,
 	inputClassName,
 	inputType,
@@ -73,7 +72,6 @@ export const InlineEdit: Component = ({
 						<InlineEditPreview
 							aria-describedby={ariaDescribedby}
 							className={inputClassName}
-							data-testid={testid && `${testid}-preview`}
 							isEditing={isEditing}
 							onRequestEdit={onEdit}
 							Preview={Preview}
@@ -81,7 +79,6 @@ export const InlineEdit: Component = ({
 							value={currentValue}
 						/>
 						<InlineEditInput
-							data-testid={testid}
 							editableInputClassName={editableInputClassName}
 							inputType={inputType}
 							setValue={setCurrentValue}
