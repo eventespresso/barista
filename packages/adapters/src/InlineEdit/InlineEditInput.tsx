@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
-
-import { EditableInput as ChakraEditableInput } from '@chakra-ui/react';
+import * as Chakra from '@chakra-ui/react';
 
 import { isEnterKey, isEscapeKey } from '@eventespresso/utils';
+
 import type { BoxProps } from '@chakra-ui/react';
 import type { InlineEditInputProps } from './types';
 
@@ -43,10 +43,10 @@ const InlineEditInput: React.FC<InlineEditInputProps> = ({
 	);
 
 	if (inputType === 'textarea') {
-		return <ChakraEditableInput {...textareaProps} data-testid={testid} />;
+		return <Chakra.EditableInput {...textareaProps} data-testid={testid} />;
 	}
 
-	return <ChakraEditableInput className={editableInputClassName} data-testid={testid} />;
+	return <Chakra.EditableInput className={editableInputClassName} data-testid={testid} />;
 };
 
 export default InlineEditInput;
