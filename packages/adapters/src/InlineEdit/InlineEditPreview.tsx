@@ -1,18 +1,14 @@
-import { EditablePreview as ChakraEditablePreview } from '@chakra-ui/react';
+import * as Chakra from '@chakra-ui/react';
 
-import type { InlineEditPreviewProps } from './types';
+import type { Props } from './types';
 
-const InlineEditPreview: React.FC<InlineEditPreviewProps> = ({
-	isEditing,
-	onRequestEdit,
-	Preview,
-	value,
-	...props
-}) => {
+type Component = React.FC<Props.InlineEditPreview>;
+
+const InlineEditPreview: Component = ({ isEditing, onRequestEdit, Preview, value, ...props }) => {
 	return Preview ? (
 		<Preview {...props} isEditing={isEditing} onRequestEdit={onRequestEdit} value={value} />
 	) : (
-		<ChakraEditablePreview />
+		<Chakra.EditablePreview />
 	);
 };
 

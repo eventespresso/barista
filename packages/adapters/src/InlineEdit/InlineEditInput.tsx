@@ -4,7 +4,7 @@ import * as Chakra from '@chakra-ui/react';
 import { isEnterKey, isEscapeKey } from '@eventespresso/utils';
 
 import type { BoxProps } from '@chakra-ui/react';
-import type { InlineEditInputProps } from './types';
+import type { Props } from './types';
 
 /**
  * Inserts substring into a string at a given position.
@@ -13,7 +13,9 @@ const insertStrAt = (str: string, subStr: string, pos: number): string => {
 	return `${str.slice(0, pos)}${subStr}${str.slice(pos)}`;
 };
 
-const InlineEditInput: React.FC<InlineEditInputProps> = ({
+type Component = React.FC<Props.InlineEditInput>;
+
+const InlineEditInput: Component = ({
 	'data-testid': testid,
 	editableInputClassName,
 	inputType,

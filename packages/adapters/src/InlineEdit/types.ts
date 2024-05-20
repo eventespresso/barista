@@ -1,35 +1,41 @@
 import type React from 'react';
 import type * as Chakra from '@chakra-ui/react';
-
 import type { CommonInputProps } from '../types';
 
 export type InputType = 'heading' | 'number' | 'textarea' | 'text';
 
-type CommonProps = Omit<CommonInputProps<HTMLInputElement>, 'onChange' | 'onChangeValue'>;
+export module Props {
+	export interface InlineEdit extends ChakraProps, CommonProps {
+		'data-testid'?: string;
+		editableInputClassName?: string;
+		inputClassName?: string;
+		inputType?: InputType;
+		lineCount?: number;
+		Preview?: React.ComponentType<InlineEditPreview>;
+		previewClassName?: string;
+		textAreaClassName?: string;
+		tooltip?: string;
+	}
 
-type ChakraProps = Partial<Chakra.EditableProps>;
+	export interface InlineEditPreview extends InlineEditBase {
+		isEditing?: boolean;
+		onRequestEdit?: () => void;
+		value?: string;
+	}
 
-export interface InlineEditProps extends ChakraProps, CommonProps {
-	'data-testid'?: string;
-	editableInputClassName?: string;
-	inputClassName?: string;
-	inputType?: InputType;
-	lineCount?: number;
-	Preview?: React.ComponentType<InlineEditPreviewProps>;
-	previewClassName?: string;
-	textAreaClassName?: string;
-	tooltip?: string;
-}
+	export interface InlineEditInput extends InlinePreviewBase {
+		onCancel: () => void;
+		setValue: React.Dispatch<React.SetStateAction<string>>;
+	}
 
-export interface InlineEditPreviewProps
-	extends Partial<Omit<InlineEditProps, 'onCancel' | 'onChange' | 'onChangeValue' | 'onEdit' | 'onSubmit'>> {
-	isEditing?: boolean;
-	onRequestEdit?: VoidFunction;
-	value?: string;
-}
+	type InlinePreviewBase = Pick<
+		InlineEdit,
+		'data-testid' | 'editableInputClassName' | 'inputType' | 'textAreaClassName'
+	>;
 
-export interface InlineEditInputProps
-	extends Pick<InlineEditProps, 'data-testid' | 'editableInputClassName' | 'inputType' | 'textAreaClassName'> {
-	onCancel: VoidFunction;
-	setValue: React.Dispatch<React.SetStateAction<string>>;
+	type InlineEditBase = Partial<Omit<InlineEdit, 'onCancel' | 'onChange' | 'onChangeValue' | 'onEdit' | 'onSubmit'>>;
+
+	type CommonProps = Omit<CommonInputProps<HTMLInputElement>, 'onChange' | 'onChangeValue'>;
+
+	type ChakraProps = Partial<Chakra.EditableProps>;
 }

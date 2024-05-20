@@ -1,13 +1,16 @@
 import { useCallback, useEffect, useState } from 'react';
-
-import { Editable as ChakraEditable } from '@chakra-ui/react';
+import * as Chakra from '@chakra-ui/react';
 
 import { usePrevious, useIfMounted } from '@eventespresso/hooks';
+
 import InlineEditInput from './InlineEditInput';
 import InlineEditPreview from './InlineEditPreview';
-import type { InlineEditProps } from './types';
 
-export const InlineEdit: React.FC<InlineEditProps> = ({
+import type { Props } from './types';
+
+type Component = React.FC<Props.InlineEdit>;
+
+export const InlineEdit: Component = ({
 	'aria-describedby': ariaDescribedby,
 	defaultValue,
 	'data-testid': testid,
@@ -38,7 +41,9 @@ export const InlineEdit: React.FC<InlineEditProps> = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value]);
 
-	const onSubmitHandler = useCallback<InlineEditProps['onSubmit']>(() => {
+	type OnSubmit = Props.InlineEdit['onSubmit'];
+
+	const onSubmitHandler = useCallback<OnSubmit>(() => {
 		// Update the curerntly submitted value
 		setPrevSubmitValue(currentValue);
 
@@ -48,7 +53,7 @@ export const InlineEdit: React.FC<InlineEditProps> = ({
 	}, [currentValue, onChange]);
 
 	return (
-		<ChakraEditable
+		<Chakra.Editable
 			className={previewClassName}
 			onChange={setCurrentValue}
 			onSubmit={onSubmitHandler}
@@ -85,6 +90,6 @@ export const InlineEdit: React.FC<InlineEditProps> = ({
 					</>
 				);
 			}}
-		</ChakraEditable>
+		</Chakra.Editable>
 	);
 };
