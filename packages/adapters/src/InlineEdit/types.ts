@@ -1,13 +1,15 @@
 import type React from 'react';
-import type { EditableProps as ChakraEditableProps } from '@chakra-ui/react';
+import type * as Chakra from '@chakra-ui/react';
 
 import type { CommonInputProps } from '../types';
 
 export type InputType = 'heading' | 'number' | 'textarea' | 'text';
 
-export interface InlineEditProps
-	extends Partial<ChakraEditableProps>,
-		Omit<CommonInputProps<HTMLInputElement>, 'onChange' | 'onChangeValue'> {
+type CommonProps = Omit<CommonInputProps<HTMLInputElement>, 'onChange' | 'onChangeValue'>;
+
+type ChakraProps = Partial<Chakra.EditableProps>;
+
+export interface InlineEditProps extends ChakraProps, CommonProps {
 	'data-testid'?: string;
 	editableInputClassName?: string;
 	inputClassName?: string;
