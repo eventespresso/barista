@@ -21,11 +21,17 @@ export module Props {
 		tooltip?: string;
 	}
 
+	type CommonProps = Omit<CommonInputProps<HTMLInputElement>, 'onChange' | 'onChangeValue'>;
+
+	type ChakraProps = Partial<Chakra.EditableProps>;
+
 	export interface InlineEditPreview extends InlineEditBase {
 		isEditing?: boolean;
 		onRequestEdit?: () => void;
 		value?: string;
 	}
+
+	type InlineEditBase = Partial<Omit<InlineEdit, 'onCancel' | 'onChange' | 'onChangeValue' | 'onEdit' | 'onSubmit'>>;
 
 	export interface InlineEditInput extends InlinePreviewBase {
 		onCancel: () => void;
@@ -33,10 +39,4 @@ export module Props {
 	}
 
 	type InlinePreviewBase = Pick<InlineEdit, 'editableInputClassName' | 'inputType' | 'textAreaClassName'>;
-
-	type InlineEditBase = Partial<Omit<InlineEdit, 'onCancel' | 'onChange' | 'onChangeValue' | 'onEdit' | 'onSubmit'>>;
-
-	type CommonProps = Omit<CommonInputProps<HTMLInputElement>, 'onChange' | 'onChangeValue'>;
-
-	type ChakraProps = Partial<Chakra.EditableProps>;
 }
