@@ -4,7 +4,6 @@ import * as Chakra from '@chakra-ui/react';
 import { usePrevious, useIfMounted } from '@eventespresso/hooks';
 
 import InlineEditInput from './InlineEditInput';
-import InlineEditPreview from './InlineEditPreview';
 
 import type { Props } from './types';
 
@@ -69,15 +68,19 @@ export const InlineEdit: Component = ({
 
 				return (
 					<>
-						<InlineEditPreview
-							aria-describedby={ariaDescribedby}
-							className={inputClassName}
-							isEditing={isEditing}
-							onRequestEdit={onEdit}
-							Preview={Preview}
-							tooltip={tooltip}
-							value={currentValue}
-						/>
+						{!Preview ? (
+							<Chakra.EditablePreview />
+						) : (
+							<Preview
+								aria-describedby={ariaDescribedby}
+								className={inputClassName}
+								isEditing={isEditing}
+								onRequestEdit={onEdit}
+								Preview={Preview}
+								tooltip={tooltip}
+								value={currentValue}
+							/>
+						)}
 						<InlineEditInput
 							editableInputClassName={editableInputClassName}
 							inputType={inputType}
