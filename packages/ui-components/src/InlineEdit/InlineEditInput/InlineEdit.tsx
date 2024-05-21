@@ -1,10 +1,12 @@
 import classNames from 'classnames';
 
-import { InlineEdit as InlineEditAdapter, InlineEditProps } from '@eventespresso/adapters';
+import { InlineEdit as InlineEditAdapter } from '@eventespresso/adapters';
+
+import type { InlineEditType } from '@eventespresso/adapters';
 
 import './style.scss';
 
-const InlineEdit: React.FC<InlineEditProps> = (props) => {
+const InlineEdit: React.FC<InlineEditType.Component.Props> = (props) => {
 	const inputClassName = classNames('ee-inline-edit', props.inputClassName);
 
 	return (

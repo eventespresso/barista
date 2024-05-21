@@ -1,2 +1,2 @@
 export * from './InlineEdit';
-export * from './types';
+export * as InlineEditType from './types';

@@ -5,9 +5,9 @@ import { usePrevious, useIfMounted } from '@eventespresso/hooks';
 
 import InlineEditInput from './InlineEditInput';
 
-import type { Props } from './types';
+import type { Component } from './types';
 
-type Component = React.FC<Props.InlineEdit>;
+type Component = React.FC<Component.Props>;
 
 export const InlineEdit: Component = ({
 	'aria-describedby': ariaDescribedby,
@@ -39,7 +39,7 @@ export const InlineEdit: Component = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value]);
 
-	type OnSubmit = Props.InlineEdit['onSubmit'];
+	type OnSubmit = Component.Props['onSubmit'];
 
 	const onSubmitHandler = useCallback<OnSubmit>(() => {
 		// Update the curerntly submitted value
@@ -74,9 +74,8 @@ export const InlineEdit: Component = ({
 							<Preview
 								aria-describedby={ariaDescribedby}
 								className={inputClassName}
-								isEditing={isEditing}
-								onRequestEdit={onEdit}
-								Preview={Preview}
+								isEditing={isEditing} // comes from chakra hook
+								onRequestEdit={onEdit} // comes from chakra hook
 								tooltip={tooltip}
 								value={currentValue}
 							/>
