@@ -4,6 +4,11 @@ import type { CommonInputProps } from '../types';
 
 export type InputType = 'heading' | 'number' | 'textarea' | 'text';
 
+// backwards compatibility prior to refactoring types
+export type InlineEditProps = Props.InlineEdit;
+export type InlineEditPreviewProps = Props.InlineEditPreview;
+export type InlineEditInputProps = Props.InlineEditInput;
+
 export module Props {
 	export interface InlineEdit extends ChakraProps, CommonProps {
 		editableInputClassName?: string;
