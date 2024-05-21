@@ -19,21 +19,23 @@ class FeatureFlagsConfigForm extends EE_Form_Section_Proper
 {
 	public function __construct(FeatureFlagsConfig $feature_flags_config)
 	{
-		$feature_flags = $feature_flags_config->getFeatureFlags();
+		$feature_flags              = $feature_flags_config->getFeatureFlags();
 		$feature_flags_form_options = $feature_flags_config->getFeatureFlagsFormOptions();
 
 		$subsections = [
-			'header' => new EE_Form_Section_HTML(EEH_HTML::h3(__('Feature Flags', 'event_espresso')))
+			'header' => new EE_Form_Section_HTML(EEH_HTML::h3(__('Feature Flags', 'event_espresso'))),
 		];
 		foreach ($feature_flags_form_options as $id => $feature_flags_form_option) {
-			$subsections[$id] = new EE_Switch_Input(
+			$subsections[ $id ] = new EE_Switch_Input(
 				[
-					'default'        => $feature_flags->{$id}
+					'default'         => $feature_flags->{$id}
 						? EE_Switch_Input::OPTION_ON
 						: EE_Switch_Input::OPTION_OFF,
 					'html_name'       => $id,
 					'html_label_text' => $feature_flags_form_option['html_label_text'],
-					'html_help_text'  => $feature_flags_form_option['help_text'],
+					'html_help_text'  => $feature_flags_form_option['help_text']
+						. ($feature_flags_form_option['overridden_by'] ?? ''),
+					'disabled'        => $feature_flags_form_option['overridden'] ?? false,
 				],
 				[
 					EE_Switch_Input::OPTION_OFF => sprintf(
