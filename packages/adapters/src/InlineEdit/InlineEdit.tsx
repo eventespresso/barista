@@ -7,9 +7,7 @@ import InlineEditInput from './InlineEditInput';
 
 import type { Component } from './types';
 
-type Component = React.FC<Component.Props>;
-
-export const InlineEdit: Component = ({
+export const InlineEdit: React.FC<Component.Props> = ({
 	'aria-describedby': ariaDescribedby,
 	defaultValue,
 	editableInputClassName,
