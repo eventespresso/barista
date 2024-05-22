@@ -4,7 +4,7 @@ import { useEvent, useEventManagers, useEventMutator } from '@eventespresso/edtr
 import type { InlineEditType, SwitchProps } from '@eventespresso/adapters';
 import type { EventRegistrationOptionsProps } from './types';
 
-type InlineEditProps = InlineEditType.Component.LegacyProps.InlineEditProps;
+type InlineEditProps = InlineEditType.Legacy.InlineEditProps;
 
 const withData = <P extends Record<string, any>>(
 	WrappedComponent: React.ComponentType<EventRegistrationOptionsProps>

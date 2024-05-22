@@ -5,20 +5,23 @@ import { usePrevious, useIfMounted } from '@eventespresso/hooks';
 
 import InlineEditInput from './InlineEditInput';
 
-import type { Component } from './types';
+import type { Legacy } from './types';
 
-export const InlineEdit: React.FC<Component.Props> = (props) => {
-	const { value, defaultValue, onChange, className: containerClassName, placeholder } = props.container;
+type InlineEditProps = Legacy.InlineEditProps;
 
-	const { className: inputClassName, type: inputType } = props.input;
-
-	const {
-		className: previewClassName,
-		'aria-describedby': ariaDescribedby,
-		component: Preview,
-		tooltip,
-	} = props.preview;
-
+export const InlineEdit: React.FC<InlineEditProps> = ({
+	'aria-describedby': ariaDescribedby,
+	defaultValue,
+	editableInputClassName,
+	inputClassName,
+	inputType,
+	onChange,
+	placeholder = '',
+	Preview,
+	previewClassName,
+	tooltip,
+	value,
+}) => {
 	const [currentValue, setCurrentValue] = useState(defaultValue || value);
 	const [prevSubmitValue, setPrevSubmitValue] = useState(currentValue);
 
@@ -36,9 +39,7 @@ export const InlineEdit: React.FC<Component.Props> = (props) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value]);
 
-	type OnSubmit = Component.Props['container']['onSubmit'];
-
-	const onSubmitHandler = useCallback<OnSubmit>(() => {
+	const onSubmitHandler = useCallback<InlineEditProps['onSubmit']>(() => {
 		// Update the curerntly submitted value
 		setPrevSubmitValue(currentValue);
 
@@ -49,7 +50,7 @@ export const InlineEdit: React.FC<Component.Props> = (props) => {
 
 	return (
 		<Chakra.Editable
-			className={containerClassName}
+			className={previewClassName}
 			onChange={setCurrentValue}
 			onSubmit={onSubmitHandler}
 			placeholder={placeholder}
@@ -70,16 +71,17 @@ export const InlineEdit: React.FC<Component.Props> = (props) => {
 						) : (
 							<Preview
 								aria-describedby={ariaDescribedby}
-								className={previewClassName}
-								isEditing={isEditing} // comes from chakra hook
-								onRequestEdit={onEdit} // comes from chakra hook
+								className={inputClassName}
+								isEditing={isEditing}
+								onRequestEdit={onEdit}
+								Preview={Preview}
 								tooltip={tooltip}
 								value={currentValue}
 							/>
 						)}
 						<InlineEditInput
-							className={inputClassName}
-							type={inputType}
+							editableInputClassName={editableInputClassName}
+							inputType={inputType}
 							setValue={setCurrentValue}
 							onCancel={onCancelEdit}
 						/>

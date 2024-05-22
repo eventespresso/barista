@@ -1,14 +1,22 @@
-import { InlineEditType as InlineEdit } from '@eventespresso/adapters';
+import { InlineEditType } from '@eventespresso/adapters';
 
-export type InlineEditProps = InlineEdit.Component.Props & {
+type InlineEditAdapterProps = InlineEditType.Legacy.InlineEditProps;
+
+type InlineEditPreviewProps = InlineEditType.Legacy.InlineEditPreviewProps;
+
+export interface InlineEditProps extends Omit<InlineEditAdapterProps, 'inputType'> {
+	lineCount?: number;
 	tag?: React.ElementType;
-};
+	tooltip?: string;
+}
 
-export type TextareaProps = InlineEditProps & {
+export interface TextareaProps extends Omit<InlineEditProps, 'inputType'> {
+	lineCount?: number;
 	richTextContent?: boolean;
-};
+	tooltip?: string;
+}
 
-export type PreviewProps = InlineEdit.Preview.Props & {
+export interface PreviewProps extends Partial<InlineEditPreviewProps> {
 	className?: string;
 	lineCount?: number;
 	lineLength?: number;
@@ -16,4 +24,4 @@ export type PreviewProps = InlineEdit.Preview.Props & {
 	onRequestEdit?: VoidFunction;
 	richTextContent?: boolean;
 	tooltip?: string;
-};
+}
