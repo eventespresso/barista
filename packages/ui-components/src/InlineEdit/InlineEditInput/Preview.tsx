@@ -11,7 +11,6 @@ import './style.scss';
 const Preview: React.FC<PreviewProps> = ({
 	'aria-describedby': ariaDescribedby,
 	className,
-	'data-testid': testId,
 	isDisabled,
 	isEditing,
 	lineCount,
@@ -38,7 +37,6 @@ const Preview: React.FC<PreviewProps> = ({
 		<TabbableText
 			aria-describedby={ariaDescribedby}
 			className={previewClassName}
-			data-testid={testId}
 			icon={icon}
 			onClick={onRequestEdit}
 			isDisabled={isDisabled}
