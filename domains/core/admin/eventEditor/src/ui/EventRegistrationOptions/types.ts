@@ -1,4 +1,4 @@
-import type { InlineEditType as InlineEdit } from '@eventespresso/adapters';
+import type { InlineEditType } from '@eventespresso/adapters';
 import type { SelectProps, SwitchProps } from '@eventespresso/ui-components';
 import type { Event, EventManager } from '@eventespresso/edtr-services';
 
@@ -11,15 +11,17 @@ export interface EventRegistrationOptionsProps extends EventProps {
 	eventManagers: EventManager[];
 	managerId: Event['manager']['id'];
 	maxReg: Event['maxRegistrations'];
-	onAltRegPageChange: InlineEdit.Component.Props['container']['onChange'];
-	onDefaultRegStatusChange: InlineEdit.Component.Props['container']['onChange'];
+	onAltRegPageChange: InlineEditProps['onChange'];
+	onDefaultRegStatusChange: InlineEditProps['onChange'];
 	onDonationsChange: SwitchProps['onChangeValue'];
 	onManagerChange: SelectProps['onChangeValue'];
-	onMaxRegChange: InlineEdit.Component.Props['container']['onChange'];
-	onPhoneNumberChange: InlineEdit.Component.Props['container']['onChange'];
-	onStatusChange: InlineEdit.Component.Props['container']['onChange'];
+	onMaxRegChange: InlineEditProps['onChange'];
+	onPhoneNumberChange: InlineEditProps['onChange'];
+	onStatusChange: InlineEditProps['onChange'];
 	onTicketSelectorChange: SwitchProps['onChangeValue'];
 }
+
+type InlineEditProps = InlineEditType.Component.LegacyProps.InlineEditProps;
 
 export interface WrapperProps {
 	children?: JSX.Element;
