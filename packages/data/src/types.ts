@@ -59,7 +59,7 @@ export interface GeneralSettingsData {
 	generalSettings: GeneralSettings;
 }
 
-// TODO: consolidate into package 'config'
+// LATER: consolidate into package 'config'
 export interface GeneralSettings {
 	dateFormat: string;
 	timeFormat: string;
