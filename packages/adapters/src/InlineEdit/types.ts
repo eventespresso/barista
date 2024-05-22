@@ -3,33 +3,27 @@ import type * as Chakra from '@chakra-ui/react';
 import type { EditableInputProps, EditablePreviewProps, UseEditableReturn } from '@chakra-ui/react';
 import type { TooltipProps } from '../Tooltip';
 
-export module Component {
-	export type Props = {
-		container?: Container.Props;
+export module Props {
+	export type InlineEdit = {
+		container?: Container;
 		preview?: PreviewProps;
-		input?: Input.Props;
+		input?: Input['type'];
 	};
 
-	type PreviewProps = Preview.Props & {
-		component?: React.FunctionComponent<Preview.Props>;
+	type PreviewProps = Preview & {
+		component?: React.FunctionComponent<Preview>;
 	};
-}
 
-export module Container {
-	export type Props = Chakra.EditableProps;
-}
+	export type Container = Chakra.EditableProps;
 
-export module Preview {
-	export type Props = EditablePreviewProps & {
+	export type Preview = EditablePreviewProps & {
 		onRequestEdit?: () => void; // MAYBE: replace when using hook (?)
 		isEditing?: UseEditableReturn['isEditing'];
 		value?: UseEditableReturn['value'];
 		tooltip?: TooltipProps['tooltip'];
 	};
-}
 
-export module Input {
-	export type Props = EditableInputProps & {
+	export type Input = EditableInputProps & {
 		onCancel?: UseEditableReturn['onCancel'];
 		setValue?: React.Dispatch<React.SetStateAction<string>>;
 		type?: 'heading' | 'number' | 'textarea' | 'text';
@@ -39,45 +33,45 @@ export module Input {
 			textArea?: string;
 		};
 	};
-}
 
-export module Legacy {
-	/**
-	 * @deprecated these are deprecated but to avoid HUGE amount of refactoring, legacy props will be used as an adapter between new and old types
-	 */
-	export type InlineEditProps = Chakra.EditableProps & {
-		editableInputClassName?: string;
-		inputClassName?: string;
-		inputType?: InputType;
-		lineCount?: number;
-		Preview?: React.ComponentType<InlineEditPreviewProps>;
-		previewClassName?: string;
-		textAreaClassName?: string;
-		tooltip?: string;
-	};
+	export module Legacy {
+		/**
+		 * @deprecated these are deprecated but to avoid HUGE amount of refactoring, legacy props will be used as an adapter between new and old types
+		 */
+		export type InlineEditProps = Chakra.EditableProps & {
+			editableInputClassName?: string;
+			inputClassName?: string;
+			inputType?: InputType;
+			lineCount?: number;
+			Preview?: React.ComponentType<InlineEditPreviewProps>;
+			previewClassName?: string;
+			textAreaClassName?: string;
+			tooltip?: string;
+		};
 
-	/**
-	 * @deprecated these are deprecated but to avoid HUGE amount of refactoring, legacy props will be used as an adapter between new and old types
-	 */
-	export type InlineEditPreviewProps = Omit<
-		InlineEditProps,
-		'onCancel' | 'onChange' | 'onChangeValue' | 'onEdit' | 'onSubmit'
-	> & {
-		isEditing?: boolean;
-		onRequestEdit?: () => void;
-		value?: string;
-	};
+		/**
+		 * @deprecated these are deprecated but to avoid HUGE amount of refactoring, legacy props will be used as an adapter between new and old types
+		 */
+		export type InlineEditPreviewProps = Omit<
+			InlineEditProps,
+			'onCancel' | 'onChange' | 'onChangeValue' | 'onEdit' | 'onSubmit'
+		> & {
+			isEditing?: boolean;
+			onRequestEdit?: () => void;
+			value?: string;
+		};
 
-	/**
-	 * @deprecated these are deprecated but to avoid HUGE amount of refactoring, legacy props will be used as an adapter between new and old types
-	 */
-	export type InlineEditInputProps = Pick<
-		InlineEditProps,
-		'editableInputClassName' | 'inputType' | 'textAreaClassName'
-	> & {
-		onCancel: () => void;
-		setValue: React.Dispatch<React.SetStateAction<string>>;
-	};
+		/**
+		 * @deprecated these are deprecated but to avoid HUGE amount of refactoring, legacy props will be used as an adapter between new and old types
+		 */
+		export type InlineEditInputProps = Pick<
+			InlineEditProps,
+			'editableInputClassName' | 'inputType' | 'textAreaClassName'
+		> & {
+			onCancel: () => void;
+			setValue: React.Dispatch<React.SetStateAction<string>>;
+		};
 
-	type InputType = 'heading' | 'number' | 'textarea' | 'text';
+		type InputType = 'heading' | 'number' | 'textarea' | 'text';
+	}
 }

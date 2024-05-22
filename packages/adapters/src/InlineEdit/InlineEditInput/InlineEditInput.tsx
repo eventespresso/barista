@@ -4,7 +4,7 @@ import * as Chakra from '@chakra-ui/react';
 import { isEnterKey, isEscapeKey } from '@eventespresso/utils';
 
 import type { BoxProps } from '@chakra-ui/react';
-import type { Legacy } from './types';
+import type { Props } from '.';
 
 /**
  * Inserts substring into a string at a given position.
@@ -13,9 +13,9 @@ const insertStrAt = (str: string, subStr: string, pos: number): string => {
 	return `${str.slice(0, pos)}${subStr}${str.slice(pos)}`;
 };
 
-type InlineEditInputProps = Legacy.InlineEditInputProps;
+// TODO: refactor component to use new prop types
 
-const InlineEditInput: React.FC<InlineEditInputProps> = ({
+export const InlineEditInput: React.FC<Props.Input> = ({
 	editableInputClassName,
 	inputType,
 	onCancel,
@@ -49,5 +49,3 @@ const InlineEditInput: React.FC<InlineEditInputProps> = ({
 
 	return <Chakra.EditableInput className={editableInputClassName} />;
 };
-
-export default InlineEditInput;

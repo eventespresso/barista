@@ -6,7 +6,7 @@ import type { InlineEditType } from '@eventespresso/adapters';
 
 import './style.scss';
 
-type Props = InlineEditType.Legacy.InlineEditProps;
+type Props = InlineEditType.Props.Legacy.InlineEditProps;
 
 const InlineEdit: React.FC<Props> = (props) => {
 	const inputClassName = classNames('ee-inline-edit', props.inputClassName);

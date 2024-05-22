@@ -1,2 +1,2 @@
-export * from './InlineEdit';
+export { InlineEdit } from './InlineEdit';
 export * as InlineEditType from './types';

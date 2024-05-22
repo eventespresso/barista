@@ -21,7 +21,7 @@ export interface EventRegistrationOptionsProps extends EventProps {
 	onTicketSelectorChange: SwitchProps['onChangeValue'];
 }
 
-type InlineEditProps = InlineEditType.Legacy.InlineEditProps;
+type InlineEditProps = InlineEditType.Props.Legacy.InlineEditProps;
 
 export interface WrapperProps {
 	children?: JSX.Element;

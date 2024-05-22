@@ -3,13 +3,13 @@ import * as Chakra from '@chakra-ui/react';
 
 import { usePrevious, useIfMounted } from '@eventespresso/hooks';
 
-import InlineEditInput from './InlineEditInput';
+import { InlineEditInput } from '../InlineEditInput';
 
-import type { Legacy } from './types';
+import type { Props } from '.';
 
-type InlineEditProps = Legacy.InlineEditProps;
+// TODO: refactor component to use new prop types
 
-export const InlineEdit: React.FC<InlineEditProps> = ({
+export const InlineEdit: React.FC<Props.InlineEdit> = ({
 	'aria-describedby': ariaDescribedby,
 	defaultValue,
 	editableInputClassName,
@@ -39,7 +39,7 @@ export const InlineEdit: React.FC<InlineEditProps> = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value]);
 
-	const onSubmitHandler = useCallback<InlineEditProps['onSubmit']>(() => {
+	const onSubmitHandler = useCallback<Props.InlineEdit['container']['onSubmit']>(() => {
 		// Update the curerntly submitted value
 		setPrevSubmitValue(currentValue);
 
