@@ -7,19 +7,18 @@ import InlineEditInput from './InlineEditInput';
 
 import type { Component } from './types';
 
-export const InlineEdit: React.FC<Component.Props> = ({
-	'aria-describedby': ariaDescribedby,
-	defaultValue,
-	editableInputClassName,
-	inputClassName,
-	inputType,
-	onChange,
-	placeholder = '',
-	Preview,
-	previewClassName,
-	tooltip,
-	value,
-}) => {
+export const InlineEdit: React.FC<Component.NewProps> = (props) => {
+	const { value, defaultValue, onChange, className: containerClassName, placeholder } = props.container;
+
+	const { className: inputClassName, type: inputType } = props.input;
+
+	const {
+		className: previewClassName,
+		'aria-describedby': ariaDescribedby,
+		component: Preview,
+		tooltip,
+	} = props.preview;
+
 	const [currentValue, setCurrentValue] = useState(defaultValue || value);
 	const [prevSubmitValue, setPrevSubmitValue] = useState(currentValue);
 
@@ -37,7 +36,7 @@ export const InlineEdit: React.FC<Component.Props> = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value]);
 
-	type OnSubmit = Component.Props['onSubmit'];
+	type OnSubmit = Component.NewProps['container']['onSubmit'];
 
 	const onSubmitHandler = useCallback<OnSubmit>(() => {
 		// Update the curerntly submitted value
@@ -50,7 +49,7 @@ export const InlineEdit: React.FC<Component.Props> = ({
 
 	return (
 		<Chakra.Editable
-			className={previewClassName}
+			className={containerClassName}
 			onChange={setCurrentValue}
 			onSubmit={onSubmitHandler}
 			placeholder={placeholder}
@@ -71,7 +70,7 @@ export const InlineEdit: React.FC<Component.Props> = ({
 						) : (
 							<Preview
 								aria-describedby={ariaDescribedby}
-								className={inputClassName}
+								className={previewClassName}
 								isEditing={isEditing} // comes from chakra hook
 								onRequestEdit={onEdit} // comes from chakra hook
 								tooltip={tooltip}
@@ -79,8 +78,8 @@ export const InlineEdit: React.FC<Component.Props> = ({
 							/>
 						)}
 						<InlineEditInput
-							editableInputClassName={editableInputClassName}
-							inputType={inputType}
+							className={inputClassName}
+							type={inputType}
 							setValue={setCurrentValue}
 							onCancel={onCancelEdit}
 						/>

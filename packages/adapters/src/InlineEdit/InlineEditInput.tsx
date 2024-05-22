@@ -15,11 +15,11 @@ const insertStrAt = (str: string, subStr: string, pos: number): string => {
 
 type Component = React.FC<Input.Props>;
 
-const InlineEditInput: Component = ({ editableInputClassName, inputType, onCancel, setValue, textAreaClassName }) => {
+const InlineEditInput: Component = ({ className, type, onCancel, setValue }) => {
 	const textareaProps: BoxProps = useMemo(
 		() => ({
 			as: 'textarea',
-			className: textAreaClassName,
+			className: className.textArea,
 			// pass our own onKeyDown handler for a11y
 			onKeyDown: (e: React.KeyboardEvent) => {
 				if (isEnterKey(e)) {
@@ -34,14 +34,14 @@ const InlineEditInput: Component = ({ editableInputClassName, inputType, onCance
 				}
 			},
 		}),
-		[onCancel, setValue, textAreaClassName]
+		[onCancel, setValue, className.textArea]
 	);
 
-	if (inputType === 'textarea') {
+	if (type === 'textarea') {
 		return <Chakra.EditableInput {...textareaProps} />;
 	}
 
-	return <Chakra.EditableInput className={editableInputClassName} />;
+	return <Chakra.EditableInput className={className.input} />;
 };
 
 export default InlineEditInput;
