@@ -7,7 +7,7 @@ import InlineEditInput from './InlineEditInput';
 
 import type { Component } from './types';
 
-export const InlineEdit: React.FC<Component.NewProps> = (props) => {
+export const InlineEdit: React.FC<Component.Props> = (props) => {
 	const { value, defaultValue, onChange, className: containerClassName, placeholder } = props.container;
 
 	const { className: inputClassName, type: inputType } = props.input;
@@ -36,7 +36,7 @@ export const InlineEdit: React.FC<Component.NewProps> = (props) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [value]);
 
-	type OnSubmit = Component.NewProps['container']['onSubmit'];
+	type OnSubmit = Component.Props['container']['onSubmit'];
 
 	const onSubmitHandler = useCallback<OnSubmit>(() => {
 		// Update the curerntly submitted value
