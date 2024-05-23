@@ -3,15 +3,22 @@ import type * as Chakra from '@chakra-ui/react';
 import type { EditableInputProps, EditablePreviewProps, UseEditableReturn } from '@chakra-ui/react';
 import type { TooltipProps } from '../Tooltip';
 
+type InputType = 'heading' | 'number' | 'textarea' | 'text';
+
 export module Props {
 	export type InlineEdit = {
 		container?: Container;
 		preview?: PreviewProps;
-		input?: Input['type'];
+		input?: InputProps;
 	};
 
 	type PreviewProps = Preview & {
+		// LATER: once deprecation is done, remove 'LegacyComponent'
 		component?: React.FunctionComponent<Preview>;
+	};
+
+	type InputProps = Input & {
+		type?: InputType;
 	};
 
 	export type Container = Chakra.EditableProps;
@@ -26,7 +33,7 @@ export module Props {
 	export type Input = EditableInputProps & {
 		onCancel?: UseEditableReturn['onCancel'];
 		setValue?: React.Dispatch<React.SetStateAction<string>>;
-		type?: 'heading' | 'number' | 'textarea' | 'text';
+		type?: InputType;
 		// MAYBE: refactor
 		className?: {
 			input?: string;
@@ -71,7 +78,5 @@ export module Props {
 			onCancel: () => void;
 			setValue: React.Dispatch<React.SetStateAction<string>>;
 		};
-
-		type InputType = 'heading' | 'number' | 'textarea' | 'text';
 	}
 }
