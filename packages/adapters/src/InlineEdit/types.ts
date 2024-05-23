@@ -9,16 +9,12 @@ export module Props {
 	export type InlineEdit = {
 		container: Container;
 		preview: PreviewProps;
-		input: InputProps;
+		input: Input;
 	};
 
 	type PreviewProps = Preview & {
 		// LATER: once deprecation is done, remove 'LegacyComponent'
 		component?: React.FunctionComponent<Preview>;
-	};
-
-	type InputProps = Input & {
-		type?: InputType;
 	};
 
 	export type Container = Chakra.EditableProps;
@@ -34,11 +30,6 @@ export module Props {
 		onCancel?: UseEditableReturn['onCancel'];
 		setValue?: React.Dispatch<React.SetStateAction<string>>;
 		type?: InputType;
-		// MAYBE: refactor
-		className?: {
-			input?: string;
-			textArea?: string;
-		};
 	};
 
 	export module Legacy {

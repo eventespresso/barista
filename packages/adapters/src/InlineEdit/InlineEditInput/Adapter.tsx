@@ -1,6 +1,6 @@
 import { Component } from '.';
 
-import type { Props } from '.';
+import type { Props as PropsType } from '.';
 
 export const Adapter: ReactFC = (props) => {
 	const newProps = legacyToNew(props);
@@ -8,8 +8,19 @@ export const Adapter: ReactFC = (props) => {
 };
 
 type ReactFC = React.FC<Props>;
-type Props = Props.Input & Props.Legacy.InlineEditInputProps;
+type Props = PropsType.Input & PropsType.Legacy.InlineEditInputProps;
 
-function legacyToNew(props: Props): Props.Input {
-	throw new Error('TODO:');
+function legacyToNew({
+	// legacy props
+	inputType,
+	editableInputClassName,
+	textAreaClassName,
+	// new props
+	...props
+}: Props): PropsType.Input {
+	if (inputType) props.type = inputType;
+	if (editableInputClassName) props.className = editableInputClassName;
+	if (textAreaClassName) props.className = textAreaClassName;
+
+	return props;
 }
