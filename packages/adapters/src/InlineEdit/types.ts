@@ -28,9 +28,16 @@ export module Props {
 
 	export type Input = InputForText | InputForTextarea;
 
-	export type InputForText = EditableInputProps;
+	type InputBase = EditableInputProps & {
+		_type: string;
+	};
 
-	export type InputForTextarea = InputForText & {
+	export type InputForText = InputBase & {
+		_type: 'text';
+	};
+
+	export type InputForTextarea = InputBase & {
+		_type: 'textarea';
 		onCancel: UseEditableReturn['onCancel'];
 		setValue: React.Dispatch<React.SetStateAction<string>>;
 	};

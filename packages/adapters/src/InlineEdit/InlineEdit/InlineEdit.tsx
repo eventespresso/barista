@@ -1,7 +1,7 @@
 import * as Chakra from '@chakra-ui/react';
 import { useEditable } from '@chakra-ui/react';
 
-import { InlineEditInput } from '../InlineEditInput';
+import { Text, Textarea } from '.';
 
 import type { Props } from '.';
 
@@ -10,9 +10,9 @@ export const InlineEdit: React.FC<Props.InlineEdit> = ({
 	preview: { component: Preview, ...preview },
 	input,
 }) => {
-	const cProps = useEditable(); // cProps = chakra-ui props
-
-	const previewProps = { ...cProps.getPreviewProps(), ...preview };
+	const { getPreviewProps, getInputProps } = useEditable();
+	const previewProps = { ...getPreviewProps(), ...preview };
+	const inputProps = { ...getInputProps(), ...input };
 
 	return (
 		<Chakra.Editable placeholder={placeholder} {...containerProps}>
@@ -20,8 +20,17 @@ export const InlineEdit: React.FC<Props.InlineEdit> = ({
 				{Preview && <Preview {...previewProps} />}
 				{!Preview && <Chakra.EditablePreview {...previewProps} />}
 
-				<InlineEditInput {...cProps.getInputProps()} {...input} />
+				{isText(inputProps) && <Text {...inputProps} />}
+				{isTextarea(inputProps) && <Textarea {...inputProps} />}
 			</>
 		</Chakra.Editable>
 	);
 };
+
+function isText(input: Props.Input): input is Props.InputForText {
+	return input._type === 'text';
+}
+
+function isTextarea(input: Props.Input): input is Props.InputForTextarea {
+	return input._type === 'textarea';
+}
