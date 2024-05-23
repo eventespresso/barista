@@ -3,7 +3,7 @@ import type * as Chakra from '@chakra-ui/react';
 import type { EditableInputProps, EditablePreviewProps, UseEditableReturn } from '@chakra-ui/react';
 import type { TooltipProps } from '../Tooltip';
 
-type InputType = 'heading' | 'number' | 'textarea' | 'text';
+export type InputType = 'heading' | 'number' | 'text' | 'textarea';
 
 export module Props {
 	export type InlineEdit = {
@@ -26,10 +26,20 @@ export module Props {
 		tooltip?: TooltipProps['tooltip'];
 	};
 
-	export type Input = EditableInputProps & {
-		onCancel?: UseEditableReturn['onCancel'];
-		setValue?: React.Dispatch<React.SetStateAction<string>>;
-		type?: InputType;
+	export type Input = InputForText | InputForTextarea;
+
+	type InputBase = EditableInputProps & {
+		type: InputType;
+	};
+
+	export type InputForText = InputBase & {
+		type: Exclude<InputType, 'textarea'>;
+	};
+
+	export type InputForTextarea = InputBase & {
+		type: Extract<InputType, 'textarea'>;
+		onCancel: UseEditableReturn['onCancel'];
+		setValue: React.Dispatch<React.SetStateAction<string>>;
 	};
 
 	export module Legacy {
