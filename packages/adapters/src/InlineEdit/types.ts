@@ -15,6 +15,7 @@ export module Props {
 	type PreviewProps = Preview & {
 		// LATER: once deprecation is done, remove 'LegacyComponent'
 		component?: React.FunctionComponent<Preview>;
+		legacyComponent?: React.ComponentType<Legacy.InlineEditPreviewProps>;
 	};
 
 	export type Container = Chakra.EditableProps;

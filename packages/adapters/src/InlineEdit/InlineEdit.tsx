@@ -6,17 +6,42 @@ import { Text, Textarea } from '.';
 import type { Props } from '.';
 
 export const InlineEdit: React.FC<Props.InlineEdit> = ({
-	container: { placeholder = '', ...containerProps },
-	preview: { component: Preview, ...preview },
+	container: { placeholder, value: initValue, defaultValue, ...container },
+	preview: { component: Preview, legacyComponent: LegacyPreview, ...preview },
 	input,
 }) => {
-	const { getPreviewProps, getInputProps } = useEditable();
+	const { getPreviewProps, getInputProps, ...chakraProps } = useEditable({
+		placeholder: placeholder ?? '',
+		value: defaultValue ?? initValue ?? '',
+		defaultValue: defaultValue ?? '',
+	});
 	const previewProps = { ...getPreviewProps(), ...preview };
 	const inputProps = { ...getInputProps(), ...input };
 
+	// TODO: hmmm... do we need local state…
+
+	// TODO: useCallback
+	const convertLegacyPreviewProps = (): Props.Legacy.InlineEditPreviewProps => {
+		const props: Props.Legacy.InlineEditPreviewProps = {
+			isEditing: chakraProps.isEditing,
+			onRequestEdit: chakraProps.onEdit,
+			value: chakraProps.value,
+		};
+
+		if (preview.tooltip) props.tooltip = preview.tooltip;
+		if (preview.className) props.className = preview.className;
+		if (preview['aria-describedby']) {
+			props['aria-describedby'] = preview['aria-describedby'];
+		}
+
+		return props;
+	};
+
 	return (
-		<Chakra.Editable placeholder={placeholder} {...containerProps}>
+		<Chakra.Editable placeholder={placeholder ?? ''} {...container}>
 			<>
+				{LegacyPreview && <LegacyPreview {...convertLegacyPreviewProps()} />}
+
 				{Preview && <Preview {...previewProps} />}
 				{!Preview && <Chakra.EditablePreview {...previewProps} />}
 

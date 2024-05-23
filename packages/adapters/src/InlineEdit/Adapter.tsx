@@ -26,7 +26,7 @@ function legacyToNew({
 	inputType,
 	inputClassName,
 	'aria-describedby': ariaDescribedby,
-	Preview, // TODO: not sure how to adapt...
+	Preview,
 	tooltip,
 }: Props): Required<PropsType.InlineEdit> {
 	const input: PropsType.InlineEdit['input'] = initInput ?? {};
@@ -44,6 +44,7 @@ function legacyToNew({
 
 	if (inputClassName) preview.className = inputClassName;
 	if (ariaDescribedby) preview['aria-describedby'] = ariaDescribedby;
+	if (Preview) preview.legacyComponent = Preview;
 	if (tooltip) preview.tooltip = tooltip;
 
 	return { container, preview, input };
