@@ -3,7 +3,7 @@ import { useEditable } from '@chakra-ui/react';
 
 import { Text, Textarea } from '.';
 
-import type { Props } from '.';
+import type { Props } from './types';
 
 export const InlineEdit: React.FC<Props.InlineEdit> = ({
 	container: { placeholder, value: initValue, defaultValue, ...container },

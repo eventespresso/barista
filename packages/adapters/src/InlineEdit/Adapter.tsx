@@ -1,6 +1,6 @@
 import { Component } from '.';
 
-import type { Props as PropsType } from '.';
+import type { Props as PropsType } from './types';
 import { useMemo } from 'react';
 
 export const Adapter: ReactFC = (props) => {

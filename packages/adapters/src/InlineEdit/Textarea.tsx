@@ -3,7 +3,7 @@ import * as Chakra from '@chakra-ui/react';
 
 import { isEnterKey, isEscapeKey, insertStrAt } from '@eventespresso/utils';
 
-import type { Props } from '.';
+import type { Props } from './types';
 
 export const Textarea: React.FC<Props.InputForTextarea> = ({ onCancel, setValue, ...props }) => {
 	type OnKeyDown = React.KeyboardEventHandler<HTMLInputElement>;
