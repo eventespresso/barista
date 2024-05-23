@@ -7,9 +7,9 @@ type InputType = 'heading' | 'number' | 'textarea' | 'text';
 
 export module Props {
 	export type InlineEdit = {
-		container?: Container;
-		preview?: PreviewProps;
-		input?: InputProps;
+		container: Container;
+		preview: PreviewProps;
+		input: InputProps;
 	};
 
 	type PreviewProps = Preview & {
