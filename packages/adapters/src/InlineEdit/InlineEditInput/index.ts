@@ -1,3 +1,3 @@
 export * from '../types';
-export { InlineEditInput as Component } from './InlineEditInput';
-export { Adapter as InlineEditInput } from './Adapter';
+export { Text } from './Text';
+export { Textarea } from './Textarea';
