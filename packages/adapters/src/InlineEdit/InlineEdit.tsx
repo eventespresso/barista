@@ -44,8 +44,8 @@ export const InlineEdit: React.FC<Props.InlineEdit> = ({
 	return (
 		<Chakra.Editable placeholder={placeholder ?? ''} {...container} value={value}>
 			{LegacyPreview && <LegacyPreview {...convertLegacyPreviewProps()} />}
-			{/* {Preview && <Preview {...previewProps} />}
-			{!Preview && !LegacyPreview && <Chakra.EditablePreview {...previewProps} />} */}
+			{Preview && <Preview {...previewProps} />}
+			{!Preview && !LegacyPreview && <Chakra.EditablePreview {...previewProps} />}
 
 			{isText(_fries, inputProps) && <Chakra.EditableInput {...inputProps} />}
 			{isTextarea(_fries, inputProps) && <Textarea _fries='textarea' {...inputProps} />}
