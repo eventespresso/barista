@@ -1,6 +1,6 @@
 import { Component } from '.';
 
-import type { Props as PropsType } from './types';
+import type { InputType, Props as PropsType } from './types';
 import { useMemo } from 'react';
 
 export const Adapter: ReactFC = (props) => {
@@ -29,7 +29,7 @@ function legacyToNew({
 	Preview,
 	tooltip,
 }: Props): Required<PropsType.InlineEdit> {
-	const input: PropsType.InlineEdit['input'] = initInput ?? {};
+	const input: PropsType.InlineEdit['input'] = initInput ?? { _fries: 'text' }; // TODO:
 	const container: PropsType.InlineEdit['container'] = initContainer ?? {};
 	const preview: PropsType.InlineEdit['preview'] = initPreview ?? {};
 
@@ -40,7 +40,7 @@ function legacyToNew({
 	if (placeholder) container.placeholder = placeholder;
 
 	if (editableInputClassName) input.className = editableInputClassName;
-	if (inputType) input.type = inputType;
+	if (inputType) input._fries = convertInputType(inputType);
 
 	if (inputClassName) preview.className = inputClassName;
 	if (ariaDescribedby) preview['aria-describedby'] = ariaDescribedby;
@@ -48,4 +48,9 @@ function legacyToNew({
 	if (tooltip) preview.tooltip = tooltip;
 
 	return { container, preview, input };
+}
+
+function convertInputType(input: InputType): PropsType.InlineEdit['input']['_fries'] {
+	if (input === 'textarea') return 'textarea';
+	return 'text';
 }

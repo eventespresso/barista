@@ -1,22 +1,26 @@
 import * as Chakra from '@chakra-ui/react';
-import { useEditable } from '@chakra-ui/react';
+import { useEditable, UseEditableReturn } from '@chakra-ui/react';
 
-import { Text, Textarea } from '.';
+import { Textarea } from '.';
+import InlineEditPreview from './InlineEditPreview';
 
 import type { Props } from './types';
+
+// BUG: is missing the following properties from type 'InlineEdit': container, preview, input
 
 export const InlineEdit: React.FC<Props.InlineEdit> = ({
 	container: { placeholder, value: initValue, defaultValue, ...container },
 	preview: { component: Preview, legacyComponent: LegacyPreview, ...preview },
-	input,
+	input: { _fries, ...input },
 }) => {
-	const { getPreviewProps, getInputProps, ...chakraProps } = useEditable({
+	const { value, ...chakraProps } = useEditable({
 		placeholder: placeholder ?? '',
 		value: defaultValue ?? initValue ?? '',
 		defaultValue: defaultValue ?? '',
 	});
-	const previewProps = { ...getPreviewProps(), ...preview };
-	const inputProps = { ...getInputProps(), ...input };
+
+	const previewProps = { ...chakraProps.getPreviewProps(), ...preview };
+	const inputProps = { ...chakraProps.getInputProps(), ...input };
 
 	// TODO: hmmm... do we need local state…
 
@@ -24,8 +28,8 @@ export const InlineEdit: React.FC<Props.InlineEdit> = ({
 	const convertLegacyPreviewProps = (): Props.Legacy.InlineEditPreviewProps => {
 		const props: Props.Legacy.InlineEditPreviewProps = {
 			isEditing: chakraProps.isEditing,
-			onRequestEdit: chakraProps.onEdit,
-			value: chakraProps.value,
+			onRequestEdit: chakraProps.onEdit, // BUG:
+			value: value,
 		};
 
 		if (preview.tooltip) props.tooltip = preview.tooltip;
@@ -38,24 +42,27 @@ export const InlineEdit: React.FC<Props.InlineEdit> = ({
 	};
 
 	return (
-		<Chakra.Editable placeholder={placeholder ?? ''} {...container}>
-			<>
-				{LegacyPreview && <LegacyPreview {...convertLegacyPreviewProps()} />}
+		<Chakra.Editable placeholder={placeholder ?? ''} {...container} value={value}>
+			{LegacyPreview && <LegacyPreview {...convertLegacyPreviewProps()} />}
+			{/* {Preview && <Preview {...previewProps} />}
+			{!Preview && !LegacyPreview && <Chakra.EditablePreview {...previewProps} />} */}
 
-				{Preview && <Preview {...previewProps} />}
-				{!Preview && <Chakra.EditablePreview {...previewProps} />}
-
-				{isText(inputProps) && <Text {...inputProps} />}
-				{isTextarea(inputProps) && <Textarea {...inputProps} />}
-			</>
+			{isText(_fries, inputProps) && <Chakra.EditableInput {...inputProps} />}
+			{isTextarea(_fries, inputProps) && <Textarea _fries='textarea' {...inputProps} />}
 		</Chakra.Editable>
 	);
 };
 
-function isText(input: Props.Input): input is Props.InputForText {
-	return input._type === 'text';
+function isText(
+	type: Props.Input['_fries'],
+	input: Omit<Props.Input, '_fries'> & ReturnType<UseEditableReturn['getInputProps']>
+): input is Omit<Props.InputForText, '_fries'> {
+	return type === 'text';
 }
 
-function isTextarea(input: Props.Input): input is Props.InputForTextarea {
-	return input._type === 'textarea';
+function isTextarea(
+	type: Props.Input['_fries'],
+	input: Omit<Props.Input, '_fries'> & ReturnType<UseEditableReturn['getInputProps']>
+): input is Omit<Props.InputForTextarea, '_fries'> {
+	return type === 'textarea';
 }
