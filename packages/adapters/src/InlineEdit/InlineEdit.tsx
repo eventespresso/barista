@@ -42,6 +42,7 @@ export const InlineEdit: React.FC<Props.InlineEdit> = ({
 
 	return (
 		<Chakra.Editable placeholder={placeholder ?? ''} {...container} value={value}>
+			{/* TODO: this looks messy... */}
 			{LegacyPreview && <LegacyPreview {...convertLegacyPreviewProps()} />}
 			{Preview && <Preview {...previewProps} />}
 			{!Preview && !LegacyPreview && <Chakra.EditablePreview {...previewProps} />}
