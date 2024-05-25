@@ -12,6 +12,7 @@ export const InlineEdit: React.FC<Props.InlineEdit> = ({
 	preview: { component: Preview, legacyComponent: LegacyPreview, ...preview },
 	input: { _fries, ...input },
 }) => {
+	// BUG: this needs fixing as useEditable does NOT work
 	const { value, ...chakraProps } = useEditable({
 		placeholder: placeholder ?? '',
 		value: defaultValue ?? initValue ?? '',
