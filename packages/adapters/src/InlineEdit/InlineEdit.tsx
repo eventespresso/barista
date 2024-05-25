@@ -2,7 +2,6 @@ import * as Chakra from '@chakra-ui/react';
 import { useEditable, UseEditableReturn } from '@chakra-ui/react';
 
 import { Textarea } from '.';
-import InlineEditPreview from './InlineEditPreview';
 
 import type { Props } from './types';
 
