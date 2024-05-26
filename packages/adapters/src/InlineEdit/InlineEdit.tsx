@@ -88,18 +88,16 @@ module Type {
 	type NoUndefined<T extends any> = Exclude<T, undefined>;
 }
 
-// TODO: do I need to update this or no?
 function isText(
 	type: Props.Input['_fries'],
-	input: Omit<Props.Input, '_fries'> & ReturnType<UseEditableReturn['getInputProps']>
+	input: Omit<Props.Input, '_fries'>
 ): input is Omit<Props.InputForText, '_fries'> {
 	return type === 'text';
 }
 
-// TODO: do I need to update this or no?
 function isTextarea(
 	type: Props.Input['_fries'],
-	input: Omit<Props.Input, '_fries'> & ReturnType<UseEditableReturn['getInputProps']>
+	input: Omit<Props.Input, '_fries'>
 ): input is Omit<Props.InputForTextarea, '_fries'> {
 	return type === 'textarea';
 }
