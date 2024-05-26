@@ -1,8 +1,8 @@
 import { convertInputType } from './convertInputType';
-import type { Props } from '../InlineEdit';
+import type { Props as InlineEditProps } from '../InlineEdit';
 import type { ConvertProps } from './types';
 
-export const convertProps: ConvertProps.Fn = ({
+export const convertProps = <T extends InlineEditProps.InputType>({
 	// new props
 	container: initContainer,
 	input: initInput,
@@ -19,10 +19,12 @@ export const convertProps: ConvertProps.Fn = ({
 	'aria-describedby': ariaDescribedby,
 	Preview,
 	tooltip,
-}) => {
-	const input: Props.Type['input'] = initInput ?? { _type: 'text' };
-	const container: Props.Type['container'] = initContainer ?? {};
-	const preview: Props.Type['preview'] = initPreview ?? {};
+}: ConvertProps.Parameters<T>): ConvertProps.Return<T> => {
+	const input: InlineEditProps.Type<T>['input'] = initInput ?? { _type: 'text' };
+
+	const container: InlineEditProps.Type<T>['container'] = initContainer ?? {};
+
+	const preview: InlineEditProps.Type<T>['preview'] = initPreview ?? {};
 
 	if (value) container.value = value;
 	if (defaultValue) container.defaultValue = defaultValue;

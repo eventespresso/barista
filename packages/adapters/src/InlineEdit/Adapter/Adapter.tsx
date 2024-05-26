@@ -3,10 +3,10 @@ import { useMemo } from 'react';
 import { InlineEdit } from '..';
 import { convertProps } from './convertProps';
 
-import type { Props } from '../InlineEdit';
+import type { Props as InlineEditProps } from '../InlineEdit';
 import type { Component } from './types';
 
-export const Adapter: Component.Type = (props) => {
-	const newProps = useMemo<Props.Type>(() => convertProps(props), [props]);
+export const Adapter = <T extends InlineEditProps.InputType>(props: Component.Props<T>) => {
+	const newProps = useMemo<InlineEditProps.Type<T>>(() => convertProps(props), [props]);
 	return <InlineEdit {...newProps} />;
 };

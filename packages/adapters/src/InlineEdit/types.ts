@@ -9,6 +9,8 @@ export type InputType = 'heading' | 'number' | 'text' | 'textarea';
 //   - remove 'LegacyComponent' in PreviewProps
 //   - remove 'onRequestEdit' in Preview
 
+// TODO: remove!
+
 export module Props {
 	export type InlineEdit = {
 		container?: Container;

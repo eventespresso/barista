@@ -1,18 +1,15 @@
-import type React from 'react';
 import type { Props as InlineEditProps } from '../InlineEdit';
 import type { Props as InputProps } from '../Input';
 import type { Legacy } from '../legacy-types';
 
 export module Component {
-	export type Type = React.FC<Props>;
-	export type Props = InlineEditProps.Type & Legacy.InlineEditProps;
+	export type Props<T extends InlineEditProps.InputType> = InlineEditProps.Type<T> & Legacy.InlineEditProps;
 }
 
 export module ConvertProps {
-	export type Fn = (parameters: Parameters) => Return;
+	export type Parameters<T extends InlineEditProps.InputType> = Component.Props<T>;
 
-	type Parameters = Component.Props;
-	type Return = InlineEditProps.Type;
+	export type Return<T extends InlineEditProps.InputType> = InlineEditProps.Type<T>;
 }
 
 export module ConvertInputType {

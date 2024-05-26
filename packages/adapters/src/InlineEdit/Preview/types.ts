@@ -8,7 +8,7 @@ import type { Legacy } from '.';
 //   - remove 'onRequestEdit' in 'Props.Type'
 
 export module Props {
-	export type Type = Default & {
+	export type Type = EditablePreviewProps & {
 		onRequestEdit?: () => void;
 		isEditing?: UseEditableReturn['isEditing'];
 		value?: UseEditableReturn['value'];
@@ -16,11 +16,13 @@ export module Props {
 	};
 
 	export type Legacy = Legacy.InlineEditPreviewProps;
-	export type Default = EditablePreviewProps;
 }
 
 export module Component {
 	export type Type = React.FC<Props.Type>;
 	export type Legacy = React.FC<Props.Legacy>;
-	export type Default = React.FC<Props.Default>;
+}
+
+export module Factory {
+	export type Props = 'TODO:';
 }

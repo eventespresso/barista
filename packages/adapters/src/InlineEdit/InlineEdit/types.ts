@@ -1,7 +1,7 @@
 import type React from 'react';
 import type * as Chakra from '@chakra-ui/react';
 import type { Props as PreviewProps } from '../Preview';
-import type { Props as InputProps } from '../Input';
+import type { Factory as InputProps } from '../Input';
 import type { Legacy } from '../legacy-types';
 
 export module Props {
@@ -11,8 +11,11 @@ export module Props {
 		input: InputProps.Type<T>;
 	};
 
+	export type InputType = InputProps.InputType;
+
 	type Container = ChakraProps;
 
+	// TODO: move to Preview
 	type PreviewProps = PreviewProps.Type & {
 		Component?: React.FunctionComponent<PreviewProps.Type>;
 		Legacy?: React.ComponentType<Legacy.InlineEditPreviewProps>;
