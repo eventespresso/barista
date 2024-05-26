@@ -6,9 +6,7 @@ import { Textarea } from '.';
 
 import type { Props } from './types';
 
-// BUG: is missing the following properties from type 'InlineEdit': container, preview, input
-
-export const InlineEdit: React.FC<Props.InlineEdit> = ({
+export const InlineEdit: React.FC<Required<Props.InlineEdit>> = ({
 	container: { placeholder, value, defaultValue, ...container },
 	preview: { component: Preview, legacyComponent: LegacyPreview, ...preview },
 	input: { _fries, ...input },

@@ -50,7 +50,7 @@ function legacyToNew({
 	return { container, preview, input };
 }
 
-function convertInputType(input: InputType): PropsType.InlineEdit['input']['_fries'] {
+function convertInputType(input: InputType): Required<PropsType.InlineEdit>['input']['_fries'] {
 	if (input === 'textarea') return 'textarea';
 	return 'text';
 }
