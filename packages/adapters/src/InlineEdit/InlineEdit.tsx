@@ -1,5 +1,6 @@
 import * as Chakra from '@chakra-ui/react';
-import { useEditable, UseEditableReturn } from '@chakra-ui/react';
+import { UseEditableReturn } from '@chakra-ui/react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { Textarea } from '.';
 
@@ -8,29 +9,23 @@ import type { Props } from './types';
 // BUG: is missing the following properties from type 'InlineEdit': container, preview, input
 
 export const InlineEdit: React.FC<Props.InlineEdit> = ({
-	container: { placeholder, value: initValue, defaultValue, ...container },
+	container: { placeholder, value, defaultValue, ...container },
 	preview: { component: Preview, legacyComponent: LegacyPreview, ...preview },
 	input: { _fries, ...input },
 }) => {
-	// BUG: this needs fixing as useEditable does NOT work
-	const { value, ...chakraProps } = useEditable({
-		placeholder: placeholder ?? '',
-		value: defaultValue ?? initValue ?? '',
-		defaultValue: defaultValue ?? '',
-	});
+	const initialValue: Type.Value = useMemo(() => {
+		return defaultValue || value || '';
+	}, [value, defaultValue]);
 
-	const previewProps = { ...chakraProps.getPreviewProps(), ...preview };
-	const inputProps = { ...chakraProps.getInputProps(), ...input };
+	const [state, setState] = useState(initialValue);
 
-	// TODO: hmmm... do we need local state…
+	// this happens when value is updated *outside* this component
+	useEffect(() => {
+		setState(initialValue);
+	}, [value, defaultValue]);
 
-	// TODO: useCallback
 	const convertLegacyPreviewProps = (): Props.Legacy.InlineEditPreviewProps => {
-		const props: Props.Legacy.InlineEditPreviewProps = {
-			isEditing: chakraProps.isEditing,
-			onRequestEdit: chakraProps.onEdit, // BUG:
-			value: value,
-		};
+		const props: Props.Legacy.InlineEditPreviewProps = {};
 
 		if (preview.tooltip) props.tooltip = preview.tooltip;
 		if (preview.className) props.className = preview.className;
@@ -41,19 +36,61 @@ export const InlineEdit: React.FC<Props.InlineEdit> = ({
 		return props;
 	};
 
-	return (
-		<Chakra.Editable placeholder={placeholder ?? ''} {...container} value={value}>
-			{/* TODO: this looks messy... */}
-			{LegacyPreview && <LegacyPreview {...convertLegacyPreviewProps()} />}
-			{Preview && <Preview {...previewProps} />}
-			{!Preview && !LegacyPreview && <Chakra.EditablePreview {...previewProps} />}
+	const onSubmit: Type.OnSubmit = (newValue) => {
+		/**
+		 * Existing consumers of this component treat 'onChange' as
+		 * 'onSubmit' i.e. updating database as soon as change happens
+		 * but we want to separate 'onChange' and 'onSubmit'
+		 */
+		if (container.onSubmit) container.onSubmit(newValue);
+		if (container.onChange) container.onChange(newValue);
+	};
 
-			{isText(_fries, inputProps) && <Chakra.EditableInput {...inputProps} />}
-			{isTextarea(_fries, inputProps) && <Textarea _fries='textarea' {...inputProps} />}
+	const onChange: Type.OnChange = (newValue) => {
+		setState(newValue);
+	};
+
+	return (
+		<Chakra.Editable
+			placeholder={placeholder ?? ''}
+			{...container}
+			onChange={onChange}
+			onSubmit={onSubmit}
+			value={state}
+		>
+			{/* TODO: this looks messy... */}
+			{({ isEditing, onEdit }) => (
+				<>
+					{LegacyPreview && (
+						<LegacyPreview
+							value={state}
+							isEditing={isEditing}
+							onRequestEdit={onEdit}
+							{...convertLegacyPreviewProps()}
+						/>
+					)}
+					{Preview && <Preview {...preview} />}
+					{!Preview && !LegacyPreview && <Chakra.EditablePreview {...preview} />}
+
+					{isText(_fries, input) && <Chakra.EditableInput {...input} />}
+					{isTextarea(_fries, input) && <Textarea _fries='textarea' {...input} />}
+				</>
+			)}
 		</Chakra.Editable>
 	);
 };
 
+// TODO: after everything is done, review the types again
+module Type {
+	export type OnSubmit = NoUndefined<Editable['onSubmit']>;
+	export type OnChange = NoUndefined<Editable['onChange']>;
+	export type Value = NoUndefined<Editable['value']>;
+
+	type Editable = Chakra.EditableProps;
+	type NoUndefined<T extends any> = Exclude<T, undefined>;
+}
+
+// TODO: do I need to update this or no?
 function isText(
 	type: Props.Input['_fries'],
 	input: Omit<Props.Input, '_fries'> & ReturnType<UseEditableReturn['getInputProps']>
@@ -61,6 +98,7 @@ function isText(
 	return type === 'text';
 }
 
+// TODO: do I need to update this or no?
 function isTextarea(
 	type: Props.Input['_fries'],
 	input: Omit<Props.Input, '_fries'> & ReturnType<UseEditableReturn['getInputProps']>
