@@ -1,5 +1,5 @@
 import * as Chakra from '@chakra-ui/react';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Preview } from '../Preview';
 import { Input } from '../Input';
@@ -21,21 +21,27 @@ export const InlineEdit = <T extends InputProps.InputType>({
 	// this happens when value is updated *outside* this component
 	useEffect(() => {
 		setState(initialValue);
-	}, [value, defaultValue]);
+	}, [initialValue]);
 
-	const onSubmit: Event.OnSubmit = (newValue) => {
-		/**
-		 * Existing consumers of this component treat 'onChange' as
-		 * 'onSubmit' i.e. updating database as soon as change happens
-		 * but we want to separate 'onChange' and 'onSubmit'
-		 */
-		if (container.onSubmit) container.onSubmit(newValue);
-		if (container.onChange) container.onChange(newValue);
-	};
+	const onSubmit = useCallback<Event.OnSubmit>(
+		(newValue) => {
+			/**
+			 * Existing consumers of this component treat 'onChange' as
+			 * 'onSubmit' i.e. updating database as soon as change happens
+			 * but we want to separate 'onChange' and 'onSubmit'
+			 */
+			if (container.onSubmit) container.onSubmit(newValue);
+			if (container.onChange) container.onChange(newValue);
+		},
+		[container]
+	);
 
-	const onChange: Event.OnChange = (newValue) => {
-		setState(newValue);
-	};
+	const onChange = useCallback<Event.OnChange>(
+		(newValue) => {
+			setState(newValue);
+		},
+		[setState]
+	);
 
 	return (
 		<Chakra.Editable

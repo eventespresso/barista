@@ -2,9 +2,9 @@ import * as Chakra from '@chakra-ui/react';
 import { useCallback } from 'react';
 import { createOnKeyDown } from './onKeyDown';
 
-import { Component, Factory, OnKeyDown } from './types';
+import { Component, Factory as FType, OnKeyDown } from './types';
 
-const Factory = <T extends Factory.InputType>(props: Factory.Type<T>) => {
+const Factory = <T extends FType.InputType>(props: FType.Type<T>) => {
 	switch (props._type) {
 		case 'textarea':
 			return <Textarea {...props} />;
