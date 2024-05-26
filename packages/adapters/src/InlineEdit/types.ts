@@ -33,15 +33,15 @@ export module Props {
 	export type Input = InputForText | InputForTextarea;
 
 	type InputBase = EditableInputProps & {
-		_fries: string;
+		_type: string;
 	};
 
 	export type InputForText = InputBase & {
-		_fries: 'text';
+		_type: 'text';
 	};
 
 	export type InputForTextarea = InputBase & {
-		_fries: 'textarea';
+		_type: 'textarea';
 		onCancel: UseEditableReturn['onCancel'];
 		setValue: React.Dispatch<React.SetStateAction<string>>;
 	};

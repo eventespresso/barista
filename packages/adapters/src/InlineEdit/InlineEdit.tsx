@@ -9,7 +9,7 @@ import type { Props } from './types';
 export const InlineEdit: React.FC<Required<Props.InlineEdit>> = ({
 	container: { placeholder, value, defaultValue, ...container },
 	preview: { component: Preview, legacyComponent: LegacyPreview, ...preview },
-	input: { _fries, ...input },
+	input: { _type, ...input },
 }) => {
 	const initialValue: Type.Value = useMemo(() => {
 		return defaultValue || value || '';
@@ -70,8 +70,8 @@ export const InlineEdit: React.FC<Required<Props.InlineEdit>> = ({
 					{Preview && <Preview {...preview} />}
 					{!Preview && !LegacyPreview && <Chakra.EditablePreview {...preview} />}
 
-					{isText(_fries, input) && <Chakra.EditableInput {...input} />}
-					{isTextarea(_fries, input) && <Textarea _fries='textarea' {...input} />}
+					{isText(_type, input) && <Chakra.EditableInput {...input} />}
+					{isTextarea(_type, input) && <Textarea _type='textarea' {...input} />}
 				</>
 			)}
 		</Chakra.Editable>
@@ -89,15 +89,15 @@ module Type {
 }
 
 function isText(
-	type: Props.Input['_fries'],
-	input: Omit<Props.Input, '_fries'>
-): input is Omit<Props.InputForText, '_fries'> {
+	type: Props.Input['_type'],
+	input: Omit<Props.Input, '_type'>
+): input is Omit<Props.InputForText, '_type'> {
 	return type === 'text';
 }
 
 function isTextarea(
-	type: Props.Input['_fries'],
-	input: Omit<Props.Input, '_fries'>
-): input is Omit<Props.InputForTextarea, '_fries'> {
+	type: Props.Input['_type'],
+	input: Omit<Props.Input, '_type'>
+): input is Omit<Props.InputForTextarea, '_type'> {
 	return type === 'textarea';
 }

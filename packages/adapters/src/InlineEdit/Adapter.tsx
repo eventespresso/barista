@@ -29,7 +29,7 @@ function legacyToNew({
 	Preview,
 	tooltip,
 }: Props): Required<PropsType.InlineEdit> {
-	const input: PropsType.InlineEdit['input'] = initInput ?? { _fries: 'text' }; // TODO: this needs a better name
+	const input: PropsType.InlineEdit['input'] = initInput ?? { _type: 'text' };
 	const container: PropsType.InlineEdit['container'] = initContainer ?? {};
 	const preview: PropsType.InlineEdit['preview'] = initPreview ?? {};
 
@@ -40,7 +40,7 @@ function legacyToNew({
 	if (placeholder) container.placeholder = placeholder;
 
 	if (editableInputClassName) input.className = editableInputClassName;
-	if (inputType) input._fries = convertInputType(inputType);
+	if (inputType) input._type = convertInputType(inputType);
 
 	if (inputClassName) preview.className = inputClassName;
 	if (ariaDescribedby) preview['aria-describedby'] = ariaDescribedby;
@@ -50,7 +50,7 @@ function legacyToNew({
 	return { container, preview, input };
 }
 
-function convertInputType(input: InputType): Required<PropsType.InlineEdit>['input']['_fries'] {
+function convertInputType(input: InputType): Required<PropsType.InlineEdit>['input']['_type'] {
 	if (input === 'textarea') return 'textarea';
 	return 'text';
 }
