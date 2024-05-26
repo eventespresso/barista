@@ -1,18 +1,24 @@
 import * as Chakra from '@chakra-ui/react';
 
-import type { Component } from '.';
+import type { Component } from './types';
+import { useMemo } from 'react';
+import { convertToLegacyProps } from './convertToLegacyProps';
 
-const Factory = () => {};
+export const Preview: Component.Factory = ({ Component, Legacy, ...props }) => {
+	if (Legacy) {
+		const legacyProps = useMemo(() => {
+			return convertToLegacyProps(props);
+		}, [props]);
+		return <Legacy {...legacyProps} />;
+	}
+
+	if (Component) {
+		return <Component {...props} />;
+	}
+
+	return <Chakra.EditablePreview />;
+};
 
 const Component: Component.Type = (props) => {
 	return <Chakra.EditablePreview {...props} />;
 };
-
-const LegacyOrDefault: Component.Legacy = ({ Preview, ...props }) => {
-	return Preview ? <Preview {...props} /> : <Chakra.EditablePreview />;
-};
-
-export const Preview = Object.assign(Factory, {
-	Component,
-	LegacyOrDefault,
-});

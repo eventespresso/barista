@@ -16,13 +16,28 @@ export module Props {
 	};
 
 	export type Legacy = Legacy.InlineEditPreviewProps;
+
+	// require either of properties but do not allow both
+	export type Factory =
+		| (Props.Type & {
+				Component: Component.Type;
+				Legacy?: never;
+		  })
+		| (Props.Type & {
+				Component?: never;
+				Legacy: Component.Legacy;
+		  });
 }
 
 export module Component {
 	export type Type = React.FC<Props.Type>;
 	export type Legacy = React.FC<Props.Legacy>;
+	export type Factory = React.FC<Props.Factory>;
 }
 
-export module Factory {
-	export type Props = 'TODO:';
+export module ConvertToLegacyProps {
+	export type Fn = (parameters: Parameters) => Props.Legacy;
+	export type Props = Props.Legacy;
+
+	type Parameters = Omit<Props.Factory, 'Component' | 'Legacy'>;
 }
