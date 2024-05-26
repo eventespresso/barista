@@ -12,7 +12,6 @@ export const Textarea: React.FC<Props.InputForTextarea> = ({ onCancel, setValue,
 			if (isEnterKey(e)) {
 				e.preventDefault(); // prevent submit
 
-				// TODO: need to test this due to change from 'target' to 'currentTarget'
 				// a number that represents the beginning index of the selected text
 				const cursorPosition = e.currentTarget.selectionStart;
 				if (cursorPosition === null) {
