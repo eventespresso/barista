@@ -44,7 +44,7 @@ function legacyToNew({
 
 	if (inputClassName) preview.className = inputClassName;
 	if (ariaDescribedby) preview['aria-describedby'] = ariaDescribedby;
-	if (Preview) preview.legacyComponent = Preview;
+	if (Preview) preview.Legacy = Preview;
 	if (tooltip) preview.tooltip = tooltip;
 
 	return { container, preview, input };

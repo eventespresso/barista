@@ -17,8 +17,8 @@ export module Props {
 	};
 
 	type PreviewProps = Preview & {
-		component?: React.FunctionComponent<Preview>;
-		legacyComponent?: React.ComponentType<Legacy.InlineEditPreviewProps>;
+		Component?: React.FunctionComponent<Preview>;
+		Legacy?: React.ComponentType<Legacy.InlineEditPreviewProps>;
 	};
 
 	export type Container = Chakra.EditableProps;

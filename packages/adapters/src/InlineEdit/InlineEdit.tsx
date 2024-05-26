@@ -1,5 +1,4 @@
 import * as Chakra from '@chakra-ui/react';
-import { UseEditableReturn } from '@chakra-ui/react';
 import { useEffect, useMemo, useState } from 'react';
 
 import { Textarea } from '.';
@@ -8,7 +7,7 @@ import type { Props } from './types';
 
 export const InlineEdit: React.FC<Required<Props.InlineEdit>> = ({
 	container: { placeholder, value, defaultValue, ...container },
-	preview: { component: Preview, legacyComponent: LegacyPreview, ...preview },
+	preview: { Component, Legacy, ...preview },
 	input: { _type, ...input },
 }) => {
 	const initialValue: Type.Value = useMemo(() => {
@@ -59,16 +58,16 @@ export const InlineEdit: React.FC<Required<Props.InlineEdit>> = ({
 			{/* TODO: this looks messy... */}
 			{({ isEditing, onEdit }) => (
 				<>
-					{LegacyPreview && (
-						<LegacyPreview
+					{Legacy && (
+						<Legacy
 							value={state}
 							isEditing={isEditing}
 							onRequestEdit={onEdit}
 							{...convertLegacyPreviewProps()}
 						/>
 					)}
-					{Preview && <Preview {...preview} />}
-					{!Preview && !LegacyPreview && <Chakra.EditablePreview {...preview} />}
+					{Component && <Component {...preview} />}
+					{!Component && !Legacy && <Chakra.EditablePreview {...preview} />}
 
 					{isText(_type, input) && <Chakra.EditableInput {...input} />}
 					{isTextarea(_type, input) && <Textarea _type='textarea' {...input} />}
