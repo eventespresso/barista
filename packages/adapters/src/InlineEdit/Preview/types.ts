@@ -31,7 +31,7 @@ export module Props {
 
 export module Component {
 	export type Type = React.FC<Props.Type>;
-	export type Legacy = React.FC<Props.Legacy>;
+	export type Legacy = React.ComponentType<Props.Legacy>;
 	export type Factory = React.FC<Props.Factory>;
 }
 

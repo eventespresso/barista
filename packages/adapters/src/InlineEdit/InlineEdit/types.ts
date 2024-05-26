@@ -1,12 +1,12 @@
 import type * as Chakra from '@chakra-ui/react';
 import type { Factory as InputProps } from '../Input';
-import type { Factory as PreviewProps } from '../Preview';
+import type { Props as PreviewProps } from '../Preview';
 
 export module Props {
 	export type Type<T extends InputProps.InputType> = {
 		container: ChakraProps;
-		preview: InputProps.Type<T>;
-		input: PreviewProps.Props;
+		input: InputProps.Type<T>;
+		preview: PreviewProps.Factory;
 	};
 
 	export type InputType = InputProps.InputType;

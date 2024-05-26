@@ -45,7 +45,6 @@ export const InlineEdit = <T extends InputProps.InputType>({
 			onSubmit={onSubmit}
 			value={state}
 		>
-			{/* TODO: */}
 			<Preview {...preview} />
 			<Input {...input} />
 		</Chakra.Editable>
