@@ -29,7 +29,7 @@ function legacyToNew({
 	Preview,
 	tooltip,
 }: Props): Required<PropsType.InlineEdit> {
-	const input: PropsType.InlineEdit['input'] = initInput ?? { _fries: 'text' }; // TODO:
+	const input: PropsType.InlineEdit['input'] = initInput ?? { _fries: 'text' }; // TODO: this needs a better name
 	const container: PropsType.InlineEdit['container'] = initContainer ?? {};
 	const preview: PropsType.InlineEdit['preview'] = initPreview ?? {};
 
