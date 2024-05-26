@@ -5,6 +5,8 @@ import { isEnterKey, isEscapeKey, insertStrAt } from '@eventespresso/utils';
 
 import type { Props } from './types';
 
+// TODO: remove !
+
 export const Textarea: React.FC<Props.InputForTextarea> = ({ onCancel, setValue, ...props }) => {
 	type OnKeyDown = React.KeyboardEventHandler<HTMLInputElement>;
 	const onKeyDown = useCallback<OnKeyDown>(

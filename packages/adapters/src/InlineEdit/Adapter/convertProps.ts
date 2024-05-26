@@ -1,17 +1,8 @@
-import { Component } from '.';
+import { convertInputType } from './convertInputType';
+import type { Props } from '../InlineEdit';
+import type { ConvertProps } from './types';
 
-import type { InputType, Props as PropsType } from './types';
-import { useMemo } from 'react';
-
-export const Adapter: ReactFC = (props) => {
-	const newProps = useMemo(() => legacyToNew(props), [props]);
-	return <Component {...newProps} />;
-};
-
-type ReactFC = React.FC<Props>;
-type Props = PropsType.Legacy.InlineEditProps & PropsType.InlineEdit;
-
-function legacyToNew({
+export const convertProps: ConvertProps.Fn = ({
 	// new props
 	container: initContainer,
 	input: initInput,
@@ -28,10 +19,10 @@ function legacyToNew({
 	'aria-describedby': ariaDescribedby,
 	Preview,
 	tooltip,
-}: Props): Required<PropsType.InlineEdit> {
-	const input: PropsType.InlineEdit['input'] = initInput ?? { _type: 'text' };
-	const container: PropsType.InlineEdit['container'] = initContainer ?? {};
-	const preview: PropsType.InlineEdit['preview'] = initPreview ?? {};
+}) => {
+	const input: Props.Type['input'] = initInput ?? { _type: 'text' };
+	const container: Props.Type['container'] = initContainer ?? {};
+	const preview: Props.Type['preview'] = initPreview ?? {};
 
 	if (value) container.value = value;
 	if (defaultValue) container.defaultValue = defaultValue;
@@ -48,9 +39,4 @@ function legacyToNew({
 	if (tooltip) preview.tooltip = tooltip;
 
 	return { container, preview, input };
-}
-
-function convertInputType(input: InputType): Required<PropsType.InlineEdit>['input']['_type'] {
-	if (input === 'textarea') return 'textarea';
-	return 'text';
-}
+};
