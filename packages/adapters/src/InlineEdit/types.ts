@@ -5,6 +5,10 @@ import type { TooltipProps } from '../Tooltip';
 
 export type InputType = 'heading' | 'number' | 'text' | 'textarea';
 
+// LATER: once deprecation is done:
+//   - remove 'LegacyComponent' in PreviewProps
+//   - remove 'onRequestEdit' in Preview
+
 export module Props {
 	export type InlineEdit = {
 		container: Container;
@@ -13,7 +17,6 @@ export module Props {
 	};
 
 	type PreviewProps = Preview & {
-		// LATER: once deprecation is done, remove 'LegacyComponent'
 		component?: React.FunctionComponent<Preview>;
 		legacyComponent?: React.ComponentType<Legacy.InlineEditPreviewProps>;
 	};
@@ -21,7 +24,7 @@ export module Props {
 	export type Container = Chakra.EditableProps;
 
 	export type Preview = EditablePreviewProps & {
-		onRequestEdit?: () => void; // MAYBE: replace when using hook (?)
+		onRequestEdit?: () => void;
 		isEditing?: UseEditableReturn['isEditing'];
 		value?: UseEditableReturn['value'];
 		tooltip?: TooltipProps['tooltip'];
