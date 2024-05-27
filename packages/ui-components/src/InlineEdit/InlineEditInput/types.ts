@@ -1,8 +1,4 @@
-import { InlineEditType } from '@eventespresso/adapters';
-
-type InlineEditAdapterProps = InlineEditType.Props.Legacy.InlineEditProps;
-
-type InlineEditPreviewProps = InlineEditType.Props.Legacy.InlineEditPreviewProps;
+import { InlineEditProps as InlineEditAdapterProps, InlineEditPreviewProps } from '@eventespresso/adapters';
 
 export interface InlineEditProps extends Omit<InlineEditAdapterProps, 'inputType'> {
 	lineCount?: number;
