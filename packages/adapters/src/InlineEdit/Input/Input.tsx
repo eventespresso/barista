@@ -5,11 +5,13 @@ import { createOnKeyDown } from './onKeyDown';
 import { Component, Factory as FType, OnKeyDown } from './types';
 
 const Factory = <T extends FType.InputType>(props: FType.Type<T>) => {
+	const state = Chakra.useEditableState();
+
 	switch (props._type) {
 		case 'textarea':
-			return <Textarea {...props} />;
+			return <Textarea {...props} {...state} />;
 		default:
-			return <Text {...props} />;
+			return <Text {...props} {...state} />;
 	}
 };
 
