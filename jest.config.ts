@@ -66,6 +66,9 @@ const config: Config.InitialOptions = {
 	moduleNameMapper: resolveTsconfigPathsToModuleNameMapper(),
 	moduleFileExtensions: ['web.js', 'js', 'web.ts', 'ts', 'web.tsx', 'tsx', 'json', 'web.jsx', 'jsx', 'node'],
 	watchPlugins: ['jest-watch-typeahead/filename', 'jest-watch-typeahead/testname'],
+	// always show summary of unit tests
+	// https://jestjs.io/docs/configuration#summary-reporter
+	reporters: [['default', { summaryThreshold: 1 }]],
 };
 
 export default config;

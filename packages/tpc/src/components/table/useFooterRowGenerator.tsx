@@ -1,8 +1,10 @@
 import { useCallback } from 'react';
 
 import { __ } from '@eventespresso/i18n';
-import { TicketPriceField } from '../../fields';
+
 import ReverseCalculateButton from '../../buttons/ReverseCalculateButton';
+import { Price } from '..';
+
 import type { Cell, FooterRow } from '@eventespresso/ui-components';
 
 interface Props {
@@ -53,11 +55,9 @@ const useFooterRowGenerator = (): FooterRowGenerator => {
 				type: 'cell',
 				className: 'ee-ticket-price-calculator__amount ee-ticket-price-calculator__total ee-number-column',
 				value: (
-					<TicketPriceField
+					<Price.Input.FormattedPrice
 						aria-label={__('ticket total')}
-						component='input'
 						disabled={isDisabled || !reverseCalculate}
-						formatOnBlur
 						id='ticket-price-total'
 					/>
 				),

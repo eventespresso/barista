@@ -1,12 +1,8 @@
 import { useCallback } from 'react';
 
-import PriceAmountInput from '../../inputs/PriceAmountInput';
-import PriceDescriptionInput from '../../inputs/PriceDescriptionInput';
-import PriceOrderInput from '../../inputs/PriceOrderInput';
-import PriceIdInput from '../../inputs/PriceIdInput';
-import PriceNameInput from '../../inputs/PriceNameInput';
 import PriceModifierActions from '../../buttons/PriceModifierActions';
-import PriceTypeInput from '../../inputs/PriceTypeInput';
+import { Price } from '..';
+
 import type { TpcPriceModifier } from '../../types';
 import type { BodyRow } from '@eventespresso/ui-components';
 
@@ -25,37 +21,37 @@ const useBodyRowGenerator = (): BodyRowGenerator => {
 				key: 'id',
 				type: 'cell',
 				className: 'ee-ticket-price-calculator__price-id ee-number-column',
-				value: <PriceIdInput price={price} />,
+				value: <Price.Input.ID price={price} />,
 			},
 			{
 				key: 'order',
 				type: 'cell',
 				className: 'ee-ticket-price-calculator__price-order ee-number-column',
-				value: <PriceOrderInput price={price} />,
+				value: <Price.Input.Order price={price} />,
 			},
 			{
 				key: 'type',
 				type: 'cell',
 				className: 'ee-ticket-price-calculator__price-type',
-				value: <PriceTypeInput price={price} />,
+				value: <Price.Input.Type price={price} />,
 			},
 			{
 				key: 'name',
 				type: 'cell',
 				className: 'ee-ticket-price-calculator__price-name',
-				value: <PriceNameInput price={price} />,
+				value: <Price.Input.Name price={price} />,
 			},
 			{
 				key: 'description',
 				type: 'cell',
 				className: 'ee-ticket-price-calculator__price-desc',
-				value: <PriceDescriptionInput price={price} />,
+				value: <Price.Input.Description price={price} />,
 			},
 			{
 				key: 'amount',
 				type: 'cell',
 				className: 'ee-ticket-price-calculator__amount ee-number-column',
-				value: <PriceAmountInput price={price} />,
+				value: <Price.Input.Amount price={price} />,
 			},
 			{
 				key: 'actions',
