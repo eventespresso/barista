@@ -1,10 +1,8 @@
 import { useCallback } from 'react';
 
 import { useEvent, useEventManagers, useEventMutator } from '@eventespresso/edtr-services';
-import type { InlineEditType, SwitchProps } from '@eventespresso/adapters';
+import type { InlineEditProps, SwitchProps } from '@eventespresso/adapters';
 import type { EventRegistrationOptionsProps } from './types';
-
-type InlineEditProps = InlineEditType.Props.Legacy.InlineEditProps;
 
 const withData = <P extends Record<string, any>>(
 	WrappedComponent: React.ComponentType<EventRegistrationOptionsProps>

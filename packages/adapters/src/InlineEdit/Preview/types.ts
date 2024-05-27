@@ -1,8 +1,8 @@
 import type React from 'react';
 import type { EditablePreviewProps, UseEditableReturn } from '@chakra-ui/react';
 
-import type { TooltipProps } from '../../Tooltip';
-import type { Legacy as LegacyType } from '.';
+import type { TooltipProps } from '../../Tooltip/types';
+import type { Legacy as LegacyType } from '../legacy-types';
 
 // LATER: once deprecation is done:
 //   - remove 'onRequestEdit' in 'Props.Type'

@@ -43,3 +43,8 @@ export module Legacy {
 		setValue: React.Dispatch<React.SetStateAction<string>>;
 	};
 }
+
+// backwards compatibility with existing type consumers
+export type InlineEditProps = Legacy.InlineEditProps;
+export type InlineEditPreviewProps = Legacy.InlineEditPreviewProps;
+export type InlineEditInputProps = Legacy.InlineEditInputProps;

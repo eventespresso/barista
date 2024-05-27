@@ -1,5 +1,5 @@
 import { convertInputType } from './convertInputType';
-import type { Props as InlineEditProps } from '../InlineEdit';
+import type { Props as InlineEditProps } from '../InlineEdit/types';
 import type { ConvertProps } from './types';
 
 export const convertProps = <T extends InlineEditProps.InputType>({

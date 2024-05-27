@@ -1,4 +1,4 @@
-import type { InlineEditType } from '@eventespresso/adapters';
+import type { InlineEditProps } from '@eventespresso/adapters';
 import type { SelectProps, SwitchProps } from '@eventespresso/ui-components';
 import type { Event, EventManager } from '@eventespresso/edtr-services';
 
@@ -20,8 +20,6 @@ export interface EventRegistrationOptionsProps extends EventProps {
 	onStatusChange: InlineEditProps['onChange'];
 	onTicketSelectorChange: SwitchProps['onChangeValue'];
 }
-
-type InlineEditProps = InlineEditType.Props.Legacy.InlineEditProps;
 
 export interface WrapperProps {
 	children?: JSX.Element;

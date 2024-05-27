@@ -1,5 +1,5 @@
-import type { Props as InlineEditProps } from '../InlineEdit';
-import type { Props as InputProps } from '../Input';
+import type { Props as InlineEditProps } from '../InlineEdit/types';
+import type { Props as InputProps } from '../Input/types';
 import type { Legacy } from '../legacy-types';
 
 export module Component {
