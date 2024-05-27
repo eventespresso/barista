@@ -26,6 +26,10 @@ export module Props {
 		| (Props.Type & {
 				Component?: never;
 				Legacy: Component.Legacy;
+		  })
+		| (Props.Type & {
+				Component?: never;
+				Legacy?: never;
 		  });
 }
 

@@ -1,6 +1,5 @@
 import { convertInputType } from './convertInputType';
 import type { ConvertProps } from './types';
-import { Component } from './Component'; // TODO:
 import { createInputProp } from './createInputProp';
 
 export const convertProps = <T extends ConvertProps.InputType>({
@@ -25,9 +24,7 @@ export const convertProps = <T extends ConvertProps.InputType>({
 
 	const container: ConvertProps.Container<T> = initContainer ?? {};
 
-	const preview: ConvertProps.Preview<T> = initPreview ?? {
-		Component, // TODO:
-	};
+	const preview: ConvertProps.Preview<T> = initPreview ?? {};
 
 	if (value) container.value = value;
 	if (defaultValue) container.defaultValue = defaultValue;
