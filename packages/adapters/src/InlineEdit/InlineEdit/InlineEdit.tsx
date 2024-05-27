@@ -51,7 +51,7 @@ export const InlineEdit = <T extends InputProps.InputType>({
 			onSubmit={onSubmit}
 			value={state}
 		>
-			<Preview {...preview} />
+			<Preview {...preview} value={state} />
 			<Input {...input} />
 		</Chakra.Editable>
 	);
