@@ -1,13 +1,9 @@
-import type {
-	FlexProps as ChakraFlexProps,
-	InputProps as ChakraInputProps,
-	NumberInputProps as ChakraNumberInputProps,
-	BoxProps as ChakraBoxProps,
-} from '@chakra-ui/react';
+import type * as Chakra from '@chakra-ui/react';
 
 import type { CommonInputProps } from '../types';
 
-type Picked =
+type CharaProps = Pick<
+	Chakra.NumberInputProps,
 	| 'aria-valuenow'
 	| 'clampValueOnBlur'
 	| 'className'
@@ -19,14 +15,15 @@ type Picked =
 	| 'min'
 	| 'precision'
 	| 'step'
-	| 'value';
+	| 'value'
+>;
 
-export interface NumberInputProps extends Pick<ChakraNumberInputProps, Picked>, CommonInputProps<HTMLInputElement> {
-	decrementStepperProps?: ChakraBoxProps;
+export interface NumberInputProps extends CharaProps, CommonInputProps<HTMLInputElement> {
+	decrementStepperProps?: Chakra.BoxProps;
 	disabled?: boolean;
-	incrementStepperProps?: ChakraBoxProps;
-	inputFieldProps?: ChakraInputProps;
-	inputStepperProps?: ChakraFlexProps;
+	incrementStepperProps?: Chakra.BoxProps;
+	inputFieldProps?: Chakra.InputProps;
+	inputStepperProps?: Chakra.FlexProps;
 	name?: string;
 	/**
 	 * The pattern used to check the <input> element's value against on form submission.
