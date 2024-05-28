@@ -6,13 +6,13 @@ import type { FormatAmountFunction } from '@eventespresso/utils';
 import type { Type as ConfigType } from '@eventespresso/config';
 
 export interface MoneyDisplay {
-	// the currency sign if the currency displays it before the amount (or '')
+	/** the currency sign if the currency displays it before the amount (or '') */
 	afterAmount: string;
-	// the currency sign if the currency displays it before the amount (or '')
+	/** the currency sign if the currency displays it before the amount (or '') */
 	beforeAmount: string;
-	// the full currency config object
+	/** the full currency config object */
 	currency: ConfigType.Currency;
-	// function for formatting the amount using the correct number of decimal places for the currency
+	/** function for formatting the amount using the correct number of decimal places for the currency */
 	formatAmount: FormatAmountFunction;
 }
 
