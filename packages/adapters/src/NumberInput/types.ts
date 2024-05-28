@@ -16,6 +16,7 @@ type CharaProps = Pick<
 	| 'precision'
 	| 'step'
 	| 'value'
+	| 'onBlur'
 >;
 
 export interface NumberInputProps extends CharaProps, CommonInputProps<HTMLInputElement> {
