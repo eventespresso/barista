@@ -12,14 +12,6 @@ export module Type {
 
 			// LATER: skip type 'Type' for now
 		}
-
-		export module Hook {
-			export type Props<K extends Key> = Type.Inputs.Map[K]['Hook']['Props'] & {
-				_type: K; // internal prop hence underscore
-			};
-
-			export type Type<K extends Key> = Type.Inputs.Map[K]['Hook']['Type'];
-		}
 	}
 
 	export module Inputs {
@@ -39,27 +31,11 @@ export module Type {
 		Component: {
 			Props: Component.Props<A>;
 		};
-		Hook: {
-			Props: Hook.Props;
-			Type: Hook.Type<A, V>;
-		};
 	};
 }
 
 module Component {
 	export type Props<H extends Attribute.Html> = Props.Type & H & AriaLabel;
-}
-
-module Hook {
-	export type Props = Props.Type;
-	export type Type<A extends Attribute.Html, V extends Value> = {
-		name: Name;
-		value: V;
-		handlers: {
-			onChange: A['onChange'];
-			onBlur?: A['onBlur'];
-		};
-	};
 }
 
 module Attribute {
