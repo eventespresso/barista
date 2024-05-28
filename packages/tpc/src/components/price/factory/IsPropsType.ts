@@ -1,4 +1,4 @@
-import type { Type, Props } from '.';
+import type { Type } from '.';
 
 export const IsPropsType = {
 	Component: {
