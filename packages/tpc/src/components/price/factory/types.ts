@@ -23,11 +23,11 @@ export module Type {
 		};
 	}
 
-	type Select = Make<SelectProps, string>;
-	type InputText = Make<TextInputWithLabelProps, string>;
-	type InputNumber = Make<NumberProps, number>;
+	type Select = Make<SelectProps>;
+	type InputText = Make<TextInputWithLabelProps>;
+	type InputNumber = Make<NumberProps>;
 
-	type Make<A extends object, V extends Value> = {
+	type Make<A extends object> = {
 		Component: {
 			Props: Component.Props<A>;
 		};
@@ -57,7 +57,5 @@ export module Props {
 }
 
 type Name = string;
-
-type Value = string | number | boolean;
 
 type AriaLabel = Required<Pick<AriaAttributes, 'aria-label'>>;
