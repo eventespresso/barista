@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { MoneyInputWrapper } from '@eventespresso/ui-components';
 import { useMoneyDisplay, useConfig } from '@eventespresso/services';
@@ -12,7 +12,7 @@ import type { NumberProps } from '@eventespresso/ui-components';
 /**
  * Used for displaying the total (formatted) price
  */
-export const FormattedPrice = (props: NumberProps) => {
+export const FormattedPrice = ({ value, ...props }: NumberProps) => {
 	const { ticket, updateTicketPrice } = useDataState();
 	const { formatAmount } = useMoneyDisplay();
 	const { currency } = useConfig();
@@ -22,18 +22,45 @@ export const FormattedPrice = (props: NumberProps) => {
 		return 0 + currency.decimalMark + decimals;
 	}, [currency]);
 
-	const value: string = useMemo(() => {
-		return formatAmount(ticket?.price) || defaultValue;
-	}, [ticket, formatAmount, defaultValue]);
+	const [isChanging, setIsChanging] = useState<boolean>(false);
+
+	const [state, setState] = useState<string>(() => {
+		return formatAmount(value) || defaultValue;
+	});
+
+	useEffect(() => {
+		if (ticket.price && !isChanging) {
+			setState(formatAmount(ticket.price));
+		}
+	}, [setState, formatAmount, ticket.price, isChanging]);
 
 	type OnChange = (string: string, number: number) => void;
 
+	const getValueFromString = useCallback((value: string): string => {
+		if (value.includes('.')) {
+			const [integers, decimals] = value.split('.');
+			if (decimals.length > 6) {
+				return integers + '.' + decimals.substring(0, 6);
+			}
+			return value;
+		}
+		return value;
+	}, []);
+
 	const onChange: OnChange = useCallback(
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		(string, number) => {
-			updateTicketPrice(Math.abs(parsedAmount(number)) || 0);
+			setState(getValueFromString(string));
+			setIsChanging(true);
 		},
-		[updateTicketPrice]
+		[getValueFromString, setState, setIsChanging]
 	);
+
+	const onBlur = useCallback(() => {
+		updateTicketPrice(Math.abs(parsedAmount(state)));
+		setState(formatAmount(state));
+		setIsChanging(false);
+	}, [updateTicketPrice, setState, formatAmount, state, setIsChanging]);
 
 	const pattern: string = useMemo(() => {
 		const mark = currency.decimalMark;
@@ -54,9 +81,9 @@ export const FormattedPrice = (props: NumberProps) => {
 				name='ticket.price'
 				aria-label={props['aria-label']}
 				onChange={onChange}
+				onBlur={onBlur}
 				min={0}
-				value={value}
-				defaultValue={value}
+				value={state}
 				pattern={pattern}
 			/>
 		</MoneyInputWrapper>
