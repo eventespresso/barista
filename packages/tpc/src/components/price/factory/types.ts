@@ -3,24 +3,24 @@ import type { InputHTMLAttributes, SelectHTMLAttributes, AriaAttributes, HTMLAtt
 
 export module Type {
 	export module Factory {
-		export type Key = Type.Inputs.Key; // alias
+		export type Key = Inputs.Key; // alias
 
 		export module Component {
-			export type Props<K extends Key> = Type.Inputs.Map[K]['Component']['Props'] & {
+			export type Props<K extends Key> = Inputs.Map[K]['Component']['Props'] & {
 				_type: K; // underscore to avoid collission with html attribute
 			};
 
 			// LATER: skip type 'Type' for now
 		}
-	}
 
-	export module Inputs {
-		export type Key = keyof Map;
-		export type Map = {
-			Select: Select;
-			Text: InputText;
-			Number: InputNumber;
-		};
+		module Inputs {
+			export type Key = keyof Map;
+			export type Map = {
+				Select: Select;
+				Text: InputText;
+				Number: InputNumber;
+			};
+		}
 	}
 
 	type Select = Make<SelectProps>;
@@ -50,7 +50,7 @@ module Element {
 	export type Select = HTMLSelectElement;
 }
 
-export module Props {
+module Props {
 	export type Type = {
 		name: Name;
 	};
