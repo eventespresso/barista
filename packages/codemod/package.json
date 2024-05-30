@@ -12,7 +12,11 @@
 		"lint-fix": "eslint ./src/**/*.{js,jsx,ts,tsx} --format=codeframe --fix",
 		"update-deps": "npx ncu -u"
 	},
-	"dependencies": {},
-	"devDependencies": {},
+	"dependencies": {
+		"jscodeshift": "^0.15.2"
+	},
+	"devDependencies": {
+		"@types/jscodeshift": "^0.11.11"
+	},
 	"license": "GPL-3.0"
 }
