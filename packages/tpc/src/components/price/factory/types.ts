@@ -35,7 +35,10 @@ export module Type {
 }
 
 module Component {
-	export type Props<H extends Attribute.Html> = Props.Type & H & AriaLabel;
+	export type Props<H extends Attribute.Html> = H &
+		AriaLabel & {
+			name: string;
+		};
 }
 
 module Attribute {
@@ -49,13 +52,5 @@ module Element {
 	export type Input = HTMLInputElement;
 	export type Select = HTMLSelectElement;
 }
-
-module Props {
-	export type Type = {
-		name: Name;
-	};
-}
-
-type Name = string;
 
 type AriaLabel = Required<Pick<AriaAttributes, 'aria-label'>>;
