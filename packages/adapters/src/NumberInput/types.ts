@@ -2,7 +2,7 @@ import type * as Chakra from '@chakra-ui/react';
 
 import type { CommonInputProps } from '../types';
 
-type CharaProps = Pick<
+type ChakraProps = Pick<
 	Chakra.NumberInputProps,
 	| 'aria-valuenow'
 	| 'clampValueOnBlur'
@@ -19,7 +19,7 @@ type CharaProps = Pick<
 	| 'onBlur'
 >;
 
-export interface NumberInputProps extends CharaProps, CommonInputProps<HTMLInputElement> {
+export interface NumberInputProps extends ChakraProps, CommonInputProps<HTMLInputElement> {
 	decrementStepperProps?: Chakra.BoxProps;
 	disabled?: boolean;
 	incrementStepperProps?: Chakra.BoxProps;
