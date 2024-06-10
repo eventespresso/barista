@@ -65,7 +65,7 @@ export const Amount: React.FC<PriceModifierProps> = ({ price }) => {
 	);
 
 	useEffect(() => {
-		// condition 1: if field is disabled it is VALID to set local state because price is being updated *outsidate*
+		// condition 1: if field is disabled it is VALID to set local state because price is being updated *outside*
 		// condition 2: when NOT focusing we know that user has finished changing the value so we can update the local state
 		if (isDisabled || !focus) {
 			setState(price.amount.toString());
