@@ -15,10 +15,11 @@ export interface EntityIDsProps {
 	align?: EntityIdAlignment;
 	dbid: EntityDbId;
 	guid: EntityId;
+	notice?: JSX.Element | string;
 }
 
-export const EntityIDs: React.FC<EntityIDsProps> = ({ dbid, guid, align = 'left' }) => {
-	const className = classNames('ee-entity-ids', 'ee-focus-priority-9', {
+export const EntityIDs: React.FC<EntityIDsProps> = ({ dbid, guid, align = 'left', notice }) => {
+	const className = classNames('ee-entity-ids', {
 		'ee-align-lft': align === EntityIdAlignment.LEFT,
 		'ee-align-rgt': align === EntityIdAlignment.RIGHT,
 	});
@@ -32,8 +33,11 @@ export const EntityIDs: React.FC<EntityIDsProps> = ({ dbid, guid, align = 'left'
 
 	return (
 		<div className={className}>
-			<span className={'ee-entity-dbid'}>{dbid}</span>
-			{extraID}
+			<span className='ee-focus-priority-9'>
+				<span className='ee-entity-dbid'>{dbid}</span>
+				{extraID}
+			</span>
+			{notice}
 		</div>
 	);
 };

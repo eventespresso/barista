@@ -3,7 +3,7 @@ import { useState, useCallback, useMemo } from 'react';
 import { __ } from '@eventespresso/i18n';
 import { BulkActions } from '@eventespresso/ee-components';
 import { ErrorMessage } from '@eventespresso/ui-components';
-import { entitiesWithGuIdInArray, TicketsStatus } from '@eventespresso/predicates';
+import { entitiesWithGuIdInArray, TicketsStatusFilters } from '@eventespresso/predicates';
 import { SOLD_TICKET_ERROR_MESSAGE } from '@eventespresso/tpc';
 import { USE_ADVANCED_EDITOR } from '@eventespresso/constants';
 import { useDisclosure, useMemoStringify } from '@eventespresso/hooks';
@@ -34,7 +34,7 @@ const Actions: React.FC = () => {
 		return isSoldTicketSelected;
 	}, [allTickets, getSelected]);
 
-	const areTrashedTickets = status === TicketsStatus.trashedOnly;
+	const areTrashedTickets = status === TicketsStatusFilters.trashedOnly;
 
 	const options = useMemoStringify([
 		{

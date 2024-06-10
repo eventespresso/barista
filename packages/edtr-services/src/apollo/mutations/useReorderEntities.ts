@@ -91,7 +91,7 @@ export const useReorderEntities = <E extends Entity>({
 				const [entity] = allEntities.splice(indexInAll, 1);
 
 				// reset the order property for all entities in filtered list
-				return { ...entity, order: index + 1 };
+				return { ...entity, order: index + 1, key: index };
 			});
 
 			// insert ordered entities at the beginning of the array
@@ -101,7 +101,7 @@ export const useReorderEntities = <E extends Entity>({
 			// but now we need to reset the order properties for ALL entities
 			allEntities.map((entity, index) => {
 				// add 1 so we don't end up with order: 0
-				return { ...entity, order: index + 1 };
+				return { ...entity, order: index + 1, key: index };
 			});
 
 			setAllOrderedEntities(entities);

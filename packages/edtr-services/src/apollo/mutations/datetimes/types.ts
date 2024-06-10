@@ -21,6 +21,7 @@ export interface DatetimeBaseInput {
 	reserved?: number;
 	sold?: number;
 	startDate?: string | Date;
+	status?: string;
 	tickets?: Array<EntityId>;
 	venue?: string;
 }

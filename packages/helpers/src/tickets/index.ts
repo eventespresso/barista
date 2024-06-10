@@ -1,5 +1,5 @@
-export { default as getTicketBackgroundColorClassName } from './getBackgroundColorClassName';
-export { default as getTicketStatusTextLabel } from './getStatusTextLabel';
-export { default as ticketStatus } from './status';
-export { default as ticketStatusBgColorClassName } from './statusBgColorClassName';
+export * from './getTicketBackgroundColorClassName';
+export * from './getTicketStatusTextLabel';
+export * from './getUpdatedTicketStatus';
+export * from './getTicketStatusBgColorClassName';
 export { VISIBILITY_OPTIONS, VISIBILITY_OPTIONS_INFO } from './ticketVisibilityOptions';

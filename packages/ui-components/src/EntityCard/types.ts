@@ -4,6 +4,7 @@ export interface EntityCardProps {
 	actionsMenu: JSX.Element;
 	details: JSX.Element;
 	entity: Entity;
+	notice?: JSX.Element | string;
 	reverse?: boolean;
 	sidebar: JSX.Element;
 	sidebarClass?: string;

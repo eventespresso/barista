@@ -9,7 +9,9 @@ export const DATETIME_ATTRIBUTES: any = gql`
 		description
 		endDate
 		isActive
+		isCancelled
 		isExpired
+		isPostponed
 		isPrimary
 		isSoldOut
 		isTrashed

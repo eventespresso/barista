@@ -1,5 +1,4 @@
-import isActive from '../../isActive';
-import isUpcoming from '../../isUpcoming';
+import { isActive, isUpcoming } from '../../index';
 import type { DatetimeFilterFn } from '../types';
 
 const activeUpcoming: DatetimeFilterFn = (dates) => {

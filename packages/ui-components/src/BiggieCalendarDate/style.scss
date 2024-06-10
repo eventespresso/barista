@@ -36,14 +36,15 @@
 		}
 
 		&__weekday {
-			line-height: var(--ee-font-size-xl);
+			font-size: var(--ee-font-size-default);
+			line-height: var(--ee-font-size-3xl);
 			margin-top: var(--ee-margin-nano);
 		}
 
 		&__month {
-			font-size: calc(var(--ee-font-size-tiny) * 2);
+			font-size: calc(var(--ee-font-size-tiny) * 2.5);
 			font-weight: bold;
-			line-height: var(--ee-font-size-4xl);
+			line-height: var(--ee-font-size-5xl);
 		}
 
 		&__month-day-sep {
@@ -52,17 +53,16 @@
 
 		&__day {
 			opacity: 0.8;
-			font-size: calc(var(--ee-font-size-big) * 2);
+			font-size: calc(var(--ee-font-size-big) * 2.5);
 			font-weight: bold;
-			line-height: calc(var(--ee-font-size-big) * 2);
+			line-height: calc(var(--ee-font-size-big) * 2.5);
 			text-shadow: var(--ee-text-shadow-inset);
 		}
 
 		&__year {
+			font-size: var(--ee-font-size-default);
 			letter-spacing: calc(var(--ee-letter-spacing-font-size-micro));
-			line-height: var(--ee-font-size-xl);
-			// left: var(--ee-padding-pico);
-			// margin-top: var(--ee-margin-nano);
+			line-height: var(--ee-font-size-2xl);
 			position: relative;
 		}
 

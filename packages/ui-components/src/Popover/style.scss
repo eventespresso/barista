@@ -51,14 +51,9 @@
 			align-self: flex-end;
 			opacity: 1;
 		}
-	}
 
-	&-form__content {
-		display: flex;
-  		flex-direction: column;
-
-		  hr {
-			margin: var(--ee-margin-smaller) 0;
-		  }
+		header {
+			text-align: start;
+		}
 	}
 }

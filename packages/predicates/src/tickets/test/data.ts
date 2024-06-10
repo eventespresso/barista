@@ -1,4 +1,4 @@
-import type { Ticket } from '@eventespresso/edtr-services';
+import { type Ticket, TicketStatus } from '@eventespresso/edtr-services';
 
 export const tickets: Ticket[] = [
 	{
@@ -8,6 +8,7 @@ export const tickets: Ticket[] = [
 		description: 'description',
 		startDate: '2019-11-27T21:43:26',
 		endDate: '2019-12-27T23:59:00',
+		status: TicketStatus.EXPIRED,
 		min: 0,
 		max: null,
 		price: 0,
@@ -37,6 +38,7 @@ export const tickets: Ticket[] = [
 		description: 'description',
 		startDate: '2019-11-27T21:43:26',
 		endDate: '2019-12-27T23:59:00',
+		status: TicketStatus.EXPIRED,
 		min: 0,
 		max: null,
 		price: 0,
@@ -66,6 +68,7 @@ export const tickets: Ticket[] = [
 		description: 'description',
 		startDate: '2019-11-27T21:43:26',
 		endDate: '2019-12-27T23:59:00',
+		status: TicketStatus.EXPIRED,
 		min: 0,
 		max: null,
 		price: 0,
@@ -95,6 +98,7 @@ export const tickets: Ticket[] = [
 		description: 'description',
 		startDate: '2019-11-27T21:43:26',
 		endDate: '2019-12-27T23:59:00',
+		status: TicketStatus.EXPIRED,
 		min: 0,
 		max: null,
 		price: 0,
@@ -124,6 +128,7 @@ export const tickets: Ticket[] = [
 		description: 'description',
 		startDate: '2019-11-27T21:43:26',
 		endDate: '2019-12-27T23:59:00',
+		status: TicketStatus.EXPIRED,
 		min: 0,
 		max: null,
 		price: 0,

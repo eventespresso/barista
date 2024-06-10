@@ -14,17 +14,19 @@ export const DATETIME_INPUT_FIELDS: Array<keyof UpdateDatetimeInput> = [
 	'reserved',
 	'sold',
 	'startDate',
+	'status',
 	'tickets',
 ];
 
 const OUTPUT_ONLY_FIELDS: Array<keyof Omit<Datetime, keyof UpdateDatetimeInput> | 'id'> = [
 	'id',
 	'isActive',
+	'isCancelled',
+	'isPostponed',
 	'isExpired',
 	'isSoldOut',
 	'isUpcoming',
 	'length',
-	'status',
 ];
 
 export const DATETIME_FIELDS = [...DATETIME_INPUT_FIELDS, ...OUTPUT_ONLY_FIELDS];

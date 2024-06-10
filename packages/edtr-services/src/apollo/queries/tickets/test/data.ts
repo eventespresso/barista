@@ -1,7 +1,7 @@
 import { GraphQLError } from 'graphql';
 import { formatISO } from 'date-fns';
 
-import type { Ticket, TicketEdge } from '../../../types';
+import { TicketStatus, type Ticket, type TicketEdge } from '../../../types';
 import { CacheQueryOptions } from '@eventespresso/data';
 
 export const request: CacheQueryOptions = null; // to be generated via Query Options hook
@@ -32,6 +32,7 @@ export const nodes: Ticket[] = [
 		reverseCalculate: false,
 		sold: 5,
 		startDate: formatISO(new Date(2018, 8, 18, 19, 0, 52)),
+		status: TicketStatus.EXPIRED,
 		userId: '',
 		uses: -1,
 		visibility: 'PUBLIC',
@@ -62,6 +63,7 @@ export const nodes: Ticket[] = [
 		reverseCalculate: false,
 		sold: 0,
 		startDate: formatISO(new Date(2038, 8, 18, 19, 0, 52)),
+		status: TicketStatus.PENDING,
 		userId: '',
 		uses: -1,
 		visibility: 'PUBLIC',
@@ -92,6 +94,7 @@ export const nodes: Ticket[] = [
 		reverseCalculate: false,
 		sold: 0,
 		startDate: formatISO(new Date(2028, 8, 18, 19, 0, 52)),
+		status: TicketStatus.PENDING,
 		userId: '',
 		uses: -1,
 		visibility: 'PUBLIC',

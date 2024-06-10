@@ -4,13 +4,22 @@ import {
 	PopoverBody,
 	PopoverCloseButton,
 	PopoverContent,
+	PopoverFooter,
 	PopoverHeader,
 	PopoverTrigger,
 } from '@chakra-ui/react';
 
 import type { PopoverProps } from './types';
 
-export const Popover: React.FC<PopoverProps> = ({ content, contentClassName, header, trigger, children, ...props }) => {
+export const Popover: React.FC<PopoverProps> = ({
+	content,
+	contentClassName,
+	header,
+	footer,
+	trigger,
+	children,
+	...props
+}) => {
 	return (
 		<ChakraPopover {...props}>
 			{trigger && <PopoverTrigger>{trigger}</PopoverTrigger>}
@@ -23,6 +32,7 @@ export const Popover: React.FC<PopoverProps> = ({ content, contentClassName, hea
 					</PopoverHeader>
 				)}
 				<PopoverBody>{content || children}</PopoverBody>
+				{footer && <PopoverFooter className='ee-popover__footer'>{footer}</PopoverFooter>}
 			</PopoverContent>
 		</ChakraPopover>
 	);
