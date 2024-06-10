@@ -34,8 +34,8 @@ export const FormattedPrice = (props: NumberProps) => {
 	);
 
 	useEffect(() => {
-		// set value from 'ticket.price' only when are *not*
-		// focusing on the input field
+		// set value from 'ticket.price',
+		// only when *not* focusing on the input field
 		if (!focus) {
 			setValue(formatPrice(ticket.price));
 		}
