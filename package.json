@@ -8,7 +8,7 @@
 	"scripts": {
 		"build:ci": "FORCE_COLOR=true yarn build",
 		"build:core": "yarn build:cra --domains \"core\" --skip-packages \"rrule-generator\"",
-		"build:cra": "node scripts/build.js",
+		"build:cra": "NODE_OPTIONS=--openssl-legacy-provider node scripts/build.js",
 		"build:es:edtrSlots": "yarn build:cra --domains \"eventSmart/admin/edtrSlots\" --skip-all-packages",
 		"build:es:upsellEditor": "yarn build:cra --domains \"eventSmart/admin/upsellEditor\" --skip-all-packages",
 		"build:packages": "yarn build:cra",
