@@ -3,7 +3,7 @@
 	"private": true,
 	"license": "GPL-3.0",
 	"engines": {
-		"node": "^16"
+		"node": "^16 || ^20"
 	},
 	"scripts": {
 		"build:ci": "FORCE_COLOR=true yarn build",
