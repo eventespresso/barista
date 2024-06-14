@@ -18,7 +18,7 @@
 		"build": "yarn build:cra --domains \"all\"",
 		"compile": "yarn tsc",
 		"deploy": "FORCE_COLOR=true lerna run deploy",
-		"dev:watch": "node scripts/watch.js",
+		"dev:watch": "NODE_OPTIONS=--openssl-legacy-provider node scripts/watch.js",
 		"dev:all": "yarn dev:watch --domains \"all\"",
 		"dev:blocks": "yarn dev:watch --domains \"domains/core/admin/wpPluginsPage,domains/core/admin/blocks\"",
 		"dev:rem": "yarn dev:watch --domains \"domains/core/admin/wpPluginsPage,domains/core/admin/eventEditor,domains/rem\"",
