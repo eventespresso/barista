@@ -23,7 +23,7 @@
 		"dev:blocks": "yarn dev:watch --domains \"domains/core/admin/wpPluginsPage,domains/core/admin/blocks\"",
 		"dev:rem": "yarn dev:watch --domains \"domains/core/admin/wpPluginsPage,domains/core/admin/eventEditor,domains/rem\"",
 		"dev": "yarn dev:watch --domains \"domains/core\"",
-		"start": "node scripts/start.js",
+		"start": "NODE_OPTIONS=--openssl-legacy-provider node scripts/start.js",
 		"generate:css": "node packages/styles/bin/css-builder/css-builder",
 		"generate:icons": "yarn svgr --config-file packages/icons/.svgrrc.js -d packages/icons/src/icons packages/icons/src/svg",
 		"generate:workspaces": "node scripts/generateWorkspaces.js",
