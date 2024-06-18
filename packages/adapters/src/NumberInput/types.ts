@@ -4,6 +4,7 @@ import type { CommonInputProps } from '../types';
 
 type ChakraProps = Pick<
 	Chakra.NumberInputProps,
+	| 'aria-label'
 	| 'aria-valuenow'
 	| 'clampValueOnBlur'
 	| 'className'

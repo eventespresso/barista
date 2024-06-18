@@ -53,4 +53,4 @@ module Element {
 	export type Select = HTMLSelectElement;
 }
 
-type AriaLabel = Required<Pick<AriaAttributes, 'aria-label'>>;
+type AriaLabel = Pick<AriaAttributes, 'aria-label'>;
