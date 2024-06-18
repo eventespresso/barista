@@ -20,7 +20,7 @@ export const FormattedPrice = (props: NumberProps) => {
 	const { currency, formatAmount: formatPrice } = useMoneyDisplay();
 
 	const [value, setValue] = useState<string>(() => {
-		return formatPrice(ticket.price);
+		return formatPrice(ticket.price ?? '');
 	});
 
 	const [focus, setFocus] = useState<boolean>(false);
@@ -37,7 +37,7 @@ export const FormattedPrice = (props: NumberProps) => {
 		// set value from 'ticket.price',
 		// only when *not* focusing on the input field
 		if (!focus) {
-			setValue(formatPrice(ticket.price));
+			setValue(formatPrice(ticket.price ?? ''));
 		}
 	}, [focus, setValue, formatPrice, ticket.price]);
 
@@ -63,7 +63,9 @@ export const FormattedPrice = (props: NumberProps) => {
 				{...props}
 				_type='Number'
 				name='ticket.price'
-				aria-label={props['aria-label']}
+				// conditional attribute rendering
+				// https://stackoverflow.com/a/35428331/4343719
+				{...(props['aria-label'] ? { 'aria-label': props['aria-label'] } : {})}
 				onChange={onChange}
 				onBlur={onBlur}
 				onFocus={onFocus}
