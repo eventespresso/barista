@@ -4,11 +4,8 @@ type Fn = () => void;
 type Callback = (func: Fn) => void;
 
 const useIfMounted = (): Callback => {
-	const isMounted = useRef(false);
-
+	const isMounted = useRef(true);
 	useEffect(() => {
-		isMounted.current = true;
-
 		return (): void => {
 			isMounted.current = false;
 		};
