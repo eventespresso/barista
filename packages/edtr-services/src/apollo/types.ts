@@ -93,7 +93,7 @@ export type DatetimesList = DatetimeList<DatetimeEdge>;
 
 // LATER: consolidate data types
 export interface Price extends Entity, Trashable {
-	amount: number;
+	amount: number | null;
 	description: string;
 	isBasePrice: boolean;
 	isDefault: boolean;

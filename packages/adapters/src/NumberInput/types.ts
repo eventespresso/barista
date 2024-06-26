@@ -4,6 +4,7 @@ import type { CommonInputProps } from '../types';
 
 type ChakraProps = Pick<
 	Chakra.NumberInputProps,
+	| 'aria-label'
 	| 'aria-valuenow'
 	| 'clampValueOnBlur'
 	| 'className'
@@ -17,6 +18,7 @@ type ChakraProps = Pick<
 	| 'step'
 	| 'value'
 	| 'onBlur'
+	| 'onFocus'
 >;
 
 export interface NumberInputProps extends ChakraProps, CommonInputProps<HTMLInputElement> {

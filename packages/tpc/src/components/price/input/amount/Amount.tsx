@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import classNames from 'classnames';
 
 import { __ } from '@eventespresso/i18n';
@@ -7,9 +7,10 @@ import { MoneyInputWrapper } from '@eventespresso/ui-components';
 
 import { useDataState } from '../../../..';
 import { Factory } from '../..';
+import { useInputFilter } from '..';
 import { useAmount } from '.';
 
-import type { CommonInputProps } from '@eventespresso/adapters';
+import type { NumberInputProps } from '@eventespresso/adapters';
 import type { PriceModifierProps } from '../../../..';
 import './styles.scss';
 
@@ -17,8 +18,10 @@ export const Amount: React.FC<PriceModifierProps> = ({ price }) => {
 	const { reverseCalculate, isDisabled } = useDataState();
 	const { getValue, setValue } = useAmount({ field: 'amount', price });
 	const { currency } = useConfig();
+	const inputFilter = useInputFilter();
 
-	const value = useMemo(() => getValue(), [getValue]);
+	const [localState, setState] = useState<string>(getValue.asString());
+	const [focus, setFocus] = useState<boolean>(false);
 
 	const hasError = useMemo<boolean>(() => {
 		return Number(price?.amount ?? 0) === 0;
@@ -35,14 +38,39 @@ export const Amount: React.FC<PriceModifierProps> = ({ price }) => {
 		return isDisabled || (reverseCalculate && price.isBasePrice) || price.isDefault;
 	}, [isDisabled, reverseCalculate, price]);
 
-	type OnChange = CommonInputProps['onChange'];
-
-	const onChange = useCallback<OnChange>(
+	const onChange = useCallback<On.Change>(
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		(string, number) => {
-			setValue(number);
+			setState(inputFilter(string));
 		},
-		[setValue]
+		[inputFilter, setState]
 	);
+
+	const onBlur = useCallback<On.Blur>(
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		(event) => {
+			setFocus(false);
+			// use 'localState' as opposed to 'event' due to filtering by 'useInputFilter' by 'onChange'
+			setValue(localState);
+		},
+		[setFocus, setValue, localState]
+	);
+
+	const onFocus = useCallback<On.Focus>(
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		(event) => {
+			setFocus(true);
+		},
+		[setFocus]
+	);
+
+	useEffect(() => {
+		// condition 1: if field is disabled it is VALID to set local state because price is being updated *outside*
+		// condition 2: when NOT focusing we know that user has finished changing the value so we can update the local state
+		if (isDisabled || !focus) {
+			setState(price.amount?.toString() ?? '');
+		}
+	}, [isDisabled, price.amount, focus, setState]);
 
 	return (
 		<MoneyInputWrapper
@@ -59,9 +87,19 @@ export const Amount: React.FC<PriceModifierProps> = ({ price }) => {
 				disabled={disabled}
 				min={0}
 				placeholder={__('amount…')}
-				value={value}
+				value={localState}
 				onChange={onChange}
+				onBlur={onBlur}
+				onFocus={onFocus}
 			/>
 		</MoneyInputWrapper>
 	);
 };
+
+module On {
+	export type Change = NoUndefined<NumberInputProps['onChange']>;
+	export type Blur = NoUndefined<NumberInputProps['onBlur']>;
+	export type Focus = React.FocusEventHandler<HTMLInputElement>;
+
+	type NoUndefined<T extends any> = Exclude<T, undefined>;
+}

@@ -10,12 +10,15 @@ export const useAmount: Hook.Type = ({ field, price }) => {
 	const { updatePrice } = useDataState();
 
 	const getValue = useCallback<() => number>(() => {
-		return parsedAmount(valueToNumber(price[field]));
+		return valueToNumber(price[field]);
 	}, [field, price]);
 
-	const setValue = useCallback<(value: number) => void>(
+	const asNumber = getValue;
+	const asString = useCallback(() => asNumber().toString(), [asNumber]);
+
+	const setValue = useCallback<(value: string | number) => void>(
 		(value) => {
-			const newValue = Math.abs(parsedAmount(value)) || 0;
+			const newValue = Math.abs(parsedAmount(value));
 			updatePrice({ id: price.id, fieldValues: { [field]: newValue } });
 		},
 		[updatePrice, price, field]
@@ -23,10 +26,13 @@ export const useAmount: Hook.Type = ({ field, price }) => {
 
 	return useMemo(
 		() => ({
-			getValue,
+			getValue: {
+				asString,
+				asNumber,
+			},
 			setValue,
 		}),
-		[getValue, setValue]
+		[asNumber, asString, setValue]
 	);
 };
 
@@ -45,10 +51,12 @@ module Hook {
 	};
 
 	type Return = {
-		getValue: () => Value;
-		setValue: (value: Value) => void;
+		getValue: {
+			asString: () => string;
+			asNumber: () => number;
+		};
+		setValue: (value: string | number) => void;
 	};
 
-	type Value = number;
 	type Field = keyof TPM;
 }

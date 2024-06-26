@@ -1,10 +1,7 @@
 import type { Amount } from './types';
 
 /**
- * returns amount parsed as a float (if not already a number)
- *
- * @param {number|string} amount
- * @return {number}
+ * Parse given input as float or return as is if already a float
  */
 export const parsedAmount = (amount: Amount): number => {
 	if (typeof amount === 'number') return amount;

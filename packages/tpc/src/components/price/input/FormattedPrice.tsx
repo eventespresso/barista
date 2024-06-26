@@ -1,77 +1,61 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 
 import { MoneyInputWrapper } from '@eventespresso/ui-components';
-import { useMoneyDisplay, useConfig } from '@eventespresso/services';
+import { useMoneyDisplay } from '@eventespresso/services';
 import { parsedAmount } from '@eventespresso/utils';
 
 import { useDataState } from '../../../data';
 import { Factory } from '..';
+import { useInputFilter } from '.';
 
 import type { NumberProps } from '@eventespresso/ui-components';
+import type { CommonInputProps } from '@eventespresso/adapters';
 
 /**
  * Used for displaying the total (formatted) price
  */
-export const FormattedPrice = ({ value, ...props }: NumberProps) => {
+export const FormattedPrice = (props: NumberProps) => {
+	const inputFilter = useInputFilter();
 	const { ticket, updateTicketPrice } = useDataState();
-	const { formatAmount } = useMoneyDisplay();
-	const { currency } = useConfig();
+	const { currency, formatAmount: formatPrice } = useMoneyDisplay();
 
-	const defaultValue: string = useMemo(() => {
-		const decimals = '0'.repeat(currency.decimalPlaces);
-		return 0 + currency.decimalMark + decimals;
-	}, [currency]);
-
-	const [isChanging, setIsChanging] = useState<boolean>(false);
-
-	const [state, setState] = useState<string>(() => {
-		return formatAmount(value) || defaultValue;
+	const [value, setValue] = useState<string>(() => {
+		return formatPrice(ticket.price ?? '');
 	});
 
-	useEffect(() => {
-		if (ticket.price && !isChanging) {
-			setState(formatAmount(ticket.price));
-		}
-	}, [setState, formatAmount, ticket.price, isChanging]);
+	const [focus, setFocus] = useState<boolean>(false);
 
-	type OnChange = (string: string, number: number) => void;
-
-	const getValueFromString = useCallback((value: string): string => {
-		if (value.includes('.')) {
-			const [integers, decimals] = value.split('.');
-			if (decimals.length > 6) {
-				return integers + '.' + decimals.substring(0, 6);
-			}
-			return value;
-		}
-		return value;
-	}, []);
-
-	const onChange: OnChange = useCallback(
+	const onChange: On.Change = useCallback(
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		(string, number) => {
-			setState(getValueFromString(string));
-			setIsChanging(true);
+			setValue(inputFilter(string));
 		},
-		[getValueFromString, setState, setIsChanging]
+		[inputFilter]
 	);
 
-	const onBlur = useCallback(() => {
-		updateTicketPrice(Math.abs(parsedAmount(state)));
-		setState(formatAmount(state));
-		setIsChanging(false);
-	}, [updateTicketPrice, setState, formatAmount, state, setIsChanging]);
+	useEffect(() => {
+		// set value from 'ticket.price',
+		// only when *not* focusing on the input field
+		if (!focus) {
+			setValue(formatPrice(ticket.price ?? ''));
+		}
+	}, [focus, setValue, formatPrice, ticket.price]);
 
-	const pattern: string = useMemo(() => {
-		const mark = currency.decimalMark;
-		const dp = currency.decimalPlaces;
+	const onBlur: On.Blur = useCallback(
+		({ currentTarget: { value } }) => {
+			setFocus(false);
+			updateTicketPrice(Math.abs(parsedAmount(value)));
+		},
+		[setFocus, updateTicketPrice]
+	);
 
-		const integers = '[0-9]*?'; // lazy but greedy quantifier
-		const separator = '\\' + mark;
-		const decimals = `[0-9]{${dp}}`;
-
-		return integers + separator + decimals;
-	}, [currency]);
+	const onFocus: On.Focus = useCallback(
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		(event) => {
+			setFocus(true);
+		},
+		[setFocus]
+	);
 
 	return (
 		<MoneyInputWrapper sign={currency?.sign} signB4={currency?.signB4} disabled={props.disabled}>
@@ -79,13 +63,24 @@ export const FormattedPrice = ({ value, ...props }: NumberProps) => {
 				{...props}
 				_type='Number'
 				name='ticket.price'
-				aria-label={props['aria-label']}
+				// conditional attribute rendering
+				// https://stackoverflow.com/a/35428331/4343719
+				{...(props['aria-label'] ? { 'aria-label': props['aria-label'] } : {})}
 				onChange={onChange}
 				onBlur={onBlur}
+				onFocus={onFocus}
 				min={0}
-				value={state}
-				pattern={pattern}
+				value={value}
+				defaultValue={value}
 			/>
 		</MoneyInputWrapper>
 	);
 };
+
+module On {
+	export type Change = CommonInputProps<HTMLInputElement, React.ReactText>['onChange'];
+
+	export type Blur = React.FocusEventHandler<HTMLInputElement>;
+
+	export type Focus = React.FocusEventHandler<HTMLInputElement>;
+}
