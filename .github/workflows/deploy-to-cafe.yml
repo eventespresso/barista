@@ -61,6 +61,16 @@ jobs:
             - name: Copy EE Core Changes to Cafe Repo
               run: source tools/copy-changes.sh "plugins/event-espresso-core/assets" "plugins/event-espresso-core/languages"
 
+            # Build Calendar domain without packages
+            # because core will load/register the packages
+            - name: Build Calendar with its packages
+              run: |
+                  cd "$GITHUB_WORKSPACE"
+                  yarn build:calendar
+
+            - name: Copy Calendar Changes to Cafe Repo
+              run: source tools/copy-changes.sh "plugins/eea-calendar/assets" "plugins/eea-calendar/languages"
+
             # Build REM domain without packages
             # because core will load/register the packages
             - name: Build REM with its packages
