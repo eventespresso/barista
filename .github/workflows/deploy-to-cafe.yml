@@ -69,7 +69,7 @@ jobs:
                   yarn build:calendar
 
             - name: Copy Calendar Changes to Cafe Repo
-              run: source tools/copy-changes.sh "plugins/eea-calendar/assets" "plugins/eea-calendar/languages"
+              run: source tools/copy-changes.sh "plugins/espresso-calendar/assets" "plugins/espresso-calendar/languages"
 
             # Build REM domain without packages
             # because core will load/register the packages
