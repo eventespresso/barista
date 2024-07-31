@@ -14,6 +14,7 @@ class Barista
 	private array $styles = [];
 
 	private array $edtr_domains = ['eventSmart'];
+	private array $public_domains = ['calendar'];
 
 
 	public function initialize()
@@ -23,9 +24,11 @@ class Barista
 		}
 
 		add_action('wp_default_scripts', [$this, 'registerScripts']);
-		add_action('wp_default_styles', [$this, 'registerPackagesStyles']);
+		add_action('wp_default_styles', [$this, 'registerStyles']);
+		add_action('wp_enqueue_scripts', [$this, 'addAssets']);
+		add_action('wp_enqueue_scripts', [$this, 'enqueuePublicScripts']);
 		add_action('admin_enqueue_scripts', [$this, 'addAssets']);
-		add_action('admin_enqueue_scripts', [$this, 'enqueueScripts']);
+		add_action('admin_enqueue_scripts', [$this, 'enqueueEditorScripts']);
 		add_filter('FHEE__FeatureFlagsConfig__getFeatureFlags__use_default_feature_flags', '__return_false');
 		add_filter(
 			'FHEE__Maintenance_Admin_Page__page_setup__page_config',
@@ -218,6 +221,7 @@ class Barista
 		$entry_points = $this->getEntryPoints();
 
 		foreach ($entry_points as $entry_point) {
+			$asset = [];
 			$handle = 'eventespresso-' . $entry_point;
 
 			// Get the path from root directory as expected by `$this->url`.
@@ -262,7 +266,7 @@ class Barista
 	 * @param WP_Styles $styles WP_Styles instance.
 	 * @since 0.0.1
 	 */
-	public function registerPackagesStyles(WP_Styles $styles)
+	public function registerStyles(WP_Styles $styles)
 	{
 		$asset_files  = $this->getManifest();
 		$entry_points = $this->getEntryPoints();
@@ -294,7 +298,7 @@ class Barista
 	/**
 	 * Enqueues assets that are loaded by exernal plugins/services.
 	 */
-	public function enqueueScripts($hook)
+	public function enqueueEditorScripts($hook)
 	{
 		global $post;
 
@@ -308,6 +312,20 @@ class Barista
 		$scripts = ['esEdtrSlots'];
 
 		foreach ($scripts as $handle) {
+			$handle = 'eventespresso-' . $handle;
+			if (wp_script_is($handle, 'registered')) {
+				wp_enqueue_script($handle);
+			}
+		}
+	}
+
+
+	/**
+	 * Enqueues assets that are loaded by exernal plugins/services.
+	 */
+	public function enqueuePublicScripts()
+	{
+		foreach ($this->public_domains as $handle) {
 			$handle = 'eventespresso-' . $handle;
 			if (wp_script_is($handle, 'registered')) {
 				wp_enqueue_script($handle);
