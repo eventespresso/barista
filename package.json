@@ -69,6 +69,7 @@
 		]
 	},
 	"dependencies": {
+		"@babel/runtime": "^7.25.0",
 		"@chakra-ui/react": "^1.6",
 		"bignumber.js": "^9.1.1",
 		"classnames": "^2.3.1",
