@@ -1,8 +1,12 @@
 import React from 'react';
 
-export default function ClockIcon() {
+interface ClockIconProps {
+	width?: number;
+	height?: number;
+}
+export default function ClockIcon({ width = 20, height = 20 }: ClockIconProps) {
 	return (
-		<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='20'>
+		<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width={`${width}`} height={`${height}`}>
 			{/* <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--> */}
 			<path
 				fill='#ffffff'

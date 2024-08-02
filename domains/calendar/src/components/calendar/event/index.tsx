@@ -1,4 +1,5 @@
 // import { HStack } from '@chakra-ui/react';
+import { Box, Heading, Text } from '@chakra-ui/react';
 import ClockIcon from '../../../assets/icons/ClockIcon';
 import LocationPinIcon from '../../../assets/icons/LocationPinIcon';
 import React from 'react';
@@ -24,22 +25,26 @@ export default function Event({ event }) {
 				padding: '10px',
 				borderRadius: '4px',
 				boxSizing: 'border-box',
-				minHeight: '100%',
+				fontSize: '12px',
+				whiteSpace: 'normal',
+				// minHeight: '100%',
 			}}
 		>
-			<strong>{event.title}</strong>
+			<Box fontSize='13px' fontWeight={600}>
+				{event.title}
+			</Box>
 			<p style={{ margin: '0px', display: 'flex' }}>
-				<span style={{ marginRight: '10px' }}>
-					<ClockIcon />
+				<span style={{ marginRight: '3px', paddingTop: '2px' }}>
+					<ClockIcon width={12} height={12} />
 				</span>
 				{formatEventTime(event.start, event.end)}
 			</p>
-			<p style={{ margin: '0px', display: 'flex' }}>
+			{/* <p style={{ margin: '0px', display: 'flex' }}>
 				<span style={{ marginRight: '10px' }}>
 					<LocationPinIcon />
 				</span>
 				{event.venue}
-			</p>
+			</p> */}
 			{/* <HStack> */}
 
 			{/* </HStack> */}

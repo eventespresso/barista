@@ -6,8 +6,11 @@
 
 .rbc-event {
 	background: none;
-	position: absolute;
-	max-width: 300px;
+	/* position: absolute; */
+	/* max-width: 300px; */
 	margin: 0px;
 	padding: 0px;
+}
+.js .hentry > [class^='entry-'] {
+	max-width: 90%;
 }
