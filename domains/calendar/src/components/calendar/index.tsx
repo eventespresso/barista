@@ -1,11 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { Calendar as ReactCalendar, momentLocalizer } from 'react-big-calendar';
+import { Calendar as ReactCalendar, dateFnsLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import moment from 'moment';
+import format from 'date-fns/format';
+import parse from 'date-fns/parse';
+import startOfWeek from 'date-fns/startOfWeek';
+import getDay from 'date-fns/getDay';
+import enUS from 'date-fns/locale/en-US';
+
+// import moment from 'moment';
 import Event from './event';
 import { Tooltip } from '@chakra-ui/react';
 
-const localizer = momentLocalizer(moment);
+const locales = {
+	'en-US': enUS,
+};
+
+const localizer = dateFnsLocalizer({
+	format,
+	parse,
+	startOfWeek,
+	getDay,
+	locales,
+});
 function Calendar(props) {
 	const [events, setEvents] = useState([
 		{
@@ -14,7 +30,7 @@ function Calendar(props) {
 			color: '',
 			venue: 'somewhere',
 			description: '',
-			end: '2024-08-22T17:00:00',
+			end: new Date('2024-08-22T17:00:00'),
 			eventType: '',
 			event_days: 1,
 			event_img_thumb: '',
@@ -24,7 +40,7 @@ function Calendar(props) {
 			id: 22,
 			iframe: false,
 			show_tooltips: true,
-			start: '2024-08-22T08:00:00',
+			start: new Date('2024-08-22T08:00:00'),
 			target_date: '2024-07-26',
 			textColor: '',
 			title: 'Cyber Security Seminar',
@@ -41,7 +57,7 @@ function Calendar(props) {
 			color: 'hsl(39deg 62.88% 47.26%)',
 			venue: 'somewhere',
 			description: '',
-			end: '2024-08-22T17:00:00',
+			end: new Date('2024-08-22T17:00:00'),
 			eventType: '',
 			event_days: 1,
 			event_img_thumb: '',
@@ -51,7 +67,7 @@ function Calendar(props) {
 			id: 22,
 			iframe: false,
 			show_tooltips: true,
-			start: '2024-08-22T08:00:00',
+			start: new Date('2024-08-22T08:00:00'),
 			target_date: '2024-07-26',
 			textColor: '',
 			title: 'Gala dinner',
@@ -68,7 +84,7 @@ function Calendar(props) {
 			color: 'hsla(11, 100%, 62.2%, 1)',
 			venue: 'Canada',
 			description: '',
-			end: '2024-08-24T17:00:00',
+			end: new Date('2024-08-24T17:00:00'),
 			eventType: '',
 			event_days: 1,
 			event_img_thumb: '',
@@ -78,7 +94,7 @@ function Calendar(props) {
 			id: 22,
 			iframe: false,
 			show_tooltips: true,
-			start: '2024-08-23T10:00:00',
+			start: new Date('2024-08-23T10:00:00'),
 			target_date: '2024-07-26',
 			textColor: '',
 			title: 'Cyber Security Seminar',
@@ -117,7 +133,6 @@ function Calendar(props) {
 				showAllEvents={true}
 				tooltipAccessor={null}
 			/>
-			
 		</>
 	);
 }

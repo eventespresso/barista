@@ -10,8 +10,7 @@
 		"url": "git+https://github.com/eventespresso/barista.git"
 	},
 	"dependencies": {
-		"react-big-calendar": "^1.13.1",
-		"moment": "^2.30.1"
+		"react-big-calendar": "^1.13.1"
 	},
 	"scripts": {
 		"lint": "eslint ./src/**/*.{ts,tsx} --format=codeframe",
