@@ -1,8 +1,10 @@
 import OptionsModalButton from './OptionsModalButton';
 import { NewDateOptions } from '@eventespresso/edtr-services';
+import { useConfig } from '@eventespresso/services';
 
 const NewDateButton: React.FC = () => {
-	return (
+	const { isCaffeinated } = useConfig();
+	return isCaffeinated ? (
 		<NewDateOptions>
 			{(fills) => {
 				if (fills.length > 1) {
@@ -11,7 +13,7 @@ const NewDateButton: React.FC = () => {
 				return <>{fills}</>;
 			}}
 		</NewDateOptions>
-	);
+	) : null;
 };
 
 export default NewDateButton;
