@@ -15,7 +15,7 @@ const Legend: React.FC<LegendProps> = ({ columnsPerRow, direction, legendConfig,
 
 	const iconsSource = icons.map(({ bgClassName, className, description, icon }) => {
 		const term = (!is(String)(icon) && createElement(icon)) || (
-			<Icon aria-label={description} name={icon as IconName} svgSize={18} />
+			<Icon aria-label={description} className={className} name={icon as IconName} svgSize={18} />
 		);
 
 		return {
