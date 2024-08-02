@@ -84,6 +84,9 @@ type CoreDomain = {
 	coreVersion: string;
 	distributionAssetsPath: string;
 	distributionAssetsUrl: string;
+	isCaffeinated: boolean;
+	isDecaf: boolean;
+	isMultiSite: boolean;
 	pluginPath: string;
 	pluginUrl: string;
 };

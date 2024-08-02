@@ -48,6 +48,9 @@ export module Type {
 		currentUser: User; // LATER: consolidate data types
 		dateTimeFormats: DateTimeFormats;
 		generalSettings: GeneralSettings;
+		isCaffeinated: boolean;
+		isDecaf: boolean;
+		isMultiSite: boolean;
 		locale: Locale;
 		nonce: Nonce;
 		sitePermissions?: SitePermissions;
