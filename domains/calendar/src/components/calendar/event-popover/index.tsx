@@ -2,7 +2,10 @@ import { Box, Heading, Text, VStack, Flex, HStack, Image } from '@chakra-ui/reac
 import ClockIcon from '../../../assets/icons/ClockIcon';
 import LocationPinIcon from '../../../assets/icons/LocationPinIcon';
 import { format, isSameMonth, isSameYear, isSameDay } from 'date-fns';
+import { useMemo } from 'react';
+
 export default function EventPopover({ event }) {
+	const isSameDayEvent = useMemo(() => isSameDay(event.start, event.end), [event]);
 	return (
 		<Box p={8} bg='hsla(252, 13%, 46%, 1)' color='white' borderRadius='md' boxShadow='md'>
 			<VStack alignItems='flex-start'>
@@ -16,11 +19,7 @@ export default function EventPopover({ event }) {
 							{format(event.start, 'MMM')}
 						</Text>
 					</VStack>
-					{!(
-						// isSameMonth(event.start, event.end) &&
-						// isSameYear(event.start, event.end) &&
-						isSameDay(event.start, event.end)
-					) && (
+					{!isSameDayEvent && (
 						<>
 							<Text fontWeight='900' className='margin-0'>
 								-
@@ -43,7 +42,8 @@ export default function EventPopover({ event }) {
 					<Flex as='span' mr={1} pt='2px'>
 						<ClockIcon width={12} height={12} />
 					</Flex>
-					{format(event.start, 'MMMM d h:mm a')} - {format(event.end, 'MMMM d h:mm a')}
+					{format(event.start, isSameDayEvent ? 'h:mm a' : 'MMMM d h:mm a')} -{' '}
+					{format(event.end, isSameDayEvent ? 'h:mm a' : 'MMMM d h:mm a')}
 					{/* (GMT-11:00) */}
 				</Flex>
 				<Flex m={0} fontSize='12px' fontWeight='600'>
