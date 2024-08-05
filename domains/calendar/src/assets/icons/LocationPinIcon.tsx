@@ -1,8 +1,12 @@
 import React from 'react';
 
-export default function LocationPinIcon() {
+interface LocationPinIconProps {
+	width?: number;
+	height?: number;
+}
+export default function LocationPinIcon({ width = 20, height = 20 }: LocationPinIconProps) {
 	return (
-		<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512' width='15'>
+		<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512' width={`${width}`} height={`${height}`}>
 			{/* <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--> */}
 			<path
 				fill='#ffffff'

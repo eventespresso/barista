@@ -87,6 +87,7 @@ function Calendar(props) {
 			end: new Date('2024-08-24T17:00:00'),
 			eventType: '',
 			event_days: 1,
+			image: 'https://demo.myeventon.com/wp-content/uploads/2016/08/Screen-Shot-2022-07-05-at-1.48.47-PM.png',
 			event_img_thumb: '',
 			event_time:
 				'<span class="time-display-block"><span class="event-start-time">8:00 am</span> - <span class="event-end-time">5:00 pm</span></span>',
@@ -117,6 +118,19 @@ function Calendar(props) {
 	// 		}
 	// 	}
 	// }, []);
+	const handleEnablePopover = (event) => {
+		return (
+			<div>
+				<span>
+					abc: <p>{event.abc}</p>
+				</span>
+
+				<span>
+					xyz: <p>{event.xyz}</p>
+				</span>
+			</div>
+		);
+	};
 	return (
 		<>
 			<ReactCalendar
@@ -128,10 +142,23 @@ function Calendar(props) {
 				endAccessor='end'
 				components={{
 					event: Event,
+					// eventWrapper: ({ event, children }) => (
+					// 	<div
+					// 		onMouseOver={(e) => {
+					// 			e.preventDefault();
+					// 		}}
+					// 	>
+					// 		{/* <Popover placement='rightTop' content={handleEnablePopover(event)} title='xyz'> */}
+					// 		<Tooltip placement='auto' label='meow'>
+					// 			{children}
+					// 		</Tooltip>
+					// 		{/* </Popover> */}
+					// 	</div>
+					// ),
 				}}
 				popup={true}
 				showAllEvents={true}
-				tooltipAccessor={null}
+				// tooltipAccessor={null}
 			/>
 		</>
 	);

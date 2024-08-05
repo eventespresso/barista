@@ -14,3 +14,16 @@
 .js .hentry > [class^='entry-'] {
 	max-width: 90%;
 }
+
+.chakra-popover__popper {
+	z-index: 9999999;
+}
+.chakra-popover__body {
+	padding: none !important;
+}
+.event-month-text {
+	margin-top: 0px !important;
+}
+.margin-0{
+margin:0px !important;
+}
