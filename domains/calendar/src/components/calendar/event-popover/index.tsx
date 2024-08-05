@@ -6,7 +6,7 @@ export default function EventPopover({ event }) {
 	return (
 		<Box p={8} bg='hsla(252, 13%, 46%, 1)' color='white' borderRadius='md' boxShadow='md'>
 			<VStack alignItems='flex-start'>
-				{event.image && <Image src={event.image} width='full' maxH='200px' borderRadius='lg' />}
+				{event.image && <Image src={event.image} width='full' h='200px' maxH='200px' borderRadius='lg' />}
 				<HStack gap={0} alignItems='flex-start'>
 					<VStack gap={0} alignItems='flex-start' lineHeight={1}>
 						<Text as='span' my={0} fontSize='35px' fontWeight='900'>
@@ -17,8 +17,8 @@ export default function EventPopover({ event }) {
 						</Text>
 					</VStack>
 					{!(
-						isSameMonth(event.start, event.end) &&
-						isSameYear(event.start, event.end) &&
+						// isSameMonth(event.start, event.end) &&
+						// isSameYear(event.start, event.end) &&
 						isSameDay(event.start, event.end)
 					) && (
 						<>
