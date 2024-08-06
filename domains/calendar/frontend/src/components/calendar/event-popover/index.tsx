@@ -13,7 +13,15 @@ export default function EventPopover({ event, isSameDayEvent }) {
 		openModal({ event: event });
 	};
 	return (
-		<Box p={8} bg='hsla(252, 13%, 46%, 1)' color='white' borderRadius='md' boxShadow='md' onClick={handleOpenModal}>
+		<Box
+			p={8}
+			bg='hsla(252, 13%, 46%, 1)'
+			color='white'
+			borderRadius='md'
+			boxShadow='md'
+			onClick={handleOpenModal}
+			cursor='pointer'
+		>
 			<VStack alignItems='flex-start'>
 				{event.image && <Image src={event.image} width='full' h='200px' maxH='200px' borderRadius='lg' />}
 				<HStack gap={0} alignItems='flex-start'>

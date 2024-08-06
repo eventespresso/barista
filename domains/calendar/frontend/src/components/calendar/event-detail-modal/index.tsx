@@ -10,6 +10,7 @@ import {
 	ModalOverlay,
 	ModalContent,
 	ModalBody,
+	SkeletonCircle,
 } from '@chakra-ui/react';
 import ClockIcon from '../../../assets/icons/ClockIcon';
 import LocationPinIcon from '../../../assets/icons/LocationPinIcon';
@@ -20,8 +21,9 @@ import { useModal } from '../../../lib/context/modalContext';
 export default function EventDetailModal() {
 	const { isOpen, closeModal, content } = useModal();
 
+	console.log(content, 'modalContent');
 	return (
-		<Modal isOpen={isOpen} size='xl' onClose={() => closeModal()}>
+		<Modal isOpen={isOpen} size='3xl' onClose={() => closeModal()}>
 			<ModalOverlay />
 			<ModalContent>
 				<ModalBody p={0}>
@@ -67,7 +69,7 @@ export default function EventDetailModal() {
 								)}
 							</HStack>
 							<VStack alignItems='flex-start'>
-								<Box height='30px' />
+								<SkeletonCircle size='6' startColor='blue.500' endColor='blue.300' />
 								<Heading fontSize='30px' fontWeight='900' color='white'>
 									Event that span across months
 								</Heading>
@@ -96,12 +98,13 @@ export default function EventDetailModal() {
 							h='300px'
 							maxH='300px'
 							borderRadius='lg'
+							objectFit='cover'
 						/>
 					</Box>
 					<HStack p={4} pt={0}>
 						<Box p={6} bg='gray.100' borderRadius='xl' height='150px'>
 							<HStack alignItems='flex-start'>
-								<ClockIcon width={24} height={24} />
+								<ClockIcon width={24} height={24} fill='#202124' />
 								<VStack alignItems='flex-start'>
 									<Heading color='#202124' fontSize='larger'>
 										Time
@@ -114,7 +117,7 @@ export default function EventDetailModal() {
 						</Box>
 						<Box p={6} bg='gray.100' borderRadius='xl' height='150px'>
 							<HStack alignItems='flex-start'>
-								<LocationPinIcon width={24} height={24} />
+								<LocationPinIcon width={24} height={24} fill='#202124' />
 								<VStack alignItems='flex-start'>
 									<Heading color='#202124' fontSize='larger'>
 										Location
