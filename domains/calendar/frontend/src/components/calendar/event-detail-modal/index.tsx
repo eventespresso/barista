@@ -11,6 +11,7 @@ import {
 	ModalContent,
 	ModalBody,
 	SkeletonCircle,
+	Button,
 } from '@chakra-ui/react';
 import ClockIcon from '../../../assets/icons/ClockIcon';
 import LocationPinIcon from '../../../assets/icons/LocationPinIcon';
@@ -34,7 +35,11 @@ export default function EventDetailModal() {
 						borderTopRightRadius='xl'
 						borderTopLeftRadius='xl'
 						color='white'
+						position='relative'
 					>
+						<Button position='absolute' right='20px' top='20px' colorScheme='pink'>
+							Register now
+						</Button>
 						<HStack alignItems='flex-start'>
 							<HStack gap={0} alignItems='flex-start'>
 								<VStack gap={0} alignItems='flex-start' lineHeight={1}>
@@ -129,6 +134,12 @@ export default function EventDetailModal() {
 							</HStack>
 						</Box>
 					</HStack>
+					<Box p={4}>Will Add more details sections here....</Box>
+					<Box p={4} w='full'>
+						<Button colorScheme='gray' size='lg' borderRadius='sm' variant='outline' w='full'>
+							Register Event
+						</Button>
+					</Box>
 				</ModalBody>
 			</ModalContent>
 		</Modal>
