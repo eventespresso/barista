@@ -1,7 +1,7 @@
 [
     {
         "name": "@eventespresso/calendar",
-        "location": "domains/calendar"
+        "location": "domains/calendar/frontend"
     },
     {
         "name": "@eventespresso/blocks",
