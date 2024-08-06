@@ -118,19 +118,7 @@ function Calendar(props) {
 	// 		}
 	// 	}
 	// }, []);
-	const handleEnablePopover = (event) => {
-		return (
-			<div>
-				<span>
-					abc: <p>{event.abc}</p>
-				</span>
 
-				<span>
-					xyz: <p>{event.xyz}</p>
-				</span>
-			</div>
-		);
-	};
 	return (
 		<>
 			<ReactCalendar
@@ -142,19 +130,6 @@ function Calendar(props) {
 				endAccessor='end'
 				components={{
 					event: Event,
-					// eventWrapper: ({ event, children }) => (
-					// 	<div
-					// 		onMouseOver={(e) => {
-					// 			e.preventDefault();
-					// 		}}
-					// 	>
-					// 		{/* <Popover placement='rightTop' content={handleEnablePopover(event)} title='xyz'> */}
-					// 		<Tooltip placement='auto' label='meow'>
-					// 			{children}
-					// 		</Tooltip>
-					// 		{/* </Popover> */}
-					// 	</div>
-					// ),
 				}}
 				popup={true}
 				showAllEvents={true}
