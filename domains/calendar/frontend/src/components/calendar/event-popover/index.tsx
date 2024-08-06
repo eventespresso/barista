@@ -4,8 +4,8 @@ import LocationPinIcon from '../../../assets/icons/LocationPinIcon';
 import { format, isSameMonth, isSameYear, isSameDay } from 'date-fns';
 import { useMemo } from 'react';
 
-export default function EventPopover({ event }) {
-	const isSameDayEvent = useMemo(() => isSameDay(event.start, event.end), [event]);
+export default function EventPopover({ event, isSameDayEvent }) {
+	// const isSameDayEvent = useMemo(() => isSameDay(event.start, event.end), [event]);
 	return (
 		<Box p={8} bg='hsla(252, 13%, 46%, 1)' color='white' borderRadius='md' boxShadow='md'>
 			<VStack alignItems='flex-start'>
