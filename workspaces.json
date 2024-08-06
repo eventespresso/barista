@@ -1,5 +1,9 @@
 [
     {
+        "name": "@eventespresso/calendar-admin",
+        "location": "domains/calendar/admin"
+    },
+    {
         "name": "@eventespresso/calendar",
         "location": "domains/calendar/frontend"
     },
