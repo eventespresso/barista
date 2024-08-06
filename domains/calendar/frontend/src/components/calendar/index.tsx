@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Calendar as ReactCalendar, dateFnsLocalizer } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import format from 'date-fns/format';
@@ -7,9 +7,8 @@ import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
 import enUS from 'date-fns/locale/en-US';
 
-// import moment from 'moment';
 import Event from './event';
-import { Tooltip } from '@chakra-ui/react';
+import CustomToolbar from './Toolbar';
 
 const locales = {
 	'en-US': enUS,
@@ -130,6 +129,7 @@ function Calendar(props) {
 				endAccessor='end'
 				components={{
 					event: Event,
+					toolbar: CustomToolbar,
 				}}
 				popup={true}
 				showAllEvents={true}
