@@ -23,7 +23,6 @@ export const legendConfig: LegendConfig<string> = {
 			icon: Trash,
 			description: __('Move Date to Trash'),
 			className: 'ee-icon ee-svg ee-svg--trash',
-
 		},
 	],
 	swatches: {
