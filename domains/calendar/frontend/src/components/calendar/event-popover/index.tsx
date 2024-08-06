@@ -1,13 +1,19 @@
-import { Box, Heading, Text, VStack, Flex, HStack, Image } from '@chakra-ui/react';
+import { Box, Heading, Text, VStack, Flex, HStack, Image, useDisclosure } from '@chakra-ui/react';
 import ClockIcon from '../../../assets/icons/ClockIcon';
 import LocationPinIcon from '../../../assets/icons/LocationPinIcon';
 import { format, isSameMonth, isSameYear, isSameDay } from 'date-fns';
 import { useMemo } from 'react';
+import EventDetailModal from '../event-detail-modal';
+import { useModal } from '../../../lib/context/modalContext';
 
 export default function EventPopover({ event, isSameDayEvent }) {
-	// const isSameDayEvent = useMemo(() => isSameDay(event.start, event.end), [event]);
+	const { openModal } = useModal();
+
+	const handleOpenModal = () => {
+		openModal({ event: event });
+	};
 	return (
-		<Box p={8} bg='hsla(252, 13%, 46%, 1)' color='white' borderRadius='md' boxShadow='md'>
+		<Box p={8} bg='hsla(252, 13%, 46%, 1)' color='white' borderRadius='md' boxShadow='md' onClick={handleOpenModal}>
 			<VStack alignItems='flex-start'>
 				{event.image && <Image src={event.image} width='full' h='200px' maxH='200px' borderRadius='lg' />}
 				<HStack gap={0} alignItems='flex-start'>
@@ -53,6 +59,7 @@ export default function EventPopover({ event, isSameDayEvent }) {
 					{event.venue}
 				</Flex>
 			</VStack>
+			{/* <EventDetailModal event={event} isSameDayEvent={isSameDayEvent} isOpen={isOpen} onClose={onClose} /> */}
 		</Box>
 	);
 }

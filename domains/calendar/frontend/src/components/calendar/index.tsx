@@ -125,7 +125,7 @@ function Calendar(props) {
 				localizer={localizer}
 				events={events}
 				style={{ height: 800 }}
-				views={['month']}
+				// views={['month']}
 				startAccessor='start'
 				endAccessor='end'
 				components={{
