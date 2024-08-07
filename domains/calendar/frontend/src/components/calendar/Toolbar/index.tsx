@@ -32,8 +32,8 @@ const CustomToolbar: React.FC<ToolbarProps> = ({ date, view, onNavigate, onView,
 					size='sm'
 					colorScheme='blue'
 					borderRadius='none'
-					borderTopLeftRadius='md'
-					borderBottomLeftRadius='md'
+					borderTopLeftRadius='sm'
+					borderBottomLeftRadius='sm'
 				>
 					Back
 				</Button>
@@ -45,8 +45,8 @@ const CustomToolbar: React.FC<ToolbarProps> = ({ date, view, onNavigate, onView,
 					size='sm'
 					colorScheme='blue'
 					borderRadius='none' // Rounded corners for rightmost button
-					borderTopRightRadius='md'
-					borderBottomRightRadius='md'
+					borderTopRightRadius='sm'
+					borderBottomRightRadius='sm'
 				>
 					Today
 				</Button>
@@ -66,10 +66,10 @@ const CustomToolbar: React.FC<ToolbarProps> = ({ date, view, onNavigate, onView,
 						size='sm'
 						colorScheme={view === viewType ? 'blue' : 'gray'}
 						borderRadius='none'
-						borderTopLeftRadius={index == 0 ? 'md' : 0}
-						borderBottomLeftRadius={index == 0 ? 'md' : 0}
-						borderTopRightRadius={index == views.length - 1 ? 'md' : 0}
-						borderBottomRightRadius={index == views.length - 1 ? 'md' : 0}
+						borderTopLeftRadius={index == 0 ? 'sm' : 0}
+						borderBottomLeftRadius={index == 0 ? 'sm' : 0}
+						borderTopRightRadius={index == views.length - 1 ? 'sm' : 0}
+						borderBottomRightRadius={index == views.length - 1 ? 'sm' : 0}
 					>
 						{viewType.charAt(0).toUpperCase() + viewType.slice(1)}
 					</Button>

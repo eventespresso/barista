@@ -4,7 +4,12 @@ import { useMemo, useState } from 'react';
 import EventPopover from '../event-popover';
 import { format, isSameDay } from 'date-fns';
 
-export default function Event({ event }) {
+import type { IEvent } from '../../../lib/types';
+
+interface IEventProps {
+	event: IEvent;
+}
+export default function Event({ event }: IEventProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	const isSameDayEvent = useMemo(() => isSameDay(event.start, event.end), [event]);
 
@@ -13,7 +18,7 @@ export default function Event({ event }) {
 			<PopoverTrigger>
 				<Box
 					style={{
-						backgroundColor: event.color || '#4cc2e6',
+						// backgroundColor: event.color || '#4cc2e6',
 						color: '#fff',
 						padding: '10px',
 						borderRadius: '4px',
@@ -21,6 +26,7 @@ export default function Event({ event }) {
 						fontSize: '12px',
 						whiteSpace: 'normal',
 					}}
+					backgroundColor={event.color || 'teal.400'}
 					onMouseEnter={() => setIsOpen(true)}
 					// onMouseLeave={() => setIsOpen(false)}
 					cursor='pointer'

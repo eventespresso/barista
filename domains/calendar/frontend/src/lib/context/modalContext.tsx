@@ -1,29 +1,32 @@
-// ModalContext.js
 import React, { createContext, ReactNode, useContext, useState } from 'react';
 
-// Define the type for the context value
-interface ModalContextType {
+import type { IEvent } from '../types';
+
+interface IModalContent {
+	event: IEvent;
+	isSameDayEvent: boolean;
+}
+interface IModalContext {
 	isOpen: boolean;
-	content: ReactNode | null;
-	openModal: (content: ReactNode) => void;
+	content: IModalContent | null;
+	openModal: (content: IModalContent) => void;
 	closeModal: () => void;
 }
 
-// Default values for the context (for TypeScript, this must include all properties)
-const defaultModalContextValue: ModalContextType = {
+const defaultModalContextValue: IModalContext = {
 	isOpen: false,
 	content: null,
 	openModal: () => {},
 	closeModal: () => {},
 };
 
-const ModalContext = createContext<ModalContextType>(defaultModalContextValue);
+const ModalContext = createContext<IModalContext>(defaultModalContextValue);
 
 export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
-	const [content, setContent] = useState<ReactNode | null>(null);
+	const [content, setContent] = useState<IModalContent | null>(null);
 
-	const openModal = (content: ReactNode) => {
+	const openModal = (content: IModalContent) => {
 		setContent(content);
 		setIsOpen(true);
 	};
