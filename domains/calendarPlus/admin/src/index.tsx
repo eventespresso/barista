@@ -1,5 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import AdminApp from './AdminApp';
 
-export default function index() {
-	return <div>index</div>;
-}
+ReactDOM.render(<AdminApp />, document.getElementById('calendar-plus-admin'));
