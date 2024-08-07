@@ -29,6 +29,7 @@ class Barista
 		add_action('wp_enqueue_scripts', [$this, 'enqueuePublicScripts']);
 		add_action('admin_enqueue_scripts', [$this, 'addAssets']);
 		add_action('admin_enqueue_scripts', [$this, 'enqueueEditorScripts']);
+		add_action('admin_enqueue_scripts', [$this, 'enqueueCalendarPlusAdmin']);
 		add_filter('FHEE__FeatureFlagsConfig__getFeatureFlags__use_default_feature_flags', '__return_false');
 		add_filter(
 			'FHEE__Maintenance_Admin_Page__page_setup__page_config',
@@ -310,6 +311,27 @@ class Barista
 		}
 
 		$scripts = ['esEdtrSlots'];
+
+		foreach ($scripts as $handle) {
+			$handle = 'eventespresso-' . $handle;
+			if (wp_script_is($handle, 'registered')) {
+				wp_enqueue_script($handle);
+			}
+		}
+	}
+
+
+	/**
+	 * Enqueues assets that are loaded by exernal plugins/services.
+	 */
+	public function enqueueCalendarPlusAdmin($hook)
+	{
+
+		if ($hook !== 'toplevel_page_calendar-plus') {
+			return;
+		}
+
+		$scripts = ['calendarPlusAdmin'];
 
 		foreach ($scripts as $handle) {
 			$handle = 'eventespresso-' . $handle;
