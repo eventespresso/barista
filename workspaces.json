@@ -1,11 +1,11 @@
 [
     {
-        "name": "@eventespresso/calendar-admin",
-        "location": "domains/calendar/admin"
+        "name": "@eventespresso/calendar-plus-admin",
+        "location": "domains/calendarPlus/admin"
     },
     {
-        "name": "@eventespresso/calendar",
-        "location": "domains/calendar/frontend"
+        "name": "@eventespresso/calendar-plus",
+        "location": "domains/calendarPlus/frontend"
     },
     {
         "name": "@eventespresso/blocks",

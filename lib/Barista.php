@@ -14,7 +14,7 @@ class Barista
 	private array $styles = [];
 
 	private array $edtr_domains = ['eventSmart'];
-	private array $public_domains = ['calendar'];
+	private array $public_domains = ['calendarPlus'];
 
 
 	public function initialize()

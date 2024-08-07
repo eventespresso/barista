@@ -27,8 +27,8 @@ function Calendar() {
 	const [events, setEvents] = useState<IEvent[] | null>(null);
 
 	useEffect(() => {
-		if (window.espressoCalendarData) {
-			const events = window.espressoCalendarData.map((item) => ({
+		if (window.calendarPlusData) {
+			const events = window.calendarPlusData.map((item) => ({
 				...item,
 				start: new Date(item.start),
 				end: new Date(item.end),
