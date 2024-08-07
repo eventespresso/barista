@@ -3,7 +3,7 @@ import { Button, ButtonGroup, HStack, Text } from '@chakra-ui/react';
 import { ToolbarProps } from 'react-big-calendar';
 import { format } from 'date-fns';
 
-const CustomToolbar: React.FC<ToolbarProps> = ({ date, view, onNavigate, onView, views }) => {
+export default function CustomToolbar({ date, view, onNavigate, onView, views }: ToolbarProps) {
 	const handleViewChange = (view: string) => {
 		onView(view);
 	};
@@ -77,6 +77,4 @@ const CustomToolbar: React.FC<ToolbarProps> = ({ date, view, onNavigate, onView,
 			</ButtonGroup>
 		</HStack>
 	);
-};
-
-export default CustomToolbar;
+}

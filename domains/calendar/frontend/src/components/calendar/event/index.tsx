@@ -12,7 +12,7 @@ interface IEventProps {
 export default function Event({ event }: IEventProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	const isSameDayEvent = useMemo(() => isSameDay(event.start, event.end), [event]);
-	console.log(event, 'im in event');
+
 	return (
 		<Popover placement='top-start' isLazy isOpen={isOpen} onClose={() => setIsOpen(false)}>
 			<PopoverTrigger>
