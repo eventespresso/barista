@@ -1,7 +1,10 @@
+import { IEvent } from './lib/types';
+
 export {};
 
 declare global {
 	interface Window {
-		calendarPlusData: any; // Replace 'any' with the appropriate type if known
+		calendarPlusData: IEvent[];
+		calendarSettings: any; //will replace type
 	}
 }

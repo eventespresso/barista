@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Calendar as ReactCalendar, dateFnsLocalizer } from 'react-big-calendar';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Calendar as ReactCalendar, dateFnsLocalizer, Views } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
@@ -9,6 +9,7 @@ import enUS from 'date-fns/locale/en-US';
 
 import Event from './event';
 import CustomToolbar from './Toolbar';
+import { useCalendarSettings } from '../../lib/context/calendarSettingsContext';
 
 import type { IEvent } from '../../lib/types';
 
@@ -24,7 +25,17 @@ const localizer = dateFnsLocalizer({
 	locales,
 });
 function Calendar() {
+	const { settings } = useCalendarSettings();
 	const [events, setEvents] = useState<IEvent[] | null>(null);
+
+	const views = useMemo(() => {
+		const views = [];
+		if (settings.monthView) views.push(Views.MONTH);
+		if (settings.weekView) views.push(Views.WEEK);
+		if (settings.dayView) views.push(Views.DAY);
+		if (settings.agendaView) views.push(Views.AGENDA);
+		return views;
+	}, [settings]);
 
 	useEffect(() => {
 		if (window.calendarPlusData) {
@@ -45,7 +56,7 @@ function Calendar() {
 				localizer={localizer}
 				events={events}
 				style={{ height: 800 }}
-				// views={['month']}
+				views={views}
 				// startAccessor={(event) => {
 				// 	return new Date(event.start);
 				// }}
