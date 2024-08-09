@@ -1,5 +1,13 @@
 [
     {
+        "name": "@eventespresso/calendar-plus-admin",
+        "location": "domains/calendarPlus/admin"
+    },
+    {
+        "name": "@eventespresso/calendar-plus",
+        "location": "domains/calendarPlus/frontend"
+    },
+    {
         "name": "@eventespresso/blocks",
         "location": "domains/core/admin/blocks"
     },

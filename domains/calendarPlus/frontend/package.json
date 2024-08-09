@@ -1,0 +1,20 @@
+{
+	"author": "Event Espresso",
+	"name": "@eventespresso/calendar-plus",
+	"version": "1.0.6",
+	"private": true,
+	"license": "GPL-3.0",
+	"main": "src/index.tsx",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/eventespresso/barista.git"
+	},
+	"dependencies": {
+		"react-big-calendar": "^1.13.1"
+	},
+	"scripts": {
+		"lint": "eslint ./src/**/*.{ts,tsx} --format=codeframe",
+		"update-deps": "npx ncu -u",
+		"lint-fix": "eslint ./src/**/*.{ts,tsx} --fix"
+	}
+}

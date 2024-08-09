@@ -1,0 +1,16 @@
+.toplevel_page_calendar-plus {
+
+	h1.calendar-plus-admin-heading {
+		color: hsl(253, 22%, 38%);
+		font-family: system-ui, sans-serif !important;
+		font-size: 30px;
+		font-weight: 700;
+
+		span.plus {
+			font-size: 24px;
+			position: relative;
+			top: .03125rem;
+			left: 1px;
+		}
+	}
+}
