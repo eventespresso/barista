@@ -5,6 +5,6 @@ export {};
 declare global {
 	interface Window {
 		calendarPlusData: IEvent[];
-		calendarSettings: any; //will replace type
+		calendarPlusSettings: any; //will replace type
 	}
 }

@@ -24,8 +24,9 @@ export const CalendarSettingsProvider: React.FC<{ children: React.ReactNode }> =
 	});
 
 	useEffect(() => {
-		//// Get the available settings here and set in state it...
-		// setSettings({});
+		if (typeof window.calendarPlusSettings !== 'undefined') {
+			setSettings(window.calendarPlusSettings);
+		}
 	}, []);
 
 	return (
@@ -35,7 +36,6 @@ export const CalendarSettingsProvider: React.FC<{ children: React.ReactNode }> =
 	);
 };
 
-// Custom hook for consuming the context
 export const useCalendarSettings = (): CalendarSettingsContextType => {
 	const context = useContext(CalendarSettingsContext);
 	if (!context) {
