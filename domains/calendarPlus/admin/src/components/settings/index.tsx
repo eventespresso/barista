@@ -1,50 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Checkbox, Button, Stack, Text } from '@chakra-ui/react';
+import { Box, Checkbox, Button, Stack, Spinner, useToast, Heading } from '@chakra-ui/react';
+import { fetchSettings, saveSettings } from '../../lib/api';
+import { useCustomToast } from '../../lib/hooks';
 
-const fetchSettings = async () => {
-	if (typeof window.calendarPlusSettings !== 'undefined') {
-		const { apiUrl, nonce } = window.calendarPlusSettings;
-
-		const response = await fetch(apiUrl, {
-			headers: {
-				'X-WP-Nonce': nonce,
-			},
-		});
-		const data = await response.json();
-		return data;
-	}
-};
-
-// Save settings to WordPress REST API
-const saveSettings = async (settings) => {
-	await fetch(window.calendarPlusSettings.apiUrl, {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-			'X-WP-Nonce': window.calendarPlusSettings.nonce,
-		},
-		body: JSON.stringify(settings),
-	});
-};
+import type { ICalendarPlusSettings } from '../../lib/types';
 
 export default function CalendarSettings() {
-	const [settings, setSettings] = useState({
-		monthView: true,
-		weekView: true,
-		dayView: true,
-		agendaView: true,
-	});
+	const { successToast } = useCustomToast();
+
+	const [settings, setSettings] = useState<ICalendarPlusSettings | null>(null);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		console.log('window', window.calendarPlusSettings);
 		const loadSettings = async () => {
 			const data = await fetchSettings();
 			setSettings({
-				monthView: data.monthView ?? true,
-				weekView: data.weekView ?? true,
-				dayView: data.dayView ?? true,
-				agendaView: data.agendaView ?? true,
+				monthView: data.monthView ?? false,
+				weekView: data.weekView ?? false,
+				dayView: data.dayView ?? false,
+				agendaView: data.agendaView ?? false,
 			});
+			setLoading(false);
 		};
 
 		loadSettings();
@@ -59,32 +35,42 @@ export default function CalendarSettings() {
 
 	const handleSave = async () => {
 		await saveSettings(settings);
-		alert('Settings saved successfully!');
+		successToast({
+			title: 'Settings saved.',
+			description: 'Calendar+ settings are saved.',
+		});
 	};
 
-	console.log('window2', window.calendarPlusSettings);
 	return (
-		<Box p={5}>
-			<Text fontSize='2xl' mb={4}>
-				Views
-			</Text>
-			<Stack spacing={4}>
-				<Checkbox isChecked={settings.monthView} onChange={() => handleChange('monthView')}>
-					Month View
-				</Checkbox>
-				<Checkbox isChecked={settings.weekView} onChange={() => handleChange('weekView')}>
-					Week View
-				</Checkbox>
-				<Checkbox isChecked={settings.dayView} onChange={() => handleChange('dayView')}>
-					Day View
-				</Checkbox>
-				<Checkbox isChecked={settings.agendaView} onChange={() => handleChange('agendaView')}>
-					Agenda View
-				</Checkbox>
-				<Button colorScheme='blue' onClick={handleSave}>
-					Save Settings
-				</Button>
-			</Stack>
-		</Box>
+		<>
+			{loading ? (
+				<Spinner thickness='4px' speed='0.65s' emptyColor='gray.200' color='blue.500' size='xl' m={8} />
+			) : (
+				<Box p={5}>
+					<Heading mb={4}>Views</Heading>
+					<Stack spacing={4}>
+						<Checkbox
+							isChecked={settings.monthView}
+							borderRadius='sm'
+							onChange={() => handleChange('monthView')}
+						>
+							Month View
+						</Checkbox>
+						<Checkbox isChecked={settings.weekView} onChange={() => handleChange('weekView')}>
+							Week View
+						</Checkbox>
+						<Checkbox isChecked={settings.dayView} onChange={() => handleChange('dayView')}>
+							Day View
+						</Checkbox>
+						<Checkbox isChecked={settings.agendaView} onChange={() => handleChange('agendaView')}>
+							Agenda View
+						</Checkbox>
+						<Button colorScheme='blue' onClick={handleSave}>
+							Save Settings
+						</Button>
+					</Stack>
+				</Box>
+			)}{' '}
+		</>
 	);
 }
