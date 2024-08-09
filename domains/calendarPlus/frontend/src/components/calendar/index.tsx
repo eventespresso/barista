@@ -56,6 +56,7 @@ function Calendar() {
 				localizer={localizer}
 				events={events}
 				style={{ height: 800 }}
+				defaultView={settings.defaultView ?? 'month'}
 				views={views}
 				// startAccessor={(event) => {
 				// 	return new Date(event.start);

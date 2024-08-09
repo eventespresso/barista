@@ -7,6 +7,7 @@ export interface IToastOptions {
 }
 
 export interface ICalendarPlusSettings {
+	defaultView: string;
 	monthView: boolean;
 	weekView: boolean;
 	dayView: boolean;

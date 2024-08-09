@@ -1,26 +1,28 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-export interface CalendarSettings {
+export interface ICalendarPlusSettings {
 	monthView: boolean;
 	weekView: boolean;
 	dayView: boolean;
 	agendaView: boolean;
+	defaultView: string;
 }
 
 export interface CalendarSettingsContextType {
-	settings: CalendarSettings;
-	setSettings: (settings: CalendarSettings) => void;
+	settings: ICalendarPlusSettings;
+	setSettings: (settings: ICalendarPlusSettings) => void;
 }
 
 // Create the context with default values
 const CalendarSettingsContext = createContext<CalendarSettingsContextType | undefined>(undefined);
 
 export const CalendarSettingsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-	const [settings, setSettings] = useState<CalendarSettings>({
+	const [settings, setSettings] = useState<ICalendarPlusSettings>({
 		monthView: true,
 		weekView: true,
 		dayView: true,
 		agendaView: true,
+		defaultView: '',
 	});
 
 	useEffect(() => {
